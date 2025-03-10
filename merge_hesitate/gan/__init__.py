@@ -6,4 +6,6 @@ to improve confidence estimation and solution quality.
 """
 
 from .model import MergeHesitateGAN
-from .discriminator import MergeDiscriminator 
+from .discriminator import MergeDiscriminator
+
+__all__ = ["MergeHesitateGAN", "MergeDiscriminator"]
