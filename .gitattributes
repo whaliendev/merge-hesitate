@@ -1,0 +1,4 @@
+# 跟踪三个目录下的所有文件（递归）
+codet5-small/​*.bin​ filter=lfs diff=lfs merge=lfs -text
+train-ms/​**​ filter=lfs diff=lfs merge=lfs -text
+test-ms/​**​ filter=lfs diff=lfs merge=lfs -text
