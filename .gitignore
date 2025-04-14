@@ -8,3 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+train-ms
+test-ms
+GIT_MERGE_FILES
+*.tar.gz
+PREPROCESSED
+PROCESSED
+RAW_DATA

@@ -13,10 +13,12 @@ class ConfidenceCalibrator:
     def __init__(self, strategy="temperature", initial_threshold=0.8):
         self.strategy = strategy
         self.calibration_model = None
-        self.threshold = initial_threshold
+        self.threshold = (
+            initial_threshold  # Use initial_threshold to set the starting value
+        )
 
         # For temperature scaling
-        self.temperature = nn.Parameter(torch.ones(1))
+        self.temperature = nn.Parameter(torch.ones(1) * 2)
 
     def fit(self, raw_confidences: List[float], correctness: List[bool]):
         """
@@ -71,15 +73,30 @@ class ConfidenceCalibrator:
         return raw_confidences  # Return uncalibrated if no model is fit
 
     def _temperature_scale(self, confidences: torch.Tensor) -> torch.Tensor:
-        """Apply temperature scaling to raw confidence scores."""
-        return torch.sigmoid(confidences / self.temperature)
+        """Apply temperature scaling to probabilities by converting to logits first."""
+        # Add a small epsilon for numerical stability when confidences are close to 0 or 1
+        eps = 1e-6
+        # Convert probabilities to logits
+        logits = torch.logit(confidences, eps=eps)
+        # Apply temperature scaling
+        scaled_logits = logits / self.temperature
+        # Convert scaled logits back to probabilities
+        return torch.sigmoid(scaled_logits)
 
     def _optimize_threshold(self, confidences: List[float], correctness: List[bool]):
-        """Find optimal confidence threshold to maximize accuracy."""
+        """Find optimal confidence threshold to maximize F0.5 score, keeping previous threshold on failure."""
+        # 处理极端情况: 如果没有数据或数据无用，则保留当前阈值并返回
+        if not confidences or not correctness:
+            return  # Keep previous threshold
+
+        if all(correctness) or not any(correctness):
+            return  # Keep previous threshold, data is not informative
+
         calibrated = self.calibrate(confidences)
 
         best_f1 = 0
-        best_threshold = 0.5
+        # Initialize best_threshold with the current threshold as fallback
+        best_threshold = self.threshold
 
         # Try different thresholds
         for t in np.linspace(0.5, 0.99, 50):
@@ -100,7 +117,7 @@ class ConfidenceCalibrator:
                 correct_predictions / sum(correctness) if sum(correctness) > 0 else 0
             )
 
-            # Use F2 score to prioritize precision over recall (beta=0.5)
+            # Use F0.5 score (beta=0.5) to prioritize precision
             beta = 0.5
             f_score = (
                 (1 + beta**2) * precision * recall / ((beta**2 * precision) + recall)
@@ -108,10 +125,12 @@ class ConfidenceCalibrator:
                 else 0
             )
 
+            # Check if this threshold gives a better F-score
             if f_score > best_f1:
                 best_f1 = f_score
-                best_threshold = t
+                best_threshold = t  # Update best_threshold only if improvement found
 
+        # Update the threshold with the best one found (or the previous one if no improvement)
         self.threshold = best_threshold
 
     def get_threshold(self) -> float:
