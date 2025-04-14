@@ -168,10 +168,6 @@ def resolve_conflict(
     # Decode solution
     solution_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-    # 将生成的文本截断为max_resolve_len个词语
-    solution_words = solution_text.split()[:max_resolve_len]
-    solution_text = " ".join(solution_words)
-
     confidence_value = confidence[0].item()
 
     # Return solution only if confident enough

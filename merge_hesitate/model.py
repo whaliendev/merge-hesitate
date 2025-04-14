@@ -132,11 +132,20 @@ class HesitateT5(nn.Module):
                 shifted_labels.contiguous().view(-1),
                 reduction="none",
             )
-            nll_loss = nll_loss.masked_fill(not mask.view(-1), 0)
+            # Correctly mask the loss using boolean inversion
+            nll_loss = nll_loss.masked_fill(~mask.view(-1), 0)
 
-            # Estimate confidence based on encoder outputs
-            # batch_size, seq_len, hidden_dim -> batch_size, hidden_dim
-            pooled_hidden = encoder_hidden_states.mean(dim=1)
+            # Estimate confidence based on encoder outputs, accounting for padding
+            # Use attention mask for weighted pooling
+            # Add epsilon to avoid division by zero if attention_mask sum is 0
+            masked_sum = (encoder_hidden_states * attention_mask.unsqueeze(-1)).sum(
+                dim=1
+            )
+            attention_sum = attention_mask.sum(dim=1, keepdim=True)
+            pooled_hidden = masked_sum / (
+                attention_sum + 1e-9
+            )  # Add epsilon for stability
+
             # batch_size, hidden_dim -> batch_size, 1 -> batch_size
             confidence = self.confidence_head(pooled_hidden).squeeze(-1)
 
@@ -161,14 +170,8 @@ class HesitateT5(nn.Module):
                 output["predictions"] = predictions
                 return output
         else:
-            # For inference without labels
-            pooled_hidden = encoder_hidden_states.mean(dim=1)
-            confidence = self.confidence_head(pooled_hidden).squeeze(-1)
-
-            return {
-                "logits": logits,
-                "confidence": confidence,
-            }
+            # it should never happen
+            raise ValueError("labels should not be None in training stage")
 
     def generate(self, **batch):
         """

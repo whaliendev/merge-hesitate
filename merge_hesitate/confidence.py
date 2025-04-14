@@ -18,7 +18,7 @@ class ConfidenceCalibrator:
         )
 
         # For temperature scaling
-        self.temperature = nn.Parameter(torch.ones(1) * 2)
+        self.temperature = nn.Parameter(torch.ones(1))
 
     def fit(self, raw_confidences: List[float], correctness: List[bool]):
         """
@@ -46,17 +46,36 @@ class ConfidenceCalibrator:
                 [1.0 if c else 0.0 for c in correctness], dtype=torch.float
             )
 
-            # Optimize temperature parameter
-            optimizer = torch.optim.LBFGS([self.temperature], lr=0.01, max_iter=50)
+            # Use Adam optimizer instead of LBFGS
+            optimizer = torch.optim.Adam([self.temperature], lr=0.01)
+            num_steps = 100  # Number of optimization steps
+            scheduler = torch.optim.lr_scheduler.StepLR(
+                optimizer, step_size=30, gamma=0.1
+            )
 
-            def closure():
+            # Standard optimization loop for Adam
+            for _ in range(num_steps):
                 optimizer.zero_grad()
                 calibrated = self._temperature_scale(confidences)
                 loss = nn.BCELoss()(calibrated, labels)
-                loss.backward()
-                return loss
 
-            optimizer.step(closure)
+                # Check for NaN loss
+                if torch.isnan(loss):
+                    print(
+                        "Warning: NaN loss detected during temperature scaling. Stopping optimization."
+                    )
+                    # Reset temperature to default if optimization fails
+                    self.temperature = nn.Parameter(torch.ones(1) * 2)
+                    break
+
+                loss.backward()
+                optimizer.step()
+                scheduler.step()
+            else:  # Executed if loop completes without break
+                final_loss = loss.item()
+                print(
+                    f"Temperature scaling finished. Final loss: {final_loss:.4f}, Final temp: {self.temperature.item():.4f}"
+                )
 
         # Find optimal threshold
         self._optimize_threshold(raw_confidences, correctness)
@@ -119,11 +138,12 @@ class ConfidenceCalibrator:
 
             # Use F0.5 score (beta=0.5) to prioritize precision
             beta = 0.5
-            f_score = (
-                (1 + beta**2) * precision * recall / ((beta**2 * precision) + recall)
-                if (precision + recall) > 0
-                else 0
-            )
+            # Add epsilon for numerical stability in denominator
+            denominator = (beta**2 * precision) + recall
+            if denominator > 1e-9:  # Check if denominator is non-zero
+                f_score = (1 + beta**2) * precision * recall / denominator
+            else:
+                f_score = 0.0  # Assign 0 if denominator is zero or too small
 
             # Check if this threshold gives a better F-score
             if f_score > best_f1:

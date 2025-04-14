@@ -59,12 +59,6 @@ def evaluate_model(
                 gen_text = tokenizer.decode(generated[i], skip_special_tokens=True)
                 target_text = tokenizer.decode(target_ids, skip_special_tokens=True)
 
-                # 将生成的文本和目标文本截断为max_resolve_len个词语
-                gen_text_words = gen_text.split()[:max_resolve_len]
-                target_text_words = target_text.split()[:max_resolve_len]
-                gen_text = " ".join(gen_text_words)
-                target_text = " ".join(target_text_words)
-
                 # Check for empty generation (model declined to solve)
                 is_empty = len(gen_text.strip()) == 0
 
