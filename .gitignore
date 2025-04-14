@@ -15,3 +15,6 @@ GIT_MERGE_FILES
 PREPROCESSED
 PROCESSED
 RAW_DATA
+codet5-small
+train-ms
+test-ms
