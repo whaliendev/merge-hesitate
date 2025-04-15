@@ -96,7 +96,7 @@ def process_merge_scenario(
     conflict_count = 0
     correct_count = 0
     wrong_count = 0
-    unchanged_count = 0
+    hesitated_count = 0
     token_limited = 0
     rejected_count = 0
 
@@ -183,36 +183,40 @@ def process_merge_scenario(
                 assert (
                     "code" in json_response and json_response["code"] == "200"
                 ), "illegal response code"
-                resolved_content = json_response["data"]
+                response_data = json_response["data"]
+                resolved_content = response_data["resolved_content"]
+                confidence = response_data["confidence"]
+                hesitated = response_data["hesitated"]
+
                 conflict_chunk["merge_gen_region"] = resolved_content
+                conflict_chunk["confidence"] = confidence
+                conflict_chunk["hesitated"] = hesitated
 
-                conflict_chunk["resolved"], res_no_space, truth_no_space = (
-                    remove_whitespace_and_compare(
-                        resolved_content, conflict_chunk["res_region"]
-                    )
-                )
-                conflict_block_str = "".join(
-                    conflict_lines[
-                        conflict_chunk["start_line"] : conflict_chunk["end_line"]
-                    ]
-                )
-                conflict_block_with_nospace = re.sub(r"\s+", "", conflict_block_str)
-
-                if conflict_chunk["resolved"]:
-                    correct_count += 1
-                elif len(truth_no_space) > len(
-                    res_no_space
-                ) and truth_no_space.startswith((res_no_space)):
-                    token_limited += 1
-                elif len(resolved_content) < 200 and not is_partial_syntax_valid(resolved_content):
-                    print(f"<<<<<<<<<<<<<<<<<<<<< warning: partial syntax error in {raw_conflict_file}")
-                    print(resolved_content)
-                    print(">>>>>>>>>>>>>>>>>>>>>")
-                    rejected_count += 1
-                elif res_no_space == conflict_block_with_nospace:
-                    unchanged_count += 1
+                if hesitated:
+                    hesitated_count += 1
                 else:
-                    wrong_count += 1
+                    conflict_chunk["resolved"], res_no_space, truth_no_space = (
+                        remove_whitespace_and_compare(
+                            resolved_content if resolved_content is not None else "",
+                            conflict_chunk["res_region"]
+                        )
+                    )
+
+                    if conflict_chunk["resolved"]:
+                        correct_count += 1
+                    elif (
+                        resolved_content is not None and
+                        len(truth_no_space) > len(res_no_space) and
+                        truth_no_space.startswith((res_no_space))
+                    ):
+                        token_limited += 1
+                    elif resolved_content is not None and len(resolved_content) < 200 and not is_partial_syntax_valid(resolved_content):
+                        print(f"<<<<<<<<<<<<<<<<<<<<< warning: partial syntax error in {raw_conflict_file}")
+                        print(resolved_content)
+                        print(">>>>>>>>>>>>>>>>>>>>>")
+                        rejected_count += 1
+                    else:
+                        wrong_count += 1
 
         filename = os.path.basename(raw_conflict_file)
         mergegen_filename = filename.replace("merged", "mergegen") + ".json"
@@ -228,7 +232,7 @@ def process_merge_scenario(
         conflict_count,
         correct_count,
         wrong_count,
-        unchanged_count,
+        hesitated_count,
         token_limited,
         rejected_count,
         execution_time,
@@ -242,7 +246,7 @@ def generate_mergegen_output(
     total_conflict_block_count = 0
     total_correct_count = 0
     total_wrong_count = 0
-    total_unchanged_count = 0
+    total_hesitated_count = 0
     total_token_limited = 0
     total_rejected_count = 0
 
@@ -263,7 +267,7 @@ def generate_mergegen_output(
             conflict_count,
             correct_count,
             wrong_count,
-            unchanged_count,
+            hesitated_count,
             token_limited,
             rejected_count,
             execution_time,
@@ -273,7 +277,7 @@ def generate_mergegen_output(
         total_conflict_block_count += conflict_count
         total_correct_count += correct_count
         total_wrong_count += wrong_count
-        total_unchanged_count += unchanged_count
+        total_hesitated_count += hesitated_count
         total_token_limited += token_limited
         total_rejected_count += rejected_count
 
@@ -290,7 +294,7 @@ def generate_mergegen_output(
         total_conflict_block_count,
         total_correct_count,
         total_wrong_count,
-        total_unchanged_count,
+        total_hesitated_count,
         total_token_limited,
         total_rejected_count,
     )
@@ -320,7 +324,7 @@ if __name__ == "__main__":
         
         # Create summary file with header
         with open(summary_file_path, "w") as summary_file:
-            summary_file.write("repo,total_conflicts,correct,wrong,unchanged,token_limited,rejected,precision,accuracy\n")
+            summary_file.write("repo,total_conflicts,correct,wrong,hesitated,token_limited,rejected,precision,accuracy\n")
             
             # Process all repositories
             for repo in os.listdir(test_dir):
@@ -333,18 +337,20 @@ if __name__ == "__main__":
 
                 # Generate mergegen output for this repository
                 result = generate_mergegen_output(repo, test_dir, output_dir, timing_file)
-                total_conflicts, correct, wrong, unchanged, token_limited, rejected = result
+                total_conflicts, correct, wrong, hesitated, token_limited, rejected = result
                 
                 # Calculate accuracy
                 accuracy = (correct + token_limited) / total_conflicts if total_conflicts > 0 else 0
-                precision = (correct + token_limited) / (total_conflicts - rejected) if total_conflicts - rejected > 0 else 0
+                # Calculate precision
+                precision_denominator = total_conflicts - rejected - hesitated
+                precision = (correct + token_limited) / precision_denominator if precision_denominator > 0 else 0
 
                 # Write summary for this repository
-                summary_file.write(f"{repo},{total_conflicts},{correct},{wrong},{unchanged},{token_limited},{rejected},{precision:.4f},{accuracy:.4f}\n")
+                summary_file.write(f"{repo},{total_conflicts},{correct},{wrong},{hesitated},{token_limited},{rejected},{precision:.4f},{accuracy:.4f}\n")
                 summary_file.flush()  # Ensure data is written immediately
 
                 # Calculate and print repository execution time
                 repo_execution_time = time.time() - start_time
                 print(f"Execution time for {repo}: {repo_execution_time:.4f} seconds")
-                print("Total conflicts, correct, wrong, unchanged, token-limited, rejected:", result)
+                print("Total conflicts, correct, wrong, hesitated, token-limited, rejected:", result)
                 print("-" * 80)
