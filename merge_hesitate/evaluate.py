@@ -99,12 +99,30 @@ def evaluate_model(
                 # --- End Debug Printing ---
 
                 # --- Corrected Vectorized Exact Match Calculation (Val) ---
-                mask = labels != pad_token_id # Shape: [bs, seq_len]
-                correct_tokens = (predictions == labels) & mask # Shape: [bs, seq_len]
-                num_correct_tokens = correct_tokens.sum(dim=1) # Correct tokens per sample
-                num_valid_tokens = mask.sum(dim=1) # Valid tokens per sample (from labels)
+                # Need pad_token_id and eos_token_id
+                eos_token_id = tokenizer.eos_token_id
+                batch_size, seq_len = predictions.shape # Assuming labels have compatible shape
 
-                # Check for exact match (all valid tokens must be correct)
+                # 1. Create prediction mask (True up to and including first EOS)
+                pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
+                eos_mask_pred = (predictions == eos_token_id)
+                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
+                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1) # Shape: [batch_size, seq_len]
+
+                # 2. Create label mask (True up to PAD)
+                label_mask = (labels != pad_token_id) # Shape: [batch_size, seq_len]
+
+                # 3. Combine masks
+                combined_mask = pred_mask & label_mask # Shape: [batch_size, seq_len]
+
+                # 4. Calculate correct tokens based on combined mask
+                correct_tokens = (predictions == labels) & combined_mask
+
+                # 5. Calculate num_correct and num_valid based on combined mask
+                num_correct_tokens = correct_tokens.sum(dim=1)
+                num_valid_tokens = combined_mask.sum(dim=1)
+
+                # 6. Check for exact match (all valid tokens in the combined range must be correct)
                 exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
                 valid_mask_sum = num_valid_tokens > 0
                 exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
@@ -140,18 +158,43 @@ def evaluate_model(
                 )
 
                 # --- Vectorized Exact Match Calculation (Test) ---
-                if generated_ids.size(1) != labels.size(1):
-                     min_len = min(generated_ids.size(1), labels.size(1))
-                     generated_ids = generated_ids[:, :min_len]
-                     labels = labels[:, :min_len]
-                     accelerator.print(f"Warning: Mismatch lengths adjusted to {min_len} for test eval.")
+                # Need pad_token_id and eos_token_id
+                eos_token_id = tokenizer.eos_token_id
+                batch_size, seq_len_pred = generated_ids.shape
+                _, seq_len_label = labels.shape
 
+                # Pad shorter sequence to match the longer one for comparison
+                if seq_len_pred > seq_len_label:
+                    padding_size = seq_len_pred - seq_len_label
+                    labels = torch.cat([labels, torch.full((batch_size, padding_size), pad_token_id, device=labels.device, dtype=labels.dtype)], dim=1)
+                    seq_len = seq_len_pred
+                elif seq_len_label > seq_len_pred:
+                    padding_size = seq_len_label - seq_len_pred
+                    generated_ids = torch.cat([generated_ids, torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)], dim=1)
+                    seq_len = seq_len_label
+                else:
+                    seq_len = seq_len_pred # Both are same length
 
-                mask = labels != pad_token_id # Mask based on labels
-                correct_tokens = (generated_ids == labels) & mask
+                # 1. Create prediction mask (True up to and including first EOS)
+                pred_indices = torch.arange(seq_len, device=generated_ids.device).unsqueeze(0).expand(batch_size, -1)
+                eos_mask_pred = (generated_ids == eos_token_id)
+                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
+                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1)
+
+                # 2. Create label mask (True up to PAD)
+                label_mask = (labels != pad_token_id)
+
+                # 3. Combine masks
+                combined_mask = pred_mask & label_mask
+
+                # 4. Calculate correct tokens based on combined mask
+                correct_tokens = (generated_ids == labels) & combined_mask
+
+                # 5. Calculate num_correct and num_valid based on combined mask
                 num_correct_tokens = correct_tokens.sum(dim=1)
-                num_valid_tokens = mask.sum(dim=1)
+                num_valid_tokens = combined_mask.sum(dim=1)
 
+                # 6. Check for exact match
                 exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
                 valid_mask_sum = num_valid_tokens > 0
                 exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])

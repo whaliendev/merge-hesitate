@@ -222,7 +222,7 @@ class HesitateT5(nn.Module):
                 encoder_outputs=encoder_outputs_for_generate,
                 attention_mask=attention_mask, # Pass attention mask explicitly
                 decoder_input_ids = (
-                    torch.ones_like(input_ids.size(0), 1) * self.tokenizer.bos_token_id
+                    torch.ones(input_ids.size(0), 1) * self.tokenizer.bos_token_id
                 ).long().cuda(),
                 num_beams=num_beams,
                 num_return_sequences=num_beams, # Generate all beams initially

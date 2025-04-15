@@ -114,6 +114,7 @@ def train(args):
     accelerator.print("***** Starting training *****")
     global_step = 0
     best_f1 = 0.0
+    best_precision = 0.0
     last_calibrator = None # Store the most recent calibrator (only on main process)
 
     # Define path for the best model state
@@ -142,6 +143,7 @@ def train(args):
     # tqdm progress bar setup
     disable_progress_bar = not accelerator.is_main_process
 
+    ever_calibrated = False
     for epoch in range(args.num_epochs):
         model.train()
         epoch_loss = 0.0
@@ -184,33 +186,39 @@ def train(args):
                 # Get predictions from logits [batch_size, seq_len, vocab_size] -> [batch_size, seq_len]
                 predictions = torch.argmax(logits, dim=-1)
 
+                # Need pad_token_id and eos_token_id
+                pad_token_id = tokenizer.pad_token_id
+                eos_token_id = tokenizer.eos_token_id
 
-                # --- Corrected Vectorized Correctness Calculation ---
-                # Compare predictions directly with the original labels
-                # Labels shape: [batch_size, seq_len]
-                # Predictions shape: [batch_size, seq_len]
+                # Ensure labels are correctly shifted and padded (already done before)
+                # labels shape: [batch_size, seq_len]
+                # predictions shape: [batch_size, seq_len]
+                batch_size, seq_len = predictions.shape
 
-                # Need pad_token_id
-                pad_token_id = tokenizer.pad_token_id if tokenizer else accelerator.unwrap_model(model).generator.config.pad_token_id
+                # 1. Create prediction mask (True up to and including first EOS)
+                pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
+                eos_mask_pred = (predictions == eos_token_id)
+                # Find index of first EOS, default to seq_len if not found
+                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len) # Shape: [batch_size]
+                # Mask is True for indices <= first_eos_idx_pred
+                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1) # Shape: [batch_size, seq_len]
 
-                # Create mask based on original labels to ignore padding positions
-                # Mask shape: [batch_size, seq_len]
-                mask = labels != pad_token_id
+                # 2. Create label mask (True up to PAD)
+                label_mask = (labels != pad_token_id) # Shape: [batch_size, seq_len]
 
-                # 1. Check equality only where mask is True
-                # Shape: [batch_size, seq_len]
-                correct_tokens = (predictions == labels) & mask
+                # 3. Combine masks: Compare tokens present in both processed prediction and label
+                combined_mask = pred_mask & label_mask # Shape: [batch_size, seq_len]
 
-                # 2. Calculate number of correct tokens per sample
-                # Shape: [batch_size]
-                num_correct_tokens = correct_tokens.sum(dim=1)
+                # 4. Calculate correct tokens using the combined mask
+                correct_tokens = (predictions == labels) & combined_mask # Shape: [batch_size, seq_len]
 
-                # 3. Calculate number of valid (non-pad) tokens per sample (from labels)
-                # Shape: [batch_size]
-                num_valid_tokens = mask.sum(dim=1)
+                # 5. Calculate num_correct_tokens and num_valid_tokens based on combined_mask
+                num_correct_tokens = correct_tokens.sum(dim=1) # Shape: [batch_size]
+                num_valid_tokens = combined_mask.sum(dim=1) # Shape: [batch_size]
 
-                # 4. Calculate per-sample accuracy (correctness target for confidence)
-                # Handle cases with zero valid tokens to avoid division by zero
+
+                # 6. Calculate per-sample accuracy (correctness target for confidence)
+                # Handle cases with zero valid tokens under the combined mask
                 sample_correctness = torch.zeros_like(confidence, dtype=torch.float) # Initialize with zeros
                 valid_mask_sum = num_valid_tokens > 0
                 sample_correctness[valid_mask_sum] = (
@@ -257,6 +265,7 @@ def train(args):
             # Train calibrator: returns calibrator object on main process, None otherwise
             # Threshold is now set internally by train_calibrator via broadcast
             new_calibrator_obj = train_calibrator(model, val_loader, tokenizer, accelerator, args)
+            ever_calibrated = True
             if accelerator.is_main_process:
                 last_calibrator = new_calibrator_obj # Store the latest calibrator
         else:
@@ -292,11 +301,17 @@ def train(args):
         if accelerator.is_main_process:
             # Check F1 score instead of precision
             current_f1 = metrics.get("f1", 0.0)
-            if current_f1 > best_f1:
-                # Update best_f1
+            current_precision = metrics.get("precision", 0.0)
+            not_converged = not ever_calibrated and current_f1 > best_f1
+            better_precision = ever_calibrated and current_precision > best_precision
+            if not_converged or better_precision:
+                # Update best_f1 and best_precision
                 best_f1 = current_f1
-                # Update print message
-                accelerator.print(f"New best F1 score: {best_f1:.4f}. Saving state...")
+                best_precision = current_precision
+                if not_converged:
+                    accelerator.print(f"New best F1 score: {best_f1:.4f}. Saving state...")
+                else:
+                    accelerator.print(f"New best precision: {best_precision:.4f}. Saving state...")
 
                 # Save accelerator state (model, optimizer, scheduler)
                 accelerator.save_state(best_model_state_path)
