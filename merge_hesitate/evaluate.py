@@ -1,107 +1,260 @@
 import torch
 import numpy as np
 from tqdm import tqdm
+from merge_hesitate.confidence import ConfidenceCalibrator # Make sure calibrator class is imported
 
 
 def evaluate_model(
     model,
     dataloader,
     tokenizer,
-    accelerator=None,
+    accelerator,
+    stage="val", # Add stage parameter ('val' or 'test')
+    calibrator: ConfidenceCalibrator | None = None, # Add optional calibrator argument
     max_length=512,
     num_beams=3,
     max_resolve_len=256,
 ):
     """
-    Evaluate model on given dataloader and return metrics.
+    Evaluate model on given dataloader and return metrics. Applies calibration if calibrator is provided (on main process).
 
     Args:
         model: HesitateT5 model
         dataloader: Evaluation dataloader
         tokenizer: Tokenizer for decoding
-        accelerator: Optional Accelerator for distributed evaluation
+        accelerator: Accelerator for distributed evaluation
+        stage: Evaluation stage ('val' or 'test')
+        calibrator: Optional ConfidenceCalibrator object for calibrating scores before metric calculation (used on main process).
         max_length: Maximum sequence length for generation
         num_beams: Number of beams for beam search
-        max_resolve_len: 解决方案的最大token数，生成时会使用2*max_resolve_len作为上限
+        max_resolve_len: 解决方案的最大token数
 
     Returns:
         Dictionary of metrics (accuracy, precision, recall, f1, coverage)
     """
     model.eval()
+    all_raw_confidences = [] # Collect raw confidences
+    all_exact_matches = [] # Stores bool: (exact generation match, ignoring confidence)
+    total_loss = 0.0
+    total_valid_tokens = 0
 
-    all_predictions = []
-    all_targets = []
-    all_confidences = []
-    all_coverage = []
+    pad_token_id = tokenizer.pad_token_id
+    unwrapped_model = accelerator.unwrap_model(model) # Unwrap once for threshold access
+    confidence_threshold = unwrapped_model.confidence_threshold
 
-    # 只在主进程上显示进度条
-    disable_progress_bar = (
-        False if accelerator is None else not accelerator.is_main_process
-    )
+    # --- Debug ---
+    printed_eval_samples = 0
+    max_prints = 5
+    # --- End Debug ---
+
+    # Disable progress bar on non-main processes
+    disable_progress_bar = not accelerator.is_main_process
 
     with torch.no_grad():
-        for batch in tqdm(dataloader, desc="Evaluating", disable=disable_progress_bar):
-            # Add generation parameters to batch
-            batch["num_beams"] = num_beams
-            batch["max_resolve_len"] = max_resolve_len
+        for batch_idx, batch in enumerate(tqdm(dataloader, desc=f"Evaluating ({stage})", disable=disable_progress_bar)):
 
-            # Generate solutions with confidence scores using unified batch interface
-            generated, confidence = model.generate(**batch)
+            if stage == "val":
+                # Validation uses model.forward
+                batch["stage"] = "val"
+                outputs = model(**batch)
 
-            # Decode generated text and targets
-            for i in range(len(generated)):
-                target_ids = batch["labels"][i]
+                predictions = outputs["predictions"]
+                raw_confidence = outputs["confidence"] # Get raw confidence
+                labels = batch["labels"]
+                # remove first bos token and add a pad token at the end
+                labels = labels[:, 1:]
+                labels = torch.cat(
+                    [
+                        labels,
+                        torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
+                    ],
+                    dim=-1
+                )
+                batch_loss = outputs["loss"]
+                batch_valid_tokens = outputs["valid_tokens"]
 
-                # Skip padding in target
-                target_ids = target_ids[target_ids != tokenizer.pad_token_id]
+                # --- Debug Printing (uses raw confidence) ---
+                if accelerator.is_main_process and printed_eval_samples < max_prints:
+                    num_to_print_this_batch = min(max_prints - printed_eval_samples, predictions.size(0))
+                    for i in range(num_to_print_this_batch):
+                         accelerator.print("\n" + "-" * 20 + f" Eval Sample {printed_eval_samples} (Batch {batch_idx}, Idx {i}) " + "-" * 20)
+                         # Convert to list for cleaner printing
+                         pred_ids = predictions[i].tolist()
+                         label_ids = labels[i].tolist()
+                         # Optionally trim padding for readability
+                         try:
+                              pred_ids_trimmed = pred_ids[:pred_ids.index(pad_token_id)]
+                         except ValueError:
+                              pred_ids_trimmed = pred_ids
+                         try:
+                              label_ids_trimmed = label_ids[:label_ids.index(pad_token_id)]
+                         except ValueError:
+                              label_ids_trimmed = label_ids
+                         
+                         accelerator.print(f"Prediction IDs: {pred_ids_trimmed}")
+                         accelerator.print(f"Target IDs    : {label_ids_trimmed}")
+                         accelerator.print(f"Raw Confidence    : {raw_confidence[i].item():.4f}")
+                         accelerator.print("-" * (42 + len(f" Eval Sample {printed_eval_samples} (Batch {batch_idx}, Idx {i}) ")) + "\n")
+                         printed_eval_samples += 1
+                # --- End Debug Printing ---
 
-                # Decode text
-                gen_text = tokenizer.decode(generated[i], skip_special_tokens=True)
-                target_text = tokenizer.decode(target_ids, skip_special_tokens=True)
+                # --- Corrected Vectorized Exact Match Calculation (Val) ---
+                mask = labels != pad_token_id # Shape: [bs, seq_len]
+                correct_tokens = (predictions == labels) & mask # Shape: [bs, seq_len]
+                num_correct_tokens = correct_tokens.sum(dim=1) # Correct tokens per sample
+                num_valid_tokens = mask.sum(dim=1) # Valid tokens per sample (from labels)
 
-                # Check for empty generation (model declined to solve)
-                is_empty = len(gen_text.strip()) == 0
+                # Check for exact match (all valid tokens must be correct)
+                exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
+                valid_mask_sum = num_valid_tokens > 0
+                exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
+                # --- End Corrected Vectorized Exact Match (Val) ---
 
-                # Mark as covered if model provided a solution and confidence exceeds threshold
-                is_covered = (
-                    not is_empty and confidence[i] >= model.confidence_threshold
+                all_raw_confidences.append(raw_confidence)
+                all_exact_matches.append(exact_match) # Stores bool (Exact Match Only)
+                total_loss += batch_loss
+                total_valid_tokens += batch_valid_tokens
+
+            elif stage == "test":
+                # Test uses model.generate
+                gen_kwargs = {
+                    "input_ids": batch["input_ids"],
+                    "attention_mask": batch["attention_mask"],
+                    "features": batch.get("features"),
+                    "num_beams": num_beams,
+                    "max_resolve_len": max_resolve_len,
+                }
+                if not unwrapped_model.use_features:
+                     gen_kwargs.pop("features")
+
+                generated_ids, raw_confidence = unwrapped_model.generate(**gen_kwargs)
+                labels = batch["labels"]
+                # remove first bos token and add a pad token at the end
+                labels = labels[:, 1:]
+                labels = torch.cat(
+                    [
+                        labels,
+                        torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
+                    ],
+                    dim=-1
                 )
 
-                # 只有在置信度超过阈值时，才将预测视为模型给出的正式预测
-                # 否则视为模型"拒绝回答"
-                prediction = (
-                    gen_text if confidence[i] >= model.confidence_threshold else ""
-                )
+                # --- Vectorized Exact Match Calculation (Test) ---
+                if generated_ids.size(1) != labels.size(1):
+                     min_len = min(generated_ids.size(1), labels.size(1))
+                     generated_ids = generated_ids[:, :min_len]
+                     labels = labels[:, :min_len]
+                     accelerator.print(f"Warning: Mismatch lengths adjusted to {min_len} for test eval.")
 
-                all_predictions.append(prediction)
-                all_targets.append(target_text)
-                all_confidences.append(confidence[i].item())
-                all_coverage.append(is_covered)
 
-    # 在分布式环境中收集所有进程的结果
-    if accelerator is not None:
-        all_predictions = accelerator.gather_for_metrics(all_predictions)
-        all_targets = accelerator.gather_for_metrics(all_targets)
-        all_confidences = accelerator.gather_for_metrics(all_confidences)
-        all_coverage = accelerator.gather_for_metrics(all_coverage)
+                mask = labels != pad_token_id # Mask based on labels
+                correct_tokens = (generated_ids == labels) & mask
+                num_correct_tokens = correct_tokens.sum(dim=1)
+                num_valid_tokens = mask.sum(dim=1)
 
-    # 只在主进程上计算指标
-    if accelerator is None or accelerator.is_main_process:
-        metrics = calculate_metrics(
-            all_predictions, all_targets, all_confidences, all_coverage
-        )
+                exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
+                valid_mask_sum = num_valid_tokens > 0
+                exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
+                # --- End Vectorized Exact Match (Test) ---
 
-        # Log whether features were used
-        if hasattr(model, "use_features"):
-            metrics["use_features"] = model.use_features
+                all_raw_confidences.append(raw_confidence)
+                all_exact_matches.append(exact_match) # Stores bool (Exact Match Only)
 
-    else:
-        # 非主进程返回空字典，将在后面广播
-        metrics = {}
+            else:
+                raise ValueError(f"Invalid stage for evaluation: {stage}. Must be 'val' or 'test'.")
 
-    # 确保所有进程获得相同的指标结果
-    if accelerator is not None:
-        metrics = accelerator.gather(metrics)[0]  # 广播主进程的结果给所有进程
+    # Concatenate results from all batches
+    all_raw_confidences = torch.cat(all_raw_confidences)
+    all_exact_matches = torch.cat(all_exact_matches) # Now stores Exact Match bool
+
+    # Gather results from all processes
+    gathered_confidences = accelerator.gather_for_metrics(all_raw_confidences)
+    gathered_exact_matches = accelerator.gather_for_metrics(all_exact_matches)
+
+    if stage == "val":
+        # Gather loss and valid tokens only for validation stage
+        total_loss_tensor = torch.tensor(float(total_loss), dtype=torch.float, device=accelerator.device) # Cast to float
+        total_valid_tokens_tensor = torch.tensor(float(total_valid_tokens), dtype=torch.float, device=accelerator.device) # Cast to float
+        gathered_losses = accelerator.gather(total_loss_tensor)
+        gathered_valid_tokens = accelerator.gather(total_valid_tokens_tensor)
+        # Sum on main process
+        if accelerator.is_main_process:
+            total_loss = torch.sum(gathered_losses).item()
+            total_valid_tokens = torch.sum(gathered_valid_tokens).item()
+        else:
+             total_loss = 0
+             total_valid_tokens = 1 # Avoid division by zero
+
+    # Calculate final metrics on the main process
+    metrics = {}
+    if accelerator.is_main_process:
+        num_samples = len(gathered_exact_matches)
+        if num_samples == 0:
+             # Handle empty evaluation case
+             precision = 0.0
+             recall = 0.0
+             f1 = 0.0
+             coverage = 0.0
+             avg_calibrated_confidence = 0.0
+             if stage == "val":
+                 avg_loss = 0.0
+        else:
+            # --- Apply Calibration on Main Process ---
+            final_confidences_to_use = gathered_confidences # Default to raw
+            if calibrator is not None:
+                try:
+                    # Calibrate requires list of floats
+                    calibrated_list = calibrator.calibrate(gathered_confidences.cpu().tolist())
+                    final_confidences_to_use = torch.tensor(calibrated_list, dtype=torch.float, device=gathered_confidences.device)
+                    print(f"Applied calibration using {calibrator.strategy} strategy for {stage} evaluation.")
+                except Exception as e:
+                    print(f"Warning: Calibration failed during {stage} evaluation: {e}. Using raw scores.")
+                    # Fallback to raw scores if calibration fails
+                    final_confidences_to_use = gathered_confidences
+            else:
+                print(f"No calibrator provided for {stage} evaluation. Using raw scores.")
+            # --- End Calibration ---
+
+            # --- Calculate Metrics using potentially calibrated confidences ---
+            confident_mask = final_confidences_to_use >= confidence_threshold
+            num_confident = confident_mask.sum().item()
+
+            # Correct predictions = Exact Match AND Confident (using calibrated confidence)
+            correct_and_confident = gathered_exact_matches & confident_mask
+            num_correct_and_confident = correct_and_confident.sum().item()
+
+            # Precision: (Correct & Confident) / Confident
+            precision = num_correct_and_confident / num_confident if num_confident > 0 else 0.0
+
+            # Recall: (Correct & Confident) / Total Samples
+            recall = num_correct_and_confident / num_samples
+
+            # F1 Score
+            f1 = (2 * precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+
+            # Coverage: Confident / Total Samples
+            coverage = num_confident / num_samples
+
+            # Average CALIBRATED confidence over all samples (if calibrated)
+            avg_calibrated_confidence = final_confidences_to_use.mean().item()
+
+            # Average loss for validation stage
+            if stage == "val":
+                avg_loss = total_loss / (total_valid_tokens + 1e-9)
+            # --- End Metric Calculation ---
+
+        # Populate metrics dictionary
+        metrics["precision"] = precision
+        metrics["recall"] = recall
+        metrics["f1"] = f1
+        metrics["coverage"] = coverage
+        metrics["avg_confidence"] = avg_calibrated_confidence # Report avg calibrated confidence
+        metrics["num_samples"] = num_samples
+        if stage == "val":
+            metrics["avg_loss"] = avg_loss
+
+    # Broadcast metrics from main process to others if needed
+    # metrics = accelerator.broadcast(metrics, from_process=0) # Usually not needed unless other processes act on metrics
 
     return metrics
 

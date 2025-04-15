@@ -10,8 +10,8 @@ import logging
 from transformers import AutoTokenizer
 import torch
 
-from .model import HesitateT5
-from .features import FeatureExtractor, prepare_input_with_features
+from merge_hesitate.model import HesitateT5
+from merge_hesitate.features import FeatureExtractor, prepare_input_with_features
 
 logger = logging.getLogger(__name__)
 

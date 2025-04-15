@@ -18,7 +18,7 @@ class ConfidenceCalibrator:
         )
 
         # For temperature scaling
-        self.temperature = nn.Parameter(torch.ones(1))
+        self.temperature = nn.Parameter(torch.ones(1) * 2)
 
     def fit(self, raw_confidences: List[float], correctness: List[bool]):
         """

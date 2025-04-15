@@ -9,7 +9,7 @@ from transformers import AutoTokenizer
 
 # Load tokenizer
 try:
-    tokenizer = AutoTokenizer.from_pretrained("./merge_hesitate/tokenizer")
+    tokenizer = AutoTokenizer.from_pretrained("./tokenizer")
 except Exception as e:
     print(f"Tokenizer not found, fail to preprocess dataset: {e}")
     exit()

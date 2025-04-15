@@ -19,3 +19,6 @@ codet5-small
 train-ms
 test-ms
 archive
+OUTPUT
+**/.ipynb_checkpoints
+*.ipynb_checkpoints

@@ -9,11 +9,13 @@ import argparse
 from tqdm import tqdm
 import numpy as np
 from accelerate import Accelerator
-
-from .model import HesitateT5
-from .data import create_dataloaders
-from .confidence import ConfidenceCalibrator
-from .evaluate import evaluate_model
+from accelerate.utils import DistributedDataParallelKwargs
+import time
+from torch.utils.data import DataLoader
+from merge_hesitate.model import HesitateT5
+from merge_hesitate.data import create_dataloaders
+from merge_hesitate.confidence import ConfidenceCalibrator
+from merge_hesitate.evaluate import evaluate_model
 
 logger = logging.getLogger(__name__)
 
@@ -31,8 +33,11 @@ def seed_everything(seed=42):
 
 def train(args):
     # Initialize accelerator
+    ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
     accelerator = Accelerator(
-        gradient_accumulation_steps=args.gradient_accumulation_steps
+        gradient_accumulation_steps=args.gradient_accumulation_steps,
+        kwargs_handlers=[ddp_kwargs],
+        project_dir=args.output_dir # Specify project dir for logs/checkpoints
     )
 
     # Set up logging
@@ -65,9 +70,10 @@ def train(args):
         tokenizer=tokenizer,
         batch_size=args.batch_size,
         max_seq_length=args.max_seq_length,
-        max_resolve_length=args.max_resolve_length,
+        max_resolve_length=args.max_resolve_len,
         feature_size=args.feature_size,
         use_features=args.use_features,
+        accelerator=accelerator,
     )
 
     # Initialize model
@@ -93,6 +99,7 @@ def train(args):
     )
 
     # Prepare for distributed training
+    # Note: Don't prepare test_loader here, prepare it before final evaluation
     model, optimizer, train_loader, val_loader, scheduler = accelerator.prepare(
         model, optimizer, train_loader, val_loader, scheduler
     )
@@ -106,9 +113,33 @@ def train(args):
     # Training loop
     accelerator.print("***** Starting training *****")
     global_step = 0
-    best_accuracy = 0.0
+    best_f1 = 0.0
+    last_calibrator = None # Store the most recent calibrator (only on main process)
 
-    # 创建tqdm进度条，只在主进程显示
+    # Define path for the best model state
+    best_model_state_path = os.path.join(args.output_dir, "best_model_state")
+    best_calibrator_path = os.path.join(best_model_state_path, "calibrator.pt") # Define path
+
+    # Log file paths (only main process needs them for writing)
+    if accelerator.is_main_process:
+        train_log_path = os.path.join(args.output_dir, "train_metrics.log")
+        test_log_path = os.path.join(args.output_dir, "test_metrics.log")
+        time_log_path = os.path.join(args.output_dir, "time_log.txt")
+        # Clear existing log files or create headers if needed
+        with open(train_log_path, "w") as f:
+            # Write header for train metrics
+            f.write("Epoch\tTrain Loss\tVal Metrics\tConfidence Threshold\tCalibrated\n")
+        with open(test_log_path, "w") as f:
+            # Write header for test metrics
+            f.write("Test Metrics\n")
+        with open(time_log_path, "w") as f:
+            # Write header for timing info
+            f.write("Timing Information\n")
+
+    # Record start time
+    start_time = time.time()
+
+    # tqdm progress bar setup
     disable_progress_bar = not accelerator.is_main_process
 
     for epoch in range(args.num_epochs):
@@ -124,55 +155,73 @@ def train(args):
             batch["stage"] = "train"
 
             # Forward pass with unified batch interface
+            # The forward pass now expects labels and returns loss, confidence, logits, valid_tokens
             outputs = model(**batch)
 
             # Get loss and other metrics
-            gen_loss = outputs["loss"] / outputs["valid_tokens"]
+            # gen_loss is already the SUMMED NLL loss for the batch from model.forward
+            # We normalize by the number of valid (non-padded) tokens
+            gen_loss = outputs["loss"] / (outputs["valid_tokens"] + 1e-9) # Avoid division by zero
             # size: [batch_size]
             confidence = outputs["confidence"]
+            # Logits size: [batch_size, seq_len, vocab_size]
+            logits = outputs["logits"]
+            # Labels size: [batch_size, seq_len]
+            labels = batch["labels"]
+            # remove first bos token and add a pad token at the end
+            labels = labels[:, 1:]
+            labels = torch.cat(
+                [
+                    labels,
+                    torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
+                ],
+                dim=-1,
+            )
 
-            # Get model predictions
+            # --- Corrected Vectorized Correctness Calculation ---
+            # Get model predictions directly from logits for confidence target calculation
             with torch.no_grad():
                 # Get predictions from logits [batch_size, seq_len, vocab_size] -> [batch_size, seq_len]
-                predictions = torch.argmax(outputs["logits"], dim=-1)
+                predictions = torch.argmax(logits, dim=-1)
 
-                # Create shifted labels to match prediction positions (like in training)
-                # batch_size, seq_len -> batch_size, seq_len + 1
-                shifted_labels = batch["labels"].clone()
-                shifted_labels = torch.cat(
-                    [
-                        shifted_labels,
-                        torch.ones(
-                            (shifted_labels.size(0), 1),
-                            dtype=torch.long,
-                            device=shifted_labels.device,
-                        )
-                        * tokenizer.pad_token_id,
-                    ],
-                    dim=-1,
+
+                # --- Corrected Vectorized Correctness Calculation ---
+                # Compare predictions directly with the original labels
+                # Labels shape: [batch_size, seq_len]
+                # Predictions shape: [batch_size, seq_len]
+
+                # Need pad_token_id
+                pad_token_id = tokenizer.pad_token_id if tokenizer else accelerator.unwrap_model(model).generator.config.pad_token_id
+
+                # Create mask based on original labels to ignore padding positions
+                # Mask shape: [batch_size, seq_len]
+                mask = labels != pad_token_id
+
+                # 1. Check equality only where mask is True
+                # Shape: [batch_size, seq_len]
+                correct_tokens = (predictions == labels) & mask
+
+                # 2. Calculate number of correct tokens per sample
+                # Shape: [batch_size]
+                num_correct_tokens = correct_tokens.sum(dim=1)
+
+                # 3. Calculate number of valid (non-pad) tokens per sample (from labels)
+                # Shape: [batch_size]
+                num_valid_tokens = mask.sum(dim=1)
+
+                # 4. Calculate per-sample accuracy (correctness target for confidence)
+                # Handle cases with zero valid tokens to avoid division by zero
+                sample_correctness = torch.zeros_like(confidence, dtype=torch.float) # Initialize with zeros
+                valid_mask_sum = num_valid_tokens > 0
+                sample_correctness[valid_mask_sum] = (
+                    num_correct_tokens[valid_mask_sum].float() / num_valid_tokens[valid_mask_sum].float()
                 )
-                # batch_size, seq_len + 1 -> batch_size, seq_len
-                shifted_labels = shifted_labels[:, 1:]
+                # Shape: [batch_size]
+                # --- End Corrected Calculation ---
 
-                # Create mask for valid positions (non-padding), size: [batch_size, seq_len]
-                mask = shifted_labels != tokenizer.pad_token_id
 
-                # Compare predictions with ground truth where mask is True
-                # For each sample, calculate if predictions match targets (averaged across sequence)
-                sample_correct = torch.zeros_like(confidence)
-
-                for i in range(predictions.size(0)):
-                    # Get valid predictions and labels for this sample
-                    valid_preds = predictions[i][mask[i]]
-                    valid_labels = shifted_labels[i][mask[i]]
-
-                    if len(valid_preds) > 0:
-                        # Calculate accuracy for this sample (between 0 and 1)
-                        accuracy = (valid_preds == valid_labels).float().mean()
-                        sample_correct[i] = accuracy
-
-            # Use correctness as target for confidence
-            conf_loss = conf_criterion(confidence, sample_correct)
+            # Use per-sample correctness as target for confidence loss
+            conf_loss = conf_criterion(confidence, sample_correctness)
 
             # Combined loss (weighted sum)
             loss = gen_loss + args.confidence_weight * conf_loss
@@ -194,187 +243,318 @@ def train(args):
                 progress_bar.set_postfix({"loss": epoch_loss / (step + 1)})
 
         accelerator.wait_for_everyone()
+        avg_epoch_loss = epoch_loss / len(train_loader)
 
-        # Evaluate after each epoch
+        # --- Calibration Step ---
+        after_demanded_epoch = (epoch + 1) >= args.when_to_calibrate
+        calibrated_this_epoch = (
+            after_demanded_epoch
+            and (epoch + 1) % args.calibration_interval == 0
+        )
+
+        if calibrated_this_epoch:
+            accelerator.print(f"Running confidence calibration (epoch {epoch + 1})...")
+            # Train calibrator: returns calibrator object on main process, None otherwise
+            # Threshold is now set internally by train_calibrator via broadcast
+            new_calibrator_obj = train_calibrator(model, val_loader, tokenizer, accelerator, args)
+            if accelerator.is_main_process:
+                last_calibrator = new_calibrator_obj # Store the latest calibrator
+        else:
+            accelerator.print(
+                f"Skipping calibration for epoch {epoch + 1} (interval: {args.calibration_interval})"
+            )
+        # Ensure all processes have finished potential calibration steps and threshold updates
+        accelerator.wait_for_everyone()
+
+
+        # --- Validation Step ---
         accelerator.print(f"Epoch {epoch + 1} completed. Running evaluation...")
-        val_loader = accelerator.prepare(val_loader)
+        # Pass the most recent calibrator (only exists on main process) to evaluate_model
+        # Evaluate_model logic will handle calibrator being None on non-main processes
         metrics = evaluate_model(
-            model,
-            val_loader,
-            tokenizer,
-            accelerator,
+            model=model,
+            dataloader=val_loader, # Already prepared
+            tokenizer=tokenizer,
+            accelerator=accelerator,
+            stage="val",
+            calibrator=last_calibrator if accelerator.is_main_process else None, # Pass calibrator
             max_length=args.max_seq_length,
             num_beams=args.num_beams,
             max_resolve_len=args.max_resolve_len,
         )
 
-        # Log metrics (只在主进程显示详细指标)
+        # Log validation metrics
         if accelerator.is_main_process:
             for key, value in metrics.items():
-                accelerator.print(f"{key}: {value:.4f}")
+                accelerator.print(f"Val {key}: {value:.4f}")
 
-        # Save best model
-        if metrics["accuracy"] > best_accuracy:
-            best_accuracy = metrics["accuracy"]
+        # --- Save Best Model State ---
+        if accelerator.is_main_process:
+            # Check F1 score instead of precision
+            current_f1 = metrics.get("f1", 0.0)
+            if current_f1 > best_f1:
+                # Update best_f1
+                best_f1 = current_f1
+                # Update print message
+                accelerator.print(f"New best F1 score: {best_f1:.4f}. Saving state...")
 
-            if accelerator.is_main_process:
-                output_dir = os.path.join(args.output_dir, "best_model")
-                os.makedirs(output_dir, exist_ok=True)
+                # Save accelerator state (model, optimizer, scheduler)
+                accelerator.save_state(best_model_state_path)
+                accelerator.print(f"Saved model state to {best_model_state_path}")
 
-                # Unwrap model before saving
-                unwrapped_model = accelerator.unwrap_model(model)
-                unwrapped_model.generator.save_pretrained(output_dir)
+                # Save the calibrator that was used for this validation epoch
+                if last_calibrator:
+                    torch.save(last_calibrator, best_calibrator_path)
+                    accelerator.print(f"Saved corresponding calibrator to {best_calibrator_path}")
+                elif os.path.exists(best_calibrator_path):
+                     # Remove old calibrator if no new one was trained this epoch but state is best
+                     os.remove(best_calibrator_path)
+                     accelerator.print(f"Removed stale calibrator from {best_calibrator_path}")
 
-                # Save confidence head and feature projector separately
-                torch.save(
-                    unwrapped_model.confidence_head.state_dict(),
-                    os.path.join(output_dir, "confidence_head.pt"),
-                )
-                torch.save(
-                    unwrapped_model.feature_projector.state_dict(),
-                    os.path.join(output_dir, "feature_projector.pt"),
-                )
 
                 # Save model configuration details
-                with open(os.path.join(output_dir, "config.txt"), "w") as f:
+                unwrapped_model = accelerator.unwrap_model(model) # Get unwrapped model for config
+                config_save_path = os.path.join(best_model_state_path, "config.txt")
+                with open(config_save_path, "w") as f:
                     f.write(f"use_features: {args.use_features}\n")
                     f.write(f"feature_size: {args.feature_size}\n")
+                    # Get the threshold *from the model state* which was saved by accelerator
                     f.write(
                         f"confidence_threshold: {unwrapped_model.confidence_threshold}\n"
                     )
+                accelerator.print(f"Saved config to {config_save_path}")
+                # No need to print this again: accelerator.print(f"Saved best model state to {best_model_state_path}")
 
-                accelerator.print(f"Saved best model to {output_dir}")
-
-        # Train confidence calibrator periodically after the initial epochs
-        if (
-            epoch >= args.num_epochs // 2
-            and (epoch + 1) % args.calibration_interval == 0
-        ):
-            accelerator.print(f"Running confidence calibration (epoch {epoch + 1})...")
-            # Ensure val_loader is prepared if it wasn't already in this scope
-            prepared_val_loader = accelerator.prepare(val_loader)
-            train_calibrator(model, prepared_val_loader, tokenizer, accelerator, args)
-        else:
-            accelerator.print(
-                f"Skipping calibration for epoch {epoch + 1} (interval: {args.calibration_interval})"
+        # Log epoch metrics to file
+        if accelerator.is_main_process:
+            current_threshold = accelerator.unwrap_model(model).confidence_threshold # Get current threshold
+            metrics_str = ', '.join(f'{k}={v:.4f}' for k, v in metrics.items())
+            log_line = (
+                f"Epoch {epoch + 1}:\t"
+                f"Train Loss={avg_epoch_loss:.4f},\t"
+                f"Val Metrics={{ {metrics_str} }},\t"
+                f"Confidence Threshold={current_threshold:.4f},\t"
+                f"Calibrated={calibrated_this_epoch}\n"
             )
+            with open(train_log_path, "a") as f:
+                f.write(log_line)
 
-    # Final evaluation on test set
+    # --- Final Evaluation on Test Set using Best Model State ---
     accelerator.wait_for_everyone()
     accelerator.print("***** Final evaluation on test set *****")
+
+    best_calibrator_for_test = None # Initialize calibrator for test
+    if os.path.exists(best_model_state_path):
+        accelerator.print(f"Loading best model state from {best_model_state_path}...")
+        accelerator.load_state(best_model_state_path)
+        accelerator.print("Best model state loaded successfully.")
+
+        # Load the corresponding calibrator ON MAIN PROCESS ONLY
+        if accelerator.is_main_process:
+            if os.path.exists(best_calibrator_path):
+                try:
+                    # Load the calibrator onto the CPU explicitly
+                    best_calibrator_for_test = torch.load(best_calibrator_path, map_location=torch.device('cpu'))
+                    accelerator.print(f"Loaded best calibrator from {best_calibrator_path}")
+                except Exception as e:
+                    accelerator.print(f"Warning: Failed to load best calibrator from {best_calibrator_path}: {e}")
+            else:
+                 accelerator.print(f"Warning: Best model state found, but no corresponding calibrator file at {best_calibrator_path}")
+
+    else:
+        accelerator.print("No best model state found. Evaluating using the final model state.")
+        # Use the last calibrator trained during the run if evaluating final state
+        if accelerator.is_main_process:
+             best_calibrator_for_test = last_calibrator
+             if best_calibrator_for_test:
+                  accelerator.print("Using last trained calibrator for final model evaluation.")
+             else:
+                  accelerator.print("Warning: No best model state and no calibrator trained. Test evaluation will use raw scores.")
+
+
+    # Prepare the test_loader *after* potentially loading the best state
     test_loader = accelerator.prepare(test_loader)
-    metrics = evaluate_model(
-        model,
-        test_loader,
-        tokenizer,
-        accelerator,
+
+    # Run final evaluation, passing the loaded best calibrator
+    # Only the main process needs/has the calibrator object
+    final_metrics = evaluate_model(
+        model=model, # Use the potentially loaded best model
+        dataloader=test_loader,
+        tokenizer=tokenizer,
+        accelerator=accelerator,
+        stage="test",
+        calibrator=best_calibrator_for_test if accelerator.is_main_process else None, # Pass loaded calibrator
         max_length=args.max_seq_length,
         num_beams=args.num_beams,
         max_resolve_len=args.max_resolve_len,
     )
 
-    # Log metrics
+    # Log final test metrics
     if accelerator.is_main_process:
-        for key, value in metrics.items():
-            accelerator.print(f"{key}: {value:.4f}")
+        log_final_metrics = {}
+        accelerator.print("--- Final Test Metrics (using best model) ---")
+        for key, value in final_metrics.items():
+            accelerator.print(f"Test {key}: {value:.4f}")
+            log_final_metrics[f"test_{key}"] = value
+        # accelerator.log(log_final_metrics, step=args.num_epochs) # Log final metrics
 
+    # Record end time and calculate duration
+    end_time = time.time()
+    total_duration = end_time - start_time
+
+    # Log final test metrics and time to files
+    if accelerator.is_main_process:
+        test_log_line = f"Test Metrics (Best Model): {{{', '.join(f'{k}={v:.4f}' for k, v in final_metrics.items())}}}\n"
+        with open(test_log_path, "a") as f:
+            f.write(test_log_line) # Append to test log
+
+        time_log_line = f"Total Training Time: {total_duration:.2f} seconds\n"
+        with open(time_log_path, "a") as f:
+            f.write(time_log_line) # Append to time log
+
+
+    accelerator.end_training() # Clean up accelerator resources
     accelerator.print("Training completed!")
 
 
-def train_calibrator(model, val_loader, tokenizer, accelerator, args):
-    """Train the confidence calibrator using validation data."""
+def train_calibrator(model: HesitateT5, val_loader: DataLoader, tokenizer: AutoTokenizer, accelerator: Accelerator, args: argparse.Namespace):
+    """
+    Train the confidence calibrator on the main process using gathered validation data.
+    Sets the threshold on the model across all processes via broadcast.
+    Returns the calibrator object on the main process, None otherwise.
+    """
     model.eval()
     raw_confidences = []
-    correctness = []
-
-    # 只在主进程显示进度条
+    exact_matches_for_calib = []
     disable_progress_bar = not accelerator.is_main_process
+    pad_token_id = tokenizer.pad_token_id
 
+    # --- Collect Data ---
     with torch.no_grad():
         for batch in tqdm(
             val_loader, desc="Collecting calibration data", disable=disable_progress_bar
         ):
-            # Set evaluation stage
-            batch["stage"] = "eval"
+            batch["stage"] = "val"
+            outputs = model(**batch)
+            confidence = outputs["confidence"]
+            predictions = outputs["predictions"]
+            labels = batch["labels"]
 
-            # Add generation parameters
-            batch["max_resolve_len"] = args.max_resolve_len
-            batch["num_beams"] = args.num_beams
-            batch["max_length"] = args.max_seq_length
+            # --- Vectorized Exact Match Calculation (for calibrator target) ---
+            shifted_labels = labels.clone()
+            shifted_labels = torch.cat(
+                [
+                    shifted_labels,
+                    torch.ones(
+                        (shifted_labels.size(0), 1),
+                        dtype=torch.long,
+                        device=shifted_labels.device,
+                    ) * pad_token_id,
+                ],
+                dim=-1,
+            )[:, 1:] # Align with predictions
 
-            # Get model predictions
-            generated, confidence = model.generate(**batch)
+            # Ensure predictions are same length (should be handled by model.forward)
+            if predictions.size(1) != shifted_labels.size(1):
+                 min_len = min(predictions.size(1), shifted_labels.size(1))
+                 predictions = predictions[:, :min_len]
+                 shifted_labels = shifted_labels[:, :min_len]
 
-            # Check if predictions match targets
-            correct = []
-            for i in range(len(generated)):
-                gen_text = tokenizer.decode(generated[i], skip_special_tokens=True)
-                target_text = tokenizer.decode(
-                    batch["labels"][i], skip_special_tokens=True
-                )
-                # 将生成的文本和目标文本截断为256个词语
-                gen_text_words = gen_text.split()[: args.max_resolve_len]
-                target_text_words = target_text.split()[: args.max_resolve_len]
-                gen_text = " ".join(gen_text_words)
-                target_text = " ".join(target_text_words)
+            mask = shifted_labels != pad_token_id
+            correct_tokens = (predictions == shifted_labels) & mask
+            num_correct_tokens = correct_tokens.sum(dim=1)
+            num_valid_tokens = mask.sum(dim=1)
 
-                # 只有当置信度大于阈值时，才判断预测是否正确
-                # 否则标记为不正确，因为模型"拒绝回答"
-                if confidence[i] >= model.confidence_threshold:
-                    correct.append(gen_text == target_text)
-                else:
-                    correct.append(False)  # 低置信度视为错误预测
+            exact_match = torch.zeros_like(confidence, dtype=torch.bool)
+            valid_mask_sum = num_valid_tokens > 0
+            exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
+            # --- End Exact Match Calculation ---
 
-            # Collect data for calibration
             raw_confidences.extend(confidence.cpu().tolist())
-            correctness.extend(correct)
+            exact_matches_for_calib.extend(exact_match.cpu().tolist()) # Use exact match as target
 
-    # 收集所有进程的数据
-    if accelerator.num_processes > 1:
-        raw_confidences = accelerator.gather_for_metrics(raw_confidences)
-        correctness = accelerator.gather_for_metrics(correctness)
+    # --- Gather Data Across Processes ---
+    gathered_confidences_list = accelerator.gather_for_metrics(raw_confidences)
+    gathered_exact_matches_list = accelerator.gather_for_metrics(exact_matches_for_calib)
 
-    # 主进程计算校准器
+    calibrator = None
+    new_threshold = None
+    unwrapped_model = accelerator.unwrap_model(model) # Unwrap once here
+
+    # --- Calculate Calibrator and Threshold on Main Process Only ---
     if accelerator.is_main_process:
-        # 检查收集的数据是否足够
-        if len(raw_confidences) < 10:
+        # Directly use the gathered lists, NO flattening needed
+        flat_confidences = gathered_confidences_list
+        flat_exact_matches = gathered_exact_matches_list
+
+        current_threshold = unwrapped_model.confidence_threshold # Get current as fallback
+
+        if len(flat_confidences) < 10 or len(set(flat_confidences)) < 2:
             accelerator.print(
-                "Warning: Too few samples for calibration, keeping previous threshold"
+                f"Warning: Too few samples ({len(flat_confidences)}) or unique confidence values ({len(set(flat_confidences))}) for calibration. Keeping current threshold {current_threshold:.4f}."
             )
-            # Get the unwrapped model and access its current threshold
-            unwrapped_model = accelerator.unwrap_model(model)
-            new_threshold = unwrapped_model.confidence_threshold
+            new_threshold = current_threshold # Keep old threshold
+            calibrator = None # Ensure no old calibrator is returned
         else:
-            # Train calibrator
-            calibrator = ConfidenceCalibrator(strategy=args.calibration_strategy)
-            calibrator.fit(raw_confidences, correctness)
-            new_threshold = calibrator.get_threshold()
-            accelerator.print(f"Calibrated confidence threshold: {new_threshold:.4f}")
+            try:
+                # Fit calibrator using exact match as the correctness target
+                calibrator = ConfidenceCalibrator(strategy=args.calibration_strategy, initial_threshold=current_threshold)
+                # Pass boolean list directly to fit
+                calibrator.fit(flat_confidences, flat_exact_matches)
+                calculated_t = calibrator.get_threshold() # get_threshold finds based on F0.5 of calibrated scores
 
-            # Save calibrator
-            output_dir = os.path.join(args.output_dir, "calibrator")
-            os.makedirs(output_dir, exist_ok=True)
-            torch.save(calibrator, os.path.join(output_dir, "calibrator.pt"))
+                if calculated_t is None: # Handle calibrator potentially returning None
+                    accelerator.print(f"Warning: Calibrator returned None threshold. Keeping current threshold {current_threshold:.4f}.")
+                    new_threshold = current_threshold
+                    # Keep the fitted calibrator object even if threshold is None, might be useful later? Or set to None? Let's set to None for consistency.
+                    calibrator = None
+                else:
+                    new_threshold = calculated_t
+                    accelerator.print(f"Calibration complete. Proposed new threshold: {new_threshold:.4f}")
+
+            except Exception as e:
+                 accelerator.print(f"Error during calibration fitting or threshold calculation: {e}. Keeping current threshold {current_threshold:.4f}.")
+                 new_threshold = current_threshold # Fallback on error
+                 calibrator = None # Ensure no failed calibrator is returned
+
+    # Wait for main process to finish calculation before broadcasting threshold
+    accelerator.wait_for_everyone()
+
+    # --- Broadcast Threshold ---
+    # Prepare the threshold for broadcast
+    if accelerator.is_main_process:
+        # Use the calculated new_threshold if valid, otherwise fallback to current
+        threshold_val = float(new_threshold if new_threshold is not None else current_threshold)
+        threshold_tensor = torch.tensor(threshold_val, device=accelerator.device)
     else:
-        # Handle the case where calibration wasn't run on the main process
-        # We still need a value for new_threshold to avoid errors
-        # Get the current threshold from the model as a default
-        unwrapped_model = accelerator.unwrap_model(model)
-        new_threshold = unwrapped_model.confidence_threshold
+        threshold_tensor = torch.empty(1, device=accelerator.device) # Placeholder on other processes
 
-    # Broadcast the threshold determined by the main process (or the default if calibration failed/skipped)
+    # Broadcast the tensor from process 0 using torch distributed (more robust than utils)
     if accelerator.num_processes > 1:
-        # Ensure new_threshold is a tensor for broadcasting if it's a Python float
-        threshold_tensor = torch.tensor(new_threshold, device=accelerator.device)
-        accelerator.broadcast(threshold_tensor, from_process=0)
-        new_threshold = threshold_tensor.item()  # Convert back to float
+        torch.distributed.broadcast(threshold_tensor, src=0)
+        # All processes receive the threshold in their tensor
+        new_threshold = threshold_tensor.item() # Extract float value
+    elif accelerator.is_main_process:
+         # Single process: new_threshold already has the value (or fallback)
+         new_threshold = threshold_val
 
-    # Set the threshold on the model across all processes
-    unwrapped_model = accelerator.unwrap_model(model)
-    unwrapped_model.set_confidence_threshold(new_threshold)
-    accelerator.print(
-        f"Confidence threshold set to {new_threshold:.4f} across all processes."
-    )
+
+    # --- Set Threshold on All Processes ---
+    # Ensure new_threshold is a float before setting
+    if new_threshold is not None:
+        unwrapped_model.set_confidence_threshold(float(new_threshold))
+        # Log on all processes to confirm the *applied* threshold
+        current_model_threshold = unwrapped_model.confidence_threshold # Read back
+        accelerator.print(
+            f"Process {accelerator.process_index}: Confidence threshold set to {current_model_threshold:.4f}."
+        )
+    else:
+         # Should not happen with the fallback logic, but log just in case
+         accelerator.print(f"Process {accelerator.process_index}: Threshold remained None after broadcast/calculation.")
+
+
+    # Return the calibrator object (only exists on main process)
+    return calibrator
 
 
 def main():
@@ -398,7 +578,7 @@ def main():
         "--max_seq_length", type=int, default=512, help="Maximum sequence length"
     )
     parser.add_argument(
-        "--max_resolve_length",
+        "--max_resolve_len",
         type=int,
         default=256,
         help="Maximum length for resolving text",
@@ -431,7 +611,7 @@ def main():
         type=str,
         required=False,
         default="OUTPUT",
-        help="Output directory",
+        help="Output directory for logs, checkpoints, etc.", # Clarified help text
     )
 
     # Generation arguments
@@ -460,23 +640,24 @@ def main():
         help="Initial confidence threshold",
     )
     parser.add_argument(
-        "--max_resolve_len",
-        type=int,
-        default=256,
-        help="Maximum length for resolving text",
-    )
-    # Add calibration interval argument
-    parser.add_argument(
         "--calibration_interval",
         type=int,
         default=5,
-        help="Run confidence calibration every N epochs after the halfway point.",
+        help="Run confidence calibration every N epochs after the start epoch.",
     )
+
+    parser.add_argument(
+        "--when_to_calibrate",
+        type=int,
+        default=50,
+        help="Run confidence calibration after N epochs.",
+    )
+
 
     args = parser.parse_args()
 
-    # Validate and create output directory
-    os.makedirs(args.output_dir, exist_ok=True)
+    # Validate and create output directory (Accelerator might handle this with project_dir)
+    # os.makedirs(args.output_dir, exist_ok=True) # Keep for safety or rely on Accelerator
 
     # Start training
     train(args)

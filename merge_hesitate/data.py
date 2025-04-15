@@ -4,7 +4,7 @@ import os
 import pickle
 import numpy as np
 from transformers import PreTrainedTokenizer
-
+from accelerate import Accelerator
 
 class MergeConflictDataset(Dataset):
     """Dataset for merge conflict resolution using preprocessed data."""
@@ -17,6 +17,7 @@ class MergeConflictDataset(Dataset):
         split: str = "train",
         feature_size: int = 12,
         use_features: bool = True,
+        accelerator: Accelerator = None,
     ):
         self.tokenizer = tokenizer
         self.max_seq_length = max_seq_length
@@ -45,11 +46,11 @@ class MergeConflictDataset(Dataset):
         # Pre-compute features only if we're using them
         self.features = self._precompute_features() if use_features else None
 
-        print(f"Loaded {len(self.inputs)} samples from {preprocessed_path}")
+        accelerator.print(f"Loaded {len(self.inputs)} samples from {preprocessed_path}")
         if use_features:
-            print(f"Feature extraction enabled with {feature_size} features")
+            accelerator.print(f"Feature extraction enabled with {feature_size} features")
         else:
-            print("Feature extraction disabled")
+            accelerator.print("Feature extraction disabled")
 
     def _precompute_features(self):
         """Precompute features for all samples in the dataset."""
@@ -157,6 +158,7 @@ def create_dataloaders(
     max_resolve_length: int = 256,
     feature_size: int = 12,
     use_features: bool = True,
+    accelerator: Accelerator = None,
 ):
     """Create dataloaders for training and evaluation."""
     train_dataset = MergeConflictDataset(
@@ -166,6 +168,7 @@ def create_dataloaders(
         split="train",
         feature_size=feature_size,
         use_features=use_features,
+        accelerator=accelerator,
     )
 
     val_dataset = MergeConflictDataset(
@@ -175,6 +178,7 @@ def create_dataloaders(
         split="val",
         feature_size=feature_size,
         use_features=use_features,
+        accelerator=accelerator,
     )
 
     test_dataset = MergeConflictDataset(
@@ -184,6 +188,7 @@ def create_dataloaders(
         split="test",
         feature_size=feature_size,
         use_features=use_features,
+        accelerator=accelerator,
     )
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
