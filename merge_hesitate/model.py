@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from transformers import T5ForConditionalGeneration
 from transformers.modeling_outputs import BaseModelOutputWithPastAndCrossAttentions
-import math # Needed for sqrt in attention
+import math
 
 
 class HesitateT5(nn.Module):
@@ -31,17 +31,26 @@ class HesitateT5(nn.Module):
 
         # Get embedding dimension
         self.embedding_dim = self.generator.config.hidden_size
-        hidden_size = self.embedding_dim # Alias for clarity
+        hidden_size = self.embedding_dim
 
-        # Feature projection layer
+        # Feature projection layer - Now using FiLM
         if self.use_features:
-             self.feature_projector = nn.Sequential(
-                nn.Linear(feature_size, hidden_size),
-                nn.ReLU(),
-                nn.LayerNorm(hidden_size),
-            )
+             # Optional: Intermediate projection before generating scale/shift
+             intermediate_feature_dim = hidden_size // 2 # Example intermediate size
+             self.feature_intermediate = nn.Sequential(
+                 nn.Linear(feature_size, intermediate_feature_dim),
+                 nn.ReLU()
+             )
+             # Layers to predict scale and shift parameters
+             self.feature_scale_predictor = nn.Linear(intermediate_feature_dim, hidden_size)
+             self.feature_shift_predictor = nn.Linear(intermediate_feature_dim, hidden_size)
+             # LayerNorm for the final fused output (optional but good practice)
+             self.film_layer_norm = nn.LayerNorm(hidden_size)
         else:
-            self.feature_projector = None
+            self.feature_intermediate = None
+            self.feature_scale_predictor = None
+            self.feature_shift_predictor = None
+            self.film_layer_norm = None
 
         # --- Attention Pooling Components ---
         # Learnable query vector for attention pooling
@@ -64,80 +73,81 @@ class HesitateT5(nn.Module):
         self.confidence_threshold = confidence_threshold
 
     def _get_fused_encoder_states_and_confidence(self, input_ids, attention_mask, features):
-        """Helper to get encoder states (potentially fused) and confidence using Attention Pooling."""
+        """Helper to get encoder states (fused using FiLM) and confidence using Attention Pooling."""
         # Get base encoder outputs
         encoder_outputs = self.generator.encoder(
             input_ids=input_ids, attention_mask=attention_mask, return_dict=True
         )
         encoder_hidden_states = encoder_outputs["last_hidden_state"]
-        states_for_decoder_or_generate = encoder_hidden_states # Default
+        final_encoder_states = encoder_hidden_states # Default output states
 
-        # Fuse features if enabled
-        if self.use_features and features is not None and self.feature_projector is not None:
-            projected_features = self.feature_projector(features)
-            projected_features_unsqueezed = projected_features.unsqueeze(1)
-            fused_encoder_hidden_states = encoder_hidden_states + projected_features_unsqueezed
-            states_for_decoder_or_generate = fused_encoder_hidden_states
-            states_for_confidence = fused_encoder_hidden_states
+        # Fuse features using FiLM if enabled
+        if self.use_features and features is not None and self.feature_intermediate is not None:
+            # Project features
+            intermediate_features = self.feature_intermediate(features) # [batch, intermediate_dim]
+            # Predict scale and shift
+            scale = self.feature_scale_predictor(intermediate_features) # [batch, hidden_size]
+            shift = self.feature_shift_predictor(intermediate_features) # [batch, hidden_size]
+
+            # Unsqueeze for broadcasting: [batch, 1, hidden_size]
+            scale_unsqueezed = scale.unsqueeze(1)
+            shift_unsqueezed = shift.unsqueeze(1)
+
+            # Apply FiLM: state * (1 + scale) + shift
+            # Using (1 + scale) is often more stable than just scale
+            fused_states = encoder_hidden_states * (1 + scale_unsqueezed) + shift_unsqueezed
+
+            # Apply LayerNorm after FiLM fusion
+            if self.film_layer_norm is not None:
+                final_encoder_states = self.film_layer_norm(fused_states)
+            else:
+                final_encoder_states = fused_states
         else:
-            states_for_confidence = encoder_hidden_states
+            # If not using features, states remain unchanged
+            final_encoder_states = encoder_hidden_states
 
-        # --- Attention Pooling Calculation ---
+        # Use the potentially fused states for both subsequent steps
+        states_for_decoder_or_generate = final_encoder_states
+        states_for_confidence = final_encoder_states
+
+        # --- Attention Pooling Calculation (operates on states_for_confidence) ---
         batch_size = states_for_confidence.size(0)
-
-        # Project states into keys
-        keys = self.key_layer(states_for_confidence) # [batch_size, seq_len, hidden_size]
-        # Values are often the original states (or could be projected)
-        values = states_for_confidence # [batch_size, seq_len, hidden_size]
-
-        # Prepare query: [hidden_size] -> [batch_size, 1, hidden_size]
+        keys = self.key_layer(states_for_confidence)
+        values = states_for_confidence
         query = self.attention_query.unsqueeze(0).unsqueeze(1).expand(batch_size, -1, -1)
-
-        # Calculate attention scores: (query * keys^T) / sqrt(d_k)
-        # Matmul: [b, 1, h] @ [b, h, s] -> [b, 1, s]
         attention_scores = torch.matmul(query, keys.transpose(-1, -2)) / math.sqrt(self.embedding_dim)
-        attention_scores = attention_scores.squeeze(1) # [batch_size, seq_len]
-
-        # Apply attention mask (set padding tokens to -inf)
+        attention_scores = attention_scores.squeeze(1)
         if attention_mask is not None:
             attention_scores = attention_scores.masked_fill(attention_mask == 0, -1e9)
-
-        # Calculate attention weights
-        attention_weights = F.softmax(attention_scores, dim=1) # [batch_size, seq_len]
-
-        # Compute weighted sum of values
-        # Sum: sum(weights[b, s] * values[b, s, h]) over s -> [b, h]
-        pooled_hidden = torch.sum(values * attention_weights.unsqueeze(-1), dim=1) # [batch_size, hidden_size]
+        attention_weights = F.softmax(attention_scores, dim=1)
+        pooled_hidden = torch.sum(values * attention_weights.unsqueeze(-1), dim=1)
         # -------------------------------------
 
         # Calculate confidence based on the attention-pooled hidden state
-        confidence = self.confidence_head(pooled_hidden).squeeze(-1) # [batch_size]
+        confidence = self.confidence_head(pooled_hidden).squeeze(-1)
 
-        # Return potentially fused states for decoder/generation and confidence
+        # Return potentially FiLM-fused states for decoder/generation and confidence
         return states_for_decoder_or_generate, confidence, encoder_outputs
 
     def forward(self, **batch):
         """
         Forward pass for training and validation stages. Always expects labels.
-        Mimics run_mergegen.py by feeding original labels (WITH BOS) to decoder
-        and manually shifting labels BEFORE loss calculation.
         """
         # Extract required inputs
         input_ids = batch["input_ids"]
         attention_mask = batch["attention_mask"]
-        labels = batch.get("labels") # Expects labels WITH initial BOS from data loader
+        labels = batch.get("labels")
         features = batch.get("features", None) if self.use_features else None
         stage = batch.get("stage", "train") # Default to train if not specified
 
         if labels is None:
             raise ValueError("Labels must be provided for forward pass (train/val stages).")
 
-        # Get potentially fused encoder states and confidence score (now uses Attention Pooling)
+        # Get potentially fused encoder states and confidence score
         encoder_states_for_decoder, confidence, _ = self._get_fused_encoder_states_and_confidence(
             input_ids, attention_mask, features
         )
 
-        # Prepare decoder inputs - Feed ORIGINAL labels (WITH BOS) directly
         decoder_input_ids = labels
 
         # Get decoder outputs using potentially fused encoder states
@@ -152,15 +162,13 @@ class HesitateT5(nn.Module):
         # Apply normalization and LM head
         logits = decoder_hidden_states * (self.embedding_dim**-0.5)
         logits = self.generator.lm_head(logits) # [batch_size, seq_len, vocab_size]
-        # logits[b, t, :] is prediction for token t+1 based on input labels[0...t]
 
         # Compute generation loss
         log_probs = F.log_softmax(logits, dim=-1)
 
-        # Prepare shifted labels for loss calculation (Mimic run_mergegen.py)
         shifted_labels = labels.clone()
         pad_token_id = self.tokenizer.pad_token_id if self.tokenizer else self.generator.config.pad_token_id
-        shifted_labels = torch.cat( # Append PAD
+        shifted_labels = torch.cat(
             [
                 shifted_labels,
                 torch.ones(
@@ -194,7 +202,8 @@ class HesitateT5(nn.Module):
 
         # Add predictions for validation stage
         if stage == "val":
-            predictions = torch.argmax(logits, dim=-1)
+            # predictions[b, t] is the model's prediction for original label token t+1
+            predictions = torch.argmax(logits, dim=-1) # [batch_size, seq_len]
             output["predictions"] = predictions
 
         return output
@@ -230,7 +239,9 @@ class HesitateT5(nn.Module):
             raise ValueError("attention_mask should not be None in generation stage")
 
 
-        # Get potentially fused encoder states and confidence score (now uses Attention Pooling)
+        # Get potentially fused encoder states and confidence score
+        # Note: _get_fused_encoder_states_and_confidence returns the states
+        # suitable for the decoder/generator, which is what we need here.
         encoder_states_for_generate, confidence, original_encoder_outputs = self._get_fused_encoder_states_and_confidence(
             input_ids, attention_mask, features
         )
@@ -244,11 +255,15 @@ class HesitateT5(nn.Module):
         with torch.no_grad():
             outputs = self.generator.generate(
                 encoder_outputs=encoder_outputs_for_generate,
+                decoder_input_ids=(
+                    torch.ones(len(batch[0]), 1) * self.tokenizer.bos_token_id
+                )
+                .long()
+                .cuda(),
                 attention_mask=attention_mask,
                 num_beams=num_beams,
                 num_return_sequences=num_beams, # Generate all beams initially
                 max_new_tokens=max_resolve_len * 2, # Allow longer generation before potential truncate
-                **batch # Pass remaining kwargs like max_length etc.
             )
 
         # Reshape output for beam search: [batch_size * num_beams, seq_len] -> [batch_size, num_beams, seq_len]
@@ -284,5 +299,8 @@ class HesitateT5(nn.Module):
         """Enable or disable feature usage."""
         self.use_features = use_features
         if not use_features:
-            self.feature_projector = None # Ensure projector is None if features disabled
+            self.feature_intermediate = None
+            self.feature_scale_predictor = None
+            self.feature_shift_predictor = None
+            self.film_layer_norm = None
         # If enabling features later, projector needs re-initialization (not handled here)
