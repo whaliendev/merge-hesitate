@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "  if (is_product_treblelized()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "b_contents": "  ReadExtensionLibraries(\"/product/etc\", &sonames);",
+        "base_contents": "  if (is_product_vndk_version_defined()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "res_region": "  if (is_product_treblelized()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "lookback": "    ReadExtensionLibraries(\"/product/etc\", &sonames);",
+        "lookahead": "  std::string libs = android::base::Join(sonames, ':');",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 203,
+        "end_line": 213,
+        "merge_gen_region": null,
+        "confidence": 0.8434689044952393,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (!is_product_treblelized()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "b_contents": "",
+        "base_contents": "  if (!is_product_vndk_version_defined()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "res_region": "  if (!is_product_treblelized()) {\n    ReadExtensionLibraries(\"/product/etc\", &sonames);\n  }",
+        "lookback": "    ReadExtensionLibraries(\"/product/etc\", &sonames);",
+        "lookahead": "  std::string libs = android::base::Join(sonames, ':');",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 228,
+        "end_line": 237,
+        "merge_gen_region": null,
+        "confidence": 0.8488009572029114,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (!is_product_treblelized()) {\n    ALOGD(\"InitLlndkLibrariesProduct: Product is not treblelized\");\n    return \"\";\n  }",
+        "b_contents": "",
+        "base_contents": "  if (!is_product_vndk_version_defined()) {\n    ALOGD(\"InitLlndkLibrariesProduct: No product VNDK version defined\");\n    return \"\";\n  }",
+        "res_region": "  if (!is_product_treblelized()) {\n    ALOGD(\"InitLlndkLibrariesProduct: Product is not treblelized\");\n    return \"\";\n  }",
+        "lookback": "    ALOGD(\"InitLlndkLibrariesProduct: Product is not treblelized\");",
+        "lookahead": "  std::string config_file;",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 278,
+        "end_line": 289,
+        "merge_gen_region": null,
+        "confidence": 0.6074044108390808,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool is_product_treblelized() {\n#if defined(ART_TARGET_ANDROID)\n  // Product is not treblelized iff launching version is prior to R and\n  // ro.product.vndk.version is not defined\n  static bool product_treblelized =\n      !(android::base::GetIntProperty(\"ro.product.first_api_level\", 0) < __ANDROID_API_R__ &&\n        !android::sysprop::VndkProperties::product_vndk_version().has_value());\n  return product_treblelized;\n#else\n  return false;\n#endif\n}\n",
+        "b_contents": "",
+        "base_contents": "bool is_product_vndk_version_defined() {\n#if defined(ART_TARGET_ANDROID)\n  return android::sysprop::VndkProperties::product_vndk_version().has_value();\n#else\n  return false;\n#endif\n}\n",
+        "res_region": "bool is_product_treblelized() {\n#if defined(ART_TARGET_ANDROID)\n  // Product is not treblelized iff launching version is prior to R and\n  // ro.product.vndk.version is not defined\n  static bool product_treblelized =\n      !(android::base::GetIntProperty(\"ro.product.first_api_level\", 0) < __ANDROID_API_R__ &&\n        !android::sysprop::VndkProperties::product_vndk_version().has_value());\n  return product_treblelized;\n#else\n  return false;\n#endif\n}\n",
+        "lookback": "#if defined(ART_TARGET_ANDROID)",
+        "lookahead": "std::string get_vndk_version(bool is_product_vndk) {",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 450,
+        "end_line": 474,
+        "merge_gen_region": null,
+        "confidence": 0.5529473423957825,
+        "hesitated": true
+    }
+]

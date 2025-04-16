@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "archive_result_t deserialize<cluster_version_t::v2_1>(read_stream_t *s,\n                                                                wire_func_t *wf) {\n    const cluster_version_t W = cluster_version_t::v2_1;",
+        "b_contents": "archive_result_t deserialize<cluster_version_t::v2_1_is_latest>(\n    read_stream_t *s, wire_func_t *wf) {\n\n    const cluster_version_t W = cluster_version_t::v2_1_is_latest;",
+        "base_contents": "archive_result_t deserialize<cluster_version_t::v2_1_is_latest>(read_stream_t *s,\n                                                                wire_func_t *wf) {\n    const cluster_version_t W = cluster_version_t::v2_1_is_latest;",
+        "res_region": "archive_result_t deserialize<cluster_version_t::v2_1_is_latest>(\n    read_stream_t *s, wire_func_t *wf) {\n\n    const cluster_version_t W = cluster_version_t::v2_1_is_latest;",
+        "lookback": "    read_stream_t *s, wire_func_t *wf) {",
+        "lookahead": "    archive_result_t res;",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 160,
+        "end_line": 173,
+        "merge_gen_region": null,
+        "confidence": 0.8208259344100952,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#pragma once\n\n#include \"IAfEffect.h\"\n#include \"PatchCommandThread.h\"\n\n#include <utils/Mutex.h>  // avoid transitive dependency\n\nnamespace android {\n\nclass IAfDeviceEffectManagerCallback : public virtual RefBase {\npublic:\n    virtual bool isAudioPolicyReady() const = 0;\n    virtual audio_unique_id_t nextUniqueId(audio_unique_id_use_t use) = 0;\n    virtual const sp<PatchCommandThread>& getPatchCommandThread() = 0;\n    virtual status_t addEffectToHal(\n            const struct audio_port_config* device, const sp<EffectHalInterface>& effect) = 0;\n    virtual status_t removeEffectFromHal(\n            const struct audio_port_config* device, const sp<EffectHalInterface>& effect) = 0;\n};\n\nclass DeviceEffectManagerCallback;",
+        "b_contents": "#pragma once\n\nnamespace android {\n\nclass DeviceEffectManagerCallback;",
+        "base_contents": "#ifndef INCLUDING_FROM_AUDIOFLINGER_H\n    #error This header file should only be included from AudioFlinger.h\n#endif",
+        "res_region": "#pragma once\n\n#include \"IAfEffect.h\"\n#include \"PatchCommandThread.h\"\n\n#include <utils/Mutex.h>  // avoid transitive dependency\n\nnamespace android {\n\nclass IAfDeviceEffectManagerCallback : public virtual RefBase {\npublic:\n    virtual bool isAudioPolicyReady() const = 0;\n    virtual audio_unique_id_t nextUniqueId(audio_unique_id_use_t use) = 0;\n    virtual const sp<PatchCommandThread>& getPatchCommandThread() = 0;\n    virtual status_t addEffectToHal(\n            const struct audio_port_config* device, const sp<EffectHalInterface>& effect) = 0;\n    virtual status_t removeEffectFromHal(\n            const struct audio_port_config* device, const sp<EffectHalInterface>& effect) = 0;\n};\n\nclass DeviceEffectManagerCallback;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 17,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.5118780732154846,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    explicit DeviceEffectManager(\n            const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback);",
+        "b_contents": "    explicit DeviceEffectManager(AudioFlinger& audioFlinger);",
+        "base_contents": "    explicit DeviceEffectManager(AudioFlinger& audioFlinger)\n        : mAudioFlinger(audioFlinger),\n          mMyCallback(new DeviceEffectManagerCallback(*this)) {}",
+        "res_region": "    explicit DeviceEffectManager(\n            const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback);",
+        "lookback": "            const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 54,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.45234668254852295,
+        "hesitated": true
+    }
+]

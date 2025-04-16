@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "void tryUpdateQueryConditionCache(const QueryPlanOptimizationSettings & optimization_settings, const Stack & stack);",
+        "b_contents": "void optimizeDistinctInOrder(QueryPlan::Node & node, QueryPlan::Nodes &);\n\n/// A separate tree traverse to apply sorting properties after *InOrder optimizations.\nvoid applyOrder(const QueryPlanOptimizationSettings & optimization_settings, QueryPlan::Node & root);",
+        "base_contents": "",
+        "res_region": "void optimizeDistinctInOrder(QueryPlan::Node & node, QueryPlan::Nodes &);\nvoid tryUpdateQueryConditionCache(const QueryPlanOptimizationSettings & optimization_settings, const Stack & stack);\n\n/// A separate tree traverse to apply sorting properties after *InOrder optimizations.\nvoid applyOrder(const QueryPlanOptimizationSettings & optimization_settings, QueryPlan::Node & root);",
+        "lookback": "void tryUpdateQueryConditionCache(const QueryPlanOptimizationSettings & optimization_settings, const Stack & stack);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 115,
+        "end_line": 123,
+        "merge_gen_region": "///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.9288041591644287,
+        "hesitated": false,
+        "resolved": false
+    }
+]

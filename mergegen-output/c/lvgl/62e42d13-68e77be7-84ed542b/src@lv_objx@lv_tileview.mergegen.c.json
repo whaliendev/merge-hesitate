@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        lv_obj_set_size(new_tileview, lv_obj_get_width_fit(lv_obj_get_parent(new_tileview)),\n        lv_obj_get_height_fit(lv_obj_get_parent(new_tileview)));\n        lv_obj_set_drag_dir(lv_page_get_scrl(new_tileview), LV_DRAG_DIR_ONE);\n        lv_obj_set_drag_throw(lv_page_get_scrl(new_tileview), true);",
+        "b_contents": "        lv_coord_t w;\n        lv_coord_t h;\n        if(par) {\n            w = lv_obj_get_width_fit(lv_obj_get_parent(new_tileview));\n            h = lv_obj_get_height_fit(lv_obj_get_parent(new_tileview));\n        } else {\n            w = lv_disp_get_hor_res(NULL);\n            h = lv_disp_get_ver_res(NULL);\n        }\n\n        lv_obj_set_size(new_tileview, w, h);\n\n        lv_obj_set_drag_throw(lv_page_get_scrl(new_tileview), false);",
+        "base_contents": "        lv_obj_set_size(new_tileview, lv_obj_get_width_fit(lv_obj_get_parent(new_tileview)),\n                        lv_obj_get_height_fit(lv_obj_get_parent(new_tileview)));\n\n        lv_obj_set_drag_throw(lv_page_get_scrl(new_tileview), false);",
+        "res_region": "        lv_coord_t w;\n        lv_coord_t h;\n        if(par) {\n            w = lv_obj_get_width_fit(lv_obj_get_parent(new_tileview));\n            h = lv_obj_get_height_fit(lv_obj_get_parent(new_tileview));\n        } else {\n            w = lv_disp_get_hor_res(NULL);\n            h = lv_disp_get_ver_res(NULL);\n        }\n\n        lv_obj_set_size(new_tileview, w, h);\n\n        lv_obj_set_drag_throw(lv_page_get_scrl(new_tileview), false);\n",
+        "lookback": "        lv_coord_t h;",
+        "lookahead": "        lv_page_set_scrl_fit(new_tileview, LV_FIT_TIGHT);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 103,
+        "end_line": 127,
+        "merge_gen_region": "___ w;___ h ifpar { w lvobjgetwidthfitlvobjgetparentnewtile)); =____(__(___(__)) w lvobjgetheightfitlvobjgetparentnewtile)); else w lvdispget____(__ w w } lvobjsetsizenew(__view w w void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void",
+        "confidence": 0.9235197901725769,
+        "hesitated": false,
+        "resolved": false
+    }
+]

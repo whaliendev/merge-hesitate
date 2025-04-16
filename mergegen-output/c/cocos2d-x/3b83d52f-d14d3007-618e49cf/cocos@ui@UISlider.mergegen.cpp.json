@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    _slidBallRenderer->setPosition(Vector2(-_barLength/2.0f + dis, 0.0f));",
+        "b_contents": "    _slidBallRenderer->setPosition(Point(dis, _contentSize.height / 2.0f));",
+        "base_contents": "    _slidBallRenderer->setPosition(Point(-_barLength/2.0f + dis, 0.0f));",
+        "res_region": "    _slidBallRenderer->setPosition(Vector2(dis, _contentSize.height / 2.0f));",
+        "lookback": "    if (_scale9Enabled)",
+        "lookahead": "    if (_scale9Enabled)",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 369,
+        "end_line": 375,
+        "merge_gen_region": null,
+        "confidence": 0.7142159342765808,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Vector2 nsp = this->_slidBallNormalRenderer->convertToNodeSpace(pt);\n    Rect ballRect = this->_slidBallNormalRenderer->getTextureRect();",
+        "b_contents": "    Point nsp = this->_slidBallNormalRenderer->convertToNodeSpace(pt);\n    Size ballSize = this->_slidBallNormalRenderer->getContentSize();\n    Rect ballRect = Rect(0,0, ballSize.width, ballSize.height);",
+        "base_contents": "    Point nsp = this->_slidBallNormalRenderer->convertToNodeSpace(pt);\n    Rect ballRect = this->_slidBallNormalRenderer->getTextureRect();",
+        "res_region": "    Vector2 nsp = this->_slidBallNormalRenderer->convertToNodeSpace(pt);\n    Size ballSize = this->_slidBallNormalRenderer->getContentSize();\n    Rect ballRect = Rect(0,0, ballSize.width, ballSize.height);",
+        "lookback": "    Size ballSize = this->_slidBallNormalRenderer->getContentSize();",
+        "lookahead": "    if (ballRect.containsPoint(nsp)) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 391,
+        "end_line": 401,
+        "merge_gen_region": null,
+        "confidence": 0.874589741230011,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Vector2 nsp = convertToNodeSpace(_touchMovePos);\n    _slidBallRenderer->setPosition(Vector2(nsp.x,0));",
+        "b_contents": "    Point nsp = convertToNodeSpace(_touchMovePos);",
+        "base_contents": "    Point nsp = convertToNodeSpace(_touchMovePos);\n    _slidBallRenderer->setPosition(Point(nsp.x,0));",
+        "res_region": "    Vector2 nsp = convertToNodeSpace(_touchMovePos);",
+        "lookback": "    setPercent(getPercentWithBallPos(nsp.x));",
+        "lookahead": "    setPercent(getPercentWithBallPos(nsp.x));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 423,
+        "end_line": 431,
+        "merge_gen_region": null,
+        "confidence": 0.37497809529304504,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    _progressBarRenderer->setPosition(Vector2(-_barLength * 0.5f, 0.0f));",
+        "b_contents": "    _progressBarRenderer->setPosition(0.0f, _contentSize.height / 2.0f);",
+        "base_contents": "    _progressBarRenderer->setPosition(Point(-_barLength * 0.5f, 0.0f));",
+        "res_region": "    _progressBarRenderer->setPosition(0.0f, _contentSize.height / 2.0f);",
+        "lookback": "    setPercent(_percent);",
+        "lookahead": "    setPercent(_percent);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 568,
+        "end_line": 574,
+        "merge_gen_region": null,
+        "confidence": 0.6029558181762695,
+        "hesitated": true
+    }
+]

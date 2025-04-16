@@ -1,0 +1,89 @@
+[
+    {
+        "a_contents": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,",
+        "b_contents": "        const std::string& clientPackageName,",
+        "base_contents": "        const String16& clientPackageName,",
+        "res_region": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,",
+        "lookback": "        const std::string& clientPackageName,",
+        "lookahead": "        bool systemNativeClient,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 90,
+        "end_line": 97,
+        "merge_gen_region": null,
+        "confidence": 0.4715065062046051,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::string threadName = std::string(\"CDU-\") + mCameraIdStr + \"-FrameProc\";\n    res = mFrameProcessor->run(threadName.c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    std::string threadName = std::string(\"CDU-\") + mCameraIdStr + \"-FrameProc\";\n    mFrameProcessor->run(threadName.c_str());",
+        "base_contents": "    threadName = String8::format(\"CDU-%s-FrameProc\", mCameraIdStr.string());\n    mFrameProcessor->run(threadName.string());",
+        "res_region": "    std::string threadName = std::string(\"CDU-\") + mCameraIdStr + \"-FrameProc\";\n    res = mFrameProcessor->run(threadName.c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    res = mFrameProcessor->run(threadName.c_str());",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 138,
+        "end_line": 152,
+        "merge_gen_region": ":: thread =::(\"DU\") mId +Frame\"; =Frame->(NamecstrresresresresresresresresresresresresresresresresresresresresresresresresresresStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringString",
+        "confidence": 0.9320665001869202,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    mProviderManager->isLogicalCamera(mCameraIdStr, &mPhysicalCameraIds);\n    if (supportsUltraHighResolutionCapture(mCameraIdStr)) {\n        mHighResolutionSensors.insert(mCameraIdStr);",
+        "b_contents": "    mProviderManager->isLogicalCamera(mCameraIdStr, &mPhysicalCameraIds);\n    if (isUltraHighResolutionSensor(mCameraIdStr)) {\n        mHighResolutionSensors.insert(mCameraIdStr);",
+        "base_contents": "    mProviderManager->isLogicalCamera(mCameraIdStr.string(), &mPhysicalCameraIds);\n    if (isUltraHighResolutionSensor(mCameraIdStr)) {\n        mHighResolutionSensors.insert(mCameraIdStr.string());",
+        "res_region": "    mProviderManager->isLogicalCamera(mCameraIdStr, &mPhysicalCameraIds);\n    if (supportsUltraHighResolutionCapture(mCameraIdStr)) {\n        mHighResolutionSensors.insert(mCameraIdStr);",
+        "lookback": "    if (supportsUltraHighResolutionCapture(mCameraIdStr)) {",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 205,
+        "end_line": 217,
+        "merge_gen_region": null,
+        "confidence": 0.8426916003227234,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (supportsUltraHighResolutionCapture(physicalId)) {\n            mHighResolutionSensors.insert(physicalId);",
+        "b_contents": "        if (isUltraHighResolutionSensor(physicalId)) {\n            mHighResolutionSensors.insert(physicalId);",
+        "base_contents": "        if (isUltraHighResolutionSensor(String8(physicalId.c_str()))) {\n            mHighResolutionSensors.insert(physicalId.c_str());",
+        "res_region": "        if (supportsUltraHighResolutionCapture(physicalId)) {\n            mHighResolutionSensors.insert(physicalId);",
+        "lookback": "            mHighResolutionSensors.insert(physicalId);",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 220,
+        "end_line": 229,
+        "merge_gen_region": "((Idififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.9365537762641907,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "bool CameraDeviceClient::supportsUltraHighResolutionCapture(const std::string &cameraId) {",
+        "b_contents": "bool CameraDeviceClient::isUltraHighResolutionSensor(const std::string &cameraId) {",
+        "base_contents": "bool CameraDeviceClient::isUltraHighResolutionSensor(const String8 &cameraId) {",
+        "res_region": "bool CameraDeviceClient::supportsUltraHighResolutionCapture(const std::string &cameraId) {",
+        "lookback": "    const CameraMetadata &deviceInfo = getStaticInfo(cameraId);",
+        "lookahead": "    const CameraMetadata &deviceInfo = getStaticInfo(cameraId);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2303,
+        "end_line": 2309,
+        "merge_gen_region": null,
+        "confidence": 0.6344872713088989,
+        "hesitated": true
+    }
+]

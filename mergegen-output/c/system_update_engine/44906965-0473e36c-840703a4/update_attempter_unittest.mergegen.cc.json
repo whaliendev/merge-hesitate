@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "#include <brillo/make_unique_ptr.h>",
+        "b_contents": "#include <brillo/bind_lambda.h>",
+        "base_contents": "#include <brillo/bind_lambda.h>\n#include <brillo/make_unique_ptr.h>",
+        "res_region": "",
+        "lookback": "#include <brillo/message_loops/message_loop.h>",
+        "lookahead": "#include <brillo/message_loops/base_message_loop.h>",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.41443300247192383,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if USE_CHROME_NETWORK_PROXY\n#include \"network_proxy/dbus-proxies.h\"\n#include \"network_proxy/dbus-proxy-mocks.h\"\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "",
+        "base_contents": "#if USE_LIBCROS\n#include \"network_proxy/dbus-proxies.h\"\n#include \"network_proxy/dbus-proxy-mocks.h\"\n#endif // USE_LIBCROS",
+        "res_region": "",
+        "lookback": "#include \"update_engine/common/fake_prefs.h\"",
+        "lookahead": "#include \"update_engine/common/fake_clock.h\"",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 39,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.7134719491004944,
+        "hesitated": true
+    },
+    {
+        "a_contents": "using chromeos_update_manager::EvalStatus;\nusing chromeos_update_manager::UpdateCheckParams;\nusing org::chromium::NetworkProxyServiceInterfaceProxyInterface;\nusing org::chromium::NetworkProxyServiceInterfaceProxyMock;\n#if USE_LIBCROS\nusing org::chromium::LibCrosServiceInterfaceProxyMock;\nusing org::chromium::UpdateEngineLibcrosProxyResolvedInterfaceProxyMock;\n#endif  // USE_LIBCROS",
+        "b_contents": "",
+        "base_contents": "using org::chromium::NetworkProxyServiceInterfaceProxyInterface;\nusing org::chromium::NetworkProxyServiceInterfaceProxyMock;",
+        "res_region": "using chromeos_update_manager::EvalStatus;\nusing chromeos_update_manager::UpdateCheckParams;",
+        "lookback": "using chromeos_update_manager::UpdateCheckParams;",
+        "lookahead": "using std::string;",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 72,
+        "end_line": 85,
+        "merge_gen_region": null,
+        "confidence": 0.8274657130241394,
+        "hesitated": true
+    },
+    {
+        "a_contents": "using testing::SetArgumentPointee;\nusing update_engine::UpdateAttemptFlags;\nusing update_engine::UpdateEngineStatus;",
+        "b_contents": "using testing::SetArgPointee;\nusing testing::_;",
+        "base_contents": "using testing::SetArgumentPointee;\nusing testing::_;",
+        "res_region": "using testing::SetArgPointee;\nusing update_engine::UpdateAttemptFlags;\nusing update_engine::UpdateEngineStatus;",
+        "lookback": "using update_engine::UpdateAttemptFlags;",
+        "lookahead": "using update_engine::UpdateStatus;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 108,
+        "merge_gen_region": null,
+        "confidence": 0.843628466129303,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if USE_CHROME_NETWORK_PROXY\n  NetworkProxyServiceInterfaceProxyMock network_proxy_service_proxy_mock_;\n  UpdateAttempterUnderTest attempter_{&fake_system_state_,\n                                      &network_proxy_service_proxy_mock_};\n#else\n  UpdateAttempterUnderTest attempter_{&fake_system_state_, nullptr};\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "  UpdateAttempterUnderTest attempter_{&fake_system_state_};",
+        "base_contents": "#if USE_LIBCROS\n  NetworkProxyServiceInterfaceProxyMock network_proxy_service_proxy_mock_;\n  UpdateAttempterUnderTest attempter_{&fake_system_state_,\n                                      &network_proxy_service_proxy_mock_};\n#else\n  UpdateAttempterUnderTest attempter_{&fake_system_state_, nullptr};\n#endif  // USE_LIBCROS",
+        "res_region": "  UpdateAttempterUnderTest attempter_{&fake_system_state_};",
+        "lookback": "  OpenSSLWrapper openssl_wrapper_;",
+        "lookahead": "  OpenSSLWrapper openssl_wrapper_;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 219,
+        "end_line": 237,
+        "merge_gen_region": null,
+        "confidence": 0.3550548851490021,
+        "hesitated": true
+    }
+]

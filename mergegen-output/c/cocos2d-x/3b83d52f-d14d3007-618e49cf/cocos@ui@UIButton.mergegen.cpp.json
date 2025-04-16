@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\nvoid Button::setAnchorPoint(const Vector2 &pt)",
+        "b_contents": "    \nvoid Button::updateTitleLocation()",
+        "base_contents": "\nvoid Button::setAnchorPoint(const Point &pt)",
+        "res_region": "    \nvoid Button::updateTitleLocation()",
+        "lookback": "void Button::updateTitleLocation()",
+        "lookahead": "{",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 519,
+        "end_line": 528,
+        "merge_gen_region": null,
+        "confidence": 0.5542054772377014,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Widget::setAnchorPoint(pt);\n    _buttonNormalRenderer->setAnchorPoint(pt);\n    _buttonClickedRenderer->setAnchorPoint(pt);\n    _buttonDisableRenderer->setAnchorPoint(pt);\n    _titleRenderer->setPosition(Vector2(_size.width*(0.5f-_anchorPoint.x), _size.height*(0.5f-_anchorPoint.y)));",
+        "b_contents": "    _titleRenderer->setPosition(Point(_contentSize.width * 0.5f, _contentSize.height * 0.5f));",
+        "base_contents": "    Widget::setAnchorPoint(pt);\n    _buttonNormalRenderer->setAnchorPoint(pt);\n    _buttonClickedRenderer->setAnchorPoint(pt);\n    _buttonDisableRenderer->setAnchorPoint(pt);\n    _titleRenderer->setPosition(Point(_size.width*(0.5f-_anchorPoint.x), _size.height*(0.5f-_anchorPoint.y)));",
+        "res_region": "    _titleRenderer->setPosition(Vector2(_contentSize.width * 0.5f, _contentSize.height * 0.5f));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 530,
+        "end_line": 544,
+        "merge_gen_region": null,
+        "confidence": 0.6670028567314148,
+        "hesitated": true
+    }
+]

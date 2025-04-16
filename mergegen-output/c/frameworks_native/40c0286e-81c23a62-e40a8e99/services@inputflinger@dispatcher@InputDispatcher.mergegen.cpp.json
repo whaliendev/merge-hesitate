@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "        if (!info.isSpy() &&\n            windowAcceptsTouchAt(info, displayId, x, y, isStylus, getTransformLocked(displayId))) {\n            return {windowHandle, outsideTargets};",
+        "b_contents": "        if (!info.isSpy() &&\n            windowAcceptsTouchAt(info, displayId, x, y, isStylus, getTransformLocked(displayId))) {\n            return windowHandle;",
+        "base_contents": "        if (!info.isSpy() && windowAcceptsTouchAt(info, displayId, x, y, isStylus)) {\n            return windowHandle;",
+        "res_region": "        if (!info.isSpy() &&\n            windowAcceptsTouchAt(info, displayId, x, y, isStylus, getTransformLocked(displayId))) {\n            return {windowHandle, outsideTargets};",
+        "lookback": "            windowAcceptsTouchAt(info, displayId, x, y, isStylus, getTransformLocked(displayId))) {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1181,
+        "end_line": 1192,
+        "merge_gen_region": null,
+        "confidence": 0.8261130452156067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            if (isHoverAction) {\n                const int32_t pointerId = entry.pointerProperties[0].id;\n                if (maskedAction == AMOTION_EVENT_ACTION_HOVER_EXIT) {\n                    // Pointer left. Remove it\n                    tempTouchState.removeHoveringPointer(entry.deviceId, pointerId);\n                } else {\n                    // The \"windowHandle\" is the target of this hovering pointer.\n                    tempTouchState.addHoveringPointerToWindow(windowHandle, entry.deviceId,\n                                                              pointerId);",
+        "b_contents": "            // Ensure the window has a connection and the connection is responsive\n            const bool isResponsive = hasResponsiveConnectionLocked(*windowHandle);\n            if (!isResponsive) {\n                ALOGW(\"Not sending touch gesture to %s because it is not responsive\",\n                      windowHandle->getName().c_str());\n                continue;\n            }\n\n            // Drop events that can't be trusted due to occlusion\n            if (mBlockUntrustedTouchesMode != BlockUntrustedTouchesMode::DISABLED) {\n                TouchOcclusionInfo occlusionInfo =\n                        computeTouchOcclusionInfoLocked(windowHandle, x, y);\n                if (!isTouchTrustedLocked(occlusionInfo)) {\n                    if (DEBUG_TOUCH_OCCLUSION) {\n                        ALOGD(\"Stack of obscuring windows during untrusted touch (%.1f, %.1f):\", x,\n                              y);\n                        for (const auto& log : occlusionInfo.debugInfo) {\n                            ALOGD(\"%s\", log.c_str());\n                        }\n                    }\n                    sendUntrustedTouchCommandLocked(occlusionInfo.obscuringPackage);\n                    if (mBlockUntrustedTouchesMode == BlockUntrustedTouchesMode::BLOCK) {\n                        ALOGW(\"Dropping untrusted touch event due to %s/%d\",\n                              occlusionInfo.obscuringPackage.c_str(), occlusionInfo.obscuringUid);\n                        continue;\n                    }",
+        "base_contents": "            // Ensure the window has a connection and the connection is responsive\n            const bool isResponsive = hasResponsiveConnectionLocked(*windowHandle);\n            if (!isResponsive) {\n                ALOGW(\"Not sending touch gesture to %s because it is not responsive\",\n                      windowHandle->getName().c_str());\n                continue;\n            }\n\n            // Drop events that can't be trusted due to occlusion\n            if (mBlockUntrustedTouchesMode != BlockUntrustedTouchesMode::DISABLED) {\n                TouchOcclusionInfo occlusionInfo =\n                        computeTouchOcclusionInfoLocked(windowHandle, x, y);\n                if (!isTouchTrustedLocked(occlusionInfo)) {\n                    if (DEBUG_TOUCH_OCCLUSION) {\n                        ALOGD(\"Stack of obscuring windows during untrusted touch (%d, %d):\", x, y);\n                        for (const auto& log : occlusionInfo.debugInfo) {\n                            ALOGD(\"%s\", log.c_str());\n                        }\n                    }\n                    sendUntrustedTouchCommandLocked(occlusionInfo.obscuringPackage);\n                    if (mBlockUntrustedTouchesMode == BlockUntrustedTouchesMode::BLOCK) {\n                        ALOGW(\"Dropping untrusted touch event due to %s/%d\",\n                              occlusionInfo.obscuringPackage.c_str(), occlusionInfo.obscuringUid);\n                        continue;\n                    }",
+        "res_region": "            if (isHoverAction) {\n                const int32_t pointerId = entry.pointerProperties[0].id;\n                if (maskedAction == AMOTION_EVENT_ACTION_HOVER_EXIT) {\n                    // Pointer left. Remove it\n                    tempTouchState.removeHoveringPointer(entry.deviceId, pointerId);\n                } else {\n                    // The \"windowHandle\" is the target of this hovering pointer.\n                    tempTouchState.addHoveringPointerToWindow(windowHandle, entry.deviceId,\n                                                              pointerId);",
+        "lookback": "                const int32_t pointerId = entry.pointerProperties[0].id;",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2302,
+        "end_line": 2365,
+        "merge_gen_region": " int_ pointer =.Properties0id ifmasked ==MOTIONEVENTACTIONHO_) // left Remove tempStateremoveing(.Id pointer%",
+        "confidence": 0.8962424397468567,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "ui::Transform InputDispatcher::getTransformLocked(int32_t displayId) const {\n    auto displayInfoIt = mDisplayInfos.find(displayId);\n    return displayInfoIt != mDisplayInfos.end() ? displayInfoIt->second.transform\n                                                : kIdentityTransform;\n}\n\nbool InputDispatcher::canWindowReceiveMotionLocked(const sp<WindowInfoHandle>& window,\n                                                   const MotionEntry& motionEntry) const {\n    const WindowInfo& info = *window->getInfo();\n\n    // Skip spy window targets that are not valid for targeted injection.\n    if (const auto err = verifyTargetedInjection(window, motionEntry); err) {\n        return false;\n    }\n\n    if (info.inputConfig.test(WindowInfo::InputConfig::PAUSE_DISPATCHING)) {\n        ALOGI(\"Not sending touch event to %s because it is paused\", window->getName().c_str());\n        return false;\n    }\n\n    if (info.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL)) {\n        ALOGW(\"Not sending touch gesture to %s because it has config NO_INPUT_CHANNEL\",\n              window->getName().c_str());",
+        "b_contents": "ui::Transform InputDispatcher::getTransformLocked(int32_t displayId) const {\n    auto displayInfoIt = mDisplayInfos.find(displayId);\n    return displayInfoIt != mDisplayInfos.end() ? displayInfoIt->second.transform\n                                                : kIdentityTransform;\n}\n\nbool InputDispatcher::hasResponsiveConnectionLocked(WindowInfoHandle& windowHandle) const {\n    sp<Connection> connection = getConnectionLocked(windowHandle.getToken());\n    const bool noInputChannel =\n            windowHandle.getInfo()->inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);\n    if (connection != nullptr && noInputChannel) {\n        ALOGW(\"%s has feature NO_INPUT_CHANNEL, but it matched to connection %s\",\n              windowHandle.getName().c_str(), connection->inputChannel->getName().c_str());",
+        "base_contents": "bool InputDispatcher::hasResponsiveConnectionLocked(WindowInfoHandle& windowHandle) const {\n    sp<Connection> connection = getConnectionLocked(windowHandle.getToken());\n    const bool noInputChannel =\n            windowHandle.getInfo()->inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);\n    if (connection != nullptr && noInputChannel) {\n        ALOGW(\"%s has feature NO_INPUT_CHANNEL, but it matched to connection %s\",\n              windowHandle.getName().c_str(), connection->inputChannel->getName().c_str());",
+        "res_region": "ui::Transform InputDispatcher::getTransformLocked(int32_t displayId) const {\n    auto displayInfoIt = mDisplayInfos.find(displayId);\n    return displayInfoIt != mDisplayInfos.end() ? displayInfoIt->second.transform\n                                                : kIdentityTransform;\n}\n\nbool InputDispatcher::canWindowReceiveMotionLocked(const sp<WindowInfoHandle>& window,\n                                                   const MotionEntry& motionEntry) const {\n    const WindowInfo& info = *window->getInfo();\n\n    // Skip spy window targets that are not valid for targeted injection.\n    if (const auto err = verifyTargetedInjection(window, motionEntry); err) {\n        return false;\n    }\n\n    if (info.inputConfig.test(WindowInfo::InputConfig::PAUSE_DISPATCHING)) {\n        ALOGI(\"Not sending touch event to %s because it is paused\", window->getName().c_str());\n        return false;\n    }\n\n    if (info.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL)) {\n        ALOGW(\"Not sending touch gesture to %s because it has config NO_INPUT_CHANNEL\",\n              window->getName().c_str());",
+        "lookback": "    auto displayInfoIt = mDisplayInfos.find(displayId);",
+        "lookahead": "        return false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4840,
+        "end_line": 4886,
+        "merge_gen_region": null,
+        "confidence": 0.8213226795196533,
+        "hesitated": true
+    }
+]

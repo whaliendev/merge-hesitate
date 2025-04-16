@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    srs_discovery_tc_url(req->tcUrl, req->schema, req->host, req->vhost, req->app, req->stream, req->port, req->param);",
+        "b_contents": "    srs_info(\"get connect app message params success.\");\n    \n    srs_discovery_tc_url(req->tcUrl, \n        req->schema, req->host, req->vhost, req->app, req->stream, req->port,\n        req->param);",
+        "base_contents": "    srs_info(\"get connect app message params success.\");\n    \n    srs_discovery_tc_url(req->tcUrl, \n        req->schema, req->host, req->vhost, req->app, req->port,\n        req->param);",
+        "res_region": "    srs_discovery_tc_url(req->tcUrl, req->schema, req->host, req->vhost, req->app, req->stream, req->port, req->param);",
+        "lookback": "    req->strip();",
+        "lookahead": "    req->strip();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2321,
+        "end_line": 2335,
+        "merge_gen_region": null,
+        "confidence": 0.772146999835968,
+        "hesitated": true
+    }
+]

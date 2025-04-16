@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "#include \"clustering/administration/auth/plaintext_authenticator.hpp\"\n#include \"clustering/administration/auth/scram_authenticator.hpp\"\n#include \"clustering/administration/auth/username.hpp\"",
+        "b_contents": "#include \"clustering/administration/auth/username.hpp\"",
+        "base_contents": "",
+        "res_region": "#include \"clustering/administration/auth/plaintext_authenticator.hpp\"\n#include \"clustering/administration/auth/scram_authenticator.hpp\"\n#include \"clustering/administration/auth/username.hpp\"",
+        "lookback": "#include \"clustering/administration/auth/scram_authenticator.hpp\"",
+        "lookahead": "#include \"clustering/administration/metadata.hpp\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 25,
+        "end_line": 32,
+        "merge_gen_region": null,
+        "confidence": 0.7917343378067017,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void write_datum(tcp_conn_t *connection, ql::datum_t datum, signal_t *interruptor) {\n    rapidjson::StringBuffer buffer;\n    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);\n    datum.write_json(&writer);\n    buffer.Put('\\0');\n    connection->write(buffer.GetString(), buffer.GetSize(), interruptor);\n}",
+        "b_contents": "std::string query_server_t::read_sized_string(tcp_conn_t *conn,\n                                              size_t max_size,\n                                              const std::string &length_error_msg,\n                                              signal_t *interruptor) {\n    uint32_t str_length;\n    conn->read_buffered(&str_length, sizeof(uint32_t), interruptor);\n\n    if (str_length > max_size) {\n        throw client_server_exc_t(length_error_msg);\n    }",
+        "base_contents": "std::string query_server_t::read_sized_string(tcp_conn_t *conn,\n                                              size_t max_size,\n                                              const std::string &length_error_msg,\n                                              signal_t *interruptor) {\n    uint32_t str_length;\n    conn->read(&str_length, sizeof(uint32_t), interruptor);\n\n    if (str_length > max_size) {\n        throw client_server_exc_t(length_error_msg);\n    }",
+        "res_region": "void write_datum(tcp_conn_t *connection, ql::datum_t datum, signal_t *interruptor) {\n    rapidjson::StringBuffer buffer;\n    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);\n    datum.write_json(&writer);\n    buffer.Put('\\0');\n    connection->write(buffer.GetString(), buffer.GetSize(), interruptor);\n}\n",
+        "lookback": "    rapidjson::StringBuffer buffer;",
+        "lookahead": "ql::datum_t read_datum(tcp_conn_t *connection, signal_t *interruptor) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 262,
+        "merge_gen_region": null,
+        "confidence": 0.8677282333374023,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ql::datum_t read_datum(tcp_conn_t *connection, signal_t *interruptor) {\n    std::array<char, 2048> buffer;",
+        "b_contents": "    scoped_array_t<char> buffer(str_length);\n    conn->read_buffered(buffer.data(), str_length, interruptor);",
+        "base_contents": "    scoped_array_t<char> buffer(max_size);\n    conn->read(buffer.data(), str_length, interruptor);",
+        "res_region": "ql::datum_t read_datum(tcp_conn_t *connection, signal_t *interruptor) {\n    std::array<char, 2048> buffer;",
+        "lookback": "    std::array<char, 2048> buffer;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 264,
+        "end_line": 273,
+        "merge_gen_region": null,
+        "confidence": 0.8405539989471436,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        uint8_t version;\n        switch (client_magic_number) {\n            case VersionDummy::V0_1:\n                version = 1;\n                break;\n            case VersionDummy::V0_2:\n                version = 2;\n                break;\n            case VersionDummy::V0_3:\n                version = 3;\n                break;\n            case VersionDummy::V0_4:\n                version = 4;\n                break;\n            case VersionDummy::V1_0:\n                version = 10;\n                break;\n            default:\n                // FIXME, how should we respond here\n                throw client_server_exc_t(\n                    \"Received an unsupported protocol version. This port is for \"\n                    \"RethinkDB queries. Does your client driver version not match the \"\n                    \"server?\");\n        }\n\n        if (version < 10) {\n            auth::plaintext_authenticator_t authenticator(rdb_ctx->get_auth_watchable());\n            if (version < 2) {\n                // Version `V0_2` and above client drivers specify the authorization\n                // key, otherwise we simply try the empty password\n                if (!authenticator.authenticate(\"\")) {\n                    throw client_server_exc_t(\n                        \"Authorization required but client does not support it.\");\n                }\n            } else {\n                uint32_t auth_key_size;\n                conn->read_buffered(&auth_key_size, sizeof(uint32_t), &ct_keepalive);\n\n                if (auth_key_size > 2048) {\n                    throw client_server_exc_t(\n                        \"Client provided an authorization key that is too long.\");\n                }\n\n                scoped_array_t<char> auth_key_buffer(auth_key_size);\n                conn->read_buffered(\n                    auth_key_buffer.data(), auth_key_size, &ct_keepalive);\n\n                if (!authenticator.authenticate(\n                        std::string(auth_key_buffer.data(), auth_key_size))) {\n                    throw client_server_exc_t(\"Incorrect authorization key.\");\n                }\n            }\n\n            if (version >= 3) {\n                int32_t wire_protocol;\n                conn->read_buffered(\n                    &wire_protocol, sizeof(wire_protocol), &ct_keepalive);\n\n                switch (wire_protocol) {\n                    case VersionDummy::JSON:\n                        break;\n                    case VersionDummy::PROTOBUF:\n                        throw client_server_exc_t(\n                            \"The PROTOBUF client protocol is no longer supported\");\n                        break;\n                    default:\n                        throw client_server_exc_t(\n                            strprintf(\n                                \"Unrecognized protocol specified: '%d'\", wire_protocol));\n                }\n            }\n\n            if (version >= 2) {\n                char const *success_msg = \"SUCCESS\";\n                conn->write(success_msg, strlen(success_msg) + 1, &ct_keepalive);",
+        "b_contents": "        bool pre_2 = client_magic_number == VersionDummy::V0_1;\n        bool pre_3 = pre_2 || client_magic_number == VersionDummy::V0_2;\n        bool pre_4 = pre_3 || client_magic_number == VersionDummy::V0_3;\n        bool legal = pre_4 || client_magic_number == VersionDummy::V0_4;\n\n        // FIXME\n        auth::username_t username(\"admin\");\n\n        if (legal) {\n            // FIXME\n            auth_key_t auth_key = read_auth_key(conn.get(), &ct_keepalive);\n            if (!auth_key.str().empty()) {\n                username = auth::username_t(auth_key.str());",
+        "base_contents": "        bool pre_2 = client_magic_number == VersionDummy::V0_1;\n        bool pre_3 = pre_2 || client_magic_number == VersionDummy::V0_2;\n        bool pre_4 = pre_3 || client_magic_number == VersionDummy::V0_3;\n        bool legal = pre_4 || client_magic_number == VersionDummy::V0_4;\n\n        // With version 0_2 and up, the client drivers specifies the authorization key\n        if (pre_2) {\n            if (!auth_key.str().empty()) {\n                throw client_server_exc_t(\n                    \"Authorization required but client does not support it.\");\n            }\n        } else if (legal) {\n            auth_key_t provided_auth = read_auth_key(conn.get(), &ct_keepalive);\n            if (!timing_sensitive_equals(provided_auth, auth_key)) {\n                throw client_server_exc_t(\"Incorrect authorization key.\");",
+        "res_region": "        uint8_t version;\n        switch (client_magic_number) {\n            case VersionDummy::V0_1:\n                version = 1;\n                break;\n            case VersionDummy::V0_2:\n                version = 2;\n                break;\n            case VersionDummy::V0_3:\n                version = 3;\n                break;\n            case VersionDummy::V0_4:\n                version = 4;\n                break;\n            case VersionDummy::V1_0:\n                version = 10;\n                break;\n            default:\n                // FIXME, how should we respond here\n                throw client_server_exc_t(\n                    \"Received an unsupported protocol version. This port is for \"\n                    \"RethinkDB queries. Does your client driver version not match the \"\n                    \"server?\");\n        }\n\n        if (version < 10) {\n            auth::plaintext_authenticator_t authenticator(rdb_ctx->get_auth_watchable());\n            if (version < 2) {\n                // Version `V0_2` and above client drivers specify the authorization\n                // key, otherwise we simply try the empty password\n                if (!authenticator.authenticate(\"\")) {\n                    throw client_server_exc_t(\n                        \"Authorization required but client does not support it.\");\n                }\n            } else {\n                uint32_t auth_key_size;\n                conn->read_buffered(&auth_key_size, sizeof(uint32_t), &ct_keepalive);\n\n                if (auth_key_size > 2048) {\n                    throw client_server_exc_t(\n                        \"Client provided an authorization key that is too long.\");\n                }\n\n                scoped_array_t<char> auth_key_buffer(auth_key_size);\n                conn->read_buffered(\n                    auth_key_buffer.data(), auth_key_size, &ct_keepalive);\n\n                if (!authenticator.authenticate(\n                        std::string(auth_key_buffer.data(), auth_key_size))) {\n                    throw client_server_exc_t(\"Incorrect authorization key.\");\n                }\n            }\n\n            if (version >= 3) {\n                int32_t wire_protocol;\n                conn->read_buffered(\n                    &wire_protocol, sizeof(wire_protocol), &ct_keepalive);\n\n                switch (wire_protocol) {\n                    case VersionDummy::JSON:\n                        break;\n                    case VersionDummy::PROTOBUF:\n                        throw client_server_exc_t(\n                            \"The PROTOBUF client protocol is no longer supported\");\n                        break;\n                    default:\n                        throw client_server_exc_t(\n                            strprintf(\n                                \"Unrecognized protocol specified: '%d'\", wire_protocol));\n                }\n            }\n\n            if (version >= 2) {\n                char const *success_msg = \"SUCCESS\";\n                conn->write(success_msg, strlen(success_msg) + 1, &ct_keepalive);",
+        "lookback": "        switch (client_magic_number) {",
+        "lookahead": "            }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 325,
+        "end_line": 431,
+        "merge_gen_region": null,
+        "confidence": 0.8498069643974304,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                ql::datum_t authentication_method =\n                    datum.get_field(\"authentication_method\", ql::NOTHROW);\n                if (authentication_method.get_type() != ql::datum_t::R_STR ||\n                        authentication_method.as_str() != \"SCRAM-SHA-256\") {\n                    // FIXME, error authentication_method\n                }",
+        "b_contents": "        ql::query_cache_t query_cache(\n            rdb_ctx,\n            client_addr_port,\n            pre_4\n                ? ql::return_empty_normal_batches_t::YES\n                : ql::return_empty_normal_batches_t::NO,\n            auth::user_context_t(std::move(username)));",
+        "base_contents": "        ql::query_cache_t query_cache(rdb_ctx, client_addr_port,\n                                      pre_4 ? ql::return_empty_normal_batches_t::YES :\n                                              ql::return_empty_normal_batches_t::NO);",
+        "res_region": "                ql::datum_t authentication_method =\n                    datum.get_field(\"authentication_method\", ql::NOTHROW);\n                if (authentication_method.get_type() != ql::datum_t::R_STR ||\n                        authentication_method.as_str() != \"SCRAM-SHA-256\") {\n                    // FIXME, error authentication_method\n                }",
+        "lookback": "                    datum.get_field(\"authentication_method\", ql::NOTHROW);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 460,
+        "end_line": 479,
+        "merge_gen_region": null,
+        "confidence": 0.6416261792182922,
+        "hesitated": true
+    }
+]

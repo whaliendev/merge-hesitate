@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    std::vector<std::string> idList;\n    CameraManagerGlobal::getInstance()->getCameraIdList(&idList);",
+        "b_contents": "    std::vector<std::string> idList;\n    CameraManagerGlobal::getInstance().getCameraIdList(&idList);",
+        "base_contents": "    std::vector<String8> idList;\n    CameraManagerGlobal::getInstance().getCameraIdList(&idList);",
+        "res_region": "    std::vector<std::string> idList;\n    CameraManagerGlobal::getInstance()->getCameraIdList(&idList);",
+        "lookback": "    CameraManagerGlobal::getInstance()->getCameraIdList(&idList);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 638,
+        "end_line": 647,
+        "merge_gen_region": null,
+        "confidence": 0.5456674098968506,
+        "hesitated": true
+    }
+]

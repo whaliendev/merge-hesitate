@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        if (status_t status = validateReadData(mDataPos + sizeof(val)); status != OK) {\n            return status;\n        }\n\n        memcpy(mData + mDataPos, &val, sizeof(val));",
+        "b_contents": "        if (status_t status = validateReadData(mDataPos + sizeof(val)); status != OK) {\n            return status;\n        }\n\n        *reinterpret_cast<T*>(mData+mDataPos) = val;",
+        "base_contents": "        *reinterpret_cast<T*>(mData+mDataPos) = val;",
+        "res_region": "        if (status_t status = validateReadData(mDataPos + sizeof(val)); status != OK) {\n            return status;\n        }\n\n        memcpy(mData + mDataPos, &val, sizeof(val));",
+        "lookback": "            return status;",
+        "lookahead": "        return finishWrite(sizeof(val));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1631,
+        "end_line": 1645,
+        "merge_gen_region": " (ififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.926954448223114,
+        "hesitated": false,
+        "resolved": false
+    }
+]

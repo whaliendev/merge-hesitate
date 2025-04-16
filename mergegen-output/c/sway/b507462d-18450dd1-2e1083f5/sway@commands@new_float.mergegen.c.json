@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"log.h\"",
+        "b_contents": "#include <errno.h>\n#include <string.h>\n#include <strings.h>",
+        "base_contents": "#include <errno.h>\n#include <string.h>",
+        "res_region": "#include \"log.h\"",
+        "lookback": "#include \"sway/commands.h\"",
+        "lookahead": "#include \"sway/commands.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 0,
+        "end_line": 9,
+        "merge_gen_region": null,
+        "confidence": 0.4963305592536926,
+        "hesitated": true
+    }
+]

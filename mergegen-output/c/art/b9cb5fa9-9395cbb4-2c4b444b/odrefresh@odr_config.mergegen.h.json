@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "  std::optional<bool> refresh_;\n  std::optional<bool> partial_compilation_;",
+        "b_contents": "  std::optional<bool> partial_compilation_;",
+        "base_contents": "",
+        "res_region": "  std::optional<bool> refresh_;\n  std::optional<bool> partial_compilation_;",
+        "lookback": "  std::optional<bool> partial_compilation_;",
+        "lookahead": "  InstructionSet isa_;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 55,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.7218194007873535,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool HasPartialCompilation() const {\n    return partial_compilation_.has_value();\n  }\n  bool GetPartialCompilation() const {\n    return partial_compilation_.value_or(true);\n  }\n  bool GetRefresh() const {\n    return refresh_.value_or(true);\n  }\n  const std::string& GetSystemServerClasspath() const {\n    return system_server_classpath_;\n  }\n  const std::string& GetSystemServerCompilerFilter() const {\n    return system_server_compiler_filter_;\n  }\n  const std::string& GetStagingDir() const {\n    return staging_dir_;\n  }\n  bool GetCompilationOsMode() const { return compilation_os_mode_; }\n  bool GetMinimal() const { return minimal_; }",
+        "b_contents": "  bool GetPartialCompilation() const {\n    return partial_compilation_.value_or(true);\n  }\n\n  const std::string& GetSystemServerClasspath() const { return system_server_classpath_; }\n  const std::string& GetUpdatableBcpPackagesFile() const { return updatable_bcp_packages_file_; }",
+        "base_contents": "  const std::string& GetSystemServerClasspath() const { return system_server_classpath_; }\n  const std::string& GetUpdatableBcpPackagesFile() const { return updatable_bcp_packages_file_; }",
+        "res_region": "  bool HasPartialCompilation() const {\n    return partial_compilation_.has_value();\n  }\n  bool GetPartialCompilation() const {\n    return partial_compilation_.value_or(true);\n  }\n  bool GetRefresh() const {\n    return refresh_.value_or(true);\n  }\n  const std::string& GetSystemServerClasspath() const {\n    return system_server_classpath_;\n  }\n  const std::string& GetSystemServerCompilerFilter() const {\n    return system_server_compiler_filter_;\n  }\n  const std::string& GetStagingDir() const {\n    return staging_dir_;\n  }\n  bool GetCompilationOsMode() const { return compilation_os_mode_; }\n  bool GetMinimal() const { return minimal_; }",
+        "lookback": "    return partial_compilation_.has_value();",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 135,
+        "end_line": 166,
+        "merge_gen_region": "outputor 1output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(outputoutput>(output>(output>(output>(output>(outputoutput>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(",
+        "confidence": 0.9318768382072449,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  void SetPartialCompilation(bool value) {\n    partial_compilation_ = value;\n  }\n  void SetRefresh(bool value) {\n    refresh_ = value;\n  }",
+        "b_contents": "  void SetPartialCompilation(bool value) {\n    partial_compilation_ = value;\n  }",
+        "base_contents": "",
+        "res_region": "  void SetPartialCompilation(bool value) {\n    partial_compilation_ = value;\n  }\n  void SetRefresh(bool value) {\n    refresh_ = value;\n  }",
+        "lookback": "    partial_compilation_ = value;",
+        "lookahead": "  void SetIsa(const InstructionSet isa) { isa_ = isa; }",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 180,
+        "end_line": 192,
+        "merge_gen_region": null,
+        "confidence": 0.8623248338699341,
+        "hesitated": true
+    }
+]

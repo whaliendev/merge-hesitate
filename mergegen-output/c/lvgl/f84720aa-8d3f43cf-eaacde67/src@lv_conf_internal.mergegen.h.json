@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "/*Tab (dependencies: lv_page, lv_btnm)*/\n#ifndef LV_USE_TABVIEW\n#  ifdef CONFIG_LV_USE_TABVIEW\n#    define LV_USE_TABVIEW CONFIG_LV_USE_TABVIEW\n#  else\n#    define  LV_USE_TABVIEW      1\n#  endif\n#endif\n#  if LV_USE_TABVIEW != 0\n/*Time of slide animation [ms] (0: no animation)*/\n#ifndef LV_TABVIEW_DEF_ANIM_TIME\n#  ifdef CONFIG_LV_TABVIEW_DEF_ANIM_TIME\n#    define LV_TABVIEW_DEF_ANIM_TIME CONFIG_LV_TABVIEW_DEF_ANIM_TIME\n#  else\n#    define  LV_TABVIEW_DEF_ANIM_TIME    300\n#  endif\n#endif\n#endif\n\n/*Tileview (dependencies: lv_page) */\n#ifndef LV_USE_TILEVIEW\n#  ifdef CONFIG_LV_USE_TILEVIEW\n#    define LV_USE_TILEVIEW CONFIG_LV_USE_TILEVIEW\n#  else\n#    define  LV_USE_TILEVIEW     1\n#  endif\n#endif\n#if LV_USE_TILEVIEW\n/*Time of slide animation [ms] (0: no animation)*/\n#ifndef LV_TILEVIEW_DEF_ANIM_TIME\n#  ifdef CONFIG_LV_TILEVIEW_DEF_ANIM_TIME\n#    define LV_TILEVIEW_DEF_ANIM_TIME CONFIG_LV_TILEVIEW_DEF_ANIM_TIME\n#  else\n#    define  LV_TILEVIEW_DEF_ANIM_TIME   300\n#  endif\n#endif\n#endif\n\n/*Window (dependencies: lv_cont, lv_btn, lv_label, lv_img, lv_page)*/\n#ifndef LV_USE_WIN\n#  ifdef CONFIG_LV_USE_WIN\n#    define LV_USE_WIN CONFIG_LV_USE_WIN\n#  else\n#    define  LV_USE_WIN      1\n#  endif\n#endif\n",
+        "base_contents": "\n/*Tab (dependencies: lv_page, lv_btnm)*/\n#ifndef LV_USE_TABVIEW\n#  ifdef CONFIG_LV_USE_TABVIEW\n#    define LV_USE_TABVIEW CONFIG_LV_USE_TABVIEW\n#  else\n#    define  LV_USE_TABVIEW      1\n#  endif\n#endif\n#  if LV_USE_TABVIEW != 0\n/*Time of slide animation [ms] (0: no animation)*/\n#ifndef LV_TABVIEW_DEF_ANIM_TIME\n#  ifdef CONFIG_LV_TABVIEW_DEF_ANIM_TIME\n#    define LV_TABVIEW_DEF_ANIM_TIME CONFIG_LV_TABVIEW_DEF_ANIM_TIME\n#  else\n#    define  LV_TABVIEW_DEF_ANIM_TIME    300\n#  endif\n#endif\n#endif\n\n/*Tileview (dependencies: lv_page) */\n#ifndef LV_USE_TILEVIEW\n#  ifdef CONFIG_LV_USE_TILEVIEW\n#    define LV_USE_TILEVIEW CONFIG_LV_USE_TILEVIEW\n#  else\n#    define  LV_USE_TILEVIEW     1\n#  endif\n#endif\n#if LV_USE_TILEVIEW\n/*Time of slide animation [ms] (0: no animation)*/\n#ifndef LV_TILEVIEW_DEF_ANIM_TIME\n#  ifdef CONFIG_LV_TILEVIEW_DEF_ANIM_TIME\n#    define LV_TILEVIEW_DEF_ANIM_TIME CONFIG_LV_TILEVIEW_DEF_ANIM_TIME\n#  else\n#    define  LV_TILEVIEW_DEF_ANIM_TIME   300\n#  endif\n#endif\n#endif\n\n/*Window (dependencies: lv_cont, lv_btn, lv_label, lv_img, lv_page)*/\n#ifndef LV_USE_WIN\n#  ifdef CONFIG_LV_USE_WIN\n#    define LV_USE_WIN CONFIG_LV_USE_WIN\n#  else\n#    define  LV_USE_WIN      1\n#  endif\n#endif\n",
+        "res_region": "",
+        "lookback": " * Non-user section",
+        "lookahead": "/*==================",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1770,
+        "end_line": 1868,
+        "merge_gen_region": null,
+        "confidence": 0.5442648530006409,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"IAfPatchPanel.h\"\n#include \"PatchCommandThread.h\"\n\n#include <audio_utils/mutex.h>",
+        "b_contents": "#include \"IAfPatchPanel.h\"\n#include \"PatchCommandThread.h\"\n",
+        "base_contents": "#include <mutex>",
+        "res_region": "#include \"IAfPatchPanel.h\"\n#include \"PatchCommandThread.h\"\n\n#include <audio_utils/mutex.h>\n#include <sounddose/SoundDoseManager.h>\n",
+        "lookback": "#include \"PatchCommandThread.h\"",
+        "lookahead": "#include <unordered_map>",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.848455548286438,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n#include <mutex>",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "#include <unordered_map>",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 32,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.78018718957901,
+        "hesitated": true
+    }
+]

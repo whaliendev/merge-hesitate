@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "      (EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::MICROPHONE))) {",
+        "b_contents": "      (EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n           Setting::MICROPHONE) != SettingState::DISABLED)) {",
+        "base_contents": "      (getSettingState(Setting::MICROPHONE) != SettingState::DISABLED)) {",
+        "res_region": "      (EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::MICROPHONE))) {",
+        "lookback": "          Setting::MICROPHONE))) {",
+        "lookahead": "    scheduleNextAudioDataEvent(handle);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 208,
+        "end_line": 216,
+        "merge_gen_region": null,
+        "confidence": 0.8423645496368408,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    bool suspended = !EventLoopManagerSingleton::get()\n                          ->getSettingManager()\n                          .getSettingEnabled(Setting::MICROPHONE);",
+        "b_contents": "    bool suspended =\n        (EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n             Setting::MICROPHONE) == SettingState::DISABLED);",
+        "base_contents": "    bool suspended =\n        (getSettingState(Setting::MICROPHONE) == SettingState::DISABLED);",
+        "res_region": "    bool suspended = !EventLoopManagerSingleton::get()\n                          ->getSettingManager()\n                          .getSettingEnabled(Setting::MICROPHONE);",
+        "lookback": "                          ->getSettingManager()",
+        "lookahead": "    postAudioSamplingChangeEvent(instanceId, handle, requestList.available,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 266,
+        "end_line": 277,
+        "merge_gen_region": null,
+        "confidence": 0.8649765849113464,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      bool suspended = !EventLoopManagerSingleton::get()\n                            ->getSettingManager()\n                            .getSettingEnabled(Setting::MICROPHONE);",
+        "b_contents": "      bool suspended =\n          (EventLoopManagerSingleton::get()\n               ->getSettingManager()\n               .getSettingState(Setting::MICROPHONE) == SettingState::DISABLED);",
+        "base_contents": "      bool suspended =\n          (getSettingState(Setting::MICROPHONE) == SettingState::DISABLED);",
+        "res_region": "      bool suspended = !EventLoopManagerSingleton::get()\n                            ->getSettingManager()\n                            .getSettingEnabled(Setting::MICROPHONE);",
+        "lookback": "                            ->getSettingManager()",
+        "lookahead": "      mAudioRequestLists[handle].available = available;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 366,
+        "end_line": 378,
+        "merge_gen_region": "Setting->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->",
+        "confidence": 0.8801296353340149,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  if (!EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::MICROPHONE)) {",
+        "b_contents": "  if (EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n          Setting::MICROPHONE) == SettingState::DISABLED) {",
+        "base_contents": "  if (getSettingState(Setting::MICROPHONE) == SettingState::DISABLED) {",
+        "res_region": "  if (!EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::MICROPHONE)) {",
+        "lookback": "          Setting::MICROPHONE)) {",
+        "lookahead": "    LOGD(\"Mic access disabled, doing nothing\");",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 390,
+        "end_line": 398,
+        "merge_gen_region": null,
+        "confidence": 0.8728837966918945,
+        "hesitated": true
+    }
+]

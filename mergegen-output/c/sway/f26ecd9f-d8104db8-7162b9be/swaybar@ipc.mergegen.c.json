@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n\t\tif (!use_output) {\n\t\t\tcontinue;\n\t\t}\n\n\t\t// add bar to the output\n\t\tstruct output *bar_output = container_output_create(name);\n\t\tbar_output->idx = i;\n\t\tlist_add(bar->outputs, bar_output);",
+        "base_contents": "\n\t\tif (!use_output) {\n\t\t\tcontinue;\n\t\t}\n\n\t\t// add bar to the output\n\t\tstruct output *bar_output = new_output(name);\n\t\tbar_output->idx = i;\n\t\tlist_add(bar->outputs, bar_output);",
+        "res_region": "",
+        "lookback": "\tjson_object_put(outputs);",
+        "lookahead": "\t}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 296,
+        "end_line": 317,
+        "merge_gen_region": null,
+        "confidence": 0.8384135961532593,
+        "hesitated": true
+    }
+]

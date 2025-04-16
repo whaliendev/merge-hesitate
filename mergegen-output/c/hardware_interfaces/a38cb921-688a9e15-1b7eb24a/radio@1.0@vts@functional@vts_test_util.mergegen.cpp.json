@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#include \"VtsCoreUtil.h\"\n\n#define WAIT_TIMEOUT_PERIOD 75",
+        "b_contents": "#include \"VtsCoreUtil.h\"",
+        "base_contents": "",
+        "res_region": "#include \"VtsCoreUtil.h\"\n\n#define WAIT_TIMEOUT_PERIOD 75",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 19,
+        "end_line": 26,
+        "merge_gen_region": null,
+        "confidence": 0.6146208047866821,
+        "hesitated": true
+    },
+    {
+        "a_contents": "}\n\nbool isSsSsEnabled() {\n    // Do not use checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"\")\n    // until b/148904287 is fixed. We need exact matching instead of partial matching. (i.e.\n    // by definition the empty string \"\" is a substring of any string).\n    return !isDsDsEnabled() && !isTsTsEnabled();\n}\n\nbool isDsDsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"dsds\");\n}\n\nbool isTsTsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"tsts\");\n}\n\nbool isVoiceInService(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::REG_HOME == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_ROAMING == state;\n}\n\nbool isVoiceEmergencyOnly(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_NOT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_DENIED_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::UNKNOWN_EM == state;\n}\n\n/*\n * Notify that the response message is received.\n */\nvoid RadioResponseWaiter::notify(int receivedSerial) {\n    std::unique_lock<std::mutex> lock(mtx_);\n    if (serial == receivedSerial) {\n        count_++;\n        cv_.notify_one();\n    }\n}\n\n/*\n * Wait till the response message is notified or till WAIT_TIMEOUT_PERIOD.\n */\nstd::cv_status RadioResponseWaiter::wait() {\n    std::unique_lock<std::mutex> lock(mtx_);\n\n    std::cv_status status = std::cv_status::no_timeout;\n    auto now = std::chrono::system_clock::now();\n    while (count_ == 0) {\n        status = cv_.wait_until(lock, now + std::chrono::seconds(WAIT_TIMEOUT_PERIOD));\n        if (status == std::cv_status::timeout) {\n            return status;\n        }\n    }\n    count_--;\n    return status;\n}",
+        "b_contents": "}\n\nbool isDsDsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"dsds\");\n}\n\nbool isTsTsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"tsts\");\n}\n\nbool isVoiceInService(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::REG_HOME == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_ROAMING == state;\n}\n\nbool isVoiceEmergencyOnly(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_NOT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_DENIED_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::UNKNOWN_EM == state;\n}",
+        "base_contents": "}",
+        "res_region": "}\n\nbool isSsSsEnabled() {\n    // Do not use checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"\")\n    // until b/148904287 is fixed. We need exact matching instead of partial matching. (i.e.\n    // by definition the empty string \"\" is a substring of any string).\n    return !isDsDsEnabled() && !isTsTsEnabled();\n}\n\nbool isDsDsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"dsds\");\n}\n\nbool isTsTsEnabled() {\n    return testing::checkSubstringInCommandOutput(\"getprop persist.radio.multisim.config\", \"tsts\");\n}\n\nbool isVoiceInService(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::REG_HOME == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_ROAMING == state;\n}\n\nbool isVoiceEmergencyOnly(RegState state) {\n    return ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_NOT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::NOT_REG_MT_SEARCHING_OP_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::REG_DENIED_EM == state ||\n           ::android::hardware::radio::V1_0::RegState::UNKNOWN_EM == state;\n}\n\n/*\n * Notify that the response message is received.\n */\nvoid RadioResponseWaiter::notify(int receivedSerial) {\n    std::unique_lock<std::mutex> lock(mtx_);\n    if (serial == receivedSerial) {\n        count_++;\n        cv_.notify_one();\n    }\n}\n\n/*\n * Wait till the response message is notified or till WAIT_TIMEOUT_PERIOD.\n */\nstd::cv_status RadioResponseWaiter::wait() {\n    std::unique_lock<std::mutex> lock(mtx_);\n\n    std::cv_status status = std::cv_status::no_timeout;\n    auto now = std::chrono::system_clock::now();\n    while (count_ == 0) {\n        status = cv_.wait_until(lock, now + std::chrono::seconds(WAIT_TIMEOUT_PERIOD));\n        if (status == std::cv_status::timeout) {\n            return status;\n        }\n    }\n    count_--;\n    return status;\n}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 88,
+        "end_line": 170,
+        "merge_gen_region": " isSSSEnabled { Do useSubInOutput(\"prop...multis.\", // b1404 is. need matching of matching (.... by the string is substring any). !DsEnabled &&isTsEnabled } boolDsDs() { testingcheckstringInOutput(\"prop persistradiomultis.\",d\"); boolTsEnabled { testingcheckstringInOutput(\"prop persistradiomultis.\", \"sts\"); boolVoiceServiceReg state { ::::hardwareradioV_::::::_ == ||androidhardwareradioV_::::::__ING state; boolVoicemerency(State) returnandroidhardwareradioV_::::::____ING state ||androidhardwareradioV_0Reg::_ING)}, ==; boolVoicemerency(State) returnandroidhardwareradioV_0Reg::______ ::androidhardwareradioV_::::::_____INGOPEM state ::::::::10Reg::____ == ||androidhardwareradioV__::::____ == ||androidhardwareradioV_0Reg::___ state state ::::::::::10Reg::____ state ::::::::::1",
+        "confidence": 0.9345203638076782,
+        "hesitated": false,
+        "resolved": false
+    }
+]

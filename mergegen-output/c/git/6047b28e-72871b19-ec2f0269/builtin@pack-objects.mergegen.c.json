@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"parse-options.h\"",
+        "b_contents": "#include \"wrapper.h\"",
+        "base_contents": "",
+        "res_region": "#include \"parse-options.h\"\n#include \"wrapper.h\"",
+        "lookback": "#include \"wrapper.h\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 43,
+        "end_line": 48,
+        "merge_gen_region": null,
+        "confidence": 0.6630602478981018,
+        "hesitated": true
+    }
+]

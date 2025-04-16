@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"chre/platform/log.h\"\n",
+        "b_contents": "#include \"chre/platform/log.h\"\n#include \"chre/util/macros.h\"\n",
+        "base_contents": "",
+        "res_region": "#include \"chre/platform/log.h\"\n",
+        "lookback": "",
+        "lookahead": "// Some devices don't have ash/debug.h implemented for them so allow swapping",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 18,
+        "end_line": 26,
+        "merge_gen_region": null,
+        "confidence": 0.8562191128730774,
+        "hesitated": true
+    }
+]

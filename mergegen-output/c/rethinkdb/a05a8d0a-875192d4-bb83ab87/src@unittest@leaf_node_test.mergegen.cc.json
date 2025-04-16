@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "private:\n    block_size_t bs_;",
+        "b_contents": "public:\n    max_block_size_t bs_;",
+        "base_contents": "public:\n    block_size_t bs_;",
+        "res_region": "private:\n    max_block_size_t bs_;",
+        "lookback": "    max_block_size_t bs_;",
+        "lookahead": "    short_value_sizer_t sizer_;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 294,
+        "end_line": 303,
+        "merge_gen_region": null,
+        "confidence": 0.828597366809845,
+        "hesitated": true
+    }
+]

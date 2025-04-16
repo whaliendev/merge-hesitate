@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        virtual ~BtreeCursor();",
+        "b_contents": "    public:\n        /** makes an appropriate subclass depending on the index version */\n        static BtreeCursor* make( NamespaceDetails *_d, int _idxNo, const IndexDetails&, const BSONObj &startKey, const BSONObj &endKey, bool endKeyInclusive, int direction );\n        static BtreeCursor* make( NamespaceDetails *_d, int _idxNo, const IndexDetails& _id, const shared_ptr< FieldRangeVector > &_bounds, int _direction );\n",
+        "base_contents": "",
+        "res_region": "    public:\n        virtual ~BtreeCursor();\n        /** makes an appropriate subclass depending on the index version */\n        static BtreeCursor* make( NamespaceDetails *_d, int _idxNo, const IndexDetails&, const BSONObj &startKey, const BSONObj &endKey, bool endKeyInclusive, int direction );\n        static BtreeCursor* make( NamespaceDetails *_d, int _idxNo, const IndexDetails& _id, const shared_ptr< FieldRangeVector > &_bounds, int _direction );\n",
+        "lookback": "        virtual ~BtreeCursor();",
+        "lookahead": "        virtual bool ok() { return !bucket.isNull(); }",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 906,
+        "end_line": 915,
+        "merge_gen_region": null,
+        "confidence": 0.7420144081115723,
+        "hesitated": true
+    }
+]

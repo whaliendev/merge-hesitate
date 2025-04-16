@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  kNewFile2             = 100,  // store smallest & largest seqno\n\n  kColumnFamily         = 200,  // specify column family for version edit\n  kColumnFamilyAdd      = 201,\n  kColumnFamilyDrop     = 202,\n  kMaxColumnFamily      = 203,",
+        "b_contents": "  kNewFile2             = 100,  // store smallest & largest seqno\n  kVersionNumber        = 101,  // manifest version number, available after 2.8",
+        "base_contents": "  kNewFile2             = 100  // store smallest & largest seqno",
+        "res_region": "  kNewFile2             = 100,  // store smallest & largest seqno\n  kVersionNumber        = 101,  // manifest version number, available after 2.8\n\n  kColumnFamily         = 200,  // specify column family for version edit\n  kColumnFamilyAdd      = 201,\n  kColumnFamilyDrop     = 202,\n  kMaxColumnFamily      = 203,",
+        "lookback": "  kVersionNumber        = 101,  // manifest version number, available after 2.8",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 31,
+        "end_line": 43,
+        "merge_gen_region": null,
+        "confidence": 0.7077605724334717,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  max_column_family_ = 0;",
+        "b_contents": "  has_version_number_ = false;",
+        "base_contents": "",
+        "res_region": "  max_column_family_ = 0;\n  has_version_number_ = false;",
+        "lookback": "  has_version_number_ = false;",
+        "lookahead": "  has_comparator_ = false;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 54,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.7950063347816467,
+        "hesitated": true
+    }
+]

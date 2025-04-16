@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    DISPLAYLEVEL(3, \"test%3d: superblock enough room for checksum : \", testNb++)\n    {\n        /* This tests whether or not we leave enough room for the checksum at the end\n         * of the dst buffer. The bug that motivated this test was found by the\n         * stream_round_trip fuzzer but this crashes for the same reason and is\n         * far more compact than re-creating the stream_round_trip fuzzer's code path */\n        ZSTD_CCtx *cctx = ZSTD_createCCtx();\n        ZSTD_CCtx_setParameter(cctx, ZSTD_c_targetCBlockSize, 64);\n        assert(!ZSTD_isError(ZSTD_compress2(cctx, compressedBuffer, 1339, CNBuffer, 1278)));\n        ZSTD_freeCCtx(cctx);\n    }\n    DISPLAYLEVEL(3, \"OK \\n\");\n",
+        "b_contents": "    DISPLAYLEVEL(3, \"test%3i : compress a NULL input with each level : \", testNb++);\n    {   int level = -1;\n        ZSTD_CCtx* cctx = ZSTD_createCCtx();\n        if (!cctx) goto _output_error;\n        for (level = -1; level <= ZSTD_maxCLevel(); ++level) {\n          CHECK_Z( ZSTD_compress(compressedBuffer, compressedBufferSize, NULL, 0, level) );\n          CHECK_Z( ZSTD_CCtx_setParameter(cctx, ZSTD_c_compressionLevel, level) );\n          CHECK_Z( ZSTD_compress2(cctx, compressedBuffer, compressedBufferSize, NULL, 0) );\n        }\n        ZSTD_freeCCtx(cctx);\n    }\n    DISPLAYLEVEL(3, \"OK \\n\");\n",
+        "base_contents": "",
+        "res_region": "    DISPLAYLEVEL(3, \"test%3d: superblock enough room for checksum : \", testNb++)\n    {\n        /* This tests whether or not we leave enough room for the checksum at the end\n         * of the dst buffer. The bug that motivated this test was found by the\n         * stream_round_trip fuzzer but this crashes for the same reason and is\n         * far more compact than re-creating the stream_round_trip fuzzer's code path */\n        ZSTD_CCtx *cctx = ZSTD_createCCtx();\n        ZSTD_CCtx_setParameter(cctx, ZSTD_c_targetCBlockSize, 64);\n        assert(!ZSTD_isError(ZSTD_compress2(cctx, compressedBuffer, 1339, CNBuffer, 1278)));\n        ZSTD_freeCCtx(cctx);\n    }\n    DISPLAYLEVEL(3, \"OK \\n\");\n  \n    DISPLAYLEVEL(3, \"test%3i : compress a NULL input with each level : \", testNb++);\n    {   int level = -1;\n        ZSTD_CCtx* cctx = ZSTD_createCCtx();\n        if (!cctx) goto _output_error;\n        for (level = -1; level <= ZSTD_maxCLevel(); ++level) {\n          CHECK_Z( ZSTD_compress(compressedBuffer, compressedBufferSize, NULL, 0, level) );\n          CHECK_Z( ZSTD_CCtx_setParameter(cctx, ZSTD_c_compressionLevel, level) );\n          CHECK_Z( ZSTD_compress2(cctx, compressedBuffer, compressedBufferSize, NULL, 0) );\n        }\n        ZSTD_freeCCtx(cctx);\n    }\n    DISPLAYLEVEL(3, \"OK \\n\");\n",
+        "lookback": "    {",
+        "lookahead": "    DISPLAYLEVEL(3, \"test%3d : check CCtx size after compressing empty input : \", testNb++);",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 491,
+        "end_line": 520,
+        "merge_gen_region": null,
+        "confidence": 0.5257957577705383,
+        "hesitated": true
+    }
+]

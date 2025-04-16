@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "TEST(record_cmd, decode_etm_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\"}));\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--exclude-perf\"}));\n}\n\nTEST(record_cmd, binary_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--binary\", \".*\"}));\n}\n",
+        "b_contents": "TEST(record_cmd, decode_etm_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\"}));\n}\n",
+        "base_contents": "",
+        "res_region": "TEST(record_cmd, decode_etm_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\"}));\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--exclude-perf\"}));\n}\n\nTEST(record_cmd, binary_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--binary\", \".*\"}));\n}\n",
+        "lookback": "  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {",
+        "lookahead": "TEST(record_cmd, pmu_event_option) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1058,
+        "end_line": 1086,
+        "merge_gen_region": " (!____ifET Radiooutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.945371150970459,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    const size_t h3Size = (zc->hashLog3) ? 1 << zc->hashLog3 : 0;\n    const size_t tableSpace = (contentSize + hSize + h3Size) * sizeof(U32);",
+        "b_contents": "    const size_t h3Size = (params.cParams.searchLength==3) ? (1 << HASHLOG3) : 0;\n    const size_t tableSpace = (chainSize + hSize + h3Size) * sizeof(U32);",
+        "base_contents": "    const size_t h3Size = (params.cParams.searchLength==3) ? (1 << HASHLOG3) : 0;\n    const size_t tableSpace = (contentSize + hSize + h3Size) * sizeof(U32);",
+        "res_region": "    const size_t h3Size = (zc->hashLog3) ? 1 << zc->hashLog3 : 0;\n    const size_t tableSpace = (chainSize + hSize + h3Size) * sizeof(U32);",
+        "lookback": "    const size_t tableSpace = (chainSize + hSize + h3Size) * sizeof(U32);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 222,
+        "end_line": 231,
+        "merge_gen_region": null,
+        "confidence": 0.43522119522094727,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        const size_t h3Size = (srcCCtx->hashLog3) ? 1 << srcCCtx->hashLog3 : 0;\n        const size_t tableSpace = (contentSize + hSize + h3Size) * sizeof(U32);",
+        "b_contents": "        const size_t h3Size = (srcCCtx->params.cParams.searchLength == 3) ? (1 << HASHLOG3) : 0;\n        const size_t tableSpace = (chaineSize + hSize + h3Size) * sizeof(U32);",
+        "base_contents": "        const size_t h3Size = (srcCCtx->params.cParams.searchLength == 3) ? (1 << HASHLOG3) : 0;\n        const size_t tableSpace = (contentSize + hSize + h3Size) * sizeof(U32);",
+        "res_region": "        const size_t h3Size = (srcCCtx->hashLog3) ? 1 << srcCCtx->hashLog3 : 0;\n        const size_t tableSpace = (chainSize + hSize + h3Size) * sizeof(U32);",
+        "lookback": "        const size_t tableSpace = (chainSize + hSize + h3Size) * sizeof(U32);",
+        "lookahead": "        memcpy(dstCCtx->workSpace, srcCCtx->workSpace, tableSpace);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 303,
+        "end_line": 312,
+        "merge_gen_region": null,
+        "confidence": 0.6931229829788208,
+        "hesitated": true
+    }
+]

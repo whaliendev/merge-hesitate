@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "                    ->windowInfosChanged(gui::WindowInfosUpdate{std::move(windowInfos),\n                                                                std::move(displayInfos),\n                                                                ftl::to_underlying(vsyncId),\n                                                                frameTime.ns()},",
+        "b_contents": "                    ->windowInfosChanged(gui::WindowInfosUpdate{std::move(windowInfos),\n                                                                std::move(displayInfos),\n                                                                vsyncId.value, frameTime.ns()},",
+        "base_contents": "                    ->windowInfosChanged(std::move(windowInfos), std::move(displayInfos),",
+        "res_region": "                    ->windowInfosChanged(gui::WindowInfosUpdate{std::move(windowInfos),\n                                                                std::move(displayInfos),\n                                                                ftl::to_underlying(vsyncId),\n                                                                frameTime.ns()},",
+        "lookback": "                                                                std::move(displayInfos),",
+        "lookahead": "                                         std::move(",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3762,
+        "end_line": 3773,
+        "merge_gen_region": null,
+        "confidence": 0.8188660740852356,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto windowInfosDebug = mWindowInfosListenerInvoker->getDebugInfo();\n    StringAppendF(&result, \"  max send vsync id: %\" PRId64 \"\\n\",\n                  ftl::to_underlying(windowInfosDebug.maxSendDelayVsyncId));\n    StringAppendF(&result, \"  max send delay (ns): %\" PRId64 \" ns\\n\",\n                  windowInfosDebug.maxSendDelayDuration);\n    StringAppendF(&result, \"  unsent messages: %\" PRIu32 \"\\n\",\n                  windowInfosDebug.pendingMessageCount);",
+        "b_contents": "    auto windowInfosDebug = mWindowInfosListenerInvoker->getDebugInfo();\n    StringAppendF(&result, \"  max send vsync id: %\" PRId64 \"\\n\",\n                  windowInfosDebug.maxSendDelayVsyncId.value);\n    StringAppendF(&result, \"  max send delay (ns): %\" PRId64 \" ns\\n\",\n                  windowInfosDebug.maxSendDelayDuration);\n    StringAppendF(&result, \"  unsent messages: %\" PRIu32 \"\\n\",\n                  windowInfosDebug.pendingMessageCount);",
+        "base_contents": "    StringAppendF(&result, \"  input flinger update vsync id: %\" PRId64 \"\\n\",\n                  mLastInputFlingerUpdateVsyncId.value);\n    StringAppendF(&result, \"  input flinger update timestamp (ns): %\" PRId64 \"\\n\",\n                  mLastInputFlingerUpdateTimestamp);",
+        "res_region": "    auto windowInfosDebug = mWindowInfosListenerInvoker->getDebugInfo();\n    StringAppendF(&result, \"  max send vsync id: %\" PRId64 \"\\n\",\n                  ftl::to_underlying(windowInfosDebug.maxSendDelayVsyncId));\n    StringAppendF(&result, \"  max send delay (ns): %\" PRId64 \" ns\\n\",\n                  windowInfosDebug.maxSendDelayDuration);\n    StringAppendF(&result, \"  unsent messages: %\" PRIu32 \"\\n\",\n                  windowInfosDebug.pendingMessageCount);",
+        "lookback": "    StringAppendF(&result, \"  max send vsync id: %\" PRId64 \"\\n\",",
+        "lookahead": "    result.append(\"\\n\");",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 6152,
+        "end_line": 6173,
+        "merge_gen_region": "Pause \"\\\", windowDebug mInfosInvokerget();Append(&, max vsync id %\"64n f::_lyingwindowDebugmaxDelaysync));Append(&,>(79VId",
+        "confidence": 0.9143171906471252,
+        "hesitated": false,
+        "resolved": false
+    }
+]

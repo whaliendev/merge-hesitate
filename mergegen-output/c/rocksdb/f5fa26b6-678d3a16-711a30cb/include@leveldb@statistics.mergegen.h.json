@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  HARD_RATE_LIMIT_DELAY_COUNT = 15,\n  SOFT_RATE_LIMIT_DELAY_COUNT = 16,\n  HISTOGRAM_ENUM_MAX = 17",
+        "b_contents": "  RATE_LIMIT_DELAY_COUNT = 15,\n  NUM_FILES_IN_SINGLE_COMPACTION = 16,\n  HISTOGRAM_ENUM_MAX = 17",
+        "base_contents": "  RATE_LIMIT_DELAY_COUNT = 15,\n  HISTOGRAM_ENUM_MAX = 16",
+        "res_region": "  HARD_RATE_LIMIT_DELAY_COUNT = 15,\n  SOFT_RATE_LIMIT_DELAY_COUNT = 16,\n  NUM_FILES_IN_SINGLE_COMPACTION = 17,\n  HISTOGRAM_ENUM_MAX = 18",
+        "lookback": "  SOFT_RATE_LIMIT_DELAY_COUNT = 16,",
+        "lookahead": "};",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 115,
+        "end_line": 126,
+        "merge_gen_region": null,
+        "confidence": 0.5571902990341187,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  { HARD_RATE_LIMIT_DELAY_COUNT, \"rocksdb.hard.rate.limit.delay.count\"},\n  { SOFT_RATE_LIMIT_DELAY_COUNT, \"rocksdb.soft.rate.limit.delay.count\"}",
+        "b_contents": "  { RATE_LIMIT_DELAY_COUNT, \"rocksdb.rate.limit.delay.count\"},\n  { NUM_FILES_IN_SINGLE_COMPACTION, \"rocksdb.numfiles.in.singlecompaction\" }",
+        "base_contents": "  { RATE_LIMIT_DELAY_COUNT, \"rocksdb.rate.limit.delay.count\"}",
+        "res_region": "  { HARD_RATE_LIMIT_DELAY_COUNT, \"rocksdb.hard.rate.limit.delay.count\"},\n  { SOFT_RATE_LIMIT_DELAY_COUNT, \"rocksdb.soft.rate.limit.delay.count\"},\n  { NUM_FILES_IN_SINGLE_COMPACTION, \"rocksdb.numfiles.in.singlecompaction\" }",
+        "lookback": "  { SOFT_RATE_LIMIT_DELAY_COUNT, \"rocksdb.soft.rate.limit.delay.count\"},",
+        "lookahead": "};",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 145,
+        "end_line": 153,
+        "merge_gen_region": null,
+        "confidence": 0.6228257417678833,
+        "hesitated": true
+    }
+]

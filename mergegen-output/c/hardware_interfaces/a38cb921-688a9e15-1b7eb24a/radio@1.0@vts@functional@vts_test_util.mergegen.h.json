@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n/*\n * Check if device is in SsSs (Single SIM Single Standby).\n */\nbool isSsSsEnabled();\n\n/*\n * Check if device is in DSDS (Dual SIM Dual Standby).\n */\nbool isDsDsEnabled();\n\n/*\n * Check if device is in TSTS (Triple SIM Triple Standby).\n */\nbool isTsTsEnabled();\n\n/*\n * Check if voice status is in emergency only.\n */\nbool isVoiceEmergencyOnly(RegState state);\n\n/*\n * Check if voice status is in service.\n */\nbool isVoiceInService(RegState state);\n\n/**\n * Used when waiting for an asynchronous response from the HAL.\n */\nclass RadioResponseWaiter {\n  protected:\n    std::mutex mtx_;\n    std::condition_variable cv_;\n    int count_;\n\n  public:\n    /* Serial number for radio request */\n    int serial;\n\n    /* Used as a mechanism to inform the test about data/event callback */\n    void notify(int receivedSerial);\n\n    /* Test code calls this function to wait for response */\n    std::cv_status wait();\n};",
+        "b_contents": "\n/*\n * Check if device is in DSDS.\n */\nbool isDsDsEnabled();\n\n/*\n * Check if device is in TSTS.\n */\nbool isTsTsEnabled();\n\n/*\n * Check if voice status is in emergency only.\n */\nbool isVoiceEmergencyOnly(RegState state);\n\n/*\n * Check if voice status is in service.\n */\nbool isVoiceInService(RegState state);",
+        "base_contents": "",
+        "res_region": "\n/*\n * Check if device is in SsSs (Single SIM Single Standby).\n */\nbool isSsSsEnabled();\n\n/*\n * Check if device is in DSDS (Dual SIM Dual Standby).\n */\nbool isDsDsEnabled();\n\n/*\n * Check if device is in TSTS (Triple SIM Triple Standby).\n */\nbool isTsTsEnabled();\n\n/*\n * Check if voice status is in emergency only.\n */\nbool isVoiceEmergencyOnly(RegState state);\n\n/*\n * Check if voice status is in service.\n */\nbool isVoiceInService(RegState state);\n\n/**\n * Used when waiting for an asynchronous response from the HAL.\n */\nclass RadioResponseWaiter {\n  protected:\n    std::mutex mtx_;\n    std::condition_variable cv_;\n    int count_;\n\n  public:\n    /* Serial number for radio request */\n    int serial;\n\n    /* Used as a mechanism to inform the test about data/event callback */\n    void notify(int receivedSerial);\n\n    /* Test code calls this function to wait for response */\n    std::cv_status wait();\n};",
+        "lookback": "/*",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 80,
+        "end_line": 148,
+        "merge_gen_region": null,
+        "confidence": 0.7612634897232056,
+        "hesitated": true
+    }
+]

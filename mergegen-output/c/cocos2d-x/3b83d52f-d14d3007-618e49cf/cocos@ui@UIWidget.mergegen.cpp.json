@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    return convertToWorldSpace(Vector2::ZERO);",
+        "b_contents": "    return convertToWorldSpace(Point(_anchorPoint.x * _contentSize.width, _anchorPoint.y * _contentSize.height));",
+        "base_contents": "    return convertToWorldSpace(Point::ZERO);",
+        "res_region": "    return convertToWorldSpace(Vector2(_anchorPoint.x * _contentSize.width, _anchorPoint.y * _contentSize.height));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 378,
+        "end_line": 384,
+        "merge_gen_region": null,
+        "confidence": 0.49670320749282837,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Vector2 nsp = convertToNodeSpace(pt);\n    Rect bb = Rect(-_size.width * _anchorPoint.x, -_size.height * _anchorPoint.y, _size.width, _size.height);\n    if (nsp.x >= bb.origin.x && nsp.x <= bb.origin.x + bb.size.width && nsp.y >= bb.origin.y && nsp.y <= bb.origin.y + bb.size.height)",
+        "b_contents": "    Point nsp = convertToNodeSpace(pt);\n    Rect bb;\n    bb.size = _contentSize;\n    if (bb.containsPoint(nsp))",
+        "base_contents": "    Point nsp = convertToNodeSpace(pt);\n    Rect bb = Rect(-_size.width * _anchorPoint.x, -_size.height * _anchorPoint.y, _size.width, _size.height);\n    if (nsp.x >= bb.origin.x && nsp.x <= bb.origin.x + bb.size.width && nsp.y >= bb.origin.y && nsp.y <= bb.origin.y + bb.size.height)",
+        "res_region": "    Vector2 nsp = convertToNodeSpace(pt);\n    Rect bb;\n    bb.size = _contentSize;\n    if (bb.containsPoint(nsp))",
+        "lookback": "    Rect bb;",
+        "lookahead": "    {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 639,
+        "end_line": 652,
+        "merge_gen_region": null,
+        "confidence": 0.8435578942298889,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void Widget::updateAnchorPoint()\n{\n    setAnchorPoint(getAnchorPoint());\n}\n\nconst Vector2& Widget::getPositionPercent()",
+        "b_contents": "const Point& Widget::getPositionPercent()",
+        "base_contents": "void Widget::updateAnchorPoint()\n{\n    setAnchorPoint(getAnchorPoint());\n}\n\nconst Point& Widget::getPositionPercent()",
+        "res_region": "const Vector2& Widget::getPositionPercent()",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 746,
+        "end_line": 762,
+        "merge_gen_region": null,
+        "confidence": 0.4724895656108856,
+        "hesitated": true
+    }
+]

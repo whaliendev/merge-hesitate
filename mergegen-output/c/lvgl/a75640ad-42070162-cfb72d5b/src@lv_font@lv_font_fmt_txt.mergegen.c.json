@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if(gsize == 0) return NULL;",
+        "b_contents": "        if(gsize == 0) return NULL;\n",
+        "base_contents": "",
+        "res_region": "        if(gsize == 0) return NULL;\n",
+        "lookback": "",
+        "lookahead": "        uint32_t buf_size = gsize;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 93,
+        "end_line": 99,
+        "merge_gen_region": null,
+        "confidence": 0.7153445482254028,
+        "hesitated": true
+    }
+]

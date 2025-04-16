@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "  uint64_t manifest_size = 222;",
+        "b_contents": "  uint64_t manifest_size = rand_r(&seed) % 256;",
+        "base_contents": "  uint64_t manifest_size = rand() % 256;",
+        "res_region": "  uint64_t manifest_size = rand_r(&seed) % 256;",
+        "lookback": "  uint64_t manifest_size_be = htobe64(manifest_size);",
+        "lookahead": "  uint64_t manifest_size_be = htobe64(manifest_size);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 745,
+        "end_line": 751,
+        "merge_gen_region": null,
+        "confidence": 0.7293123006820679,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  uint32_t metadata_signature_size = 111;",
+        "b_contents": "  uint32_t metadata_signature_size = rand_r(&seed) % 256;",
+        "base_contents": "  uint32_t metadata_signature_size = rand() % 256;",
+        "res_region": "  uint32_t metadata_signature_size = rand_r(&seed) % 256;",
+        "lookback": "  uint32_t metadata_signature_size_be = htobe32(metadata_signature_size);",
+        "lookahead": "  uint32_t metadata_signature_size_be = htobe32(metadata_signature_size);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 755,
+        "end_line": 761,
+        "merge_gen_region": null,
+        "confidence": 0.6639386415481567,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // result of 'echo \"Test\" | base64'\n  install_plan_.public_key_rsa = \"VGVzdAo=\";",
+        "b_contents": "  // This is the result of 'echo \"Test\" | base64' and is not meant to be a\n  // valid public key, but it is valid base-64.\n  constexpr char kBase64TestKey[] = \"VGVzdAo=\";\n  install_plan_.public_key_rsa = kBase64TestKey;",
+        "base_contents": "  install_plan_.public_key_rsa = \"VGVzdAo=\"; // result of 'echo \"Test\" | base64'",
+        "res_region": "  // This is the result of 'echo \"Test\" | base64' and is not meant to be a\n  // valid public key, but it is valid base-64.\n  constexpr char kBase64TestKey[] = \"VGVzdAo=\";\n  install_plan_.public_key_rsa = kBase64TestKey;",
+        "lookback": "  // valid public key, but it is valid base-64.",
+        "lookahead": "  EXPECT_TRUE(performer_.GetPublicKeyFromResponse(&key_path));",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 863,
+        "end_line": 873,
+        "merge_gen_region": null,
+        "confidence": 0.8046405911445618,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // result of 'echo \"Test\" | base64'\n  install_plan_.public_key_rsa = \"VGVzdAo=\";",
+        "b_contents": "  install_plan_.public_key_rsa = kBase64TestKey;",
+        "base_contents": "  install_plan_.public_key_rsa = \"VGVzdAo=\"; // result of 'echo \"Test\" | base64'",
+        "res_region": "  install_plan_.public_key_rsa = kBase64TestKey;",
+        "lookback": "  EXPECT_FALSE(performer_.GetPublicKeyFromResponse(&key_path));",
+        "lookahead": "  EXPECT_FALSE(performer_.GetPublicKeyFromResponse(&key_path));",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 884,
+        "end_line": 891,
+        "merge_gen_region": null,
+        "confidence": 0.46545886993408203,
+        "hesitated": true
+    }
+]

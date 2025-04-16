@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "using testing::SetArgumentPointee;\nusing update_engine::UpdateAttemptFlags;",
+        "b_contents": "using testing::SetArgPointee;\nusing testing::_;",
+        "base_contents": "using testing::SetArgumentPointee;\nusing testing::_;",
+        "res_region": "using testing::SetArgPointee;\nusing update_engine::UpdateAttemptFlags;",
+        "lookback": "using update_engine::UpdateAttemptFlags;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 32,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.7891204357147217,
+        "hesitated": true
+    }
+]

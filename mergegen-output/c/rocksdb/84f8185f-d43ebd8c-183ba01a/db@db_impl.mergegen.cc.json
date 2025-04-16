@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "  DBImpl::DeletionState deletion_state;\n  state->mu->Lock();\n  if (state->mem) { // not set for immutable iterator\n    MemTable* m = state->mem->Unref();\n    if (m != nullptr) {\n      deletion_state.memtables_to_free.push_back(m);\n    }\n  }\n  if (state->version) {  // not set for memtable-only iterator\n    state->version->Unref();\n  }\n  if (state->imm) {  // not set for memtable-only iterator\n    state->imm->Unref(&deletion_state.memtables_to_free);",
+        "b_contents": "  DBImpl::DeletionState deletion_state(state->db->GetOptions().\n                                       max_write_buffer_number);\n\n  bool need_cleanup = state->super_version->Unref();\n  if (need_cleanup) {\n    state->mu->Lock();\n    state->super_version->Cleanup();\n    state->db->FindObsoleteFiles(deletion_state, false, true);\n    state->mu->Unlock();\n\n    delete state->super_version;\n    state->db->PurgeObsoleteFiles(deletion_state);",
+        "base_contents": "  DBImpl::DeletionState deletion_state(state->db->GetOptions().\n                                       max_write_buffer_number);\n  state->mu->Lock();\n  if (state->mem) { // not set for immutable iterator\n    MemTable* m = state->mem->Unref();\n    if (m != nullptr) {\n      deletion_state.memtables_to_free.push_back(m);\n    }\n  }\n  if (state->version) {  // not set for memtable-only iterator\n    state->version->Unref();\n  }\n  if (state->imm) {  // not set for memtable-only iterator\n    state->imm->Unref(&deletion_state.memtables_to_free);",
+        "res_region": "  DBImpl::DeletionState deletion_state(state->db->GetOptions().\n                                       max_write_buffer_number);\n\n  bool need_cleanup = state->super_version->Unref();\n  if (need_cleanup) {\n    state->mu->Lock();\n    state->super_version->Cleanup();\n    state->db->FindObsoleteFiles(deletion_state, false, true);\n    state->mu->Unlock();\n\n    delete state->super_version;\n    state->db->PurgeObsoleteFiles(deletion_state);",
+        "lookback": "                                       max_write_buffer_number);",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2693,
+        "end_line": 2735,
+        "merge_gen_region": null,
+        "confidence": 0.7342576384544373,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      env_, &internal_comparator_, &iterator_list[0], iterator_list.size());\n  cleanup->version = version;\n  cleanup->mu = &mutex_;\n  cleanup->db = this;",
+        "b_contents": "      &internal_comparator_, &iterator_list[0], iterator_list.size());\n\n  IterState* cleanup = new IterState(this, &mutex_, super_version);",
+        "base_contents": "      &internal_comparator_, &iterator_list[0], iterator_list.size());\n  cleanup->version = version;\n  cleanup->mu = &mutex_;\n  cleanup->db = this;",
+        "res_region": "      env_, &internal_comparator_, &iterator_list[0], iterator_list.size());\n\n  IterState* cleanup = new IterState(this, &mutex_, super_version);",
+        "lookback": "",
+        "lookahead": "  internal_iter->RegisterCleanup(CleanupIteratorState, cleanup, nullptr);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2758,
+        "end_line": 2772,
+        "merge_gen_region": null,
+        "confidence": 0.8454251885414124,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  immutable_mems->AddIterators(options, &list);\n  immutable_cleanup->imm = immutable_mems;\n  version->AddIterators(options, storage_options_, &list);\n  immutable_cleanup->version = version;\n  immutable_cleanup->db = this;\n  immutable_cleanup->mu = &mutex_;\n\n  immutable_iter =\n      NewMergingIterator(env_, &internal_comparator_, &list[0], list.size());\n  immutable_iter->RegisterCleanup(CleanupIteratorState, immutable_cleanup,\n                                  nullptr);",
+        "b_contents": "  super_version->imm->AddIterators(options, &list);\n  super_version->current->AddIterators(options, storage_options_, &list);\n  Iterator* immutable_iter =\n    NewMergingIterator(&internal_comparator_, &list[0], list.size());",
+        "base_contents": "  immutable_mems->AddIterators(options, &list);\n  immutable_cleanup->imm = immutable_mems;\n  version->AddIterators(options, storage_options_, &list);\n  immutable_cleanup->version = version;\n  immutable_cleanup->db = this;\n  immutable_cleanup->mu = &mutex_;\n\n  immutable_iter =\n    NewMergingIterator(&internal_comparator_, &list[0], list.size());\n  immutable_iter->RegisterCleanup(CleanupIteratorState, immutable_cleanup,\n                                  nullptr);",
+        "res_region": "  super_version->imm->AddIterators(options, &list);\n  super_version->current->AddIterators(options, storage_options_, &list);\n  Iterator* immutable_iter =\n    NewMergingIterator(env_, &internal_comparator_, &list[0], list.size());",
+        "lookback": "  super_version->current->AddIterators(options, storage_options_, &list);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2800,
+        "end_line": 2829,
+        "merge_gen_region": null,
+        "confidence": 0.8364971280097961,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  autovector<MemTable*> to_delete;",
+        "b_contents": "",
+        "base_contents": "  std::vector<MemTable*> to_delete;",
+        "res_region": "",
+        "lookback": "  mutex_.Lock();",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 2988,
+        "end_line": 2993,
+        "merge_gen_region": null,
+        "confidence": 0.4425337016582489,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // Post processing (decrement reference counts and record statistics)\n  StopWatchNano post_process_timer(env_, false);\n  StartPerfTimer(&post_process_timer);\n  mutex_.Lock();\n  if (!options_.disable_seek_compaction &&\n      have_stat_update && current->UpdateStats(stats)) {\n    MaybeScheduleFlushOrCompaction();",
+        "b_contents": "  bool delete_get_version = false;\n  if (!options_.disable_seek_compaction && have_stat_update) {\n    mutex_.Lock();\n    if (get_version->current->UpdateStats(stats)) {\n      MaybeScheduleFlushOrCompaction();\n    }\n    if (get_version->Unref()) {\n      get_version->Cleanup();\n      delete_get_version = true;\n    }\n    mutex_.Unlock();\n  } else {\n    if (get_version->Unref()) {\n      mutex_.Lock();\n      get_version->Cleanup();\n      mutex_.Unlock();\n      delete_get_version = true;\n    }\n  }\n  if (delete_get_version) {\n    delete get_version;",
+        "base_contents": "  // Post processing (decrement reference counts and record statistics)\n  mutex_.Lock();\n  if (!options_.disable_seek_compaction &&\n      have_stat_update && current->UpdateStats(stats)) {\n    MaybeScheduleFlushOrCompaction();",
+        "res_region": "  // Post processing (decrement reference counts and record statistics)\n  StopWatchNano post_process_timer(env_, false);\n  StartPerfTimer(&post_process_timer);\n  bool delete_get_version = false;\n  if (!options_.disable_seek_compaction && have_stat_update) {\n    mutex_.Lock();\n    if (get_version->current->UpdateStats(stats)) {\n      MaybeScheduleFlushOrCompaction();\n    }\n    if (get_version->Unref()) {\n      get_version->Cleanup();\n      delete_get_version = true;\n    }\n    mutex_.Unlock();\n  } else {\n    if (get_version->Unref()) {\n      mutex_.Lock();\n      get_version->Cleanup();\n      mutex_.Unlock();\n      delete_get_version = true;\n    }\n  }\n  if (delete_get_version) {\n    delete get_version;",
+        "lookback": "  StopWatchNano post_process_timer(env_, false);",
+        "lookahead": "  }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3046,
+        "end_line": 3082,
+        "merge_gen_region": null,
+        "confidence": 0.844609797000885,
+        "hesitated": true
+    }
+]

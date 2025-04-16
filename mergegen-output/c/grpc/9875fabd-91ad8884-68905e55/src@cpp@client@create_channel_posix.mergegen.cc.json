@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "  return ::grpc_impl::CreateChannelInternal(",
+        "b_contents": "  return grpc::CreateChannelInternal(",
+        "base_contents": "  return CreateChannelInternal(",
+        "res_region": "  return ::grpc_impl::CreateChannelInternal(",
+        "lookback": "      \"\", grpc_insecure_channel_create_from_fd(target.c_str(), fd, nullptr),",
+        "lookahead": "      \"\", grpc_insecure_channel_create_from_fd(target.c_str(), fd, nullptr),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 34,
+        "end_line": 40,
+        "merge_gen_region": null,
+        "confidence": 0.8684665560722351,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return ::grpc_impl::CreateChannelInternal(",
+        "b_contents": "  return grpc::CreateChannelInternal(",
+        "base_contents": "  return CreateChannelInternal(",
+        "res_region": "  return ::grpc_impl::CreateChannelInternal(",
+        "lookback": "      \"\",",
+        "lookahead": "      \"\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 52,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.71754390001297,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return ::grpc_impl::CreateChannelInternal(",
+        "b_contents": "  return grpc::CreateChannelInternal(",
+        "base_contents": "  return CreateChannelInternal(",
+        "res_region": "  return ::grpc_impl::CreateChannelInternal(",
+        "lookback": "      \"\",",
+        "lookahead": "      \"\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 77,
+        "end_line": 83,
+        "merge_gen_region": null,
+        "confidence": 0.71754390001297,
+        "hesitated": true
+    }
+]

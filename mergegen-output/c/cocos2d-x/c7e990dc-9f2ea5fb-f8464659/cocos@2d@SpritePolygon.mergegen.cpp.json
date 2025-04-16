@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    SpritePolygonCache::printInfo(*_polygonInfo);\n    delete _triangles.verts;\n    delete _triangles.indices;",
+        "b_contents": "",
+        "base_contents": "    \n    delete _triangles.verts;\n    delete _triangles.indices;",
+        "res_region": "//    SpritePolygonCache::printInfo(*_polygonInfo);",
+        "lookback": "#if CC_SPRITE_DEBUG_DRAW",
+        "lookahead": "#if CC_SPRITE_DEBUG_DRAW",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 262,
+        "end_line": 272,
+        "merge_gen_region": null,
+        "confidence": 0.6032081842422485,
+        "hesitated": true
+    }
+]

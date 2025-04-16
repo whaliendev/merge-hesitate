@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n    // Having an alignment offset > alignment doesn't really make sense.\n    EXPECT_LT(device_info.alignment_offset, device_info.alignment);",
+        "base_contents": "\n    // Having an alignment offset > alignment doesn't really make sense.\n    EXPECT_LT(device_info.alignment_offset, device_info.alignment);\n\n    if (IPropertyFetcher::GetInstance()->GetBoolProperty(\"ro.virtual_ab.enabled\", false)) {\n        EXPECT_EQ(device_info.alignment_offset, 0);\n    }",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 53,
+        "end_line": 66,
+        "merge_gen_region": null,
+        "confidence": 0.811549186706543,
+        "hesitated": true
+    }
+]

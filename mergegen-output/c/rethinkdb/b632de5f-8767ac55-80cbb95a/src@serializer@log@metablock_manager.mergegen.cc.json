@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "           == static_cast<uint32_t>(cluster_version_t::v2_0_is_latest_disk);",
+        "b_contents": "            == static_cast<uint32_t>(cluster_version_t::v2_0)\n        || disk_format_version\n            == static_cast<uint32_t>(cluster_version_t::v2_1_is_latest_disk);",
+        "base_contents": "            == static_cast<uint32_t>(cluster_version_t::v2_0_is_latest_disk);",
+        "res_region": "        || disk_format_version == static_cast<uint32_t>(cluster_version_t::v2_0)\n        || disk_format_version\n            == static_cast<uint32_t>(cluster_version_t::v2_1_is_latest_disk);",
+        "lookback": "        || disk_format_version",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "style_related"
+        ],
+        "start_line": 149,
+        "end_line": 157,
+        "merge_gen_region": null,
+        "confidence": 0.6972764730453491,
+        "hesitated": true
+    }
+]

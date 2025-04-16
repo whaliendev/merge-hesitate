@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    void *buf = lv_mem_buf_get(len + pos_conv_len * sizeof(uint16_t));\n    if(buf == NULL) return (uint16_t) -1;",
+        "b_contents": "    uint32_t txt_buf_size = len + 1;\n    txt_buf_size = (txt_buf_size + 3) & (~0x3);\n    void *buf = lv_draw_get_buf(txt_buf_size + pos_conv_len * sizeof(uint16_t));",
+        "base_contents": "    void *buf = lv_draw_get_buf(len + pos_conv_len * sizeof(uint16_t));",
+        "res_region": "    char * buf = lv_mem_buf_get(len + 1);\n    if(buf == NULL) return (uint16_t) -1;\n\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n",
+        "lookback": "    if(buf == NULL) return (uint16_t) -1;",
+        "lookahead": "    if (bidi_txt) *bidi_txt = buf;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 190,
+        "end_line": 199,
+        "merge_gen_region": null,
+        "confidence": 0.8718101382255554,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);",
+        "b_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + txt_buf_size);",
+        "base_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    lv_bidi_process_paragraph(str_in, bidi_txt? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "label": [
+            "deletion",
+            "style_related"
+        ],
+        "start_line": 201,
+        "end_line": 208,
+        "merge_gen_region": null,
+        "confidence": 0.722282886505127,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void *buf = lv_mem_buf_get(len + pos_conv_len * sizeof(uint16_t));\n    if(buf == NULL) return (uint16_t) -1;",
+        "b_contents": "    uint32_t txt_buf_size = len + 1;\n    txt_buf_size = (txt_buf_size + 3) & (~0x3);\n    void *buf = lv_draw_get_buf(txt_buf_size + pos_conv_len * sizeof(uint16_t));",
+        "base_contents": "    void *buf = lv_draw_get_buf(len + pos_conv_len * sizeof(uint16_t));",
+        "res_region": "    char * buf = lv_mem_buf_get(len + 1);\n    if(buf == NULL) return (uint16_t) -1;\n\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n",
+        "lookback": "    if(buf == NULL) return (uint16_t) -1;",
+        "lookahead": "    if (bidi_txt) *bidi_txt = buf;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 241,
+        "merge_gen_region": null,
+        "confidence": 0.8718101382255554,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);\n    lv_bidi_process_paragraph(str_in, bidi_txt ? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "b_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + txt_buf_size);\n    lv_bidi_process_paragraph(str_in, bidi_txt? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "base_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);\n    lv_bidi_process_paragraph(str_in, bidi_txt? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "res_region": "",
+        "lookback": "        if (GET_POS(pos_conv_buf[i]) == logical_pos){",
+        "lookahead": "    for (uint16_t i = 0; i < pos_conv_len; i++){",
+        "label": [
+            "deletion",
+            "style_related"
+        ],
+        "start_line": 243,
+        "end_line": 253,
+        "merge_gen_region": null,
+        "confidence": 0.6941296458244324,
+        "hesitated": true
+    }
+]

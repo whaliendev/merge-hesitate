@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "BOOST_AUTO_TEST_CASE(stQuadraticComplexityTest)\n{\n\tfor (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t{\n\t\tstring arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\tif (arg == \"--quadratic\" || arg == \"--all\")\n\t\t{\n\t\t\tauto start = chrono::steady_clock::now();\n\n\t\t\tdev::test::executeTests(\"stQuadraticComplexityTest\", \"/StateTests\", dev::test::doStateTests);\n\n\t\t\tauto end = chrono::steady_clock::now();\n\t\t\tauto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\tcnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t}\n\t}\n}\n\nBOOST_AUTO_TEST_CASE(stMemoryStressTest)\n{\n\tfor (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t{\n\t\tstring arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\tif (arg == \"--memory\" || arg == \"--all\")\n\t\t{\n\t\t\tauto start = chrono::steady_clock::now();\n\n\t\t\tdev::test::executeTests(\"stMemoryStressTest\", \"/StateTests\", dev::test::doStateTests);\n\n\t\t\tauto end = chrono::steady_clock::now();\n\t\t\tauto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\tcnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t}\n\t}\n}\n\nBOOST_AUTO_TEST_CASE(stSolidityTest)",
+        "b_contents": "BOOST_AUTO_TEST_CASE(stQuadraticComplexityTest)\n{\n\t   for (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t   {\n\t\t\t   string arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\t\t   if (arg == \"--quadratic\" || arg == \"--all\")\n\t\t\t   {\n\t\t\t\t\t   auto start = chrono::steady_clock::now();\n\n\t\t\t\t\t   dev::test::executeTests(\"stQuadraticComplexityTest\", \"/StateTests\", dev::test::doStateTests);\n\n\t\t\t\t\t   auto end = chrono::steady_clock::now();\n\t\t\t\t\t   auto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\t\t\t   cnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t\t   }\n\t   }\n}\n\nBOOST_AUTO_TEST_CASE(stMemoryStressTest)",
+        "base_contents": "BOOST_AUTO_TEST_CASE(stSolidityTest)",
+        "res_region": "BOOST_AUTO_TEST_CASE(stMemoryStressTest)\n{\n\tfor (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t{\n\t\tstring arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\tif (arg == \"--quadratic\" || arg == \"--all\")\n\t\t{\n\t\t\tauto start = chrono::steady_clock::now();\n\t\t\tdev::test::executeTests(\"stQuadraticComplexityTest\", \"/StateTests\", dev::test::doStateTests);\n\t\t\tauto end = chrono::steady_clock::now();\n\t\t\tauto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\tcnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t}\n\t\telse if (arg == \"--memory\" || arg == \"--all\")\n\t\t{\n\t\t\tauto start = chrono::steady_clock::now();\n\t\t\tdev::test::executeTests(\"stMemoryStressTest\", \"/StateTests\", dev::test::doStateTests);\n\t\t\tauto end = chrono::steady_clock::now();\n\t\t\tauto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\tcnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t}\n\t}\n}\n\nBOOST_AUTO_TEST_CASE(stMemoryTest)\n{\n\tdev::test::executeTests(\"stMemoryTest\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stSolidityTest)\n{\n\tdev::test::executeTests(\"stSolidityTest\", \"/StateTests\", dev::test::doStateTests);\n}",
+        "lookback": "{",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 170,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.8713476061820984,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t   for (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t   {\n\t\t\t   string arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\t\t   if (arg == \"--quadratic\" || arg == \"--all\")\n\t\t\t   {\n\t\t\t\t\t   auto start = chrono::steady_clock::now();\n\n\t\t\t\t\t   dev::test::executeTests(\"stQuadraticComplexityTest\", \"/StateTests\", dev::test::doStateTests);\n\n\t\t\t\t\t   auto end = chrono::steady_clock::now();\n\t\t\t\t\t   auto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\t\t\t   cnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t\t   }\n\t   }\n}\n\nBOOST_AUTO_TEST_CASE(stMemoryTest)\n{\n\tdev::test::executeTests(\"stMemoryTest\", \"/StateTests\", dev::test::doStateTests);",
+        "b_contents": "\t   for (int i = 1; i < boost::unit_test::framework::master_test_suite().argc; ++i)\n\t   {\n\t\t\t   string arg = boost::unit_test::framework::master_test_suite().argv[i];\n\t\t\t   if (arg == \"--memory\" || arg == \"--all\")\n\t\t\t   {\n\t\t\t\t\t   auto start = chrono::steady_clock::now();\n\n\t\t\t\t\t   dev::test::executeTests(\"stMemoryStressTest\", \"/StateTests\", dev::test::doStateTests);\n\n\t\t\t\t\t   auto end = chrono::steady_clock::now();\n\t\t\t\t\t   auto duration(chrono::duration_cast<chrono::milliseconds>(end - start));\n\t\t\t\t\t   cnote << \"test duration: \" << duration.count() << \" milliseconds.\\n\";\n\t\t\t   }\n\t   }",
+        "base_contents": "\tdev::test::executeTests(\"stSolidityTest\", \"/StateTests\", dev::test::doStateTests);",
+        "res_region": "",
+        "lookback": "BOOST_AUTO_TEST_CASE(stCreateTest)",
+        "lookahead": "",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 269,
+        "merge_gen_region": "___(*Test \"/Tests devtest::State(\"Test \"/Tests); end cho::eadyclocknow auto(::::_<::>( -));note \" duration \" durationcount() \".\\\"; }",
+        "confidence": 0.9272996783256531,
+        "hesitated": false,
+        "resolved": false
+    }
+]

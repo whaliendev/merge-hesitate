@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if(LV_ABS(delta) < 3) {",
+        "b_contents": "    if(delta < 3) {",
+        "base_contents": "    if(LV_MATH_ABS(delta) < 3) {",
+        "res_region": "    if(delta < 3) {",
+        "lookback": "        hsv.h = 0;",
+        "lookahead": "        hsv.h = 0;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 229,
+        "end_line": 235,
+        "merge_gen_region": null,
+        "confidence": 0.8243075013160706,
+        "hesitated": true
+    }
+]

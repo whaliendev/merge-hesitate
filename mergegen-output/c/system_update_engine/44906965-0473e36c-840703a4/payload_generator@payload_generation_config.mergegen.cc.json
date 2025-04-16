@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    case InstallOperation::PUFFDIFF:\n      return minor >= kPuffdiffMinorPayloadVersion;",
+        "b_contents": "    case InstallOperation::BROTLI_BSDIFF:\n    case InstallOperation::PUFFDIFF:\n      return minor >= kPuffdiffMinorPayloadVersion;",
+        "base_contents": "    case InstallOperation::IMGDIFF:\n      return minor >= kImgdiffMinorPayloadVersion && imgdiff_allowed;",
+        "res_region": "    case InstallOperation::BROTLI_BSDIFF:\n    case InstallOperation::PUFFDIFF:\n      return minor >= kPuffdiffMinorPayloadVersion;",
+        "lookback": "    case InstallOperation::PUFFDIFF:",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 167,
+        "end_line": 177,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9028151631355286,
+        "hesitated": false,
+        "resolved": false
+    }
+]

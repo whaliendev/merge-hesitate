@@ -1,0 +1,260 @@
+[
+    {
+        "a_contents": "    Log(logger_, \"Universal: nothing to do\\n\");",
+        "b_contents": "    LogToBuffer(log_buffer, \"Universal: nothing to do\\n\");",
+        "base_contents": "    Log(options_->info_log, \"Universal: nothing to do\\n\");",
+        "res_region": "    LogToBuffer(log_buffer, \"Universal: nothing to do\\n\");",
+        "lookback": "    return nullptr;",
+        "lookahead": "    return nullptr;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 551,
+        "end_line": 557,
+        "merge_gen_region": null,
+        "confidence": 0.8113321661949158,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  Log(logger_, \"Universal: candidate files(%zu): %s\\n\",\n      version->files_[level].size(), version->LevelFileSummary(&tmp, 0));",
+        "b_contents": "  LogToBuffer(log_buffer, \"Universal: candidate files(%zu): %s\\n\",\n              version->files_[level].size(),\n              version->LevelFileSummary(&tmp, 0));",
+        "base_contents": "  Log(options_->info_log, \"Universal: candidate files(%zu): %s\\n\",\n      version->files_[level].size(),\n      version->LevelFileSummary(&tmp, 0));",
+        "res_region": "  LogToBuffer(log_buffer, \"Universal: candidate files(%zu): %s\\n\",\n              version->files_[level].size(),\n              version->LevelFileSummary(&tmp, 0));",
+        "lookback": "              version->files_[level].size(),",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 561,
+        "end_line": 572,
+        "merge_gen_region": null,
+        "confidence": 0.6940287351608276,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if ((c = PickCompactionUniversalSizeAmp(version, score)) != nullptr) {\n    Log(logger_, \"Universal: compacting for size amp\\n\");",
+        "b_contents": "  if ((c = PickCompactionUniversalSizeAmp(version, score, log_buffer)) !=\n      nullptr) {\n    LogToBuffer(log_buffer, \"Universal: compacting for size amp\\n\");",
+        "base_contents": "  if ((c = PickCompactionUniversalSizeAmp(version, score)) != nullptr) {\n    Log(options_->info_log, \"Universal: compacting for size amp\\n\");",
+        "res_region": "  if ((c = PickCompactionUniversalSizeAmp(version, score, log_buffer)) !=\n      nullptr) {\n    LogToBuffer(log_buffer, \"Universal: compacting for size amp\\n\");",
+        "lookback": "      nullptr) {",
+        "lookahead": "  } else {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 576,
+        "end_line": 586,
+        "merge_gen_region": " (( =ififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.9307003617286682,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if ((c = PickCompactionUniversalReadAmp(version, score, ratio, UINT_MAX)) != nullptr) {\n      Log(logger_, \"Universal: compacting for size ratio\\n\");",
+        "b_contents": "    if ((c = PickCompactionUniversalReadAmp(version, score, ratio, UINT_MAX,\n                                            log_buffer)) != nullptr) {\n      LogToBuffer(log_buffer, \"Universal: compacting for size ratio\\n\");",
+        "base_contents": "    if ((c = PickCompactionUniversalReadAmp(version, score, ratio, UINT_MAX)) != nullptr) {\n      Log(options_->info_log, \"Universal: compacting for size ratio\\n\");",
+        "res_region": "    if ((c = PickCompactionUniversalReadAmp(version, score, ratio, UINT_MAX,\n                                            log_buffer)) != nullptr) {\n      LogToBuffer(log_buffer, \"Universal: compacting for size ratio\\n\");",
+        "lookback": "                                            log_buffer)) != nullptr) {",
+        "lookahead": "    } else {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 592,
+        "end_line": 602,
+        "merge_gen_region": "///ifififififififififififififififififififififififififififoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8887293338775635,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "      if ((c = PickCompactionUniversalReadAmp(version, score, UINT_MAX, num_files)) != nullptr) {\n        Log(logger_, \"Universal: compacting for file num\\n\");",
+        "b_contents": "      if ((c = PickCompactionUniversalReadAmp(\n               version, score, UINT_MAX, num_files, log_buffer)) != nullptr) {\n        Log(options_->info_log, \"Universal: compacting for file num\\n\");",
+        "base_contents": "      if ((c = PickCompactionUniversalReadAmp(version, score, UINT_MAX, num_files)) != nullptr) {\n        Log(options_->info_log, \"Universal: compacting for file num\\n\");",
+        "res_region": "      if ((c = PickCompactionUniversalReadAmp(\n               version, score, UINT_MAX, num_files, log_buffer)) != nullptr) {\n        LogToBuffer(log_buffer, \"Universal: compacting for file num\\n\");",
+        "lookback": "               version, score, UINT_MAX, num_files, log_buffer)) != nullptr) {",
+        "lookahead": "      }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 610,
+        "end_line": 620,
+        "merge_gen_region": null,
+        "confidence": 0.8030380606651306,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      Log(logger_, \"Universal: file %lu[%d] being compacted, skipping\",\n          (unsigned long)f->number, loop);",
+        "b_contents": "      LogToBuffer(log_buffer,\n                  \"Universal: file %lu[%d] being compacted, skipping\",\n                  (unsigned long)f->number, loop);",
+        "base_contents": "      Log(options_->info_log,\n          \"Universal: file %lu[%d] being compacted, skipping\",\n          (unsigned long)f->number, loop);",
+        "res_region": "      LogToBuffer(log_buffer,\n                  \"Universal: file %lu[%d] being compacted, skipping\",\n                  (unsigned long)f->number, loop);",
+        "lookback": "                  \"Universal: file %lu[%d] being compacted, skipping\",",
+        "lookahead": "      f = nullptr;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 704,
+        "end_line": 715,
+        "merge_gen_region": null,
+        "confidence": 0.7971227169036865,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      Log(logger_, \"Universal: Possible candidate file %lu[%d].\",\n          (unsigned long)f->number, loop);",
+        "b_contents": "      LogToBuffer(log_buffer, \"Universal: Possible candidate file %lu[%d].\",\n                  (unsigned long)f->number, loop);",
+        "base_contents": "      Log(options_->info_log, \"Universal: Possible candidate file %lu[%d].\",\n          (unsigned long)f->number, loop);",
+        "res_region": "      LogToBuffer(log_buffer, \"Universal: Possible candidate file %lu[%d].\",\n                  (unsigned long)f->number, loop);",
+        "lookback": "                  (unsigned long)f->number, loop);",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 723,
+        "end_line": 732,
+        "merge_gen_region": null,
+        "confidence": 0.8114563822746277,
+        "hesitated": true
+    },
+    {
+        "a_contents": "       Log(logger_, \"Universal: Skipping file %lu[%d] with size %lu %d\\n\",\n           (unsigned long)f->number, i, (unsigned long)f->file_size,\n           f->being_compacted);",
+        "b_contents": "       LogToBuffer(log_buffer,\n                   \"Universal: Skipping file %lu[%d] with size %lu %d\\n\",\n                   (unsigned long)f->number, i, (unsigned long)f->file_size,\n                   f->being_compacted);",
+        "base_contents": "       Log(options_->info_log,\n           \"Universal: Skipping file %lu[%d] with size %lu %d\\n\",\n           (unsigned long)f->number,\n           i,\n           (unsigned long)f->file_size,\n           f->being_compacted);",
+        "res_region": "       LogToBuffer(log_buffer,\n                   \"Universal: Skipping file %lu[%d] with size %lu %d\\n\",\n                   (unsigned long)f->number, i, (unsigned long)f->file_size,\n                   f->being_compacted);",
+        "lookback": "                   \"Universal: Skipping file %lu[%d] with size %lu %d\\n\",",
+        "lookahead": "      }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 782,
+        "end_line": 798,
+        "merge_gen_region": null,
+        "confidence": 0.8102375268936157,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(logger_, \"Universal: Picking file %lu[%d] with size %lu\\n\",\n        (unsigned long)f->number, i, (unsigned long)f->file_size);",
+        "b_contents": "    LogToBuffer(log_buffer, \"Universal: Picking file %lu[%d] with size %lu\\n\",\n                (unsigned long)f->number, i, (unsigned long)f->file_size);",
+        "base_contents": "    Log(options_->info_log, \"Universal: Picking file %lu[%d] with size %lu\\n\",\n        (unsigned long)f->number,\n        i,\n        (unsigned long)f->file_size);",
+        "res_region": "    LogToBuffer(log_buffer, \"Universal: Picking file %lu[%d] with size %lu\\n\",\n                (unsigned long)f->number, i, (unsigned long)f->file_size);",
+        "lookback": "                (unsigned long)f->number, i, (unsigned long)f->file_size);",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 832,
+        "end_line": 843,
+        "merge_gen_region": null,
+        "confidence": 0.8304312825202942,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(logger_, \"Universal: skipping file %lu[%d] compacted %s\",\n        (unsigned long)f->number, loop,\n        \" cannot be a candidate to reduce size amp.\\n\");",
+        "b_contents": "    LogToBuffer(log_buffer, \"Universal: skipping file %lu[%d] compacted %s\",\n                (unsigned long)f->number, loop,\n                \" cannot be a candidate to reduce size amp.\\n\");",
+        "base_contents": "    Log(options_->info_log, \"Universal: skipping file %lu[%d] compacted %s\",\n        (unsigned long)f->number,\n        loop,\n        \" cannot be a candidate to reduce size amp.\\n\");",
+        "res_region": "    LogToBuffer(log_buffer, \"Universal: skipping file %lu[%d] compacted %s\",\n                (unsigned long)f->number, loop,\n                \" cannot be a candidate to reduce size amp.\\n\");",
+        "lookback": "                (unsigned long)f->number, loop,",
+        "lookahead": "    f = nullptr;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 879,
+        "end_line": 892,
+        "merge_gen_region": null,
+        "confidence": 0.7415688037872314,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  Log(logger_, \"Universal: First candidate file %lu[%d] %s\",\n      (unsigned long)f->number, start_index, \" to reduce size amp.\\n\");",
+        "b_contents": "  LogToBuffer(log_buffer, \"Universal: First candidate file %lu[%d] %s\",\n              (unsigned long)f->number, start_index, \" to reduce size amp.\\n\");",
+        "base_contents": "  Log(options_->info_log, \"Universal: First candidate file %lu[%d] %s\",\n      (unsigned long)f->number,\n      start_index,\n      \" to reduce size amp.\\n\");",
+        "res_region": "  LogToBuffer(log_buffer, \"Universal: First candidate file %lu[%d] %s\",\n              (unsigned long)f->number, start_index, \" to reduce size amp.\\n\");",
+        "lookback": "              (unsigned long)f->number, start_index, \" to reduce size amp.\\n\");",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 899,
+        "end_line": 910,
+        "merge_gen_region": null,
+        "confidence": 0.5768657922744751,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      Log(logger_, \"Universal: Possible candidate file %lu[%d] %s.\",\n          (unsigned long)f->number, loop,",
+        "b_contents": "      LogToBuffer(\n          log_buffer, \"Universal: Possible candidate file %lu[%d] %s.\",\n          (unsigned long)f->number, loop,",
+        "base_contents": "      Log(options_->info_log,\n          \"Universal: Possible candidate file %lu[%d] %s.\",\n          (unsigned long)f->number,\n          loop,",
+        "res_region": "      LogToBuffer(\n          log_buffer, \"Universal: Possible candidate file %lu[%d] %s.\",\n          (unsigned long)f->number, loop,",
+        "lookback": "          log_buffer, \"Universal: Possible candidate file %lu[%d] %s.\",",
+        "lookahead": "          \" is already being compacted. No size amp reduction possible.\\n\");",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 918,
+        "end_line": 930,
+        "merge_gen_region": null,
+        "confidence": 0.7940092086791992,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(logger_,\n        \"Universal: size amp not needed. newer-files-total-size %lu \"\n        \"earliest-file-size %lu\",\n        (unsigned long)candidate_size, (unsigned long)earliest_file_size);",
+        "b_contents": "    LogToBuffer(log_buffer,\n                \"Universal: size amp not needed. newer-files-total-size %lu \"\n                \"earliest-file-size %lu\",\n                (unsigned long)candidate_size,\n                (unsigned long)earliest_file_size);",
+        "base_contents": "    Log(options_->info_log,\n        \"Universal: size amp not needed. newer-files-total-size %lu \"\n        \"earliest-file-size %lu\",\n        (unsigned long)candidate_size,\n        (unsigned long)earliest_file_size);",
+        "res_region": "    LogToBuffer(log_buffer,\n                \"Universal: size amp not needed. newer-files-total-size %lu \"\n                \"earliest-file-size %lu\",\n                (unsigned long)candidate_size,\n                (unsigned long)earliest_file_size);",
+        "lookback": "                \"Universal: size amp not needed. newer-files-total-size %lu \"",
+        "lookahead": "    return nullptr;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 947,
+        "end_line": 964,
+        "merge_gen_region": null,
+        "confidence": 0.8275519609451294,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(logger_,\n        \"Universal: size amp needed. newer-files-total-size %lu \"\n        \"earliest-file-size %lu\",\n        (unsigned long)candidate_size, (unsigned long)earliest_file_size);",
+        "b_contents": "    LogToBuffer(log_buffer,\n                \"Universal: size amp needed. newer-files-total-size %lu \"\n                \"earliest-file-size %lu\",\n                (unsigned long)candidate_size,\n                (unsigned long)earliest_file_size);",
+        "base_contents": "    Log(options_->info_log,\n        \"Universal: size amp needed. newer-files-total-size %lu \"\n        \"earliest-file-size %lu\",\n        (unsigned long)candidate_size,\n        (unsigned long)earliest_file_size);",
+        "res_region": "    LogToBuffer(log_buffer,\n                \"Universal: size amp needed. newer-files-total-size %lu \"\n                \"earliest-file-size %lu\",\n                (unsigned long)candidate_size,\n                (unsigned long)earliest_file_size);",
+        "lookback": "                \"Universal: size amp needed. newer-files-total-size %lu \"",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 967,
+        "end_line": 984,
+        "merge_gen_region": null,
+        "confidence": 0.8507863283157349,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(logger_, \"Universal: size amp picking file %lu[%d] with size %lu\",\n        (unsigned long)f->number, index, (unsigned long)f->file_size);",
+        "b_contents": "    LogToBuffer(log_buffer,\n                \"Universal: size amp picking file %lu[%d] with size %lu\",\n                (unsigned long)f->number, index, (unsigned long)f->file_size);",
+        "base_contents": "    Log(options_->info_log,\n        \"Universal: size amp picking file %lu[%d] with size %lu\",\n        (unsigned long)f->number,\n        index,\n        (unsigned long)f->file_size);",
+        "res_region": "    LogToBuffer(log_buffer,\n                \"Universal: size amp picking file %lu[%d] with size %lu\",\n                (unsigned long)f->number, index, (unsigned long)f->file_size);",
+        "lookback": "                \"Universal: size amp picking file %lu[%d] with size %lu\",",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 998,
+        "end_line": 1011,
+        "merge_gen_region": " ComputeBufferlogger \"iversaloutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8950170278549194,
+        "hesitated": false,
+        "resolved": false
+    }
+]

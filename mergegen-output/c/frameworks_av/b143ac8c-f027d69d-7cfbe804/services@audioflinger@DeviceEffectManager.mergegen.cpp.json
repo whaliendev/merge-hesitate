@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "#define LOG_TAG \"DeviceEffectManager\"",
+        "b_contents": "\n#define LOG_TAG \"DeviceEffectManager\"",
+        "base_contents": "\n#define LOG_TAG \"AudioFlinger::DeviceEffectManager\"",
+        "res_region": "#define LOG_TAG \"DeviceEffectManager\"",
+        "lookback": "//#define LOG_NDEBUG 0",
+        "lookahead": "//#define LOG_NDEBUG 0",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 17,
+        "end_line": 25,
+        "merge_gen_region": null,
+        "confidence": 0.7164961695671082,
+        "hesitated": true
+    },
+    {
+        "a_contents": "DeviceEffectManager::DeviceEffectManager(\n        const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback)\n    : mAfDeviceEffectManagerCallback(afDeviceEffectManagerCallback),\n      mMyCallback(new DeviceEffectManagerCallback(*this)) {}\n\nvoid DeviceEffectManager::onFirstRef() {\n    mAfDeviceEffectManagerCallback->getPatchCommandThread()->addListener(this);\n}\n\nstatus_t DeviceEffectManager::addEffectToHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAfDeviceEffectManagerCallback->addEffectToHal(device, effect);\n};\n\nstatus_t DeviceEffectManager::removeEffectFromHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAfDeviceEffectManagerCallback->removeEffectFromHal(device, effect);\n};\n\nvoid DeviceEffectManager::onCreateAudioPatch(audio_patch_handle_t handle,",
+        "b_contents": "DeviceEffectManager::DeviceEffectManager(AudioFlinger& audioFlinger)\n    : mAudioFlinger(audioFlinger),\n      mMyCallback(new DeviceEffectManagerCallback(*this)) {}\n\nvoid DeviceEffectManager::onFirstRef() {\n    mAudioFlinger.mPatchCommandThread->addListener(this);\n}\n\nstatus_t DeviceEffectManager::addEffectToHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAudioFlinger.addEffectToHal(device, effect);\n};\n\nstatus_t DeviceEffectManager::removeEffectFromHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAudioFlinger.removeEffectFromHal(device, effect);\n};\n\nvoid DeviceEffectManager::onCreateAudioPatch(audio_patch_handle_t handle,",
+        "base_contents": "void AudioFlinger::DeviceEffectManager::onCreateAudioPatch(audio_patch_handle_t handle,",
+        "res_region": "DeviceEffectManager::DeviceEffectManager(\n        const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback)\n    : mAfDeviceEffectManagerCallback(afDeviceEffectManagerCallback),\n      mMyCallback(new DeviceEffectManagerCallback(*this)) {}\n\nvoid DeviceEffectManager::onFirstRef() {\n    mAfDeviceEffectManagerCallback->getPatchCommandThread()->addListener(this);\n}\n\nstatus_t DeviceEffectManager::addEffectToHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAfDeviceEffectManagerCallback->addEffectToHal(device, effect);\n};\n\nstatus_t DeviceEffectManager::removeEffectFromHal(const struct audio_port_config* device,\n        const sp<EffectHalInterface>& effect) {\n    return mAfDeviceEffectManagerCallback->removeEffectFromHal(device, effect);\n};\n\nvoid DeviceEffectManager::onCreateAudioPatch(audio_patch_handle_t handle,",
+        "lookback": "        const sp<IAfDeviceEffectManagerCallback>& afDeviceEffectManagerCallback)",
+        "lookahead": "        const IAfPatchPanel::Patch& patch) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 45,
+        "end_line": 88,
+        "merge_gen_region": null,
+        "confidence": 0.8164648413658142,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    const bool locked = afutils::dumpTryLock(mLock);",
+        "b_contents": "    const bool locked = AudioFlinger::dumpTryLock(mLock);",
+        "base_contents": "    const bool locked = dumpTryLock(mLock);",
+        "res_region": "    const bool locked = afutils::dumpTryLock(mLock);",
+        "lookback": "    if (!locked) {",
+        "lookahead": "    if (!locked) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 207,
+        "end_line": 213,
+        "merge_gen_region": " const locked constALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHA constALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHAALPHA",
+        "confidence": 0.9215925335884094,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "bool DeviceEffectManagerCallback::isAudioPolicyReady() const {\n    return mManager.afDeviceEffectManagerCallback()->isAudioPolicyReady();\n}\n\nint DeviceEffectManagerCallback::newEffectId() const {\n    return mManager.afDeviceEffectManagerCallback()->nextUniqueId(AUDIO_UNIQUE_ID_USE_EFFECT);\n}\n",
+        "b_contents": "bool DeviceEffectManagerCallback::isAudioPolicyReady() const {\n    return mManager.audioFlinger().isAudioPolicyReady();\n}\n\nint DeviceEffectManagerCallback::newEffectId() const {\n    return mManager.audioFlinger().nextUniqueId(AUDIO_UNIQUE_ID_USE_EFFECT);\n}\n",
+        "base_contents": "",
+        "res_region": "bool DeviceEffectManagerCallback::isAudioPolicyReady() const {\n    return mManager.afDeviceEffectManagerCallback()->isAudioPolicyReady();\n}\n\nint DeviceEffectManagerCallback::newEffectId() const {\n    return mManager.afDeviceEffectManagerCallback()->nextUniqueId(AUDIO_UNIQUE_ID_USE_EFFECT);\n}\n",
+        "lookback": "    return mManager.afDeviceEffectManagerCallback()->isAudioPolicyReady();",
+        "lookahead": "} // namespace android",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 263,
+        "end_line": 282,
+        "merge_gen_region": null,
+        "confidence": 0.8038771748542786,
+        "hesitated": true
+    }
+]

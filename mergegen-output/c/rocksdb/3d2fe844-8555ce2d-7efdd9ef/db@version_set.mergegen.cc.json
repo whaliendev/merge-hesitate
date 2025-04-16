@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    const FileMetaData* meta_file =\n        reinterpret_cast<const FileMetaData*>(level_iter->value().data());\n\n    may_match = cfd_->table_cache()->PrefixMayMatch(\n        options, cfd_->internal_comparator(), *meta_file, internal_prefix,\n        nullptr);",
+        "b_contents": "    const EncodedFileMetaData* encoded_meta =\n        reinterpret_cast<const EncodedFileMetaData*>(\n            level_iter->value().data());\n    FileMetaData meta(encoded_meta->number, encoded_meta->file_size);\n    meta.table_reader_handle = encoded_meta->table_reader_handle;\n    may_match = vset_->table_cache_->PrefixMayMatch(options, vset_->icmp_, meta,\n                                                    internal_prefix, nullptr);",
+        "base_contents": "    const FileMetaData* meta_file =\n        reinterpret_cast<const FileMetaData*>(level_iter->value().data());\n\n    may_match = vset_->table_cache_->PrefixMayMatch(\n        options, vset_->icmp_, *meta_file, internal_prefix, nullptr);",
+        "res_region": "    const EncodedFileMetaData* encoded_meta =\n        reinterpret_cast<const EncodedFileMetaData*>(\n            level_iter->value().data());\n    FileMetaData meta(encoded_meta->number, encoded_meta->file_size);\n    meta.table_reader_handle = encoded_meta->table_reader_handle;\n    may_match = cfd_->table_cache()->PrefixMayMatch(\n        options, cfd_->internal_comparator(), meta, internal_prefix, nullptr);",
+        "lookback": "        reinterpret_cast<const EncodedFileMetaData*>(",
+        "lookahead": "  }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 255,
+        "end_line": 276,
+        "merge_gen_region": null,
+        "confidence": 0.7816330194473267,
+        "hesitated": true
+    }
+]

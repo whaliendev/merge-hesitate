@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            \"Corruption: VersionEdit: column family already has \"\n            \"more levels than specified\");",
+        "b_contents": "            \"Invalid argument: db has more levels than options.num_levels\");",
+        "base_contents": "            \"Corruption: VersionEdit: db already has \"\n            \"more levels than options.num_levels\");",
+        "res_region": "            \"Invalid argument: db has more levels than options.num_levels\");",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 766,
+        "end_line": 774,
+        "merge_gen_region": null,
+        "confidence": 0.7601131796836853,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  for (auto& optimizer : optimizers_) {\n    if (!optimizer->Init()) {\n      AERROR << common::util::StrCat(\"Init optimizer[\", optimizer->name(),\n                                     \"] failed.\");\n      return Status(ErrorCode::PLANNING_ERROR, \"Init optimizer failed.\");\n    }\n  }",
+        "b_contents": "  for (auto& optimizer : optimizers_) {\n    if (!optimizer->Init()) {\n      std::string msg(common::util::StrCat(\"Init optimizer[\", optimizer->name(),\n                                     \"] failed.\"));\n      AERROR << msg;\n      return Status(ErrorCode::PLANNING_ERROR, msg);\n    }\n  }",
+        "base_contents": "",
+        "res_region": "  for (auto& optimizer : optimizers_) {\n    if (!optimizer->Init()) {\n      std::string msg(common::util::StrCat(\"Init optimizer[\", optimizer->name(),\n                                     \"] failed.\"));\n      AERROR << msg;\n      return Status(ErrorCode::PLANNING_ERROR, msg);\n    }\n  }",
+        "lookback": "    if (!optimizer->Init()) {",
+        "lookahead": "  return Status::OK();",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 70,
+        "end_line": 88,
+        "merge_gen_region": null,
+        "confidence": 0.8193113803863525,
+        "hesitated": true
+    }
+]

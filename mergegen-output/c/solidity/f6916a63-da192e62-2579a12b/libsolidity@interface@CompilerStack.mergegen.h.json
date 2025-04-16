@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <libsolidity/interface/DebugSettings.h>",
+        "b_contents": "#include <libsolidity/formal/SolverInterface.h>",
+        "base_contents": "",
+        "res_region": "#include <libsolidity/interface/DebugSettings.h>\n#include <libsolidity/formal/SolverInterface.h>",
+        "lookback": "#include <libsolidity/formal/SolverInterface.h>",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.6542835235595703,
+        "hesitated": true
+    }
+]

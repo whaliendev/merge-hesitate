@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    vcodec = SrsVideoCodecIdReserved;\n    acodec = SrsAudioCodecIdReserved1;",
+        "b_contents": "    ready = false;\n    vcodec = SrsCodecVideoReserved;\n    acodec = SrsCodecAudioReserved1;",
+        "base_contents": "    vcodec = SrsCodecVideoReserved;\n    acodec = SrsCodecAudioReserved1;",
+        "res_region": "    ready = false;\n    vcodec = SrsVideoCodecIdReserved;\n    acodec = SrsAudioCodecIdReserved1;",
+        "lookback": "    vcodec = SrsVideoCodecIdReserved;",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 238,
+        "end_line": 248,
+        "merge_gen_region": null,
+        "confidence": 0.836184024810791,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ",
+        "b_contents": "    \n    // When PAT and PMT are writen, the context is ready now.\n    ready = true;\n",
+        "base_contents": "",
+        "res_region": "    \n    // When PAT and PMT are writen, the context is ready now.\n    ready = true;\n",
+        "lookback": "    // When PAT and PMT are writen, the context is ready now.",
+        "lookahead": "    return ret;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 454,
+        "end_line": 463,
+        "merge_gen_region": null,
+        "confidence": 0.7994064092636108,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ",
+        "b_contents": "    \n    // Sometimes, the context is not ready(PAT/PMT write failed), error in this situation.\n    if (!ready) {\n        ret = ERROR_TS_CONTEXT_NOT_READY;\n        srs_error(\"TS: context not ready, ret=%d\", ret);\n        return ret;\n    }\n",
+        "base_contents": "",
+        "res_region": "    \n    // Sometimes, the context is not ready(PAT/PMT write failed), error in this situation.\n    if (!ready) {\n        ret = ERROR_TS_CONTEXT_NOT_READY;\n        srs_error(\"TS: context not ready, ret=%d\", ret);\n        return ret;\n    }\n",
+        "lookback": "    // Sometimes, the context is not ready(PAT/PMT write failed), error in this situation.",
+        "lookahead": "    if (msg->payload->length() == 0) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 470,
+        "end_line": 483,
+        "merge_gen_region": null,
+        "confidence": 0.8146502375602722,
+        "hesitated": true
+    }
+]

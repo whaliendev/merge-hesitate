@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nCC_DEPRECATED_ATTRIBUTE std::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len /*= -1*/)\n{\n    if (len == -1)\n    {\n        return StringUtf8ToWideChar(pszUtf8Str);\n    }\n    else\n    {\n        std::wstring ret;\n        do\n        {\n            if (!pszUtf8Str || !len) break;\n\n            // get UTF16 string length\n            int wLen = MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, 0, 0);\n            if (0 == wLen || 0xFFFD == wLen) break;\n\n            // convert string  \n            wchar_t * pwszStr = new wchar_t[wLen + 1];\n            if (!pwszStr) break;\n            pwszStr[wLen] = 0;\n            MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, pwszStr, wLen + 1);\n            ret = pwszStr;\n            CC_SAFE_DELETE_ARRAY(pwszStr);\n        } while (0);\n        return ret;\n    }\n}\n\nCC_DEPRECATED_ATTRIBUTE std::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr)\n{\n    return StringWideCharToUtf8(pwszStr);\n}\n\n\nstd::wstring StringUtf8ToWideChar(const std::string& strUtf8)",
+        "b_contents": "bool isWindowsPhone()\n{\n#if _MSC_VER >= 1900\n    if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent(\"Windows.Phone.UI.Input.HardwareButtons\"))\n    {\n        return true;\n    }\n#elif (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP)\n    return true;\n#else\n    return false;\n#endif\n}\n\nstd::wstring CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len/* = -1*/)",
+        "base_contents": "std::wstring CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len/* = -1*/)",
+        "res_region": "bool isWindowsPhone()\n{\n#if _MSC_VER >= 1900\n    if (Windows::Foundation::Metadata::ApiInformation::IsTypePresent(\"Windows.Phone.UI.Input.HardwareButtons\"))\n    {\n        return true;\n    }\n#elif (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP)\n    return true;\n#else\n    return false;\n#endif\n}\n\nCC_DEPRECATED_ATTRIBUTE std::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len /*= -1*/)\n{\n    if (len == -1)\n    {\n        return StringUtf8ToWideChar(pszUtf8Str);\n    }\n    else\n    {\n        std::wstring ret;\n        do\n        {\n            if (!pszUtf8Str || !len) break;\n\n            // get UTF16 string length\n            int wLen = MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, 0, 0);\n            if (0 == wLen || 0xFFFD == wLen) break;\n\n            // convert string  \n            wchar_t * pwszStr = new wchar_t[wLen + 1];\n            if (!pwszStr) break;\n            pwszStr[wLen] = 0;\n            MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, pwszStr, wLen + 1);\n            ret = pwszStr;\n            CC_SAFE_DELETE_ARRAY(pwszStr);\n        } while (0);\n        return ret;\n    }\n}\n\nCC_DEPRECATED_ATTRIBUTE std::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr)\n{\n    return StringWideCharToUtf8(pwszStr);\n}\n\n\nstd::wstring StringUtf8ToWideChar(const std::string& strUtf8)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 49,
+        "end_line": 105,
+        "merge_gen_region": null,
+        "confidence": 0.7505488395690918,
+        "hesitated": true
+    }
+]

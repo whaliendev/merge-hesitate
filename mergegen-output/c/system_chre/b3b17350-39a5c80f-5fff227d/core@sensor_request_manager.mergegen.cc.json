@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void SensorRequestManager::handleSensorEvent(SensorType sensorType,\n                                             void *event) {\n  uint16_t eventType = getSampleEventTypeForSensorType(sensorType);\n  // Only allow dropping continuous sensor events since losing one-shot or\n  // on-change events could result in nanoapps stuck in a bad state.\n  if (sensorTypeIsContinuous(sensorType)) {\n    EventLoopManagerSingleton::get()->getEventLoop().postLowPriorityEventOrFree(\n        eventType, event, sensorDataEventFree);\n  } else {\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        eventType, event, sensorDataEventFree);\n  }\n}\n\nvoid SensorRequestManager::logStateToBuffer(DebugDumpWrapper &debugDump) const {\n  debugDump.print(\"\\nSensors:\\n\");",
+        "b_contents": "void SensorRequestManager::handleSensorEvent(SensorType sensorType,\n                                             void *event) {\n  uint16_t eventType = getSampleEventTypeForSensorType(sensorType);\n  // Only allow dropping continuous sensor events since losing one-shot or\n  // on-change events could result in nanoapps stuck in a bad state.\n  if (sensorTypeIsContinuous(sensorType)) {\n    EventLoopManagerSingleton::get()->getEventLoop().postLowPriorityEventOrFree(\n        eventType, event, sensorDataEventFree);\n  } else {\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        eventType, event, sensorDataEventFree);\n  }\n}\n\nvoid SensorRequestManager::logStateToBuffer(char *buffer, size_t *bufferPos,\n                                            size_t bufferSize) const {\n  debugDumpPrint(buffer, bufferPos, bufferSize, \"\\nSensors:\\n\");",
+        "base_contents": "void SensorRequestManager::logStateToBuffer(char *buffer, size_t *bufferPos,\n                                            size_t bufferSize) const {\n  debugDumpPrint(buffer, bufferPos, bufferSize, \"\\nSensors:\\n\");",
+        "res_region": "void SensorRequestManager::handleSensorEvent(SensorType sensorType,\n                                             void *event) {\n  uint16_t eventType = getSampleEventTypeForSensorType(sensorType);\n  // Only allow dropping continuous sensor events since losing one-shot or\n  // on-change events could result in nanoapps stuck in a bad state.\n  if (sensorTypeIsContinuous(sensorType)) {\n    EventLoopManagerSingleton::get()->getEventLoop().postLowPriorityEventOrFree(\n        eventType, event, sensorDataEventFree);\n  } else {\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        eventType, event, sensorDataEventFree);\n  }\n}\n\nvoid SensorRequestManager::logStateToBuffer(DebugDumpWrapper &debugDump) const {\n  debugDump.print(\"\\nSensors:\\n\");",
+        "lookback": "                                             void *event) {",
+        "lookahead": "  for (uint8_t i = 0; i < static_cast<uint8_t>(SensorType::SENSOR_TYPE_COUNT);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 427,
+        "end_line": 466,
+        "merge_gen_region": null,
+        "confidence": 0.83717942237854,
+        "hesitated": true
+    }
+]

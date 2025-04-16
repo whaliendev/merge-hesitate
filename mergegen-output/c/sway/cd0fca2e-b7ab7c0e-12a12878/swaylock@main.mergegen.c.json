@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "\t\tsurface->output_global_name = name;\n\t\tsurface->image = state->background_image;\n\t\twl_output_add_listener(surface->output, &output_listener, surface);",
+        "b_contents": "\t\twl_output_add_listener(surface->output, &_wl_output_listener, surface);",
+        "base_contents": "\t\twl_output_add_listener(surface->output, &output_listener, surface);",
+        "res_region": "\t\tsurface->output_global_name = name;\n\t\tsurface->image = state->background_image;\n\t\twl_output_add_listener(surface->output, &_wl_output_listener, surface);",
+        "lookback": "\t\tsurface->image = state->background_image;",
+        "lookahead": "\t\twl_list_insert(&state->surfaces, &surface->link);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 222,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.8440181016921997,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\"  -f, --daemonize                Detach from the controlling terminal.\\n\"\n\t\t\"  --socket <socket>              Use the specified socket.\\n\";",
+        "b_contents": "\t\t\"  -f, --daemonize                Detach from the controlling terminal.\\n\";",
+        "base_contents": "\t\t\"  -f, --daemonize                Detach from the controlling terminal.\\n\" \n\t\t\"  --socket <socket>              Use the specified socket.\\n\";",
+        "res_region": "\t\t\"  -f, --daemonize                Detach from the controlling terminal.\\n\";",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 347,
+        "end_line": 355,
+        "merge_gen_region": null,
+        "confidence": 0.6807354688644409,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\tstate.args = args;\n\twl_list_init(&state.images);",
+        "base_contents": "\tcairo_surface_t *background_image = NULL;\n\tstate.args = args;",
+        "res_region": "\twl_list_init(&state.images);\n",
+        "lookback": "",
+        "lookahead": "\twlr_log_init(L_DEBUG, NULL);",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 362,
+        "end_line": 370,
+        "merge_gen_region": null,
+        "confidence": 0.551055371761322,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t// TODO: Multiple background images (bleh)\n\t\t\tstate.background_image = load_background_image(optarg);\n\t\t\tif (!state.background_image) {\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\tstate.args.mode = BACKGROUND_MODE_FILL;",
+        "b_contents": "\t\t\tload_image(optarg, &state);",
+        "base_contents": "\t\t\t// TODO: Multiple background images (bleh)\n\t\t\tbackground_image = load_background_image(optarg);\n\t\t\tif (!background_image) {\n\t\t\t\treturn 1;\n\t\t\t}\n\t\t\tstate.args.mode = BACKGROUND_MODE_FILL;",
+        "res_region": "\t\t\tload_image(optarg, &state);",
+        "lookback": "\t\t\tbreak;",
+        "lookahead": "\t\t\tbreak;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 387,
+        "end_line": 403,
+        "merge_gen_region": null,
+        "confidence": 0.3839104175567627,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tzwlr_input_inhibit_manager_v1_get_inhibitor(state.input_inhibit_manager);\n",
+        "b_contents": "\tif (state.zxdg_output_manager) {\n\t\tstruct swaylock_surface *surface;\n\t\twl_list_for_each(surface, &state.surfaces, link) {\n\t\t\tsurface->xdg_output = zxdg_output_manager_v1_get_xdg_output(\n\t\t\t\t\t\tstate.zxdg_output_manager, surface->output);\n\t\t\tzxdg_output_v1_add_listener(\n\t\t\t\t\tsurface->xdg_output, &_xdg_output_listener, surface);\n\t\t}\n\t\twl_display_roundtrip(state.display);\n\t} else {\n\t\twlr_log(L_INFO, \"Compositor does not support zxdg output manager, \"\n\t\t\t\t\"images assigned to named outputs will not work\");\n\t}\n",
+        "base_contents": "",
+        "res_region": "\tzwlr_input_inhibit_manager_v1_get_inhibitor(state.input_inhibit_manager);\n\n\tif (state.zxdg_output_manager) {\n\t\tstruct swaylock_surface *surface;\n\t\twl_list_for_each(surface, &state.surfaces, link) {\n\t\t\tsurface->xdg_output = zxdg_output_manager_v1_get_xdg_output(\n\t\t\t\t\t\tstate.zxdg_output_manager, surface->output);\n\t\t\tzxdg_output_v1_add_listener(\n\t\t\t\t\tsurface->xdg_output, &_xdg_output_listener, surface);\n\t\t}\n\t\twl_display_roundtrip(state.display);\n\t} else {\n\t\twlr_log(L_INFO, \"Compositor does not support zxdg output manager, \"\n\t\t\t\t\"images assigned to named outputs will not work\");\n\t}\n",
+        "lookback": "",
+        "lookahead": "\tstruct swaylock_surface *surface;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 461,
+        "end_line": 480,
+        "merge_gen_region": null,
+        "confidence": 0.8782238364219666,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tcreate_layer_surface(surface);",
+        "b_contents": "\t\tsurface->image = select_image(&state, surface);\n\n\t\tsurface->surface = wl_compositor_create_surface(state.compositor);\n\t\tassert(surface->surface);\n\n\t\tsurface->layer_surface = zwlr_layer_shell_v1_get_layer_surface(\n\t\t\t\tstate.layer_shell, surface->surface, surface->output,\n\t\t\t\tZWLR_LAYER_SHELL_V1_LAYER_OVERLAY, \"lockscreen\");\n\t\tassert(surface->layer_surface);\n\n\t\tzwlr_layer_surface_v1_set_size(surface->layer_surface, 0, 0);\n\t\tzwlr_layer_surface_v1_set_anchor(surface->layer_surface,\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_TOP |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_RIGHT |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_BOTTOM |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_LEFT);\n\t\tzwlr_layer_surface_v1_set_exclusive_zone(surface->layer_surface, -1);\n\t\tzwlr_layer_surface_v1_set_keyboard_interactivity(\n\t\t\t\tsurface->layer_surface, true);\n\t\tzwlr_layer_surface_v1_add_listener(surface->layer_surface,\n\t\t\t\t&layer_surface_listener, surface);\n\t\twl_surface_commit(surface->surface);\n\t\twl_display_roundtrip(state.display);",
+        "base_contents": "\t\tsurface->image = background_image;\n\n\t\tsurface->surface = wl_compositor_create_surface(state.compositor);\n\t\tassert(surface->surface);\n\n\t\tsurface->layer_surface = zwlr_layer_shell_v1_get_layer_surface(\n\t\t\t\tstate.layer_shell, surface->surface, surface->output,\n\t\t\t\tZWLR_LAYER_SHELL_V1_LAYER_OVERLAY, \"lockscreen\");\n\t\tassert(surface->layer_surface);\n\n\t\tzwlr_layer_surface_v1_set_size(surface->layer_surface, 0, 0);\n\t\tzwlr_layer_surface_v1_set_anchor(surface->layer_surface,\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_TOP |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_RIGHT |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_BOTTOM |\n\t\t\t\tZWLR_LAYER_SURFACE_V1_ANCHOR_LEFT);\n\t\tzwlr_layer_surface_v1_set_exclusive_zone(surface->layer_surface, -1);\n\t\tzwlr_layer_surface_v1_set_keyboard_interactivity(\n\t\t\t\tsurface->layer_surface, true);\n\t\tzwlr_layer_surface_v1_add_listener(surface->layer_surface,\n\t\t\t\t&layer_surface_listener, surface);\n\t\twl_surface_commit(surface->surface);\n\t\twl_display_roundtrip(state.display);",
+        "res_region": "\t\tcreate_layer_surface(surface);",
+        "lookback": "\t}",
+        "lookahead": "\t}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 483,
+        "end_line": 533,
+        "merge_gen_region": null,
+        "confidence": 0.5894680023193359,
+        "hesitated": true
+    }
+]

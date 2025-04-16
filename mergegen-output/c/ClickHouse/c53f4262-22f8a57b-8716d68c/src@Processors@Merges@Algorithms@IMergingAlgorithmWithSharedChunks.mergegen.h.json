@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    size_t prev_unequal_column = 0;",
+        "b_contents": "    MergedStats getMergedStats() const override { return merged_data->getMergedStats(); }\n",
+        "base_contents": "",
+        "res_region": "    size_t prev_unequal_column = 0;\n    MergedStats getMergedStats() const override { return merged_data->getMergedStats(); }\n    ",
+        "lookback": "    MergedStats getMergedStats() const override { return merged_data->getMergedStats(); }",
+        "lookahead": "private:",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 18,
+        "end_line": 24,
+        "merge_gen_region": null,
+        "confidence": 0.5976496338844299,
+        "hesitated": true
+    }
+]

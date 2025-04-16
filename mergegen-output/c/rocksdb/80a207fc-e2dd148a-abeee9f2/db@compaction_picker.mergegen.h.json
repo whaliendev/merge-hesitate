@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  UniversalCompactionPicker(const ColumnFamilyOptions* options,\n                            const InternalKeyComparator* icmp, Logger* logger)\n      : CompactionPicker(options, icmp, logger) {}\n  virtual Compaction* PickCompaction(Version* version) override;",
+        "b_contents": "  UniversalCompactionPicker(const Options* options,\n                            const InternalKeyComparator* icmp)\n      : CompactionPicker(options, icmp) {}\n  virtual Compaction* PickCompaction(Version* version,\n                                     LogBuffer* log_buffer) override;",
+        "base_contents": "  UniversalCompactionPicker(const Options* options,\n                            const InternalKeyComparator* icmp)\n      : CompactionPicker(options, icmp) {}\n  virtual Compaction* PickCompaction(Version* version) override;",
+        "res_region": "  UniversalCompactionPicker(const ColumnFamilyOptions* options,\n                            const InternalKeyComparator* icmp, Logger* logger)\n      : CompactionPicker(options, icmp, logger) {}\n  virtual Compaction* PickCompaction(Version* version,\n                                     LogBuffer* log_buffer) override;",
+        "lookback": "                            const InternalKeyComparator* icmp, Logger* logger)",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 132,
+        "end_line": 148,
+        "merge_gen_region": null,
+        "confidence": 0.6474613547325134,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  LevelCompactionPicker(const ColumnFamilyOptions* options,\n                        const InternalKeyComparator* icmp, Logger* logger)\n      : CompactionPicker(options, icmp, logger) {}\n  virtual Compaction* PickCompaction(Version* version) override;",
+        "b_contents": "  LevelCompactionPicker(const Options* options,\n                        const InternalKeyComparator* icmp)\n      : CompactionPicker(options, icmp) {}\n  virtual Compaction* PickCompaction(Version* version,\n                                     LogBuffer* log_buffer) override;",
+        "base_contents": "  LevelCompactionPicker(const Options* options,\n                        const InternalKeyComparator* icmp)\n      : CompactionPicker(options, icmp) {}\n  virtual Compaction* PickCompaction(Version* version) override;",
+        "res_region": "  LevelCompactionPicker(const ColumnFamilyOptions* options,\n                        const InternalKeyComparator* icmp, Logger* logger)\n      : CompactionPicker(options, icmp, logger) {}\n  virtual Compaction* PickCompaction(Version* version,\n                                     LogBuffer* log_buffer) override;",
+        "lookback": "                        const InternalKeyComparator* icmp, Logger* logger)",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 164,
+        "end_line": 180,
+        "merge_gen_region": null,
+        "confidence": 0.6672627925872803,
+        "hesitated": true
+    }
+]

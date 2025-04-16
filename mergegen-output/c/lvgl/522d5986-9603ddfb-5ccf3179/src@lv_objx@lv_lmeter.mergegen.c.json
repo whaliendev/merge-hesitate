@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        lv_obj_refresh_ext_size(lmeter);\n    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        const lv_style_t * style = lv_lmeter_get_style(lmeter);\n        lmeter->ext_size   = LV_MATH_MAX(lmeter->ext_size, style->line.width);",
+        "b_contents": "        lv_obj_refresh_ext_draw_pad(lmeter);\n    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_style_t * style = lv_lmeter_get_style(lmeter);\n        lmeter->ext_draw_pad   = LV_MATH_MAX(lmeter->ext_draw_pad, style->line.width);",
+        "base_contents": "        lv_obj_refresh_ext_size(lmeter);\n    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        lv_style_t * style = lv_lmeter_get_style(lmeter);\n        lmeter->ext_size   = LV_MATH_MAX(lmeter->ext_size, style->line.width);",
+        "res_region": "        lv_obj_refresh_ext_draw_pad(lmeter);\n    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        const lv_style_t * style = lv_lmeter_get_style(lmeter);\n        lmeter->ext_draw_pad   = LV_MATH_MAX(lmeter->ext_draw_pad, style->line.width);",
+        "lookback": "    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {",
+        "lookahead": "    } else if(sign == LV_SIGNAL_GET_TYPE) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 342,
+        "end_line": 357,
+        "merge_gen_region": null,
+        "confidence": 0.770570695400238,
+        "hesitated": true
+    }
+]

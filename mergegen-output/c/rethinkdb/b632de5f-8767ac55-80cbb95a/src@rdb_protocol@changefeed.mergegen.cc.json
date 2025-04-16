@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            if (include_initial_vals) {\n                if (include_states) els.push_back(initializing_datum());\n                for (auto &&it : active_data) {\n                    els.push_back(vals_to_change(datum_t(), (*it)->second.second, true));\n                }",
+        "b_contents": "            for (auto it = active_data.rbegin(); it != active_data.rend(); ++it) {\n                els.push_back(\n                    datum_t(std::map<datum_string_t, datum_t>{\n                            {datum_string_t(\"new_val\"), (**it)->second.second}}));",
+        "base_contents": "            for (auto &&it : active_data) {\n                els.push_back(\n                    datum_t(std::map<datum_string_t, datum_t> {\n                            { datum_string_t(\"new_val\"), (*it)->second.second } }));",
+        "res_region": "            if (include_initial_vals) {\n                if (include_states) els.push_back(initializing_datum());\n                for (auto it = active_data.rbegin(); it != active_data.rend(); ++it) {\n                    els.push_back(\n                        datum_t(std::map<datum_string_t, datum_t>{\n                                {datum_string_t(\"new_val\"), (**it)->second.second}}));\n                }",
+        "lookback": "                if (include_states) els.push_back(initializing_datum());",
+        "lookahead": "            }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1871,
+        "end_line": 1887,
+        "merge_gen_region": null,
+        "confidence": 0.79612135887146,
+        "hesitated": true
+    }
+]

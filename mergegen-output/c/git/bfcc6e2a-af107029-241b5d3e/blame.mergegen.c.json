@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\tCALLOC_ARRAY(result, length_b);\n\tCALLOC_ARRAY(second_best_result, length_b);\n\tCALLOC_ARRAY(certainties, length_b);",
+        "b_contents": "\tresult = xcalloc(length_b, sizeof(int));\n\tsecond_best_result = xcalloc(length_b, sizeof(int));\n\tcertainties = xcalloc(length_b, sizeof(int));",
+        "base_contents": "\tresult = xcalloc(sizeof(int), length_b);\n\tsecond_best_result = xcalloc(sizeof(int), length_b);\n\tcertainties = xcalloc(sizeof(int), length_b);",
+        "res_region": "\tCALLOC_ARRAY(result, length_b);\n\tCALLOC_ARRAY(second_best_result, length_b);\n\tCALLOC_ARRAY(certainties, length_b);",
+        "lookback": "\tCALLOC_ARRAY(second_best_result, length_b);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 953,
+        "end_line": 965,
+        "merge_gen_region": null,
+        "confidence": 0.6106173992156982,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tCALLOC_ARRAY(similarities, similarity_count);",
+        "b_contents": "\tsimilarities = xcalloc(similarity_count, sizeof(int));",
+        "base_contents": "\tsimilarities = xcalloc(sizeof(int), similarity_count);",
+        "res_region": "\tCALLOC_ARRAY(similarities, similarity_count);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 969,
+        "end_line": 975,
+        "merge_gen_region": null,
+        "confidence": 0.5798115730285645,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tCALLOC_ARRAY(o->fingerprints, o->num_lines);",
+        "b_contents": "\to->fingerprints = xcalloc(o->num_lines, sizeof(struct fingerprint));",
+        "base_contents": "\to->fingerprints = xcalloc(sizeof(struct fingerprint), o->num_lines);",
+        "res_region": "\tCALLOC_ARRAY(o->fingerprints, o->num_lines);",
+        "lookback": "\tget_line_fingerprints(o->fingerprints, o->file.ptr, line_starts,",
+        "lookahead": "\tget_line_fingerprints(o->fingerprints, o->file.ptr, line_starts,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1013,
+        "end_line": 1019,
+        "merge_gen_region": null,
+        "confidence": 0.7866333723068237,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tCALLOC_ARRAY(line_blames, same - tlno);",
+        "b_contents": "\t\tline_blames = xcalloc(same - tlno,\n\t\t\t\t      sizeof(struct blame_line_tracker));",
+        "base_contents": "\t\tline_blames = xcalloc(sizeof(struct blame_line_tracker),\n\t\t\t\t      same - tlno);",
+        "res_region": "\t\tCALLOC_ARRAY(line_blames, same - tlno);",
+        "lookback": "\t\tguess_line_blames(parent, target, tlno, offset, same,",
+        "lookahead": "\t\tguess_line_blames(parent, target, tlno, offset, same,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1877,
+        "end_line": 1885,
+        "merge_gen_region": null,
+        "confidence": 0.807298481464386,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "static int set_head(int argc, const char **argv, const char *prefix,\n\t\t    struct repository *repo UNUSED)",
+        "b_contents": "static void report_set_head_auto(const char *remote, const char *head_name,\n\t\t\tstruct strbuf *b_local_head, int was_detached) {\n\tstruct strbuf buf_prefix = STRBUF_INIT;\n\tconst char *prev_head = NULL;\n\n\tstrbuf_addf(&buf_prefix, \"refs/remotes/%s/\", remote);\n\tskip_prefix(b_local_head->buf, buf_prefix.buf, &prev_head);\n\n\tif (prev_head && !strcmp(prev_head, head_name))\n\t\tprintf(_(\"'%s/HEAD' is unchanged and points to '%s'\\n\"),\n\t\t\tremote, head_name);\n\telse if (prev_head)\n\t\tprintf(_(\"'%s/HEAD' has changed from '%s' and now points to '%s'\\n\"),\n\t\t\tremote, prev_head, head_name);\n\telse if (!b_local_head->len)\n\t\tprintf(_(\"'%s/HEAD' is now created and points to '%s'\\n\"),\n\t\t\tremote, head_name);\n\telse if (was_detached && b_local_head->len)\n\t\tprintf(_(\"'%s/HEAD' was detached at '%s' and now points to '%s'\\n\"),\n\t\t\tremote, b_local_head->buf, head_name);\n\telse\n\t\tprintf(_(\"'%s/HEAD' used to point to '%s' \"\n\t\t\t\"(which is not a remote branch), but now points to '%s'\\n\"),\n\t\t\tremote, b_local_head->buf, head_name);\n\tstrbuf_release(&buf_prefix);\n}\n\nstatic int set_head(int argc, const char **argv, const char *prefix)",
+        "base_contents": "static int set_head(int argc, const char **argv, const char *prefix)",
+        "res_region": "static void report_set_head_auto(const char *remote, const char *head_name,\n\t\t\tstruct strbuf *b_local_head, int was_detached) {\n\tstruct strbuf buf_prefix = STRBUF_INIT;\n\tconst char *prev_head = NULL;\n\n\tstrbuf_addf(&buf_prefix, \"refs/remotes/%s/\", remote);\n\tskip_prefix(b_local_head->buf, buf_prefix.buf, &prev_head);\n\n\tif (prev_head && !strcmp(prev_head, head_name))\n\t\tprintf(_(\"'%s/HEAD' is unchanged and points to '%s'\\n\"),\n\t\t\tremote, head_name);\n\telse if (prev_head)\n\t\tprintf(_(\"'%s/HEAD' has changed from '%s' and now points to '%s'\\n\"),\n\t\t\tremote, prev_head, head_name);\n\telse if (!b_local_head->len)\n\t\tprintf(_(\"'%s/HEAD' is now created and points to '%s'\\n\"),\n\t\t\tremote, head_name);\n\telse if (was_detached && b_local_head->len)\n\t\tprintf(_(\"'%s/HEAD' was detached at '%s' and now points to '%s'\\n\"),\n\t\t\tremote, b_local_head->buf, head_name);\n\telse\n\t\tprintf(_(\"'%s/HEAD' used to point to '%s' \"\n\t\t\t\"(which is not a remote branch), but now points to '%s'\\n\"),\n\t\t\tremote, b_local_head->buf, head_name);\n\tstrbuf_release(&buf_prefix);\n}\n\nstatic int set_head(int argc, const char **argv, const char *prefix,\n\t\t    struct repository *repo UNUSED)",
+        "lookback": "\t\t\tstruct strbuf *b_local_head, int was_detached) {",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1405,
+        "end_line": 1439,
+        "merge_gen_region": " strbufblocalhead int_( argc const **, char *, chardet)static reportsetheadautoconst *, charhead_, strbufblocalhead int_ached { strbuf bufprefix STR_; charprevhead NULL strbufadd(&_,refsrem/%/\",);_(___, charprevheadbuf bufprefixbuf &_); (_ &&strcmpprevhead headname printf'%sHEAD is and points '%'\\\"),,__); else (_)(_(\"sHEAD has from '%' now tosn remote prevhead headname else (!___->)(_(\"sHEAD is created points '%'\\\"),,_); ifwasdet &&_ached blocalheadlen printf'%/HEAD was ats and now tosn\"),,__); else(_(\"sHEAD used point '%' \"( is a branch but points '%'\\\"),,__);_->buf headname strbufreleasebufprefix } int_( argc const **, charargv const *, repositoryrepo UNUSED",
+        "confidence": 0.8826763033866882,
+        "hesitated": false,
+        "resolved": false
+    }
+]

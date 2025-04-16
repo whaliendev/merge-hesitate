@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#include \"clustering/administration/auth/username.hpp\"\n\n#include \"clustering/administration/auth/crypto/saslprep.hpp\"\n#include \"containers/archive/stl_types.hpp\"\n#include \"containers/archive/versioned.hpp\"\n\n#include <iostream>\n\nnamespace auth {\n\nusername_t::username_t() { }\n\nusername_t::username_t(std::string const &username) {\n    m_username = crypto::saslprep(username);\n    if (m_username.empty()) {\n        // FIXME error\n    }\n    std::cout << \"-- '\" << m_username << \"'\\n\";\n}\n\nbool username_t::is_admin() const {\n    return m_username == \"admin\";\n}\n\nstd::string const &username_t::to_string() const {\n    return m_username;\n}\n\nbool username_t::operator<(username_t const &rhs) const {\n    return m_username < rhs.m_username;\n}\n\nbool username_t::operator==(username_t const &rhs) const {\n    return m_username == rhs.m_username;\n}\n\nRDB_IMPL_SERIALIZABLE_1(username_t, m_username);\nINSTANTIATE_SERIALIZABLE_SINCE_v2_3(username_t);\n\n}  // namespace auth",
+        "b_contents": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#include \"clustering/administration/auth/username.hpp\"\n\n#include \"containers/archive/stl_types.hpp\"\n#include \"containers/archive/versioned.hpp\"\n\nnamespace auth {\n\nusername_t::username_t() { }\n\nusername_t::username_t(std::string username)\n    : m_username(std::move(username)) {\n    // FIXME, SASLPrep\n}\n\nbool username_t::is_admin() const {\n    return m_username == \"admin\";\n}\n\nstd::string const &username_t::to_string() const {\n    return m_username;\n}\n\nbool username_t::operator<(username_t const &rhs) const {\n    return m_username < rhs.m_username;\n}\n\nbool username_t::operator==(username_t const &rhs) const {\n    return m_username == rhs.m_username;\n}\n\nRDB_IMPL_SERIALIZABLE_1(username_t, m_username);\nINSTANTIATE_SERIALIZABLE_SINCE_v2_3(username_t);\n\n}  // namespace auth",
+        "base_contents": "",
+        "res_region": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#include \"clustering/administration/auth/username.hpp\"\n\n#include \"clustering/administration/auth/crypto/saslprep.hpp\"\n#include \"containers/archive/stl_types.hpp\"\n\nnamespace auth {\n\nusername_t::username_t() { }\n\nusername_t::username_t(std::string const &username) {\n    m_username = crypto::saslprep(username);\n    if (m_username.empty()) {\n        // FIXME error\n    }\n}\n\nbool username_t::is_admin() const {\n    return m_username == \"admin\";\n}\n\nstd::string const &username_t::to_string() const {\n    return m_username;\n}\n\nbool username_t::operator<(username_t const &rhs) const {\n    return m_username < rhs.m_username;\n}\n\nbool username_t::operator==(username_t const &rhs) const {\n    return m_username == rhs.m_username;\n}\n\nRDB_IMPL_SERIALIZABLE_1(username_t, m_username);\nINSTANTIATE_SERIALIZABLE_SINCE_v2_3(username_t);\n\n}  // namespace auth",
+        "lookback": "#include \"clustering/administration/auth/username.hpp\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 0,
+        "end_line": 79,
+        "merge_gen_region": null,
+        "confidence": 0.8590583801269531,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    task.pid = waitpid(__pid, __stat_loc, __options | WNOHANG);\n    if (task.pid > 0)\n    {\n        return task.pid;\n    }\n    else\n    {\n        task.pid = 0;\n    }\n\n    task.co = Coroutine::get_current_safe();",
+        "b_contents": "    task.co = Coroutine::get_current();",
+        "base_contents": "    task.co = Coroutine::get_current_safe();",
+        "res_region": "    task.pid = waitpid(__pid, __stat_loc, __options | WNOHANG);\n    if (task.pid > 0)\n    {\n        return task.pid;\n    }\n    else\n    {\n        task.pid = 0;\n    }\n\n    task.co = Coroutine::get_current();",
+        "lookback": "    if (task.pid > 0)",
+        "lookahead": "    waitpid_map[__pid] = &task;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 111,
+        "end_line": 127,
+        "merge_gen_region": null,
+        "confidence": 0.6691452860832214,
+        "hesitated": true
+    }
+]

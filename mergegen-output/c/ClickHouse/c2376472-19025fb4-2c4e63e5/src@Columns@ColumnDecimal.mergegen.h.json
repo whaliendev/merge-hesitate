@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <Common/FieldVisitorToString.h>\n#include <DataTypes/FieldToDataType.h>\n#include <base/sort.h>\n#include <base/TypeName.h>\n#include <Core/Field.h>\n#include <Core/DecimalFunctions.h>\n#include <Core/TypeId.h>\n#include <Common/typeid_cast.h>",
+        "b_contents": "",
+        "base_contents": "#include <base/sort.h>\n#include <base/TypeName.h>\n#include <Core/Field.h>\n#include <Core/DecimalFunctions.h>\n#include <Core/TypeId.h>\n#include <Common/typeid_cast.h>",
+        "res_region": "#include <Common/FieldVisitorToString.h>\n#include <DataTypes/FieldToDataType.h>\n#include <base/sort.h>\n#include <base/TypeName.h>\n#include <Core/Field.h>\n#include <Core/DecimalFunctions.h>\n#include <Core/TypeId.h>\n#include <Common/typeid_cast.h>",
+        "lookback": "#include <DataTypes/FieldToDataType.h>",
+        "lookahead": "#include <Columns/ColumnFixedSizeHelper.h>",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 2,
+        "end_line": 19,
+        "merge_gen_region": null,
+        "confidence": 0.8552533388137817,
+        "hesitated": true
+    }
+]

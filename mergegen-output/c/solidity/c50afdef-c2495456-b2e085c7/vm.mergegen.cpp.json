@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "#include <libevmjit/VM.h>",
+        "b_contents": "#include <boost/filesystem/path.hpp>",
+        "base_contents": "",
+        "res_region": "#include <libevmjit/VM.h>\n#include <boost/filesystem/path.hpp>",
+        "lookback": "#include <boost/filesystem/path.hpp>",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 29,
+        "merge_gen_region": null,
+        "confidence": 0.8413635492324829,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tauto argc = boost::unit_test::framework::master_test_suite().argc;\n\t\t\tauto argv = boost::unit_test::framework::master_test_suite().argv;\n\n\t\t\tauto useJit = argc >= 2 && std::string(argv[1]) == \"--jit\";\n\t\t\tif (useJit)\n\t\t\t{\n\t\t\t\tjit::VM vm(fev.gas);\n\t\t\t\toutput = vm.go(fev);\n\t\t\t\tgas = vm.gas();\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tVM vm(fev.gas);\n\t\t\t\toutput = vm.go(fev).toVector();\n\t\t\t\tgas = vm.gas(); // Get the remaining gas\n\t\t\t}",
+        "b_contents": "\t\t\tVM vm(fev.gas);\n\t\t\toutput = vm.go(fev).toVector();\n\t\t\tgas = vm.gas(); // Get the remaining gas",
+        "base_contents": "\t\t\toutput = vm.go(fev).toBytes();",
+        "res_region": "\t\t\tauto argc = boost::unit_test::framework::master_test_suite().argc;\n\t\t\tauto argv = boost::unit_test::framework::master_test_suite().argv;\n\n\t\t\tauto useJit = argc >= 2 && std::string(argv[1]) == \"--jit\";\n\t\t\tif (useJit)\n\t\t\t{\n\t\t\t\tjit::VM vm(fev.gas);\n\t\t\t\toutput = vm.go(fev);\n\t\t\t\tgas = vm.gas();\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tVM vm(fev.gas);\n\t\t\t\toutput = vm.go(fev).toVector();\n\t\t\t\tgas = vm.gas(); // Get the remaining gas\n\t\t}",
+        "lookback": "\t\t\tauto argv = boost::unit_test::framework::master_test_suite().argv;",
+        "lookahead": "\t\t}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 522,
+        "end_line": 545,
+        "merge_gen_region": " argvoughauto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =auto =autoauto =autoauto =autoautoautoautoautoautoautoautoautoautoautoautoautoautoautoauto =autoautoautoautoautoautoautoautoautoautoautoautoauto",
+        "confidence": 0.9002233743667603,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\t\t\tBOOST_CHECK_EQUAL(test.toInt(o[\"gas\"]), gas);\n\n\t\t\tauto& expectedAddrs = test.addresses;\n\t\t\tauto& resultAddrs = fev.addresses;\n\t\t\tfor (auto&& expectedPair : expectedAddrs)\n\t\t\t{\n\t\t\t\tauto& expectedAddr = expectedPair.first;\n\t\t\t\tauto resultAddrIt = resultAddrs.find(expectedAddr);\n\t\t\t\tif (resultAddrIt == resultAddrs.end())\n\t\t\t\t\tBOOST_ERROR(\"Missing expected address \" << expectedAddr);\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\tauto& expectedState = expectedPair.second;\n\t\t\t\t\tauto& resultState = resultAddrIt->second;\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<0>(expectedState) == std::get<0>(resultState), expectedAddr << \": incorrect balance \" << std::get<0>(resultState) << \", expected \" << std::get<0>(expectedState));\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<1>(expectedState) == std::get<1>(resultState), expectedAddr << \": incorrect txCount \" << std::get<1>(resultState) << \", expected \" << std::get<1>(expectedState));\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<3>(expectedState) == std::get<3>(resultState), expectedAddr << \": incorrect code\");\n\n\t\t\t\t\tauto&& expectedStore = std::get<2>(expectedState);\n\t\t\t\t\tauto&& resultStore = std::get<2>(resultState);\n\n\t\t\t\t\tfor (auto&& expectedStorePair : expectedStore)\n\t\t\t\t\t{\n\t\t\t\t\t\tauto& expectedStoreKey = expectedStorePair.first;\n\t\t\t\t\t\tauto resultStoreIt = resultStore.find(expectedStoreKey);\n\t\t\t\t\t\tif (resultStoreIt == resultStore.end())\n\t\t\t\t\t\t\tBOOST_ERROR(expectedAddr << \": missing store key \" << expectedStoreKey);\n\t\t\t\t\t\telse\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tauto& expectedStoreValue = expectedStorePair.second;\n\t\t\t\t\t\t\tauto& resultStoreValue = resultStoreIt->second;\n\t\t\t\t\t\t\tBOOST_CHECK_MESSAGE(expectedStoreValue == resultStoreValue, expectedAddr << \": store[\" << expectedStoreKey << \"] = \" << resultStoreValue << \", expected \" << expectedStoreValue);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tBOOST_CHECK(test.addresses == fev.addresses);\t// Just to make sure nothing missed",
+        "b_contents": "\t\t\tBOOST_CHECK(test.toInt(o[\"gas\"]) == gas);\n\t\t\tBOOST_CHECK(test.addresses == fev.addresses);",
+        "base_contents": "\t\t\tBOOST_CHECK(test.toInt(o[\"gas\"]) == vm.gas());\n\t\t\tBOOST_CHECK(test.addresses == fev.addresses);",
+        "res_region": "\t\t\tBOOST_CHECK_EQUAL(test.toInt(o[\"gas\"]), gas);\n\n\t\t\tauto& expectedAddrs = test.addresses;\n\t\t\tauto& resultAddrs = fev.addresses;\n\t\t\tfor (auto&& expectedPair : expectedAddrs)\n\t\t\t{\n\t\t\t\tauto& expectedAddr = expectedPair.first;\n\t\t\t\tauto resultAddrIt = resultAddrs.find(expectedAddr);\n\t\t\t\tif (resultAddrIt == resultAddrs.end())\n\t\t\t\t\tBOOST_ERROR(\"Missing expected address \" << expectedAddr);\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\tauto& expectedState = expectedPair.second;\n\t\t\t\t\tauto& resultState = resultAddrIt->second;\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<0>(expectedState) == std::get<0>(resultState), expectedAddr << \": incorrect balance \" << std::get<0>(resultState) << \", expected \" << std::get<0>(expectedState));\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<1>(expectedState) == std::get<1>(resultState), expectedAddr << \": incorrect txCount \" << std::get<1>(resultState) << \", expected \" << std::get<1>(expectedState));\n\t\t\t\t\tBOOST_CHECK_MESSAGE(std::get<3>(expectedState) == std::get<3>(resultState), expectedAddr << \": incorrect code\");\n\n\t\t\t\t\tauto&& expectedStore = std::get<2>(expectedState);\n\t\t\t\t\tauto&& resultStore = std::get<2>(resultState);\n\n\t\t\t\t\tfor (auto&& expectedStorePair : expectedStore)\n\t\t\t\t\t{\n\t\t\t\t\t\tauto& expectedStoreKey = expectedStorePair.first;\n\t\t\t\t\t\tauto resultStoreIt = resultStore.find(expectedStoreKey);\n\t\t\t\t\t\tif (resultStoreIt == resultStore.end())\n\t\t\t\t\t\t\tBOOST_ERROR(expectedAddr << \": missing store key \" << expectedStoreKey);\n\t\t\t\t\t\telse\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tauto& expectedStoreValue = expectedStorePair.second;\n\t\t\t\t\t\t\tauto& resultStoreValue = resultStoreIt->second;\n\t\t\t\t\t\t\tBOOST_CHECK_MESSAGE(expectedStoreValue == resultStoreValue, expectedAddr << \": store[\" << expectedStoreKey << \"] = \" << resultStoreValue << \", expected \" << expectedStoreValue);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tBOOST_CHECK(test.addresses == fev.addresses);\t// Just to make sure nothing missed",
+        "lookback": "",
+        "lookahead": "\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 606,
+        "end_line": 651,
+        "merge_gen_region": null,
+        "confidence": 0.8545127511024475,
+        "hesitated": true
+    }
+]

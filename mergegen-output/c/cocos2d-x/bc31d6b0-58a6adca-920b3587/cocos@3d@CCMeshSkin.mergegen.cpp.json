@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    if (_blendStates.size() == 0)\n        return;",
+        "b_contents": "//    Mat4::createTranslation(_localTranslate, &_local);\n//    if (!_localRot.isZero())\n//    _local.rotate(_localRot);\n//    return;\n    if(0 == _dirtyFlag) return;",
+        "base_contents": "    Mat4::createTranslation(_localTranslate, &_local);\n    if (!_localRot.isZero())\n    _local.rotate(_localRot);\n    return;",
+        "res_region": "",
+        "lookback": "    {",
+        "lookahead": "    if (_blendStates.size())",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 219,
+        "end_line": 233,
+        "merge_gen_region": null,
+        "confidence": 0.4528140127658844,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!_localDirty)\n        return;\n    \n    Vec3 translate(0.f, 0.f, 0.f), scale(0.f, 0.f, 0.f);\n    Quaternion quat(0.f, 0.f, 0.f, 0.f);\n    if (_blendStates.size())\n    {\n        float total = 0.f;\n        for (auto it: _blendStates) {\n            total += it.weight;\n        }\n        if (total)\n        {\n            if (_blendStates.size() == 1)\n            {\n                translate = _blendStates[0].localTranslate;\n                scale = _blendStates[0].localScale;\n                quat = _blendStates[0].localRot;\n            }\n            else\n            {\n                float invTotal = 1.f / total;\n                for (auto it : _blendStates) {\n                    float weight = (it.weight * invTotal);\n                    translate += it.localTranslate * weight;\n                    if (!it.localScale.isZero())\n                    {\n                        scale.x *= it.localScale.x * weight;\n                        scale.y *= it.localScale.y * weight;\n                        scale.z *= it.localScale.z * weight;\n                    }\n                    if (!it.localRot.isZero())\n                    {\n                        if (!quat.isZero())\n                        {\n                            Quaternion& q = _blendStates[0].localRot;\n                            if (q.x * quat.x + q.y * quat.y + q.z * quat.z + q.w * quat.w < 0)\n                            weight = -weight;\n                        }\n                        quat = Quaternion(it.localRot.x * weight + quat.x, it.localRot.y * weight + quat.y, it.localRot.z * weight + quat.z, it.localRot.w * weight + quat.w);\n                    }\n                }\n            }  \n        }\n        \n        bool hasTrans = !translate.isZero();\n        bool hasRot = !quat.isZero();\n        bool hasScale = !scale.isZero();\n        \n        if (hasTrans)\n        {\n            Mat4::createTranslation(translate, &_local);\n            if (hasRot)\n                _local.rotate(quat);\n            if (hasScale)\n                _local.scale(scale);\n        }\n        else if (hasRot)\n        {\n            Mat4::createRotation(quat, &_local);\n            if (hasScale)\n                _local.scale(scale);\n        }\n        else if (hasScale)\n        {\n            Mat4::createScale(scale, &_local);\n        }\n        else\n            _local.setIdentity();\n        \n        _blendStates.clear();\n        _localDirty = false;\n    }\n    \n    \n}\n\nvoid Bone::clearBlendState()\n{\n    _blendStates.clear();",
+        "b_contents": "    Mat4 tmp;\n    Mat4::createScale(_localScale, &_local);\n    Mat4::createRotation(_localRot, &tmp);\n    \n    _local = tmp * _local;\n    \n    Mat4::createTranslation(_localTranslate, &tmp);\n    _local = tmp * _local;\n    \n    return;",
+        "base_contents": "    if (_dirtyFlag & Dirty_Translate)\n    {\n        Mat4::createTranslation(_localTranslate, &_local);\n        if (_dirtyFlag & Dirty_Rotation)\n            _local.rotate(_localRot);\n        if (_dirtyFlag & Dirty_Scale)\n            _local.scale(_localScale);\n    }\n    else if (_dirtyFlag & Dirty_Rotation)\n    {\n        Mat4::createRotation(_localRot, &_local);\n        if (_dirtyFlag & Dirty_Scale)\n            _local.scale(_localScale);\n    }\n    else if (_dirtyFlag & Dirty_Scale)\n    {\n        Mat4::createScale(_localScale, &_local);\n    }\n    _dirtyFlag = 0;",
+        "res_region": "    if (_blendStates.size())\n    {\n        Vec3 translate(Vec3::ZERO), scale(Vec3::ONE);\n        Quaternion quat(Quaternion::identity());\n        \n        float total = 0.f;\n        for (auto it: _blendStates) {\n            total += it.weight;\n        }\n        if (total)\n        {\n            if (_blendStates.size() == 1)\n            {\n                translate = _blendStates[0].localTranslate;\n                scale = _blendStates[0].localScale;\n                quat = _blendStates[0].localRot;\n            }\n            else\n            {\n                float invTotal = 1.f / total;\n                for (auto it : _blendStates) {\n                    float weight = (it.weight * invTotal);\n                    translate += it.localTranslate * weight;\n                    if (!it.localScale.isZero())\n                    {\n                        scale.x *= it.localScale.x * weight;\n                        scale.y *= it.localScale.y * weight;\n                        scale.z *= it.localScale.z * weight;\n                    }\n                    if (!it.localRot.isZero())\n                    {\n                        if (!quat.isZero())\n                        {\n                            Quaternion& q = _blendStates[0].localRot;\n                            if (q.x * quat.x + q.y * quat.y + q.z * quat.z + q.w * quat.w < 0)\n                            weight = -weight;\n                        }\n                        quat = Quaternion(it.localRot.x * weight + quat.x, it.localRot.y * weight + quat.y, it.localRot.z * weight + quat.z, it.localRot.w * weight + quat.w);\n                    }\n                }\n            }  \n        }\n        \n        Mat4::createTranslation(translate, &_local);\n        _local.rotate(quat);\n        _local.scale(scale);\n        \n        _blendStates.clear();\n        _localDirty = false;\n    }\n    \n    \n}\n\nvoid Bone::clearBlendState()\n{\n    _blendStates.clear();",
+        "lookback": "    {",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 235,
+        "end_line": 347,
+        "merge_gen_region": null,
+        "confidence": 0.7957191467285156,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n    return mPermissionChecker->checkPermissionForPreflight(\n            toString16(permission), attributionSource, toString16(message),\n            attributedOpCode) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n}\n\nbool CameraService::hasPermissionsForSystemCamera(const std::string& cameraId, int callingPid,\n        int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = checkPermission(cameraId,\n            sSystemCameraPermission, attributionSource, std::string(), AppOpsManager::OP_NONE);\n    bool checkPermissionForCamera = checkPermission(cameraId,\n            sCameraPermission, attributionSource, std::string(), AppOpsManager::OP_NONE);\n    return checkPermissionForSystemCamera && checkPermissionForCamera;\n}\n\nbool CameraService::hasPermissionsForCameraHeadlessSystemUser(const std::string& cameraId,\n        int callingPid, int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    return checkPermission(cameraId, sCameraHeadlessSystemUserPermission, attributionSource,\n            std::string(), AppOpsManager::OP_NONE);\n}\n\nbool CameraService::hasPermissionsForCameraPrivacyAllowlist(int callingPid, int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    return checkPermission(std::string(), sCameraPrivacyAllowlistPermission, attributionSource,\n            std::string(), AppOpsManager::OP_NONE);\n}\n\nStatus CameraService::getNumberOfCameras(int32_t type, int32_t* numCameras) {\n    ATRACE_CALL();",
+        "base_contents": "    permission::PermissionChecker permissionChecker;\n    return permissionChecker.checkPermissionForPreflight(toString16(permission), attributionSource,\n            toString16(message), attributedOpCode)\n            != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n}\n\nbool CameraService::hasPermissionsForSystemCamera(const std::string& cameraId, int callingPid,\n        int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = checkPermission(cameraId,\n            sSystemCameraPermission, attributionSource, std::string(), AppOpsManager::OP_NONE);\n    bool checkPermissionForCamera = checkPermission(cameraId,\n            sCameraPermission, attributionSource, std::string(), AppOpsManager::OP_NONE);\n    return checkPermissionForSystemCamera && checkPermissionForCamera;\n}\n\nbool CameraService::hasPermissionsForCameraHeadlessSystemUser(const std::string& cameraId,\n        int callingPid, int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    return checkPermission(cameraId, sCameraHeadlessSystemUserPermission, attributionSource,\n            std::string(), AppOpsManager::OP_NONE);\n}\n\nbool CameraService::hasPermissionsForCameraPrivacyAllowlist(int callingPid, int callingUid) const{\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    return checkPermission(std::string(), sCameraPrivacyAllowlistPermission, attributionSource,\n            std::string(), AppOpsManager::OP_NONE);\n}\n\nStatus CameraService::getNumberOfCameras(int32_t type, int32_t* numCameras) {\n    ATRACE_CALL();",
+        "res_region": "",
+        "lookback": "    bool hasSystemCameraPermissions =",
+        "lookahead": "    Mutex::Autolock l(mServiceLock);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 808,
+        "end_line": 885,
+        "merge_gen_region": null,
+        "confidence": 0.38040775060653687,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    sp<IPermissionController> permCtrl;\n    if (flags::cache_permission_services()) {\n        permCtrl = getPermissionController();\n    } else {\n        sp<IServiceManager> sm = defaultServiceManager();\n#pragma clang diagnostic push\n#pragma clang diagnostic ignored \"-Wdeprecated-declarations\"\n        // Using deprecated function to preserve functionality until the\n        // cache_permission_services flag is removed.\n        sp<IBinder> binder = sm->getService(toString16(kPermissionServiceName));\n#pragma clang diagnostic pop\n        if (binder == 0) {\n            ALOGE(\"Cannot get permission service\");\n            permCtrl = nullptr;\n        } else {\n            permCtrl = interface_cast<IPermissionController>(binder);\n        }\n    }\n\n    if (permCtrl == nullptr) {",
+        "b_contents": "    sp<IPermissionController> permCtrl;\n    permCtrl = getPermissionController();\n\n    if (permCtrl == nullptr) {",
+        "base_contents": "    sp<IServiceManager> sm = defaultServiceManager();\n    sp<IBinder> binder = sm->getService(toString16(kPermissionServiceName));\n    if (binder == 0) {\n        ALOGE(\"Cannot get permission service\");",
+        "res_region": "    sp<IPermissionController> permCtrl;\n    if (flags::cache_permission_services()) {\n        permCtrl = getPermissionController();\n    } else {\n        sp<IServiceManager> sm = defaultServiceManager();\n#pragma clang diagnostic push\n#pragma clang diagnostic ignored \"-Wdeprecated-declarations\"\n        // Using deprecated function to preserve functionality until the\n        // cache_permission_services flag is removed.\n        sp<IBinder> binder = sm->getService(toString16(kPermissionServiceName));\n#pragma clang diagnostic pop\n        if (binder == 0) {\n            ALOGE(\"Cannot get permission service\");\n            permCtrl = nullptr;\n        } else {\n            permCtrl = interface_cast<IPermissionController>(binder);\n        }\n    }\n\n    if (permCtrl == nullptr) {",
+        "lookback": "    if (flags::cache_permission_services()) {",
+        "lookahead": "        // Return empty package name and the further interaction",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2548,
+        "end_line": 2579,
+        "merge_gen_region": null,
+        "confidence": 0.8044307827949524,
+        "hesitated": true
+    }
+]

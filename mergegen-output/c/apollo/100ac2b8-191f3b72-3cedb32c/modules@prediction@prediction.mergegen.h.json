@@ -1,0 +1,56 @@
+[
+    {
+        "a_contents": "#include \"ros/include/ros/ros.h\"\n#include \"modules/perception/proto/perception_obstacle.pb.h\"\n#include \"modules/prediction/proto/prediction_conf.pb.h\"",
+        "b_contents": "#include \"ros/include/ros/ros.h\"\n",
+        "base_contents": "#include \"modules/perception/proto/perception_obstacle.pb.h\"\n",
+        "res_region": "#include \"ros/include/ros/ros.h\"\n\n#include \"modules/perception/proto/perception_obstacle.pb.h\"\n#include \"modules/prediction/proto/prediction_conf.pb.h\"",
+        "lookback": "",
+        "lookahead": "#include \"modules/common/apollo_app.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 35,
+        "merge_gen_region": "################################",
+        "confidence": 0.8848302364349365,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  /**\n   * @brief Destructor\n   */\n  ~Prediction() = default;\n\n  /**\n   * @brief Get name of the node\n   * @return Name of the node\n   */\n  std::string Name() const override;\n\n  /**\n   * @brief Initialize the node\n   * @return Status of the initialization\n   */\n  ::apollo::common::Status Init() override;",
+        "b_contents": "  ~Prediction() = default;",
+        "base_contents": "  virtual ~Prediction() = default;",
+        "res_region": "  /**\n   * @brief Destructor\n   */\n  ~Prediction() = default;\n\n  /**\n   * @brief Get name of the node\n   * @return Name of the node\n   */\n  std::string Name() const override;\n\n  /**\n   * @brief Initialize the node\n   * @return Status of the initialization\n   */\n  ::apollo::common::Status Init() override;",
+        "lookback": "   * @brief Destructor",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 69,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9082390069961548,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  /**\n   * @brief Start the node\n   * @return Status of the starting process\n   */\n  ::apollo::common::Status Start() override;\n\n  /**\n   * @brief Stop the node\n   */\n  void Stop() override;",
+        "b_contents": "  std::string Name() const override;\n  common::Status Init() override;\n  common::Status Start() override;\n  void Stop() override;",
+        "base_contents": "  virtual std::string Name() const override;\n  virtual common::Status Init() override;\n  virtual common::Status Start() override;\n  virtual void Stop() override;",
+        "res_region": "  /**\n   * @brief Start the node\n   * @return Status of the starting process\n   */\n  ::apollo::common::Status Start() override;\n\n  /**\n   * @brief Stop the node\n   */\n  void Stop() override;",
+        "lookback": "   * @brief Start the node",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 71,
+        "end_line": 92,
+        "merge_gen_region": "* warrant the**********************************************************************************************************************************************************************************************************************************",
+        "confidence": 0.8818030953407288,
+        "hesitated": false,
+        "resolved": false
+    }
+]

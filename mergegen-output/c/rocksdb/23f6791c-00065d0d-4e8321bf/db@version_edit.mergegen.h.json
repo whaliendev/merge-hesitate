@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  explicit VersionEdit(int number_levels) : number_levels_(number_levels) {\n    Clear();\n  }",
+        "b_contents": "  VersionEdit() { Clear(); }",
+        "base_contents": "  explicit VersionEdit(int number_levels) :\n      number_levels_(number_levels) {\n    Clear();\n  }",
+        "res_region": "  VersionEdit() { Clear(); }",
+        "lookback": "  ~VersionEdit() { }",
+        "lookahead": "  ~VersionEdit() { }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 36,
+        "end_line": 47,
+        "merge_gen_region": null,
+        "confidence": 0.6403193473815918,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::vector< std::pair<int, FileMetaData> > new_files_;\n\n  // Each version edit record should have column_family_id set\n  // If it's not set, it is default (0)\n  uint32_t column_family_;\n  // a version edit can be either column_family add or\n  // column_family drop. If it's column family add,\n  // it also includes column family name.\n  bool is_column_family_drop_;\n  bool is_column_family_add_;\n  std::string column_family_name_;",
+        "b_contents": "  std::vector<std::pair<int, FileMetaData> > new_files_;",
+        "base_contents": "  std::vector< std::pair<int, FileMetaData> > new_files_;",
+        "res_region": "  std::vector< std::pair<int, FileMetaData> > new_files_;\n\n  // Each version edit record should have column_family_id set\n  // If it's not set, it is default (0)\n  uint32_t column_family_;\n  // a version edit can be either column_family add or\n  // column_family drop. If it's column family add,\n  // it also includes column family name.\n  bool is_column_family_drop_;\n  bool is_column_family_add_;\n  std::string column_family_name_;",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 149,
+        "end_line": 165,
+        "merge_gen_region": null,
+        "confidence": 0.8426364064216614,
+        "hesitated": true
+    }
+]

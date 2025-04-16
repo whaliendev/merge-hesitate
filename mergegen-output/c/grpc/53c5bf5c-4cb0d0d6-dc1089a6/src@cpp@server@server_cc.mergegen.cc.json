@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  return ::grpc_impl::CreateChannelInternal(",
+        "b_contents": "  return grpc::CreateChannelInternal(",
+        "base_contents": "  return CreateChannelInternal(",
+        "res_region": "  return ::grpc_impl::CreateChannelInternal(",
+        "lookback": "      \"inproc\", grpc_inproc_channel_create(server_, &channel_args, nullptr),",
+        "lookahead": "      \"inproc\", grpc_inproc_channel_create(server_, &channel_args, nullptr),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1030,
+        "end_line": 1036,
+        "merge_gen_region": null,
+        "confidence": 0.8200209736824036,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return ::grpc_impl::CreateChannelInternal(",
+        "b_contents": "  return grpc::CreateChannelInternal(",
+        "base_contents": "  return CreateChannelInternal(",
+        "res_region": "  return ::grpc_impl::CreateChannelInternal(",
+        "lookback": "      \"inproc\",",
+        "lookahead": "      \"inproc\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1049,
+        "end_line": 1055,
+        "merge_gen_region": null,
+        "confidence": 0.7871031165122986,
+        "hesitated": true
+    }
+]

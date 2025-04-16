@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "            env->global_optargs.get_all_optargs(), return_changes);\n    write_t w(std::move(write), durability, env->profile(), env->limits());",
+        "b_contents": "            env->get_all_optargs(), return_changes);\n    write_t w(std::move(write), durability, env->profile(), env->limits());",
+        "base_contents": "            env->global_optargs.get_all_optargs(), return_changes);\n    write_t w(std::move(write), durability, env->profile(), env->limits);",
+        "res_region": "            env->get_all_optargs(), return_changes);\n    write_t w(std::move(write), durability, env->profile(), env->limits());",
+        "lookback": "    write_t w(std::move(write), durability, env->profile(), env->limits());",
+        "lookahead": "    write_response_t response;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 224,
+        "end_line": 233,
+        "merge_gen_region": "_ wstdoutputoutputoutputGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "confidence": 0.9069436192512512,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "      no_block_cache(false),\n      table_cache_numshardbits(4),\n      max_log_file_size(0),",
+        "base_contents": "      max_log_file_size(0),",
+        "res_region": "      no_block_cache(false),\n      table_cache_numshardbits(4),\n      max_log_file_size(0),",
+        "lookback": "      table_cache_numshardbits(4),",
+        "lookahead": "      delete_obsolete_files_period_micros(0),",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 46,
+        "end_line": 53,
+        "merge_gen_region": null,
+        "confidence": 0.6026903986930847,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(log,\"              Options.comparator: %s\", comparator->Name());\n    Log(log,\"       Options.create_if_missing: %d\", create_if_missing);\n    Log(log,\"         Options.error_if_exists: %d\", error_if_exists);\n    Log(log,\"         Options.paranoid_checks: %d\", paranoid_checks);\n    Log(log,\"                     Options.env: %p\", env);\n    Log(log,\"                Options.info_log: %p\", info_log);\n    Log(log,\"       Options.write_buffer_size: %zd\", write_buffer_size);\n    Log(log,\" Options.max_write_buffer_number: %zd\", max_write_buffer_number);\n    Log(log,\"          Options.max_open_files: %d\", max_open_files);\n    Log(log,\"             Options.block_cache: %p\", block_cache);\n    Log(log,\"        Options.block_cache_size: %zd\", block_cache->GetCapacity());\n    Log(log,\"              Options.block_size: %zd\", block_size);\n    Log(log,\"  Options.block_restart_interval: %d\", block_restart_interval);\n    Log(log,\"             Options.compression: %d\", compression);\n    Log(log,\"           Options.filter_policy: %s\",\n        filter_policy == NULL ? \"NULL\" : filter_policy->Name());\n    Log(log,\"              Options.num_levels: %d\", num_levels);\n    Log(log,\"         Options.disableDataSync: %d\", disableDataSync);\n    Log(log,\"               Options.use_fsync: %d\", use_fsync);",
+        "b_contents": "    Log(log,\"            Options.comparator: %s\", comparator->Name());\n    Log(log,\"     Options.create_if_missing: %d\", create_if_missing);\n    Log(log,\"       Options.error_if_exists: %d\", error_if_exists);\n    Log(log,\"       Options.paranoid_checks: %d\", paranoid_checks);\n    Log(log,\"                   Options.env: %p\", env);\n    Log(log,\"              Options.info_log: %p\", info_log);\n    Log(log,\"     Options.write_buffer_size: %zd\", write_buffer_size);\n    Log(log,\"        Options.max_open_files: %d\", max_open_files);\n    Log(log,\"           Options.block_cache: %p\", block_cache);\n    if (block_cache) {\n      Log(log,\"      Options.block_cache_size: %zd\",\n          block_cache->GetCapacity());\n    }\n    Log(log,\"            Options.block_size: %zd\", block_size);\n    Log(log,\"Options.block_restart_interval: %d\", block_restart_interval);",
+        "base_contents": "    Log(log,\"            Options.comparator: %s\", comparator->Name());\n    Log(log,\"     Options.create_if_missing: %d\", create_if_missing);\n    Log(log,\"       Options.error_if_exists: %d\", error_if_exists);\n    Log(log,\"       Options.paranoid_checks: %d\", paranoid_checks);\n    Log(log,\"                   Options.env: %p\", env);\n    Log(log,\"              Options.info_log: %p\", info_log);\n    Log(log,\"     Options.write_buffer_size: %zd\", write_buffer_size);\n    Log(log,\"        Options.max_open_files: %d\", max_open_files);\n    Log(log,\"           Options.block_cache: %p\", block_cache);\n    Log(log,\"      Options.block_cache_size: %zd\", block_cache->GetCapacity());\n    Log(log,\"            Options.block_size: %zd\", block_size);\n    Log(log,\"Options.block_restart_interval: %d\", block_restart_interval);",
+        "res_region": "    Log(log,\"              Options.comparator: %s\", comparator->Name());\n    Log(log,\"       Options.create_if_missing: %d\", create_if_missing);\n    Log(log,\"         Options.error_if_exists: %d\", error_if_exists);\n    Log(log,\"         Options.paranoid_checks: %d\", paranoid_checks);\n    Log(log,\"                     Options.env: %p\", env);\n    Log(log,\"                Options.info_log: %p\", info_log);\n    Log(log,\"       Options.write_buffer_size: %zd\", write_buffer_size);\n    Log(log,\" Options.max_write_buffer_number: %zd\", max_write_buffer_number);\n    Log(log,\"          Options.max_open_files: %d\", max_open_files);\n    Log(log,\"             Options.block_cache: %p\", block_cache);\n    if (block_cache) {\n      Log(log,\"      Options.block_cache_size: %zd\",\n          block_cache->GetCapacity());\n    }\n    Log(log,\"              Options.block_size: %zd\", block_size);\n    Log(log,\"  Options.block_restart_interval: %d\", block_restart_interval);",
+        "lookback": "    Log(log,\"       Options.create_if_missing: %d\", create_if_missing);",
+        "lookahead": "    if (compression_per_level != NULL) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 64,
+        "end_line": 113,
+        "merge_gen_region": null,
+        "confidence": 0.8627477884292603,
+        "hesitated": true
+    }
+]

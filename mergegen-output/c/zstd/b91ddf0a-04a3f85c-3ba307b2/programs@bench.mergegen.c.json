@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            double const cSpeed = (double)srcSize / fastestC;\n            double const dSpeed = (double)srcSize / fastestD;",
+        "b_contents": "            double cSpeed = ((double)srcSize / fastestC) * 1000;\n            double dSpeed = ((double)srcSize / fastestD) * 1000;",
+        "base_contents": "            double cSpeed = (double)srcSize / fastestC;\n            double dSpeed = (double)srcSize / fastestD;",
+        "res_region": "            double const cSpeed = ((double)srcSize / fastestC) * 1000;\n            double const dSpeed = ((double)srcSize / fastestD) * 1000;",
+        "lookback": "            double const dSpeed = ((double)srcSize / fastestD) * 1000;",
+        "lookahead": "            if (g_additionalParam)",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 475,
+        "end_line": 484,
+        "merge_gen_region": null,
+        "confidence": 0.7309935688972473,
+        "hesitated": true
+    }
+]

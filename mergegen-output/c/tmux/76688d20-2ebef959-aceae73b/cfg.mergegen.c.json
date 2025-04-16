@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <unistd.h>\n#include <util.h>",
+        "base_contents": "#include <util.h>",
+        "res_region": "#include <unistd.h>\n#include <util.h>",
+        "lookback": "#include <util.h>",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 25,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.6354012489318848,
+        "hesitated": true
+    }
+]

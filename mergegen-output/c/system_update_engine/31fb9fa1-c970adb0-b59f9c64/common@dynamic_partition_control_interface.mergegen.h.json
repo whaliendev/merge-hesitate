@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  // Get an action to clean up previous update.\n  // Return NoOpAction on non-Virtual A/B devices.\n  // Before applying the next update, run this action to clean up previous",
+        "b_contents": "  // Deprecated. Use GetCleanupPreviousUpdateAction instead.\n  // Before applying the next update, call this function to clean up previous",
+        "base_contents": "  // Before applying the next update, call this function to clean up previous",
+        "res_region": "",
+        "lookback": "  // Return NoOpAction on non-Virtual A/B devices.",
+        "lookahead": "  // Get an action to clean up previous update.",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 86,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.8186909556388855,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // - If successful, action completes with kSuccess.\n  // - If any error, but caller should retry after reboot, action completes with\n  //   kError.\n  // - If any irrecoverable failures, action completes with kDeviceCorrupted.\n  virtual std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) = 0;",
+        "b_contents": "  // - If successful, return kSuccess.\n  // - If any error, but caller should retry after reboot, return kError.\n  // - If any irrecoverable failures, return kDeviceCorrupted.\n  virtual ErrorCode CleanupSuccessfulUpdate() = 0;\n\n  // Get an action to clean up previous update.\n  // Return NoOpAction on non-Virtual A/B devices.\n  // Before applying the next update, run this action to clean up previous\n  // update files. This function blocks until delta files are merged into\n  // current OS partitions and finished cleaning up.\n  // - If successful, action completes with kSuccess.\n  // - If any error, but caller should retry after reboot, action completes with\n  //   kError.\n  // - If any irrecoverable failures, action completes with kDeviceCorrupted.\n  virtual std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) = 0;",
+        "base_contents": "  // - If successful, return kSuccess.\n  // - If any error, but caller should retry after reboot, return kError.\n  // - If any irrecoverable failures, return kDeviceCorrupted.\n  virtual ErrorCode CleanupSuccessfulUpdate() = 0;",
+        "res_region": "  // Get an action to clean up previous update.\n  // Return NoOpAction on non-Virtual A/B devices.\n  // Before applying the next update, run this action to clean up previous\n  // update files. This function blocks until delta files are merged into\n  // current OS partitions and finished cleaning up.\n  // - If successful, action completes with kSuccess.\n  // - If any error, but caller should retry after reboot, action completes with\n  //   kError.\n  // - If any irrecoverable failures, action completes with kDeviceCorrupted.\n  virtual std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) = 0;",
+        "lookback": "  // Return NoOpAction on non-Virtual A/B devices.",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 131,
+        "merge_gen_region": null,
+        "confidence": 0.7852540016174316,
+        "hesitated": true
+    }
+]

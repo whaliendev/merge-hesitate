@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\tif (!ft->m.valid)\n\t\treturn;\n\twp = cmd_mouse_pane(&ft->m, NULL, NULL);\n\tif (wp == NULL)\n\t\treturn;\n\tif (!TAILQ_EMPTY (&wp->modes))\n\t\treturn;\n\tif (cmd_mouse_at(wp, &ft->m, &x, &y, 0) != 0)\n\t\treturn;\n\tgd = wp->base.grid;",
+        "base_contents": "\tif (!ft->m.valid)\n\t\treturn;\n\twp = cmd_mouse_pane(&ft->m, NULL, NULL);\n\tif (wp == NULL)\n\t\treturn;\n\tif (cmd_mouse_at(wp, &ft->m, &x, &y, 0) != 0)\n\t\treturn;\n\tgd = wp->base.grid;",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "\tws = options_get_string(global_s_options, \"word-separators\");",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 733,
+        "end_line": 754,
+        "merge_gen_region": null,
+        "confidence": 0.6324766278266907,
+        "hesitated": true
+    }
+]

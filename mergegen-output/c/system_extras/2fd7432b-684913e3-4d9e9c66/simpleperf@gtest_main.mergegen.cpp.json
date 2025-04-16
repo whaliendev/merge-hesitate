@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "\nclass SavedPerfHardenProperty {\n public:\n  SavedPerfHardenProperty() {\n    __system_property_get(\"security.perf_harden\", prop_value_);\n    if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                    &paranoid_value_)) {\n      PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n    }\n  }\n\n  ~SavedPerfHardenProperty() {\n    if (strlen(prop_value_) != 0) {\n      __system_property_set(\"security.perf_harden\", prop_value_);\n      // Sleep one second to wait for security.perf_harden changing\n      // /proc/sys/kernel/perf_event_paranoid.\n      sleep(1);\n      std::string paranoid_value;\n      if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                           &paranoid_value)) {\n        PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n        return;\n      }\n      if (paranoid_value_ != paranoid_value) {\n        LOG(ERROR) << \"failed to restore /proc/sys/kernel/perf_event_paranoid\";\n      }\n    }\n  }\n\n private:\n  char prop_value_[PROP_VALUE_MAX];\n  std::string paranoid_value_;\n};\n\n#endif  // defined(__ANDROID__)",
+        "b_contents": "\n#if defined(__ANDROID__)\nclass SavedPerfHardenProperty {\n public:\n  SavedPerfHardenProperty() {\n    __system_property_get(\"security.perf_harden\", prop_value_);\n    if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                    &paranoid_value_)) {\n      PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n    }\n  }\n\n  ~SavedPerfHardenProperty() {\n    if (strlen(prop_value_) != 0) {\n      if (__system_property_set(\"security.perf_harden\", prop_value_) != 0) {\n        PLOG(ERROR) << \"failed to set security.perf_harden\";\n        return;\n      }\n      // Sleep one second to wait for security.perf_harden changing\n      // /proc/sys/kernel/perf_event_paranoid.\n      sleep(1);\n      std::string paranoid_value;\n      if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                           &paranoid_value)) {\n        PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n        return;\n      }\n      if (paranoid_value_ != paranoid_value) {\n        LOG(ERROR) << \"failed to restore /proc/sys/kernel/perf_event_paranoid\";\n      }\n    }\n  }\n\n private:\n  char prop_value_[PROP_VALUE_MAX];\n  std::string paranoid_value_;\n};\n#endif  // defined(__ANDROID__)\n#endif  // defined(IN_CTS_TEST)",
+        "base_contents": "#endif  // defined(IN_CTS_TEST)",
+        "res_region": "\nclass SavedPerfHardenProperty {\n public:\n  SavedPerfHardenProperty() {\n    __system_property_get(\"security.perf_harden\", prop_value_);\n    if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                    &paranoid_value_)) {\n      PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n    }\n  }\n\n  ~SavedPerfHardenProperty() {\n    if (strlen(prop_value_) != 0) {\n      __system_property_set(\"security.perf_harden\", prop_value_);\n      // Sleep one second to wait for security.perf_harden changing\n      // /proc/sys/kernel/perf_event_paranoid.\n      sleep(1);\n      std::string paranoid_value;\n      if (!android::base::ReadFileToString(\"/proc/sys/kernel/perf_event_paranoid\",\n                                           &paranoid_value)) {\n        PLOG(ERROR) << \"failed to read /proc/sys/kernel/perf_event_paranoid\";\n        return;\n      }\n      if (paranoid_value_ != paranoid_value) {\n        LOG(ERROR) << \"failed to restore /proc/sys/kernel/perf_event_paranoid\";\n      }\n    }\n  }\n\n private:\n  char prop_value_[PROP_VALUE_MAX];\n  std::string paranoid_value_;\n};\n\n#endif  // defined(__ANDROID__)",
+        "lookback": "class SavedPerfHardenProperty {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 96,
+        "end_line": 174,
+        "merge_gen_region": null,
+        "confidence": 0.8595960736274719,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n  // A cts test PerfEventParanoidTest.java is testing if\n  // /proc/sys/kernel/perf_event_paranoid is 3, so restore perf_harden\n  // value after current test to not break that test.\n  SavedPerfHardenProperty saved_perf_harden;",
+        "b_contents": "\n#if defined(__ANDROID__)\n  // A cts test PerfEventParanoidTest.java is testing if\n  // /proc/sys/kernel/perf_event_paranoid is 3, so restore perf_harden\n  // value after current test to not break that test.\n  SavedPerfHardenProperty saved_perf_harden;\n#endif",
+        "base_contents": "",
+        "res_region": "\n  // A cts test PerfEventParanoidTest.java is testing if\n  // /proc/sys/kernel/perf_event_paranoid is 3, so restore perf_harden\n  // value after current test to not break that test.\n  SavedPerfHardenProperty saved_perf_harden;",
+        "lookback": "  // A cts test PerfEventParanoidTest.java is testing if",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 210,
+        "end_line": 225,
+        "merge_gen_region": " A####### /*>(# /*>(#",
+        "confidence": 0.8886668682098389,
+        "hesitated": false,
+        "resolved": false
+    }
+]

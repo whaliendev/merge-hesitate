@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    hls->dispose();",
+        "b_contents": "    int ret = ERROR_SUCCESS;\n    \n    srs_assert(h);\n    srs_assert(!_req);\n\n    handler = h;\n    _req = r->copy();\n    atc = _srs_config->get_atc(_req->vhost);\n\n#ifdef SRS_AUTO_HLS\n    if ((ret = hls->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n#endif\n    \n#ifdef SRS_AUTO_DVR\n    if ((ret = dvr->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n#endif\n\n    if ((ret = play_edge->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n    if ((ret = publish_edge->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n    \n    double queue_size = _srs_config->get_queue_length(_req->vhost);\n    publish_edge->set_queue_size(queue_size);\n    \n    jitter_algorithm = (SrsRtmpJitterAlgorithm)_srs_config->get_time_jitter(_req->vhost);\n    mix_correct = _srs_config->get_mix_correct(_req->vhost);",
+        "base_contents": "    int ret = ERROR_SUCCESS;\n    \n    srs_assert(h);\n    srs_assert(!_req);\n\n    handler = h;\n    _req = r->copy();\n    atc = _srs_config->get_atc(_req->vhost);\n\n#ifdef SRS_AUTO_HLS\n    if ((ret = hls->initialize(this)) != ERROR_SUCCESS) {\n        return ret;\n    }\n#endif\n    \n#ifdef SRS_AUTO_DVR\n    if ((ret = dvr->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n#endif\n\n    if ((ret = play_edge->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n    if ((ret = publish_edge->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n    \n    double queue_size = _srs_config->get_queue_length(_req->vhost);\n    publish_edge->set_queue_size(queue_size);\n    \n    jitter_algorithm = (SrsRtmpJitterAlgorithm)_srs_config->get_time_jitter(_req->vhost);\n    mix_correct = _srs_config->get_mix_correct(_req->vhost);",
+        "res_region": "    hls->dispose();",
+        "lookback": "    ",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 892,
+        "end_line": 962,
+        "merge_gen_region": null,
+        "confidence": 0.3846915364265442,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Notify the hub about the publish event.\n    if ((err = hub->on_publish()) != srs_success) {\n        return srs_error_wrap(err, \"hub publish\");",
+        "b_contents": "    // create forwarders\n    if ((ret = create_forwarders()) != ERROR_SUCCESS) {\n        srs_error(\"create forwarders failed. ret=%d\", ret);\n        return ret;\n    }\n    \n    // TODO: FIXME: use initialize to set req.\n#ifdef SRS_AUTO_TRANSCODE\n    if ((ret = encoder->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"start encoder failed. ret=%d\", ret);\n        return ret;\n    }\n#endif\n    \n#ifdef SRS_AUTO_HLS\n    if ((ret = hls->on_publish(_req, false)) != ERROR_SUCCESS) {\n        srs_error(\"start hls failed. ret=%d\", ret);\n        return ret;",
+        "base_contents": "    // create forwarders\n    if ((ret = create_forwarders()) != ERROR_SUCCESS) {\n        srs_error(\"create forwarders failed. ret=%d\", ret);\n        return ret;\n    }\n    \n    // TODO: FIXME: use initialize to set req.\n#ifdef SRS_AUTO_TRANSCODE\n    if ((ret = encoder->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"start encoder failed. ret=%d\", ret);\n        return ret;\n    }\n#endif\n    \n    // TODO: FIXME: use initialize to set req.\n#ifdef SRS_AUTO_HLS\n    if ((ret = hls->on_publish(_req, false)) != ERROR_SUCCESS) {\n        srs_error(\"start hls failed. ret=%d\", ret);\n        return ret;",
+        "res_region": "    // Notify the hub about the publish event.\n    if ((err = hub->on_publish()) != srs_success) {\n        return srs_error_wrap(err, \"hub publish\");",
+        "lookback": "    if ((err = hub->on_publish()) != srs_success) {",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2472,
+        "end_line": 2515,
+        "merge_gen_region": null,
+        "confidence": 0.6476153135299683,
+        "hesitated": true
+    }
+]

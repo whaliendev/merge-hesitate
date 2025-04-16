@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    DISPLAY( \"--list  : list information about a zstd compressed file \\n\");\n    DISPLAY( \"--long  : enable long distance matching\\n\");",
+        "b_contents": "",
+        "base_contents": "    DISPLAY( \"--list  : list information about a zstd compressed file \\n\");",
+        "res_region": "",
+        "lookback": "#ifndef ZSTD_NODICT",
+        "lookahead": "    DISPLAY( \"--      : All arguments after \\\"--\\\" are treated as files \\n\");",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 154,
+        "end_line": 160,
+        "merge_gen_region": null,
+        "confidence": 0.7067417502403259,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  uint32_t interval = 0;\n  if (options.PullUintValue(\"--etm-flush-interval\", &interval) && interval != 0) {\n    etm_flush_interval_ = std::chrono::milliseconds(interval);\n  }",
+        "b_contents": "  uint32_t interval = 0;\n  if (options.PullUintValue(\"--etm-flush-interval\", &interval)) {\n    etm_flush_interval_ = std::chrono::milliseconds(interval);\n  }",
+        "base_contents": "",
+        "res_region": "  uint32_t interval = 0;\n  if (options.PullUintValue(\"--etm-flush-interval\", &interval) && interval != 0) {\n    etm_flush_interval_ = std::chrono::milliseconds(interval);\n  }",
+        "lookback": "  if (options.PullUintValue(\"--etm-flush-interval\", &interval) && interval != 0) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1058,
+        "end_line": 1069,
+        "merge_gen_region": "uintuintString&uintString&uintString&uintString&uintString&uintString&uintString&uintString&uintString&uintString&uintString&uint_uint_uint_uint_uintString&uintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintStringuintString&uintString&uintString&uintString&uintString&uintString&uintString&",
+        "confidence": 0.8858038187026978,
+        "hesitated": false,
+        "resolved": false
+    }
+]

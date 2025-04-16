@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "#include <memory>\n#include <utility>\n#include <vector>\n",
+        "b_contents": "#include <memory>\n\n#include \"modules/common/apollo_app.h\"\n#include \"modules/common/proto/path_point.pb.h\"\n#include \"modules/common/status/status.h\"\n#include \"modules/common/util/factory.h\"",
+        "base_contents": "",
+        "res_region": "#include <memory>\n\n#include \"modules/common/apollo_app.h\"\n#include \"modules/common/proto/path_point.pb.h\"\n#include \"modules/common/status/status.h\"\n#include \"modules/common/util/factory.h\"",
+        "lookback": "",
+        "lookahead": "#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 19,
+        "end_line": 32,
+        "merge_gen_region": "include#########",
+        "confidence": 0.8940333724021912,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/**\n * @namespace apollo::planning\n * @brief apollo::planning\n */",
+        "base_contents": "#include <memory>\n",
+        "res_region": "/**\n * @namespace apollo::planning\n * @brief apollo::planning\n */",
+        "lookback": " * @namespace apollo::planning",
+        "lookahead": "namespace apollo {",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 38,
+        "end_line": 47,
+        "merge_gen_region": "797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.9138726592063904,
+        "hesitated": false,
+        "resolved": false
+    }
+]

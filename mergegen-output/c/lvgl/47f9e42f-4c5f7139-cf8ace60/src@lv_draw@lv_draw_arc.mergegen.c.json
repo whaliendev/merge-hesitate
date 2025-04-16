@@ -1,0 +1,55 @@
+[
+    {
+        "a_contents": "#define SPLIT_RADIUS_LIMIT 10  /*With radius greater then this the arc will drawn in quarters. A quarter is drawn only if there is arc in it */\n#define SPLIT_ANGLE_GAP_LIMIT 60  /*With small gaps in the arc don't bother with splitting because there is nothing to skip.",
+        "b_contents": "#define SPLIT_RADIUS_LIMIT 10  /*With radius greater then this the arc will drawn in quarters. A quarter is drawn only if there is arc in it */\n#define SPLIT_ANGLE_GAP_LIMIT 60  /*With small gaps in the arc don't bother with splitting because there is nothing to skip. */\n",
+        "base_contents": "",
+        "res_region": "#define SPLIT_RADIUS_LIMIT 10  /*With radius greater then this the arc will drawn in quarters. A quarter is drawn only if there is arc in it */\n#define SPLIT_ANGLE_GAP_LIMIT 60  /*With small gaps in the arc don't bother with splitting because there is nothing to skip.*/",
+        "lookback": "#define SPLIT_ANGLE_GAP_LIMIT 60  /*With small gaps in the arc don't bother with splitting because there is nothing to skip.*/",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 15,
+        "end_line": 23,
+        "merge_gen_region": null,
+        "confidence": 0.8136589527130127,
+        "hesitated": true
+    },
+    {
+        "a_contents": "typedef struct {\n    lv_coord_t center_x;\n    lv_coord_t center_y;\n    lv_coord_t radius;\n    uint16_t start_angle;\n    uint16_t end_angle;\n    uint16_t start_quarter;\n    uint16_t end_quarter;\n    lv_coord_t width;\n    lv_draw_rect_dsc_t * draw_dsc;\n    const lv_area_t * draw_area;\n    const lv_area_t * clip_area;\n}quarter_draw_dsc_t;",
+        "b_contents": "typedef struct {\n    lv_coord_t center_x;\n    lv_coord_t center_y;\n    lv_coord_t radius;\n    uint16_t start_angle;\n    uint16_t end_angle;\n    uint16_t start_quarter;\n    uint16_t end_quarter;\n    lv_coord_t width;\n    lv_opa_t opa_scale;\n    lv_style_t * style;\n    const lv_area_t * draw_area;\n    const lv_area_t * clip_area;\n}quarter_draw_dsc_t;\n",
+        "base_contents": "",
+        "res_region": "typedef struct {\n    lv_coord_t center_x;\n    lv_coord_t center_y;\n    lv_coord_t radius;\n    uint16_t start_angle;\n    uint16_t end_angle;\n    uint16_t start_quarter;\n    uint16_t end_quarter;\n    lv_coord_t width;\n    lv_draw_rect_dsc_t * draw_dsc;\n    const lv_area_t * draw_area;\n    const lv_area_t * clip_area;\n}quarter_draw_dsc_t;\n",
+        "lookback": "    lv_coord_t center_x;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 59,
+        "merge_gen_region": " voidtypedef {typedef",
+        "confidence": 0.9146697521209717,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    int32_t angle_gap;\n    if(end_angle > start_angle) {\n        angle_gap = 360 - (end_angle - start_angle);\n    } else {\n        angle_gap = end_angle - start_angle;\n    }\n    if(angle_gap > SPLIT_ANGLE_GAP_LIMIT && radius > SPLIT_RADIUS_LIMIT) {\n        /*Handle each quarter individually and skip which is empty*/\n        quarter_draw_dsc_t q_dsc;\n        q_dsc.center_x = center_x;\n        q_dsc.center_y = center_y;\n        q_dsc.radius = radius;\n        q_dsc.start_angle = start_angle;\n        q_dsc.end_angle = end_angle;\n        q_dsc.start_quarter= start_angle / 90;\n        q_dsc.end_quarter = end_angle / 90;\n        q_dsc.width = dsc->width;\n        q_dsc.draw_dsc =  &cir_dsc;\n        q_dsc.draw_area = &area;\n        q_dsc.clip_area = clip_area;\n\n        draw_quarter_0(&q_dsc);\n        draw_quarter_1(&q_dsc);\n        draw_quarter_2(&q_dsc);\n        draw_quarter_3(&q_dsc);\n    } else {\n        lv_draw_rect(&area, clip_area, &cir_dsc);\n    }",
+        "b_contents": "    int32_t angle_gap;\n    if(end_angle > start_angle) {\n        angle_gap = 360 - (end_angle - start_angle);\n    } else {\n        angle_gap = end_angle - start_angle;\n    }\n    if(angle_gap > SPLIT_ANGLE_GAP_LIMIT && radius > SPLIT_RADIUS_LIMIT) {\n        /*Handle each quarter individually and skip which is empty*/\n        quarter_draw_dsc_t q_dsc;\n        q_dsc.center_x = center_x;\n        q_dsc.center_y = center_y;\n        q_dsc.radius = radius;\n        q_dsc.start_angle = start_angle;\n        q_dsc.end_angle = end_angle;\n        q_dsc.start_quarter= start_angle / 90;\n        q_dsc.end_quarter = end_angle / 90;\n        q_dsc.width = circle_style.body.border.width;\n        q_dsc.opa_scale = opa_scale;\n        q_dsc.style =  &circle_style;\n        q_dsc.draw_area = &area;\n        q_dsc.clip_area = clip_area;",
+        "base_contents": "    lv_draw_rect(&area, clip_area, &circle_style, LV_OPA_COVER);",
+        "res_region": "    int32_t angle_gap;\n    if(end_angle > start_angle) {\n        angle_gap = 360 - (end_angle - start_angle);\n    } else {\n        angle_gap = end_angle - start_angle;\n    }\n    if(angle_gap > SPLIT_ANGLE_GAP_LIMIT && radius > SPLIT_RADIUS_LIMIT) {\n        /*Handle each quarter individually and skip which is empty*/\n        quarter_draw_dsc_t q_dsc;\n        q_dsc.center_x = center_x;\n        q_dsc.center_y = center_y;\n        q_dsc.radius = radius;\n        q_dsc.start_angle = start_angle;\n        q_dsc.end_angle = end_angle;\n        q_dsc.start_quarter= start_angle / 90;\n        q_dsc.end_quarter = end_angle / 90;\n        q_dsc.width = dsc->width;\n        q_dsc.draw_dsc =  &cir_dsc;\n        q_dsc.draw_area = &area;\n        q_dsc.clip_area = clip_area;\n\n        draw_quarter_0(&q_dsc);\n        draw_quarter_1(&q_dsc);\n        draw_quarter_2(&q_dsc);\n        draw_quarter_3(&q_dsc);\n    } else {\n        lv_draw_rect(&area, clip_area, &cir_dsc);",
+        "lookback": "    if(end_angle > start_angle) {",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 119,
+        "end_line": 172,
+        "merge_gen_region": "32t_ anglegap ifendangle startangle) anglegap 360 (__ -__ -_); else anglegap endangle startangle } ifanglegap SITANGLEGAPLIMIT radius >PL____ && >PL___LIMIT {Handle qu indid and which empty qu____ qdsc qdsccenterx centerx qdsccentery centery qdscradius radius qdscstartangle startangle startangle q__endangle endangle q qdscstartqu=_ /;__._ =scwidth qdscdrawdsc &_; qdscdrawarea &; qdsccliparea cliparea drawqu_0q_);_arter1q_);_arter_(&_);_arter_(&__);_arter3q_); else",
+        "confidence": 0.9399469494819641,
+        "hesitated": false,
+        "resolved": false
+    }
+]

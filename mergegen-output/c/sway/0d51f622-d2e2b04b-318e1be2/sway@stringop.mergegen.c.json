@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\nchar *cmdsep(char **stringp, const char *delim) {\n\tchar *head = strsep(stringp, delim);\n\t// But skip over trailing delims. '3   tokens  here' -> '3' 'tokens  here'\n\tif (*stringp) {\n\t\t*stringp += strspn(*stringp, delim);\n\t\t// If skiping over delims brings us to the end of string, set to NULL\n\t\tif (!**stringp) *stringp = NULL;\n\t}\n\treturn head;\n}\n\nchar *argsep(char **stringp, const char *delim) {\n\tchar *start = *stringp;\n\tchar *end = start;\n\tbool in_string = false;\n\tbool in_char = false;\n\tbool escaped = false;\n\twhile (1) {\n\t\tif (*end == '\"' && !in_char && !escaped) {\n\t\t\tin_string = !in_string;\n\t\t} else if (*end == '\\'' && !in_string && !escaped) {\n\t\t\tin_char = !in_char;\n\t\t} else if (*end == '\\\\') {\n\t\t\tescaped = !escaped;\n\t\t} else if (*end == '\\0') {\n\t\t\t*stringp = NULL;\n\t\t\tgoto found;\n\t\t} else if (!in_string && !in_char && !escaped && strchr(delim, *end)) {\n\t\t\tif (end - start) {\n\t\t\t\t*(end++) = 0;\n\t\t\t\t*stringp = end + strspn(end, delim);;\n\t\t\t\tif (!**stringp) *stringp = NULL;\n\t\t\t\tgoto found;\n\t\t\t} else {\n\t\t\t\t++start;\n\t\t\t\tend = start;\n\t\t\t}\n\t\t}\n\t\tif (*end != '\\\\') {\n\t\t\tescaped = false;\n\t\t}\n\t\t++end;\n\t}\n\tfound:\n\treturn start;\n}",
+        "b_contents": "\nchar *strdup(const char *str) {\n\tchar *dup = malloc(strlen(str) + 1);\n\tif (dup) {\n\t\tstrcpy(dup, str);\n\t}\n\treturn dup;\n}",
+        "base_contents": "",
+        "res_region": "\nchar *cmdsep(char **stringp, const char *delim) {\n\t// skip over leading delims\n\tchar *head = *stringp + strspn(*stringp, delim);\n\t// Find end token\n\tchar *tail = *stringp += strcspn(*stringp, delim);\n\t// Set stringp to begining of next token\n\t*stringp += strspn(*stringp, delim);\n\t// Set stringp to null if last token\n\tif (!**stringp) *stringp = NULL;\n\t// Nullify end of first token\n\t*tail = 0;\n\treturn head;\n}\n\nchar *argsep(char **stringp, const char *delim) {\n\tchar *start = *stringp;\n\tchar *end = start;\n\tbool in_string = false;\n\tbool in_char = false;\n\tbool escaped = false;\n\twhile (1) {\n\t\tif (*end == '\"' && !in_char && !escaped) {\n\t\t\tin_string = !in_string;\n\t\t} else if (*end == '\\'' && !in_string && !escaped) {\n\t\t\tin_char = !in_char;\n\t\t} else if (*end == '\\\\') {\n\t\t\tescaped = !escaped;\n\t\t} else if (*end == '\\0') {\n\t\t\t*stringp = NULL;\n\t\t\tgoto found;\n\t\t} else if (!in_string && !in_char && !escaped && strchr(delim, *end)) {\n\t\t\tif (end - start) {\n\t\t\t\t*(end++) = 0;\n\t\t\t\t*stringp = end + strspn(end, delim);;\n\t\t\t\tif (!**stringp) *stringp = NULL;\n\t\t\t\tgoto found;\n\t\t\t} else {\n\t\t\t\t++start;\n\t\t\t\tend = start;\n\t\t\t}\n\t\t}\n\t\tif (*end != '\\\\') {\n\t\t\tescaped = false;\n\t\t}\n\t\t++end;\n\t}\n\tfound:\n\treturn start;\n}\n\nchar *strdup(const char *str) {\n\tchar *dup = malloc(strlen(str) + 1);\n\tif (dup) {\n\t\tstrcpy(dup, str);\n\t}\n\treturn dup;\n}\n",
+        "lookback": "char *cmdsep(char **stringp, const char *delim) {",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 313,
+        "end_line": 371,
+        "merge_gen_region": " *sepcharstring, chardelim { *sepcharstring, chardelim { charhead =sepstring,); But over dems ' tokens' '3 ->3 ' here ifstringp { *p strn(*p delim // skip over demsrings to end string set NULL if**string)string = NULL } head } chararg( **p const *) charstart *string; * =; * =; * =; * =; charend start bool_ =; inchar false bool =; (1 { ifend ==' !nchar !) in_ =i_; else (* =='' !nstring &&escaped { inchar !i_; else (* == '\\\\') escaped !; else (* ==0 { *string = NULL goto; else (!nstring &&i_ &&escaped {(,end { ifend start { charstrdupconst *) chardup =((() 1 ifdup) strcpydup str } return; return; return; else; charstrdupconst *) chardup mallocstrlenstr +); () strcpydup str(,,); return; return; } } } void void( charstr { *sepcharstring, char { * =sepcharstring, char { * =",
+        "confidence": 0.9001392126083374,
+        "hesitated": false,
+        "resolved": false
+    }
+]

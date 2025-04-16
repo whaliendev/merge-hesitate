@@ -1,0 +1,155 @@
+[
+    {
+        "a_contents": "    \n    lv_chart_t * chart    = (lv_chart_t *)obj;",
+        "b_contents": "\n    if(chart == NULL || series == NULL) return;\n    lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);",
+        "base_contents": "    \n    if(chart == NULL || series == NULL) return;\n    lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);",
+        "res_region": "    \n    lv_chart_t * chart    = (lv_chart_t *)obj;",
+        "lookback": "    lv_chart_t * chart    = (lv_chart_t *)obj;",
+        "lookahead": "    if(!series->ext_buf_assigned && series->points) lv_mem_free(series->points);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 139,
+        "end_line": 150,
+        "merge_gen_region": null,
+        "confidence": 0.709186851978302,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    if(chart->type & LV_CHART_TYPE_LINE) {\n        x = (w * id) / (chart->point_cnt - 1);",
+        "b_contents": "    if(ext->type & LV_CHART_TYPE_LINE) {\n        x = (w * id) / (ext->point_cnt - 1);",
+        "base_contents": "\n    if(ext->type & LV_CHART_TYPE_LINE) {\n        x = (w * id) / (ext->point_cnt - 1);",
+        "res_region": "    if(chart->type & LV_CHART_TYPE_LINE) {\n        x = (w * id) / (chart->point_cnt - 1);",
+        "lookback": "        x = (w * id) / (chart->point_cnt - 1);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 658,
+        "end_line": 669,
+        "merge_gen_region": null,
+        "confidence": 0.8656405210494995,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/**\n * Get the series area of a chart.\n * @param chart pointer to a chart object\n * @param series_area pointer to an area variable that the result will be put in.\n */\nvoid lv_chart_get_series_area(lv_obj_t * chart, lv_area_t * series_area)\n{\n    lv_area_copy(series_area, &chart->coords);\n    series_area->x1 += lv_obj_get_style_pad_left(chart, LV_CHART_PART_BG);\n    series_area->x2 -= lv_obj_get_style_pad_right(chart, LV_CHART_PART_BG);\n    series_area->y1 += lv_obj_get_style_pad_top(chart, LV_CHART_PART_BG);\n    series_area->y2 -= lv_obj_get_style_pad_bottom(chart, LV_CHART_PART_BG);\n}\n",
+        "base_contents": "/**\n * Get the series area of a chart.\n * @param chart  pointer to a chart object\n * @param series_area  pointer to an area variable that the result will be put in.\n */\nvoid lv_chart_get_series_area(lv_obj_t * chart, lv_area_t * series_area)\n{\n    lv_area_copy(series_area, &chart->coords);\n    series_area->x1 += lv_obj_get_style_pad_left(chart, LV_CHART_PART_BG);\n    series_area->x2 -= lv_obj_get_style_pad_right(chart, LV_CHART_PART_BG);\n    series_area->y1 += lv_obj_get_style_pad_top(chart, LV_CHART_PART_BG);\n    series_area->y2 -= lv_obj_get_style_pad_bottom(chart, LV_CHART_PART_BG);\n}\n",
+        "res_region": "",
+        "lookback": " * Other functions",
+        "lookahead": "/*=====================",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 718,
+        "end_line": 749,
+        "merge_gen_region": null,
+        "confidence": 0.6292637586593628,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        lv_chart_t * chart  = (lv_chart_t *)obj;\n        if(chart->type & LV_CHART_TYPE_LINE) draw_series_line(obj, clip_area);\n        else if(chart->type & LV_CHART_TYPE_COLUMN) draw_series_column(obj, clip_area);",
+        "b_contents": "        draw_series_bg(chart, &series_area, clip_area);\n        draw_axes(chart, &series_area, clip_area);\n\n        lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);\n        if(ext->type & LV_CHART_TYPE_LINE) draw_series_line(chart, &series_area, clip_area);\n        if(ext->type & LV_CHART_TYPE_COLUMN) draw_series_column(chart, &series_area, clip_area);\n        draw_cursors(chart, &series_area, clip_area);",
+        "base_contents": "        draw_series_bg(chart, &series_area, clip_area);\n        draw_axes(chart, &series_area, clip_area);\n\n\n        lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);\n        if(ext->type & LV_CHART_TYPE_LINE) draw_series_line(chart, &series_area, clip_area);\n        if(ext->type & LV_CHART_TYPE_COLUMN) draw_series_column(chart, &series_area, clip_area);\n        draw_cursors(chart, &series_area, clip_area);",
+        "res_region": "        lv_chart_t * chart  = (lv_chart_t *)obj;\n        if(chart->type & LV_CHART_TYPE_LINE) draw_series_line(obj, clip_area);\n        else if(chart->type & LV_CHART_TYPE_COLUMN) draw_series_column(obj, clip_area);",
+        "lookback": "        if(chart->type & LV_CHART_TYPE_LINE) draw_series_line(obj, clip_area);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 862,
+        "end_line": 883,
+        "merge_gen_region": null,
+        "confidence": 0.8532405495643616,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/**\n * Get the style descriptor of a part of the object\n * @param chart pointer the object\n * @param part the part of the chart. (LV_CHART_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_chart_get_style(lv_obj_t * chart, uint8_t part)\n{\n    LV_ASSERT_OBJ(chart, LV_OBJX_NAME);\n\n    lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);\n    lv_style_list_t * style_dsc_p;\n\n    switch(part) {\n        case LV_CHART_PART_BG:\n            style_dsc_p = &chart->style_list;\n            break;\n        case LV_CHART_PART_SERIES_BG:\n            style_dsc_p = &ext->style_series_bg;\n            break;\n        case LV_CHART_PART_SERIES:\n            style_dsc_p = &ext->style_series;\n            break;\n        case LV_CHART_PART_CURSOR:\n            style_dsc_p = &ext->style_cursors;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n",
+        "base_contents": "\n/**\n * Get the style descriptor of a part of the object\n * @param chart pointer the object\n * @param part the part of the chart. (LV_CHART_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_chart_get_style(lv_obj_t * chart, uint8_t part)\n{\n    LV_ASSERT_OBJ(chart, LV_OBJX_NAME);\n\n    lv_chart_ext_t * ext = lv_obj_get_ext_attr(chart);\n    lv_style_list_t * style_dsc_p;\n\n    switch(part) {\n        case LV_CHART_PART_BG:\n            style_dsc_p = &chart->style_list;\n            break;\n        case LV_CHART_PART_SERIES_BG:\n            style_dsc_p = &ext->style_series_bg;\n            break;\n        case LV_CHART_PART_SERIES:\n            style_dsc_p = &ext->style_series;\n            break;\n        case LV_CHART_PART_CURSOR:\n            style_dsc_p = &ext->style_cursors;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n",
+        "res_region": "",
+        "lookback": " * Draw the division lines on chart background",
+        "lookahead": "/**",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 934,
+        "end_line": 1004,
+        "merge_gen_region": null,
+        "confidence": 0.6823723912239075,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    obj->state = state_ori;\n\n    lv_coord_t point_size_act;",
+        "b_contents": "    lv_coord_t point_radius = lv_obj_get_style_size(chart, LV_CHART_PART_SERIES);",
+        "base_contents": "\n    lv_coord_t point_radius = lv_obj_get_style_size(chart, LV_CHART_PART_SERIES);",
+        "res_region": "    obj->state = state_ori;\n\n    lv_coord_t point_size_act;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1092,
+        "end_line": 1101,
+        "merge_gen_region": null,
+        "confidence": 0.6918460130691528,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    _LV_LL_READ_BACK(&chart->series_ll, ser) {\n    \tif (ser->hidden) continue;\n        line_dsc_default.color = ser->color;\n        point_dsc_default.bg_color = ser->color;",
+        "b_contents": "    _LV_LL_READ_BACK(ext->series_ll, ser) {\n        if(ser->hidden) continue;\n        line_dsc.color = ser->color;\n        point_dsc.bg_color = ser->color;\n        area_dsc.bg_color = ser->color;\n        area_dsc.bg_grad_color = ser->color;",
+        "base_contents": "    _LV_LL_READ_BACK(ext->series_ll, ser) {\n    \tif (ser->hidden) continue;\n        line_dsc.color = ser->color;\n        point_dsc.bg_color = ser->color;\n        area_dsc.bg_color = ser->color;\n        area_dsc.bg_grad_color = ser->color;",
+        "res_region": "    _LV_LL_READ_BACK(&chart->series_ll, ser) {\n    \tif (ser->hidden) continue;\n        line_dsc_default.color = ser->color;\n        point_dsc_default.bg_color = ser->color;",
+        "lookback": "    \tif (ser->hidden) continue;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1107,
+        "end_line": 1126,
+        "merge_gen_region": null,
+        "confidence": 0.7250869870185852,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _LV_LL_READ_BACK(&chart->series_ll, ser) {\n        \tif (ser->hidden) continue;\n            lv_coord_t start_point = chart->update_mode == LV_CHART_UPDATE_MODE_SHIFT ? ser->start_point : 0;",
+        "b_contents": "        _LV_LL_READ_BACK(ext->series_ll, ser) {\n            if(ser->hidden) continue;\n            lv_coord_t start_point = ext->update_mode == LV_CHART_UPDATE_MODE_SHIFT ? ser->start_point : 0;",
+        "base_contents": "        _LV_LL_READ_BACK(ext->series_ll, ser) {\n        \tif (ser->hidden) continue;\n            lv_coord_t start_point = ext->update_mode == LV_CHART_UPDATE_MODE_SHIFT ? ser->start_point : 0;",
+        "res_region": "        _LV_LL_READ_BACK(&chart->series_ll, ser) {\n        \tif (ser->hidden) continue;\n            lv_coord_t start_point = chart->update_mode == LV_CHART_UPDATE_MODE_SHIFT ? ser->start_point : 0;",
+        "lookback": "        \tif (ser->hidden) continue;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1255,
+        "end_line": 1267,
+        "merge_gen_region": null,
+        "confidence": 0.7820838689804077,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_obj_init_draw_label_dsc(obj, LV_PART_MARKER, &label_dsc);\n\n    lv_coord_t major_tick_len = lv_obj_get_style_pad_bottom(obj, LV_PART_MARKER);\n    lv_coord_t minor_tick_len = major_tick_len / 2;\n    lv_coord_t label_gap = TICK_LABEL_GAP;",
+        "b_contents": "    lv_obj_init_draw_label_dsc(chart, LV_CHART_PART_BG, &label_dsc);\n\n    /* calculate the size of tick marks */\n    if(ext->x_axis.major_tick_len == LV_CHART_TICK_LENGTH_AUTO)\n        major_tick_len = (int32_t)w * LV_CHART_AXIS_MAJOR_TICK_LEN_COE;\n    else\n        major_tick_len = ext->x_axis.major_tick_len;",
+        "base_contents": "    lv_obj_init_draw_label_dsc(chart, LV_CHART_PART_BG, &label_dsc);\n\n\n    /* calculate the size of tick marks */\n    if(ext->x_axis.major_tick_len == LV_CHART_TICK_LENGTH_AUTO)\n        major_tick_len = (int32_t)w * LV_CHART_AXIS_MAJOR_TICK_LEN_COE;\n    else\n        major_tick_len = ext->x_axis.major_tick_len;",
+        "res_region": "    lv_obj_init_draw_label_dsc(obj, LV_PART_MARKER, &label_dsc);\n\n    lv_coord_t major_tick_len = lv_obj_get_style_pad_bottom(obj, LV_PART_MARKER);\n    lv_coord_t minor_tick_len = major_tick_len / 2;\n    lv_coord_t label_gap = TICK_LABEL_GAP;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1500,
+        "end_line": 1523,
+        "merge_gen_region": null,
+        "confidence": 0.8321137428283691,
+        "hesitated": true
+    }
+]

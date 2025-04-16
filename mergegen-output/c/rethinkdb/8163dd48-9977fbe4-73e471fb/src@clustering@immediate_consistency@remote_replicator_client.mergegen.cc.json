@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        THROWS_NOTHING {\n    /* The current implementation of the dispatcher will never send us an async write\n    once it's started sending sync writes, but we don't want to rely on that detail, so\n    we pass sync writes through the timestamp enforcer too. */\n    timestamp_enforcer_->complete(timestamp);",
+        "b_contents": "        THROWS_ONLY(interrupted_exc_t) {\n    /* We aren't inserting into the queue ourselves, so there's no need to wait on\n    `write_queue_entrance_enforcer_`. But a call to `on_write_async()` could\n    hypothetically come later, so we need to tell the `write_queue_entrance_enforcer_`\n    not to wait for us. */\n    write_queue_entrance_enforcer_->complete(timestamp);",
+        "base_contents": "        THROWS_NOTHING {\n    /* We aren't inserting into the queue ourselves, so there's no need to wait on\n    `write_queue_entrance_enforcer_`. But a call to `on_write_async()` could\n    hypothetically come later, so we need to tell the `write_queue_entrance_enforcer_`\n    not to wait for us. */\n    write_queue_entrance_enforcer_->complete(timestamp);",
+        "res_region": "        THROWS_ONLY(interrupted_exc_t) {\n    /* The current implementation of the dispatcher will never send us an async write\n    once it's started sending sync writes, but we don't want to rely on that detail, so\n    we pass sync writes through the timestamp enforcer too. */\n    timestamp_enforcer_->complete(timestamp);",
+        "lookback": "    /* The current implementation of the dispatcher will never send us an async write",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 585,
+        "end_line": 605,
+        "merge_gen_region": null,
+        "confidence": 0.6103287935256958,
+        "hesitated": true
+    }
+]

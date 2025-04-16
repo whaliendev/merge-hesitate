@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "void js_cocostudio_ObjectExtensionData_finalize(JSFreeOp *fop, JSObject *obj) {\n    CCLOGINFO(\"jsbindings: finalizing JS object %p (ObjectExtensionData)\", obj);",
+        "b_contents": "\nextern JSObject *jsb_cocos2d_Component_prototype;\n\nvoid js_cocostudio_ComExtensionData_finalize(JSFreeOp *fop, JSObject *obj) {\n    CCLOGINFO(\"jsbindings: finalizing JS object %p (ComExtensionData)\", obj);",
+        "base_contents": "\n\nvoid js_cocostudio_ObjectExtensionData_finalize(JSFreeOp *fop, JSObject *obj) {\n    CCLOGINFO(\"jsbindings: finalizing JS object %p (ObjectExtensionData)\", obj);",
+        "res_region": "void js_cocostudio_ObjectExtensionData_finalize(JSFreeOp *fop, JSObject *obj) {\n    CCLOGINFO(\"jsbindings: finalizing JS object %p (ObjectExtensionData)\", obj);",
+        "lookback": "    CCLOGINFO(\"jsbindings: finalizing JS object %p (ObjectExtensionData)\", obj);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 13636,
+        "end_line": 13650,
+        "merge_gen_region": null,
+        "confidence": 0.7957120537757874,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void js_register_cocos2dx_studio_ObjectExtensionData(JSContext *cx, JS::HandleObject global) {\n    jsb_cocostudio_ObjectExtensionData_class = (JSClass *)calloc(1, sizeof(JSClass));\n    jsb_cocostudio_ObjectExtensionData_class->name = \"ObjectExtensionData\";\n    jsb_cocostudio_ObjectExtensionData_class->addProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->delProperty = JS_DeletePropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->getProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->setProperty = JS_StrictPropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->enumerate = JS_EnumerateStub;\n    jsb_cocostudio_ObjectExtensionData_class->resolve = JS_ResolveStub;\n    jsb_cocostudio_ObjectExtensionData_class->convert = JS_ConvertStub;\n    jsb_cocostudio_ObjectExtensionData_class->finalize = js_cocostudio_ObjectExtensionData_finalize;\n    jsb_cocostudio_ObjectExtensionData_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);",
+        "b_contents": "\nvoid js_register_cocos2dx_studio_ComExtensionData(JSContext *cx, JS::HandleObject global) {\n    jsb_cocostudio_ComExtensionData_class = (JSClass *)calloc(1, sizeof(JSClass));\n    jsb_cocostudio_ComExtensionData_class->name = \"ComExtensionData\";\n    jsb_cocostudio_ComExtensionData_class->addProperty = JS_PropertyStub;\n    jsb_cocostudio_ComExtensionData_class->delProperty = JS_DeletePropertyStub;\n    jsb_cocostudio_ComExtensionData_class->getProperty = JS_PropertyStub;\n    jsb_cocostudio_ComExtensionData_class->setProperty = JS_StrictPropertyStub;\n    jsb_cocostudio_ComExtensionData_class->enumerate = JS_EnumerateStub;\n    jsb_cocostudio_ComExtensionData_class->resolve = JS_ResolveStub;\n    jsb_cocostudio_ComExtensionData_class->convert = JS_ConvertStub;\n    jsb_cocostudio_ComExtensionData_class->finalize = js_cocostudio_ComExtensionData_finalize;\n    jsb_cocostudio_ComExtensionData_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);",
+        "base_contents": "\nvoid js_register_cocos2dx_studio_ObjectExtensionData(JSContext *cx, JS::HandleObject global) {\n    jsb_cocostudio_ObjectExtensionData_class = (JSClass *)calloc(1, sizeof(JSClass));\n    jsb_cocostudio_ObjectExtensionData_class->name = \"ObjectExtensionData\";\n    jsb_cocostudio_ObjectExtensionData_class->addProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->delProperty = JS_DeletePropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->getProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->setProperty = JS_StrictPropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->enumerate = JS_EnumerateStub;\n    jsb_cocostudio_ObjectExtensionData_class->resolve = JS_ResolveStub;\n    jsb_cocostudio_ObjectExtensionData_class->convert = JS_ConvertStub;\n    jsb_cocostudio_ObjectExtensionData_class->finalize = js_cocostudio_ObjectExtensionData_finalize;\n    jsb_cocostudio_ObjectExtensionData_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);",
+        "res_region": "void js_register_cocos2dx_studio_ObjectExtensionData(JSContext *cx, JS::HandleObject global) {\n    jsb_cocostudio_ObjectExtensionData_class = (JSClass *)calloc(1, sizeof(JSClass));\n    jsb_cocostudio_ObjectExtensionData_class->name = \"ObjectExtensionData\";\n    jsb_cocostudio_ObjectExtensionData_class->addProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->delProperty = JS_DeletePropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->getProperty = JS_PropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->setProperty = JS_StrictPropertyStub;\n    jsb_cocostudio_ObjectExtensionData_class->enumerate = JS_EnumerateStub;\n    jsb_cocostudio_ObjectExtensionData_class->resolve = JS_ResolveStub;\n    jsb_cocostudio_ObjectExtensionData_class->convert = JS_ConvertStub;\n    jsb_cocostudio_ObjectExtensionData_class->finalize = js_cocostudio_ObjectExtensionData_finalize;\n    jsb_cocostudio_ObjectExtensionData_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);",
+        "lookback": "    jsb_cocostudio_ObjectExtensionData_class = (JSClass *)calloc(1, sizeof(JSClass));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 13652,
+        "end_line": 13693,
+        "merge_gen_region": null,
+        "confidence": 0.8647533059120178,
+        "hesitated": true
+    }
+]

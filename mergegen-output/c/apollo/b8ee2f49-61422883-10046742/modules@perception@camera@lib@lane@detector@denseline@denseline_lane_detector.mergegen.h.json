@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/perception/camera/lib/lane/common/proto/denseline.pb.h\"\n#if GPU_PLATFORM == NVIDIA\n  #include \"modules/perception/inference/tensorrt/rt_net.h\"\n#elif GPU_PLATFORM == AMD\n  #include \"modules/perception/inference/migraphx/mi_net.h\"\n#endif",
+        "b_contents": "#include \"modules/perception/inference/tensorrt/rt_net.h\"",
+        "base_contents": "#include \"modules/perception/camera/lib/lane/common/proto/denseline.pb.h\"\n#include \"modules/perception/inference/tensorrt/rt_net.h\"",
+        "res_region": "#if GPU_PLATFORM == NVIDIA\n  #include \"modules/perception/inference/tensorrt/rt_net.h\"\n#elif GPU_PLATFORM == AMD\n  #include \"modules/perception/inference/migraphx/mi_net.h\"\n#endif",
+        "lookback": "  #include \"modules/perception/inference/tensorrt/rt_net.h\"",
+        "lookahead": "#include \"modules/perception/lib/registerer/registerer.h\"",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.7706137299537659,
+        "hesitated": true
+    }
+]

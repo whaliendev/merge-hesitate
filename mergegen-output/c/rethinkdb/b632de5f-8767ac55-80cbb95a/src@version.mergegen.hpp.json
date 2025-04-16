@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    v1_14 = 1,",
+        "b_contents": "    v1_13 = 0,\n    v1_14 = 1,",
+        "base_contents": "    v1_13,\n    v1_14,",
+        "res_region": "    v1_14 = 1,",
+        "lookback": "    v1_15 = v1_14,",
+        "lookahead": "    v1_15 = v1_14,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 82,
+        "end_line": 90,
+        "merge_gen_region": null,
+        "confidence": 0.4688760042190552,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    v1_16 = 2,\n    v2_0 = 3,",
+        "b_contents": "    v1_16 = 2,\n    v2_0 = 3,\n    v2_1 = 4,",
+        "base_contents": "    v1_16,\n    v2_0,",
+        "res_region": "    v1_16 = 2,\n    v2_0 = 3,\n    v2_1 = 4,",
+        "lookback": "    v2_0 = 3,",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 92,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.6457259058952332,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    EARLIEST = v1_14,\n    LATEST = v2_0,",
+        "b_contents": "    // Code that uses _has_v1_14_ordering may need to be updated when\n    // the ordering of datums changes\n    LATEST_has_v1_14_ordering = v2_1,\n\n    EARLIEST = v1_13,\n    LATEST = v2_1,",
+        "base_contents": "    // Code that uses _has_v1_14_ordering may need to be updated when\n    // the ordering of datums changes\n    LATEST_has_v1_14_ordering = v2_0,\n\n    EARLIEST = v1_13,\n    LATEST = v2_0,",
+        "res_region": "    EARLIEST = v1_14,\n    LATEST = v2_1,",
+        "lookback": "    LATEST = v2_1,",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 108,
+        "end_line": 125,
+        "merge_gen_region": null,
+        "confidence": 0.8412349224090576,
+        "hesitated": true
+    }
+]

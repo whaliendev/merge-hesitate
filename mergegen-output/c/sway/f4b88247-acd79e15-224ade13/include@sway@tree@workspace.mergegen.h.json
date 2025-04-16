@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\nstruct sway_container *workspace_for_pid(pid_t pid);\n\nvoid workspace_record_pid(pid_t pid);\n",
+        "b_contents": "\nvoid workspace_detect_urgent(struct sway_container *workspace);\n",
+        "base_contents": "",
+        "res_region": "\nstruct sway_container *workspace_for_pid(pid_t pid);\n\nvoid workspace_record_pid(pid_t pid);\n\nvoid workspace_detect_urgent(struct sway_container *workspace);\n",
+        "lookback": "struct sway_container *workspace_for_pid(pid_t pid);",
+        "lookahead": "#endif",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 45,
+        "end_line": 56,
+        "merge_gen_region": "structstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstruct",
+        "confidence": 0.8913121223449707,
+        "hesitated": false,
+        "resolved": false
+    }
+]

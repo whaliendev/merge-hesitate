@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "status_t AudioFlinger::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {\n    audio_utils::lock_guard _l(mutex());\n    ALOGV(\"%s\", __func__);\n\n    std::map<audio_port_handle_t, bool> tracksInternalMuteMap;\n    for (const auto& trackInternalMute : tracksInternalMute) {\n        audio_port_handle_t portId = VALUE_OR_RETURN_STATUS(\n                aidl2legacy_int32_t_audio_port_handle_t(trackInternalMute.portId));\n        tracksInternalMuteMap.emplace(portId, trackInternalMute.muted);\n    }\n    for (size_t i = 0; i < mPlaybackThreads.size() && !tracksInternalMuteMap.empty(); i++) {\n        mPlaybackThreads.valueAt(i)->setTracksInternalMute(&tracksInternalMuteMap);\n    }\n    return NO_ERROR;\n}\n\nstatus_t AudioFlinger::resetReferencesForTest() {\n    mDeviceEffectManager.clear();\n    mPatchPanel.clear();\n    mMelReporter->resetReferencesForTest();\n    return NO_ERROR;\n}\n",
+        "b_contents": "status_t AudioFlinger::resetReferencesForTest() {\n    mDeviceEffectManager.clear();\n    mPatchPanel.clear();\n    mMelReporter->resetReferencesForTest();\n    return NO_ERROR;\n}\n",
+        "base_contents": "",
+        "res_region": "status_t AudioFlinger::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {\n    audio_utils::lock_guard _l(mutex());\n    ALOGV(\"%s\", __func__);\n\n    std::map<audio_port_handle_t, bool> tracksInternalMuteMap;\n    for (const auto& trackInternalMute : tracksInternalMute) {\n        audio_port_handle_t portId = VALUE_OR_RETURN_STATUS(\n                aidl2legacy_int32_t_audio_port_handle_t(trackInternalMute.portId));\n        tracksInternalMuteMap.emplace(portId, trackInternalMute.muted);\n    }\n    for (size_t i = 0; i < mPlaybackThreads.size() && !tracksInternalMuteMap.empty(); i++) {\n        mPlaybackThreads.valueAt(i)->setTracksInternalMute(&tracksInternalMuteMap);\n    }\n    return NO_ERROR;\n}\n\nstatus_t AudioFlinger::resetReferencesForTest() {\n    mDeviceEffectManager.clear();\n    mPatchPanel.clear();\n    mMelReporter->resetReferencesForTest();\n    return NO_ERROR;\n}\n",
+        "lookback": "        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {",
+        "lookahead": "// ----------------------------------------------------------------------------",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 4974,
+        "end_line": 5008,
+        "merge_gen_region": null,
+        "confidence": 0.8107659816741943,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        case TransactionCode::SET_TRACKS_INTERNAL_MUTE:\n        case TransactionCode::RESET_REFERENCES_FOR_TEST:",
+        "b_contents": "        case TransactionCode::RESET_REFERENCES_FOR_TEST:",
+        "base_contents": "",
+        "res_region": "        case TransactionCode::SET_TRACKS_INTERNAL_MUTE:\n        case TransactionCode::RESET_REFERENCES_FOR_TEST:",
+        "lookback": "        case TransactionCode::RESET_REFERENCES_FOR_TEST:",
+        "lookahead": "            ALOGW(\"%s: transaction %d received from PID %d\",",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 5043,
+        "end_line": 5049,
+        "merge_gen_region": null,
+        "confidence": 0.692077100276947,
+        "hesitated": true
+    }
+]

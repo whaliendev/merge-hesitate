@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"renderer/CCPrimitive.h\"\n#include \"renderer/CCPrimitiveCommand.h\"\n#include \"renderer/CCTrianglesCommand.h\"\n#include \"renderer/CCMaterial.h\"\n#include \"renderer/CCTechnique.h\"\n#include \"renderer/CCPass.h\"\n#include \"renderer/CCRenderState.h\"\n#include \"renderer/CCFrameBufferObject.h\"",
+        "b_contents": "#include \"renderer/ccGLStateCache.h\"\n#include \"renderer/ccShaders.h\"",
+        "base_contents": "#include \"renderer/CCPrimitive.h\"\n#include \"renderer/CCPrimitiveCommand.h\"\n#include \"renderer/CCTrianglesCommand.h\"\n#include \"renderer/CCMaterial.h\"\n#include \"renderer/CCTechnique.h\"\n#include \"renderer/CCPass.h\"\n#include \"renderer/CCRenderState.h\"",
+        "res_region": "#include \"renderer/CCPrimitive.h\"\n#include \"renderer/CCPrimitiveCommand.h\"\n#include \"renderer/CCTrianglesCommand.h\"\n#include \"renderer/CCMaterial.h\"\n#include \"renderer/CCTechnique.h\"\n#include \"renderer/CCPass.h\"\n#include \"renderer/CCRenderState.h\"\n#include \"renderer/CCFrameBufferObject.h\"\n#include \"renderer/ccGLStateCache.h\"\n#include \"renderer/ccShaders.h\"",
+        "lookback": "#include \"renderer/CCPrimitiveCommand.h\"",
+        "lookahead": "",
+        "label": [
+            "concat",
+            "complex_conflict"
+        ],
+        "start_line": 169,
+        "end_line": 189,
+        "merge_gen_region": null,
+        "confidence": 0.8427508473396301,
+        "hesitated": true
+    }
+]

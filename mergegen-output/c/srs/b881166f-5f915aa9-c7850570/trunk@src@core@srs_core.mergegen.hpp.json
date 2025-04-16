@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define VERSION_REVISION    6",
+        "b_contents": "#define VERSION_REVISION    203",
+        "base_contents": "#define VERSION_REVISION    202",
+        "res_region": "#define VERSION_REVISION    6",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 39,
+        "merge_gen_region": "define_____();define____",
+        "confidence": 0.8800803422927856,
+        "hesitated": false,
+        "resolved": false
+    }
+]

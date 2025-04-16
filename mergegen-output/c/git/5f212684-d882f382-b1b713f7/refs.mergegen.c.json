@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\ttransaction = ref_store_transaction_begin(refs, 0, &err);\n\tif (!transaction ||\n\t    ref_transaction_update(transaction, ref, NULL, NULL,\n\t\t\t\t   target, NULL, REF_NO_DEREF,\n\t\t\t\t   logmsg, &err) ||\n\t    ref_transaction_commit(transaction, &err)) {",
+        "b_contents": "\ttransaction = ref_store_transaction_begin(refs, &err);\n\tif (!transaction) {\n\terror_return:",
+        "base_contents": "\ttransaction = ref_store_transaction_begin(refs, &err);\n\tif (!transaction ||\n\t    ref_transaction_update(transaction, ref, NULL, NULL,\n\t\t\t\t   target, NULL, REF_NO_DEREF,\n\t\t\t\t   logmsg, &err) ||\n\t    ref_transaction_commit(transaction, &err)) {",
+        "res_region": "\ttransaction = ref_store_transaction_begin(refs, 0, &err);\n\tif (!transaction) {\n\terror_return:",
+        "lookback": "\tif (!transaction) {",
+        "lookahead": "\t\tret = error(\"%s\", err.buf);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2180,
+        "end_line": 2198,
+        "merge_gen_region": null,
+        "confidence": 0.761830747127533,
+        "hesitated": true
+    }
+]

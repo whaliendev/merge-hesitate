@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ce = zend_register_internal_class(&_ce);",
+        "b_contents": "    ce = zend_register_internal_class(&_ce TSRMLS_CC);\n\n    SWOOLE_DEFINE(HOOK_FILE);\n    SWOOLE_DEFINE(HOOK_SLEEP);\n    SWOOLE_DEFINE(HOOK_TCP);\n    SWOOLE_DEFINE(HOOK_UDP);\n    SWOOLE_DEFINE(HOOK_UNIX);\n    SWOOLE_DEFINE(HOOK_UDG);\n    SWOOLE_DEFINE(HOOK_SSL);\n    SWOOLE_DEFINE(HOOK_TLS);\n    SWOOLE_DEFINE(HOOK_ALL);",
+        "base_contents": "    ce = zend_register_internal_class(&_ce TSRMLS_CC);",
+        "res_region": "    ce = zend_register_internal_class(&_ce);\n\n    SWOOLE_DEFINE(HOOK_FILE);\n    SWOOLE_DEFINE(HOOK_SLEEP);\n    SWOOLE_DEFINE(HOOK_TCP);\n    SWOOLE_DEFINE(HOOK_UDP);\n    SWOOLE_DEFINE(HOOK_UNIX);\n    SWOOLE_DEFINE(HOOK_UDG);\n    SWOOLE_DEFINE(HOOK_SSL);\n    SWOOLE_DEFINE(HOOK_TLS);\n    SWOOLE_DEFINE(HOOK_ALL);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 131,
+        "end_line": 147,
+        "merge_gen_region": null,
+        "confidence": 0.7986605167388916,
+        "hesitated": true
+    }
+]

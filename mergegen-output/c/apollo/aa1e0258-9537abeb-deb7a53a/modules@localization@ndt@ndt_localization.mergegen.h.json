@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  std::list<TimeStampPose, Eigen::aligned_allocator<TimeStampPose>>\n    odometry_buffer_;",
+        "b_contents": "  std::list<TimeStampPose, Eigen::aligned_allocator<TimeStampPose>> odometry_buffer_;",
+        "base_contents": "  std::list<TimeStampPose> odometry_buffer_;",
+        "res_region": "  std::list<TimeStampPose, Eigen::aligned_allocator<TimeStampPose>>\n    odometry_buffer_;",
+        "lookback": "    odometry_buffer_;",
+        "lookahead": "  std::mutex odometry_buffer_mutex_;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 135,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.6205683946609497,
+        "hesitated": true
+    }
+]

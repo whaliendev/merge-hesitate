@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "                backfill_end_timestamps.combine(\n                    backfill_end_timestamps_t(\n                        region_map_transform<version_t, state_timestamp_t>(chunk,\n                            [](const version_t &version) {\n                                return version.timestamp;\n                            })));",
+        "b_contents": "                backfill_end_timestamps.combine(backfill_end_timestamps_t(\n                    chunk.map(\n                        chunk.get_domain(),\n                        [](const version_t &version) { return version.timestamp; })));",
+        "base_contents": "                backfill_end_timestamps.combine(\n                    region_map_transform<version_t, state_timestamp_t>(chunk,\n                        [](const version_t &version) { return version.timestamp; }));",
+        "res_region": "                backfill_end_timestamps.combine(backfill_end_timestamps_t(\n                    chunk.map(\n                        chunk.get_domain(),\n                        [](const version_t &version) { return version.timestamp; })));",
+        "lookback": "                    chunk.map(",
+        "lookahead": "                return (queue->size() < config->write_queue_count);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 217,
+        "end_line": 233,
+        "merge_gen_region": "chunkchunkchunkchunkchunkchunkchunk",
+        "confidence": 0.9175593256950378,
+        "hesitated": false,
+        "resolved": false
+    }
+]

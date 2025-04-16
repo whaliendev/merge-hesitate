@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "    void synthesizePointerDownEventsForConnectionLocked(const nsecs_t downTime,\n                                                        const sp<Connection>& connection,\n                                                        ftl::Flags<InputTarget::Flags> targetFlags)\n            REQUIRES(mLock);",
+        "b_contents": "    void synthesizePointerDownEventsForConnectionLocked(const sp<Connection>& connection,\n                                                        int32_t targetFlags) REQUIRES(mLock);\n\n    void synthesizeCancelationEventsForWindowLocked(\n            const sp<android::gui::WindowInfoHandle>& windowHandle,\n            const CancelationOptions& options) REQUIRES(mLock);",
+        "base_contents": "    void synthesizePointerDownEventsForConnectionLocked(const sp<Connection>& connection)\n            REQUIRES(mLock);",
+        "res_region": "    void synthesizePointerDownEventsForConnectionLocked(const nsecs_t downTime,\n                                                        const sp<Connection>& connection,\n                                                        ftl::Flags<InputTarget::Flags> targetFlags)\n            REQUIRES(mLock);",
+        "lookback": "                                                        const sp<Connection>& connection,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 629,
+        "end_line": 644,
+        "merge_gen_region": ">(TypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeType",
+        "confidence": 0.8934793472290039,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\n    void slipWallpaperTouch(ftl::Flags<InputTarget::Flags> targetFlags,\n                            const sp<android::gui::WindowInfoHandle>& oldWindowHandle,\n                            const sp<android::gui::WindowInfoHandle>& newWindowHandle,\n                            TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n    void transferWallpaperTouch(ftl::Flags<InputTarget::Flags> oldTargetFlags,\n                                ftl::Flags<InputTarget::Flags> newTargetFlags,\n                                const sp<android::gui::WindowInfoHandle> fromWindowHandle,\n                                const sp<android::gui::WindowInfoHandle> toWindowHandle,\n                                TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n\n    sp<android::gui::WindowInfoHandle> findWallpaperWindowBelow(\n            const sp<android::gui::WindowInfoHandle>& windowHandle) const REQUIRES(mLock);",
+        "b_contents": "\n    void slipWallpaperTouch(int32_t targetFlags,\n                            const sp<android::gui::WindowInfoHandle>& oldWindowHandle,\n                            const sp<android::gui::WindowInfoHandle>& newWindowHandle,\n                            TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n    void transferWallpaperTouch(int32_t oldTargetFlags, int32_t newTargetFlags,\n                                const sp<android::gui::WindowInfoHandle> fromWindowHandle,\n                                const sp<android::gui::WindowInfoHandle> toWindowHandle,\n                                TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n\n    sp<android::gui::WindowInfoHandle> findWallpaperWindowBelow(\n            const sp<android::gui::WindowInfoHandle>& windowHandle) const REQUIRES(mLock);",
+        "base_contents": "",
+        "res_region": "\n    void slipWallpaperTouch(ftl::Flags<InputTarget::Flags> targetFlags,\n                            const sp<android::gui::WindowInfoHandle>& oldWindowHandle,\n                            const sp<android::gui::WindowInfoHandle>& newWindowHandle,\n                            TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n    void transferWallpaperTouch(ftl::Flags<InputTarget::Flags> oldTargetFlags,\n                                ftl::Flags<InputTarget::Flags> newTargetFlags,\n                                const sp<android::gui::WindowInfoHandle> fromWindowHandle,\n                                const sp<android::gui::WindowInfoHandle> toWindowHandle,\n                                TouchState& state, const BitSet32& pointerIds) REQUIRES(mLock);\n\n    sp<android::gui::WindowInfoHandle> findWallpaperWindowBelow(\n            const sp<android::gui::WindowInfoHandle>& windowHandle) const REQUIRES(mLock);",
+        "lookback": "    void slipWallpaperTouch(ftl::Flags<InputTarget::Flags> targetFlags,",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 710,
+        "end_line": 738,
+        "merge_gen_region": " sWallTouchft::<Target::>Flags, spandroidguiWindow voidlippaper(lFlagsInput::::InfoHandle oldHandleHandle const<::::::Info>&WindowHandle const spandroidguiWindowHandle>&WindowHandle Touch&, Bit32 pointer) REQUI(); transferpaper(lFlagsInput::>::<::::::InfoWindowWindowHandlesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss//////////////",
+        "confidence": 0.886730432510376,
+        "hesitated": false,
+        "resolved": false
+    }
+]

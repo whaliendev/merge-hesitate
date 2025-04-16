@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                 audio_utils::lock_guard _l(mAfThreadCallback->mutex());",
+        "b_contents": "                audio_utils::lock_guard _l(mAfThreadCallback->mutex());",
+        "base_contents": "                Mutex::Autolock _l(mAfThreadCallback->mutex());",
+        "res_region": "                 audio_utils::lock_guard _l(mAfThreadCallback->mutex());",
+        "lookback": "                vibratorInfo = std::move(mAfThreadCallback->getDefaultVibratorInfo_l());",
+        "lookahead": "                vibratorInfo = std::move(mAfThreadCallback->getDefaultVibratorInfo_l());",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 2908,
+        "end_line": 2914,
+        "merge_gen_region": null,
+        "confidence": 0.8121232390403748,
+        "hesitated": true
+    }
+]

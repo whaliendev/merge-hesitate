@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "        Vec2 anchorPoint;\n        anchorPoint.x = _anchorPointInPoints.x * _scaleX;\n        anchorPoint.y = _anchorPointInPoints.y * _scaleY;",
+        "b_contents": "        bool needsSkewMatrix = ( _skewX || _skewY );\n\n        Vec2 anchorPoint(_anchorPointInPoints.x * _scaleX, _anchorPointInPoints.y * _scaleY);",
+        "base_contents": "        bool needsSkewMatrix = ( _skewX || _skewY );\n\n        Vec2 anchorPoint;\n        anchorPoint.x = _anchorPointInPoints.x * _scaleX;\n        anchorPoint.y = _anchorPointInPoints.y * _scaleY;",
+        "res_region": "        Vec2 anchorPoint(_anchorPointInPoints.x * _scaleX, _anchorPointInPoints.y * _scaleY);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1771,
+        "end_line": 1785,
+        "merge_gen_region": null,
+        "confidence": 0.6822026371955872,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (_scaleX != 1.f)\n        {\n            _transform.m[0] *= _scaleX, _transform.m[4] *= _scaleX, _transform.m[8] *= _scaleX;",
+        "b_contents": "        \n        // FIXME:\n        // FIX ME: Expensive operation.\n        // FIX ME: It should be done together with the rotationZ\n        if(_rotationY)\n        {\n            Mat4 rotY;\n            Mat4::createRotationY(CC_DEGREES_TO_RADIANS(_rotationY), &rotY);\n            _transform = _transform * rotY;",
+        "base_contents": "        \n        // FIXME:\n        // FIX ME: Expensive operation.\n        // FIX ME: It should be done together with the rotationZ\n        if(_rotationY) {\n            Mat4 rotY;\n            Mat4::createRotationY(CC_DEGREES_TO_RADIANS(_rotationY), &rotY);\n            _transform = _transform * rotY;",
+        "res_region": "        if (_scaleX != 1.f)\n        {\n            _transform.m[0] *= _scaleX, _transform.m[4] *= _scaleX, _transform.m[8] *= _scaleX;",
+        "lookback": "        {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1805,
+        "end_line": 1828,
+        "merge_gen_region": null,
+        "confidence": 0.8757407069206238,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (_scaleY)\n        {\n            _transform.m[1] *= _scaleY, _transform.m[5] *= _scaleY, _transform.m[9] *= _scaleY;",
+        "b_contents": "        if(_rotationX)\n        {\n            Mat4 rotX;\n            Mat4::createRotationX(CC_DEGREES_TO_RADIANS(_rotationX), &rotX);\n            _transform = _transform * rotX;",
+        "base_contents": "        if(_rotationX) {\n            Mat4 rotX;\n            Mat4::createRotationX(CC_DEGREES_TO_RADIANS(_rotationX), &rotX);\n            _transform = _transform * rotX;",
+        "res_region": "        if (_scaleY != 1.f)\n        {\n            _transform.m[1] *= _scaleY, _transform.m[5] *= _scaleY, _transform.m[9] *= _scaleY;",
+        "lookback": "        {",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 1830,
+        "end_line": 1845,
+        "merge_gen_region": " (_ifififififififififififififififififififififififififififififififififififififififififif>(ifififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.8825665712356567,
+        "hesitated": false,
+        "resolved": false
+    }
+]

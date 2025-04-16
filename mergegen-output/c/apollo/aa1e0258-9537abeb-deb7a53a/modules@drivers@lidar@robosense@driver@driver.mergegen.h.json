@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/drivers/lidar/robosense/proto/sensor_suteng.pb.h\"\n#include \"modules/drivers/lidar/robosense/proto/sensor_suteng_conf.pb.h\"",
+        "b_contents": "#include \"modules/drivers/lidar/proto/config.pb.h\"\n#include \"modules/drivers/lidar/proto/robosense.pb.h\"\n#include \"modules/drivers/lidar/proto/robosense_config.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/pointcloud.pb.h\"",
+        "base_contents": "#include \"modules/drivers/lidar/proto/config.pb.h\"\n#include \"modules/drivers/lidar/proto/robosense.pb.h\"\n#include \"modules/drivers/lidar/proto/robosense_config.pb.h\"\n#include \"modules/drivers/proto/pointcloud.pb.h\"",
+        "res_region": "#include \"modules/drivers/lidar/robosense/proto/sensor_suteng.pb.h\"\n#include \"modules/drivers/lidar/robosense/proto/sensor_suteng_conf.pb.h\"",
+        "lookback": "#include \"modules/drivers/lidar/robosense/proto/sensor_suteng_conf.pb.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 20,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.8555759191513062,
+        "hesitated": true
+    }
+]

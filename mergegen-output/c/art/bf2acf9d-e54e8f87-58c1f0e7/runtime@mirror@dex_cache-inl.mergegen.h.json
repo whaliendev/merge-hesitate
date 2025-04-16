@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "template<typename T>\nT* DexCache::AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup) {\n  Thread* self = Thread::Current();",
+        "b_contents": "template<typename T, size_t kMaxCacheSize>\nT* DexCache::AllocArray(MemberOffset obj_offset,\n                        MemberOffset num_offset,\n                        size_t num,\n                        LinearAllocKind kind) {\n  num = std::min<size_t>(num, kMaxCacheSize);\n  if (num == 0) {\n    return nullptr;\n  }",
+        "base_contents": "template<typename T, size_t kMaxCacheSize>\nT* DexCache::AllocArray(MemberOffset obj_offset, MemberOffset num_offset, size_t num) {\n  num = std::min<size_t>(num, kMaxCacheSize);\n  if (num == 0) {\n    return nullptr;\n  }",
+        "res_region": "template<typename T>\nT* DexCache::AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup) {\n  Thread* self = Thread::Current();",
+        "lookback": "T* DexCache::AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup) {",
+        "lookahead": "  mirror::DexCache* dex_cache = this;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 55,
+        "end_line": 76,
+        "merge_gen_region": null,
+        "confidence": 0.8626633882522583,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  SetStringsEntry(string_idx.index_, resolved.Ptr());",
+        "b_contents": "  StringDexCacheType* strings = GetStrings();\n  if (UNLIKELY(strings == nullptr)) {\n    strings = AllocArray<StringDexCacheType, kDexCacheStringCacheSize>(\n        StringsOffset(),\n        NumStringsOffset(),\n        GetDexFile()->NumStringIds(),\n        LinearAllocKind::kDexCacheArray);\n  }\n  strings[StringSlotIndex(string_idx)].store(\n      StringDexCachePair(resolved, string_idx.index_), std::memory_order_relaxed);",
+        "base_contents": "  StringDexCacheType* strings = GetStrings();\n  if (UNLIKELY(strings == nullptr)) {\n    strings = AllocArray<StringDexCacheType, kDexCacheStringCacheSize>(\n        StringsOffset(), NumStringsOffset(), GetDexFile()->NumStringIds());\n  }\n  strings[StringSlotIndex(string_idx)].store(\n      StringDexCachePair(resolved, string_idx.index_), std::memory_order_relaxed);",
+        "res_region": "  SetStringsEntry(string_idx.index_, resolved.Ptr());",
+        "lookback": "  Runtime* const runtime = Runtime::Current();",
+        "lookahead": "  Runtime* const runtime = Runtime::Current();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 158,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.5133294463157654,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return GetResolvedTypesEntry(type_idx.index_);",
+        "b_contents": "  // It is theorized that a load acquire is not required since obtaining the resolved class will\n  // always have an address dependency or a lock.\n  TypeDexCacheType* resolved_types = GetResolvedTypes();\n  if (UNLIKELY(resolved_types == nullptr)) {\n    return nullptr;\n  }\n  return resolved_types[TypeSlotIndex(type_idx)].load(\n      std::memory_order_relaxed).GetObjectForIndex(type_idx.index_);\n}\n\ninline void DexCache::SetResolvedType(dex::TypeIndex type_idx, ObjPtr<Class> resolved) {\n  DCHECK(resolved != nullptr);\n  DCHECK(resolved->IsResolved()) << resolved->GetStatus();\n  TypeDexCacheType* resolved_types = GetResolvedTypes();\n  if (UNLIKELY(resolved_types == nullptr)) {\n    resolved_types = AllocArray<TypeDexCacheType, kDexCacheTypeCacheSize>(\n        ResolvedTypesOffset(),\n        NumResolvedTypesOffset(),\n        GetDexFile()->NumTypeIds(),\n        LinearAllocKind::kDexCacheArray);\n  }\n  // TODO default transaction support.\n  // Use a release store for SetResolvedType. This is done to prevent other threads from seeing a\n  // class but not necessarily seeing the loaded members like the static fields array.\n  // See b/32075261.\n  resolved_types[TypeSlotIndex(type_idx)].store(\n      TypeDexCachePair(resolved, type_idx.index_), std::memory_order_release);\n  // TODO: Fine-grained marking, so that we don't need to go through all arrays in full.\n  WriteBarrier::ForEveryFieldWrite(this);",
+        "base_contents": "  // It is theorized that a load acquire is not required since obtaining the resolved class will\n  // always have an address dependency or a lock.\n  TypeDexCacheType* resolved_types = GetResolvedTypes();\n  if (UNLIKELY(resolved_types == nullptr)) {\n    return nullptr;\n  }\n  return resolved_types[TypeSlotIndex(type_idx)].load(\n      std::memory_order_relaxed).GetObjectForIndex(type_idx.index_);\n}\n\ninline void DexCache::SetResolvedType(dex::TypeIndex type_idx, ObjPtr<Class> resolved) {\n  DCHECK(resolved != nullptr);\n  DCHECK(resolved->IsResolved()) << resolved->GetStatus();\n  TypeDexCacheType* resolved_types = GetResolvedTypes();\n  if (UNLIKELY(resolved_types == nullptr)) {\n    resolved_types = AllocArray<TypeDexCacheType, kDexCacheTypeCacheSize>(\n        ResolvedTypesOffset(), NumResolvedTypesOffset(), GetDexFile()->NumTypeIds());\n  }\n  // TODO default transaction support.\n  // Use a release store for SetResolvedType. This is done to prevent other threads from seeing a\n  // class but not necessarily seeing the loaded members like the static fields array.\n  // See b/32075261.\n  resolved_types[TypeSlotIndex(type_idx)].store(\n      TypeDexCachePair(resolved, type_idx.index_), std::memory_order_release);\n  // TODO: Fine-grained marking, so that we don't need to go through all arrays in full.\n  WriteBarrier::ForEveryFieldWrite(this);",
+        "res_region": "  return GetResolvedTypesEntry(type_idx.index_);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 203,
+        "end_line": 262,
+        "merge_gen_region": null,
+        "confidence": 0.8182785511016846,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  SetResolvedMethodTypesEntry(proto_idx.index_, resolved);\n",
+        "b_contents": "  MethodTypeDexCacheType* methods = GetResolvedMethodTypes();\n  if (UNLIKELY(methods == nullptr)) {\n    methods = AllocArray<MethodTypeDexCacheType, kDexCacheMethodTypeCacheSize>(\n        ResolvedMethodTypesOffset(),\n        NumResolvedMethodTypesOffset(),\n        GetDexFile()->NumProtoIds(),\n        LinearAllocKind::kDexCacheArray);\n  }\n  methods[MethodTypeSlotIndex(proto_idx)].store(\n      MethodTypeDexCachePair(resolved, proto_idx.index_), std::memory_order_relaxed);",
+        "base_contents": "  MethodTypeDexCacheType* methods = GetResolvedMethodTypes();\n  if (UNLIKELY(methods == nullptr)) {\n    methods = AllocArray<MethodTypeDexCacheType, kDexCacheMethodTypeCacheSize>(\n        ResolvedMethodTypesOffset(), NumResolvedMethodTypesOffset(), GetDexFile()->NumProtoIds());\n  }\n  methods[MethodTypeSlotIndex(proto_idx)].store(\n      MethodTypeDexCachePair(resolved, proto_idx.index_), std::memory_order_relaxed);",
+        "res_region": "  SetResolvedMethodTypesEntry(proto_idx.index_, resolved);\n",
+        "lookback": "",
+        "lookahead": "  Runtime* const runtime = Runtime::Current();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 284,
+        "end_line": 306,
+        "merge_gen_region": null,
+        "confidence": 0.8397186398506165,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    call_sites = AllocateResolvedCallSites();",
+        "b_contents": "    call_sites = AllocArray<GcRoot<CallSite>, std::numeric_limits<size_t>::max()>(\n        ResolvedCallSitesOffset(),\n        NumResolvedCallSitesOffset(),\n        GetDexFile()->NumCallSiteIds(),\n        LinearAllocKind::kGCRootArray);",
+        "base_contents": "    call_sites = AllocArray<GcRoot<CallSite>, std::numeric_limits<size_t>::max()>(\n        ResolvedCallSitesOffset(), NumResolvedCallSitesOffset(), GetDexFile()->NumCallSiteIds());",
+        "res_region": "    call_sites = AllocateResolvedCallSites();",
+        "lookback": "  }",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 351,
+        "end_line": 362,
+        "merge_gen_region": null,
+        "confidence": 0.63315349817276,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  SetResolvedFieldsEntry(field_idx, field);",
+        "b_contents": "  DCHECK(field != nullptr);\n  FieldDexCachePair pair(field, field_idx);\n  FieldDexCacheType* fields = GetResolvedFields();\n  if (UNLIKELY(fields == nullptr)) {\n    fields = AllocArray<FieldDexCacheType, kDexCacheFieldCacheSize>(\n        ResolvedFieldsOffset(),\n        NumResolvedFieldsOffset(),\n        GetDexFile()->NumFieldIds(),\n        LinearAllocKind::kNoGCRoots);\n  }\n  SetNativePair(fields, FieldSlotIndex(field_idx), pair);\n}\n\ninline uint32_t DexCache::MethodSlotIndex(uint32_t method_idx) {\n  DCHECK_LT(method_idx, GetDexFile()->NumMethodIds());\n  const uint32_t slot_idx = method_idx % kDexCacheMethodCacheSize;\n  DCHECK_LT(slot_idx, NumResolvedMethods());\n  return slot_idx;",
+        "base_contents": "  DCHECK(field != nullptr);\n  FieldDexCachePair pair(field, field_idx);\n  FieldDexCacheType* fields = GetResolvedFields();\n  if (UNLIKELY(fields == nullptr)) {\n    fields = AllocArray<FieldDexCacheType, kDexCacheFieldCacheSize>(\n        ResolvedFieldsOffset(), NumResolvedFieldsOffset(), GetDexFile()->NumFieldIds());\n  }\n  SetNativePair(fields, FieldSlotIndex(field_idx), pair);\n}\n\ninline uint32_t DexCache::MethodSlotIndex(uint32_t method_idx) {\n  DCHECK_LT(method_idx, GetDexFile()->NumMethodIds());\n  const uint32_t slot_idx = method_idx % kDexCacheMethodCacheSize;\n  DCHECK_LT(slot_idx, NumResolvedMethods());\n  return slot_idx;",
+        "res_region": "  SetResolvedFieldsEntry(field_idx, field);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 383,
+        "end_line": 420,
+        "merge_gen_region": null,
+        "confidence": 0.5368744134902954,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  SetResolvedMethodsEntry(method_idx, method);",
+        "b_contents": "  DCHECK(method != nullptr);\n  MethodDexCachePair pair(method, method_idx);\n  MethodDexCacheType* methods = GetResolvedMethods();\n  if (UNLIKELY(methods == nullptr)) {\n    methods = AllocArray<MethodDexCacheType, kDexCacheMethodCacheSize>(\n        ResolvedMethodsOffset(),\n        NumResolvedMethodsOffset(),\n        GetDexFile()->NumMethodIds(),\n        LinearAllocKind::kNoGCRoots);\n  }\n  SetNativePair(methods, MethodSlotIndex(method_idx), pair);\n}\n\ntemplate <typename T>\nNativeDexCachePair<T> DexCache::GetNativePair(std::atomic<NativeDexCachePair<T>>* pair_array,\n                                              size_t idx) {\n  auto* array = reinterpret_cast<std::atomic<AtomicPair<uintptr_t>>*>(pair_array);\n  AtomicPair<uintptr_t> value = AtomicPairLoadAcquire(&array[idx]);\n  return NativeDexCachePair<T>(reinterpret_cast<T*>(value.first), value.second);\n}\n\ntemplate <typename T>\nvoid DexCache::SetNativePair(std::atomic<NativeDexCachePair<T>>* pair_array,\n                             size_t idx,\n                             NativeDexCachePair<T> pair) {\n  auto* array = reinterpret_cast<std::atomic<AtomicPair<uintptr_t>>*>(pair_array);\n  AtomicPair<uintptr_t> v(reinterpret_cast<size_t>(pair.object), pair.index);\n  AtomicPairStoreRelease(&array[idx], v);",
+        "base_contents": "  DCHECK(method != nullptr);\n  MethodDexCachePair pair(method, method_idx);\n  MethodDexCacheType* methods = GetResolvedMethods();\n  if (UNLIKELY(methods == nullptr)) {\n    methods = AllocArray<MethodDexCacheType, kDexCacheMethodCacheSize>(\n        ResolvedMethodsOffset(), NumResolvedMethodsOffset(), GetDexFile()->NumMethodIds());\n  }\n  SetNativePair(methods, MethodSlotIndex(method_idx), pair);\n}\n\ntemplate <typename T>\nNativeDexCachePair<T> DexCache::GetNativePair(std::atomic<NativeDexCachePair<T>>* pair_array,\n                                              size_t idx) {\n  auto* array = reinterpret_cast<std::atomic<AtomicPair<uintptr_t>>*>(pair_array);\n  AtomicPair<uintptr_t> value = AtomicPairLoadAcquire(&array[idx]);\n  return NativeDexCachePair<T>(reinterpret_cast<T*>(value.first), value.second);\n}\n\ntemplate <typename T>\nvoid DexCache::SetNativePair(std::atomic<NativeDexCachePair<T>>* pair_array,\n                             size_t idx,\n                             NativeDexCachePair<T> pair) {\n  auto* array = reinterpret_cast<std::atomic<AtomicPair<uintptr_t>>*>(pair_array);\n  AtomicPair<uintptr_t> v(reinterpret_cast<size_t>(pair.object), pair.index);\n  AtomicPairStoreRelease(&array[idx], v);",
+        "res_region": "  SetResolvedMethodsEntry(method_idx, method);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 428,
+        "end_line": 485,
+        "merge_gen_region": null,
+        "confidence": 0.6298073530197144,
+        "hesitated": true
+    }
+]

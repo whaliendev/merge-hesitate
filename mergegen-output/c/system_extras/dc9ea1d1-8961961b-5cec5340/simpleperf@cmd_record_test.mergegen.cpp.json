@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "          if (android::base::EndsWith(name, \"jni_trampoline\")) {\n            continue;\n          }\n          // When the jni_trampoline function is from JIT cache, we may not get map info in time.\n          // To avoid test flakiness, we accept this.\n          // Case 1: It doesn't hit any maps.\n          if (name == \"unknown\") {\n            continue;",
+        "b_contents": "          if (android::base::EndsWith(name, \"jni_trampoline\")) {\n            continue;",
+        "base_contents": "          if (!android::base::EndsWith(name, \"jni_trampoline\")) {\n            GTEST_LOG_(ERROR) << \"unexpected symbol after art::Method_invoke: \" << name;\n            return false;",
+        "res_region": "          if (android::base::EndsWith(name, \"jni_trampoline\")) {\n            continue;\n          }",
+        "lookback": "            continue;",
+        "lookahead": "          // When the jni_trampoline function is from JIT cache, we may not get map info in time.",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 932,
+        "end_line": 948,
+        "merge_gen_region": null,
+        "confidence": 0.7113987803459167,
+        "hesitated": true
+    },
+    {
+        "a_contents": "          // Case 2: It hits an old map for JIT cache.\n          if (const MapEntry* map = thread_tree.FindMap(thread, ips[i + 1], false);\n              JITDebugReader::IsPathInJITSymFile(map->dso->Path())) {\n            continue;\n          }\n\n          GTEST_LOG_(ERROR) << \"unexpected symbol after art::Method_invoke: \" << name;\n          return false;",
+        "b_contents": "          // When the jni_trampoline function is from JIT cache, we may not get map info in time.\n          // To avoid test flakiness, we accept this.\n          // Case 1: It doesn't hit any maps.\n          if (name == \"unknown\") {\n            continue;\n          }\n          // Case 2: It hits an old map for JIT cache.\n          if (const MapEntry* map = thread_tree.FindMap(thread, ips[i + 1], false);\n              JITDebugReader::IsPathInJITSymFile(map->dso->Path())) {\n            continue;\n          }\n\n          GTEST_LOG_(ERROR) << \"unexpected symbol after art::Method_invoke: \" << name;\n          return false;",
+        "base_contents": "",
+        "res_region": "          // When the jni_trampoline function is from JIT cache, we may not get map info in time.\n          // To avoid test flakiness, we accept this.\n          // Case 1: It doesn't hit any maps.\n          if (name == \"unknown\") {\n            continue;\n          }\n          // Case 2: It hits an old map for JIT cache.\n          if (const MapEntry* map = thread_tree.FindMap(thread, ips[i + 1], false);\n              JITDebugReader::IsPathInJITSymFile(map->dso->Path())) {\n            continue;\n          }\n\n          GTEST_LOG_(ERROR) << \"unexpected symbol after art::Method_invoke: \" << name;\n          return false;",
+        "lookback": "          // To avoid test flakiness, we accept this.",
+        "lookahead": "        }",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 950,
+        "end_line": 975,
+        "merge_gen_region": " Case: hits old for cache. ( Map* =_.7979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.920532763004303,
+        "hesitated": false,
+        "resolved": false
+    }
+]

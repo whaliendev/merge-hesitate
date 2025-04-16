@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            ->current_traffic_light_overlaps.size() == 0) {",
+        "b_contents": "            ->current_traffic_light_overlaps.empty()) {",
+        "base_contents": "        ->current_traffic_light_overlaps.size() == 0) {",
+        "res_region": "            ->current_traffic_light_overlaps.empty()) {",
+        "lookback": "      return FinishStage();",
+        "lookahead": "      return FinishStage();",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 62,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.6339007019996643,
+        "hesitated": true
+    }
+]

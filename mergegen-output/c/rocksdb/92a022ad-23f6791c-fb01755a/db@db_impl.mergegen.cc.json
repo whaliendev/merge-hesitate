@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "// If externalTable is set, then apply recovered transactions\n// to that table. This is used for readonly mode.\nStatus DBImpl::Recover(\n    VersionEdit* edit,\n    const std::vector<ColumnFamilyDescriptor>& column_families,\n    MemTable* external_table, bool error_if_log_file_exist) {",
+        "b_contents": "Status DBImpl::Recover(bool read_only, bool error_if_log_file_exist) {",
+        "base_contents": "// If externalTable is set, then apply recovered transactions\n// to that table. This is used for readonly mode.\nStatus DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n                       bool error_if_log_file_exist) {",
+        "res_region": "Status DBImpl::Recover(\n    const std::vector<ColumnFamilyDescriptor>& column_families, bool read_only,\n    bool error_if_log_file_exist) {",
+        "lookback": "    const std::vector<ColumnFamilyDescriptor>& column_families, bool read_only,",
+        "lookahead": "  mutex_.AssertHeld();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 865,
+        "end_line": 879,
+        "merge_gen_region": null,
+        "confidence": 0.7767379283905029,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  VersionEdit edit;\n  // Handles create_if_missing, error_if_exists\n  s = impl->Recover(&edit, column_families);",
+        "b_contents": "  s = impl->Recover(); // Handles create_if_missing, error_if_exists",
+        "base_contents": "  VersionEdit edit;\n  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "res_region": "  s = impl->Recover(); // Handles create_if_missing, error_if_exists",
+        "lookback": "  if (s.ok()) {",
+        "lookahead": "  if (s.ok()) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 3960,
+        "end_line": 3969,
+        "merge_gen_region": null,
+        "confidence": 0.3820372223854065,
+        "hesitated": true
+    }
+]

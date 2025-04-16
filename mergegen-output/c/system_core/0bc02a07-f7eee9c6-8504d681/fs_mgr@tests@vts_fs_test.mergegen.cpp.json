@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    // T-launch GKI kernels and higher must support EROFS.\n    if (GetVsrLevel() < __ANDROID_API_T__) {",
+        "b_contents": "    // S and higher for this test.\n    if (GetVsrLevel() < __ANDROID_API_S__) {",
+        "base_contents": "    // U and higher for this test.\n    if (GetVsrLevel() <= __ANDROID_API_T__) {",
+        "res_region": "    // T-launch GKI kernels and higher must support EROFS.\n    if (GetVsrLevel() < __ANDROID_API_T__) {",
+        "lookback": "    if (GetVsrLevel() < __ANDROID_API_T__) {",
+        "lookahead": "        GTEST_SKIP();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 30,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.8459637761116028,
+        "hesitated": true
+    }
+]

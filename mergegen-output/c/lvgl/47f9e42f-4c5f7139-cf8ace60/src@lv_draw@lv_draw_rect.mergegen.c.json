@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "static void draw_bg(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic void draw_border(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic void draw_shadow(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic inline lv_color_t grad_get(lv_draw_rect_dsc_t * dsc, lv_coord_t s, lv_coord_t i);\nstatic void shadow_draw_corner_buf(const lv_area_t * coords,  lv_opa_t * sh_buf, lv_coord_t s, lv_coord_t r);\nstatic void shadow_blur_corner(lv_coord_t size, lv_coord_t sw, lv_opa_t * res_buf, uint16_t * sh_ups_buf);\nstatic void draw_img(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);",
+        "b_contents": "static void draw_bg(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic void draw_border(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic void draw_shadow(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic lv_color_t grad_get(const lv_style_t * style, lv_coord_t s, lv_coord_t i);\nstatic void shadow_draw_corner_buf(const lv_area_t * coords,  uint16_t * sh_buf, lv_coord_t s, lv_coord_t r);\nstatic void shadow_blur_corner(lv_coord_t size, lv_coord_t sw, uint16_t * sh_ups_buf);",
+        "base_contents": "static void draw_bg(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic void draw_border(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic void draw_shadow(const lv_area_t * coords, const lv_area_t * clip, const lv_style_t * style, lv_opa_t opa_scale);\nstatic lv_color_t grad_get(const lv_style_t * style, lv_coord_t s, lv_coord_t i);\nstatic void shadow_draw_corner_buf(const lv_area_t * coords,  lv_opa_t * sh_buf, lv_coord_t s, lv_coord_t r);\nstatic void shadow_blur_corner(lv_coord_t size, lv_coord_t sw, lv_opa_t * res_buf, uint16_t * sh_ups_buf);",
+        "res_region": "static void draw_bg(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic void draw_border(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic void draw_shadow(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);\nstatic inline lv_color_t grad_get(lv_draw_rect_dsc_t * dsc, lv_coord_t s, lv_coord_t i);\nstatic void shadow_draw_corner_buf(const lv_area_t * coords,  uint16_t * sh_buf, lv_coord_t s, lv_coord_t r);\nstatic void shadow_blur_corner(lv_coord_t size, lv_coord_t sw, uint16_t * sh_ups_buf);\nstatic void draw_img(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);",
+        "lookback": "static void draw_border(const lv_area_t * coords, const lv_area_t * clip, lv_draw_rect_dsc_t * dsc);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 29,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.83268141746521,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_opa_t * sh_buf = lv_mem_buf_get(corner_size * corner_size);\n    shadow_draw_corner_buf(&sh_rect_area, sh_buf, dsc->shadow_width, r_sh);",
+        "b_contents": "    lv_opa_t * sh_buf = lv_mem_buf_get(corner_size * corner_size * sizeof(uint16_t));\n    shadow_draw_corner_buf(&sh_rect_area, (uint16_t *)sh_buf, style->body.shadow.width, r_sh);",
+        "base_contents": "    lv_opa_t * sh_buf = lv_mem_buf_get(corner_size * corner_size);\n    shadow_draw_corner_buf(&sh_rect_area, sh_buf, style->body.shadow.width, r_sh);",
+        "res_region": "    lv_opa_t * sh_buf = lv_mem_buf_get(corner_size * corner_size * sizeof(uint16_t));\n    shadow_draw_corner_buf(&sh_rect_area, (uint16_t *)sh_buf, dsc->shadow_width, r_sh);",
+        "lookback": "    shadow_draw_corner_buf(&sh_rect_area, (uint16_t *)sh_buf, dsc->shadow_width, r_sh);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 596,
+        "end_line": 605,
+        "merge_gen_region": null,
+        "confidence": 0.8391969799995422,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        int32_t i;",
+        "b_contents": "        uint32_t i;\n        lv_opa_t * res_buf = (lv_opa_t *)sh_buf;",
+        "base_contents": "        lv_coord_t i;",
+        "res_region": "        uint32_t i;\n        lv_opa_t * res_buf = (lv_opa_t *)sh_buf;",
+        "lookback": "        lv_opa_t * res_buf = (lv_opa_t *)sh_buf;",
+        "lookahead": "        for(i = 0; i < size * size; i++) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 962,
+        "end_line": 969,
+        "merge_gen_region": null,
+        "confidence": 0.7314878702163696,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "        memcpy(sh_ups_tmp_buf, sh_ups_blur_buf, size * sizeof(uint16_t));",
+        "base_contents": "",
+        "res_region": "        memcpy(sh_ups_tmp_buf, sh_ups_blur_buf, size * sizeof(uint16_t));",
+        "lookback": "        sh_ups_tmp_buf += size;",
+        "lookahead": "        sh_ups_tmp_buf += size;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 1036,
+        "end_line": 1041,
+        "merge_gen_region": null,
+        "confidence": 0.7077082991600037,
+        "hesitated": true
+    }
+]

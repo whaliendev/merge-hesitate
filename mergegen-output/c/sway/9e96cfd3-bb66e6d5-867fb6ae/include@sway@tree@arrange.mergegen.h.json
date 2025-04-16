@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/**\n * Arrange layout for all the children of the given container, and add them to\n * the given transaction.\n *\n * Use this function if you need to arrange multiple sections of the tree in one\n * transaction.\n */\nvoid arrange_windows(struct sway_container *container,\n\t\tstruct sway_transaction *transaction);",
+        "b_contents": "// Remove gaps around container\nvoid remove_gaps(struct sway_container *c);\n\n// Add gaps around container\nvoid add_gaps(struct sway_container *c);\n\n// Determine the root container's geometry, then iterate to everything below\nvoid arrange_root(void);",
+        "base_contents": "// Determine the root container's geometry, then iterate to everything below\nvoid arrange_root(void);",
+        "res_region": "// Remove gaps around container\nvoid remove_gaps(struct sway_container *c);\n\n// Add gaps around container\nvoid add_gaps(struct sway_container *c);\n\n/**\n * Arrange layout for all the children of the given container, and add them to\n * the given transaction.\n *\n * Use this function if you need to arrange multiple sections of the tree in one\n * transaction.\n */\nvoid arrange_windows(struct sway_container *container,\n\t\tstruct sway_transaction *transaction);",
+        "lookback": "void remove_gaps(struct sway_container *c);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 6,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.839516282081604,
+        "hesitated": true
+    }
+]

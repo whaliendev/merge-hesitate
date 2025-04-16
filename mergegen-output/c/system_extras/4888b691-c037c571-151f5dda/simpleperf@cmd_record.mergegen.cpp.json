@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "\"ETM recording options:\\n\"\n\"--addr-filter filter_str1,filter_str2,...\\n\"\n\"                Provide address filters for cs-etm instruction tracing.\\n\"\n\"                filter_str accepts below formats:\\n\"\n\"                  'filter  <addr-range>'  -- trace instructions in a range\\n\"\n\"                  'start <addr>'          -- start tracing when ip is <addr>\\n\"\n\"                  'stop <addr>'           -- stop tracing when ip is <addr>\\n\"\n\"                <addr-range> accepts below formats:\\n\"\n\"                  <file_path>                            -- code sections in a binary file\\n\"\n\"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\\n\"\n\"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\\n\"\n\"                <addr> accepts below formats:\\n\"\n\"                  <vaddr>@<file_path>      -- virtual addr in a binary file\\n\"\n\"                  <kernel_addr>            -- a kernel address\\n\"\n\"                Examples:\\n\"\n\"                  'filter 0x456-0x480@/system/lib/libc.so'\\n\"\n\"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\\n\"\n\"--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\\n\"\n\"                                 Need to be power of 2 and page size aligned.\\n\"\n\"                                 Used memory size is (buffer_size * (cpu_count + 1).\\n\"\n\"                                 Default is 4M.\\n\"\n\"--decode-etm                     Convert ETM data into branch lists while recording.\\n\"\n\"--binary binary_name             Used with --decode-etm to only generate data for binaries\\n\"\n\"                                 matching binary_name regex.\\n\"\n\"\\n\"",
+        "b_contents": "\"ETM recording options:\\n\"\n\"--addr-filter filter_str1,filter_str2,...\\n\"\n\"                Provide address filters for cs-etm instruction tracing.\\n\"\n\"                filter_str accepts below formats:\\n\"\n\"                  'filter  <addr-range>'  -- trace instructions in a range\\n\"\n\"                  'start <addr>'          -- start tracing when ip is <addr>\\n\"\n\"                  'stop <addr>'           -- stop tracing when ip is <addr>\\n\"\n\"                <addr-range> accepts below formats:\\n\"\n\"                  <file_path>                            -- code sections in a binary file\\n\"\n\"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\\n\"\n\"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\\n\"\n\"                <addr> accepts below formats:\\n\"\n\"                  <vaddr>@<file_path>      -- virtual addr in a binary file\\n\"\n\"                  <kernel_addr>            -- a kernel address\\n\"\n\"                Examples:\\n\"\n\"                  'filter 0x456-0x480@/system/lib/libc.so'\\n\"\n\"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\\n\"\n\"--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\\n\"\n\"                                 Need to be power of 2 and page size aligned.\\n\"\n\"                                 Used memory size is (buffer_size * (cpu_count + 1).\\n\"\n\"                                 Default is 4M.\\n\"\n\"--decode-etm                     Convert ETM data into branch lists while recording.\\n\"\n\"\\n\"",
+        "base_contents": "",
+        "res_region": "\"ETM recording options:\\n\"\n\"--addr-filter filter_str1,filter_str2,...\\n\"\n\"                Provide address filters for cs-etm instruction tracing.\\n\"\n\"                filter_str accepts below formats:\\n\"\n\"                  'filter  <addr-range>'  -- trace instructions in a range\\n\"\n\"                  'start <addr>'          -- start tracing when ip is <addr>\\n\"\n\"                  'stop <addr>'           -- stop tracing when ip is <addr>\\n\"\n\"                <addr-range> accepts below formats:\\n\"\n\"                  <file_path>                            -- code sections in a binary file\\n\"\n\"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\\n\"\n\"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\\n\"\n\"                <addr> accepts below formats:\\n\"\n\"                  <vaddr>@<file_path>      -- virtual addr in a binary file\\n\"\n\"                  <kernel_addr>            -- a kernel address\\n\"\n\"                Examples:\\n\"\n\"                  'filter 0x456-0x480@/system/lib/libc.so'\\n\"\n\"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\\n\"\n\"--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\\n\"\n\"                                 Need to be power of 2 and page size aligned.\\n\"\n\"                                 Used memory size is (buffer_size * (cpu_count + 1).\\n\"\n\"                                 Default is 4M.\\n\"\n\"--decode-etm                     Convert ETM data into branch lists while recording.\\n\"\n\"--binary binary_name             Used with --decode-etm to only generate data for binaries\\n\"\n\"                                 matching binary_name regex.\\n\"\n\"\\n\"",
+        "lookback": "\"--addr-filter filter_str1,filter_str2,...\\n\"",
+        "lookahead": "\"Other options:\\n\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 291,
+        "end_line": 342,
+        "merge_gen_region": null,
+        "confidence": 0.854845404624939,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n  std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;\n  std::unique_ptr<RegEx> binary_name_regex_;",
+        "b_contents": "\n  std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;",
+        "base_contents": "",
+        "res_region": "\n  std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;\n  std::unique_ptr<RegEx> binary_name_regex_;",
+        "lookback": "  std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 504,
+        "end_line": 512,
+        "merge_gen_region": "stduniquestdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.905163586139679,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      started_at_(options.env->NowMicros()),\n      delayed_writes_(0) {",
+        "b_contents": "      stall_leveln_slowdown_(0),\n      started_at_(options.env->NowMicros()),\n      flush_on_destroy_(false) {",
+        "base_contents": "      started_at_(options.env->NowMicros()) {",
+        "res_region": "      stall_leveln_slowdown_(0),\n      started_at_(options.env->NowMicros()),\n      flush_on_destroy_(false),\n      delayed_writes_(0) {",
+        "lookback": "      started_at_(options.env->NowMicros()),",
+        "lookahead": "  mem_->Ref();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 195,
+        "end_line": 204,
+        "merge_gen_region": null,
+        "confidence": 0.8001593351364136,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      //Log(options_.info_log,\n      //    \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n      //     delayed);",
+        "b_contents": "      Log(options_.info_log,\n          \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n           (long long unsigned int)delayed);",
+        "base_contents": "      Log(options_.info_log,\n          \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n           delayed);",
+        "res_region": "      //Log(options_.info_log,\n      //    \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n      //     (long long unsigned int)delayed);",
+        "lookback": "      //    \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",",
+        "lookahead": "      mutex_.Lock();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1744,
+        "end_line": 1756,
+        "merge_gen_region": null,
+        "confidence": 0.7871789336204529,
+        "hesitated": true
+    }
+]

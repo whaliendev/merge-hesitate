@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\t\t\t{\n\t\t\t\tstring functionSignature = f->getCanonicalSignature();\n\t\t\t\tif (f->isPublic() && !f->isConstructor() && !f->getName().empty() && signaturesSeen.count(functionSignature) == 0)",
+        "b_contents": "\t\t\t\tif (functionsSeen.count(f->getName()) == 0 && f->isPartOfExternalInterface())",
+        "base_contents": "\t\t\t\tif (f->isPublic() && !f->isConstructor() && !f->getName().empty() && functionsSeen.count(f->getName()) == 0)",
+        "res_region": "\t\t\t{\n\t\t\t\tstring functionSignature = f->externalSignature();\n\t\t\t\tif (f->isPartOfExternalInterface() && signaturesSeen.count(functionSignature) == 0)",
+        "lookback": "\t\t\t\tstring functionSignature = f->externalSignature();",
+        "lookahead": "\t\t\t\t{",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 240,
+        "merge_gen_region": null,
+        "confidence": 0.7124580144882202,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t\t\tsignaturesSeen.insert(functionSignature);\n\t\t\t\t\tFixedHash<4> hash(dev::sha3(functionSignature));",
+        "b_contents": "\t\t\t\t\tFixedHash<4> hash(dev::sha3(f->externalSignature()));",
+        "base_contents": "\t\t\t\t\tFixedHash<4> hash(dev::sha3(f->getCanonicalSignature()));",
+        "res_region": "\t\t\t\t\tsignaturesSeen.insert(functionSignature);\n\t\t\t\t\tFixedHash<4> hash(dev::sha3(functionSignature));",
+        "lookback": "\t\t\t\t\tFixedHash<4> hash(dev::sha3(functionSignature));",
+        "lookahead": "\t\t\t\t\tm_interfaceFunctionList->push_back(make_pair(hash, make_shared<FunctionType>(*f, false)));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 243,
+        "end_line": 250,
+        "merge_gen_region": null,
+        "confidence": 0.7620945572853088,
+        "hesitated": true
+    }
+]

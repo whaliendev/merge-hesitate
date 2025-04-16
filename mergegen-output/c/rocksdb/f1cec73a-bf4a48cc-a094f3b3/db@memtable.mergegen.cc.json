@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                   MergeContext& merge_context, const Options& options) {\n  StopWatchNano memtable_get_timer(options.env, false);\n  StartPerfTimer(&memtable_get_timer);\n\n  Slice mem_key = key.memtable_key();\n  Slice user_key = key.user_key();",
+        "b_contents": "                   MergeContext& merge_context, const Options& options) {\n  Slice memkey = key.memtable_key();\n  std::shared_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(key.user_key()));\n  iter->Seek(memkey.data());",
+        "base_contents": "                   std::deque<std::string>* operands, const Options& options) {\n  Slice memkey = key.memtable_key();\n  std::shared_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(key.user_key()));\n  iter->Seek(memkey.data());",
+        "res_region": "                   MergeContext& merge_context, const Options& options) {\n  StopWatchNano memtable_get_timer(options.env, false);\n  StartPerfTimer(&memtable_get_timer);\n\n  Slice mem_key = key.memtable_key();\n  Slice user_key = key.user_key();",
+        "lookback": "  StopWatchNano memtable_get_timer(options.env, false);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 207,
+        "end_line": 226,
+        "merge_gen_region": null,
+        "confidence": 0.8686062097549438,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::shared_ptr<MemTableRep::Iterator> iter;\n  if (prefix_bloom_ &&\n      !prefix_bloom_->MayContain(prefix_extractor_->Transform(user_key))) {\n    // iter is null if prefix bloom says the key does not exist\n  } else {\n    iter = table_->GetIterator(user_key);\n    iter->Seek(user_key, mem_key.data());\n  }\n",
+        "b_contents": "",
+        "base_contents": "  // It is the caller's responsibility to allocate/delete operands list\n  assert(operands != nullptr);\n",
+        "res_region": "  std::shared_ptr<MemTableRep::Iterator> iter;\n  if (prefix_bloom_ &&\n      !prefix_bloom_->MayContain(prefix_extractor_->Transform(user_key))) {\n    // iter is null if prefix bloom says the key does not exist\n  } else {\n    iter = table_->GetIterator(user_key);\n    iter->Seek(user_key, mem_key.data());\n  }\n",
+        "lookback": "  if (prefix_bloom_ &&",
+        "lookahead": "  bool merge_in_progress = s->IsMergeInProgress();",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 228,
+        "end_line": 243,
+        "merge_gen_region": null,
+        "confidence": 0.8031565546989441,
+        "hesitated": true
+    }
+]

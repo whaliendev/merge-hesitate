@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"buffer_cache/alt/cache_balancer.hpp\"\n#include \"clustering/administration/artificial_reql_cluster_interface.hpp\"",
+        "b_contents": "#include \"buffer_cache/cache_balancer.hpp\"\n#include \"clustering/administration/admin_tracker.hpp\"\n#include \"clustering/administration/auto_reconnect.hpp\"",
+        "base_contents": "#include \"buffer_cache/alt/cache_balancer.hpp\"\n#include \"clustering/administration/admin_tracker.hpp\"\n#include \"clustering/administration/auto_reconnect.hpp\"",
+        "res_region": "#include \"buffer_cache/cache_balancer.hpp\"\n#include \"clustering/administration/artificial_reql_cluster_interface.hpp\"",
+        "lookback": "#include \"clustering/administration/artificial_reql_cluster_interface.hpp\"",
+        "lookahead": "#include \"clustering/administration/http/server.hpp\"",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 8,
+        "end_line": 19,
+        "merge_gen_region": null,
+        "confidence": 0.7220770120620728,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "ndk::ScopedAStatus Module::getSoundDose(std::shared_ptr<ISoundDose>* _aidl_return) {\n    if (mSoundDose == nullptr) {\n        mSoundDose = ndk::SharedRefBase::make<SoundDose>();\n    }\n    *_aidl_return = mSoundDose;\n    LOG(DEBUG) << __func__ << \": returning instance of ISoundDose: \" << _aidl_return->get();\n    return ndk::ScopedAStatus::ok();\n}\n",
+        "b_contents": "ndk::ScopedAStatus Module::getSoundDose(std::shared_ptr<ISoundDose>* _aidl_return) {\n    *_aidl_return = nullptr;\n    LOG(DEBUG) << __func__ << \": ISoundDose not implemented\";\n    return ndk::ScopedAStatus::ok();\n}\n",
+        "base_contents": "",
+        "res_region": "ndk::ScopedAStatus Module::getSoundDose(std::shared_ptr<ISoundDose>* _aidl_return) {\n    if (mSoundDose == nullptr) {\n        mSoundDose = ndk::SharedRefBase::make<SoundDose>();\n    }\n    *_aidl_return = mSoundDose;\n    LOG(DEBUG) << __func__ << \": returning instance of ISoundDose: \" << _aidl_return->get();\n    return ndk::ScopedAStatus::ok();\n}\n",
+        "lookback": "    if (mSoundDose == nullptr) {",
+        "lookahead": "}  // namespace aidl::android::hardware::audio::core",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 934,
+        "end_line": 952,
+        "merge_gen_region": "nd::A ModulegetD::SoundosestdsharedptrISD>*aid_) ifmD ==) mD =dkSharedBasemakeSoundose }aid_;() ____::::outputoutputoutputoutput",
+        "confidence": 0.9516978859901428,
+        "hesitated": false,
+        "resolved": false
+    }
+]

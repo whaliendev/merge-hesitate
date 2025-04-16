@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    size_t prevOffset[ZSTD_REP_INIT];\n    const BYTE* dumps;\n    const BYTE* dumpsEnd;",
+        "b_contents": "    size_t prevOffset;",
+        "base_contents": "    size_t prevOffset;\n    const BYTE* dumps;\n    const BYTE* dumpsEnd;",
+        "res_region": "    size_t prevOffset[ZSTD_REP_INIT];",
+        "lookback": "} seqState_t;",
+        "lookahead": "} seqState_t;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 623,
+        "end_line": 633,
+        "merge_gen_region": null,
+        "confidence": 0.4217158555984497,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "",
+        "base_contents": "\n",
+        "res_region": "\n",
+        "lookback": "",
+        "lookahead": "static void ZSTD_decodeSequence(seq_t* seq, seqState_t* seqState, const U32 mls)",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 636,
+        "end_line": 642,
+        "merge_gen_region": null,
+        "confidence": 0.7871924638748169,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if ZSTD_REP_NUM == 4\n        if (offsetCode==0) offset = 0;\n        \n        if (offset < ZSTD_REP_NUM) {\n            if (litLength == 0 && offset <= 1) offset = 1-offset;\n\n            if (offset != 0) {\n                size_t temp = seqState->prevOffset[offset];\n                if (offset != 1) {\n                    if (offset == 3) seqState->prevOffset[3] = seqState->prevOffset[2];\n                    seqState->prevOffset[2] = seqState->prevOffset[1];\n                }\n                seqState->prevOffset[1] = seqState->prevOffset[0];\n                seqState->prevOffset[0] = offset = temp;\n\n            } else {\n                offset = seqState->prevOffset[0];\n            }\n\n        } else {\n            offset -= ZSTD_REP_MOVE;\n#if 1 // faster without kSlotNew\n            seqState->prevOffset[3] = seqState->prevOffset[2];\n            seqState->prevOffset[2] = seqState->prevOffset[1];\n            seqState->prevOffset[1] = seqState->prevOffset[0];               \n            seqState->prevOffset[0] = offset;\n#else\n            if (kSlotNew < 3) seqState->prevOffset[3] = seqState->prevOffset[2];\n            if (kSlotNew < 2) seqState->prevOffset[2] = seqState->prevOffset[1];\n            if (kSlotNew < 1) seqState->prevOffset[1] = seqState->prevOffset[0];               \n            seqState->prevOffset[kSlotNew] = offset;\n#endif\n        }\n#else // ZSTD_REP_NUM == 1\n    #if 0\n        if (offsetCode==0) offset = litLength ? seq->offset : seqState->prevOffset[0];   /* repcode, cmove */\n        else offset -= ZSTD_REP_MOVE;\n        if (offsetCode | !litLength) seqState->prevOffset[0] = seq->offset;   /* cmove */\n    #else\n        if (offsetCode==0) {\n            if (!litLength) {\n                offset = seqState->prevOffset[0];   /* repcode, cmove */\n                seqState->prevOffset[0] = seq->offset;   /* cmove */\n            } else\n                offset = seq->offset;   /* repcode, cmove */\n        } else {\n            seqState->prevOffset[0] = seq->offset;   /* cmove */\n            offset -= ZSTD_REP_MOVE;\n        }\n    #endif\n#endif\n        FSE_decodeSymbol(&(seqState->stateOffb), &(seqState->DStream));    /* update */\n//    printf(\"offsetCode=%d nbBits=%d offset=%d\\n\", offsetCode, nbBits, (int)offset); fflush(stdout);",
+        "b_contents": "        if (ofCode | !llCode) seqState->prevOffset = seq->offset;   /* cmove */\n        seq->offset = offset;",
+        "base_contents": "        if (offsetCode==0) offset = litLength ? seq->offset : seqState->prevOffset;\n        if (offsetCode | !litLength) seqState->prevOffset = seq->offset;   /* cmove */\n        FSE_decodeSymbol(&(seqState->stateOffb), &(seqState->DStream));    /* update */",
+        "res_region": "        if (ofCode | !llCode) seqState->prevOffset[0] = seq->offset;   /* cmove */\n        seq->offset = offset;\n\n#if ZSTD_REP_NUM == 4\n        if (ofCode==0) offset = 0;\n        \n        if (offset < ZSTD_REP_NUM) {\n            if (litLength == 0 && offset <= 1) offset = 1-offset;\n\n            if (offset != 0) {\n                size_t temp = seqState->prevOffset[offset];\n                if (offset != 1) {\n                    if (offset == 3) seqState->prevOffset[3] = seqState->prevOffset[2];\n                    seqState->prevOffset[2] = seqState->prevOffset[1];\n                }\n                seqState->prevOffset[1] = seqState->prevOffset[0];\n                seqState->prevOffset[0] = offset = temp;\n\n            } else {\n                offset = seqState->prevOffset[0];\n            }\n\n        } else {\n            offset -= ZSTD_REP_MOVE;\n#if 1 // faster without kSlotNew\n            seqState->prevOffset[3] = seqState->prevOffset[2];\n            seqState->prevOffset[2] = seqState->prevOffset[1];\n            seqState->prevOffset[1] = seqState->prevOffset[0];               \n            seqState->prevOffset[0] = offset;\n#else\n            if (kSlotNew < 3) seqState->prevOffset[3] = seqState->prevOffset[2];\n            if (kSlotNew < 2) seqState->prevOffset[2] = seqState->prevOffset[1];\n            if (kSlotNew < 1) seqState->prevOffset[1] = seqState->prevOffset[0];               \n            seqState->prevOffset[kSlotNew] = offset;\n#endif\n        }\n#else // ZSTD_REP_NUM == 1\n    #if 1\n/*        if (ofCode==0) offset = litLength ? seq->offset : seqState->prevOffset[0];\n        else offset -= ZSTD_REP_MOVE;\n        if (ofCode | !litLength) seqState->prevOffset[0] = seq->offset;   */\n    #else\n        if (ofCode==0) {\n            if (!litLength) {\n                offset = seqState->prevOffset[0];   /* repcode, cmove */\n                seqState->prevOffset[0] = seq->offset;   /* cmove */\n            } else\n                offset = seq->offset;   /* repcode, cmove */\n        } else {\n            seqState->prevOffset[0] = seq->offset;   /* cmove */\n            offset -= ZSTD_REP_MOVE;\n        }\n    #endif\n#endif",
+        "lookback": "        seq->offset = offset;",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 676,
+        "end_line": 737,
+        "merge_gen_region": null,
+        "confidence": 0.6784402132034302,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        seqState.dumps = dumps;\n        seqState.dumpsEnd = dumps + dumpsLength;\n        for (int i=0; i<ZSTD_REP_INIT; i++)\n            seqState.prevOffset[i] = REPCODE_STARTVALUE;\n        errorCode = BIT_initDStream(&(seqState.DStream), ip, iend-ip);\n        if (ERR_isError(errorCode)) return ERROR(corruption_detected);",
+        "b_contents": "        seqState.prevOffset = REPCODE_STARTVALUE;\n        { size_t const errorCode = BIT_initDStream(&(seqState.DStream), ip, iend-ip);\n          if (ERR_isError(errorCode)) return ERROR(corruption_detected); }",
+        "base_contents": "        seqState.dumps = dumps;\n        seqState.dumpsEnd = dumps + dumpsLength;\n        seqState.prevOffset = REPCODE_STARTVALUE;\n        errorCode = BIT_initDStream(&(seqState.DStream), ip, iend-ip);\n        if (ERR_isError(errorCode)) return ERROR(corruption_detected);",
+        "res_region": "        for (int i=0; i<ZSTD_REP_INIT; i++)\n            seqState.prevOffset[i] = REPCODE_STARTVALUE;\n        { size_t const errorCode = BIT_initDStream(&(seqState.DStream), ip, iend-ip);\n          if (ERR_isError(errorCode)) return ERROR(corruption_detected); }",
+        "lookback": "            seqState.prevOffset[i] = REPCODE_STARTVALUE;",
+        "lookahead": "        FSE_initDState(&(seqState.stateLL), &(seqState.DStream), DTableLL);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 863,
+        "end_line": 880,
+        "merge_gen_region": null,
+        "confidence": 0.8222343325614929,
+        "hesitated": true
+    }
+]

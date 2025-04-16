@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    expected_shared_libs_to_platform_ns =\n        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());",
+        "b_contents": "",
+        "base_contents": "    expected_shared_libs_to_platform_ns =\n        default_public_libraries() + \":\" + llndk_libraries_product();",
+        "res_region": "    expected_shared_libs_to_platform_ns =\n        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());",
+        "lookback": "        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());",
+        "lookahead": "    expected_link_with_vndk_product_ns = true;",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 384,
+        "end_line": 391,
+        "merge_gen_region": null,
+        "confidence": 0.47975027561187744,
+        "hesitated": true
+    }
+]

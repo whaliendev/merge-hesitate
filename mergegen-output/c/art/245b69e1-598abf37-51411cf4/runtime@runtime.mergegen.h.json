@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  const std::vector<int>& GetBootClassPathFds() const {\n    return boot_class_path_fds_;\n  }\n\n  // Returns the checksums for the boot image, extensions and extra boot class path dex files,\n  // based on the image spaces and boot class path dex files loaded in memory.\n  const std::string& GetBootClassPathChecksums() const {\n    return boot_class_path_checksums_;\n  }\n",
+        "b_contents": "  // Returns the checksums for the boot image, extensions and extra boot class path dex files,\n  // based on the image spaces and boot class path dex files loaded in memory.\n  const std::string& GetBootClassPathChecksums() const {\n    return boot_class_path_checksums_;\n  }\n",
+        "base_contents": "",
+        "res_region": "  const std::vector<int>& GetBootClassPathFds() const {\n    return boot_class_path_fds_;\n  }\n\n  // Returns the checksums for the boot image, extensions and extra boot class path dex files,\n  // based on the image spaces and boot class path dex files loaded in memory.\n  const std::string& GetBootClassPathChecksums() const {\n    return boot_class_path_checksums_;\n  }\n",
+        "lookback": "    return boot_class_path_fds_;",
+        "lookahead": "  const std::string& GetClassPathString() const {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 289,
+        "end_line": 308,
+        "merge_gen_region": null,
+        "confidence": 0.8043503165245056,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::string boot_class_path_checksums_;\n  std::vector<int> boot_class_path_fds_;",
+        "b_contents": "  std::string boot_class_path_checksums_;",
+        "base_contents": "",
+        "res_region": "  std::string boot_class_path_checksums_;\n  std::vector<int> boot_class_path_fds_;",
+        "lookback": "  std::vector<int> boot_class_path_fds_;",
+        "lookahead": "  std::string class_path_string_;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1142,
+        "end_line": 1148,
+        "merge_gen_region": null,
+        "confidence": 0.8094067573547363,
+        "hesitated": true
+    }
+]

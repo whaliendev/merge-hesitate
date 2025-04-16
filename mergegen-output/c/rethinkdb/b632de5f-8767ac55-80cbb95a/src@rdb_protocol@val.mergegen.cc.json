@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    env_t *env, const protob_t<const Backtrace> &bt) {\n    if (bounds.is_empty()) {",
+        "b_contents": "    env_t *env, backtrace_id_t bt) {\n    if (bounds.is_empty(env->reql_version())) {",
+        "base_contents": "    env_t *env, const protob_t<const Backtrace> &bt) {\n    if (bounds.is_empty(env->reql_version())) {",
+        "res_region": "    env_t *env, backtrace_id_t bt) {\n    if (bounds.is_empty()) {",
+        "lookback": "    if (bounds.is_empty()) {",
+        "lookahead": "        return make_counted<array_datum_stream_t>(datum_t::empty_array(), bt);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 161,
+        "end_line": 170,
+        "merge_gen_region": null,
+        "confidence": 0.7144252061843872,
+        "hesitated": true
+    }
+]

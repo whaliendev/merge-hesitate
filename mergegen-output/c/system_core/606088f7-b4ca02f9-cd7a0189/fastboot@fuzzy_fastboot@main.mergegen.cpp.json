@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n    GTEST_LOG_(INFO) << \"Testing 'fastboot delete-logical-partition' command\";\n    EXPECT_EQ(fb->DeletePartition(test_partition_name), SUCCESS)\n            << \"delete logical-partition failed\";",
+        "b_contents": "",
+        "base_contents": "    GTEST_LOG_(INFO) << \"Rebooting to bootloader mode\";\n    // Reboot to bootloader mode and attempt to flash the logical partitions\n    fb->RebootTo(\"bootloader\");\n\n    ReconnectFastbootDevice();\n    ASSERT_FALSE(UserSpaceFastboot());\n    GTEST_LOG_(INFO) << \"Attempt to flash a logical partition..\";\n    EXPECT_EQ(fb->FlashPartition(test_partition_name, buf), DEVICE_FAIL)\n            << \"flash logical partition must fail in bootloader\";\n    GTEST_LOG_(INFO) << \"Rebooting back to fastbootd mode\";\n    fb->RebootTo(\"fastboot\");\n\n    ReconnectFastbootDevice();\n    ASSERT_TRUE(UserSpaceFastboot());\n    GTEST_LOG_(INFO) << \"Testing 'fastboot delete-logical-partition' command\";\n    EXPECT_EQ(fb->DeletePartition(test_partition_name), SUCCESS)\n            << \"delete logical-partition failed\";",
+        "res_region": "\n    GTEST_LOG_(INFO) << \"Testing 'fastboot delete-logical-partition' command\";\n    EXPECT_EQ(fb->DeletePartition(test_partition_name), SUCCESS)\n            << \"delete logical-partition failed\";",
+        "lookback": "    GTEST_LOG_(INFO) << \"Testing 'fastboot delete-logical-partition' command\";",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 263,
+        "end_line": 287,
+        "merge_gen_region": "___(INFO <<Testingfast deletelogicalpartition command",
+        "confidence": 0.8801076412200928,
+        "hesitated": false,
+        "resolved": false
+    }
+]

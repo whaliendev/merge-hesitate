@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#   define COMPRESS_LITERALS_SIZE_MIN 63\n    {   size_t const minLitSize = (prevEntropy->hufCTable_repeatMode == HUF_repeat_valid) ? 6 : COMPRESS_LITERALS_SIZE_MIN;\n        if (srcSize <= minLitSize) return ZSTD_noCompressLiterals(dst, dstCapacity, src, srcSize);",
+        "b_contents": "#   define LITERAL_NOENTROPY 63\n    {   size_t const minLitSize = (prevEntropy->hufCTable_repeatMode == HUF_repeat_valid) ? 6 : LITERAL_NOENTROPY;\n        if (srcSize <= minLitSize)\n            return ZSTD_noCompressLiterals(dst, dstCapacity, src, srcSize);",
+        "base_contents": "#   define LITERAL_NOENTROPY 63\n    {   size_t const minLitSize = prevEntropy->hufCTable_repeatMode == HUF_repeat_valid ? 6 : LITERAL_NOENTROPY;\n        if (srcSize <= minLitSize) return ZSTD_noCompressLiterals(dst, dstCapacity, src, srcSize);",
+        "res_region": "#   define COMPRESS_LITERALS_SIZE_MIN 63\n    {   size_t const minLitSize = (prevEntropy->hufCTable_repeatMode == HUF_repeat_valid) ? 6 : COMPRESS_LITERALS_SIZE_MIN;\n        if (srcSize <= minLitSize) return ZSTD_noCompressLiterals(dst, dstCapacity, src, srcSize);",
+        "lookback": "    {   size_t const minLitSize = (prevEntropy->hufCTable_repeatMode == HUF_repeat_valid) ? 6 : COMPRESS_LITERALS_SIZE_MIN;",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1413,
+        "end_line": 1426,
+        "merge_gen_region": null,
+        "confidence": 0.8640193343162537,
+        "hesitated": true
+    }
+]

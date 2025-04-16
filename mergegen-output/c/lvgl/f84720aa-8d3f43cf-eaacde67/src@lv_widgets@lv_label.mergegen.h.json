@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "lv_style_list_t * lv_label_get_style(lv_obj_t * label, uint8_t type);\n",
+        "base_contents": "\nlv_style_list_t * lv_label_get_style(lv_obj_t * label, uint8_t type);\n",
+        "res_region": "",
+        "lookback": " * Other functions",
+        "lookahead": "/*=====================",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 220,
+        "end_line": 228,
+        "merge_gen_region": null,
+        "confidence": 0.5020105242729187,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "        lv_cpicker_ext_t * ext = lv_obj_get_ext_attr(cpicker);\n        int16_t start_angle = 0; /*Default*/\n        int16_t end_angle = 360 - LV_CPICKER_DEF_QF; /*Default*/",
+        "base_contents": "        int16_t start_angle = 0; /*Default*/\n        int16_t end_angle = 360 - LV_CPICKER_DEF_QF; /*Default*/",
+        "res_region": "    lv_cpicker_ext_t * ext = lv_obj_get_ext_attr(cpicker);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 535,
+        "end_line": 543,
+        "merge_gen_region": null,
+        "confidence": 0.4065708816051483,
+        "hesitated": true
+    },
+    {
+        "a_contents": "//        /*Mask out the center area*/\n//        const lv_style_t * style_main = lv_cpicker_get_style(cpicker, LV_CPICKER_STYLE_MAIN);\n//        lv_style_copy(&style, style_main);\n//        style.body.radius = LV_RADIUS_CIRCLE;\n//        lv_area_t area_mid;\n//        lv_area_copy(&area_mid, &cpicker->coords);\n//        area_mid.x1 += style_main->line.width;\n//        area_mid.y1 += style_main->line.width;\n//        area_mid.x2 -= style_main->line.width;\n//        area_mid.y2 -= style_main->line.width;\n//\n//        lv_draw_rect(&area_mid, mask, &style, opa_scale);",
+        "b_contents": "        /*Mask out the center area*/\n        const lv_style_t * style_main = lv_cpicker_get_style(cpicker, LV_CPICKER_STYLE_MAIN);\n        lv_style_copy(&style, style_main);\n        style.body.radius = LV_RADIUS_CIRCLE;\n        lv_area_t area_mid;\n        lv_area_copy(&area_mid, &cpicker->coords);\n        area_mid.x1 += style_main->line.width;\n        area_mid.y1 += style_main->line.width;\n        area_mid.x2 -= style_main->line.width;\n        area_mid.y2 -= style_main->line.width;\n\n        lv_draw_rect(&area_mid, mask, &style, opa_scale);\n\n        if(ext->preview) {\n            lv_color_t color = lv_cpicker_get_color(cpicker);\n            style.body.main_color = color;\n            style.body.grad_color = color;\n            area_mid.x1 += style_main->line.width;\n            area_mid.y1 += style_main->line.width;\n            area_mid.x2 -= style_main->line.width;\n            area_mid.y2 -= style_main->line.width;\n\n            lv_draw_rect(&area_mid, mask, &style, opa_scale);\n        }",
+        "base_contents": "        /*Mask out the center area*/\n        const lv_style_t * style_main = lv_cpicker_get_style(cpicker, LV_CPICKER_STYLE_MAIN);\n        lv_style_copy(&style, style_main);\n        style.body.radius = LV_RADIUS_CIRCLE;\n        lv_area_t area_mid;\n        lv_area_copy(&area_mid, &cpicker->coords);\n        area_mid.x1 += style_main->line.width;\n        area_mid.y1 += style_main->line.width;\n        area_mid.x2 -= style_main->line.width;\n        area_mid.y2 -= style_main->line.width;\n\n        lv_draw_rect(&area_mid, mask, &style, opa_scale);",
+        "res_region": "\n    if(ext->preview) {\n\n        /*Mask out the center area*/\n        const lv_style_t * style_main = lv_cpicker_get_style(cpicker, LV_CPICKER_STYLE_MAIN);\n        lv_style_copy(&style, style_main);\n        style.body.radius = LV_RADIUS_CIRCLE;\n        lv_area_t area_mid;\n        lv_area_copy(&area_mid, &cpicker->coords);\n        area_mid.x1 += style_main->line.width;\n        area_mid.y1 += style_main->line.width;\n        area_mid.x2 -= style_main->line.width;\n        area_mid.y2 -= style_main->line.width;\n\n        lv_draw_rect(&area_mid, mask, &style, opa_scale);\n        lv_color_t color = lv_cpicker_get_color(cpicker);\n        style.body.main_color = color;\n        style.body.grad_color = color;\n        area_mid.x1 += style_main->line.width;\n        area_mid.y1 += style_main->line.width;\n        area_mid.x2 -= style_main->line.width;\n        area_mid.y2 -= style_main->line.width;\n\n        lv_draw_rect(&area_mid, mask, &style, opa_scale);\n    }",
+        "lookback": "    if(ext->preview) {",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 580,
+        "end_line": 631,
+        "merge_gen_region": null,
+        "confidence": 0.6627151370048523,
+        "hesitated": true
+    }
+]

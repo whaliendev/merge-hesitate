@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  VersionEdit edit(impl->NumberLevels());\n  DBOptions db_options(options);\n  ColumnFamilyOptions cf_options(options);\n  std::vector<ColumnFamilyDescriptor> column_families;\n  column_families.push_back(\n      ColumnFamilyDescriptor(default_column_family_name, cf_options));\n  Status s = impl->Recover(&edit, column_families, impl->GetMemTable(),",
+        "b_contents": "  VersionEdit edit;\n  Status s = impl->Recover(&edit, impl->GetMemTable(),",
+        "base_contents": "  VersionEdit edit(impl->NumberLevels());\n  Status s = impl->Recover(&edit, impl->GetMemTable(),",
+        "res_region": "  VersionEdit edit;\n  DBOptions db_options(options);\n  ColumnFamilyOptions cf_options(options);\n  std::vector<ColumnFamilyDescriptor> column_families;\n  column_families.push_back(\n      ColumnFamilyDescriptor(default_column_family_name, cf_options));\n  Status s = impl->Recover(&edit, column_families, impl->GetMemTable(),",
+        "lookback": "  DBOptions db_options(options);",
+        "lookahead": "                           error_if_log_file_exist);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 87,
+        "end_line": 101,
+        "merge_gen_region": null,
+        "confidence": 0.7761585712432861,
+        "hesitated": true
+    }
+]

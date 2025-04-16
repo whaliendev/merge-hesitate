@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/v2x/common/v2x_proxy_gflags.h\"\n// #include \"modules/perception/pipeline/proto/traffic_light_config.pb.h\"\n#include \"modules/perception/pipeline/proto/pipeline_config.pb.h\"\n#include \"modules/perception/pipeline/data_frame.h\"",
+        "base_contents": "#include \"modules/v2x/common/v2x_proxy_gflags.h\"",
+        "res_region": "#include \"modules/v2x/common/v2x_proxy_gflags.h\"\n// #include \"modules/perception/pipeline/proto/traffic_light_config.pb.h\"\n#include \"modules/perception/pipeline/proto/pipeline_config.pb.h\"\n#include \"modules/perception/pipeline/data_frame.h\"",
+        "lookback": "// #include \"modules/perception/pipeline/proto/traffic_light_config.pb.h\"",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 36,
+        "end_line": 44,
+        "merge_gen_region": null,
+        "confidence": 0.6727982759475708,
+        "hesitated": true
+    }
+]

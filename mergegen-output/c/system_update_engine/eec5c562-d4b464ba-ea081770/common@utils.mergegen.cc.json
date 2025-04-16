@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  if (errno == EINVAL) {\n    LOG(INFO) << \"Not a mountpoint: \" << mountpoint;",
+        "b_contents": "  if (errno == EINVAL) {\n    LOG(INFO) << \"Not a mountpoint: \" << mountpoint;\n    return false;\n  }\n  PLOG(WARNING) << \"Error unmounting \" << mountpoint << \" after \" << num_retries\n                << \" attempts. Lazy unmounting instead, error was\";\n  if (umount2(mountpoint.c_str(), MNT_DETACH) != 0) {\n    PLOG(ERROR) << \"Lazy unmount failed\";\n    return false;\n  }\n  return true;\n}\n\nbool GetFilesystemSize(const string& device,\n                       int* out_block_count,\n                       int* out_block_size) {\n  int fd = HANDLE_EINTR(open(device.c_str(), O_RDONLY));\n  TEST_AND_RETURN_FALSE_ERRNO(fd >= 0);\n  ScopedFdCloser fd_closer(&fd);\n  return GetFilesystemSizeFromFD(fd, out_block_count, out_block_size);\n}\n\nbool GetFilesystemSizeFromFD(int fd,\n                             int* out_block_count,\n                             int* out_block_size) {\n  TEST_AND_RETURN_FALSE(fd >= 0);\n\n  // Determine the filesystem size by directly reading the block count and\n  // block size information from the superblock. Supported FS are ext3 and\n  // squashfs.\n\n  // Read from the fd only once and detect in memory. The first 2 KiB is enough\n  // to read the ext2 superblock (located at offset 1024) and the squashfs\n  // superblock (located at offset 0).\n  const ssize_t kBufferSize = 2048;\n\n  uint8_t buffer[kBufferSize];\n  if (HANDLE_EINTR(pread(fd, buffer, kBufferSize, 0)) != kBufferSize) {\n    PLOG(ERROR) << \"Unable to read the file system header:\";",
+        "base_contents": "  return true;\n}\n\nbool GetFilesystemSize(const string& device,\n                       int* out_block_count,\n                       int* out_block_size) {\n  int fd = HANDLE_EINTR(open(device.c_str(), O_RDONLY));\n  TEST_AND_RETURN_FALSE_ERRNO(fd >= 0);\n  ScopedFdCloser fd_closer(&fd);\n  return GetFilesystemSizeFromFD(fd, out_block_count, out_block_size);\n}\n\nbool GetFilesystemSizeFromFD(int fd,\n                             int* out_block_count,\n                             int* out_block_size) {\n  TEST_AND_RETURN_FALSE(fd >= 0);\n\n  // Determine the filesystem size by directly reading the block count and\n  // block size information from the superblock. Supported FS are ext3 and\n  // squashfs.\n\n  // Read from the fd only once and detect in memory. The first 2 KiB is enough\n  // to read the ext2 superblock (located at offset 1024) and the squashfs\n  // superblock (located at offset 0).\n  const ssize_t kBufferSize = 2048;\n\n  uint8_t buffer[kBufferSize];\n  if (HANDLE_EINTR(pread(fd, buffer, kBufferSize, 0)) != kBufferSize) {\n    PLOG(ERROR) << \"Unable to read the file system header:\";",
+        "res_region": "  if (errno == EINVAL) {\n    LOG(INFO) << \"Not a mountpoint: \" << mountpoint;",
+        "lookback": "    LOG(INFO) << \"Not a mountpoint: \" << mountpoint;",
+        "lookahead": "    return false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 696,
+        "end_line": 769,
+        "merge_gen_region": null,
+        "confidence": 0.630744457244873,
+        "hesitated": true
+    }
+]

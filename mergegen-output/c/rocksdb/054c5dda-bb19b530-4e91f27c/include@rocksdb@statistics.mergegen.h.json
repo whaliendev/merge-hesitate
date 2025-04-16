@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "\nclass Histogram {\n public:\n  // clear's the histogram\n  virtual void Clear() = 0;\n  virtual ~Histogram();\n  // Add a value to be recorded in the histogram.\n  virtual void Add(uint64_t value) = 0;\n\n  virtual std::string ToString() const = 0;\n\n  // Get statistics\n  virtual double Median() const = 0;\n  virtual double Percentile(double p) const = 0;\n  virtual double Average() const = 0;\n  virtual double StandardDeviation() const = 0;\n  virtual void Data(HistogramData * const data) const = 0;\n\n};\n\n/**\n * A dumb ticker which keeps incrementing through its life time.\n * Thread safe. Locking managed by implementation of this interface.\n */\nclass Ticker {\n public:\n  Ticker() : count_(0) { }\n\n  inline void setTickerCount(uint64_t count) {\n    count_ = count;\n  }\n\n  inline void recordTick(int64_t count = 1) {\n    count_ += count;\n  }\n\n  inline uint64_t getCount() {\n    return count_;\n  }\n\n private:\n  std::atomic_uint_fast64_t count_;\n};\n",
+        "b_contents": "",
+        "base_contents": "\nclass Histogram {\n public:\n  // clear's the histogram\n  virtual void Clear() = 0;\n  virtual ~Histogram();\n  // Add a value to be recorded in the histogram.\n  virtual void Add(uint64_t value) = 0;\n\n  virtual std::string ToString() const = 0;\n\n  // Get statistics\n  virtual double Median() const = 0;\n  virtual double Percentile(double p) const = 0;\n  virtual double Average() const = 0;\n  virtual double StandardDeviation() const = 0;\n  virtual void Data(HistogramData * const data) const = 0;\n\n};\n\n/**\n * A dumb ticker which keeps incrementing through its life time.\n * Thread safe. Locking managed by implementation of this interface.\n */\nclass Ticker {\n public:\n  Ticker() : count_(0) { }\n\n  inline void setTickerCount(uint64_t count) {\n    count_ = count;\n  }\n\n  inline void recordTick(int count = 1) {\n    count_ += count;\n  }\n\n  inline uint64_t getCount() {\n    return count_;\n  }\n\n private:\n  std::atomic_uint_fast64_t count_;\n};\n",
+        "res_region": "",
+        "lookback": "class Statistics {",
+        "lookahead": "// Analyze the performance of a db",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 241,
+        "end_line": 332,
+        "merge_gen_region": " Statistics",
+        "confidence": 0.9630575776100159,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  virtual ~Statistics() {}\n",
+        "base_contents": "",
+        "res_region": "  virtual ~Statistics() {}\n",
+        "lookback": "",
+        "lookahead": "  virtual long getTickerCount(Tickers tickerType) = 0;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 336,
+        "end_line": 342,
+        "merge_gen_region": null,
+        "confidence": 0.5134833455085754,
+        "hesitated": true
+    }
+]

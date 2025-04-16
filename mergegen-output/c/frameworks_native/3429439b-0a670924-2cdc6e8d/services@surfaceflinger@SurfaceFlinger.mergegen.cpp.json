@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n            if (!captureResults.capturedHdrLayers) {\n                displayBrightnessNits = sdrWhitePointNits;\n            } else {\n                displayBrightnessNits = state.displayBrightnessNits;\n                // Only clamp the display brightness if this is not a seamless transition. Otherwise\n                // for seamless transitions it's important to match the current display state as the\n                // buffer will be shown under these same conditions, and we want to avoid any\n                // flickers\n                if (sdrWhitePointNits > 1.0f && !renderArea->getHintForSeamlessTransition()) {\n                    // Restrict the amount of HDR \"headroom\" in the screenshot to avoid over-dimming\n                    // the SDR portion. 2.0 chosen by experimentation\n                    constexpr float kMaxScreenshotHeadroom = 2.0f;\n                    displayBrightnessNits = std::min(sdrWhitePointNits * kMaxScreenshotHeadroom,\n                                                     displayBrightnessNits);\n                }\n            }",
+        "base_contents": "            displayBrightnessNits = state.displayBrightnessNits;\n            // Only clamp the display brightness if this is not a seamless transition. Otherwise\n            // for seamless transitions it's important to match the current display state as the\n            // buffer will be shown under these same conditions, and we want to avoid any flickers\n            if (sdrWhitePointNits > 1.0f && !renderArea->getHintForSeamlessTransition()) {\n                // Restrict the amount of HDR \"headroom\" in the screenshot to avoid over-dimming\n                // the SDR portion. 2.0 chosen by experimentation\n                constexpr float kMaxScreenshotHeadroom = 2.0f;\n                displayBrightnessNits =\n                        std::min(sdrWhitePointNits * kMaxScreenshotHeadroom, displayBrightnessNits);\n            }",
+        "res_region": "",
+        "lookback": "             // TODO(b/298219334): Clean this up once we verify this doesn't break anything",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 7811,
+        "end_line": 7842,
+        "merge_gen_region": null,
+        "confidence": 0.5991015434265137,
+        "hesitated": true
+    }
+]

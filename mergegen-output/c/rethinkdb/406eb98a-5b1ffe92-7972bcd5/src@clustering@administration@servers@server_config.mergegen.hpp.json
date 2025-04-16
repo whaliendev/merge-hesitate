@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            server_name_client_t *_name_client);\n    ~server_config_artificial_table_backend_t();",
+        "b_contents": "            server_config_client_t *_server_config_client) :\n        common_server_artificial_table_backend_t(\n            _servers_sl_view, _server_config_client) { }",
+        "base_contents": "            server_name_client_t *_name_client) :\n        common_server_artificial_table_backend_t(_servers_sl_view, _name_client) { }",
+        "res_region": "            server_config_client_t *_server_config_client);\n    ~server_config_artificial_table_backend_t();",
+        "lookback": "    ~server_config_artificial_table_backend_t();",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.7069408297538757,
+        "hesitated": true
+    }
+]

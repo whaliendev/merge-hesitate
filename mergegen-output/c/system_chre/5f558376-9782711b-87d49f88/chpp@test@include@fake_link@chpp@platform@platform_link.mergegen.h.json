@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define CHPP_TEST_LINK_TX_MTU_BYTES ((size_t)1280)\n#define CHPP_TEST_LINK_RX_MTU_BYTES ((size_t)1280)",
+        "b_contents": "#define CHPP_TEST_LINK_TX_MTU_BYTES ((size_t)1280)\n#define CHPP_TEST_LINK_RX_MTU_BYTES ((size_t)1280)\n#define CHPP_TEST_TRANSPORT_TIMEOUT_MS ((uint16_t)10)",
+        "base_contents": "#define CHPP_PLATFORM_LINK_TX_MTU_BYTES 1280\n#define CHPP_PLATFORM_LINK_RX_MTU_BYTES 1280",
+        "res_region": "#define CHPP_TEST_LINK_TX_MTU_BYTES ((size_t)1280)\n#define CHPP_TEST_LINK_RX_MTU_BYTES ((size_t)1280)",
+        "lookback": "#define CHPP_TEST_LINK_RX_MTU_BYTES ((size_t)1280)",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 23,
+        "end_line": 33,
+        "merge_gen_region": "",
+        "confidence": 0.9123950004577637,
+        "hesitated": false,
+        "resolved": false
+    }
+]

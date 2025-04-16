@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"modules/canbus/vehicle/abstract_vehicle_factory.h\"",
+        "b_contents": "\n#include \"modules/common_msgs/chassis_msgs/chassis_detail.pb.h\"\n#include \"modules/common_msgs/drivers_msgs/can_card_parameter.pb.h\"\n#include \"modules/common_msgs/guardian_msgs/guardian.pb.h\"\n",
+        "base_contents": "\n#include \"modules/canbus/proto/chassis_detail.pb.h\"\n#include \"modules/drivers/canbus/proto/can_card_parameter.pb.h\"\n#include \"modules/guardian/proto/guardian.pb.h\"\n",
+        "res_region": "#include \"modules/canbus/vehicle/abstract_vehicle_factory.h\"",
+        "lookback": "#include \"modules/canbus/vehicle/vehicle_controller.h\"",
+        "lookahead": "#include \"modules/canbus/vehicle/vehicle_controller.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 34,
+        "end_line": 48,
+        "merge_gen_region": null,
+        "confidence": 0.8040836453437805,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/control_msgs/control_cmd.pb.h\"",
+        "base_contents": "#include \"modules/control/proto/control_cmd.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/drivers/canbus/can_comm/can_receiver.h\"",
+        "lookahead": "#include \"modules/drivers/canbus/can_client/can_client.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 52,
+        "end_line": 57,
+        "merge_gen_region": null,
+        "confidence": 0.7449409365653992,
+        "hesitated": true
+    }
+]

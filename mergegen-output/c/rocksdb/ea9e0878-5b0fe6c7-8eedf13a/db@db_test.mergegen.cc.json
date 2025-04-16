@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // ASSERT_EQ(CountFiles(), num_files); TODO",
+        "b_contents": "  ASSERT_EQ(CountLiveFiles(), num_files);",
+        "base_contents": "  ASSERT_EQ(CountFiles(), num_files);",
+        "res_region": "  ASSERT_EQ(CountLiveFiles(), num_files);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1645,
+        "end_line": 1651,
+        "merge_gen_region": null,
+        "confidence": 0.648431658744812,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,90 @@
+[
+    {
+        "a_contents": "    explicit ModuleConfig(aidl::android::hardware::audio::core::IModule* module);\n    const ndk::ScopedAStatus& getStatus() const { return mStatus; }\n    std::string getError() const { return mStatus.getMessage(); }\n\n    std::vector<aidl::android::media::audio::common::AudioPort> getAttachedDevicePorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getExternalDevicePorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getInputMixPorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getOutputMixPorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getMixPorts(bool isInput) const {",
+        "b_contents": "    std::vector<android::media::audio::common::AudioPort> getAttachedDevicePorts() const;\n    std::vector<android::media::audio::common::AudioPort> getExternalDevicePorts() const;\n    std::vector<android::media::audio::common::AudioPort> getInputMixPorts() const;\n    std::vector<android::media::audio::common::AudioPort> getOutputMixPorts() const;\n    std::vector<android::media::audio::common::AudioPort> getMixPorts(bool isInput) const {",
+        "base_contents": "    std::vector<android::media::audio::common::AudioPort> getInputMixPorts() const;\n    std::vector<android::media::audio::common::AudioPort> getOutputMixPorts() const;\n    std::vector<android::media::audio::common::AudioPort> getMixPorts(bool isInput) const {",
+        "res_region": "    explicit ModuleConfig(aidl::android::hardware::audio::core::IModule* module);\n    const ndk::ScopedAStatus& getStatus() const { return mStatus; }\n    std::string getError() const { return mStatus.getMessage(); }\n\n    std::vector<aidl::android::media::audio::common::AudioPort> getAttachedDevicePorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getExternalDevicePorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getInputMixPorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getOutputMixPorts() const;\n    std::vector<aidl::android::media::audio::common::AudioPort> getMixPorts(bool isInput) const {",
+        "lookback": "    const ndk::ScopedAStatus& getStatus() const { return mStatus; }",
+        "lookahead": "        return isInput ? getInputMixPorts() : getOutputMixPorts();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 39,
+        "end_line": 59,
+        "merge_gen_region": " n::(landroidmediaaudiocommonAudio>DeviceDevice();::<<landroidmediaaudiocommonAudio>Device {Device();",
+        "confidence": 0.9039941430091858,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    std::vector<aidl::android::media::audio::common::AudioPortConfig>\n    getPortConfigsForAttachedDevicePorts() const {\n        return generateAudioDevicePortConfigs(getAttachedDevicePorts(), false);\n    }\n    std::vector<aidl::android::media::audio::common::AudioPortConfig> getPortConfigsForMixPorts()\n            const {\n        auto inputs = generateAudioMixPortConfigs(getInputMixPorts(), true, false);\n        auto outputs = generateAudioMixPortConfigs(getOutputMixPorts(), false, false);",
+        "b_contents": "    std::vector<android::media::audio::common::AudioPortConfig>\n    getPortConfigsForAttachedDevicePorts() const {\n        return generateAudioDevicePortConfigs(getAttachedDevicePorts(), false);\n    }\n    std::vector<android::media::audio::common::AudioPortConfig> getPortConfigsForMixPorts() const {\n        auto inputs = generateInputAudioMixPortConfigs(getInputMixPorts(), false);\n        auto outputs = generateOutputAudioMixPortConfigs(getOutputMixPorts(), false);",
+        "base_contents": "    std::vector<android::media::audio::common::AudioPortConfig> getPortConfigsForMixPorts() const {\n        auto inputs = generateInputAudioMixPortConfigs(getInputMixPorts(), false);\n        auto outputs = generateOutputAudioMixPortConfigs(getOutputMixPorts(), false);",
+        "res_region": "    std::vector<aidl::android::media::audio::common::AudioPortConfig>\n    getPortConfigsForAttachedDevicePorts() const {\n        return generateAudioDevicePortConfigs(getAttachedDevicePorts(), false);\n    }\n    std::vector<aidl::android::media::audio::common::AudioPortConfig> getPortConfigsForMixPorts()\n            const {\n        auto inputs = generateAudioMixPortConfigs(getInputMixPorts(), true, false);\n        auto outputs = generateAudioMixPortConfigs(getOutputMixPorts(), false, false);",
+        "lookback": "    getPortConfigsForAttachedDevicePorts() const {",
+        "lookahead": "        inputs.insert(inputs.end(), outputs.begin(), outputs.end());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 84,
+        "end_line": 105,
+        "merge_gen_region": null,
+        "confidence": 0.8580400347709656,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::vector<aidl::android::media::audio::common::AudioPortConfig> getPortConfigsForDevicePort(\n            const aidl::android::media::audio::common::AudioPort& port) const {\n        return generateAudioDevicePortConfigs({port}, false);\n    }\n    aidl::android::media::audio::common::AudioPortConfig getSingleConfigForDevicePort(\n            const aidl::android::media::audio::common::AudioPort& port) const {",
+        "b_contents": "    std::vector<android::media::audio::common::AudioPortConfig> getPortConfigsForDevicePort(\n            const android::media::audio::common::AudioPort& port) const {\n        return generateAudioDevicePortConfigs({port}, false);\n    }\n    android::media::audio::common::AudioPortConfig getSingleConfigForDevicePort(\n            const android::media::audio::common::AudioPort& port) const {",
+        "base_contents": "    android::media::audio::common::AudioPortConfig getSingleConfigForDevicePort(\n            const android::media::audio::common::AudioPort& port) const {\n        for (const auto& config : mInitialConfigs) {\n            if (config.portId == port.id) return config;\n        }",
+        "res_region": "    std::vector<aidl::android::media::audio::common::AudioPortConfig> getPortConfigsForDevicePort(\n            const aidl::android::media::audio::common::AudioPort& port) const {\n        return generateAudioDevicePortConfigs({port}, false);\n    }\n    aidl::android::media::audio::common::AudioPortConfig getSingleConfigForDevicePort(\n            const aidl::android::media::audio::common::AudioPort& port) const {",
+        "lookback": "            const aidl::android::media::audio::common::AudioPort& port) const {",
+        "lookahead": "        const auto config = generateAudioDevicePortConfigs({port}, true);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 134,
+        "end_line": 154,
+        "merge_gen_region": "::::const::::&&const::&&&&%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+        "confidence": 0.8831304311752319,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    // port, its initial configs are looked up, if there are none,\n    // then an empty config is used, assuming further negotiation via setAudioPortConfig.\n    std::vector<aidl::android::media::audio::common::AudioPortConfig>\n    generateAudioDevicePortConfigs(\n            const std::vector<aidl::android::media::audio::common::AudioPort>& ports,",
+        "b_contents": "    // port, its initial configs are looked up, if there are none,\n    // then an empty config is used, assuming further negotiation via setAudioPortConfig.\n    std::vector<android::media::audio::common::AudioPortConfig> generateAudioDevicePortConfigs(\n            const std::vector<android::media::audio::common::AudioPort>& ports,",
+        "base_contents": "    // port, a vector with an empty config is returned.\n    std::vector<android::media::audio::common::AudioPortConfig> generateAudioDevicePortConfigs(\n            const std::vector<android::media::audio::common::AudioPort>& ports,",
+        "res_region": "    // port, its initial configs are looked up, if there are none,\n    // then an empty config is used, assuming further negotiation via setAudioPortConfig.\n    std::vector<aidl::android::media::audio::common::AudioPortConfig>\n    generateAudioDevicePortConfigs(\n            const std::vector<aidl::android::media::audio::common::AudioPort>& ports,",
+        "lookback": "    // then an empty config is used, assuming further negotiation via setAudioPortConfig.",
+        "lookahead": "            bool singleProfile) const;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 168,
+        "end_line": 183,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput Peroutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8851984739303589,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    std::set<int32_t> mExternalDevicePorts;\n    std::vector<aidl::android::hardware::audio::core::AudioRoute> mRoutes;",
+        "b_contents": "    std::set<int32_t> mExternalDevicePorts;\n    std::vector<android::hardware::audio::core::AudioRoute> mRoutes;",
+        "base_contents": "    std::vector<android::hardware::audio::core::AudioRoute> mRoutes;",
+        "res_region": "    std::set<int32_t> mExternalDevicePorts;\n    std::vector<aidl::android::hardware::audio::core::AudioRoute> mRoutes;",
+        "lookback": "    std::vector<aidl::android::hardware::audio::core::AudioRoute> mRoutes;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 191,
+        "end_line": 199,
+        "merge_gen_region": null,
+        "confidence": 0.5196133852005005,
+        "hesitated": true
+    }
+]

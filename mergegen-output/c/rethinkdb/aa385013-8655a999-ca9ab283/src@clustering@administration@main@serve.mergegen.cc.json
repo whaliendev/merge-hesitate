@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                query_server_t rdb_pb2_server(address_ports.local_addresses,\n                                              address_ports.reql_port,\n                                              &rdb_ctx);",
+        "b_contents": "                rdb_query_server_t rdb_query_server(address_ports.local_addresses,\n                                                    address_ports.reql_port, &rdb_ctx);",
+        "base_contents": "                query2_server_t rdb_pb2_server(address_ports.local_addresses,\n                                               address_ports.reql_port, &rdb_ctx);",
+        "res_region": "                rdb_query_server_t rdb_query_server(address_ports.local_addresses,\n                                                    address_ports.reql_port, &rdb_ctx);",
+        "lookback": "                                                    address_ports.reql_port, &rdb_ctx);",
+        "lookahead": "                logINF(\"Listening for client driver connections on port %d\\n\",",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 291,
+        "end_line": 301,
+        "merge_gen_region": null,
+        "confidence": 0.39072322845458984,
+        "hesitated": true
+    }
+]

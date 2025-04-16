@@ -1,0 +1,208 @@
+[
+    {
+        "a_contents": "    s = cfd->imm()->InstallMemtableFlushResults(\n        cfd, mems, versions_.get(), &mutex_, options_.info_log.get(),\n        file_number, pending_outputs_, &deletion_state.memtables_to_free,\n        db_directory_.get());",
+        "b_contents": "    s = imm_.InstallMemtableFlushResults(\n        mems, versions_.get(), &mutex_, options_.info_log.get(), file_number,\n        pending_outputs_, &deletion_state.memtables_to_free,\n        db_directory_.get(), log_buffer);",
+        "base_contents": "    s = imm_.InstallMemtableFlushResults(\n        mems, versions_.get(), &mutex_, options_.info_log.get(), file_number,\n        pending_outputs_, &deletion_state.memtables_to_free,\n        db_directory_.get());",
+        "res_region": "    s = cfd->imm()->InstallMemtableFlushResults(\n        cfd, mems, versions_.get(), &mutex_, options_.info_log.get(),\n        file_number, pending_outputs_, &deletion_state.memtables_to_free,\n        db_directory_.get(), log_buffer);",
+        "lookback": "        cfd, mems, versions_.get(), &mutex_, options_.info_log.get(),",
+        "lookahead": "  }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1350,
+        "end_line": 1365,
+        "merge_gen_region": null,
+        "confidence": 0.8066844344139099,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  mutex_.AssertHeld();\n  // call_status is failure if at least one flush was a failure. even if\n  // flushing one column family reports a failure, we will continue flushing\n  // other column families. however, call_status will be a failure in that case.\n  Status call_status;\n  autovector<ColumnFamilyData*> to_delete;\n  // refcounting in iteration\n  for (auto cfd : *versions_->GetColumnFamilySet()) {\n    cfd->Ref();\n    Status flush_status;\n    while (flush_status.ok() && cfd->imm()->IsFlushPending()) {\n      Log(options_.info_log,\n          \"BackgroundCallFlush doing FlushMemTableToOutputFile with column \"\n          \"family %u, flush slots available %d\",\n          cfd->GetID(), options_.max_background_flushes - bg_flush_scheduled_);\n      flush_status = FlushMemTableToOutputFile(cfd, madeProgress,\n                                               deletion_state, log_buffer);\n    }\n    if (call_status.ok() && !flush_status.ok()) {\n      call_status = flush_status;\n    }\n    if (cfd->Unref()) {\n      to_delete.push_back(cfd);\n    }\n  }\n  for (auto cfd : to_delete) {\n    delete cfd;",
+        "b_contents": "  Status stat;\n  while (stat.ok() && imm_.IsFlushPending()) {\n    LogToBuffer(log_buffer,\n                \"BackgroundCallFlush doing FlushMemTableToOutputFile, \"\n                \"flush slots available %d\",\n                options_.max_background_flushes - bg_flush_scheduled_);\n    stat = FlushMemTableToOutputFile(madeProgress, deletion_state, log_buffer);",
+        "base_contents": "  Status stat;\n  while (stat.ok() && imm_.IsFlushPending()) {\n    Log(options_.info_log,\n        \"BackgroundCallFlush doing FlushMemTableToOutputFile, flush slots available %d\",\n        options_.max_background_flushes - bg_flush_scheduled_);\n    stat = FlushMemTableToOutputFile(madeProgress, deletion_state, log_buffer);",
+        "res_region": "  mutex_.AssertHeld();\n  // call_status is failure if at least one flush was a failure. even if\n  // flushing one column family reports a failure, we will continue flushing\n  // other column families. however, call_status will be a failure in that case.\n  Status call_status;\n  autovector<ColumnFamilyData*> to_delete;\n  // refcounting in iteration\n  for (auto cfd : *versions_->GetColumnFamilySet()) {\n    cfd->Ref();\n    Status flush_status;\n    while (flush_status.ok() && cfd->imm()->IsFlushPending()) {\n      LogToBuffer(\n          log_buffer,\n          \"BackgroundCallFlush doing FlushMemTableToOutputFile with column \"\n          \"family %u, flush slots available %d\",\n          cfd->GetID(), options_.max_background_flushes - bg_flush_scheduled_);\n      flush_status = FlushMemTableToOutputFile(cfd, madeProgress,\n                                               deletion_state, log_buffer);\n    }\n    if (call_status.ok() && !flush_status.ok()) {\n      call_status = flush_status;\n    }\n    if (cfd->Unref()) {\n      to_delete.push_back(cfd);\n    }\n  }\n  for (auto cfd : to_delete) {\n    delete cfd;",
+        "lookback": "  // call_status is failure if at least one flush was a failure. even if",
+        "lookahead": "  }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1954,
+        "end_line": 1997,
+        "merge_gen_region": " callstatus failure at one Sinkoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9252789616584778,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  Log(options_.info_log,  \"Compacted %d@%d + %d@%d files => %lld bytes\",\n      compact->compaction->num_input_files(0),\n      compact->compaction->level(),\n      compact->compaction->num_input_files(1),\n      compact->compaction->output_level(),",
+        "b_contents": "  LogToBuffer(\n      log_buffer, \"Compacted %d@%d + %d@%d files => %lld bytes\",\n      compact->compaction->num_input_files(0), compact->compaction->level(),\n      compact->compaction->num_input_files(1), compact->compaction->level() + 1,",
+        "base_contents": "  Log(options_.info_log,  \"Compacted %d@%d + %d@%d files => %lld bytes\",\n      compact->compaction->num_input_files(0),\n      compact->compaction->level(),\n      compact->compaction->num_input_files(1),\n      compact->compaction->level() + 1,",
+        "res_region": "  LogToBuffer(log_buffer, \"Compacted %d@%d + %d@%d files => %lld bytes\",\n              compact->compaction->num_input_files(0),\n              compact->compaction->level(),\n              compact->compaction->num_input_files(1),\n              compact->compaction->output_level(),\n              static_cast<long long>(compact->total_bytes));",
+        "lookback": "              compact->compaction->num_input_files(0),",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2456,
+        "end_line": 2473,
+        "merge_gen_region": null,
+        "confidence": 0.7055840492248535,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ColumnFamilyData* cfd = compact->compaction->column_family_data();\n  Log(options_.info_log,\n      \"[CF %u] Compacting %d@%d + %d@%d files, score %.2f slots available %d\",\n      cfd->GetID(), compact->compaction->num_input_files(0),\n      compact->compaction->level(), compact->compaction->num_input_files(1),\n      compact->compaction->output_level(), compact->compaction->score(),\n      options_.max_background_compactions - bg_compaction_scheduled_);",
+        "b_contents": "  LogToBuffer(log_buffer,\n              \"Compacting %d@%d + %d@%d files, score %.2f slots available %d\",\n              compact->compaction->num_input_files(0),\n              compact->compaction->level(),\n              compact->compaction->num_input_files(1),\n              compact->compaction->output_level(), compact->compaction->score(),\n              options_.max_background_compactions - bg_compaction_scheduled_);",
+        "base_contents": "  Log(options_.info_log,\n      \"Compacting %d@%d + %d@%d files, score %.2f slots available %d\",\n      compact->compaction->num_input_files(0),\n      compact->compaction->level(),\n      compact->compaction->num_input_files(1),\n      compact->compaction->output_level(),\n      compact->compaction->score(),\n      options_.max_background_compactions - bg_compaction_scheduled_);",
+        "res_region": "  ColumnFamilyData* cfd = compact->compaction->column_family_data();\n  LogToBuffer(\n      log_buffer,\n      \"[CF %u] Compacting %d@%d + %d@%d files, score %.2f slots available %d\",\n      cfd->GetID(), compact->compaction->num_input_files(0),\n      compact->compaction->level(), compact->compaction->num_input_files(1),\n      compact->compaction->output_level(), compact->compaction->score(),\n      options_.max_background_compactions - bg_compaction_scheduled_);",
+        "lookback": "  LogToBuffer(",
+        "lookahead": "  char scratch[2345];",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2882,
+        "end_line": 2907,
+        "merge_gen_region": null,
+        "confidence": 0.7308734059333801,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    status = InstallCompactionResults(compact);\n    InstallSuperVersion(cfd, deletion_state);",
+        "b_contents": "    status = InstallCompactionResults(compact, log_buffer);\n    InstallSuperVersion(deletion_state);",
+        "base_contents": "    status = InstallCompactionResults(compact);\n    InstallSuperVersion(deletion_state);",
+        "res_region": "    status = InstallCompactionResults(compact, log_buffer);\n    InstallSuperVersion(cfd, deletion_state);",
+        "lookback": "    InstallSuperVersion(cfd, deletion_state);",
+        "lookahead": "  }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3158,
+        "end_line": 3167,
+        "merge_gen_region": " =CompResultscompact logbuffer InstallVersionc,.",
+        "confidence": 0.8823386430740356,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  Status status;\n  autovector<ColumnFamilyData*> to_delete;\n  // refcounting cfd in iteration\n  for (auto cfd : *versions_->GetColumnFamilySet()) {\n    cfd->Ref();\n    // May temporarily unlock and wait.\n    status = MakeRoomForWrite(cfd, my_batch == nullptr);\n    if (cfd->Unref()) {\n      to_delete.push_back(cfd);\n    }\n    if (!status.ok()) {\n      break;\n    }\n  }\n  for (auto cfd : to_delete) {\n    delete cfd;\n  }",
+        "b_contents": "  // May temporarily unlock and wait.\n  SuperVersion* superversion_to_free = nullptr;\n  log::Writer* old_log = nullptr;\n  Status status = MakeRoomForWrite(my_batch == nullptr,\n                                   &superversion_to_free,\n                                   &old_log);",
+        "base_contents": "  // May temporarily unlock and wait.\n  SuperVersion* superversion_to_free = nullptr;\n  Status status = MakeRoomForWrite(my_batch == nullptr, &superversion_to_free);",
+        "res_region": "  Status status;\n  autovector<ColumnFamilyData*> to_delete;\n  // refcounting cfd in iteration\n  for (auto cfd : *versions_->GetColumnFamilySet()) {\n    cfd->Ref();\n    // May temporarily unlock and wait.\n    status = MakeRoomForWrite(cfd, my_batch == nullptr);\n    if (cfd->Unref()) {\n      to_delete.push_back(cfd);\n    }\n    if (!status.ok()) {\n      break;\n    }\n  }\n  for (auto cfd : to_delete) {\n    delete cfd;\n  }",
+        "lookback": "  autovector<ColumnFamilyData*> to_delete;",
+        "lookahead": "  uint64_t last_sequence = versions_->LastSequence();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3853,
+        "end_line": 3882,
+        "merge_gen_region": null,
+        "confidence": 0.8749067783355713,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  delete old_log;\n  delete superversion_to_free;",
+        "base_contents": "  delete superversion_to_free;",
+        "res_region": "",
+        "lookback": "               &pre_post_process_timer);",
+        "lookahead": "  BumpPerfTime(&perf_context.write_pre_and_post_process_time,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 3987,
+        "end_line": 3993,
+        "merge_gen_region": null,
+        "confidence": 0.5605797171592712,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status DBImpl::MakeRoomForWrite(ColumnFamilyData* cfd, bool force) {",
+        "b_contents": "Status DBImpl::MakeRoomForWrite(bool force,\n                                SuperVersion** superversion_to_free,\n                                log::Writer** old_log) {",
+        "base_contents": "Status DBImpl::MakeRoomForWrite(bool force,\n                                SuperVersion** superversion_to_free) {",
+        "res_region": "Status DBImpl::MakeRoomForWrite(ColumnFamilyData* cfd, bool force) {",
+        "lookback": "  mutex_.AssertHeld();",
+        "lookahead": "  mutex_.AssertHeld();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4081,
+        "end_line": 4090,
+        "merge_gen_region": null,
+        "confidence": 0.7628880143165588,
+        "hesitated": true
+    },
+    {
+        "a_contents": "          lfile->SetPreallocationBlockSize(1.1 *\n                                           cfd->options()->write_buffer_size);\n          new_mem = new MemTable(cfd->internal_comparator(), *cfd->options());",
+        "b_contents": "          lfile->SetPreallocationBlockSize(1.1 * options_.write_buffer_size);\n          new_log = new log::Writer(std::move(lfile));\n          new_mem = new MemTable(internal_comparator_, options_);",
+        "base_contents": "          lfile->SetPreallocationBlockSize(1.1 * options_.write_buffer_size);\n          new_mem = new MemTable(internal_comparator_, options_);",
+        "res_region": "          lfile->SetPreallocationBlockSize(1.1 *\n                                           cfd->options()->write_buffer_size);\n          new_log = new log::Writer(std::move(lfile));\n          new_mem = new MemTable(cfd->internal_comparator(), *cfd->options());",
+        "lookback": "                                           cfd->options()->write_buffer_size);",
+        "lookahead": "          new_superversion = new SuperVersion();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 4233,
+        "end_line": 4244,
+        "merge_gen_region": null,
+        "confidence": 0.7721125483512878,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        assert(!new_mem);",
+        "b_contents": "        assert (!new_mem);\n        assert(new_log == nullptr);",
+        "base_contents": "        assert (!new_mem);",
+        "res_region": "        assert(!new_mem);\n        assert(!new_log);",
+        "lookback": "        assert(!new_log);",
+        "lookahead": "        break;",
+        "label": [
+            "newcode",
+            "style_related"
+        ],
+        "start_line": 4255,
+        "end_line": 4262,
+        "merge_gen_region": null,
+        "confidence": 0.6877375841140747,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      log_.reset(new log::Writer(std::move(lfile)));\n      cfd->mem()->SetNextLogNumber(logfile_number_);\n      cfd->imm()->Add(cfd->mem());",
+        "b_contents": "      assert(new_log != nullptr);\n      *old_log = log_.release();\n      log_.reset(new_log);\n      mem_->SetNextLogNumber(logfile_number_);\n      imm_.Add(mem_);",
+        "base_contents": "      log_.reset(new log::Writer(std::move(lfile)));\n      mem_->SetNextLogNumber(logfile_number_);\n      imm_.Add(mem_);",
+        "res_region": "      assert(new_log != nullptr);\n      // TODO(icanadi) delete outside of mutex\n      delete log_.release();\n      log_.reset(new_log);\n      cfd->mem()->SetNextLogNumber(logfile_number_);\n      cfd->imm()->Add(cfd->mem());",
+        "lookback": "      // TODO(icanadi) delete outside of mutex",
+        "lookahead": "      if (force) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 4266,
+        "end_line": 4280,
+        "merge_gen_region": null,
+        "confidence": 0.7193484902381897,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      new_mem->Ref();\n      alive_log_files_.push_back(logfile_number_);\n      for (auto cfd : *versions_->GetColumnFamilySet()) {\n        // all this is just optimization to delete logs that\n        // are no longer needed -- if CF is empty, that means it\n        // doesn't need that particular log to stay alive, so we just\n        // advance the log number. no need to persist this in the manifest\n        if (cfd->mem()->GetFirstSequenceNumber() == 0 &&\n            cfd->imm()->size() == 0) {\n          cfd->SetLogNumber(logfile_number_);\n        }\n      }\n      cfd->SetMemtable(new_mem);\n      Log(options_.info_log,\n          \"[CF %\" PRIu32 \"] New memtable created with log file: #%lu\\n\",\n          cfd->GetID(), (unsigned long)logfile_number_);\n      force = false;  // Do not force another compaction if have room",
+        "b_contents": "      mem_ = new_mem;\n      mem_->Ref();\n      mem_->SetLogNumber(logfile_number_);\n      force = false;   // Do not force another compaction if have room",
+        "base_contents": "      mem_ = new_mem;\n      mem_->Ref();\n      Log(options_.info_log,\n          \"New memtable created with log file: #%lu\\n\",\n          (unsigned long)logfile_number_);\n      mem_->SetLogNumber(logfile_number_);\n      force = false;   // Do not force another compaction if have room",
+        "res_region": "      new_mem->Ref();\n      alive_log_files_.push_back(logfile_number_);\n      for (auto cfd : *versions_->GetColumnFamilySet()) {\n        // all this is just optimization to delete logs that\n        // are no longer needed -- if CF is empty, that means it\n        // doesn't need that particular log to stay alive, so we just\n        // advance the log number. no need to persist this in the manifest\n        if (cfd->mem()->GetFirstSequenceNumber() == 0 &&\n            cfd->imm()->size() == 0) {\n          cfd->SetLogNumber(logfile_number_);\n        }\n      }\n      cfd->SetMemtable(new_mem);\n      Log(options_.info_log,\n          \"[CF %\" PRIu32 \"] New memtable created with log file: #%lu\\n\",\n          cfd->GetID(), (unsigned long)logfile_number_);\n      force = false;  // Do not force another compaction if have room",
+        "lookback": "      alive_log_files_.push_back(logfile_number_);",
+        "lookahead": "      MaybeScheduleFlushOrCompaction();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4284,
+        "end_line": 4315,
+        "merge_gen_region": null,
+        "confidence": 0.823502242565155,
+        "hesitated": true
+    }
+]

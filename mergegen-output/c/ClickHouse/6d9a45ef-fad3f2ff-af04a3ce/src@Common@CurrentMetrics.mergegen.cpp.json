@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \\\n    M(StartupScriptsExecutionState, \"State of startup scripts execution: 0 = not finished, 1 = success, 2 = failure.\") \\",
+        "b_contents": "    \\\n    M(MergeTreeIndexGranularityInternalArraysTotalSize, \"The total size of all internal arrays in Merge Tree index granularity objects in bytes.\") \\",
+        "base_contents": "",
+        "res_region": "    \\\n    M(MergeTreeIndexGranularityInternalArraysTotalSize, \"The total size of all internal arrays in Merge Tree index granularity objects in bytes.\") \\\n    \\\n    M(StartupScriptsExecutionState, \"State of startup scripts execution: 0 = not finished, 1 = success, 2 = failure.\") \\",
+        "lookback": "    M(MergeTreeIndexGranularityInternalArraysTotalSize, \"The total size of all internal arrays in Merge Tree index granularity objects in bytes.\") \\",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 356,
+        "end_line": 363,
+        "merge_gen_region": null,
+        "confidence": 0.8442040085792542,
+        "hesitated": true
+    }
+]

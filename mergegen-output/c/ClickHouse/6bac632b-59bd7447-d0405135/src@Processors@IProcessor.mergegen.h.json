@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    void setQueryPlanStep(IQueryPlanStep * step, size_t group = 0)\n    {\n        if (step != nullptr)\n        {\n            query_plan_step = step;\n            step_uniq_id = step->getUniqID();\n        }\n        query_plan_step_group = group;\n    }",
+        "b_contents": "    void setQueryPlanStep(IQueryPlanStep * step, size_t group = 0);",
+        "base_contents": "    void setQueryPlanStep(IQueryPlanStep * step, size_t group = 0)\n    {\n        query_plan_step = step;\n        query_plan_step_group = group;\n    }",
+        "res_region": "    void setQueryPlanStep(IQueryPlanStep * step, size_t group = 0);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 328,
+        "end_line": 346,
+        "merge_gen_region": null,
+        "confidence": 0.6677368879318237,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    size_t processor_index = 0;",
+        "b_contents": "    String plan_step_name;\n    String plan_step_description;",
+        "base_contents": "",
+        "res_region": "\n    size_t processor_index = 0;\n    String plan_step_name;\n    String plan_step_description;",
+        "lookback": "    size_t processor_index = 0;",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 445,
+        "end_line": 452,
+        "merge_gen_region": null,
+        "confidence": 0.641320526599884,
+        "hesitated": true
+    }
+]

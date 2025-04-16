@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <wlr/xwayland.h>\n#include \"list.h\"",
+        "b_contents": "",
+        "base_contents": "#include <wlr/xwayland.h>",
+        "res_region": "#include \"list.h\"",
+        "lookback": "#include \"sway/config.h\"",
+        "lookahead": "#include \"sway/config.h\"",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 21,
+        "end_line": 27,
+        "merge_gen_region": null,
+        "confidence": 0.44955387711524963,
+        "hesitated": true
+    }
+]

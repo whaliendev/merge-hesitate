@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    static void instantFormat(const char* fmt, ...) {\n        const int BUFFER_SIZE = 256;\n        va_list ap;\n        char buf[BUFFER_SIZE];\n\n        va_start(ap, fmt);\n        vsnprintf(buf, BUFFER_SIZE, fmt, ap);\n        va_end(ap);\n\n        ATRACE_INSTANT(buf);\n    }\n};",
+        "b_contents": "    static void intantFormat(const char* fmt, ...) {\n        if (CC_LIKELY(!ATRACE_ENABLED())) return;\n\n        const int BUFFER_SIZE = 256;\n        va_list ap;\n        char buf[BUFFER_SIZE];\n\n        va_start(ap, fmt);\n        vsnprintf(buf, BUFFER_SIZE, fmt, ap);\n        va_end(ap);\n\n        ATRACE_INSTANT(buf);\n    }\n\n}; // class TraceUtils",
+        "base_contents": "}; // class TraceUtils",
+        "res_region": "    static void instantFormat(const char* fmt, ...) {\n        const int BUFFER_SIZE = 256;\n        va_list ap;\n        char buf[BUFFER_SIZE];\n\n        va_start(ap, fmt);\n        vsnprintf(buf, BUFFER_SIZE, fmt, ap);\n        va_end(ap);\n\n        ATRACE_INSTANT(buf);\n    }\n};",
+        "lookback": "        const int BUFFER_SIZE = 256;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 61,
+        "end_line": 92,
+        "merge_gen_region": null,
+        "confidence": 0.7487125992774963,
+        "hesitated": true
+    }
+]

@@ -73,6 +73,7 @@ def git_merge(tokens_base, tokens_a, tokens_b):
         raise RuntimeError("Tokenizer not loaded")
     with tempfile.TemporaryDirectory() as merge_path:
         # Ensure correct file paths within the temporary directory
+        # print(">>>>>>>", merge_path)
         base_file = os.path.join(merge_path, "base")
         a_file = os.path.join(merge_path, "a")
         b_file = os.path.join(merge_path, "b")
@@ -91,6 +92,7 @@ def git_merge(tokens_base, tokens_a, tokens_b):
         final_tokens = []
         # Execute git merge-file and capture stdout
         merge_cmd = f"git merge-file -L a -L base -L b {a_file} {base_file} {b_file} --diff3 -p > {merge_path}/merge"
+        execute_command(merge_cmd)
         logger.debug(f"Executing git merge command: {merge_cmd}")
         with open(f"{merge_path}/merge", "r") as f:
             merge_res = f.read().splitlines()
@@ -182,7 +184,7 @@ def load_model_and_tokenizer():
         model_structure = HesitateT5(
             model_name_or_path=MODEL_NAME_OR_PATH,
             tokenizer=tokenizer, # Pass tokenizer for potential resizing
-            confidence_threshold=0.6, # Initial threshold, will be loaded from state
+            confidence_threshold=0.88, # Initial threshold, will be loaded from state
             feature_size=FEATURE_SIZE,
             use_features=USE_FEATURES,
         )
@@ -212,12 +214,14 @@ def load_model_and_tokenizer():
         if os.path.exists(CALIBRATOR_PATH):
             logger.info(f"Loading calibrator from {CALIBRATOR_PATH}")
             try:
-                # Load calibrator to CPU first
+                # Load calibrator to CPU explicitly
                 calibrator = torch.load(CALIBRATOR_PATH, map_location=torch.device('cpu'), weights_only=False)
-                # If calibrator has torch tensors (like temperature), move them if needed
+                # Ensure any internal tensors (like temperature) ALSO remain on CPU
                 if hasattr(calibrator, 'temperature') and isinstance(calibrator.temperature, torch.Tensor):
-                     calibrator.temperature = calibrator.temperature.to(device) # Move temp if it exists
-                logger.info(f"Calibrator loaded (Strategy: {getattr(calibrator, 'strategy', 'N/A')}).")
+                     # Keep temperature on CPU to match calibrator loading device and inference input type
+                     calibrator.temperature = calibrator.temperature.to(torch.device('cpu'))
+                     logger.info(f"Calibrator temperature tensor explicitly kept on CPU.")
+                logger.info(f"Calibrator loaded to CPU (Strategy: {getattr(calibrator, 'strategy', 'N/A')}).")
             except Exception as e:
                 logger.error(f"Failed to load calibrator: {e}. Proceeding without calibration.")
                 calibrator = None
@@ -301,37 +305,39 @@ def resolve_with_hesitation(input_ids_array):
 
             final_confidence = calibrated_confidence # Store the score used for decision
 
-            # --- Hesitation Check ---
+            # Decode the generated sequence (beam 0)
+            output_ids_list = generated_ids[0].tolist() # Shape [max_resolve_len] -> list
+
+            # Remove padding and EOS token robustly
+            try:
+                eos_index = output_ids_list.index(tokenizer.eos_token_id)
+                output_ids_list = output_ids_list[:eos_index]
+            except ValueError:
+                pass # EOS not found, use full list
+            # Remove padding tokens
+            output_ids_list = [id_ for id_ in output_ids_list if id_ != tokenizer.pad_token_id]
+
+            # Use tokenizer.decode for robust conversion
+            resolved_content_str = tokenizer.decode(output_ids_list, skip_special_tokens=True)
+
+            # --- Hesitation Check (AFTER decoding) ---
             logger.info(f"Comparing confidence {final_confidence:.4f} against threshold {model_threshold:.4f}")
             if final_confidence >= model_threshold:
                 hesitated = False
-                logger.info(f"Confidence {final_confidence:.4f} >= threshold {model_threshold:.4f}. Accepting resolution.")
-                # Decode the generated sequence (beam 0)
-                output_ids_list = generated_ids[0].tolist() # Shape [max_resolve_len] -> list
-
-                # Remove padding and EOS token robustly
-                try:
-                    eos_index = output_ids_list.index(tokenizer.eos_token_id)
-                    output_ids_list = output_ids_list[:eos_index]
-                except ValueError:
-                    pass # EOS not found, use full list
-                # Remove padding tokens
-                output_ids_list = [id_ for id_ in output_ids_list if id_ != tokenizer.pad_token_id]
-
-                # Use tokenizer.decode for robust conversion
-                resolved_content_str = tokenizer.decode(output_ids_list, skip_special_tokens=True)
-
+                logger.info(f"Confidence >= threshold. Accepting resolution.")
             else:
                 hesitated = True
-                logger.info(f"Confidence {final_confidence:.4f} < threshold {model_threshold:.4f}. Hesitating.")
-                resolved_content_str = None # Indicate no resolution provided
+                logger.info(f"Confidence < threshold. Hesitating (but returning generated content).)")
+                # NOTE: We still return resolved_content_str even if hesitated
 
         except Exception as e:
             logger.error(f"Error during model generation or processing: {e}", exc_info=True)
-            # Keep hesitated=True, return None content
-            resolved_content_str = None
+            # Keep hesitated=True, return None content and confidence
+            resolved_content_str = None # Set to None on generation error
             final_confidence = raw_confidence if 'raw_confidence' in locals() else None # Report raw if calibration failed early
+            hesitated = True # Ensure hesitated is True on error
 
+    # Return the generated content, confidence, and hesitation flag
     return resolved_content_str, final_confidence, hesitated
 
 
@@ -381,14 +387,27 @@ def resolve_conflict():
         # Resolve with hesitation
         resolved_content, confidence, hesitated = resolve_with_hesitation(padded_ids_array)
 
+        # --- Log Inputs and Resolution ---
+        logger.info("="*15 + " Conflict Resolution Attempt " + "="*15)
+        logger.info(f"INPUT Base:\n---\n{raw_base}\n---")
+        logger.info(f"INPUT A:\n---\n{raw_a}\n---")
+        logger.info(f"INPUT B:\n---\n{raw_b}\n---")
+        logger.info("-"*40)
+        logger.info(f"GENERATED Content:\n---\n{resolved_content if resolved_content is not None else '[Error during generation]'}\n---")
+        confidence_str = f'{confidence:.4f}' if confidence is not None else 'N/A'
+        logger.info(f"CONFIDENCE: {confidence_str}")
+        logger.info(f"HESITATED: {hesitated}")
+        logger.info("="*55)
+        # ---------------------------------
+
         # Prepare response data
         response_data = {
-            "resolved_content": resolved_content, # Will be None if hesitated
-            "confidence": confidence, # The (potentially calibrated) score used
+            "resolved_content": resolved_content if not hesitated else None, # Return None *in response* if hesitated
+            "confidence": confidence,
             "hesitated": hesitated
         }
         duration = time.time() - start_time
-        logger.info(f"Request processed in {duration:.4f} seconds. Hesitated: {hesitated}. Confidence: {confidence:.4f if confidence is not None else 'N/A'}")
+        logger.info(f"Request processed in {duration:.4f} seconds. Decision: {'Accepted' if not hesitated else 'Hesitated'}.")
 
         # Return success response with structured data
         return AResult.success(data=response_data), 200

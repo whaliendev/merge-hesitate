@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "bool is_auto_layout(enum swayc_layouts layout);",
+        "b_contents": "bool is_auto_layout(enum swayc_layouts layout);\n",
+        "base_contents": "inline bool is_auto_layout(enum swayc_layouts layout) {\n\treturn (layout >= L_AUTO_FIRST) && (layout <= L_AUTO_LAST);\n}",
+        "res_region": "bool is_auto_layout(enum swayc_layouts layout);\n",
+        "lookback": "",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 77,
+        "end_line": 86,
+        "merge_gen_region": null,
+        "confidence": 0.6806341409683228,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,105 @@
+[
+    {
+        "a_contents": "\tif (_operator == Token::DELETE)\n\t\treturn true;\n\tif (isAddress())\n\t\treturn false;\n\tif (_operator == Token::BIT_NOT)\n\t\treturn true;\n\tif (isHash())\n\t\treturn false;\n\treturn _operator == Token::ADD || _operator == Token::SUB ||\n\t\t   _operator == Token::INC || _operator == Token::DEC;\n}\n\nbool IntegerType::operator==(const Type& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tIntegerType const& other = dynamic_cast<IntegerType const&>(_other);\n\treturn other.m_bits == m_bits && other.m_modifier == m_modifier;",
+        "b_contents": "\tif (_operator == Token::DELETE)\n\t\treturn true;\n\tif (isAddress())\n\t\treturn false;\n\tif (_operator == Token::BIT_NOT)\n\t\treturn true;\n\tif (isHash())\n\t\treturn false;\n\treturn _operator == Token::ADD || _operator == Token::SUB ||\n\t\t   _operator == Token::INC || _operator == Token::DEC;\n}\n\nbool IntegerType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tIntegerType const& other = dynamic_cast<IntegerType const&>(_other);\n\treturn other.m_bits == m_bits && other.m_modifier == m_modifier;",
+        "base_contents": "\treturn _operator == Token::DELETE || (!isAddress() && _operator == Token::BIT_NOT);",
+        "res_region": "\tif (_operator == Token::DELETE)\n\t\treturn true;\n\tif (isAddress())\n\t\treturn false;\n\tif (_operator == Token::BIT_NOT)\n\t\treturn true;\n\tif (isHash())\n\t\treturn false;\n\treturn _operator == Token::ADD || _operator == Token::SUB ||\n\t\t   _operator == Token::INC || _operator == Token::DEC;\n}\n\nbool IntegerType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tIntegerType const& other = dynamic_cast<IntegerType const&>(_other);\n\treturn other.m_bits == m_bits && other.m_modifier == m_modifier;",
+        "lookback": "\t\treturn true;",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 133,
+        "end_line": 173,
+        "merge_gen_region": " truereturn;return",
+        "confidence": 0.9007779359817505,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "u256 IntegerType::literalValue(const Literal& _literal) const\n{\n\tbigint value(_literal.getValue());\n\t//@todo check that the number is not too large\n\t//@todo does this work for signed numbers?\n\treturn u256(value);\n}\n",
+        "b_contents": "bytes IntegerType::literalToBigEndian(Literal const& _literal) const\n{\n\tbigint value(_literal.getValue());\n\tif (!isSigned() && value < 0)\n\t\treturn bytes(); // @todo this should already be caught by \"smallestTypeforLiteral\"\n\t//@todo check that the number of bits is correct\n\t//@todo does \"toCompactBigEndian\" work for signed numbers?\n\treturn toCompactBigEndian(value);\n}\n",
+        "base_contents": "",
+        "res_region": "u256 IntegerType::literalValue(Literal const& _literal) const\n{\n\tbigint value(_literal.getValue());\n\t//@todo check that the number is not too large\n\t//@todo does this work for signed numbers?\n\treturn u256(value);\n}\n",
+        "lookback": "{",
+        "lookahead": "bool BoolType::isExplicitlyConvertibleTo(Type const& _convertTo) const",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 184,
+        "end_line": 205,
+        "merge_gen_region": null,
+        "confidence": 0.7898634672164917,
+        "hesitated": true
+    },
+    {
+        "a_contents": "u256 BoolType::literalValue(const Literal& _literal) const",
+        "b_contents": "bytes BoolType::literalToBigEndian(Literal const& _literal) const",
+        "base_contents": "bool ContractType::isImplicitlyConvertibleTo(Type const& _convertTo) const",
+        "res_region": "u256 BoolType::literalValue(Literal const& _literal) const",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 219,
+        "end_line": 225,
+        "merge_gen_region": null,
+        "confidence": 0.5324487090110779,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif (_literal.getToken() == Token::TRUE_LITERAL)\n\t\treturn u256(1);\n\telse if (_literal.getToken() == Token::FALSE_LITERAL)\n\t\treturn u256(0);\n\telse\n\t\tassert(false);\n}\n\nbool ContractType::operator==(const Type& _other) const\n{\n\tif (_other.getCategory() != getCategory())",
+        "b_contents": "\tif (_literal.getToken() == Token::TRUE_LITERAL)\n\t\treturn bytes(1, 1);\n\telse if (_literal.getToken() == Token::FALSE_LITERAL)\n\t\treturn bytes(1, 0);\n\telse\n\t\treturn NullBytes;\n}\n\nbool ContractType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())",
+        "base_contents": "\tif (_convertTo.getCategory() != Category::CONTRACT)",
+        "res_region": "\tif (_literal.getToken() == Token::TRUE_LITERAL)\n\t\treturn u256(1);\n\telse if (_literal.getToken() == Token::FALSE_LITERAL)\n\t\treturn u256(0);\n\telse\n\t\tassert(false);\n}\n\nbool ContractType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())",
+        "lookback": "\t\treturn u256(1);",
+        "lookahead": "\t\treturn false;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 227,
+        "end_line": 253,
+        "merge_gen_region": null,
+        "confidence": 0.8656770586967468,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool StructType::operator==(const Type& _other) const",
+        "b_contents": "bool StructType::operator==(Type const& _other) const",
+        "base_contents": "bool StructType::isImplicitlyConvertibleTo(Type const& _convertTo) const",
+        "res_region": "bool StructType::operator==(Type const& _other) const",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 259,
+        "end_line": 265,
+        "merge_gen_region": null,
+        "confidence": 0.7216770052909851,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool FunctionType::operator==(const Type& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tFunctionType const& other = dynamic_cast<FunctionType const&>(_other);\n\treturn other.m_function == m_function;\n}\n\nbool MappingType::operator==(const Type& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tMappingType const& other = dynamic_cast<MappingType const&>(_other);\n\treturn *other.m_keyType == *m_keyType && *other.m_valueType == *m_valueType;\n}\n\nbool TypeType::operator==(const Type& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tTypeType const& other = dynamic_cast<TypeType const&>(_other);\n\treturn *getActualType() == *other.getActualType();\n}",
+        "b_contents": "bool FunctionType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tFunctionType const& other = dynamic_cast<FunctionType const&>(_other);\n\treturn other.m_function == m_function;\n}\n\nbool MappingType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tMappingType const& other = dynamic_cast<MappingType const&>(_other);\n\treturn *other.m_keyType == *m_keyType && *other.m_valueType == *m_valueType;\n}\n\nbool TypeType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tTypeType const& other = dynamic_cast<TypeType const&>(_other);\n\treturn *getActualType() == *other.getActualType();\n}",
+        "base_contents": "",
+        "res_region": "bool FunctionType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tFunctionType const& other = dynamic_cast<FunctionType const&>(_other);\n\treturn other.m_function == m_function;\n}\n\nbool MappingType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tMappingType const& other = dynamic_cast<MappingType const&>(_other);\n\treturn *other.m_keyType == *m_keyType && *other.m_valueType == *m_valueType;\n}\n\nbool TypeType::operator==(Type const& _other) const\n{\n\tif (_other.getCategory() != getCategory())\n\t\treturn false;\n\tTypeType const& other = dynamic_cast<TypeType const&>(_other);\n\treturn *getActualType() == *other.getActualType();\n}",
+        "lookback": "{",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 273,
+        "end_line": 322,
+        "merge_gen_region": null,
+        "confidence": 0.650810182094574,
+        "hesitated": true
+    }
+]

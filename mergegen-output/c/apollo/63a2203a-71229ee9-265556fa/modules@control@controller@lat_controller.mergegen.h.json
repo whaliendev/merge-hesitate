@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common/configs/proto/vehicle_config.pb.h\"\n#include \"modules/control/common/interpolation_1d.h\"",
+        "b_contents": "#include \"Eigen/Core\"\n\n#include \"modules/common/configs/proto/vehicle_config.pb.h\"\n#include \"modules/control/common/interpolation_1d.h\"",
+        "base_contents": "",
+        "res_region": "#include \"Eigen/Core\"\n\n#include \"modules/common/configs/proto/vehicle_config.pb.h\"\n#include \"modules/control/common/interpolation_1d.h\"",
+        "lookback": "",
+        "lookahead": "#include \"modules/control/common/trajectory_analyzer.h\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.8603726029396057,
+        "hesitated": true
+    }
+]

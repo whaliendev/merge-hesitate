@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "TEST(String16Test, RemoveOutOfBounds) {\n    String16 tmp(\"Verify me\");\n    tmp.remove(100, 6);\n    EXPECT_EQ(3U, tmp.size());\n    EXPECT_STR16EQ(u\" me\", tmp);\n}\n",
+        "b_contents": "",
+        "base_contents": "TEST(String16Test, MakeLower) {\n    String16 tmp(\"Verify Me!\");\n    tmp.makeLower();\n    EXPECT_EQ(10U, tmp.size());\n    EXPECT_STR16EQ(u\"verify me!\", tmp);\n}\n",
+        "res_region": "TEST(String16Test, RemoveOutOfBounds) {\n    String16 tmp(\"Verify me\");\n    tmp.remove(100, 6);\n    EXPECT_EQ(3U, tmp.size());\n    EXPECT_STR16EQ(u\" me\", tmp);\n}\n",
+        "lookback": "    String16 tmp(\"Verify me\");",
+        "lookahead": "TEST(String16Test, ReplaceAll) {",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 106,
+        "end_line": 123,
+        "merge_gen_region": null,
+        "confidence": 0.7421229481697083,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n    static const std::string sTestEngineConfig;",
+        "b_contents": "",
+        "base_contents": "\n    constexpr static const uint32_t k48000SamplingRate = 48000;",
+        "res_region": "\n    static const std::string sTestEngineConfig;",
+        "lookback": "    static const std::string sTestEngineConfig;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 229,
+        "end_line": 236,
+        "merge_gen_region": null,
+        "confidence": 0.6911343932151794,
+        "hesitated": true
+    }
+]

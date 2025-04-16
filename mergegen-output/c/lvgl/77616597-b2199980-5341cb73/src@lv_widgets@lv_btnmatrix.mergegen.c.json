@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    if(ext->btn_id_act == LV_BTNMATRIX_BTN_NONE) ext->btn_id_act = id;",
+        "b_contents": "    if(id == btnm->btn_id_focused) return;",
+        "base_contents": "    if(id == ext->btn_id_focused) return;",
+        "res_region": "    if(btnm->btn_id_act == LV_BTNMATRIX_BTN_NONE) btnm->btn_id_act = id;\n\n    if(id == btnm->btn_id_focused) return;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 191,
+        "end_line": 197,
+        "merge_gen_region": null,
+        "confidence": 0.606603741645813,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if(id == ext->btn_id_focused) return;\n    ext->btn_id_focused = id;\n\n    lv_obj_invalidate(btnm);",
+        "b_contents": "    btnm->btn_id_focused = id;\n    lv_obj_invalidate(obj);",
+        "base_contents": "    ext->btn_id_focused = id;\n    lv_obj_invalidate(btnm);",
+        "res_region": "    btnm->btn_id_focused = id;\n    lv_obj_invalidate(obj);",
+        "lookback": "    lv_obj_invalidate(obj);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 199,
+        "end_line": 210,
+        "merge_gen_region": null,
+        "confidence": 0.6447526812553406,
+        "hesitated": true
+    }
+]

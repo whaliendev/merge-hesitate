@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "BOOST_AUTO_TEST_CASE(stLogTests)\n{\n\tdev::test::executeTests(\"stLogTests\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stRecursiveCreate)\n{\n\tdev::test::executeTests(\"stRecursiveCreate\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stInitCodeTest)\n{\n\tdev::test::executeTests(\"stInitCodeTest\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stSpecialTest)\n{\n\tdev::test::executeTests(\"stSpecialTest\", \"/StateTests\", dev::test::doStateTests);\n}\n",
+        "b_contents": "BOOST_AUTO_TEST_CASE(stLogTests)\n{\n\tdev::test::executeTests(\"stLogTests\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stRecursiveCreate)\n{\n\tdev::test::executeTests(\"stRecursiveCreate\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stSpecialTest)\n{\n\tdev::test::executeTests(\"stSpecialTest\", \"/StateTests\", dev::test::doStateTests);\n}\n",
+        "base_contents": "",
+        "res_region": "BOOST_AUTO_TEST_CASE(stLogTests)\n{\n\tdev::test::executeTests(\"stLogTests\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stRecursiveCreate)\n{\n\tdev::test::executeTests(\"stRecursiveCreate\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stInitCodeTest)\n{\n\tdev::test::executeTests(\"stInitCodeTest\", \"/StateTests\", dev::test::doStateTests);\n}\n\nBOOST_AUTO_TEST_CASE(stSpecialTest)\n{\n\tdev::test::executeTests(\"stSpecialTest\", \"/StateTests\", dev::test::doStateTests);\n}\n",
+        "lookback": "{",
+        "lookahead": "BOOST_AUTO_TEST_CASE(stCreateTest)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 127,
+        "end_line": 165,
+        "merge_gen_region": "__(BOOSTAUTOargsargsargsBOOSTAUTOBOOSTAUTOBOOSTAUTOBOOSTBOOST111BOOST111BOOST111BOOST111BOOST111BOOSTBOOST111",
+        "confidence": 0.9259089231491089,
+        "hesitated": false,
+        "resolved": false
+    }
+]

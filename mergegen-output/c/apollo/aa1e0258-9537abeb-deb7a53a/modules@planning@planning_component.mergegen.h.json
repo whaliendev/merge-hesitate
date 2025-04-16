@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/pad_msg.pb.h\"\n#include \"modules/planning/proto/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/prediction/proto/prediction_obstacle.pb.h\"\n#include \"modules/routing/proto/routing.pb.h\"\n#include \"modules/storytelling/proto/story.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "lookback": "#include \"modules/common_msgs/planning_msgs/planning.pb.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 30,
+        "end_line": 51,
+        "merge_gen_region": "includemodulescommonmsgsplan_//..\"includemodulescommonmsgsplan_/..\"includemodulescommon//h # \"//h # \"///..\"includemodulescommonInInh #modulescommonInInh #modulescommonInInh",
+        "confidence": 0.9252225756645203,
+        "hesitated": false,
+        "resolved": false
+    }
+]

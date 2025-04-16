@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": " * Handle the drawing related tasks of the text areas\n * @param ta pointer to an object\n * @param clip_area the object will be drawn only in this area\n * @param mode LV_DRAW_COVER_CHK: only check if the object fully covers the 'mask_p' area",
+        "b_contents": " * An extended scrollable design of the page. Calls the normal design function and draws a cursor.\n * @param scrl pointer to the scrollable part of the Text area\n * @param clip_area the object will be drawn only in this area\n * @param mode LV_DESIGN_COVER_CHK: only check if the object fully covers the 'mask_p' area",
+        "base_contents": " * An extended scrollable design of the page. Calls the normal design function and draws a cursor.\n * @param scrl pointer to the scrollable part of the Text area\n * @param clip_area  the object will be drawn only in this area\n * @param mode LV_DESIGN_COVER_CHK: only check if the object fully covers the 'mask_p' area",
+        "res_region": " * Handle the drawing related tasks of the text areas\n * @param ta pointer to an object\n * @param clip_area the object will be drawn only in this area\n * @param mode LV_DRAW_COVER_CHK: only check if the object fully covers the 'mask_p' area",
+        "lookback": " * @param ta pointer to an object",
+        "lookahead": " *                                  (return 'true' if yes)",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1051,
+        "end_line": 1066,
+        "merge_gen_region": null,
+        "confidence": 0.8047434687614441,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static void start_cursor_blink(lv_obj_t * obj)\n{\n#if LV_USE_ANIMATION\n    lv_textarea_t * ta = (lv_textarea_t *) obj;\n    uint32_t blink_time = lv_obj_get_style_anim_time(obj, LV_PART_MARKER);\n    if(blink_time == 0) {\n        lv_anim_del(obj, (lv_anim_exec_xcb_t)cursor_blink_anim_cb);\n        ta->cursor.show = 1;\n    } else {\n        lv_anim_path_t path;\n        lv_anim_path_init(&path);\n        lv_anim_path_set_cb(&path, lv_anim_path_step);\n\n        lv_anim_t a;\n        lv_anim_init(&a);\n        lv_anim_set_var(&a, ta);\n        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)cursor_blink_anim_cb);\n        lv_anim_set_time(&a, blink_time);\n        lv_anim_set_playback_time(&a, blink_time);\n        lv_anim_set_values(&a, 1, 0);\n        lv_anim_set_path(&a, &path);\n        lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);\n        lv_anim_start(&a);\n    }\n#endif\n}\n\nstatic void refr_cursor_area(lv_obj_t * obj)",
+        "b_contents": "static void refr_cursor_area(lv_obj_t * ta)",
+        "base_contents": "\nstatic void refr_cursor_area(lv_obj_t * ta)",
+        "res_region": "static void start_cursor_blink(lv_obj_t * obj)\n{\n#if LV_USE_ANIMATION\n    lv_textarea_t * ta = (lv_textarea_t *) obj;\n    uint32_t blink_time = lv_obj_get_style_anim_time(obj, LV_PART_MARKER);\n    if(blink_time == 0) {\n        lv_anim_del(obj, (lv_anim_exec_xcb_t)cursor_blink_anim_cb);\n        ta->cursor.show = 1;\n    } else {\n        lv_anim_path_t path;\n        lv_anim_path_init(&path);\n        lv_anim_path_set_cb(&path, lv_anim_path_step);\n\n        lv_anim_t a;\n        lv_anim_init(&a);\n        lv_anim_set_var(&a, ta);\n        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)cursor_blink_anim_cb);\n        lv_anim_set_time(&a, blink_time);\n        lv_anim_set_playback_time(&a, blink_time);\n        lv_anim_set_values(&a, 1, 0);\n        lv_anim_set_path(&a, &path);\n        lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);\n        lv_anim_start(&a);\n    }\n#endif\n}\n\nstatic void refr_cursor_area(lv_obj_t * obj)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1297,
+        "end_line": 1331,
+        "merge_gen_region": null,
+        "confidence": 0.8203351497650146,
+        "hesitated": true
+    }
+]

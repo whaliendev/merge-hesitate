@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <grpc/support/useful.h>\n\n#include \"src/core/lib/gpr/host_port.h\"",
+        "base_contents": "#include <grpc/support/useful.h>",
+        "res_region": "\n#include \"src/core/lib/gpr/host_port.h\"",
+        "lookback": "#include \"src/core/lib/gpr/host_port.h\"",
+        "lookahead": "#include \"src/core/lib/gpr/string.h\"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 33,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.5427881479263306,
+        "hesitated": true
+    }
+]

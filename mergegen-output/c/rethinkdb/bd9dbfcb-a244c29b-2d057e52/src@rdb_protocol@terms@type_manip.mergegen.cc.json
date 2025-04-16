@@ -1,0 +1,55 @@
+[
+    {
+        "a_contents": "                        arr.push_back(datum_t(std::move(pair),\n                                                            env->env->limits()));",
+        "b_contents": "                        arr.push_back(make_counted<datum_t>(std::move(pair),\n                                                            env->env->limits()));",
+        "base_contents": "                        arr.push_back(make_counted<datum_t>(std::move(pair),\n                                                            env->env->limits));",
+        "res_region": "                        arr.push_back(datum_t(std::move(pair), env->env->limits()));",
+        "lookback": "                    }",
+        "lookahead": "                    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 192,
+        "end_line": 201,
+        "merge_gen_region": null,
+        "confidence": 0.8616691827774048,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    return new_val(datum_t(std::move(arr),\n                                                               env->env->limits()));",
+        "b_contents": "                    return new_val(make_counted<const datum_t>(std::move(arr),\n                                                               env->env->limits()));",
+        "base_contents": "                    return new_val(make_counted<const datum_t>(std::move(arr),\n                                                               env->env->limits));",
+        "res_region": "                    return new_val(datum_t(std::move(arr), env->env->limits()));",
+        "lookback": "                }",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 203,
+        "end_line": 212,
+        "merge_gen_region": " newvalreturnreturnreturnreturnreturnreturnreturn\",returnreturnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",returnReplacereturnReplacereturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",",
+        "confidence": 0.8878011107444763,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        return new_val(datum_t(std::move(v), env->env->limits()));",
+        "b_contents": "        return new_val(make_counted<const datum_t>(std::move(v), env->env->limits()));",
+        "base_contents": "        return new_val(make_counted<const datum_t>(std::move(v), env->env->limits));",
+        "res_region": "        return new_val(datum_t(std::move(v), env->env->limits()));",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 299,
+        "end_line": 305,
+        "merge_gen_region": "returnreturnreturnreturnReplacereturnReplacereturnReplacereturnReplacereturnReplacereturnReplacereturnReplacereturnReplacereturnononreturnreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnwhichreturnononreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnononreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnonreturnononreturnonreturnonreturnonreturn>(return>(return>(return>(return>(returnStringreturnStringreturnStringreturnStringreturnStringreturn",
+        "confidence": 0.9025424718856812,
+        "hesitated": false,
+        "resolved": false
+    }
+]

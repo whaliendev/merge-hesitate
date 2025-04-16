@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include <srs_app_statistic.hpp>",
+        "b_contents": "#include <srs_app_recv_thread.hpp>",
+        "base_contents": "",
+        "res_region": "#include <srs_app_statistic.hpp>\n#include <srs_app_recv_thread.hpp>",
+        "lookback": "#include <srs_app_recv_thread.hpp>",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 54,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.7684506177902222,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ",
+        "b_contents": "    \n    // Use receive thread to accept the close event to avoid FD leak.\n    // @see https://github.com/ossrs/srs/issues/636#issuecomment-298208427\n    SrsHttpMessage* hr = dynamic_cast<SrsHttpMessage*>(r);\n    SrsResponseOnlyHttpConn* hc = dynamic_cast<SrsResponseOnlyHttpConn*>(hr->connection());\n    \n    SrsHttpRecvThread* trd = new SrsHttpRecvThread(hc);\n    SrsAutoFree(SrsHttpRecvThread, trd);\n    \n    if ((ret = trd->start()) != ERROR_SUCCESS) {\n        srs_error(\"http: start notify thread failed, ret=%d\", ret);\n        return ret;\n    }\n",
+        "base_contents": "",
+        "res_region": "    \n    // Use receive thread to accept the close event to avoid FD leak.\n    // @see https://github.com/ossrs/srs/issues/636#issuecomment-298208427\n    SrsHttpMessage* hr = dynamic_cast<SrsHttpMessage*>(r);\n    SrsResponseOnlyHttpConn* hc = dynamic_cast<SrsResponseOnlyHttpConn*>(hr->connection());\n    \n    SrsHttpRecvThread* trd = new SrsHttpRecvThread(hc);\n    SrsAutoFree(SrsHttpRecvThread, trd);\n    \n    if ((ret = trd->start()) != ERROR_SUCCESS) {\n        srs_error(\"http: start notify thread failed, ret=%d\", ret);\n        return ret;\n    }\n",
+        "lookback": "    // Use receive thread to accept the close event to avoid FD leak.",
+        "lookahead": "    // TODO: free and erase the disabled entry after all related connections is closed.",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 544,
+        "end_line": 563,
+        "merge_gen_region": null,
+        "confidence": 0.8580830693244934,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        ",
+        "b_contents": "        \n        // Whether client closed the FD.\n        if ((ret = trd->error_code()) != ERROR_SUCCESS) {\n            return ret;\n        }\n",
+        "base_contents": "",
+        "res_region": "        \n        // Whether client closed the FD.\n        if ((ret = trd->error_code()) != ERROR_SUCCESS) {\n            return ret;\n        }\n",
+        "lookback": "        // Whether client closed the FD.",
+        "lookahead": "        // get messages from consumer.",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 567,
+        "end_line": 578,
+        "merge_gen_region": null,
+        "confidence": 0.813527524471283,
+        "hesitated": true
+    }
+]

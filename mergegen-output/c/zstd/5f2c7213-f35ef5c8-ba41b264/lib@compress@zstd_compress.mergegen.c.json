@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "    size_t const neededSpace = tableSpace + (256*sizeof(U32)) /* huffTable */ + tokenSpace\n                             + (((cParams.strategy == ZSTD_btopt) || (cParams.strategy == ZSTD_btultra)) ? optSpace : 0);",
+        "b_contents": "    size_t const optSpace = ((cParams.strategy == ZSTD_btopt) || (cParams.strategy == ZSTD_btopt2)) ? optBudget : 0;\n    size_t const neededSpace = entropySpace + tableSpace + tokenSpace + optSpace;",
+        "base_contents": "    size_t const neededSpace = tableSpace + (256*sizeof(U32)) /* huffTable */ + tokenSpace\n                             + (((cParams.strategy == ZSTD_btopt) || (cParams.strategy == ZSTD_btopt2)) ? optSpace : 0);",
+        "res_region": "    size_t const optSpace = ((cParams.strategy == ZSTD_btopt) || (cParams.strategy == ZSTD_btultra)) ? optBudget : 0;\n    size_t const neededSpace = entropySpace + tableSpace + tokenSpace + optSpace;",
+        "lookback": "    size_t const neededSpace = entropySpace + tableSpace + tokenSpace + optSpace;",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 271,
+        "end_line": 280,
+        "merge_gen_region": null,
+        "confidence": 0.8189809918403625,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        {   size_t const optSpace = ((MaxML+1) + (MaxLL+1) + (MaxOff+1) + (1<<Litbits))*sizeof(U32)\n                                  + (ZSTD_OPT_NUM+1)*(sizeof(ZSTD_match_t) + sizeof(ZSTD_optimal_t));\n            size_t const neededSpace = tableSpace + (256*sizeof(U32)) /* huffTable */ + tokenSpace\n                                  + (((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btultra)) ? optSpace : 0);",
+        "b_contents": "        {   size_t const entropySpace = hufCTable_size + litlengthCTable_size\n                                  + offcodeCTable_size + matchlengthCTable_size\n                                  + entropyScratchSpace_size;\n            size_t const optPotentialSpace = ((MaxML+1) + (MaxLL+1) + (MaxOff+1) + (1<<Litbits)) * sizeof(U32)\n                                  + (ZSTD_OPT_NUM+1) * (sizeof(ZSTD_match_t)+sizeof(ZSTD_optimal_t));\n            size_t const optSpace = ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btopt2)) ? optPotentialSpace : 0;\n            size_t const neededSpace = entropySpace + optSpace + tableSpace + tokenSpace;",
+        "base_contents": "        {   size_t const optSpace = ((MaxML+1) + (MaxLL+1) + (MaxOff+1) + (1<<Litbits))*sizeof(U32)\n                                  + (ZSTD_OPT_NUM+1)*(sizeof(ZSTD_match_t) + sizeof(ZSTD_optimal_t));\n            size_t const neededSpace = tableSpace + (256*sizeof(U32)) /* huffTable */ + tokenSpace\n                                  + (((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btopt2)) ? optSpace : 0);",
+        "res_region": "        {   size_t const entropySpace = hufCTable_size + litlengthCTable_size\n                                  + offcodeCTable_size + matchlengthCTable_size\n                                  + entropyScratchSpace_size;\n            size_t const optPotentialSpace = ((MaxML+1) + (MaxLL+1) + (MaxOff+1) + (1<<Litbits)) * sizeof(U32)\n                                  + (ZSTD_OPT_NUM+1) * (sizeof(ZSTD_match_t)+sizeof(ZSTD_optimal_t));\n            size_t const optSpace = ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btultra)) ? optPotentialSpace : 0;\n            size_t const neededSpace = entropySpace + optSpace + tableSpace + tokenSpace;",
+        "lookback": "                                  + offcodeCTable_size + matchlengthCTable_size",
+        "lookahead": "            if (zc->workSpaceSize < neededSpace) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 344,
+        "end_line": 362,
+        "merge_gen_region": null,
+        "confidence": 0.838127851486206,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btultra)) {",
+        "b_contents": "        /* ensure entropy tables are close together at the beginning */\n        assert((void*)zc->hufCTable == zc->workSpace);\n        assert((char*)zc->offcodeCTable == (char*)zc->hufCTable + hufCTable_size);\n        assert((char*)zc->matchlengthCTable == (char*)zc->offcodeCTable + offcodeCTable_size);\n        assert((char*)zc->litlengthCTable == (char*)zc->matchlengthCTable + matchlengthCTable_size);\n        assert((char*)zc->entropyScratchSpace == (char*)zc->litlengthCTable + litlengthCTable_size);\n        ptr = (char*)zc->entropyScratchSpace + entropyScratchSpace_size;\n\n        /* opt parser space */\n        if ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btopt2)) {\n            DEBUGLOG(5, \"reserving optimal parser space \");\n            assert(((size_t)ptr & 3) == 0);  /* ensure ptr is properly aligned */",
+        "base_contents": "        if ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btopt2)) {",
+        "res_region": "        /* ensure entropy tables are close together at the beginning */\n        assert((void*)zc->hufCTable == zc->workSpace);\n        assert((char*)zc->offcodeCTable == (char*)zc->hufCTable + hufCTable_size);\n        assert((char*)zc->matchlengthCTable == (char*)zc->offcodeCTable + offcodeCTable_size);\n        assert((char*)zc->litlengthCTable == (char*)zc->matchlengthCTable + matchlengthCTable_size);\n        assert((char*)zc->entropyScratchSpace == (char*)zc->litlengthCTable + litlengthCTable_size);\n        ptr = (char*)zc->entropyScratchSpace + entropyScratchSpace_size;\n\n        /* opt parser space */\n        if ((params.cParams.strategy == ZSTD_btopt) || (params.cParams.strategy == ZSTD_btultra)) {\n            DEBUGLOG(5, \"reserving optimal parser space \");\n            assert(((size_t)ptr & 3) == 0);  /* ensure ptr is properly aligned */",
+        "lookback": "        assert((void*)zc->hufCTable == zc->workSpace);",
+        "lookahead": "            zc->seqStore.litFreq = (U32*)ptr;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 409,
+        "end_line": 426,
+        "merge_gen_region": null,
+        "confidence": 0.871341347694397,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        { ZSTD_compressBlock_fast, ZSTD_compressBlock_doubleFast, ZSTD_compressBlock_greedy, ZSTD_compressBlock_lazy, ZSTD_compressBlock_lazy2, ZSTD_compressBlock_btlazy2, ZSTD_compressBlock_btopt, ZSTD_compressBlock_btultra },\n        { ZSTD_compressBlock_fast_extDict, ZSTD_compressBlock_doubleFast_extDict, ZSTD_compressBlock_greedy_extDict, ZSTD_compressBlock_lazy_extDict,ZSTD_compressBlock_lazy2_extDict, ZSTD_compressBlock_btlazy2_extDict, ZSTD_compressBlock_btopt_extDict, ZSTD_compressBlock_btultra_extDict }",
+        "b_contents": "        { ZSTD_compressBlock_fast, ZSTD_compressBlock_doubleFast, ZSTD_compressBlock_greedy,\n          ZSTD_compressBlock_lazy, ZSTD_compressBlock_lazy2, ZSTD_compressBlock_btlazy2,\n          ZSTD_compressBlock_btopt, ZSTD_compressBlock_btopt2 },\n        { ZSTD_compressBlock_fast_extDict, ZSTD_compressBlock_doubleFast_extDict, ZSTD_compressBlock_greedy_extDict,\n          ZSTD_compressBlock_lazy_extDict,ZSTD_compressBlock_lazy2_extDict, ZSTD_compressBlock_btlazy2_extDict,\n          ZSTD_compressBlock_btopt_extDict, ZSTD_compressBlock_btopt2_extDict }",
+        "base_contents": "        { ZSTD_compressBlock_fast, ZSTD_compressBlock_doubleFast, ZSTD_compressBlock_greedy, ZSTD_compressBlock_lazy, ZSTD_compressBlock_lazy2, ZSTD_compressBlock_btlazy2, ZSTD_compressBlock_btopt, ZSTD_compressBlock_btopt2 },\n        { ZSTD_compressBlock_fast_extDict, ZSTD_compressBlock_doubleFast_extDict, ZSTD_compressBlock_greedy_extDict, ZSTD_compressBlock_lazy_extDict,ZSTD_compressBlock_lazy2_extDict, ZSTD_compressBlock_btlazy2_extDict, ZSTD_compressBlock_btopt_extDict, ZSTD_compressBlock_btopt2_extDict }",
+        "res_region": "        { ZSTD_compressBlock_fast, ZSTD_compressBlock_doubleFast, ZSTD_compressBlock_greedy,\n          ZSTD_compressBlock_lazy, ZSTD_compressBlock_lazy2, ZSTD_compressBlock_btlazy2,\n          ZSTD_compressBlock_btopt, ZSTD_compressBlock_btultra },\n        { ZSTD_compressBlock_fast_extDict, ZSTD_compressBlock_doubleFast_extDict, ZSTD_compressBlock_greedy_extDict,\n          ZSTD_compressBlock_lazy_extDict,ZSTD_compressBlock_lazy2_extDict, ZSTD_compressBlock_btlazy2_extDict,\n          ZSTD_compressBlock_btopt_extDict, ZSTD_compressBlock_btultra_extDict }",
+        "lookback": "          ZSTD_compressBlock_lazy, ZSTD_compressBlock_lazy2, ZSTD_compressBlock_btlazy2,",
+        "lookahead": "    };",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 2469,
+        "end_line": 2482,
+        "merge_gen_region": null,
+        "confidence": 0.8774598836898804,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    case ZSTD_btultra:\n        ZSTD_updateTree(zc, iend-HASH_READ_SIZE, iend, 1 << zc->params.cParams.searchLog, zc->params.cParams.searchLength);",
+        "b_contents": "    case ZSTD_btopt2:\n        if (srcSize >= HASH_READ_SIZE)\n            ZSTD_updateTree(zc, iend-HASH_READ_SIZE, iend, 1 << zc->params.cParams.searchLog, zc->params.cParams.searchLength);",
+        "base_contents": "    case ZSTD_btopt2:\n        ZSTD_updateTree(zc, iend-HASH_READ_SIZE, iend, 1 << zc->params.cParams.searchLog, zc->params.cParams.searchLength);",
+        "res_region": "    case ZSTD_btultra:\n        if (srcSize >= HASH_READ_SIZE)\n            ZSTD_updateTree(zc, iend-HASH_READ_SIZE, iend, 1 << zc->params.cParams.searchLog, zc->params.cParams.searchLength);",
+        "lookback": "        if (srcSize >= HASH_READ_SIZE)",
+        "lookahead": "        break;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2734,
+        "end_line": 2744,
+        "merge_gen_region": null,
+        "confidence": 0.8718875646591187,
+        "hesitated": true
+    }
+]

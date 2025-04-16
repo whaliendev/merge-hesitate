@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  Status MakeRoomForWrite(ColumnFamilyData* cfd,\n                          bool force /* flush even if there is room? */);",
+        "b_contents": "  // MakeRoomForWrite will return superversion_to_free through an arugment,\n  // which the caller needs to delete. We do it because caller can delete\n  // the superversion outside of mutex.\n  // old_log if not nullptr is the old log writer that should be safely\n  // closed whenever DB mutex is released.\n  Status MakeRoomForWrite(bool force /* compact even if there is room? */,\n                          SuperVersion** superversion_to_free,\n                          log::Writer** old_log);",
+        "base_contents": "  // MakeRoomForWrite will return superversion_to_free through an arugment,\n  // which the caller needs to delete. We do it because caller can delete\n  // the superversion outside of mutex\n  Status MakeRoomForWrite(bool force /* compact even if there is room? */,\n                          SuperVersion** superversion_to_free);",
+        "res_region": "\n  // TODO(icanadi) free superversion_to_free and old_log outside of mutex\n  Status MakeRoomForWrite(ColumnFamilyData* cfd,\n                          bool force /* flush even if there is room? */);\n",
+        "lookback": "  // TODO(icanadi) free superversion_to_free and old_log outside of mutex",
+        "lookahead": "  void BuildBatchGroup(Writer** last_writer,",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 313,
+        "end_line": 331,
+        "merge_gen_region": null,
+        "confidence": 0.8349674344062805,
+        "hesitated": true
+    }
+]

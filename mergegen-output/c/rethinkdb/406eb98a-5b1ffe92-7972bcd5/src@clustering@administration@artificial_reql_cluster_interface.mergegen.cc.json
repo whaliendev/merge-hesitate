@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        _name_client,\n        _directory_map_view));",
+        "b_contents": "        _server_config_client,\n        _directory_view,\n        metadata_field(&cluster_semilattice_metadata_t::rdb_namespaces,\n            _semilattice_view),\n        metadata_field(&cluster_semilattice_metadata_t::databases,\n            _semilattice_view)));",
+        "base_contents": "        _name_client,\n        _directory_view,\n        metadata_field(&cluster_semilattice_metadata_t::rdb_namespaces,\n            _semilattice_view),\n        metadata_field(&cluster_semilattice_metadata_t::databases,\n            _semilattice_view)));",
+        "res_region": "        _server_config_client,\n        _directory_map_view));",
+        "lookback": "        _directory_map_view));",
+        "lookahead": "    backends[name_string_t::guarantee_valid(\"server_status\")] =",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 321,
+        "end_line": 338,
+        "merge_gen_region": null,
+        "confidence": 0.7739191055297852,
+        "hesitated": true
+    }
+]

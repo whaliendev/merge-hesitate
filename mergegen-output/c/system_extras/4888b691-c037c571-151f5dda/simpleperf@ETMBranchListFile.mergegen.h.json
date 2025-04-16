@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "class BinaryFilter {\n public:\n  BinaryFilter(const RegEx* binary_name_regex) : binary_name_regex_(binary_name_regex) {}\n\n  void SetRegex(const RegEx* binary_name_regex) {\n    binary_name_regex_ = binary_name_regex;\n    dso_filter_cache_.clear();\n  }\n\n  bool Filter(Dso* dso) {\n    auto lookup = dso_filter_cache_.find(dso);\n    if (lookup != dso_filter_cache_.end()) {\n      return lookup->second;\n    }\n    bool match = Filter(dso->Path());\n    dso_filter_cache_.insert({dso, match});\n    return match;\n  }\n\n  bool Filter(const std::string& path) {\n    return binary_name_regex_ == nullptr || binary_name_regex_->Search(path);\n  }\n\n private:\n  const RegEx* binary_name_regex_;\n  std::unordered_map<Dso*, bool> dso_filter_cache_;\n};\n\n// Convert ETM data into branch lists while recording.\nclass ETMBranchListGenerator {\n public:\n  static std::unique_ptr<ETMBranchListGenerator> Create(bool dump_maps_from_proc);\n\n  virtual ~ETMBranchListGenerator();\n  virtual void SetExcludePid(pid_t pid) = 0;\n  virtual void SetBinaryFilter(const RegEx* binary_name_regex) = 0;\n  virtual bool ProcessRecord(const Record& r, bool& consumed) = 0;\n  virtual BranchListBinaryMap GetBranchListBinaryMap() = 0;\n};\n",
+        "b_contents": "// Convert ETM data into branch lists while recording.\nclass ETMBranchListGenerator {\n public:\n  static std::unique_ptr<ETMBranchListGenerator> Create(bool dump_maps_from_proc);\n\n  virtual ~ETMBranchListGenerator();\n  virtual bool ProcessRecord(const Record& r, bool& consumed) = 0;\n  virtual BranchListBinaryMap GetBranchListBinaryMap() = 0;\n};\n",
+        "base_contents": "",
+        "res_region": "class BinaryFilter {\n public:\n  BinaryFilter(const RegEx* binary_name_regex) : binary_name_regex_(binary_name_regex) {}\n\n  void SetRegex(const RegEx* binary_name_regex) {\n    binary_name_regex_ = binary_name_regex;\n    dso_filter_cache_.clear();\n  }\n\n  bool Filter(Dso* dso) {\n    auto lookup = dso_filter_cache_.find(dso);\n    if (lookup != dso_filter_cache_.end()) {\n      return lookup->second;\n    }\n    bool match = Filter(dso->Path());\n    dso_filter_cache_.insert({dso, match});\n    return match;\n  }\n\n  bool Filter(const std::string& path) {\n    return binary_name_regex_ == nullptr || binary_name_regex_->Search(path);\n  }\n\n private:\n  const RegEx* binary_name_regex_;\n  std::unordered_map<Dso*, bool> dso_filter_cache_;\n};\n\n// Convert ETM data into branch lists while recording.\nclass ETMBranchListGenerator {\n public:\n  static std::unique_ptr<ETMBranchListGenerator> Create(bool dump_maps_from_proc);\n\n  virtual ~ETMBranchListGenerator();\n  virtual void SetExcludePid(pid_t pid) = 0;\n  virtual void SetBinaryFilter(const RegEx* binary_name_regex) = 0;\n  virtual bool ProcessRecord(const Record& r, bool& consumed) = 0;\n  virtual BranchListBinaryMap GetBranchListBinaryMap() = 0;\n};\n",
+        "lookback": " public:",
+        "lookahead": "// for testing",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 107,
+        "end_line": 160,
+        "merge_gen_region": " Binary {:FilterconstEx binarynameregex :___(___regex {} Set( Reg*___) binarynameregex =___;so____.(); bool(so d) auto =sofilter__.(); ( !=sofiltercacheend { lookupsecond } match FilterD* d) auto =sofiltercachefinddso iflookup d__.()) return->; bool =(->Path d___.({,}); match; bool( stdstring path { binarynameregex == ||___->(); private constEx binarynameregex stdunorderedmapD*,>sosofilter__; }; ConvertTM into lists recording classMBanchGenerator public static::_<<MBrList> Createbool___); ~MBanchList(); voidExclude(__ pid =; voidBinary( Reg*___) 0 virtual Process( Record r bool consumed =; BranchBinary GetListMapMapBranchBinary() 0;",
+        "confidence": 0.9040055871009827,
+        "hesitated": false,
+        "resolved": false
+    }
+]

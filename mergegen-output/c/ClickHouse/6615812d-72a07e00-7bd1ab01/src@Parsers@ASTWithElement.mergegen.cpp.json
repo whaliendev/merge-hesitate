@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    settings.ostr << (settings.hilite ? hilite_alias : \"\");\n    settings.writeIdentifier(name, /*ambiguous=*/false);\n    settings.ostr << (settings.hilite ? hilite_none : \"\");\n    if (aliases)\n    {\n        const bool prep_whitespace = frame.expression_list_prepend_whitespace;\n        frame.expression_list_prepend_whitespace = false;\n\n        settings.ostr << \" (\";\n        aliases->formatImpl(settings, state, frame);\n        settings.ostr << \")\";\n\n        frame.expression_list_prepend_whitespace = prep_whitespace;\n    }\n    settings.ostr << (settings.hilite ? hilite_keyword : \"\") << \" AS\" << (settings.hilite ? hilite_none : \"\");\n    settings.ostr << settings.nl_or_ws << indent_str;\n    dynamic_cast<const ASTWithAlias &>(*subquery).formatImplWithoutAlias(settings, state, frame);",
+        "b_contents": "    ostr << (settings.hilite ? hilite_alias : \"\");\n    settings.writeIdentifier(ostr, name, /*ambiguous=*/false);\n    ostr << (settings.hilite ? hilite_none : \"\");\n    ostr << (settings.hilite ? hilite_keyword : \"\") << \" AS\" << (settings.hilite ? hilite_none : \"\");\n    ostr << settings.nl_or_ws << indent_str;\n    dynamic_cast<const ASTWithAlias &>(*subquery).formatImplWithoutAlias(ostr, settings, state, frame);",
+        "base_contents": "    settings.ostr << (settings.hilite ? hilite_alias : \"\");\n    settings.writeIdentifier(name, /*ambiguous=*/false);\n    settings.ostr << (settings.hilite ? hilite_none : \"\");\n    settings.ostr << (settings.hilite ? hilite_keyword : \"\") << \" AS\" << (settings.hilite ? hilite_none : \"\");\n    settings.ostr << settings.nl_or_ws << indent_str;\n    dynamic_cast<const ASTWithAlias &>(*subquery).formatImplWithoutAlias(settings, state, frame);",
+        "res_region": "    ostr << (settings.hilite ? hilite_alias : \"\");\n    settings.writeIdentifier(ostr, name, /*ambiguous=*/false);\n    ostr << (settings.hilite ? hilite_none : \"\");\n    if (aliases)\n    {\n        const bool prep_whitespace = frame.expression_list_prepend_whitespace;\n        frame.expression_list_prepend_whitespace = false;\n\n        ostr << \" (\";\n        aliases->formatImpl(settings, state, frame);\n        ostr << \")\";\n\n        frame.expression_list_prepend_whitespace = prep_whitespace;\n    }\n    ostr << (settings.hilite ? hilite_keyword : \"\") << \" AS\" << (settings.hilite ? hilite_none : \"\");\n    ostr << settings.nl_or_ws << indent_str;\n    dynamic_cast<const ASTWithAlias &>(*subquery).formatImplWithoutAlias(settings, state, frame);",
+        "lookback": "    settings.writeIdentifier(ostr, name, /*ambiguous=*/false);",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 23,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.6738373637199402,
+        "hesitated": true
+    }
+]

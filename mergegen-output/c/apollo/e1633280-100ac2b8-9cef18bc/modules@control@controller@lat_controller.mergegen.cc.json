@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  double point_angle =\n      std::atan2(point.y() - closest.y(), point.x() - closest.x());\n  double point2path_angle = point_angle - closest.theta();",
+        "b_contents": "  double point_angle = std::atan2(point.y() - closest.path_point().y(),\n                                  point.x() - closest.path_point().x());\n  double point2path_angle = point_angle - closest.path_point().theta();",
+        "base_contents": "  double point_angle = std::atan2(point.y() - closest.y(),\n                                  point.x() - closest.x());\n  double point2path_angle = point_angle - closest.theta();",
+        "res_region": "  double point_angle = std::atan2(point.y() - closest.path_point().y(),\n                                  point.x() - closest.path_point().x());\n  double point2path_angle = point_angle - closest.path_point().theta();",
+        "lookback": "                                  point.x() - closest.path_point().x());",
+        "lookahead": "  if (traj_point != nullptr) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 468,
+        "end_line": 480,
+        "merge_gen_region": null,
+        "confidence": 0.8406563401222229,
+        "hesitated": true
+    }
+]

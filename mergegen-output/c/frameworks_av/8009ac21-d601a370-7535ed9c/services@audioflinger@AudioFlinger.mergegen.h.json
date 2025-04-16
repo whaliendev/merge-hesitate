@@ -1,0 +1,141 @@
+[
+    {
+        "a_contents": "#include \"DeviceEffectManager.h\"",
+        "b_contents": "#include \"ResamplerBufferProvider.h\"\n\n// include AudioFlinger component interfaces\n#include \"IAfPatchPanel.h\"  // this should be listed before other IAf* interfaces.",
+        "base_contents": "#include \"ResamplerBufferProvider.h\"\n\n// TODO(b/291319167) remove me when AudioFlinger class not directly used by subcomponents\nnamespace android { class AudioFlinger; }\n\n// include AudioFlinger component interfaces\n#include \"IAfPatchPanel.h\"  // this should be listed before other IAf* interfaces.",
+        "res_region": "#include \"DeviceEffectManager.h\"",
+        "lookback": "#include \"IAfEffect.h\"",
+        "lookahead": "#include \"IAfEffect.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 21,
+        "end_line": 36,
+        "merge_gen_region": null,
+        "confidence": 0.639195442199707,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // ----- begin IAfThreadCallback interface\n\n    bool isNonOffloadableGlobalEffectEnabled_l() const final;\n    bool btNrecIsOff() const final { return mBtNrecIsOff.load(); }\n    float masterVolume_l() const final;\n    bool masterMute_l() const final;\n    float getMasterBalance_l() const;\n    // no range check, AudioFlinger::mLock held\n    bool streamMute_l(audio_stream_type_t stream) const final { return mStreamTypes[stream].mute; }\n    audio_mode_t getMode() const final { return mMode; }\n    bool isLowRamDevice() const final { return mIsLowRamDevice; }\n    uint32_t getScreenState() const final { return mScreenState; }\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l() const final;\n    const sp<IAfPatchPanel>& getPatchPanel() const final { return mPatchPanel; }\n    const sp<MelReporter>& getMelReporter() const final { return mMelReporter; }\n    const sp<EffectsFactoryHalInterface>& getEffectsFactoryHal() const final {\n        return mEffectsFactoryHal;\n    }\n    sp<IAudioManager> getOrCreateAudioManager() final;\n\n    // Called when the last effect handle on an effect instance is removed. If this\n    // effect belongs to an effect chain in mOrphanEffectChains, the chain is updated\n    // and removed from mOrphanEffectChains if it does not contain any effect.\n    // Return true if the effect was found in mOrphanEffectChains, false otherwise.\n    bool updateOrphanEffectChains(const sp<IAfEffectModule>& effect) final;\n\n    status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge() final;\n    sp<NBLog::Writer> newWriter_l(size_t size, const char *name) final;\n    void unregisterWriter(const sp<NBLog::Writer>& writer) final;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n            audio_session_t triggerSession,\n            audio_session_t listenerSession,\n            const audioflinger::SyncEventCallback& callBack,\n            const wp<IAfTrackBase>& cookie) final;\n\n    void ioConfigChanged(audio_io_config_event_t event,\n            const sp<AudioIoDescriptor>& ioDesc,\n            pid_t pid = 0) final;\n    void onNonOffloadableGlobalEffectEnable() final;\n    void onSupportedLatencyModesChanged(\n            audio_io_handle_t output, const std::vector<audio_latency_mode_t>& modes) final;\n\n    // ---- end of IAfThreadCallback interface\n",
+        "b_contents": "    // ----- begin IAfThreadCallback interface\n\n    bool isNonOffloadableGlobalEffectEnabled_l() const final;\n    bool btNrecIsOff() const final { return mBtNrecIsOff.load(); }\n    float masterVolume_l() const final;\n    bool masterMute_l() const final;\n    float getMasterBalance_l() const;\n    // no range check, AudioFlinger::mLock held\n    bool streamMute_l(audio_stream_type_t stream) const final { return mStreamTypes[stream].mute; }\n    audio_mode_t getMode() const final { return mMode; }\n    bool isLowRamDevice() const final { return mIsLowRamDevice; }\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l() const final;\n    const sp<IAfPatchPanel>& getPatchPanel() const final { return mPatchPanel; }\n    const sp<MelReporter>& getMelReporter() const final { return mMelReporter; }\n    const sp<EffectsFactoryHalInterface>& getEffectsFactoryHal() const final {\n        return mEffectsFactoryHal;\n    }\n    sp<IAudioManager> getOrCreateAudioManager() final;\n\n    // Called when the last effect handle on an effect instance is removed. If this\n    // effect belongs to an effect chain in mOrphanEffectChains, the chain is updated\n    // and removed from mOrphanEffectChains if it does not contain any effect.\n    // Return true if the effect was found in mOrphanEffectChains, false otherwise.\n    bool updateOrphanEffectChains(const sp<IAfEffectModule>& effect) final;\n\n    status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge() final;\n    sp<NBLog::Writer> newWriter_l(size_t size, const char *name) final;\n    void unregisterWriter(const sp<NBLog::Writer>& writer) final;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n            audio_session_t triggerSession,\n            audio_session_t listenerSession,\n            const audioflinger::SyncEventCallback& callBack,\n            const wp<IAfTrackBase>& cookie) final;\n\n    void ioConfigChanged(audio_io_config_event_t event,\n            const sp<AudioIoDescriptor>& ioDesc,\n            pid_t pid = 0) final;\n    void onNonOffloadableGlobalEffectEnable() final;\n    void onSupportedLatencyModesChanged(\n            audio_io_handle_t output, const std::vector<audio_latency_mode_t>& modes) final;\n\n    // ---- end of IAfThreadCallback interface\n",
+        "base_contents": "",
+        "res_region": "    // ----- begin IAfThreadCallback interface\n\n    bool isNonOffloadableGlobalEffectEnabled_l() const final;\n    bool btNrecIsOff() const final { return mBtNrecIsOff.load(); }\n    float masterVolume_l() const final;\n    bool masterMute_l() const final;\n    float getMasterBalance_l() const;\n    // no range check, AudioFlinger::mLock held\n    bool streamMute_l(audio_stream_type_t stream) const final { return mStreamTypes[stream].mute; }\n    audio_mode_t getMode() const final { return mMode; }\n    bool isLowRamDevice() const final { return mIsLowRamDevice; }\n    uint32_t getScreenState() const final { return mScreenState; }\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l() const final;\n    const sp<IAfPatchPanel>& getPatchPanel() const final { return mPatchPanel; }\n    const sp<MelReporter>& getMelReporter() const final { return mMelReporter; }\n    const sp<EffectsFactoryHalInterface>& getEffectsFactoryHal() const final {\n        return mEffectsFactoryHal;\n    }\n    sp<IAudioManager> getOrCreateAudioManager() final;\n\n    // Called when the last effect handle on an effect instance is removed. If this\n    // effect belongs to an effect chain in mOrphanEffectChains, the chain is updated\n    // and removed from mOrphanEffectChains if it does not contain any effect.\n    // Return true if the effect was found in mOrphanEffectChains, false otherwise.\n    bool updateOrphanEffectChains(const sp<IAfEffectModule>& effect) final;\n\n    status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge() final;\n    sp<NBLog::Writer> newWriter_l(size_t size, const char *name) final;\n    void unregisterWriter(const sp<NBLog::Writer>& writer) final;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n            audio_session_t triggerSession,\n            audio_session_t listenerSession,\n            const audioflinger::SyncEventCallback& callBack,\n            const wp<IAfTrackBase>& cookie) final;\n\n    void ioConfigChanged(audio_io_config_event_t event,\n            const sp<AudioIoDescriptor>& ioDesc,\n            pid_t pid = 0) final;\n    void onNonOffloadableGlobalEffectEnable() final;\n    void onSupportedLatencyModesChanged(\n            audio_io_handle_t output, const std::vector<audio_latency_mode_t>& modes) final;\n\n    // ---- end of IAfThreadCallback interface\n",
+        "lookback": "",
+        "lookahead": "    /* List available audio ports and their attributes */",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 322,
+        "end_line": 426,
+        "merge_gen_region": null,
+        "confidence": 0.7611358165740967,
+        "hesitated": true
+    },
+    {
+        "a_contents": "public:\n    // TODO(b/292281786): Remove this when Oboeservice can get access to\n    // openMmapStream through an IAudioFlinger handle directly.\n    static inline std::atomic<AudioFlinger*> gAudioFlinger = nullptr;\n",
+        "b_contents": "public:",
+        "base_contents": "",
+        "res_region": "public:\n    // TODO(b/292281786): Remove this when Oboeservice can get access to\n    // openMmapStream through an IAudioFlinger handle directly.\n    static inline std::atomic<AudioFlinger*> gAudioFlinger = nullptr;\n",
+        "lookback": "    // TODO(b/292281786): Remove this when Oboeservice can get access to",
+        "lookahead": "    status_t openMmapStream(MmapStreamInterface::stream_direction_t direction,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 432,
+        "end_line": 441,
+        "merge_gen_region": null,
+        "confidence": 0.8186322450637817,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n    static os::HapticScale onExternalVibrationStart(\n        const sp<os::ExternalVibration>& externalVibration);\n    static void onExternalVibrationStop(const sp<os::ExternalVibration>& externalVibration);\n",
+        "base_contents": "\n    static os::HapticScale onExternalVibrationStart(\n        const sp<os::ExternalVibration>& externalVibration);\n    static void onExternalVibrationStop(const sp<os::ExternalVibration>& externalVibration);\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l();\n",
+        "res_region": "",
+        "lookback": "    // FIXME The 400 is temporarily too high until a leak of writers in media.log is fixed.",
+        "lookahead": "private:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 451,
+        "end_line": 466,
+        "merge_gen_region": null,
+        "confidence": 0.8059361577033997,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    // Set kEnableExtendedChannels to true to enable greater than stereo output\n    // for the MixerThread and device sink.  Number of channels allowed is\n    // FCC_2 <= channels <= AudioMixer::MAX_NUM_CHANNELS.\n    static const bool kEnableExtendedChannels = true;\n\npublic:\n    // Remove this when Oboeservice is updated to obtain handle directly.\n    static inline std::atomic<AudioFlinger*> gAudioFlinger = nullptr;\n\n    // Returns true if channel mask is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkChannelMask(audio_channel_mask_t channelMask) {\n        switch (audio_channel_mask_get_representation(channelMask)) {\n        case AUDIO_CHANNEL_REPRESENTATION_POSITION: {\n            // Haptic channel mask is only applicable for channel position mask.\n            const uint32_t channelCount = audio_channel_count_from_out_mask(\n                    static_cast<audio_channel_mask_t>(channelMask & ~AUDIO_CHANNEL_HAPTIC_ALL));\n            const uint32_t maxChannelCount = kEnableExtendedChannels\n                    ? AudioMixer::MAX_NUM_CHANNELS : FCC_2;\n            if (channelCount < FCC_2 // mono is not supported at this time\n                    || channelCount > maxChannelCount) {\n                return false;\n            }\n            // check that channelMask is the \"canonical\" one we expect for the channelCount.\n            return audio_channel_position_mask_is_out_canonical(channelMask);\n            }\n        case AUDIO_CHANNEL_REPRESENTATION_INDEX:\n            if (kEnableExtendedChannels) {\n                const uint32_t channelCount = audio_channel_count_from_out_mask(channelMask);\n                if (channelCount >= FCC_2 // mono is not supported at this time\n                        && channelCount <= AudioMixer::MAX_NUM_CHANNELS) {\n                    return true;\n                }\n            }\n            return false;\n        default:\n            return false;\n        }\n    }\n\n    // Set kEnableExtendedPrecision to true to use extended precision in MixerThread\n    static const bool kEnableExtendedPrecision = true;\n\n    // Returns true if format is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkFormat(audio_format_t format) {\n        switch (format) {\n        case AUDIO_FORMAT_PCM_16_BIT:\n            return true;\n        case AUDIO_FORMAT_PCM_FLOAT:\n        case AUDIO_FORMAT_PCM_24_BIT_PACKED:\n        case AUDIO_FORMAT_PCM_32_BIT:\n        case AUDIO_FORMAT_PCM_8_24_BIT:\n            return kEnableExtendedPrecision;\n        default:\n            return false;\n        }\n    }\n\n    // standby delay for MIXER and DUPLICATING playback threads is read from property\n    // ro.audio.flinger_standbytime_ms or defaults to kDefaultStandbyTimeInNsecs\n    static nsecs_t          mStandbyTimeInNsecs;\n",
+        "base_contents": "    // Set kEnableExtendedChannels to true to enable greater than stereo output\n    // for the MixerThread and device sink.  Number of channels allowed is\n    // FCC_2 <= channels <= AudioMixer::MAX_NUM_CHANNELS.\n    static const bool kEnableExtendedChannels = true;\n\n    // Returns true if channel mask is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkChannelMask(audio_channel_mask_t channelMask) {\n        switch (audio_channel_mask_get_representation(channelMask)) {\n        case AUDIO_CHANNEL_REPRESENTATION_POSITION: {\n            // Haptic channel mask is only applicable for channel position mask.\n            const uint32_t channelCount = audio_channel_count_from_out_mask(\n                    static_cast<audio_channel_mask_t>(channelMask & ~AUDIO_CHANNEL_HAPTIC_ALL));\n            const uint32_t maxChannelCount = kEnableExtendedChannels\n                    ? AudioMixer::MAX_NUM_CHANNELS : FCC_2;\n            if (channelCount < FCC_2 // mono is not supported at this time\n                    || channelCount > maxChannelCount) {\n                return false;\n            }\n            // check that channelMask is the \"canonical\" one we expect for the channelCount.\n            return audio_channel_position_mask_is_out_canonical(channelMask);\n            }\n        case AUDIO_CHANNEL_REPRESENTATION_INDEX:\n            if (kEnableExtendedChannels) {\n                const uint32_t channelCount = audio_channel_count_from_out_mask(channelMask);\n                if (channelCount >= FCC_2 // mono is not supported at this time\n                        && channelCount <= AudioMixer::MAX_NUM_CHANNELS) {\n                    return true;\n                }\n            }\n            return false;\n        default:\n            return false;\n        }\n    }\n\n    // Set kEnableExtendedPrecision to true to use extended precision in MixerThread\n    static const bool kEnableExtendedPrecision = true;\n\n    // Returns true if format is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkFormat(audio_format_t format) {\n        switch (format) {\n        case AUDIO_FORMAT_PCM_16_BIT:\n            return true;\n        case AUDIO_FORMAT_PCM_FLOAT:\n        case AUDIO_FORMAT_PCM_24_BIT_PACKED:\n        case AUDIO_FORMAT_PCM_32_BIT:\n        case AUDIO_FORMAT_PCM_8_24_BIT:\n            return kEnableExtendedPrecision;\n        default:\n            return false;\n        }\n    }\n\n    // standby delay for MIXER and DUPLICATING playback threads is read from property\n    // ro.audio.flinger_standbytime_ms or defaults to kDefaultStandbyTimeInNsecs\n    static nsecs_t          mStandbyTimeInNsecs;\n",
+        "res_region": "",
+        "lookback": "    // AudioFlinger::setParameters() updates with mLock.",
+        "lookahead": "    // incremented by 2 when screen state changes, bit 0 == 1 means \"off\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 489,
+        "end_line": 610,
+        "merge_gen_region": " AudioFlingerset() withLock",
+        "confidence": 0.9486369490623474,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    // Internal dump utilities.\n    static const int kDumpLockTimeoutNs = 1 * NANOS_PER_SECOND;\n\n    // TODO(b/291319167) extract to afutils\n    static bool dumpTryLock(Mutex& mutex);\nprivate:",
+        "base_contents": "    // Internal dump utilities.\n    static const int kDumpLockTimeoutNs = 1 * NANOS_PER_SECOND;\npublic:\n    // TODO(b/291319167) extract to afutils\n    static bool dumpTryLock(Mutex& mutex);\nprivate:",
+        "res_region": "",
+        "lookback": "    void dumpClients(int fd, const Vector<String16>& args);",
+        "lookahead": "    void dumpPermissionDenial(int fd, const Vector<String16>& args);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 615,
+        "end_line": 630,
+        "merge_gen_region": "",
+        "confidence": 0.9238193035125732,
+        "hesitated": false,
+        "resolved": true
+    },
+    {
+        "a_contents": "              status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfRecordThread* srcThread, IAfRecordThread* dstThread);\n",
+        "b_contents": "",
+        "base_contents": "              status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread);\n",
+        "res_region": "              status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfRecordThread* srcThread, IAfRecordThread* dstThread);\n",
+        "lookback": "            IAfRecordThread* srcThread, IAfRecordThread* dstThread);",
+        "lookahead": "              // return thread associated with primary hardware device, or NULL",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 737,
+        "end_line": 746,
+        "merge_gen_region": "",
+        "confidence": 0.921430766582489,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "public:\n    // Keep in sync with java definition in media/java/android/media/AudioRecord.java\n    static constexpr int32_t kMaxSharedAudioHistoryMs = 5000;\nprivate:\n",
+        "base_contents": "    // Keep in sync with java definition in media/java/android/media/AudioRecord.java\n    static constexpr int32_t kMaxSharedAudioHistoryMs = 5000;\n",
+        "res_region": "",
+        "lookback": "             std::vector<media::audio::common::AudioMMapPolicyInfo>> mPolicyInfos;",
+        "lookahead": "    std::map<media::audio::common::AudioMMapPolicyType,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 935,
+        "end_line": 946,
+        "merge_gen_region": null,
+        "confidence": 0.855215311050415,
+        "hesitated": true
+    }
+]

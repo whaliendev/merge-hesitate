@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n      // adc trajectory timestamp\n      obstacle_ptr->mutable_latest_feature()->set_adc_timestamp(\n          ptr_ego_trajectory_container->adc_trajectory()\n          .header().timestamp_sec());\n",
+        "b_contents": "\n      // adc trajectory timestamp\n      obstacle_ptr->mutable_latest_feature()->set_adc_timestamp(\n          ptr_ego_trajectory_container->adc_trajectory()\n          .header().timestamp_sec());\n\n      // ego pose_container\n      auto ptr_ego_pose = container_manager->GetContainer<PoseContainer>(\n          AdapterConfig::LOCALIZATION);\n      CHECK_NOTNULL(ptr_ego_pose);\n\n      // adc localization\n      obstacle_ptr->mutable_latest_feature()->mutable_adc_localization()->\n        CopyFrom(*ptr_ego_pose->ToPerceptionObstacle());\n",
+        "base_contents": "      */",
+        "res_region": "\n      // adc trajectory timestamp\n      obstacle_ptr->mutable_latest_feature()->set_adc_timestamp(\n          ptr_ego_trajectory_container->adc_trajectory()\n          .header().timestamp_sec());\n\n      // ego pose_container\n      auto ptr_ego_pose = container_manager->GetContainer<PoseContainer>(\n          AdapterConfig::LOCALIZATION);\n      CHECK_NOTNULL(ptr_ego_pose);\n\n      // adc localization\n      obstacle_ptr->mutable_latest_feature()->mutable_adc_localization()->\n        CopyFrom(*ptr_ego_pose->ToPerceptionObstacle());\n",
+        "lookback": "      // adc trajectory timestamp",
+        "lookahead": "      FeatureOutput::InsertFeatureProto(obstacle_ptr->latest_feature());",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 218,
+        "end_line": 243,
+        "merge_gen_region": null,
+        "confidence": 0.8331108093261719,
+        "hesitated": true
+    }
+]

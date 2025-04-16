@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "\tread_ext(infd);\n\n\tbuild_sparse_ext(infd, in);",
+        "b_contents": "\tread_ext(infd);",
+        "base_contents": "\tread_ext(fd);",
+        "res_region": "\tread_ext(infd);\n\n\tbuild_sparse_ext(infd, in);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 222,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.7798277139663696,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tclose(infd);",
+        "b_contents": "\tbuild_sparse_ext(infd, in);",
+        "base_contents": "\tbuild_sparse_ext(fd, in);",
+        "res_region": "\tclose(infd);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 238,
+        "merge_gen_region": null,
+        "confidence": 0.3307761549949646,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif (strcmp(out, \"-\")) {\n\t\toutfd = open(out, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);\n\t\tif (outfd < 0) {\n\t\t\terror_errno(\"open\");\n\t\t\treturn EXIT_FAILURE;\n\t\t}\n\t} else {\n\t\toutfd = STDOUT_FILENO;\n\t}",
+        "b_contents": "\tclose(infd);",
+        "base_contents": "\tclose(fd);",
+        "res_region": "\tif (strcmp(out, \"-\")) {\n\t\toutfd = open(out, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);",
+        "lookback": "\t\toutfd = open(out, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);",
+        "lookahead": "\t\tif (outfd < 0) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 240,
+        "end_line": 254,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9105482697486877,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\twrite_ext4_image(outfd, gzip, sparse, crc, 0);\n\tclose(outfd);",
+        "b_contents": "\tif (strcmp(out, \"-\")) {\n\t\toutfd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0644);\n\t\tif (outfd < 0) {\n\t\t\terror_errno(\"open\");\n\t\t\treturn EXIT_FAILURE;\n\t\t}\n\t} else {\n\t\toutfd = STDOUT_FILENO;\n\t}\n\n\twrite_ext4_image(outfd, gzip, sparse, crc, 0);\n\tclose(outfd);",
+        "base_contents": "\twrite_ext4_image(out, gzip, sparse, crc, 0);",
+        "res_region": "\t\tif (outfd < 0) {\n\t\t\terror_errno(\"open\");\n\t\t\treturn EXIT_FAILURE;\n\t\t}\n\t} else {\n\t\toutfd = STDOUT_FILENO;\n\t}\n\n\twrite_ext4_image(outfd, gzip, sparse, crc, 0);\n\tclose(outfd);",
+        "lookback": "\t\t\terror_errno(\"open\");",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 256,
+        "end_line": 274,
+        "merge_gen_region": null,
+        "confidence": 0.8572198152542114,
+        "hesitated": true
+    }
+]

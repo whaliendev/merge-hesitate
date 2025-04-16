@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    LV_PROTECT_NONE      = 0x00,\n    LV_PROTECT_CHILD_CHG = 0x01,   /**< Disable the child change signal. Used by the library*/\n    LV_PROTECT_PARENT    = 0x02,   /**< Prevent automatic parent change (e.g. in lv_page)*/\n    LV_PROTECT_POS       = 0x04,   /**< Prevent automatic positioning (e.g. in lv_cont layout)*/\n    LV_PROTECT_FOLLOW    = 0x08,   /**< Prevent the object be followed in automatic ordering (e.g. in\n                                      lv_cont PRETTY layout)*/\n    LV_PROTECT_PRESS_LOST = 0x10,  /**< If the `indev` was pressing this object but swiped out while\n                                      pressing do not search other object.*/\n    LV_PROTECT_CLICK_FOCUS = 0x20, /**< Prevent focusing the object by clicking on it*/\n    LV_PROTECT_EVENT_TO_DISABLED = 0x40, /**< Pass events even to disabled objects*/",
+        "b_contents": "    LV_STATE_DEFAULT     =  0x00,\n    LV_STATE_CHECKED     =  0x01,\n    LV_STATE_FOCUSED     =  0x02,\n    LV_STATE_FOCUS_KEY   =  0x04,\n    LV_STATE_EDITED      =  0x08,\n    LV_STATE_HOVERED     =  0x10,\n    LV_STATE_PRESSED     =  0x20,\n    LV_STATE_SCROLLED    =  0x40,\n    LV_STATE_DISABLED    =  0x80,\n    _LV_STATE_RESERVED    =  0x80,\n\n    LV_STATE_ANY = 0x1FF,    /**< Special value can be used in some functions to target all states */",
+        "base_contents": "    LV_PROTECT_NONE      = 0x00,\n    LV_PROTECT_CHILD_CHG = 0x01,   /**< Disable the child change signal. Used by the library*/\n    LV_PROTECT_PARENT    = 0x02,   /**< Prevent automatic parent change (e.g. in lv_page)*/\n    LV_PROTECT_POS       = 0x04,   /**< Prevent automatic positioning (e.g. in lv_cont layout)*/\n    LV_PROTECT_FOLLOW    = 0x08,   /**< Prevent the object be followed in automatic ordering (e.g. in\n                                      lv_cont PRETTY layout)*/\n    LV_PROTECT_PRESS_LOST = 0x10,  /**< If the `indev` was pressing this object but swiped out while\n                                      pressing do not search other object.*/\n    LV_PROTECT_CLICK_FOCUS = 0x20, /**< Prevent focusing the object by clicking on it*/",
+        "res_region": "    LV_STATE_DEFAULT     =  0x00,\n    LV_STATE_CHECKED     =  0x01,\n    LV_STATE_FOCUSED     =  0x02,\n    LV_STATE_FOCUS_KEY   =  0x04,\n    LV_STATE_EDITED      =  0x08,\n    LV_STATE_HOVERED     =  0x10,\n    LV_STATE_PRESSED     =  0x20,\n    LV_STATE_SCROLLED    =  0x40,\n    LV_STATE_DISABLED    =  0x80,\n    _LV_STATE_RESERVED    =  0x80,\n\n    LV_STATE_ANY = 0x1FF,    /**< Special value can be used in some functions to target all states */",
+        "lookback": "    LV_STATE_CHECKED     =  0x01,",
+        "lookahead": "};",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 142,
+        "end_line": 176,
+        "merge_gen_region": null,
+        "confidence": 0.6685929298400879,
+        "hesitated": true
+    }
+]

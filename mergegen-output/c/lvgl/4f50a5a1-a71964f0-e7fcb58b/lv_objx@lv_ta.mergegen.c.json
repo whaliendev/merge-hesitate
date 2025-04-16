@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "static void placeholder_update(lv_obj_t * ta);",
+        "b_contents": "static void update_cursor_position_on_click(lv_obj_t * ta, lv_indev_t * click_source);",
+        "base_contents": "",
+        "res_region": "static void placeholder_update(lv_obj_t * ta);\nstatic void update_cursor_position_on_click(lv_obj_t * ta, lv_indev_t * click_source);",
+        "lookback": "static void update_cursor_position_on_click(lv_obj_t * ta, lv_indev_t * click_source);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 55,
+        "end_line": 60,
+        "merge_gen_region": null,
+        "confidence": 0.8144913911819458,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static void placeholder_update(lv_obj_t * ta)\n{\n    lv_ta_ext_t * ext = lv_obj_get_ext_attr(ta);\n    const char * ta_text;\n\n    if(ext->placeholder == NULL) return;\n\n    ta_text = lv_ta_get_text(ta);\n\n    uint32_t len = ta_text == NULL ? 0 : strlen(ta_text);\n\n    if(len == 0) lv_obj_set_hidden(ext->placeholder, false);\n    else lv_obj_set_hidden(ext->placeholder, true);\n}\n",
+        "b_contents": "static void update_cursor_position_on_click(lv_obj_t * ta, lv_indev_t * click_source)\n{\n    lv_ta_ext_t * ext = lv_obj_get_ext_attr(ta);\n\n    lv_area_t label_coords;\n    uint16_t index_of_char_at_position;\n\n    lv_obj_get_coords(ext->label, &label_coords);\n\n    lv_point_t relative_position;\n    relative_position.x = click_source->proc.act_point.x - label_coords.x1;\n    relative_position.y = click_source->proc.act_point.y - label_coords.y1;\n\n    lv_coord_t label_width = lv_obj_get_width(ext->label);\n\n    /*Check if the click happened on the left side of the area outside the label*/\n    if (relative_position.x < 0) {\n        index_of_char_at_position = 0;\n    }\n    /*Check if the click happened on the right side of the area outside the label*/\n    else if (relative_position.x >= label_width) {\n        index_of_char_at_position = LV_TA_CURSOR_LAST;\n    }\n    else {\n        index_of_char_at_position = lv_label_get_letter_on(ext->label, &relative_position);\n    }\n\n    lv_ta_set_cursor_pos(ta, index_of_char_at_position);\n}\n",
+        "base_contents": "",
+        "res_region": "static void placeholder_update(lv_obj_t * ta)\n{\n    lv_ta_ext_t * ext = lv_obj_get_ext_attr(ta);\n    const char * ta_text;\n\n    if(ext->placeholder == NULL) return;\n\n    ta_text = lv_ta_get_text(ta);\n\n    if(ta_text[0] == '\\0') {\n        /*Be sure the main label and the placeholder has the same coordinates*/\n        lv_obj_t * scrl = lv_page_get_scrl(ta);\n        lv_style_t * style_scrl = lv_obj_get_style(scrl);\n        lv_obj_set_pos(ext->placeholder, style_scrl->body.padding.hor, style_scrl->body.padding.ver);\n        lv_obj_set_pos(ext->label, style_scrl->body.padding.hor, style_scrl->body.padding.ver);\n\n        lv_obj_set_width(ext->placeholder, lv_obj_get_width(scrl) - 2 * style_scrl->body.padding.hor);\n        lv_obj_set_hidden(ext->placeholder, false);\n    }\n    else lv_obj_set_hidden(ext->placeholder, true);\n}\n\nstatic void update_cursor_position_on_click(lv_obj_t * ta, lv_indev_t * click_source)\n{\n    lv_ta_ext_t * ext = lv_obj_get_ext_attr(ta);\n\n    lv_area_t label_coords;\n    uint16_t index_of_char_at_position;\n\n    lv_obj_get_coords(ext->label, &label_coords);\n\n    lv_point_t relative_position;\n    relative_position.x = click_source->proc.act_point.x - label_coords.x1;\n    relative_position.y = click_source->proc.act_point.y - label_coords.y1;\n\n    lv_coord_t label_width = lv_obj_get_width(ext->label);\n\n    /*Check if the click happened on the left side of the area outside the label*/\n    if (relative_position.x < 0) {\n        index_of_char_at_position = 0;\n    }\n    /*Check if the click happened on the right side of the area outside the label*/\n    else if (relative_position.x >= label_width) {\n        index_of_char_at_position = LV_TA_CURSOR_LAST;\n    }\n    else {\n        index_of_char_at_position = lv_label_get_letter_on(ext->label, &relative_position);\n    }\n\n    lv_ta_set_cursor_pos(ta, index_of_char_at_position);\n}\n",
+        "lookback": "{",
+        "lookahead": "#endif",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 1437,
+        "end_line": 1485,
+        "merge_gen_region": " void_______(_ * lvobjgetextattrta const *); char tatext ifext->holder NULL return tatext lvtagettextta uint_ len tatext NULL 0 strlentatext iflen 0 lvobjsethiddenextplace,); void______(_ * lvobjgetcoordsextlabel &_); void_____(_ * lvobjgetcoordsextlabel &_); void_______(__ * lvobjgetextattrta lvareat_;16t_ indexofcharatposition lvobjgetcoordsextlabel &_);____ relativeposition relativepositionx =_sourceprocactpointxset_.1 relativepositiony clicksourceprocactpointy labelcoordsy;_____(->); lvcoordt_ =____(->); /* if click on left of area the*/ (_. <) indexofcharatposition 0 }Check the happened on right of area the*/ ifrelativepositionx >=_) indexofcharatposition lvlabelgetletteronextlabel &_); }_________(,___);",
+        "confidence": 0.8989481329917908,
+        "hesitated": false,
+        "resolved": false
+    }
+]

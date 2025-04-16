@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\nstruct usb_functionfs_event;\nconst char* ffs_event_to_string(enum usb_functionfs_event_type type);\nbool read_functionfs_setup(android::base::borrowed_fd fd, usb_functionfs_event* event);",
+        "b_contents": "\nstruct usb_functionfs_event;\nconst char* ffs_event_to_string(enum usb_functionfs_event_type type);\nbool read_functionfs_setup(int fd, usb_functionfs_event* event);",
+        "base_contents": "",
+        "res_region": "\nstruct usb_functionfs_event;\nconst char* ffs_event_to_string(enum usb_functionfs_event_type type);\nbool read_functionfs_setup(android::base::borrowed_fd fd, usb_functionfs_event* event);",
+        "lookback": "struct usb_functionfs_event;",
+        "lookahead": "bool open_functionfs(android::base::unique_fd* control, android::base::unique_fd* bulk_out,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 66,
+        "end_line": 77,
+        "merge_gen_region": " usbfunctionstructstructstructStringString&structStringString&structStringString&structStringStringoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9209738373756409,
+        "hesitated": false,
+        "resolved": false
+    }
+]

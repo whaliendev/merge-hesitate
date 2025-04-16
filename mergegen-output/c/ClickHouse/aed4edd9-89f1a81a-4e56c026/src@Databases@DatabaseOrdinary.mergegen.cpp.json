@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    auto * storage = create_query->storage;\n\n    /// Get replicated engine\n    const auto & server_settings = context->getServerSettings();\n    String replica_path = server_settings[ServerSetting::default_replica_path];\n    String replica_name = server_settings[ServerSetting::default_replica_name];\n\n    /// Check that replica path doesn't exist",
+        "base_contents": "    auto * storage = create_query->storage;\n\n    /// Get replicated engine\n    const auto & server_settings = context->getServerSettings();\n    String replica_path = server_settings.default_replica_path;\n    String replica_name = server_settings.default_replica_name;\n\n    /// Check that replica path doesn't exist",
+        "res_region": "",
+        "lookback": "    StorageID table_id = StorageID(create_query.getDatabase(), create_query.getTable(), create_query.uuid);",
+        "lookahead": "    Macros::MacroExpansionInfo info;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 95,
+        "end_line": 114,
+        "merge_gen_region": null,
+        "confidence": 0.7532020211219788,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto policy = getContext()->getStoragePolicy(default_settings.storage_policy);\n    if (auto * query_settings = create_query.storage->settings)",
+        "b_contents": "    auto policy = getContext()->getStoragePolicy(default_settings[MergeTreeSetting::storage_policy]);\n    if (auto * query_settings = create_query->storage->settings)",
+        "base_contents": "    auto policy = getContext()->getStoragePolicy(default_settings.storage_policy);\n    if (auto * query_settings = create_query->storage->settings)",
+        "res_region": "    auto policy = getContext()->getStoragePolicy(default_settings[MergeTreeSetting::storage_policy]);\n    if (auto * query_settings = create_query.storage->settings)",
+        "lookback": "    if (auto * query_settings = create_query.storage->settings)",
+        "lookahead": "        if (Field * policy_setting = query_settings->changes.tryGet(\"storage_policy\"))",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 206,
+        "end_line": 215,
+        "merge_gen_region": null,
+        "confidence": 0.8211784362792969,
+        "hesitated": true
+    }
+]

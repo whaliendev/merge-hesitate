@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ext->time = LV_PRELOAD_DEF_SPIN_TIME*5;",
+        "b_contents": "    ext->time = LV_PRELOAD_DEF_SPIN_TIME * 10;",
+        "base_contents": "    ext->time = LV_PRELOAD_DEF_SPIN_TIME;",
+        "res_region": "    ext->time = LV_PRELOAD_DEF_SPIN_TIME;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "theirs",
+            "complex_conflict"
+        ],
+        "start_line": 89,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.5661805272102356,
+        "hesitated": true
+    }
+]

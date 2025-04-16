@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    TemporaryDataOnDiskScopePtr getTempDataOnDisk() { return tmp_data; }\n    bool enableEnalyzer() const { return enable_analyzer; }\n    void assertEnableEnalyzer() const;",
+        "b_contents": "    TemporaryDataOnDiskScopePtr getTempDataOnDisk() { return tmp_data ? tmp_data->childScope(CurrentMetrics::TemporaryFilesForJoin) : nullptr; }",
+        "base_contents": "    TemporaryDataOnDiskScopePtr getTempDataOnDisk() { return tmp_data; }",
+        "res_region": "    bool enableEnalyzer() const { return enable_analyzer; }\n    void assertEnableEnalyzer() const;\n    TemporaryDataOnDiskScopePtr getTempDataOnDisk() { return tmp_data ? tmp_data->childScope(CurrentMetrics::TemporaryFilesForJoin) : nullptr; }",
+        "lookback": "    void assertEnableEnalyzer() const;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 277,
+        "end_line": 285,
+        "merge_gen_region": null,
+        "confidence": 0.7554929256439209,
+        "hesitated": true
+    }
+]

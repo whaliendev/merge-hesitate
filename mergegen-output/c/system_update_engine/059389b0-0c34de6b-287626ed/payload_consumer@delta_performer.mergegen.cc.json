@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "             << next_operation_num_ << \", which is the operation \"\n             << next_operation_num_ - partition_first_op_num\n             << \" in partition \\\"\"\n             << partitions_[current_partition_].partition_name() << \"\\\"\";\n  if (*error == ErrorCode::kSuccess)\n    *error = ErrorCode::kDownloadOperationExecutionError;",
+        "b_contents": "             << next_operation_num_ << \", which is the operation \"\n             << next_operation_num_ - partition_first_op_num\n             << \" in partition \\\"\"\n             << partitions_[current_partition_].partition_name() << \"\\\"\";\n  *error = ErrorCode::kDownloadOperationExecutionError;",
+        "base_contents": "             << next_operation_num_;\n  *error = ErrorCode::kDownloadOperationExecutionError;",
+        "res_region": "             << next_operation_num_ << \", which is the operation \"\n             << next_operation_num_ - partition_first_op_num\n             << \" in partition \\\"\"\n             << partitions_[current_partition_].partition_name() << \"\\\"\";\n  if (*error == ErrorCode::kSuccess)\n    *error = ErrorCode::kDownloadOperationExecutionError;",
+        "lookback": "             << next_operation_num_ - partition_first_op_num",
+        "lookahead": "  return false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 288,
+        "end_line": 304,
+        "merge_gen_region": null,
+        "confidence": 0.6922889351844788,
+        "hesitated": true
+    }
+]

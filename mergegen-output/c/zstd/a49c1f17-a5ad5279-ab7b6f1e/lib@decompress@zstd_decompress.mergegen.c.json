@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            {   seq_t const sequence = ZSTD_decodeSequence(&seqState);",
+        "b_contents": "            sequence = ZSTD_decodeSequence(&seqState);",
+        "base_contents": "            ZSTD_decodeSequence(&sequence, &seqState);",
+        "res_region": "            sequence = ZSTD_decodeSequence(&seqState);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 836,
+        "end_line": 842,
+        "merge_gen_region": null,
+        "confidence": 0.7206159234046936,
+        "hesitated": true
+    }
+]

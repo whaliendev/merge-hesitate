@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "int\nserver_create_socket(int flags, char **cause)",
+        "b_contents": "int\nserver_create_socket(uint64_t flags, char **cause)",
+        "base_contents": "static int\nserver_create_socket(int flags, char **cause)",
+        "res_region": "int\nserver_create_socket(uint64_t flags, char **cause)",
+        "lookback": "server_create_socket(uint64_t flags, char **cause)",
+        "lookahead": "{",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 104,
+        "end_line": 113,
+        "merge_gen_region": null,
+        "confidence": 0.6063535809516907,
+        "hesitated": true
+    }
+]

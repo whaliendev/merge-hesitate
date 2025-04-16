@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "      std::string compiler_filter =\n          android::base::GetProperty(\"dalvik.vm.systemservercompilerfilter\", \"speed\");\n      if (compiler_filter == \"speed-profile\") {\n        AddDex2OatProfileAndCompilerFilter(&args, &readonly_files_raii, profile);\n      } else {\n        args.emplace_back(\"--compiler-filter=\" + compiler_filter);\n      }",
+        "b_contents": "      std::string compiler_filter =\n          android::base::GetProperty(\"dalvik.vm.systemservercompilerfilter\", {});\n      if (compiler_filter == \"speed-profile\") {\n        AddDex2OatProfileAndCompilerFilter(&args, profile);\n      } else {\n        args.emplace_back(\"--compiler-filter=speed\");\n      }",
+        "base_contents": "      AddDex2OatProfileAndCompilerFilter(&args, profile);",
+        "res_region": "      std::string compiler_filter =\n          android::base::GetProperty(\"dalvik.vm.systemservercompilerfilter\", \"speed\");\n      if (compiler_filter == \"speed-profile\") {\n        AddDex2OatProfileAndCompilerFilter(&args, &readonly_files_raii, profile);\n      } else {\n        args.emplace_back(\"--compiler-filter=\" + compiler_filter);\n      }",
+        "lookback": "          android::base::GetProperty(\"dalvik.vm.systemservercompilerfilter\", \"speed\");",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1494,
+        "end_line": 1512,
+        "merge_gen_region": "stdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.9085995554924011,
+        "hesitated": false,
+        "resolved": false
+    }
+]

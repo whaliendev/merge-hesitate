@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"util/mutexlock.h\"\n#include \"util/perf_context_imp.h\"\n#include \"util/statistics_imp.h\"\n#include \"util/stop_watch.h\"",
+        "b_contents": "#include \"util/statistics.h\"",
+        "base_contents": "#include \"util/statistics_imp.h\"",
+        "res_region": "#include \"util/mutexlock.h\"\n#include \"util/perf_context_imp.h\"\n#include \"util/statistics.h\"\n#include \"util/stop_watch.h\"",
+        "lookback": "#include \"util/perf_context_imp.h\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 21,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.8786712884902954,
+        "hesitated": true
+    }
+]

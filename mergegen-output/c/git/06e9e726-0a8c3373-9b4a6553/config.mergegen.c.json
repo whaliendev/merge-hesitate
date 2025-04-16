@@ -1,0 +1,88 @@
+[
+    {
+        "a_contents": "RESULT_MUST_BE_USED\nstatic int configset_find_element(struct config_set *cs, const char *key,\n\t\t\t\t  struct config_set_element **dest)",
+        "b_contents": "static struct config_set_element *configset_find_element(struct config_set *set, const char *key)",
+        "base_contents": "static struct config_set_element *configset_find_element(struct config_set *cs, const char *key)",
+        "res_region": "RESULT_MUST_BE_USED\nstatic int configset_find_element(struct config_set *set, const char *key,\n\t\t\t\t  struct config_set_element **dest)",
+        "lookback": "static int configset_find_element(struct config_set *set, const char *key,",
+        "lookahead": "{",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2356,
+        "end_line": 2364,
+        "merge_gen_region": null,
+        "confidence": 0.7637450695037842,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tret = configset_find_element(cs, key, &e);\n\tif (ret)\n\t\treturn ret;",
+        "b_contents": "\te = configset_find_element(set, key);",
+        "base_contents": "\te = configset_find_element(cs, key);",
+        "res_region": "\tret = configset_find_element(set, key, &e);\n\tif (ret)\n\t\treturn ret;",
+        "lookback": "\tif (ret)",
+        "lookahead": "\t/*",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2397,
+        "end_line": 2405,
+        "merge_gen_region": null,
+        "confidence": 0.8691318035125732,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif ((ret = git_configset_get_value_multi(cs, key, &values)))\n\t\treturn ret;",
+        "b_contents": "\tvalues = git_configset_get_value_multi(set, key);",
+        "base_contents": "\tvalues = git_configset_get_value_multi(cs, key);",
+        "res_region": "\tif ((ret = git_configset_get_value_multi(set, key, &values)))\n\t\treturn ret;",
+        "lookback": "\t\treturn ret;",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2515,
+        "end_line": 2522,
+        "merge_gen_region": null,
+        "confidence": 0.8749584555625916,
+        "hesitated": true
+    },
+    {
+        "a_contents": "int git_configset_get_value_multi(struct config_set *cs, const char *key,\n\t\t\t\t  const struct string_list **dest)\n{\n\tstruct config_set_element *e;\n\tint ret;\n\n\tif ((ret = configset_find_element(cs, key, &e)))\n\t\treturn ret;\n\telse if (!e)\n\t\treturn 1;\n\t*dest = &e->value_list;\n\n\treturn 0;\n}\n\nstatic int check_multi_string(struct string_list_item *item, void *util)\n{\n\treturn item->string ? 0 : config_error_nonbool(util);\n}\n\nint git_configset_get_string_multi(struct config_set *cs, const char *key,\n\t\t\t\t   const struct string_list **dest)\n{\n\tint ret;\n\n\tif ((ret = git_configset_get_value_multi(cs, key, dest)))\n\t\treturn ret;\n\tif ((ret = for_each_string_list((struct string_list *)*dest,\n\t\t\t\t\tcheck_multi_string, (void *)key)))\n\t\treturn ret;\n\n\treturn 0;\n}\n\nint git_configset_get(struct config_set *cs, const char *key)",
+        "b_contents": "const struct string_list *git_configset_get_value_multi(struct config_set *set, const char *key)",
+        "base_contents": "const struct string_list *git_configset_get_value_multi(struct config_set *cs, const char *key)",
+        "res_region": "int git_configset_get_value_multi(struct config_set *set, const char *key,\n\t\t\t\t  const struct string_list **dest)\n{\n\tstruct config_set_element *e;\n\tint ret;\n\n\tif ((ret = configset_find_element(set, key, &e)))\n\t\treturn ret;\n\telse if (!e)\n\t\treturn 1;\n\t*dest = &e->value_list;\n\n\treturn 0;\n}\n\nstatic int check_multi_string(struct string_list_item *item, void *util)\n{\n\treturn item->string ? 0 : config_error_nonbool(util);\n}\n\nint git_configset_get_string_multi(struct config_set *cs, const char *key,\n\t\t\t\t   const struct string_list **dest)\n{\n\tint ret;\n\n\tif ((ret = git_configset_get_value_multi(cs, key, dest)))\n\t\treturn ret;\n\tif ((ret = for_each_string_list((struct string_list *)*dest,\n\t\t\t\t\tcheck_multi_string, (void *)key)))\n\t\treturn ret;\n\n\treturn 0;\n}\n\nint git_configset_get(struct config_set *set, const char *key)",
+        "lookback": "\t\t\t\t  const struct string_list **dest)",
+        "lookahead": "{",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2529,
+        "end_line": 2569,
+        "merge_gen_region": " struct__ *; void___ *; void__;",
+        "confidence": 0.9162624478340149,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\tstruct config_set_element *e;\n\tint ret;\n\n\tif ((ret = configset_find_element(cs, key, &e)))\n\t\treturn ret;\n\telse if (!e)\n\t\treturn 1;\n\treturn 0;",
+        "b_contents": "\tstruct config_set_element *e = configset_find_element(set, key);\n\treturn e ? &e->value_list : NULL;",
+        "base_contents": "\tstruct config_set_element *e = configset_find_element(cs, key);\n\treturn e ? &e->value_list : NULL;",
+        "res_region": "\tstruct config_set_element *e;\n\tint ret;\n\n\tif ((ret = configset_find_element(set, key, &e)))\n\t\treturn ret;\n\telse if (!e)\n\t\treturn 1;\n\treturn 0;",
+        "lookback": "\tint ret;",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2571,
+        "end_line": 2586,
+        "merge_gen_region": null,
+        "confidence": 0.8779826760292053,
+        "hesitated": true
+    }
+]

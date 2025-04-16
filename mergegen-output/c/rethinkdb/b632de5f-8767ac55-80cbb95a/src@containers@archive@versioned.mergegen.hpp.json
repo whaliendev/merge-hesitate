@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "// This is used to implement serialize_cluster_version and\n// deserialize_cluster_version.  (cluster_version_t conveniently has a contiguous set\n// of valid representation, from v1_13 to v2_1_is_latest).\nARCHIVE_PRIM_MAKE_RANGED_SERIALIZABLE(cluster_version_t, int8_t,\n                                      cluster_version_t::v1_13,\n                                      cluster_version_t::v2_1_is_latest);\n",
+        "base_contents": "// This is used to implement serialize_cluster_version and\n// deserialize_cluster_version.  (cluster_version_t conveniently has a contiguous set\n// of valid representation, from v1_13 to v2_0_is_latest).\nARCHIVE_PRIM_MAKE_RANGED_SERIALIZABLE(cluster_version_t, int8_t,\n                                      cluster_version_t::v1_13,\n                                      cluster_version_t::v2_0_is_latest);\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "class bogus_made_up_type_t;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 8,
+        "end_line": 25,
+        "merge_gen_region": "",
+        "confidence": 0.9271889925003052,
+        "hesitated": false,
+        "resolved": true
+    }
+]

@@ -1,0 +1,105 @@
+[
+    {
+        "a_contents": "        filteredConfigs.push_back(std::move(config));\n    }",
+        "b_contents": "",
+        "base_contents": "        filteredConfigs.push_back(std::move(config));\n    }\n    for (auto& config : filteredConfigs) {\n        mConfigsByPropId[config.prop] = config;\n    }\n    VehiclePropConfigs vehiclePropConfigs;\n    vehiclePropConfigs.payloads = std::move(filteredConfigs);\n    auto result = LargeParcelableBase::parcelableToStableLargeParcelable(vehiclePropConfigs);\n    if (!result.ok()) {\n        ALOGE(\"failed to convert configs to shared memory file, error: %s, code: %d\",\n              result.error().message().c_str(), static_cast<int>(result.error().code()));\n        mConfigFile = nullptr;\n        return false;\n    }",
+        "res_region": "",
+        "lookback": "        if (result.value() != nullptr) {",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 391,
+        "end_line": 410,
+        "merge_gen_region": null,
+        "confidence": 0.6387971639633179,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    {\n        std::unique_lock<std::shared_timed_mutex> configWriteLock(mConfigLock);\n        UniqueScopedLockAssertion lockAssertion(mConfigLock);\n\n        for (auto& config : filteredConfigs) {\n            mConfigsByPropId[config.prop] = config;\n        }\n        VehiclePropConfigs vehiclePropConfigs;\n        vehiclePropConfigs.payloads = std::move(filteredConfigs);\n        auto result = LargeParcelableBase::parcelableToStableLargeParcelable(vehiclePropConfigs);\n        if (!result.ok()) {\n            ALOGE(\"failed to convert configs to shared memory file, error: %s, code: %d\",\n                  result.error().message().c_str(), static_cast<int>(result.error().code()));\n            mConfigFile = nullptr;\n            return false;\n        }\n\n        if (result.value() != nullptr) {\n            mConfigFile = std::move(result.value());\n        }",
+        "b_contents": "        if (result.value() != nullptr) {\n            mConfigFile = std::move(result.value());\n        }",
+        "base_contents": "    if (result.value() != nullptr) {\n        mConfigFile = std::move(result.value());",
+        "res_region": "\n        if (result.value() != nullptr) {\n            mConfigFile = std::move(result.value());\n        }",
+        "lookback": "        if (result.value() != nullptr) {",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 412,
+        "end_line": 440,
+        "merge_gen_region": null,
+        "confidence": 0.8437687754631042,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Result<VehiclePropConfig> DefaultVehicleHal::getConfig(int32_t propId) const {\n    Result<VehiclePropConfig> result;\n    getConfigsByPropId([this, &result, propId](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        auto it = configsByPropId.find(propId);\n        if (it == configsByPropId.end()) {\n            result = Error() << \"no config for property, ID: \" << propId;\n            return;\n        }\n        // Copy the VehiclePropConfig\n        result = it->second;\n    });\n    return result;",
+        "b_contents": "Result<VehiclePropConfig> DefaultVehicleHal::getConfig(int32_t propId) const {\n    Result<VehiclePropConfig> result;\n\n    if (!mConfigInit) {\n        std::optional<VehiclePropConfig> config = mVehicleHardware->getPropertyConfig(propId);\n        if (!config.has_value()) {\n            return Error() << \"no config for property, ID: \" << propId;\n        }\n        if (!isConfigSupportedForCurrentVhalVersion(config.value())) {\n            return Error() << \"property not supported for current VHAL interface, ID: \" << propId;\n        }\n\n        return config.value();\n    }\n\n    getConfigsByPropId([this, &result, propId](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        auto it = configsByPropId.find(propId);\n        if (it == configsByPropId.end()) {\n            result = Error() << \"no config for property, ID: \" << propId;\n            return;\n        }\n        // Copy the VehiclePropConfig\n        result = it->second;\n    });\n    return result;",
+        "base_contents": "Result<const VehiclePropConfig*> DefaultVehicleHal::getConfig(int32_t propId) const {\n    const auto& configsByPropId = getConfigsByPropId();\n    auto it = configsByPropId.find(propId);\n    if (it == configsByPropId.end()) {\n        return Error() << \"no config for property, ID: \" << propId;\n    }\n    return &(it->second);",
+        "res_region": "Result<VehiclePropConfig> DefaultVehicleHal::getConfig(int32_t propId) const {\n    Result<VehiclePropConfig> result;\n\n    if (!mConfigInit) {\n        std::optional<VehiclePropConfig> config = mVehicleHardware->getPropertyConfig(propId);\n        if (!config.has_value()) {\n            return Error() << \"no config for property, ID: \" << propId;\n        }\n        if (!isConfigSupportedForCurrentVhalVersion(config.value())) {\n            return Error() << \"property not supported for current VHAL interface, ID: \" << propId;\n        }\n\n        return config.value();\n    }\n\n    getConfigsByPropId([this, &result, propId](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        auto it = configsByPropId.find(propId);\n        if (it == configsByPropId.end()) {\n            result = Error() << \"no config for property, ID: \" << propId;\n            return;\n        }\n        // Copy the VehiclePropConfig\n        result = it->second;\n    });\n    return result;",
+        "lookback": "    Result<VehiclePropConfig> result;",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 482,
+        "end_line": 533,
+        "merge_gen_region": null,
+        "confidence": 0.8583188652992249,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ScopedAStatus status = ScopedAStatus::ok();\n    getConfigsByPropId([this, &configs, &status, &props](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        for (int32_t prop : props) {\n            auto it = configsByPropId.find(prop);\n            if (it != configsByPropId.end()) {\n                configs.push_back(it->second);\n            } else {\n                status = ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                        toInt(StatusCode::INVALID_ARG),\n                        StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());\n                return;\n            }",
+        "b_contents": "\n    if (!mConfigInit) {\n        for (int32_t prop : props) {\n            auto maybeConfig = mVehicleHardware->getPropertyConfig(prop);\n            if (!maybeConfig.has_value() ||\n                !isConfigSupportedForCurrentVhalVersion(maybeConfig.value())) {\n                return ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                        toInt(StatusCode::INVALID_ARG),\n                        StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());\n            }\n            configs.push_back(maybeConfig.value());",
+        "base_contents": "    const auto& configsByPropId = getConfigsByPropId();\n    for (int32_t prop : props) {\n        auto it = configsByPropId.find(prop);\n        if (it != configsByPropId.end()) {\n            configs.push_back(it->second);\n        } else {\n            return ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                    toInt(StatusCode::INVALID_ARG),\n                    StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());",
+        "res_region": "\n    if (!mConfigInit) {\n        for (int32_t prop : props) {\n            auto maybeConfig = mVehicleHardware->getPropertyConfig(prop);\n            if (!maybeConfig.has_value() ||\n                !isConfigSupportedForCurrentVhalVersion(maybeConfig.value())) {\n                return ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                        toInt(StatusCode::INVALID_ARG),\n                        StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());\n            }\n            configs.push_back(maybeConfig.value());",
+        "lookback": "    if (!mConfigInit) {",
+        "lookahead": "        }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 776,
+        "end_line": 813,
+        "merge_gen_region": null,
+        "confidence": 0.8518056273460388,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    });\n\n    if (!status.isOk()) {\n        return status;",
+        "b_contents": "\n        return vectorToStableLargeParcelable(std::move(configs), output);",
+        "base_contents": "",
+        "res_region": "\n        return vectorToStableLargeParcelable(std::move(configs), output);",
+        "lookback": "        return vectorToStableLargeParcelable(std::move(configs), output);",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 815,
+        "end_line": 824,
+        "merge_gen_region": null,
+        "confidence": 0.8693382143974304,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n    ScopedAStatus status = ScopedAStatus::ok();\n    getConfigsByPropId([this, &configs, &status, &props](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        for (int32_t prop : props) {\n            auto it = configsByPropId.find(prop);\n            if (it != configsByPropId.end()) {\n                configs.push_back(it->second);\n            } else {\n                status = ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                        toInt(StatusCode::INVALID_ARG),\n                        StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());\n                return;\n            }\n        }\n    });\n\n    if (!status.isOk()) {\n        return status;\n    }\n",
+        "base_contents": "",
+        "res_region": "\n    ScopedAStatus status = ScopedAStatus::ok();\n    getConfigsByPropId([this, &configs, &status, &props](const auto& configsByPropId) {\n        SharedScopedLockAssertion lockAssertion(mConfigLock);\n\n        for (int32_t prop : props) {\n            auto it = configsByPropId.find(prop);\n            if (it != configsByPropId.end()) {\n                configs.push_back(it->second);\n            } else {\n                status = ScopedAStatus::fromServiceSpecificErrorWithMessage(\n                        toInt(StatusCode::INVALID_ARG),\n                        StringPrintf(\"no config for property, ID: %\" PRId32, prop).c_str());\n                return;\n            }\n        }\n    });\n\n    if (!status.isOk()) {\n        return status;\n    }\n",
+        "lookback": "    ScopedAStatus status = ScopedAStatus::ok();",
+        "lookahead": "    return vectorToStableLargeParcelable(std::move(configs), output);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 826,
+        "end_line": 852,
+        "merge_gen_region": "Aoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8881810307502747,
+        "hesitated": false,
+        "resolved": false
+    }
+]

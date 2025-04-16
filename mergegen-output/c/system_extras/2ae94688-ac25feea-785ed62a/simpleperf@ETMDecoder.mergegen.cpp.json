@@ -1,0 +1,211 @@
+[
+    {
+        "a_contents": "  // packet callbacks are called in priority order.\n  enum Priority {\n    MAP_LOCATOR,\n    BRANCH_LIST_PARSER,\n    PACKET_TO_ELEMENT,\n  };\n\n  PacketCallback(Priority prio) : priority(prio) {}",
+        "b_contents": "  // packet callbacks are called in priority order.\n  enum Priority {\n    MAP_LOCATOR,\n    PACKET_TO_ELEMENT,\n  };\n\n  PacketCallback(Priority prio) : priority(prio) {}",
+        "base_contents": "",
+        "res_region": "  // packet callbacks are called in priority order.\n  enum Priority {\n    MAP_LOCATOR,\n    BRANCH_LIST_PARSER,\n    PACKET_TO_ELEMENT,\n  };\n\n  PacketCallback(Priority prio) : priority(prio) {}",
+        "lookback": "  enum Priority {",
+        "lookahead": "  virtual ~PacketCallback() {}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 121,
+        "end_line": 139,
+        "merge_gen_region": null,
+        "confidence": 0.7727663516998291,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  MapLocator(ThreadTree& thread_tree)\n      : PacketCallback(PacketCallback::MAP_LOCATOR), thread_tree_(thread_tree) {}\n\n  ThreadTree& GetThreadTree() { return thread_tree_; }\n\n  // Return current thread id of a trace_id. If not available, return -1.\n  pid_t GetTid(uint8_t trace_id) const {\n    return trace_data_[trace_id].tid;\n  }\n\n  ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,\n                                     ocsd_trc_index_t index_sop,\n                                     const EtmV4ITrcPacket* pkt) override {\n    TraceData& data = trace_data_[trace_id];\n    if (op == OCSD_OP_DATA) {\n      if (pkt != nullptr && pkt->getContext().updated_c) {\n        int32_t new_tid = static_cast<int32_t>(pkt->getContext().ctxtID);\n        if (data.tid != new_tid) {\n          data.tid = new_tid;\n          data.thread = nullptr;\n          data.userspace_map = nullptr;\n        }",
+        "b_contents": "  MapLocator(ThreadTree& thread_tree)\n      : PacketCallback(PacketCallback::MAP_LOCATOR), thread_tree_(thread_tree) {}\n\n  ThreadTree& GetThreadTree() { return thread_tree_; }\n\n  ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,\n                                     ocsd_trc_index_t index_sop,\n                                     const EtmV4ITrcPacket* pkt) override {\n    TraceData& data = trace_data_[trace_id];\n    if (op == OCSD_OP_DATA) {\n      if (pkt != nullptr && pkt->getContext().updated_c) {\n        int32_t new_tid = static_cast<int32_t>(pkt->getContext().ctxtID);\n        if (data.tid != new_tid) {\n          data.tid = new_tid;\n          data.thread = nullptr;\n          data.userspace_map = nullptr;\n        }\n      }\n    } else if (op == OCSD_OP_RESET) {\n      data.tid = -1;\n      data.thread = nullptr;\n      data.userspace_map = nullptr;\n    }\n    return OCSD_RESP_CONT;\n  }\n\n  const MapEntry* FindMap(uint8_t trace_id, uint64_t addr) {\n    TraceData& data = trace_data_[trace_id];\n    if (data.userspace_map != nullptr && data.userspace_map->Contains(addr)) {\n      return data.userspace_map;\n    }\n    if (data.tid == -1) {\n      return nullptr;\n    }\n    if (data.thread == nullptr) {\n      data.thread = thread_tree_.FindThread(data.tid);\n      if (data.thread == nullptr) {\n        return nullptr;",
+        "base_contents": "  MemAccess(ThreadTree& thread_tree) : thread_tree_(thread_tree) {}\n\n  void ProcessPacket(uint8_t trace_id, const EtmV4ITrcPacket* packet) {\n    if (packet->getContext().updated_c) {\n      tid_map_[trace_id] = packet->getContext().ctxtID;\n      if (trace_id == trace_id_) {\n        // Invalidate the cached buffer when the last trace stream changes thread.\n        buffer_end_ = 0;",
+        "res_region": "  MapLocator(ThreadTree& thread_tree)\n      : PacketCallback(PacketCallback::MAP_LOCATOR), thread_tree_(thread_tree) {}\n\n  ThreadTree& GetThreadTree() { return thread_tree_; }\n\n  // Return current thread id of a trace_id. If not available, return -1.\n  pid_t GetTid(uint8_t trace_id) const {\n    return trace_data_[trace_id].tid;\n  }\n\n  ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,\n                                     ocsd_trc_index_t index_sop,\n                                     const EtmV4ITrcPacket* pkt) override {\n    TraceData& data = trace_data_[trace_id];\n    if (op == OCSD_OP_DATA) {\n      if (pkt != nullptr && pkt->getContext().updated_c) {\n        int32_t new_tid = static_cast<int32_t>(pkt->getContext().ctxtID);\n        if (data.tid != new_tid) {\n          data.tid = new_tid;\n          data.thread = nullptr;\n          data.userspace_map = nullptr;\n        }\n      }\n    } else if (op == OCSD_OP_RESET) {\n      data.tid = -1;\n      data.thread = nullptr;\n      data.userspace_map = nullptr;\n    }\n    return OCSD_RESP_CONT;\n  }\n",
+        "lookback": "      : PacketCallback(PacketCallback::MAP_LOCATOR), thread_tree_(thread_tree) {}",
+        "lookahead": "  const MapEntry* FindMap(uint8_t trace_id, uint64_t addr) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 179,
+        "end_line": 250,
+        "merge_gen_region": null,
+        "confidence": 0.8399444818496704,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return OCSD_RESP_CONT;",
+        "b_contents": "    data.userspace_map = data.thread->maps->FindMapByAddr(addr);\n    if (data.userspace_map != nullptr) {\n      return data.userspace_map;\n    }\n    // We don't cache kernel map. Because kernel map can start from 0 and overlap all userspace\n    // maps.\n    return thread_tree_.GetKernelMaps().FindMapByAddr(addr);",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "    TraceData& data = trace_data_[trace_id];",
+        "lookahead": "  const MapEntry* FindMap(uint8_t trace_id, uint64_t addr) {",
+        "label": [
+            "theirs",
+            "one_side_deletion"
+        ],
+        "start_line": 257,
+        "end_line": 268,
+        "merge_gen_region": null,
+        "confidence": 0.8047366142272949,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const MapEntry* FindMap(uint8_t trace_id, uint64_t addr) {\n    TraceData& data = trace_data_[trace_id];\n    if (data.userspace_map != nullptr && data.userspace_map->Contains(addr)) {\n      return data.userspace_map;\n    }\n    if (data.tid == -1) {\n      return nullptr;\n    }\n    if (data.thread == nullptr) {\n      data.thread = thread_tree_.FindThread(data.tid);\n      if (data.thread == nullptr) {\n        return nullptr;\n      }\n    }\n    data.userspace_map = data.thread->maps->FindMapByAddr(addr);\n    if (data.userspace_map != nullptr) {\n      return data.userspace_map;\n    }\n    // We don't cache kernel map. Because kernel map can start from 0 and overlap all userspace\n    // maps.\n    return thread_tree_.GetKernelMaps().FindMapByAddr(addr);\n  }\n\n private:\n  struct TraceData {\n    int32_t tid = -1;  // thread id, -1 if invalid\n    const ThreadEntry* thread = nullptr;\n    const MapEntry* userspace_map = nullptr;\n  };\n\n  ThreadTree& thread_tree_;\n  TraceData trace_data_[256];\n};\n\n// Map (trace_id, ip address) to (binary_path, binary_offset), and read binary files.\nclass MemAccess : public ITargetMemAccess {\n public:\n  MemAccess(MapLocator& map_locator) : map_locator_(map_locator) {}\n\n  ocsd_err_t ReadTargetMemory(const ocsd_vaddr_t address, uint8_t trace_id, ocsd_mem_space_acc_t,",
+        "b_contents": " private:\n  struct TraceData {\n    int32_t tid = -1;  // thread id, -1 if invalid\n    const ThreadEntry* thread = nullptr;\n    const MapEntry* userspace_map = nullptr;\n  };\n\n  ThreadTree& thread_tree_;\n  TraceData trace_data_[256];\n};\n\n// Map (trace_id, ip address) to (binary_path, binary_offset), and read binary files.\nclass MemAccess : public ITargetMemAccess {\n public:\n  MemAccess(MapLocator& map_locator) : map_locator_(map_locator) {}\n\n  ocsd_err_t ReadTargetMemory(const ocsd_vaddr_t address, uint8_t trace_id, ocsd_mem_space_acc_t,",
+        "base_contents": "  ocsd_err_t ReadTargetMemory(const ocsd_vaddr_t address, uint8_t cs_trace_id, ocsd_mem_space_acc_t,",
+        "res_region": "  const MapEntry* FindMap(uint8_t trace_id, uint64_t addr) {\n    TraceData& data = trace_data_[trace_id];\n    if (data.userspace_map != nullptr && data.userspace_map->Contains(addr)) {\n      return data.userspace_map;\n    }\n    if (data.tid == -1) {\n      return nullptr;\n    }\n    if (data.thread == nullptr) {\n      data.thread = thread_tree_.FindThread(data.tid);\n      if (data.thread == nullptr) {\n        return nullptr;\n      }\n    }\n    data.userspace_map = data.thread->maps->FindMapByAddr(addr);\n    if (data.userspace_map != nullptr) {\n      return data.userspace_map;\n    }\n    // We don't cache kernel map. Because kernel map can start from 0 and overlap all userspace\n    // maps.\n    return thread_tree_.GetKernelMaps().FindMapByAddr(addr);\n  }\n\n private:\n  struct TraceData {\n    int32_t tid = -1;  // thread id, -1 if invalid\n    const ThreadEntry* thread = nullptr;\n    const MapEntry* userspace_map = nullptr;\n  };\n\n  ThreadTree& thread_tree_;\n  TraceData trace_data_[256];\n};\n\n// Map (trace_id, ip address) to (binary_path, binary_offset), and read binary files.\nclass MemAccess : public ITargetMemAccess {\n public:\n  MemAccess(MapLocator& map_locator) : map_locator_(map_locator) {}\n\n  ocsd_err_t ReadTargetMemory(const ocsd_vaddr_t address, uint8_t trace_id, ocsd_mem_space_acc_t,",
+        "lookback": "    TraceData& data = trace_data_[trace_id];",
+        "lookahead": "                              uint32_t* num_bytes, uint8_t* p_buffer) override {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 271,
+        "end_line": 332,
+        "merge_gen_region": " Map*Mapuint_ traceid uint_ addr {Data data tracedatatraceid ifdata.pacemap nullptr datausers_->()) return.pacemap } ifdatadatatid -) return; ifdata. ==) data. =__.Threaddatatid ifdata. ==) return; } datausers_ =. =__.Find(datatid ifdata. ==) return; } datausers_ =.->->FindBy(); (.pacemap nullptr { datausers_ =.->->->MapBy(); (.pacemap nullptr nullptr { return.pacemap } We't kernel. kernel can from 0 overlap userspace maps return__.Kernel().MapBy(); private structData int_ tid -; thread,1 invalid Thread* =; Map* userspacemap nullptr };Tree&___;Data__[]; // (__, address tobinarypath binaryoffset and binary files classAccess public IMem { public Mem(Locator maplocator :__(_)",
+        "confidence": 0.9171332716941833,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "class InstrRangeParser : public ElementCallback {\n private:\n  struct TraceData {\n    ETMInstrRange instr_range;\n    bool wait_for_branch_to_addr_fix = false;\n  };\n",
+        "b_contents": "class InstrRangeParser : public ElementCallback {",
+        "base_contents": "class BasicInstrRangeParser : public InstrRangeParser, public ElementCallback {",
+        "res_region": "class InstrRangeParser : public ElementCallback {\n private:\n  struct TraceData {\n    ETMInstrRange instr_range;\n    bool wait_for_branch_to_addr_fix = false;\n  };\n",
+        "lookback": " private:",
+        "lookahead": " public:",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 497,
+        "end_line": 509,
+        "merge_gen_region": " InstrParser publicCallbackholder structDataclassRangeclassRangeclassRangeclassRangeclassRangeclassRangeclassRangeclassRangeclassRange",
+        "confidence": 0.8856273889541626,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  InstrRangeParser(MapLocator& map_locator, const ETMDecoder::InstrRangeCallbackFn& callback)\n      : map_locator_(map_locator), callback_(callback) {}",
+        "b_contents": "  InstrRangeParser(MapLocator& map_locator, const ETMDecoder::CallbackFn& callback)\n      : map_locator_(map_locator), callback_(callback) {}",
+        "base_contents": "  BasicInstrRangeParser(ThreadTree& thread_tree, const ETMDecoder::CallbackFn& callback)\n      : InstrRangeParser(thread_tree, callback) {}",
+        "res_region": "  InstrRangeParser(MapLocator& map_locator, const ETMDecoder::InstrRangeCallbackFn& callback)\n      : map_locator_(map_locator), callback_(callback) {}",
+        "lookback": "      : map_locator_(map_locator), callback_(callback) {}",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 511,
+        "end_line": 520,
+        "merge_gen_region": null,
+        "confidence": 0.7787681221961975,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (elem.getType() == OCSD_GEN_TRC_ELEM_INSTR_RANGE) {\n      TraceData& data = trace_data_[trace_id];\n      const MapEntry* map = map_locator_.FindMap(trace_id, elem.st_addr);\n      if (map == nullptr) {\n        FlushData(data);",
+        "b_contents": "    if (elem.getType() == OCSD_GEN_TRC_ELEM_INSTR_RANGE) {\n      const MapEntry* map = map_locator_.FindMap(trace_id, elem.st_addr);\n      if (map == nullptr) {",
+        "base_contents": "    if (elem.getType() == OCSD_GEN_TRC_ELEM_PE_CONTEXT) {\n      if (elem.getContext().ctxt_id_valid) {\n        // trace_id is associated with a new thread.\n        pid_t new_tid = elem.getContext().context_id;\n        auto& tid = tid_map_[trace_id];\n        if (tid != new_tid) {\n          tid = new_tid;\n          if (trace_id == current_map_.trace_id) {\n            current_map_.Invalidate();\n          }\n        }\n      }\n    } else if (elem.getType() == OCSD_GEN_TRC_ELEM_INSTR_RANGE) {\n      if (!FindMap(trace_id, elem.st_addr)) {",
+        "res_region": "    if (elem.getType() == OCSD_GEN_TRC_ELEM_INSTR_RANGE) {\n      TraceData& data = trace_data_[trace_id];\n      const MapEntry* map = map_locator_.FindMap(trace_id, elem.st_addr);\n      if (map == nullptr) {\n        FlushData(data);",
+        "lookback": "      TraceData& data = trace_data_[trace_id];",
+        "lookahead": "        return OCSD_RESP_CONT;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 525,
+        "end_line": 550,
+        "merge_gen_region": " (.() OCSDGENTRCELEMINSTRRANGE {Data data tracedatatraceid constEntry* =_____;",
+        "confidence": 0.8844174146652222,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "      uint64_t start_addr = map->GetVaddrInFile(elem.st_addr);\n      auto& instr_range = data.instr_range;\n\n      if (data.wait_for_branch_to_addr_fix) {\n        // OpenCSD may cache a list of InstrRange elements, making it inaccurate to get branch to\n        // address from next_instr->branch_addr. So fix it by using the start address of the next\n        // InstrRange element.\n        instr_range.branch_to_addr = start_addr;\n      }\n      FlushData(data);\n      instr_range.dso = map->dso;\n      instr_range.start_addr = start_addr;\n      instr_range.end_addr = map->GetVaddrInFile(elem.en_addr - elem.last_instr_sz);",
+        "b_contents": "      instr_range_.dso = map->dso;\n      instr_range_.start_addr = map->GetVaddrInFile(elem.st_addr);\n      instr_range_.end_addr = map->GetVaddrInFile(elem.en_addr - elem.last_instr_sz);",
+        "base_contents": "      instr_range_.dso = current_map_.map->dso;\n      instr_range_.start_addr = current_map_.ToVaddrInFile(elem.st_addr);\n      instr_range_.end_addr = current_map_.ToVaddrInFile(elem.en_addr - elem.last_instr_sz);",
+        "res_region": "      uint64_t start_addr = map->GetVaddrInFile(elem.st_addr);\n      auto& instr_range = data.instr_range;\n\n      if (data.wait_for_branch_to_addr_fix) {\n        // OpenCSD may cache a list of InstrRange elements, making it inaccurate to get branch to\n        // address from next_instr->branch_addr. So fix it by using the start address of the next\n        // InstrRange element.\n        instr_range.branch_to_addr = start_addr;\n      }\n      FlushData(data);\n      instr_range.dso = map->dso;\n      instr_range.start_addr = start_addr;\n      instr_range.end_addr = map->GetVaddrInFile(elem.en_addr - elem.last_instr_sz);",
+        "lookback": "      auto& instr_range = data.instr_range;",
+        "lookahead": "      bool end_with_branch =",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 553,
+        "end_line": 575,
+        "merge_gen_region": null,
+        "confidence": 0.8424148559570312,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        // It is based on the assumption that we only do immediate branch inside a binary,\n        // which may not be true for all cases. TODO: http://b/151665001.\n        instr_range.branch_to_addr = map->GetVaddrInFile(next_instr->branch_addr);\n        data.wait_for_branch_to_addr_fix = true;",
+        "b_contents": "        // It is based on the assumption that we only do immediate branch inside a binary,\n        // which may not be true for all cases. TODO: http://b/151665001.\n        instr_range_.branch_to_addr = map->GetVaddrInFile(next_instr->branch_addr);",
+        "base_contents": "        instr_range_.branch_to_addr = current_map_.ToVaddrInFile(next_instr->branch_addr);",
+        "res_region": "        // It is based on the assumption that we only do immediate branch inside a binary,\n        // which may not be true for all cases. TODO: http://b/151665001.\n        instr_range.branch_to_addr = map->GetVaddrInFile(next_instr->branch_addr);\n        data.wait_for_branch_to_addr_fix = true;",
+        "lookback": "        // which may not be true for all cases. TODO: http://b/151665001.",
+        "lookahead": "      } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 580,
+        "end_line": 591,
+        "merge_gen_region": "In((//ALPHAoutputoutputoutputdexdex database database//ALPHAbool&outputoutputoutput>(>(2//ALPHA//outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput/////",
+        "confidence": 0.8884881138801575,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  struct TraceData {\n    uint64_t addr = 0;\n    uint8_t addr_valid_bits = 0;\n    uint8_t isa = 0;\n    bool invalid_branch = false;\n    ETMBranchList branch;\n  };\n\n public:\n  BranchListParser(MapLocator& map_locator, const ETMDecoder::BranchListCallbackFn& callback)\n      : PacketCallback(BRANCH_LIST_PARSER), map_locator_(map_locator), callback_(callback) {}\n\n  void CheckConfigs(std::unordered_map<uint8_t, EtmV4Config>& configs) {\n    // TODO: Current implementation doesn't support non-zero speculation length and return stack.\n    for (auto& p : configs) {\n      if (p.second.MaxSpecDepth() > 0) {\n        LOG(WARNING) << \"branch list collection isn't accurate with non-zero speculation length\";\n        break;\n      }\n    }\n    for (auto& p : configs) {\n      if (p.second.enabledRetStack()) {\n        LOG(WARNING) << \"branch list collection will lose some data with return stack enabled\";\n        break;\n      }\n    }\n  }\n\n  bool IsAddrPacket(const EtmV4ITrcPacket* pkt) {\n    return pkt->getType() >= ETM4_PKT_I_ADDR_CTXT_L_32IS0 &&\n           pkt->getType() <= ETM4_PKT_I_ADDR_L_64IS1;\n  }\n\n  bool IsAtomPacket(const EtmV4ITrcPacket* pkt) { return pkt->getAtom().num > 0; }\n\n  ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,\n                                     ocsd_trc_index_t /*index_sop */,\n                                     const EtmV4ITrcPacket* pkt) override {\n    TraceData& data = trace_data_[trace_id];\n    if (op == OCSD_OP_DATA) {\n      if (IsAddrPacket(pkt)) {\n        // Flush branch when seeing an Addr packet. Because it isn't correct to concatenate\n        // branches before and after an Addr packet.\n        FlushBranch(data);\n        data.addr = pkt->getAddrVal();\n        data.addr_valid_bits = pkt->v_addr.valid_bits;\n        data.isa = pkt->getAddrIS();\n      }\n\n      if (IsAtomPacket(pkt)) {\n        // An atom packet contains a branch list. We may receive one or more atom packets in a row,\n        // and need to concatenate them.\n        ProcessAtomPacket(trace_id, data, pkt);\n      }\n\n    } else {\n      // Flush branch when seeing a flush or reset operation.\n      FlushBranch(data);\n      if (op == OCSD_OP_RESET) {\n        data.addr = 0;\n        data.addr_valid_bits = 0;\n        data.isa = 0;\n        data.invalid_branch = false;\n      }\n    }\n    return OCSD_RESP_CONT;\n  }\n\n  void FinishData() {\n    for (auto& pair : trace_data_) {\n      FlushBranch(pair.second);\n    }\n  }\n\n private:\n  void ProcessAtomPacket(uint8_t trace_id, TraceData& data, const EtmV4ITrcPacket* pkt) {\n    if (data.invalid_branch) {\n      return;  // Skip atom packets when we think a branch list is invalid.\n    }\n    if (data.branch.branch.empty()) {\n      // This is the first atom packet in a branch list. Check if we have tid and addr info to\n      // parse it and the following atom packets. If not, mark the branch list as invalid.\n      if (map_locator_.GetTid(trace_id) == -1 || data.addr_valid_bits == 0) {\n        data.invalid_branch = true;\n        return;\n      }\n      const MapEntry* map = map_locator_.FindMap(trace_id, data.addr);\n      if (map == nullptr) {\n        data.invalid_branch = true;\n        return;\n      }\n      data.branch.dso = map->dso;\n      data.branch.addr = map->GetVaddrInFile(data.addr);\n      if (data.isa == 1) {  // thumb instruction, mark it in bit 0.\n        data.branch.addr |= 1;\n      }\n    }\n    uint32_t bits = pkt->atom.En_bits;\n    for (size_t i = 0; i < pkt->atom.num; i++) {\n      data.branch.branch.push_back((bits & 1) == 1);\n      bits >>= 1;\n    }\n  }\n\n  void FlushBranch(TraceData& data) {\n    if (!data.branch.branch.empty()) {\n      callback_(data.branch);\n      data.branch.branch.clear();\n    }\n    data.invalid_branch = false;\n  }\n\n  MapLocator& map_locator_;\n  ETMDecoder::BranchListCallbackFn callback_;\n  std::unordered_map<uint8_t, TraceData> trace_data_;",
+        "b_contents": "  MapLocator& map_locator_;\n  ETMInstrRange instr_range_;\n  ETMDecoder::CallbackFn callback_;",
+        "base_contents": "  struct CurrentMap {\n    int trace_id = -1;\n    const MapEntry* map = nullptr;\n    uint64_t addr_in_file = 0;\n\n    void Invalidate() { trace_id = -1; }\n\n    bool IsAddrInMap(uint8_t trace_id, uint64_t addr) {\n      return trace_id == this->trace_id && map != nullptr && addr >= map->start_addr &&\n             addr < map->get_end_addr();\n    }\n\n    uint64_t ToVaddrInFile(uint64_t addr) {\n      if (addr >= map->start_addr && addr < map->get_end_addr()) {\n        return addr - map->start_addr + addr_in_file;\n      }\n      return 0;\n    }\n  };\n\n  bool FindMap(uint8_t trace_id, uint64_t addr) {\n    if (current_map_.IsAddrInMap(trace_id, addr)) {\n      return true;\n    }\n    ThreadEntry* thread = thread_tree_.FindThread(tid_map_[trace_id]);\n    if (thread != nullptr) {\n      const MapEntry* map = thread_tree_.FindMap(thread, addr, false);\n      if (map != nullptr && !thread_tree_.IsUnknownDso(map->dso)) {\n        current_map_.trace_id = trace_id;\n        current_map_.map = map;\n        current_map_.addr_in_file =\n            map->dso->IpToVaddrInFile(map->start_addr, map->start_addr, map->pgoff);\n        return true;\n      }\n    }\n    return false;\n  }\n\n  std::unordered_map<uint8_t, pid_t> tid_map_;\n  CurrentMap current_map_;\n  ETMInstrRange instr_range_;",
+        "res_region": "  struct TraceData {\n    uint64_t addr = 0;\n    uint8_t addr_valid_bits = 0;\n    uint8_t isa = 0;\n    bool invalid_branch = false;\n    ETMBranchList branch;\n  };\n\n public:\n  BranchListParser(MapLocator& map_locator, const ETMDecoder::BranchListCallbackFn& callback)\n      : PacketCallback(BRANCH_LIST_PARSER), map_locator_(map_locator), callback_(callback) {}\n\n  void CheckConfigs(std::unordered_map<uint8_t, EtmV4Config>& configs) {\n    // TODO: Current implementation doesn't support non-zero speculation length and return stack.\n    for (auto& p : configs) {\n      if (p.second.MaxSpecDepth() > 0) {\n        LOG(WARNING) << \"branch list collection isn't accurate with non-zero speculation length\";\n        break;\n      }\n    }\n    for (auto& p : configs) {\n      if (p.second.enabledRetStack()) {\n        LOG(WARNING) << \"branch list collection will lose some data with return stack enabled\";\n        break;\n      }\n    }\n  }\n\n  bool IsAddrPacket(const EtmV4ITrcPacket* pkt) {\n    return pkt->getType() >= ETM4_PKT_I_ADDR_CTXT_L_32IS0 &&\n           pkt->getType() <= ETM4_PKT_I_ADDR_L_64IS1;\n  }\n\n  bool IsAtomPacket(const EtmV4ITrcPacket* pkt) { return pkt->getAtom().num > 0; }\n\n  ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,\n                                     ocsd_trc_index_t /*index_sop */,\n                                     const EtmV4ITrcPacket* pkt) override {\n    TraceData& data = trace_data_[trace_id];\n    if (op == OCSD_OP_DATA) {\n      if (IsAddrPacket(pkt)) {\n        // Flush branch when seeing an Addr packet. Because it isn't correct to concatenate\n        // branches before and after an Addr packet.\n        FlushBranch(data);\n        data.addr = pkt->getAddrVal();\n        data.addr_valid_bits = pkt->v_addr.valid_bits;\n        data.isa = pkt->getAddrIS();\n      }\n\n      if (IsAtomPacket(pkt)) {\n        // An atom packet contains a branch list. We may receive one or more atom packets in a row,\n        // and need to concatenate them.\n        ProcessAtomPacket(trace_id, data, pkt);\n      }\n\n    } else {\n      // Flush branch when seeing a flush or reset operation.\n      FlushBranch(data);\n      if (op == OCSD_OP_RESET) {\n        data.addr = 0;\n        data.addr_valid_bits = 0;\n        data.isa = 0;\n        data.invalid_branch = false;\n      }\n    }\n    return OCSD_RESP_CONT;\n  }\n\n  void FinishData() {\n    for (auto& pair : trace_data_) {\n      FlushBranch(pair.second);\n    }\n  }\n\n private:\n  void ProcessAtomPacket(uint8_t trace_id, TraceData& data, const EtmV4ITrcPacket* pkt) {\n    if (data.invalid_branch) {\n      return;  // Skip atom packets when we think a branch list is invalid.\n    }\n    if (data.branch.branch.empty()) {\n      // This is the first atom packet in a branch list. Check if we have tid and addr info to\n      // parse it and the following atom packets. If not, mark the branch list as invalid.\n      if (map_locator_.GetTid(trace_id) == -1 || data.addr_valid_bits == 0) {\n        data.invalid_branch = true;\n        return;\n      }\n      const MapEntry* map = map_locator_.FindMap(trace_id, data.addr);\n      if (map == nullptr) {\n        data.invalid_branch = true;\n        return;\n      }\n      data.branch.dso = map->dso;\n      data.branch.addr = map->GetVaddrInFile(data.addr);\n      if (data.isa == 1) {  // thumb instruction, mark it in bit 0.\n        data.branch.addr |= 1;\n      }\n    }\n    uint32_t bits = pkt->atom.En_bits;\n    for (size_t i = 0; i < pkt->atom.num; i++) {\n      data.branch.branch.push_back((bits & 1) == 1);\n      bits >>= 1;\n    }\n  }\n\n  void FlushBranch(TraceData& data) {\n    if (!data.branch.branch.empty()) {\n      callback_(data.branch);\n      data.branch.branch.clear();\n    }\n    data.invalid_branch = false;\n  }\n\n  MapLocator& map_locator_;\n  ETMDecoder::BranchListCallbackFn callback_;\n  std::unordered_map<uint8_t, TraceData> trace_data_;",
+        "lookback": "    uint64_t addr = 0;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 634,
+        "end_line": 796,
+        "merge_gen_region": " Trace {64t =;8t_ addrvalidbits 0;8t =; invalidbranch false ETrList; public BranchParserMap&_, ETe::ListFn&) Packet(__),__(_),_() voidConfigsstdunorderedmapuint_,tm4>&s) //: Current doesn support nonzeroulation and stack forauto p config) ifpsecondMaxDepth >) LOGWARNING <<branch collection't with nonzeroulation\";; } forauto p config) ifpsecondenabledStack {(WARNING <<branch collection lose data return stack enabled break } } boolAddr( EVITPacket pkt { return->() E4PKTI_____TL320 pktgetType <=TM________IS; boolAtom() \" list will lose data return enabled break } } boolAddr( EVITPacket pkt { pktgetType >=TM________TL320 pktgetType <=TM______IS; boolAtom( EVITPacket pkt {Atomnum 0 }csddata_pathresptPacketuint_ traceid o_pathopt,csddata____()) // branch see an packet",
+        "confidence": 0.9292036294937134,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  void RegisterCallback(const InstrRangeCallbackFn& callback) {\n    InstallMapLocator();\n    instr_range_parser_.reset(new InstrRangeParser(*map_locator_, callback));\n    InstallElementCallback(instr_range_parser_.get());\n  }\n\n  void RegisterCallback(const BranchListCallbackFn& callback ){\n    InstallMapLocator();\n    branch_list_parser_.reset(new BranchListParser(*map_locator_, callback));\n    branch_list_parser_->CheckConfigs(configs_);\n    InstallPacketCallback(branch_list_parser_.get());",
+        "b_contents": "  void RegisterCallback(const CallbackFn& callback) {\n    InstallMapLocator();\n    instr_range_parser_.reset(new InstrRangeParser(*map_locator_, callback));\n    InstallElementCallback(instr_range_parser_.get());",
+        "base_contents": "  void RegisterCallback(const CallbackFn& callback) {\n    auto parser = std::make_unique<BasicInstrRangeParser>(thread_tree_, callback);\n    InstallElementCallback(parser.get());\n    instr_range_parser_.reset(parser.release());",
+        "res_region": "  void RegisterCallback(const InstrRangeCallbackFn& callback) {\n    InstallMapLocator();\n    instr_range_parser_.reset(new InstrRangeParser(*map_locator_, callback));\n    InstallElementCallback(instr_range_parser_.get());\n  }\n\n  void RegisterCallback(const BranchListCallbackFn& callback ){\n    InstallMapLocator();\n    branch_list_parser_.reset(new BranchListParser(*map_locator_, callback));\n    branch_list_parser_->CheckConfigs(configs_);\n    InstallPacketCallback(branch_list_parser_.get());",
+        "lookback": "    InstallMapLocator();",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 851,
+        "end_line": 873,
+        "merge_gen_region": null,
+        "confidence": 0.8311546444892883,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::unique_ptr<MapLocator> map_locator_;\n  std::unique_ptr<BranchListParser> branch_list_parser_;",
+        "b_contents": "  std::unique_ptr<MapLocator> map_locator_;",
+        "base_contents": "",
+        "res_region": "  std::unique_ptr<MapLocator> map_locator_;\n  std::unique_ptr<BranchListParser> branch_list_parser_;",
+        "lookback": "  std::unique_ptr<BranchListParser> branch_list_parser_;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 953,
+        "end_line": 959,
+        "merge_gen_region": null,
+        "confidence": 0.8302516937255859,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,88 @@
+[
+    {
+        "a_contents": "static const char * const default_kb_map_lc[] = {\"1#\", \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\", \"i\", \"o\", \"p\", \"Bksp\", \"\\n\",\n                                   \"ABC\", \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", \"Enter\", \"\\n\",",
+        "b_contents": "static const char * kb_map_lc[] = {\"1#\", \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\", \"i\", \"o\", \"p\", LV_SYMBOL_BACKSPACE, \"\\n\",\n                                   \"ABC\", \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "base_contents": "static const char * kb_map_lc[] = {\"1#\", \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\", \"i\", \"o\", \"p\", \"Bksp\", \"\\n\",\n                                   \"ABC\", \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", \"Enter\", \"\\n\",",
+        "res_region": "static const char * default_kb_map_lc[] = {\"1#\", \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\", \"i\", \"o\", \"p\", LV_SYMBOL_BACKSPACE, \"\\n\",\n                                   \"ABC\", \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "lookback": "                                   \"ABC\", \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\", \"k\", \"l\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "lookahead": "                                   \"_\", \"-\", \"z\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\", \".\", \",\", \":\", \"\\n\",",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 38,
+        "end_line": 47,
+        "merge_gen_region": null,
+        "confidence": 0.8587213158607483,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static const char * const default_kb_map_uc[] = {\"1#\", \"Q\", \"W\", \"E\", \"R\", \"T\", \"Y\", \"U\", \"I\", \"O\", \"P\", \"Bksp\", \"\\n\",\n                                   \"abc\", \"A\", \"S\", \"D\", \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", \"Enter\", \"\\n\",",
+        "b_contents": "static const char * kb_map_uc[] = {\"1#\", \"Q\", \"W\", \"E\", \"R\", \"T\", \"Y\", \"U\", \"I\", \"O\", \"P\", LV_SYMBOL_BACKSPACE, \"\\n\",\n                                   \"abc\", \"A\", \"S\", \"D\", \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "base_contents": "static const char * kb_map_uc[] = {\"1#\", \"Q\", \"W\", \"E\", \"R\", \"T\", \"Y\", \"U\", \"I\", \"O\", \"P\", \"Bksp\", \"\\n\",\n                                   \"abc\", \"A\", \"S\", \"D\", \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", \"Enter\", \"\\n\",",
+        "res_region": "static const char * default_kb_map_uc[] = {\"1#\", \"Q\", \"W\", \"E\", \"R\", \"T\", \"Y\", \"U\", \"I\", \"O\", \"P\", LV_SYMBOL_BACKSPACE, \"\\n\",\n                                   \"abc\", \"A\", \"S\", \"D\", \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "lookback": "                                   \"abc\", \"A\", \"S\", \"D\", \"F\", \"G\", \"H\", \"J\", \"K\", \"L\", LV_SYMBOL_NEW_LINE, \"\\n\",",
+        "lookahead": "                                   \"_\", \"-\", \"Z\", \"X\", \"C\", \"V\", \"B\", \"N\", \"M\", \".\", \",\", \":\", \"\\n\",",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 57,
+        "end_line": 66,
+        "merge_gen_region": "outputoutput \"\\\",\",\",\",\",G \"\",J \"\",K \"\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",\",",
+        "confidence": 0.8862513899803162,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "static const char * const default_kb_map_spec[] = {\"0\", \"1\", \"2\", \"3\", \"4\" ,\"5\", \"6\", \"7\", \"8\", \"9\", \"Bksp\", \"\\n\",",
+        "b_contents": "static const char * kb_map_spec[] = {\"0\", \"1\", \"2\", \"3\", \"4\" ,\"5\", \"6\", \"7\", \"8\", \"9\", LV_SYMBOL_BACKSPACE, \"\\n\",",
+        "base_contents": "static const char * kb_map_spec[] = {\"0\", \"1\", \"2\", \"3\", \"4\" ,\"5\", \"6\", \"7\", \"8\", \"9\", \"Bksp\", \"\\n\",",
+        "res_region": "static const char * default_kb_map_spec[] = {\"0\", \"1\", \"2\", \"3\", \"4\" ,\"5\", \"6\", \"7\", \"8\", \"9\", \"Bksp\", \"\\n\",",
+        "lookback": "                                     \"abc\", \"+\", \"-\", \"/\", \"*\", \"=\", \"%\", \"!\", \"?\", \"#\", \"<\", \">\", \"\\n\",",
+        "lookahead": "                                     \"abc\", \"+\", \"-\", \"/\", \"*\", \"=\", \"%\", \"!\", \"?\", \"#\", \"<\", \">\", \"\\n\",",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 76,
+        "end_line": 82,
+        "merge_gen_region": null,
+        "confidence": 0.7918568253517151,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        lv_btnm_set_map(new_kb, kb_map[LV_KB_MODE_TEXT_LOWER]);\n        lv_btnm_set_ctrl_map(new_kb, kb_ctrl[LV_KB_MODE_TEXT_LOWER]);",
+        "b_contents": "        lv_btnm_set_map(new_kb, kb_map_lc);\n        lv_btnm_set_ctrl_map(new_kb, kb_ctrl_lc_map);\n        lv_obj_set_base_dir(new_kb, LV_BIDI_DIR_LTR);",
+        "base_contents": "        lv_btnm_set_map(new_kb, kb_map_lc);\n        lv_btnm_set_ctrl_map(new_kb, kb_ctrl_lc_map);",
+        "res_region": "        lv_obj_set_base_dir(new_kb, LV_BIDI_DIR_LTR);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 169,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.8332393765449524,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_btnm_set_map(kb, kb_map[mode]);\n    lv_btnm_set_ctrl_map(kb, kb_ctrl[mode]);",
+        "b_contents": "    if(mode == LV_KB_MODE_TEXT) {\n        lv_btnm_set_map(kb, kb_map_lc);\n        lv_btnm_set_ctrl_map(kb, kb_ctrl_lc_map);\n    } else if(mode == LV_KB_MODE_NUM) {\n        lv_btnm_set_map(kb, kb_map_num);\n        lv_btnm_set_ctrl_map(kb, kb_ctrl_num_map);\n    } else if(mode == LV_KB_MODE_TEXT_UPPER) {\n        lv_btnm_set_map(kb, kb_map_uc);\n        lv_btnm_set_ctrl_map(kb, kb_ctrl_uc_map);\n    }",
+        "base_contents": "    if(mode == LV_KB_MODE_TEXT) {\n        lv_btnm_set_map(kb, kb_map_lc);\n        lv_btnm_set_ctrl_map(kb, kb_ctrl_lc_map);\n    } else if(mode == LV_KB_MODE_NUM) {\n        lv_btnm_set_map(kb, kb_map_num);\n        lv_btnm_set_ctrl_map(kb, kb_ctrl_num_map);\n    }",
+        "res_region": "    lv_btnm_set_map(kb, kb_map[mode]);\n    lv_btnm_set_ctrl_map(kb, kb_ctrl[mode]);",
+        "lookback": "    lv_btnm_set_ctrl_map(kb, kb_ctrl[mode]);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 256,
+        "end_line": 278,
+        "merge_gen_region": null,
+        "confidence": 0.8604082465171814,
+        "hesitated": true
+    }
+]

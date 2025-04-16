@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/**\n * Search the most top, clickable object by a point\n * @param obj pointer to a start object, typically the screen\n * @param point pointer to a point for searching the most top child\n * @return pointer to the found object or NULL if there was no suitable object\n */\nlv_obj_t * lv_indev_search_obj(lv_obj_t * obj, lv_point_t * point)\n{\n    lv_obj_t * found_p = NULL;\n\n    /*If the point is on this object check its children too*/\n    if(lv_obj_hittest(obj, point)) {\n        lv_obj_t * i;\n\n        _LV_LL_READ(obj->child_ll, i) {\n            found_p = lv_indev_search_obj(i, point);\n\n            /*If a child was found then break*/\n            if(found_p != NULL) {\n                break;\n            }\n        }\n\n        /*If then the children was not ok, and this obj is clickable\n         * and it or its parent is not hidden then save this object*/\n        if(found_p == NULL && lv_obj_get_click(obj) != false) {\n            lv_obj_t * hidden_i = obj;\n            while(hidden_i != NULL) {\n                if(lv_obj_get_hidden(hidden_i) == true) break;\n                hidden_i = lv_obj_get_parent(hidden_i);\n            }\n            /*No parent found with hidden == true*/\n            if(lv_obj_is_protected(obj, LV_PROTECT_EVENT_TO_DISABLED) == false) {\n                if(hidden_i == NULL && (lv_obj_get_state(obj, LV_OBJ_PART_MAIN) & LV_STATE_DISABLED) == false) found_p = obj;\n            }\n            else {\n                if(hidden_i == NULL) found_p = obj;\n            }\n        }\n    }\n\n    return found_p;\n}",
+        "b_contents": "",
+        "base_contents": "/**\n * Search the most top, clickable object by a point\n * @param obj pointer to a start object, typically the screen\n * @param point pointer to a point for searching the most top child\n * @return pointer to the found object or NULL if there was no suitable object\n */\nlv_obj_t * lv_indev_search_obj(lv_obj_t * obj, lv_point_t * point)\n{\n    lv_obj_t * found_p = NULL;\n\n    /*If the point is on this object check its children too*/\n    if(lv_obj_hittest(obj, point)) {\n        lv_obj_t * i;\n\n        _LV_LL_READ(obj->child_ll, i) {\n            found_p = lv_indev_search_obj(i, point);\n\n            /*If a child was found then break*/\n            if(found_p != NULL) {\n                break;\n            }\n        }\n\n        /*If then the children was not ok, and this obj is clickable\n         * and it or its parent is not hidden then save this object*/\n        if(found_p == NULL && lv_obj_get_click(obj) != false) {\n            lv_obj_t * hidden_i = obj;\n            while(hidden_i != NULL) {\n                if(lv_obj_get_hidden(hidden_i) == true) break;\n                hidden_i = lv_obj_get_parent(hidden_i);\n            }\n            /*No parent found with hidden == true*/\n            if(hidden_i == NULL && (lv_obj_get_state(obj, LV_OBJ_PART_MAIN) & LV_STATE_DISABLED) == false) found_p = obj;\n        }\n    }\n\n    return found_p;\n}",
+        "res_region": "",
+        "lookback": "/**",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 973,
+        "end_line": 1057,
+        "merge_gen_region": null,
+        "confidence": 0.5891802310943604,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "void Statement::expectType(Expression& _expression, Type const& _expectedType)\n{\n\t_expression.checkTypeRequirements();\n\tif (!_expression.getType()->isImplicitlyConvertibleTo(_expectedType))\n\t\tBOOST_THROW_EXCEPTION(_expression.createTypeError(\"Type not implicitly convertible to expected type.\"));\n\t//@todo provide more information to the exception\n}\n",
+        "base_contents": "void Statement::expectType(Expression& _expression, const Type& _expectedType)\n{\n\t_expression.checkTypeRequirements();\n\tif (!_expression.getType()->isImplicitlyConvertibleTo(_expectedType))\n\t\tBOOST_THROW_EXCEPTION(_expression.createTypeError(\"Type not implicitly convertible to expected type.\"));\n\t//@todo provide more information to the exception\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "void Block::checkTypeRequirements()",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 265,
+        "end_line": 284,
+        "merge_gen_region": "",
+        "confidence": 0.96014004945755,
+        "hesitated": false,
+        "resolved": true
+    },
+    {
+        "a_contents": "\tassert(m_returnParameters);\n\tif (!m_expression)\n\t\treturn;",
+        "b_contents": "\tassert(m_returnParameters);",
+        "base_contents": "\tBOOST_ASSERT(m_returnParameters);",
+        "res_region": "\tassert(m_returnParameters);\n\tif (!m_expression)\n\t\treturn;",
+        "lookback": "\tif (!m_expression)",
+        "lookahead": "\tif (m_returnParameters->getParameters().size() != 1)",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 315,
+        "end_line": 323,
+        "merge_gen_region": null,
+        "confidence": 0.744873046875,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tif (fun.getReturnParameters().empty())\n\t\t\tm_type = make_shared<VoidType>();",
+        "b_contents": "\t\tif (fun.getReturnParameterList()->getParameters().empty())\n\t\t\tm_type = make_shared<VoidType>();",
+        "base_contents": "\t\tif (fun.getReturnParameterList()->getParameters().empty())\n\t\t\tm_type = std::make_shared<VoidType>();",
+        "res_region": "\t\tif (fun.getReturnParameters().empty())\n\t\t\tm_type = make_shared<VoidType>();",
+        "lookback": "\t\t\tm_type = make_shared<VoidType>();",
+        "lookahead": "\t\telse",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 452,
+        "end_line": 461,
+        "merge_gen_region": null,
+        "confidence": 0.7476032376289368,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#endif",
+        "b_contents": "#endif\n",
+        "base_contents": "",
+        "res_region": "#endif\n",
+        "lookback": "",
+        "lookahead": "    //CONNECT",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 169,
+        "end_line": 176,
+        "merge_gen_region": null,
+        "confidence": 0.7880398035049438,
+        "hesitated": true
+    }
+]

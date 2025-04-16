@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "        uint8_t type : 4; // up to 16 values",
+        "base_contents": "        uint8_t type : 4; // upto 16 values",
+        "res_region": "",
+        "lookback": "    } s;",
+        "lookahead": "        uint8_t crop : 1;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 45,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.26046639680862427,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_coord_t * col_w;\n} lv_table_t;\n\nextern const lv_obj_class_t lv_table;",
+        "b_contents": "    lv_style_list_t cell_style[LV_TABLE_CELL_STYLE_CNT];\n    lv_coord_t col_w[LV_TABLE_COL_MAX];\nuint16_t cell_types :\n    LV_TABLE_CELL_STYLE_CNT; /*Keep track which cell types exists to avoid dealing with unused ones*/\n} lv_table_ext_t;\n\n/*Parts of the table*/\nenum {\n    LV_TABLE_PART_BG,     /* Because of this member, LV_PART.*CELL1 has enum value of 1,        */\n    LV_TABLE_PART_CELL1,  /*   LV_PART.*CELL2 has an enum value of 2 and so on up to the maximum */\n    LV_TABLE_PART_CELL2,  /*   number of styles specified by LV_TABLE_CELL_STYLE_CNT            */\n    LV_TABLE_PART_CELL3,\n    LV_TABLE_PART_CELL4,  /* CELL 5-16 are not needed to be defined, the values in this enum\n                             are there for backward compatibility */\n};",
+        "base_contents": "    lv_style_list_t cell_style[LV_TABLE_CELL_STYLE_CNT];\n    lv_coord_t col_w[LV_TABLE_COL_MAX];\nuint16_t cell_types :\n    LV_TABLE_CELL_STYLE_CNT; /*Keep track which cell types exists to avoid dealing with unused ones*/\n} lv_table_ext_t;\n\n/*Parts of the table*/\nenum {\n    LV_TABLE_PART_BG,     /* Because of this member, LV_PART.*CELL1 has enum value of 1,        */\n    LV_TABLE_PART_CELL1,  /*   LV_PART.*CELL2 has an enum value of 2 and so on upto the maximum */\n    LV_TABLE_PART_CELL2,  /*   number of styles specified by LV_TABLE_CELL_STYLE_CNT            */\n    LV_TABLE_PART_CELL3,\n    LV_TABLE_PART_CELL4,  /* CELL 5-16 are not needed to be defined, the values in this enum\n                             are there for backward compatibility */\n};",
+        "res_region": "    lv_coord_t * col_w;\n} lv_table_t;\n\nextern const lv_obj_class_t lv_table;",
+        "lookback": "} lv_table_t;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 63,
+        "end_line": 100,
+        "merge_gen_region": null,
+        "confidence": 0.7412480711936951,
+        "hesitated": true
+    }
+]

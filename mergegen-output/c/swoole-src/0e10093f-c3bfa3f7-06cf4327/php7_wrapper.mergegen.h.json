@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    char *tmp = estrndup(key->val, key->len);",
+        "base_contents": "    char *tmp = (char *)emalloc(key->len);",
+        "res_region": "",
+        "lookback": "    char *tmp = (char *)emalloc(key->len);",
+        "lookahead": "    int ret = zend_is_callable_ex(callable, NULL, check_flags, &key, fcc, error);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 339,
+        "end_line": 344,
+        "merge_gen_region": null,
+        "confidence": 0.46130743622779846,
+        "hesitated": true
+    }
+]

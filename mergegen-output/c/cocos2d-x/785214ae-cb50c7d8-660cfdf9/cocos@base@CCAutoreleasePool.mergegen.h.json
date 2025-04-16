@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/*\n * @js NA \n */",
+        "b_contents": "/**\n * @cond\n */",
+        "base_contents": "",
+        "res_region": "/*\n * @js NA \n * @cond\n */",
+        "lookback": " * @js NA ",
+        "lookahead": "class CC_DLL PoolManager",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 142,
+        "end_line": 151,
+        "merge_gen_region": null,
+        "confidence": 0.8071937561035156,
+        "hesitated": true
+    }
+]

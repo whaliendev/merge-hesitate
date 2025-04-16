@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "double PHPCoroutine::socket_connect_timeout = SW_DEFAULT_SOCKET_CONNECT_TIMEOUT;\ndouble PHPCoroutine::socket_timeout = SW_DEFAULT_SOCKET_TIMEOUT;\nbool PHPCoroutine::tick_init = false;\nuint32_t PHPCoroutine::max_exec_msec = 0;",
+        "b_contents": "",
+        "base_contents": "double PHPCoroutine::socket_connect_timeout = SW_DEFAULT_SOCKET_CONNECT_TIMEOUT;\ndouble PHPCoroutine::socket_timeout = SW_DEFAULT_SOCKET_TIMEOUT;",
+        "res_region": "php_coro_task PHPCoroutine::main_task = {0};\nbool PHPCoroutine::tick_init = false;\nuint32_t PHPCoroutine::max_exec_msec = 0;",
+        "lookback": "bool PHPCoroutine::tick_init = false;",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 26,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.744273841381073,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    task->origin_task = get_and_save_current_task();\n#ifdef SW_CORO_TICK_SCHEDULE\n    if (PHPCoroutine::tick_init)\n    {\n        task->last_msec = swTimer_get_absolute_msec();\n    }\n#endif\n    restore_vm_stack(task);\n    restore_og(task);\n    swTraceLog(SW_TRACE_COROUTINE,\"php_coro_resume from cid=%ld to cid=%ld\", Coroutine::get_cid(task->origin_task->co), Coroutine::get_cid(task->co));",
+        "b_contents": "    php_coro_task *current_task = get_task();\n    save_task(current_task);\n    restore_task(task);\n    swTraceLog(SW_TRACE_COROUTINE,\"php_coro_resume from cid=%ld to cid=%ld\", Coroutine::get_current_cid(), task->co->get_cid());",
+        "base_contents": "    task->origin_task = get_and_save_current_task();\n    restore_vm_stack(task);\n    restore_og(task);\n    swTraceLog(SW_TRACE_COROUTINE,\"php_coro_resume from cid=%ld to cid=%ld\", Coroutine::get_cid(task->origin_task->co), Coroutine::get_cid(task->co));",
+        "res_region": "#ifdef SW_CORO_TICK_SCHEDULE\n    if (PHPCoroutine::tick_init)\n    {\n        task->last_msec = swTimer_get_absolute_msec();\n    }\n#endif\n    php_coro_task *current_task = get_task();\n    save_task(current_task);\n    restore_task(task);\n    swTraceLog(SW_TRACE_COROUTINE,\"php_coro_resume from cid=%ld to cid=%ld\", Coroutine::get_current_cid(), task->co->get_cid());",
+        "lookback": "    if (PHPCoroutine::tick_init)",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 218,
+        "end_line": 239,
+        "merge_gen_region": null,
+        "confidence": 0.7390518188476562,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    task->origin_task = origin_task;\n    task->pcid = Coroutine::get_cid(origin_task->co);\n#ifdef SW_CORO_TICK_SCHEDULE\n    task->last_msec = swTimer_get_absolute_msec();\n#endif",
+        "b_contents": "    task->pcid = task->co->get_origin_cid();\n    task->context = nullptr;",
+        "base_contents": "    task->origin_task = origin_task;\n    task->pcid = Coroutine::get_cid(origin_task->co);",
+        "res_region": "    task->pcid = task->co->get_origin_cid();\n    task->context = nullptr;\n#ifdef SW_CORO_TICK_SCHEDULE\n    task->last_msec = swTimer_get_absolute_msec();\n#endif",
+        "lookback": "    task->context = nullptr;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 338,
+        "end_line": 350,
+        "merge_gen_region": null,
+        "confidence": 0.875944972038269,
+        "hesitated": true
+    }
+]

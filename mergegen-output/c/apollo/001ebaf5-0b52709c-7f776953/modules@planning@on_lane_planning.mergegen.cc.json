@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    partition_line->set_label(\"partitioned\");",
+        "b_contents": "    partition_line->set_label(\"Patitioned\");",
+        "base_contents": "    partition_line->set_label(\"patitioned\");",
+        "res_region": "    partition_line->set_label(\"Patitioned\");",
+        "lookback": "    for (const auto& point : partitioned_trajectory.trajectory_point()) {",
+        "lookahead": "    for (const auto& point : partitioned_trajectory.trajectory_point()) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 726,
+        "end_line": 732,
+        "merge_gen_region": null,
+        "confidence": 0.5382019281387329,
+        "hesitated": true
+    }
+]

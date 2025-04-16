@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    read_t read(\n        intersecting_geo_read_t(\n            boost::optional<changefeed_stamp_t>(),\n            region_t::universe(),\n            ql::global_optargs_t(),\n            auth::user_context_t(auth::permissions_t(true, false, false, false)),\n            table_name,\n            ql::batchspec_t::all(),\n            std::vector<ql::transform_variant_t>(),\n            boost::optional<ql::terminal_variant_t>(),\n            sindex_rangespec_t(\n                idx_name,\n                region_t::universe(),\n                ql::datumspec_t(\n                    ql::datum_range_t::universe())),\n            query_geometry),\n        profile_bool_t::PROFILE,\n        read_mode_t::SINGLE);",
+        "b_contents": "    read_t read(\n        intersecting_geo_read_t(\n            boost::optional<changefeed_stamp_t>(),\n            region_t::universe(),\n            ql::global_optargs_t(),\n            auth::user_context_t(auth::permissions_t(true, false, false, false)),\n            table_name,\n            ql::batchspec_t::all(),\n            std::vector<ql::transform_variant_t>(),\n            boost::optional<ql::terminal_variant_t>(),\n            sindex_rangespec_t(\n                idx_name,\n                region_t::universe(),\n                ql::datumspec_t(\n                    ql::datum_range_t::universe()),\n                require_sindexes_t::NO),\n            query_geometry),\n        profile_bool_t::PROFILE,\n        read_mode_t::SINGLE);",
+        "base_contents": "    read_t read(intersecting_geo_read_t(boost::optional<changefeed_stamp_t>(),\n                                        region_t::universe(),\n                                        ql::global_optargs_t(),\n                                        table_name, ql::batchspec_t::all(),\n                                        std::vector<ql::transform_variant_t>(),\n                                        boost::optional<ql::terminal_variant_t>(),\n                                        sindex_rangespec_t(\n                                            idx_name,\n                                            region_t::universe(),\n                                            ql::datumspec_t(\n                                                ql::datum_range_t::universe())),\n                                        query_geometry),\n                profile_bool_t::PROFILE,\n                read_mode_t::SINGLE);",
+        "res_region": "    read_t read(\n        intersecting_geo_read_t(\n            boost::optional<changefeed_stamp_t>(),\n            region_t::universe(),\n            ql::global_optargs_t(),\n            auth::user_context_t(auth::permissions_t(true, false, false, false)),\n            table_name,\n            ql::batchspec_t::all(),\n            std::vector<ql::transform_variant_t>(),\n            boost::optional<ql::terminal_variant_t>(),\n            sindex_rangespec_t(\n                idx_name,\n                region_t::universe(),\n                ql::datumspec_t(\n                    ql::datum_range_t::universe()),\n                require_sindexes_t::NO),\n            query_geometry),\n        profile_bool_t::PROFILE,\n        read_mode_t::SINGLE);",
+        "lookback": "        intersecting_geo_read_t(",
+        "lookahead": "    read_response_t response;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 327,
+        "end_line": 381,
+        "merge_gen_region": null,
+        "confidence": 0.7563847303390503,
+        "hesitated": true
+    }
+]

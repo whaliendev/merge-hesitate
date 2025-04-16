@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \n    srs_parse_rtmp_url(context->url, context->tcUrl, context->stream);\n    \n    // when connect, we only need to parse the tcUrl\n    srs_discovery_tc_url(context->tcUrl,\n        schema, context->host, context->vhost, context->app, context->stream, context->port,",
+        "b_contents": "    srs_discovery_tc_url(context->tcUrl, \n        schema, context->host, context->vhost, context->app, context->stream, context->port,",
+        "base_contents": "    srs_discovery_tc_url(context->tcUrl, \n        schema, context->host, context->vhost, context->app, context->port,",
+        "res_region": "\n    srs_parse_rtmp_url(context->url, context->tcUrl, context->stream);\n    \n    // when connect, we only need to parse the tcUrl\n    srs_discovery_tc_url(context->tcUrl,\n        schema, context->host, context->vhost, context->app, context->stream, context->port,",
+        "lookback": "    srs_parse_rtmp_url(context->url, context->tcUrl, context->stream);",
+        "lookahead": "        context->param);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 481,
+        "end_line": 494,
+        "merge_gen_region": null,
+        "confidence": 0.7045895457267761,
+        "hesitated": true
+    }
+]

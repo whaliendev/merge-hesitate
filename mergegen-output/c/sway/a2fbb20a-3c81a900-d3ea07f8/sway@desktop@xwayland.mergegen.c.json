@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t// TODO: Let floating views do whatever\n\tconfigure(view, view->swayc->current.view_x, view->swayc->current.view_y,\n\t\t\tview->swayc->current.view_width, view->swayc->current.view_height);",
+        "b_contents": "\tif (container_is_floating(view->swayc)) {\n\t\tconfigure(view, view->x, view->y, ev->width, ev->height);\n\t} else {\n\t\tconfigure(view, view->x, view->y,\n\t\t\tview->width, view->height);\n\t}",
+        "base_contents": "\t// TODO: Let floating views do whatever\n\tconfigure(view, view->swayc->x, view->swayc->y, view->width, view->height);",
+        "res_region": "\tif (container_is_floating(view->swayc)) {\n\t\tconfigure(view, view->swayc->current.view_x,\n\t\t\t\tview->swayc->current.view_y, ev->width, ev->height);\n\t} else {\n\t\tconfigure(view, view->swayc->current.view_x,\n\t\t\t\tview->swayc->current.view_y, view->swayc->current.view_width,\n\t\t\t\tview->swayc->current.view_height);\n\t}",
+        "lookback": "\t\tconfigure(view, view->swayc->current.view_x,",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 352,
+        "end_line": 366,
+        "merge_gen_region": null,
+        "confidence": 0.651388943195343,
+        "hesitated": true
+    }
+]

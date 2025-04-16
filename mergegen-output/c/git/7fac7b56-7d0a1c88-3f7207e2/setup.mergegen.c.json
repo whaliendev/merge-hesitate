@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tif (get_allowed_bare_repo() == ALLOWED_BARE_REPO_EXPLICIT)\n\t\t\t\treturn GIT_DIR_DISALLOWED_BARE;\n\t\t\tif (!ensure_valid_ownership(NULL, NULL, dir->buf))",
+        "b_contents": "\t\t\tif (!ensure_valid_ownership(NULL, NULL, dir->buf, report))",
+        "base_contents": "\t\t\tif (!ensure_valid_ownership(NULL, NULL, dir->buf))",
+        "res_region": "\t\t\tif (get_allowed_bare_repo() == ALLOWED_BARE_REPO_EXPLICIT)\n\t\t\t\treturn GIT_DIR_DISALLOWED_BARE;\n\t\t\tif (!ensure_valid_ownership(NULL, NULL, dir->buf, report))",
+        "lookback": "\t\t\t\treturn GIT_DIR_DISALLOWED_BARE;",
+        "lookahead": "\t\t\t\treturn GIT_DIR_INVALID_OWNERSHIP;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1347,
+        "end_line": 1355,
+        "merge_gen_region": null,
+        "confidence": 0.8254134654998779,
+        "hesitated": true
+    }
+]

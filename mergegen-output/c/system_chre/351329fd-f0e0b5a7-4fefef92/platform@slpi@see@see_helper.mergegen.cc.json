@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#ifdef CHRE_SLPI_DEFAULT_BUILD\nbool decodeSnsAmdProtoEvent(pb_istream_t *stream, const pb_field_t *field,\n                            void **arg) {\n  bool success = false;\n  sns_amd_event event = sns_amd_event_init_default;\n  auto *info = static_cast<SeeInfoArg *>(*arg);\n\n  if (!pb_decode(stream, sns_amd_event_fields, &event)) {\n    LOG_NANOPB_ERROR(stream);\n  } else {\n    // Stationary / instant motion share the same suid so modify the sensorType\n    // to be the correct type depending on the event.\n    if (SNS_AMD_EVENT_TYPE_STATIONARY == event.state) {\n      info->data->sensorType = CHRE_SENSOR_TYPE_STATIONARY_DETECT;\n    } else if (SNS_AMD_EVENT_TYPE_MOTION == event.state) {\n      info->data->sensorType = CHRE_SENSOR_TYPE_INSTANT_MOTION_DETECT;\n    } else {\n      CHRE_ASSERT(false);\n    }\n\n    float val = 0;\n    populateEventSample(info, &val);\n    success = true;\n  }\n\n  return success;\n}\n#endif\n",
+        "b_contents": "#ifdef CHRE_SLPI_DEFAULT_BUILD\nbool decodeSnsAmdProtoEvent(\n    pb_istream_t *stream, const pb_field_t *field, void **arg) {\n  bool success = false;\n  sns_amd_event event = sns_amd_event_init_default;\n  auto *info = static_cast<SeeInfoArg *>(*arg);\n\n  if (!pb_decode(stream, sns_amd_event_fields, &event)) {\n    LOG_NANOPB_ERROR(stream);\n  } else {\n    // Stationary / instant motion share the same suid so modify the sensorType\n    // to be the correct type depending on the event.\n    if (SNS_AMD_EVENT_TYPE_STATIONARY == event.state) {\n      info->data->sensorType = SensorType::StationaryDetect;\n    } else if (SNS_AMD_EVENT_TYPE_MOTION == event.state) {\n      info->data->sensorType = SensorType::InstantMotion;\n    } else {\n      CHRE_ASSERT(false);\n    }\n\n    float val = 0;\n    populateEventSample(info, &val);\n    success = true;\n  }\n\n  return success;\n}\n#endif\n",
+        "base_contents": "",
+        "res_region": "#ifdef CHRE_SLPI_DEFAULT_BUILD\nbool decodeSnsAmdProtoEvent(pb_istream_t *stream, const pb_field_t *field,\n                            void **arg) {\n  bool success = false;\n  sns_amd_event event = sns_amd_event_init_default;\n  auto *info = static_cast<SeeInfoArg *>(*arg);\n\n  if (!pb_decode(stream, sns_amd_event_fields, &event)) {\n    LOG_NANOPB_ERROR(stream);\n  } else {\n    // Stationary / instant motion share the same suid so modify the sensorType\n    // to be the correct type depending on the event.\n    if (SNS_AMD_EVENT_TYPE_STATIONARY == event.state) {\n      info->data->sensorType = CHRE_SENSOR_TYPE_STATIONARY_DETECT;\n    } else if (SNS_AMD_EVENT_TYPE_MOTION == event.state) {\n      info->data->sensorType = CHRE_SENSOR_TYPE_INSTANT_MOTION_DETECT;\n    } else {\n      CHRE_ASSERT(false);\n    }\n\n    float val = 0;\n    populateEventSample(info, &val);\n    success = true;\n  }\n\n  return success;\n}\n#endif\n",
+        "lookback": "bool decodeSnsAmdProtoEvent(pb_istream_t *stream, const pb_field_t *field,",
+        "lookahead": "bool assignPayloadCallback(const SeeInfoArg *info, pb_callback_t *payload) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1194,
+        "end_line": 1255,
+        "merge_gen_region": " pbfieldt *,# CH_PIDEFAULTBUILD decodensmdEventpbistreamtstream const__ *stream const pbfieldt *, pbistreamtstream const pbfieldtfield voidarg) bool =;nsamdevent =nsamdeventinitdefault autoinfo staticcastSeeArg*); (!_(,ns &)) LOGNANBERRORstream } { Stary / motion the sameuid so theTypeType be the type on event ifSN_____ARY event.) infodatasensor = CH_____ARYDETECT } ifSN_____ ==.) infodatasensor = CH____ARYDETECT } ifSN___MOTION eventstatestate {->->TypeSENSORTYPEINST___; else CH_(REASSERTfalse } float =;Event(,val success true } success } #",
+        "confidence": 0.9152539372444153,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  if (success && (info->msgId == SNS_STD_SENSOR_MSGID_SNS_STD_SENSOR_EVENT ||\n                  info->msgId == SNS_PROXIMITY_MSGID_SNS_PROXIMITY_EVENT\n#ifdef CHRE_SLPI_DEFAULT_BUILD\n                  || info->msgId == SNS_AMD_MSGID_SNS_AMD_EVENT\n#endif\n                  )) {",
+        "b_contents": "  if (success\n      && (info->msgId == SNS_STD_SENSOR_MSGID_SNS_STD_SENSOR_EVENT\n          || info->msgId == SNS_PROXIMITY_MSGID_SNS_PROXIMITY_EVENT\n#ifdef CHRE_SLPI_DEFAULT_BUILD\n          || info->msgId == SNS_AMD_MSGID_SNS_AMD_EVENT\n#endif\n      )) {",
+        "base_contents": "  if (success\n      && (info->msgId == SNS_STD_SENSOR_MSGID_SNS_STD_SENSOR_EVENT\n          || info->msgId == SNS_PROXIMITY_MSGID_SNS_PROXIMITY_EVENT)) {",
+        "res_region": "  if (success && (info->msgId == SNS_STD_SENSOR_MSGID_SNS_STD_SENSOR_EVENT ||\n                  info->msgId == SNS_PROXIMITY_MSGID_SNS_PROXIMITY_EVENT\n#ifdef CHRE_SLPI_DEFAULT_BUILD\n                  || info->msgId == SNS_AMD_MSGID_SNS_AMD_EVENT\n#endif\n                  )) {",
+        "lookback": "                  info->msgId == SNS_PROXIMITY_MSGID_SNS_PROXIMITY_EVENT",
+        "lookahead": "    info->data->sampleIndex++;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1354,
+        "end_line": 1373,
+        "merge_gen_region": null,
+        "confidence": 0.8376016616821289,
+        "hesitated": true
+    }
+]

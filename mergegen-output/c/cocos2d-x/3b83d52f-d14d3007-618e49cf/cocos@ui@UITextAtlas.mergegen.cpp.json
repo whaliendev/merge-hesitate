@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void TextAtlas::setAnchorPoint(const Vector2 &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _labelAtlasRenderer->setAnchorPoint(Vector2(pt.x, pt.y));\n}\n",
+        "b_contents": "",
+        "base_contents": "void TextAtlas::setAnchorPoint(const Point &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _labelAtlasRenderer->setAnchorPoint(Point(pt.x, pt.y));\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "void TextAtlas::onSizeChanged()",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 113,
+        "end_line": 128,
+        "merge_gen_region": null,
+        "confidence": 0.8023658990859985,
+        "hesitated": true
+    }
+]

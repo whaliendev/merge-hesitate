@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "static constexpr int32_t POINTER_3_DOWN =\n        AMOTION_EVENT_ACTION_POINTER_DOWN | (3 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);\nstatic constexpr int32_t POINTER_0_UP =\n        AMOTION_EVENT_ACTION_POINTER_UP | (0 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);",
+        "b_contents": "static constexpr int32_t POINTER_0_UP =\n        AMOTION_EVENT_ACTION_POINTER_UP | (0 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);",
+        "base_contents": "",
+        "res_region": "static constexpr int32_t POINTER_3_DOWN =\n        AMOTION_EVENT_ACTION_POINTER_DOWN | (3 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);\nstatic constexpr int32_t POINTER_0_UP =\n        AMOTION_EVENT_ACTION_POINTER_UP | (0 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);",
+        "lookback": "        AMOTION_EVENT_ACTION_POINTER_DOWN | (3 << AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT);",
+        "lookahead": "static constexpr int32_t POINTER_1_UP =",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 64,
+        "end_line": 73,
+        "merge_gen_region": null,
+        "confidence": 0.846381664276123,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    sp<FakeWindowHandle> foregroundWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Foreground\", ADISPLAY_ID_DEFAULT);\n    foregroundWindow->setDupTouchToWallpaper(true);\n    foregroundWindow->setPreventSplitting(GetParam());",
+        "b_contents": "    sp<FakeWindowHandle> foregroundWindow =\n            new FakeWindowHandle(application, mDispatcher, \"Foreground\", ADISPLAY_ID_DEFAULT);\n    foregroundWindow->setDupTouchToWallpaper(true);\n    foregroundWindow->setPreventSplitting(GetParam());",
+        "base_contents": "    sp<FakeWindowHandle> window =\n            new FakeWindowHandle(application, mDispatcher, \"Top\", ADISPLAY_ID_DEFAULT);\n    window->setDupTouchToWallpaper(true);",
+        "res_region": "    sp<FakeWindowHandle> foregroundWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Foreground\", ADISPLAY_ID_DEFAULT);\n    foregroundWindow->setDupTouchToWallpaper(true);\n    foregroundWindow->setPreventSplitting(GetParam());",
+        "lookback": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"Foreground\", ADISPLAY_ID_DEFAULT);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1833,
+        "end_line": 1847,
+        "merge_gen_region": null,
+        "confidence": 0.8059558868408203,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    sp<FakeWindowHandle> leftWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Left\", ADISPLAY_ID_DEFAULT);\n    leftWindow->setFrame(Rect(0, 0, 200, 200));\n    leftWindow->setDupTouchToWallpaper(true);\n    leftWindow->setSlippery(true);\n\n    sp<FakeWindowHandle> rightWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Right\", ADISPLAY_ID_DEFAULT);\n    rightWindow->setFrame(Rect(200, 0, 400, 200));",
+        "b_contents": "    sp<FakeWindowHandle> leftWindow =\n            new FakeWindowHandle(application, mDispatcher, \"Left\", ADISPLAY_ID_DEFAULT);\n    leftWindow->setFrame(Rect(0, 0, 200, 200));\n    leftWindow->setDupTouchToWallpaper(true);\n    leftWindow->setSlippery(true);\n\n    sp<FakeWindowHandle> rightWindow =\n            new FakeWindowHandle(application, mDispatcher, \"Right\", ADISPLAY_ID_DEFAULT);\n    rightWindow->setFrame(Rect(200, 0, 400, 200));",
+        "base_contents": "    sp<FakeWindowHandle> window =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Top\", ADISPLAY_ID_DEFAULT);\n    window->setDupTouchToWallpaper(true);",
+        "res_region": "    sp<FakeWindowHandle> leftWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Left\", ADISPLAY_ID_DEFAULT);\n    leftWindow->setFrame(Rect(0, 0, 200, 200));\n    leftWindow->setDupTouchToWallpaper(true);\n    leftWindow->setSlippery(true);\n\n    sp<FakeWindowHandle> rightWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Right\", ADISPLAY_ID_DEFAULT);\n    rightWindow->setFrame(Rect(200, 0, 400, 200));",
+        "lookback": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"Left\", ADISPLAY_ID_DEFAULT);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2006,
+        "end_line": 2030,
+        "merge_gen_region": null,
+        "confidence": 0.5924854278564453,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                               {100, 100}))\n            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";\n\n    // Both foreground window and its wallpaper should receive the touch down\n    leftWindow->consumeMotionDown();\n    wallpaperWindow->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    // Move to right window, the left window should receive cancel.\n    ASSERT_EQ(InputEventInjectionResult::SUCCEEDED,\n              injectMotionEvent(mDispatcher, AMOTION_EVENT_ACTION_MOVE, AINPUT_SOURCE_TOUCHSCREEN,\n                                ADISPLAY_ID_DEFAULT, {201, 100}))",
+        "b_contents": "                               {100, 100}))\n            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";\n\n    // Both foreground window and its wallpaper should receive the touch down\n    leftWindow->consumeMotionDown();\n    wallpaperWindow->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    // Move to right window, the left window should receive cancel.\n    ASSERT_EQ(InputEventInjectionResult::SUCCEEDED,\n              injectMotionEvent(mDispatcher, AMOTION_EVENT_ACTION_MOVE, AINPUT_SOURCE_TOUCHSCREEN,\n                                ADISPLAY_ID_DEFAULT, {201, 100}))",
+        "base_contents": "                               {50, 50}))\n            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";\n    window->consumeMotionDown(ADISPLAY_ID_DEFAULT);\n    wallpaperWindow->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    const MotionEvent secondFingerDownEvent =\n            MotionEventBuilder(POINTER_1_DOWN, AINPUT_SOURCE_TOUCHSCREEN)\n                    .displayId(ADISPLAY_ID_DEFAULT)\n                    .eventTime(systemTime(SYSTEM_TIME_MONOTONIC))\n                    .pointer(PointerBuilder(/* id */ 0, AMOTION_EVENT_TOOL_TYPE_FINGER).x(50).y(50))\n                    .pointer(PointerBuilder(/* id */ 1, AMOTION_EVENT_TOOL_TYPE_FINGER).x(10).y(10))\n                    .build();\n    ASSERT_EQ(InputEventInjectionResult::SUCCEEDED,\n              injectMotionEvent(mDispatcher, secondFingerDownEvent, INJECT_EVENT_TIMEOUT,\n                                InputEventInjectionSync::WAIT_FOR_RESULT))\n            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";\n\n    window->consumeMotionPointerDown(1);\n    wallpaperWindow->consumeMotionPointerDown(1, ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    const MotionEvent secondFingerUpEvent =\n            MotionEventBuilder(POINTER_1_UP, AINPUT_SOURCE_TOUCHSCREEN)\n                    .displayId(ADISPLAY_ID_DEFAULT)\n                    .eventTime(systemTime(SYSTEM_TIME_MONOTONIC))\n                    .pointer(PointerBuilder(/* id */ 0, AMOTION_EVENT_TOOL_TYPE_FINGER).x(50).y(50))\n                    .pointer(PointerBuilder(/* id */ 1, AMOTION_EVENT_TOOL_TYPE_FINGER).x(10).y(10))\n                    .build();\n    ASSERT_EQ(InputEventInjectionResult::SUCCEEDED,\n              injectMotionEvent(mDispatcher, secondFingerUpEvent, INJECT_EVENT_TIMEOUT,\n                                InputEventInjectionSync::WAIT_FOR_RESULT))",
+        "res_region": "                               {100, 100}))\n            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";\n\n    // Both foreground window and its wallpaper should receive the touch down\n    leftWindow->consumeMotionDown();\n    wallpaperWindow->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    // Move to right window, the left window should receive cancel.\n    ASSERT_EQ(InputEventInjectionResult::SUCCEEDED,\n              injectMotionEvent(mDispatcher, AMOTION_EVENT_ACTION_MOVE, AINPUT_SOURCE_TOUCHSCREEN,\n                                ADISPLAY_ID_DEFAULT, {201, 100}))",
+        "lookback": "            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";",
+        "lookahead": "            << \"Inject motion event should return InputEventInjectionResult::SUCCEEDED\";",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 2042,
+        "end_line": 2097,
+        "merge_gen_region": null,
+        "confidence": 0.8269409537315369,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"First Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    firstWindow->setDupTouchToWallpaper(true);",
+        "b_contents": "            new FakeWindowHandle(application, mDispatcher, \"First Window\", ADISPLAY_ID_DEFAULT);\n    firstWindow->setDupTouchToWallpaper(true);\n",
+        "base_contents": "            new FakeWindowHandle(application, mDispatcher, \"First Window\", ADISPLAY_ID_DEFAULT);",
+        "res_region": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"First Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    firstWindow->setDupTouchToWallpaper(true);",
+        "lookback": "                                       ADISPLAY_ID_DEFAULT);",
+        "lookahead": "    sp<FakeWindowHandle> secondWindow =",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2948,
+        "end_line": 2958,
+        "merge_gen_region": null,
+        "confidence": 0.8187822103500366,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"Second Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    sp<FakeWindowHandle> wallpaper =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Wallpaper\", ADISPLAY_ID_DEFAULT);\n    wallpaper->setIsWallpaper(true);",
+        "b_contents": "            new FakeWindowHandle(application, mDispatcher, \"Second Window\", ADISPLAY_ID_DEFAULT);\n    sp<FakeWindowHandle> wallpaper =\n            new FakeWindowHandle(application, mDispatcher, \"Wallpaper\", ADISPLAY_ID_DEFAULT);\n    wallpaper->setIsWallpaper(true);",
+        "base_contents": "            new FakeWindowHandle(application, mDispatcher, \"Second Window\", ADISPLAY_ID_DEFAULT);\n",
+        "res_region": "            sp<FakeWindowHandle>::make(application, mDispatcher, \"Second Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    sp<FakeWindowHandle> wallpaper =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Wallpaper\", ADISPLAY_ID_DEFAULT);\n    wallpaper->setIsWallpaper(true);",
+        "lookback": "                                       ADISPLAY_ID_DEFAULT);",
+        "lookahead": "    // Add the windows to the dispatcher",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2960,
+        "end_line": 2974,
+        "merge_gen_region": null,
+        "confidence": 0.8311610817909241,
+        "hesitated": true
+    },
+    {
+        "a_contents": "TEST_P(TransferTouchFixture, TransferTouch_MultipleWallpapers) {",
+        "b_contents": "TEST_P(TransferTouchFixture, TransferTouch_MultipleWallpapers) {\n    std::shared_ptr<FakeApplicationHandle> application = std::make_shared<FakeApplicationHandle>();\n\n    // Create a couple of windows\n    sp<FakeWindowHandle> firstWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"First Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    firstWindow->setDupTouchToWallpaper(true);\n    sp<FakeWindowHandle> secondWindow =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Second Window\",\n                                       ADISPLAY_ID_DEFAULT);\n    secondWindow->setDupTouchToWallpaper(true);\n\n    sp<FakeWindowHandle> wallpaper1 =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Wallpaper1\", ADISPLAY_ID_DEFAULT);\n    wallpaper1->setIsWallpaper(true);\n\n    sp<FakeWindowHandle> wallpaper2 =\n            sp<FakeWindowHandle>::make(application, mDispatcher, \"Wallpaper2\", ADISPLAY_ID_DEFAULT);\n    wallpaper2->setIsWallpaper(true);\n    // Add the windows to the dispatcher\n    mDispatcher->setInputWindows(\n            {{ADISPLAY_ID_DEFAULT, {firstWindow, wallpaper1, secondWindow, wallpaper2}}});\n\n    // Send down to the first window\n    NotifyMotionArgs downMotionArgs =\n            generateMotionArgs(AMOTION_EVENT_ACTION_DOWN, AINPUT_SOURCE_TOUCHSCREEN,\n                               ADISPLAY_ID_DEFAULT);\n    mDispatcher->notifyMotion(&downMotionArgs);\n\n    // Only the first window should get the down event\n    firstWindow->consumeMotionDown();\n    secondWindow->assertNoEvents();\n    wallpaper1->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n    wallpaper2->assertNoEvents();\n\n    // Transfer touch focus to the second window\n    TransferFunction f = GetParam();\n    bool success = f(mDispatcher, firstWindow->getToken(), secondWindow->getToken());\n    ASSERT_TRUE(success);\n\n    // The first window gets cancel and the second gets down\n    firstWindow->consumeMotionCancel();\n    secondWindow->consumeMotionDown();\n    wallpaper1->consumeMotionCancel(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n    wallpaper2->consumeMotionDown(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n\n    // Send up event to the second window\n    NotifyMotionArgs upMotionArgs =\n            generateMotionArgs(AMOTION_EVENT_ACTION_UP, AINPUT_SOURCE_TOUCHSCREEN,\n                               ADISPLAY_ID_DEFAULT);\n    mDispatcher->notifyMotion(&upMotionArgs);\n    // The first  window gets no events and the second gets up\n    firstWindow->assertNoEvents();\n    secondWindow->consumeMotionUp();\n    wallpaper1->assertNoEvents();\n    wallpaper2->consumeMotionUp(ADISPLAY_ID_DEFAULT, expectedWallpaperFlags);\n}\n\n// For the cases of single pointer touch and two pointers non-split touch, the api's\n// 'transferTouch' and 'transferTouchFocus' are equivalent in behaviour. They only differ\n// for the case where there are multiple pointers split across several windows.\nINSTANTIATE_TEST_SUITE_P(TransferFunctionTests, TransferTouchFixture,\n                         ::testing::Values(\n                                 [&](const std::unique_ptr<InputDispatcher>& dispatcher,\n                                     sp<IBinder> /*ignored*/, sp<IBinder> destChannelToken) {\n                                     return dispatcher->transferTouch(destChannelToken,\n                                                                      ADISPLAY_ID_DEFAULT);\n                                 },\n                                 [&](const std::unique_ptr<InputDispatcher>& dispatcher,\n                                     sp<IBinder> from, sp<IBinder> to) {\n                                     return dispatcher->transferTouchFocus(from, to,\n                                                                           false /*isDragAndDrop*/);\n                                 }));\n\nTEST_F(InputDispatcherTest, TransferTouchFocus_TwoPointersSplitTouch) {",
+        "base_contents": "// For the cases of single pointer touch and two pointers non-split touch, the api's\n// 'transferTouch' and 'transferTouchFocus' are equivalent in behaviour. They only differ\n// for the case where there are multiple pointers split across several windows.\nINSTANTIATE_TEST_SUITE_P(TransferFunctionTests, TransferTouchFixture,\n                         ::testing::Values(\n                                 [&](const std::unique_ptr<InputDispatcher>& dispatcher,\n                                     sp<IBinder> /*ignored*/, sp<IBinder> destChannelToken) {\n                                     return dispatcher->transferTouch(destChannelToken,\n                                                                      ADISPLAY_ID_DEFAULT);\n                                 },\n                                 [&](const std::unique_ptr<InputDispatcher>& dispatcher,\n                                     sp<IBinder> from, sp<IBinder> to) {\n                                     return dispatcher->transferTouchFocus(from, to,\n                                                                           false /*isDragAndDrop*/);\n                                 }));\n\nTEST_F(InputDispatcherTest, TransferTouchFocus_TwoPointersSplitTouch) {",
+        "res_region": "TEST_P(TransferTouchFixture, TransferTouch_MultipleWallpapers) {",
+        "lookback": "    std::shared_ptr<FakeApplicationHandle> application = std::make_shared<FakeApplicationHandle>();",
+        "lookahead": "    std::shared_ptr<FakeApplicationHandle> application = std::make_shared<FakeApplicationHandle>();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3130,
+        "end_line": 3227,
+        "merge_gen_region": null,
+        "confidence": 0.8261218070983887,
+        "hesitated": true
+    }
+]

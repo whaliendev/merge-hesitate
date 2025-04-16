@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    std::cout << \"Received a message with type \" << message.messageType\n              << \" size \" << message.messageBody.size() << \" from nanoapp 0x\"\n              << std::hex << message.nanoappId\n              << \" sent to the host endpoint 0x\"\n              << static_cast<int>(message.hostEndPoint) << std::endl;\n    std::cout << \"message: 0x\";",
+        "b_contents": "    std::cout << \"Received a message!\" << std::endl\n              << \"   From: 0x\" << std::hex << message.nanoappId << std::endl\n              << \"     To: 0x\" << message.hostEndPoint << std::endl\n              << \"   Body: (type \" << message.messageType << \" size \"\n              << message.messageBody.size() << \") 0x\";",
+        "base_contents": "    std::cout << \"Received a message with type \" << message.messageType\n              << \" size \" << message.messageBody.size() << \" from nanoapp 0x\"\n              << std::hex << message.nanoappId\n              << \" sent to the host endpoint 0x\" << message.hostEndPoint\n              << std::endl;\n    std::cout << \"message: 0x\";",
+        "res_region": "    std::cout << \"Received a message!\" << std::endl\n              << \"   From: 0x\" << std::hex << message.nanoappId << std::endl\n              << \"     To: 0x\" << static_cast<int>(message.hostEndPoint)\n              << std::endl\n              << \"   Body: (type \" << message.messageType << \" size \"\n              << message.messageBody.size() << \") 0x\";",
+        "lookback": "              << \"   From: 0x\" << std::hex << message.nanoappId << std::endl",
+        "lookahead": "    for (const uint8_t &data : message.messageBody) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 166,
+        "end_line": 186,
+        "merge_gen_region": "output>(outputoutput>(output>(output>(output>(output>(output>(output>(output>(output>(output>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",\",>(\",\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(\",>(",
+        "confidence": 0.8861847519874573,
+        "hesitated": false,
+        "resolved": false
+    }
+]

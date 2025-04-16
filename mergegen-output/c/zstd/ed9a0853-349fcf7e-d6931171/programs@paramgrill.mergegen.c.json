@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#if defined(_MSC_VER)\n#  define snprintf _snprintf    /* snprintf unsupported by Visual <= 2012 */\n#elif defined (__cplusplus) || (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /* C99 */)\n#else\n#  define snprintf(b, s, ...) sprintf(b, __VA_ARGS__)\n#endif\n",
+        "base_contents": "#if defined(_MSC_VER)\n#  define snprintf _snprintf    /* snprintf unsupported by Visual <= 2012 */\n#endif\n",
+        "res_region": "",
+        "lookback": "/*-************************************",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 46,
+        "merge_gen_region": null,
+        "confidence": 0.6586636304855347,
+        "hesitated": true
+    }
+]

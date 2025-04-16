@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "     * initialize the hls by handler and source.\n     */\n    virtual srs_error_t initialize(SrsOriginHub* h, SrsRequest* r);",
+        "b_contents": "    * initialize the hls by handler and source.\n    */\n    virtual int initialize(SrsSource* s, SrsRequest* r);",
+        "base_contents": "    * initialize the hls by handler and source.\n    */\n    virtual int initialize(SrsSource* s);",
+        "res_region": "     * initialize the hls by handler and source.\n     */\n    virtual srs_error_t initialize(SrsOriginHub* h, SrsRequest* r);",
+        "lookback": "     */",
+        "lookahead": "    /**",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 318,
+        "end_line": 330,
+        "merge_gen_region": null,
+        "confidence": 0.7773416638374329,
+        "hesitated": true
+    }
+]

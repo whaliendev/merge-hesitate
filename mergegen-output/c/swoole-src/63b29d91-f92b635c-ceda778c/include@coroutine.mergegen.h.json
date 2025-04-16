@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    static inline void set_max_death_ms(long max_ms)\n    {\n        max_death_msec = max_ms;\n    }\n\n    static inline void set_loop_threshold(long threshold)\n    {\n\n        loop_threshold = threshold;\n    }\n\n#ifdef SW_LOG_TRACE_OPEN",
+        "b_contents": "",
+        "base_contents": "#ifdef SW_LOG_TRACE_OPEN",
+        "res_region": "    static inline void set_max_death_ms(long max_ms)\n    {\n        max_death_msec = max_ms;\n    }\n\n    static inline void set_loop_threshold(long threshold)\n    {\n\n        loop_threshold = threshold;\n    }\n",
+        "lookback": "    {",
+        "lookahead": "    static inline long get_cid(Coroutine* co)",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 142,
+        "end_line": 158,
+        "merge_gen_region": null,
+        "confidence": 0.7591329216957092,
+        "hesitated": true
+    }
+]

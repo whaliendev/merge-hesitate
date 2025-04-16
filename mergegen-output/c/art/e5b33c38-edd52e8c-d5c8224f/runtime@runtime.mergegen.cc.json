@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include <utility>\n",
+        "b_contents": "",
+        "base_contents": "// sys/mount.h has to come before linux/fs.h due to redefinition of MS_RDONLY, MS_BIND, etc\n#include <sys/mount.h>",
+        "res_region": "#include <utility>\n",
+        "lookback": "",
+        "lookahead": "#ifdef __linux__",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 18,
+        "end_line": 25,
+        "merge_gen_region": null,
+        "confidence": 0.7767905592918396,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  if (!kUseUserfaultfd) {\n    // Userfaultfd GC creates the thread-pool on its own.\n    heap_->CreateThreadPool();\n  }",
+        "base_contents": "  heap_->CreateThreadPool();",
+        "res_region": "",
+        "lookback": "  // waste memory.",
+        "lookahead": "  // Avoid creating the runtime thread pool for system server since it will not be used and would",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1167,
+        "end_line": 1175,
+        "merge_gen_region": null,
+        "confidence": 0.5608499050140381,
+        "hesitated": true
+    }
+]

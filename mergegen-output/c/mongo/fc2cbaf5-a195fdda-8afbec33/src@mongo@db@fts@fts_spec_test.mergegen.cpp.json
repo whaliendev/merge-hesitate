@@ -1,0 +1,206 @@
+[
+    {
+        "a_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" ),\n                                spec.defaultLanguage(),\n                                \"\",\n                                false,\n                                &m );",
+        "b_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" ), &m );\n",
+        "base_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" ),\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" ), &m );",
+        "lookback": "            ASSERT_EQUALS( 3U, m.size() );",
+        "lookahead": "            ASSERT_EQUALS( 3U, m.size() );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 182,
+        "end_line": 197,
+        "merge_gen_region": null,
+        "confidence": 0.7934038639068604,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" << \"text\" << \"cat book\" ),\n                                spec.defaultLanguage(),\n                                \"\",\n                                false,\n                                &m );",
+        "b_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" << \"text\" << \"cat book\" ), &m );",
+        "base_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" << \"text\" << \"cat book\" ),\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( BSON( \"title\" << \"cat sat run\" << \"text\" << \"cat book\" ), &m );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 212,
+        "end_line": 226,
+        "merge_gen_region": null,
+        "confidence": 0.7192364931106567,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat sat run run run\" ),\n                                spec.defaultLanguage(),\n                                \"\",\n                                false,\n                                &m );",
+        "b_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat sat run run run\" ), &m );\n",
+        "base_contents": "            spec.scoreDocument( BSON( \"title\" << \"cat sat sat run run run\" ),\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( BSON( \"title\" << \"cat sat sat run run run\" ), &m );",
+        "lookback": "            ASSERT_EQUALS( 3U, m.size() );",
+        "lookahead": "            ASSERT_EQUALS( 3U, m.size() );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 261,
+        "end_line": 276,
+        "merge_gen_region": null,
+        "confidence": 0.7892033457756042,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &m );",
+        "b_contents": "            spec.scoreDocument( obj, &m );\n",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( obj, &m );",
+        "lookback": "            ASSERT_EQUALS( 1U, m.size() );",
+        "lookahead": "            ASSERT_EQUALS( 1U, m.size() );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 345,
+        "end_line": 356,
+        "merge_gen_region": null,
+        "confidence": 0.7579896450042725,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &m );",
+        "b_contents": "            spec.scoreDocument( obj, &m );\n",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( obj, &m );",
+        "lookback": "            ASSERT_EQUALS( 1U, m.size() );",
+        "lookahead": "            ASSERT_EQUALS( 1U, m.size() );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 367,
+        "end_line": 378,
+        "merge_gen_region": null,
+        "confidence": 0.7579896450042725,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &m );",
+        "b_contents": "            spec.scoreDocument( obj, &m );\n",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &m );",
+        "res_region": "            spec.scoreDocument( obj, &m );",
+        "lookback": "            ASSERT_EQUALS( 0U, m.size() );",
+        "lookahead": "            ASSERT_EQUALS( 0U, m.size() );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 390,
+        "end_line": 401,
+        "merge_gen_region": null,
+        "confidence": 0.7865482568740845,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 420,
+        "end_line": 430,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 461,
+        "end_line": 471,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 502,
+        "end_line": 512,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 545,
+        "end_line": 555,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 588,
+        "end_line": 598,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            spec.scoreDocument( obj, spec.defaultLanguage(), \"\", false, &tfm );",
+        "b_contents": "            spec.scoreDocument( obj, &tfm );",
+        "base_contents": "            spec.scoreDocument( obj,\n                                FTSLanguage::makeFTSLanguage( \"english\" ).getValue(),\n                                \"\",\n                                false,\n                                &tfm );",
+        "res_region": "            spec.scoreDocument( obj, &tfm );",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 633,
+        "end_line": 643,
+        "merge_gen_region": null,
+        "confidence": 0.6899084448814392,
+        "hesitated": true
+    }
+]

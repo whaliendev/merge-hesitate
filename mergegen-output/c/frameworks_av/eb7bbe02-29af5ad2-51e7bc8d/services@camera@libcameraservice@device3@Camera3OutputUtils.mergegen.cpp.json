@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        res = fixupAutoframingTags(physicalMetadata.mPhysicalCameraMetadata);\n        if (res != OK) {\n            SET_ERR(\"Failed to set autoframing defaults in physical result metadata: %s (%d)\",\n                    strerror(-res), res);\n            return;\n        }\n    }\n\n    for (auto& physicalMetadata : captureResult.mPhysicalMetadatas) {\n        const std::string cameraId = physicalMetadata.mPhysicalCameraId;\n        auto mapper = states.distortionMappers.find(cameraId);",
+        "b_contents": "        const std::string cameraId = physicalMetadata.mPhysicalCameraId;\n        auto mapper = states.distortionMappers.find(cameraId);",
+        "base_contents": "        String8 cameraId8(physicalMetadata.mPhysicalCameraId);\n        auto mapper = states.distortionMappers.find(cameraId8.c_str());",
+        "res_region": "        res = fixupAutoframingTags(physicalMetadata.mPhysicalCameraMetadata);\n        if (res != OK) {\n            SET_ERR(\"Failed to set autoframing defaults in physical result metadata: %s (%d)\",\n                    strerror(-res), res);\n            return;\n        }\n    }\n\n    for (auto& physicalMetadata : captureResult.mPhysicalMetadatas) {\n        const std::string cameraId = physicalMetadata.mPhysicalCameraId;\n        auto mapper = states.distortionMappers.find(cameraId);",
+        "lookback": "        if (res != OK) {",
+        "lookahead": "        if (mapper != states.distortionMappers.end()) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 395,
+        "end_line": 413,
+        "merge_gen_region": null,
+        "confidence": 0.6889541149139404,
+        "hesitated": true
+    }
+]

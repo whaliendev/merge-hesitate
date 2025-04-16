@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    env_t *env,\n    std::vector<counted_t<datum_stream_t> > &&streams,\n    const protob_t<const Backtrace> &bt_src,\n    size_t expected_states)\n    : datum_stream_t(bt_src),",
+        "b_contents": "        env_t *env,\n        std::vector<counted_t<datum_stream_t> > &&streams,\n        backtrace_id_t bt)\n    : datum_stream_t(bt),",
+        "base_contents": "    env_t *env,\n    std::vector<counted_t<datum_stream_t> > &&streams,\n    const protob_t<const Backtrace> &bt_src)\n    : datum_stream_t(bt_src),",
+        "res_region": "    env_t *env,\n    std::vector<counted_t<datum_stream_t> > &&streams,\n    backtrace_id_t bt,\n    size_t expected_states)\n    : datum_stream_t(bt_src),",
+        "lookback": "    std::vector<counted_t<datum_stream_t> > &&streams,",
+        "lookahead": "      union_type(feed_type_t::not_feed),",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1284,
+        "end_line": 1300,
+        "merge_gen_region": null,
+        "confidence": 0.8194396495819092,
+        "hesitated": true
+    }
+]

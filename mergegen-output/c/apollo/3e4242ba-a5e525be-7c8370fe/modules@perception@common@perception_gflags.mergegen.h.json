@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// lidar_center_point\nDECLARE_string(center_point_model_file);\nDECLARE_string(center_point_params_file);\nDECLARE_bool(use_trt);\nDECLARE_int32(trt_precision);\nDECLARE_int32(trt_use_static);\nDECLARE_string(trt_static_dir);\nDECLARE_int32(collect_shape_info);\nDECLARE_string(dynamic_shape_file);\n\n// bev petr_v1\nDECLARE_string(bev_model_file);\nDECLARE_string(bev_params_file);\n\n// caddn\nDECLARE_string(caddn_model_file);\nDECLARE_string(caddn_params_file);\n",
+        "b_contents": "// lidar_center_point\nDECLARE_string(center_point_model_file);\nDECLARE_string(center_point_params_file);\nDECLARE_bool(use_trt);\nDECLARE_int32(trt_precision);\nDECLARE_int32(trt_use_static);\nDECLARE_string(trt_static_dir);\nDECLARE_int32(collect_shape_info);\nDECLARE_string(dynamic_shape_file);\n",
+        "base_contents": "",
+        "res_region": "// lidar_center_point\nDECLARE_string(center_point_model_file);\nDECLARE_string(center_point_params_file);\nDECLARE_bool(use_trt);\nDECLARE_int32(trt_precision);\nDECLARE_int32(trt_use_static);\nDECLARE_string(trt_static_dir);\nDECLARE_int32(collect_shape_info);\nDECLARE_string(dynamic_shape_file);\n\n// bev petr_v1\nDECLARE_string(bev_model_file);\nDECLARE_string(bev_params_file);\n\n// caddn\nDECLARE_string(caddn_model_file);\nDECLARE_string(caddn_params_file);\n",
+        "lookback": "DECLARE_string(center_point_model_file);",
+        "lookahead": "// emergency detection onnx",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 67,
+        "end_line": 98,
+        "merge_gen_region": null,
+        "confidence": 0.8545379638671875,
+        "hesitated": true
+    }
+]

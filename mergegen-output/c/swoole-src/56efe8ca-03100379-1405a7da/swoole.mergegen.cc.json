@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"zend_exceptions.h\"\n",
+        "b_contents": "#include <queue>\n",
+        "base_contents": "",
+        "res_region": "#include <queue>\n\n#include \"zend_exceptions.h\"\n",
+        "lookback": "",
+        "lookahead": "ZEND_DECLARE_MODULE_GLOBALS(swoole)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 30,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.6718068718910217,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "void php_swoole_register_rshutdown_callback(swCallback cb, void *private_data)\n{\n    rshutdown_func *rf = (rshutdown_func*) emalloc(sizeof(rshutdown_func));\n    rshutdown_functions.push(rf);\n}\n\nstatic void execute_rshutdown_callback()\n{\n    while(!rshutdown_functions.empty())\n    {\n        rshutdown_func *rf = rshutdown_functions.front();\n        rshutdown_functions.pop();\n        rf->callback(rf->private_data);\n        efree(rf);\n    }\n}\n\nstatic sw_inline zend_string* get_debug_print_backtrace(zend_long options, zend_long limit)\n{\n    SW_PHP_OB_START(zoutput)\n    {\n        zval fcn, args[2];\n        ZVAL_STRING(&fcn, \"debug_print_backtrace\");\n        ZVAL_LONG(&args[0], options);\n        ZVAL_LONG(&args[1], limit);\n        sw_zend_call_function_ex(&fcn, NULL, 2, args, &zoutput);\n        zval_ptr_dtor(&fcn);\n    }\n    SW_PHP_OB_END();\n    if (UNEXPECTED(Z_TYPE_P(&zoutput) != IS_STRING))\n    {\n        return nullptr;\n    }\n    Z_STRVAL(zoutput)[--Z_STRLEN(zoutput)] = '\\0'; // replace \\n to \\0\n    return Z_STR(zoutput);\n}\n",
+        "base_contents": "static sw_inline zend_string* get_debug_print_backtrace(zend_long options, zend_long limit)\n{\n    SW_PHP_OB_START(zoutput)\n    {\n        zval fcn, args[2];\n        ZVAL_STRING(&fcn, \"debug_print_backtrace\");\n        ZVAL_LONG(&args[0], options);\n        ZVAL_LONG(&args[1], limit);\n        sw_zend_call_function_ex(&fcn, NULL, 2, args, &zoutput);\n        zval_ptr_dtor(&fcn);\n    }\n    SW_PHP_OB_END();\n    if (UNEXPECTED(Z_TYPE_P(&zoutput) != IS_STRING))\n    {\n        return nullptr;\n    }\n    Z_STRVAL(zoutput)[--Z_STRLEN(zoutput)] = '\\0'; // replace \\n to \\0\n    return Z_STR(zoutput);\n}\n",
+        "res_region": "void php_swoole_register_rshutdown_callback(swCallback cb, void *private_data)\n{\n    rshutdown_func *rf = (rshutdown_func*) emalloc(sizeof(rshutdown_func));\n    rshutdown_functions.push(rf);\n}\n\nstatic void execute_rshutdown_callback()\n{\n    while(!rshutdown_functions.empty())\n    {\n        rshutdown_func *rf = rshutdown_functions.front();\n        rshutdown_functions.pop();\n        rf->callback(rf->private_data);\n        efree(rf);\n    }\n}\n",
+        "lookback": "{",
+        "lookahead": "static void fatal_error(int code, const char *format, ...)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 326,
+        "end_line": 386,
+        "merge_gen_region": null,
+        "confidence": 0.6568296551704407,
+        "hesitated": true
+    }
+]

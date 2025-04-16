@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "class Channel;",
+        "b_contents": "class Server;",
+        "base_contents": "",
+        "res_region": "class Channel;\nclass Server;",
+        "lookback": "class Server;",
+        "lookahead": "class ServerBuilder;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 45,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.42923471331596375,
+        "hesitated": true
+    }
+]

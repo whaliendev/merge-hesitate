@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // TODO this only works for default column family now\n  Version* current_version = column_family_data_.find(0)->second->current;\n  int current_levels = NumberLevels();",
+        "b_contents": "  Version* current_version = current_;\n  int current_levels = current_version->NumberLevels();",
+        "base_contents": "  Version* current_version = current_;\n  int current_levels = NumberLevels();",
+        "res_region": "  // TODO this only works for default column family now\n  Version* current_version = column_family_data_.find(0)->second->current;\n  int current_levels = current_version->NumberLevels();",
+        "lookback": "  Version* current_version = column_family_data_.find(0)->second->current;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 26,
+        "end_line": 36,
+        "merge_gen_region": null,
+        "confidence": 0.6996349692344666,
+        "hesitated": true
+    }
+]

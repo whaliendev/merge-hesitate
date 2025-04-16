@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "enum utf8_state\t utf8_combine(const struct utf8_data *, wchar_t *);\nenum utf8_state\t utf8_split(wchar_t, struct utf8_data *);",
+        "b_contents": "u_int\t\t utf8_width(wchar_t);\nwchar_t\t\t utf8_combine(const struct utf8_data *);\nenum utf8_state\t utf8_split(wchar_t, struct utf8_data *);",
+        "base_contents": "u_int\t\t utf8_combine(const struct utf8_data *);\nenum utf8_state\t utf8_split(u_int, struct utf8_data *);\nu_int\t\t utf8_split2(u_int, u_char *);",
+        "res_region": "enum utf8_state\t utf8_combine(const struct utf8_data *, wchar_t *);\nenum utf8_state\t utf8_split(wchar_t, struct utf8_data *);",
+        "lookback": "enum utf8_state\t utf8_split(wchar_t, struct utf8_data *);",
+        "lookahead": "int\t\t utf8_strvis(char *, const char *, size_t, int);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2320,
+        "end_line": 2331,
+        "merge_gen_region": " utf_8_/structstruct____struct___struct___struct___struct____struct___struct___struct___struct___struct___struct___struct___struct___struct___structstruct_____structstruct____struct____struct____struct____struct___struct___struct__struct___struct__struct__struct__struct__struct__struct__struct__struct__struct__struct___struct___struct___structstruct_____structstruct____struct__struct___struct__struct__struct__struct__struct__struct",
+        "confidence": 0.9226359724998474,
+        "hesitated": false,
+        "resolved": false
+    }
+]

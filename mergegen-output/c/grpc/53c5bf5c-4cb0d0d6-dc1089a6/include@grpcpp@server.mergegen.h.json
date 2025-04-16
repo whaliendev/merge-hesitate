@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include <grpc/compression.h>\n#include <grpc/support/atm.h>\n#include <grpcpp/channel.h>\n#include <grpcpp/completion_queue.h>\n#include <grpcpp/health_check_service_interface.h>\n#include <grpcpp/impl/call.h>\n#include <grpcpp/impl/codegen/client_interceptor.h>\n#include <grpcpp/impl/codegen/grpc_library.h>\n#include <grpcpp/impl/codegen/server_interface.h>\n#include <grpcpp/impl/rpc_service_method.h>\n#include <grpcpp/security/server_credentials.h>\n#include <grpcpp/support/channel_arguments.h>\n#include <grpcpp/support/config.h>\n#include <grpcpp/support/status.h>\n\nstruct grpc_server;\n\nnamespace grpc_impl {\n\nclass ServerInitializer;\n}",
+        "b_contents": "",
+        "base_contents": "#include <grpc/compression.h>\n#include <grpc/support/atm.h>\n#include <grpcpp/completion_queue.h>\n#include <grpcpp/health_check_service_interface.h>\n#include <grpcpp/impl/call.h>\n#include <grpcpp/impl/codegen/client_interceptor.h>\n#include <grpcpp/impl/codegen/grpc_library.h>\n#include <grpcpp/impl/codegen/server_interface.h>\n#include <grpcpp/impl/rpc_service_method.h>\n#include <grpcpp/security/server_credentials.h>\n#include <grpcpp/support/channel_arguments.h>\n#include <grpcpp/support/config.h>\n#include <grpcpp/support/status.h>\n\nstruct grpc_server;\n\nnamespace grpc_impl {\n\nclass ServerInitializer;\n}",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "namespace grpc {",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 23,
+        "end_line": 67,
+        "merge_gen_region": "",
+        "confidence": 0.9143216609954834,
+        "hesitated": false,
+        "resolved": true
+    }
+]

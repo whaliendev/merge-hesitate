@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        ASSERT_EQ(mount(loop_dev.device().c_str(), mntpoint_.c_str(), \"f2fs\", 0, nullptr), 0)\n                << strerror(errno);",
+        "b_contents": "        ASSERT_EQ(mount(loop_dev.device().c_str(), mntpoint_.c_str(), \"f2fs\", 0, nullptr), 0);",
+        "base_contents": "        ASSERT_EQ(mount(loop_dev.device().c_str(), mntpoint.c_str(), \"f2fs\", 0, nullptr), 0);",
+        "res_region": "        ASSERT_EQ(mount(loop_dev.device().c_str(), mntpoint_.c_str(), \"f2fs\", 0, nullptr), 0)\n                << strerror(errno);",
+        "lookback": "                << strerror(errno);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 521,
+        "end_line": 528,
+        "merge_gen_region": "_( ASSERT ASSERTerenceserences database database database database database database database database database database database database onQPQPQP database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database",
+        "confidence": 0.8910810947418213,
+        "hesitated": false,
+        "resolved": false
+    }
+]

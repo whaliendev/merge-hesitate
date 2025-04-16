@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (rfc) {\n\t\tstrbuf_insertstr(&sprefix, 0, \"RFC \");\n\t\tsubject_prefix = 1;\n\t}",
+        "b_contents": "\tif (rfc && rfc[0]) {\n\t\tif (rfc[0] == '-')\n\t\t\tstrbuf_addf(&sprefix, \" %s\", rfc + 1);\n\t\telse\n\t\t\tstrbuf_insertf(&sprefix, 0, \"%s \", rfc);\n\t}",
+        "base_contents": "\tif (rfc)\n\t\tstrbuf_insertstr(&sprefix, 0, \"RFC \");",
+        "res_region": "\tif (rfc && rfc[0]) {\n\t\tsubject_prefix = 1;\n\t\tif (rfc[0] == '-')\n\t\t\tstrbuf_addf(&sprefix, \" %s\", rfc + 1);\n\t\telse\n\t\t\tstrbuf_insertf(&sprefix, 0, \"%s \", rfc);\n\t}",
+        "lookback": "\t\tsubject_prefix = 1;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2067,
+        "end_line": 2082,
+        "merge_gen_region": null,
+        "confidence": 0.7649914026260376,
+        "hesitated": true
+    }
+]

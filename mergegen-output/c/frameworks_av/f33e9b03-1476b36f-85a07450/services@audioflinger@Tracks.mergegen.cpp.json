@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            audio_utils::lock_guard _laf(thread->afThreadCallback()->mutex());\n            const bool nonOffloadableGlobalEffectEnabled =\n                    thread->afThreadCallback()->isNonOffloadableGlobalEffectEnabled_l();\n            audio_utils::lock_guard _lth(thread->mutex());",
+        "b_contents": "            audio_utils::lock_guard _laf(thread->afThreadCallback()->mutex());\n            Mutex::Autolock _lth(thread->mutex());",
+        "base_contents": "            Mutex::Autolock _laf(thread->afThreadCallback()->mutex());\n            Mutex::Autolock _lth(thread->mutex());",
+        "res_region": "            audio_utils::lock_guard _laf(thread->afThreadCallback()->mutex());\n            const bool nonOffloadableGlobalEffectEnabled =\n                    thread->afThreadCallback()->isNonOffloadableGlobalEffectEnabled_l();\n            audio_utils::lock_guard _lth(thread->mutex());",
+        "lookback": "            const bool nonOffloadableGlobalEffectEnabled =",
+        "lookahead": "            sp<IAfEffectChain> ec = thread->getEffectChain_l(mSessionId);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1169,
+        "end_line": 1180,
+        "merge_gen_region": null,
+        "confidence": 0.8614925742149353,
+        "hesitated": true
+    }
+]

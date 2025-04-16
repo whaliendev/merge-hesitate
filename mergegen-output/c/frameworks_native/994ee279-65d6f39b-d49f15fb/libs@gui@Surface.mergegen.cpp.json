@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    FrameTimelineInfo ftlInfo;\n    ftlInfo.vsyncId = frameTimelineVsyncId;\n    ftlInfo.inputEventId = inputEventId;\n    ftlInfo.startTimeNanos = startTimeNanos;\n    return setFrameTimelineInfo(frameNumber, ftlInfo);",
+        "b_contents": "    return setFrameTimelineInfo(frameNumber, {frameTimelineVsyncId, inputEventId, startTimeNanos});",
+        "base_contents": "    return setFrameTimelineInfo({frameTimelineVsyncId, inputEventId, startTimeNanos});",
+        "res_region": "    FrameTimelineInfo ftlInfo;\n    ftlInfo.vsyncId = frameTimelineVsyncId;\n    ftlInfo.inputEventId = inputEventId;\n    ftlInfo.startTimeNanos = startTimeNanos;\n    return setFrameTimelineInfo(frameNumber, ftlInfo);",
+        "lookback": "    ftlInfo.vsyncId = frameTimelineVsyncId;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1871,
+        "end_line": 1881,
+        "merge_gen_region": null,
+        "confidence": 0.8071993589401245,
+        "hesitated": true
+    },
+    {
+        "a_contents": "status_t Surface::setFrameTimelineInfo(uint64_t /*frameNumber*/,\n                                       const FrameTimelineInfo& /*frameTimelineInfo*/) {\n    // ISurfaceComposer no longer supports setFrameTimelineInfo\n    return BAD_VALUE;",
+        "b_contents": "status_t Surface::setFrameTimelineInfo(uint64_t /*frameNumber*/,\n                                       const FrameTimelineInfo& frameTimelineInfo) {\n    return composerService()->setFrameTimelineInfo(mGraphicBufferProducer, frameTimelineInfo);",
+        "base_contents": "status_t Surface::setFrameTimelineInfo(const FrameTimelineInfo& frameTimelineInfo) {\n    return composerService()->setFrameTimelineInfo(mGraphicBufferProducer, frameTimelineInfo);",
+        "res_region": "status_t Surface::setFrameTimelineInfo(uint64_t /*frameNumber*/,\n                                       const FrameTimelineInfo& /*frameTimelineInfo*/) {\n    // ISurfaceComposer no longer supports setFrameTimelineInfo\n    return BAD_VALUE;",
+        "lookback": "                                       const FrameTimelineInfo& /*frameTimelineInfo*/) {",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2650,
+        "end_line": 2662,
+        "merge_gen_region": null,
+        "confidence": 0.8782796859741211,
+        "hesitated": true
+    }
+]

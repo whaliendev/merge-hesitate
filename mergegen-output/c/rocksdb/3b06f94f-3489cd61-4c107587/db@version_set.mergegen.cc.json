@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  int write = snprintf(output, len, \"Base version %ld Base level %d, inputs:\", \n                       input_version_->GetVersionNumber(), level_);",
+        "b_contents": "  int write = snprintf(output, len,\n      \"Base level %d, seek compaction:%d, inputs:\",\n      level_, seek_compaction_);",
+        "base_contents": "  int write = snprintf(output, len, \"Base level %d, inputs:\", level_);",
+        "res_region": "  int write = snprintf(output, len,\n      \"Base version %ld Base level %d, seek compaction:%d, inputs:\",\n      input_version_->GetVersionNumber(), level_, seek_compaction_);",
+        "lookback": "      \"Base version %ld Base level %d, seek compaction:%d, inputs:\",",
+        "lookahead": "  if(write < 0 || write > len)",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1940,
+        "end_line": 1949,
+        "merge_gen_region": null,
+        "confidence": 0.8083658218383789,
+        "hesitated": true
+    }
+]

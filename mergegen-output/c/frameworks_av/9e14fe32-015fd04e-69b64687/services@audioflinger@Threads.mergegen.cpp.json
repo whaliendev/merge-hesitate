@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include <sstream>\n#include <string>\n#include <sys/stat.h>\n#include <sys/syscall.h>",
+        "b_contents": "#include <afutils/DumpTryLock.h>\n#include <afutils/Permission.h>\n#include <afutils/TypedLogger.h>",
+        "base_contents": "#include <afutils/DumpTryLock.h>\n#include <afutils/TypedLogger.h>",
+        "res_region": "#include <sstream>\n#include <string>\n#include <sys/stat.h>\n#include <sys/syscall.h>",
+        "lookback": "#include <string>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 91,
+        "end_line": 103,
+        "merge_gen_region": "#########",
+        "confidence": 0.907874584197998,
+        "hesitated": false,
+        "resolved": false
+    }
+]

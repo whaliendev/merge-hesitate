@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    float getLineHeight() const { return _lineHeight; }\n    void  setLineHeight(float newHeight);",
+        "b_contents": "\n    float getCommonLineHeight() const { return _commonLineHeight; }\n    void  setCommonLineHeight(float newHeight);",
+        "base_contents": "    float getCommonLineHeight() const;\n    void  setCommonLineHeight(float newHeight);",
+        "res_region": "    float getLineHeight() const { return _lineHeight; }\n    void  setLineHeight(float newHeight);",
+        "lookback": "    void  setLineHeight(float newHeight);",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 82,
+        "end_line": 92,
+        "merge_gen_region": null,
+        "confidence": 0.6735262274742126,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    void findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);\n\n    void conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);\n",
+        "b_contents": "\n    void findNewCharacters(const std::u16string& u16SrcString, std::unordered_map<unsigned short, unsigned short>& newCharsMap);\n\n    void conversionU16TOGB2312(const std::u16string& newChars, std::unordered_map<unsigned short, unsigned short>& newCharsMap);\n",
+        "base_contents": "",
+        "res_region": "\n    void findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);\n\n    void conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);\n",
+        "lookback": "    void findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);",
+        "lookahead": "    std::unordered_map<ssize_t, Texture2D*> _atlasTextures;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 121,
+        "end_line": 134,
+        "merge_gen_region": null,
+        "confidence": 0.8512928485870361,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::unordered_map<char16_t, FontLetterDefinition> _letterDefinitions;\n    float _lineHeight;\n    Font* _font;\n    FontFreeType* _fontFreeType;\n    void* _iconv;",
+        "b_contents": "    std::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;\n    float _commonLineHeight;\n    Font * _font;\n    FontFreeType* _fontFreeType;",
+        "base_contents": "    std::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;\n    float _commonLineHeight;\n    Font * _font;",
+        "res_region": "    std::unordered_map<char16_t, FontLetterDefinition> _letterDefinitions;\n    float _lineHeight;\n    Font* _font;\n    FontFreeType* _fontFreeType;\n    void* _iconv;",
+        "lookback": "    float _lineHeight;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 136,
+        "end_line": 151,
+        "merge_gen_region": null,
+        "confidence": 0.8458349704742432,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int _currLineHeight;\n\n    friend class Label;",
+        "b_contents": "\n    void* _iconv;",
+        "base_contents": "",
+        "res_region": "    int _currLineHeight;\n\n    friend class Label;",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 165,
+        "end_line": 173,
+        "merge_gen_region": null,
+        "confidence": 0.42626023292541504,
+        "hesitated": true
+    }
+]

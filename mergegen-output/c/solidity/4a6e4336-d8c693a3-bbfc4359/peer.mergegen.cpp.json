@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tthis_thread::sleep_for(chrono::milliseconds(100000));",
+        "b_contents": "\t\tstd::this_thread::sleep_for(std::chrono::microseconds(100000));",
+        "base_contents": "\t\tusleep(100000);",
+        "res_region": "\t\tthis_thread::sleep_for(chrono::milliseconds(100000));",
+        "lookback": "\t\tpn.process(ch);",
+        "lookahead": "\t\tpn.process(ch);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 57,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.6771572828292847,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        const lv_style_t * style = lv_ddlist_get_style(ddlist, LV_DDLIST_STYLE_BG);\n        lv_coord_t hpad          = LV_MATH_MAX(style->body.padding.left, style->body.padding.right);\n        if(scrl->ext_size < hpad) scrl->ext_size = hpad;",
+        "b_contents": "        lv_style_t * style = lv_ddlist_get_style(ddlist, LV_DDLIST_STYLE_BG);\n        lv_coord_t hpad    = LV_MATH_MAX(style->body.padding.left, style->body.padding.right);\n        if(scrl->ext_draw_pad < hpad) scrl->ext_draw_pad = hpad;",
+        "base_contents": "        lv_style_t * style = lv_ddlist_get_style(ddlist, LV_DDLIST_STYLE_BG);\n        lv_coord_t hpad    = LV_MATH_MAX(style->body.padding.left, style->body.padding.right);\n        if(scrl->ext_size < hpad) scrl->ext_size = hpad;",
+        "res_region": "        const lv_style_t * style = lv_ddlist_get_style(ddlist, LV_DDLIST_STYLE_BG);\n        lv_coord_t hpad    = LV_MATH_MAX(style->body.padding.left, style->body.padding.right);\n        if(scrl->ext_draw_pad < hpad) scrl->ext_draw_pad = hpad;",
+        "lookback": "        lv_coord_t hpad    = LV_MATH_MAX(style->body.padding.left, style->body.padding.right);",
+        "lookahead": "    } else if(sign == LV_SIGNAL_RELEASED) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 734,
+        "end_line": 746,
+        "merge_gen_region": " lvstylet style lvdd____(,__ const__const const__ const_constconst__constconstconstconstconstconstconstconstconstconstconstconstconst&constconstconstconstconstconstconst& const_const&const&const__ const_ const_",
+        "confidence": 0.8905668258666992,
+        "hesitated": false,
+        "resolved": false
+    }
+]

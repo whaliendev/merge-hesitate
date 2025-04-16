@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "\tif (parse_tree(tree) < 0)\n\t\treturn 128;\n\tinit_tree_desc(&tree_desc, tree->buffer, tree->size);",
+        "b_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&tree_desc, &tree->object.oid, tree->buffer, tree->size);",
+        "base_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&tree_desc, tree->buffer, tree->size);",
+        "res_region": "\tif (parse_tree(tree) < 0)\n\t\treturn 128;\n\tinit_tree_desc(&tree_desc, &tree->object.oid, tree->buffer, tree->size);",
+        "lookback": "\t\treturn 128;",
+        "lookahead": "\tswitch (unpack_trees(1, &tree_desc, &opts)) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 706,
+        "end_line": 716,
+        "merge_gen_region": " (ifparseifififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.911208987236023,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\t\tinit_tree_desc(&trees[0], tree->buffer, tree->size);\n\t\tif (parse_tree(new_tree) < 0)\n\t\t\texit(128);",
+        "b_contents": "\t\tinit_tree_desc(&trees[0], &tree->object.oid,\n\t\t\t       tree->buffer, tree->size);\n\t\tparse_tree(new_tree);",
+        "base_contents": "\t\tinit_tree_desc(&trees[0], tree->buffer, tree->size);\n\t\tparse_tree(new_tree);",
+        "res_region": "\t\tinit_tree_desc(&trees[0], &tree->object.oid,\n\t\t\t       tree->buffer, tree->size);\n\t\tif (parse_tree(new_tree) < 0)\n\t\t\texit(128);",
+        "lookback": "\t\t\t       tree->buffer, tree->size);",
+        "lookahead": "\t\ttree = new_tree;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 836,
+        "end_line": 847,
+        "merge_gen_region": null,
+        "confidence": 0.8750762939453125,
+        "hesitated": true
+    }
+]

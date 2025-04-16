@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n    /// If query condition cache is enabled, the query condition cache needs to be updated in the WHERE stage.\n    bool use_query_condition_cache = false;",
+        "b_contents": "    bool is_explain;",
+        "base_contents": "",
+        "res_region": "\n    /// If query condition cache is enabled, the query condition cache needs to be updated in the WHERE stage.\n    bool use_query_condition_cache = false;\n    bool is_explain;",
+        "lookback": "    /// If query condition cache is enabled, the query condition cache needs to be updated in the WHERE stage.",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 71,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.6486455798149109,
+        "hesitated": true
+    }
+]

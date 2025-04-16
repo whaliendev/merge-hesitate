@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "bool test_rdb_env_t::instance_t::table_config(\n        UNUSED const boost::optional<name_string_t> &name,\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const ql::protob_t<const Backtrace> &bt,\n        UNUSED signal_t *local_interruptor,\n        UNUSED counted_t<ql::val_t> *resp_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support table_config()\";\n    return false;\n}\n\nbool test_rdb_env_t::instance_t::table_status(\n        UNUSED const boost::optional<name_string_t> &name,\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const ql::protob_t<const Backtrace> &bt,\n        UNUSED signal_t *local_interruptor,\n        UNUSED counted_t<ql::val_t> *resp_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support table_status()\";\n    return false;\n}\n\nbool test_rdb_env_t::instance_t::table_reconfigure(\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const name_string_t &name,\n        UNUSED const table_generate_config_params_t &params,\n        UNUSED bool dry_run,\n        UNUSED signal_t *local_interruptor,\n        UNUSED ql::datum_t *new_config_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support reconfigure()\";\n    return false;\n}\n\n}\n",
+        "b_contents": "}  // namespace unittest",
+        "base_contents": "}",
+        "res_region": "bool test_rdb_env_t::instance_t::table_config(\n        UNUSED const boost::optional<name_string_t> &name,\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const ql::protob_t<const Backtrace> &bt,\n        UNUSED signal_t *local_interruptor,\n        UNUSED counted_t<ql::val_t> *resp_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support table_config()\";\n    return false;\n}\n\nbool test_rdb_env_t::instance_t::table_status(\n        UNUSED const boost::optional<name_string_t> &name,\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const ql::protob_t<const Backtrace> &bt,\n        UNUSED signal_t *local_interruptor,\n        UNUSED counted_t<ql::val_t> *resp_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support table_status()\";\n    return false;\n}\n\nbool test_rdb_env_t::instance_t::table_reconfigure(\n        UNUSED counted_t<const ql::db_t> db,\n        UNUSED const name_string_t &name,\n        UNUSED const table_generate_config_params_t &params,\n        UNUSED bool dry_run,\n        UNUSED signal_t *local_interruptor,\n        UNUSED ql::datum_t *new_config_out,\n        std::string *error_out) {\n    *error_out = \"test_rdb_env_t::instance_t doesn't support reconfigure()\";\n    return false;\n}\n\n}  // namespace unittest\n",
+        "lookback": "        UNUSED const boost::optional<name_string_t> &name,",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 421,
+        "end_line": 462,
+        "merge_gen_region": null,
+        "confidence": 0.7910065054893494,
+        "hesitated": true
+    }
+]

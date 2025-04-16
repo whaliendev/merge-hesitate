@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            const std::set<std::set<std::string>>& physicalCameraIdSet, bool isStillCapture,\n            bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,\n            const std::set<std::string>& idsWithZoom, nsecs_t requestNs,\n            const SurfaceMap& outSurfaces = SurfaceMap{}) :",
+        "b_contents": "            const std::set<std::set<std::string>>& physicalCameraIdSet, bool isStillCapture,\n            bool isZslCapture, bool rotateAndCropAuto, const std::set<std::string>& idsWithZoom,\n            nsecs_t requestNs, const SurfaceMap& outSurfaces = SurfaceMap{}) :",
+        "base_contents": "            const std::set<std::set<String8>>& physicalCameraIdSet, bool isStillCapture,\n            bool isZslCapture, bool rotateAndCropAuto, const std::set<std::string>& idsWithZoom,\n            nsecs_t requestNs, const SurfaceMap& outSurfaces = SurfaceMap{}) :",
+        "res_region": "            const std::set<std::set<std::string>>& physicalCameraIdSet, bool isStillCapture,\n            bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,\n            const std::set<std::string>& idsWithZoom, nsecs_t requestNs,\n            const SurfaceMap& outSurfaces = SurfaceMap{}) :",
+        "lookback": "            bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "lookahead": "            shutterTimestamp(0),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 225,
+        "end_line": 238,
+        "merge_gen_region": null,
+        "confidence": 0.8080373406410217,
+        "hesitated": true
+    }
+]

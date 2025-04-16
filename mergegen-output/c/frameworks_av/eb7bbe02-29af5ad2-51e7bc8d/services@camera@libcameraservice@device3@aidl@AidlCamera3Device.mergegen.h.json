@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    explicit AidlCamera3Device(\n            std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n            const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "b_contents": "    explicit AidlCamera3Device(const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "base_contents": "    explicit AidlCamera3Device(const String8& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "res_region": "    explicit AidlCamera3Device(\n            std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n            const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "lookback": "            std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,",
+        "lookahead": "            bool legacyClient = false);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 41,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.6286702156066895,
+        "hesitated": true
+    }
+]

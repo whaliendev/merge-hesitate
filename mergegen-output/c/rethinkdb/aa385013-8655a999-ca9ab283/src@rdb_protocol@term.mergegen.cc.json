@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "         Response *res,\n         stream_cache_t *stream_cache) {",
+        "b_contents": "         stream_cache_t *stream_cache,\n         Response *res) {",
+        "base_contents": "         Response *res,\n         stream_cache2_t *stream_cache2) {",
+        "res_region": "         stream_cache_t *stream_cache,\n         Response *res) {",
+        "lookback": "         Response *res) {",
+        "lookahead": "    try {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 175,
+        "end_line": 184,
+        "merge_gen_region": null,
+        "confidence": 0.8540262579917908,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            bool b = stream_cache->serve(token, res, interruptor);\n            rcheck_toplevel(b, base_exc_t::GENERIC,\n                            strprintf(\"Token %\" PRIi64 \" not in stream cache.\", token));",
+        "b_contents": "            bool b = stream_cache->serve(token, res, interruptor);\n            if (!b) {\n                auto err = strprintf(\"Token %\" PRIi64 \" not in stream cache.\", token);\n                fill_error(res, Response::CLIENT_ERROR, err, backtrace_t());\n            }",
+        "base_contents": "            bool b = stream_cache2->serve(token, res, interruptor);\n            rcheck_toplevel(b, base_exc_t::GENERIC,\n                            strprintf(\"Token %\" PRIi64 \" not in stream cache.\", token));",
+        "res_region": "            bool b = stream_cache->serve(token, res, interruptor);\n            if (!b) {\n                auto err = strprintf(\"Token %\" PRIi64 \" not in stream cache.\", token);\n                fill_error(res, Response::CLIENT_ERROR, err, backtrace_t());\n            }",
+        "lookback": "            if (!b) {",
+        "lookahead": "        } catch (const exc_t &e) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 287,
+        "end_line": 301,
+        "merge_gen_region": null,
+        "confidence": 0.8579708933830261,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        zval *zobject = getThis();\n        zval_ptr_dtor(zobject);",
+        "b_contents": "        cli->object = NULL;\n        zval_ptr_dtor(cli->object);",
+        "base_contents": "        zval *zobject = getThis();\n        sw_zval_ptr_dtor(&zobject);",
+        "res_region": "        cli->object = NULL;\n        zval_ptr_dtor(cli->object);",
+        "lookback": "        zval_ptr_dtor(cli->object);",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1763,
+        "end_line": 1772,
+        "merge_gen_region": null,
+        "confidence": 0.5472715497016907,
+        "hesitated": true
+    }
+]

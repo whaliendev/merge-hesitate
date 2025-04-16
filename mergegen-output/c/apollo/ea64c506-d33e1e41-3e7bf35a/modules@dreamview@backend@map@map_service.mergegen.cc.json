@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "bool MapService::ConstructLaneWayPointWithLaneId(\n    const double x, const double y, const std::string id,\n    routing::LaneWaypoint *laneWayPoint) const {\n  LaneInfoConstPtr lane = HDMap()->GetLaneById(hdmap::MakeMapId(id));\n  if (!lane) {\n    return false;\n  }\n\n  if (!CheckRoutingPointLaneType(lane)) {\n    return false;\n  }\n\n  double s, l;\n  PointENU point;\n  point.set_x(x);\n  point.set_y(y);\n\n  if (!lane->GetProjection({point.x(), point.y()}, &s, &l)) {\n    return false;\n  }\n\n  laneWayPoint->set_id(id);\n  laneWayPoint->set_s(s);\n  auto *pose = laneWayPoint->mutable_pose();\n  pose->set_x(x);\n  pose->set_y(y);\n\n  return true;\n}\n",
+        "b_contents": "bool MapService::ConstructLaneWayPointWithLaneId(\n    const double x, const double y, const std::string id,\n    routing::LaneWaypoint *laneWayPoint) const {\n  LaneInfoConstPtr lane = HDMap()->GetLaneById(hdmap::MakeMapId(id));\n  if (!lane) {\n    return false;\n  }\n\n  if (!CheckRoutingPointLaneType(lane)) {\n    return false;\n  }\n\n  double s, l;\n  PointENU point;\n  point.set_x(x);\n  point.set_y(y);\n\n  if (!lane->GetProjection({point.x(), point.y()}, &s, &l)) {\n    return false;\n  }\n\n  if (s > lane->lane().length()) {\n    s = lane->lane().length();\n  }\n\n\n  laneWayPoint->set_id(id);\n  laneWayPoint->set_s(s);\n  auto *pose = laneWayPoint->mutable_pose();\n  pose->set_x(x);\n  pose->set_y(y);\n\n  return true;\n}\n",
+        "base_contents": "",
+        "res_region": "bool MapService::ConstructLaneWayPointWithLaneId(\n    const double x, const double y, const std::string id,\n    routing::LaneWaypoint *laneWayPoint) const {\n  LaneInfoConstPtr lane = HDMap()->GetLaneById(hdmap::MakeMapId(id));\n  if (!lane) {\n    return false;\n  }\n\n  if (!CheckRoutingPointLaneType(lane)) {\n    return false;\n  }\n\n  double s, l;\n  PointENU point;\n  point.set_x(x);\n  point.set_y(y);\n\n  if (!lane->GetProjection({point.x(), point.y()}, &s, &l)) {\n    return false;\n  }\n\n  if (s > lane->lane().length()) {\n    s = lane->lane().length();\n  }\n\n\n  laneWayPoint->set_id(id);\n  laneWayPoint->set_s(s);\n  auto *pose = laneWayPoint->mutable_pose();\n  pose->set_x(x);\n  pose->set_y(y);\n\n  return true;\n}\n",
+        "lookback": "    const double x, const double y, const std::string id,",
+        "lookahead": "bool MapService::CheckRoutingPoint(const double x, const double y) const {",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 431,
+        "end_line": 499,
+        "merge_gen_region": " double::LanePointLane( double, double, double, stdstring id routingLane *Way) {aneConst lane HD()->Lane(,Map(Way) { false } (!RoutingLane()) return; double,;ENU;._();._(,,._); },._(,._); void___(,,._); void___(,._); void___(,._); void___,__); void___(,._); void___(,._);",
+        "confidence": 0.8832127451896667,
+        "hesitated": false,
+        "resolved": false
+    }
+]

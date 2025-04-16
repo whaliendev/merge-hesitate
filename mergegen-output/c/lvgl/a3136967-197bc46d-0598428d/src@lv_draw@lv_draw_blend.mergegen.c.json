@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                        lv_opa_t opa_tmp = (uint32_t)((uint32_t)mask_tmp[x] * opa) >> 8;",
+        "b_contents": "                        lv_opa_t opa_tmp = mask_tmp[x] == LV_OPA_COVER ? opa : (uint32_t)((uint32_t)mask_tmp[x] * opa) >> 8;",
+        "base_contents": "                        lv_opa_t opa_tmp = (uint16_t)((uint16_t)mask_tmp[x] * opa) >> 8;",
+        "res_region": "                        lv_opa_t opa_tmp = mask_tmp[x] == LV_OPA_COVER ? opa : (uint32_t)((uint32_t)mask_tmp[x] * opa) >> 8;",
+        "lookback": "#if LV_COLOR_SCREEN_TRANSP",
+        "lookahead": "#if LV_COLOR_SCREEN_TRANSP",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 348,
+        "end_line": 354,
+        "merge_gen_region": null,
+        "confidence": 0.6459657549858093,
+        "hesitated": true
+    }
+]

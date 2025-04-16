@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tseat_get_focus_inactive(seat, output->swayc);\n\tstruct sway_container *workspace = (focus->type == C_WORKSPACE ?\n\t\t\tfocus :\n\t\t\tcontainer_parent(focus, C_WORKSPACE));",
+        "b_contents": "\t\tsway_seat_get_focus_inactive(seat, output->swayc);\n\tif (!focus) {\n\t\t// We've never been to this output before\n\t\tfocus = output->swayc->children->items[0];\n\t}\n\tstruct sway_container *workspace = focus->type == C_WORKSPACE ?\n\t\t\tfocus : container_parent(focus, C_WORKSPACE);",
+        "base_contents": "\t\tsway_seat_get_focus_inactive(seat, output->swayc);\n\tstruct sway_container *workspace = (focus->type == C_WORKSPACE ?\n\t\t\tfocus :\n\t\t\tcontainer_parent(focus, C_WORKSPACE));",
+        "res_region": "\t\tseat_get_focus_inactive(seat, output->swayc);\n\tif (!focus) {\n\t\t// We've never been to this output before\n\t\tfocus = output->swayc->children->items[0];\n\t}\n\tstruct sway_container *workspace = focus->type == C_WORKSPACE ?\n\t\t\tfocus : container_parent(focus, C_WORKSPACE);",
+        "lookback": "\tif (!focus) {",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 230,
+        "end_line": 248,
+        "merge_gen_region": null,
+        "confidence": 0.8158314824104309,
+        "hesitated": true
+    }
+]

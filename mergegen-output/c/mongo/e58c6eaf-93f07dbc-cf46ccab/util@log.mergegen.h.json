@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    private:\n        static thread_specific_ptr<Logstream> tsp;\n    public:\n        static Logstream& get() {\n            Logstream *p = tsp.get();\n            if( p == 0 )\n                tsp.reset( p = new Logstream() );\n            return *p;\n        }",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "\n    private:\n        static thread_specific_ptr<Logstream> tsp;\n    public:\n        static Logstream& get() {\n            Logstream *p = tsp.get();\n            if( p == 0 )\n                tsp.reset( p = new Logstream() );\n            return *p;\n        }",
+        "lookback": "    private:",
+        "lookahead": "    };",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 176,
+        "end_line": 189,
+        "merge_gen_region": null,
+        "confidence": 0.8672839403152466,
+        "hesitated": true
+    }
+]

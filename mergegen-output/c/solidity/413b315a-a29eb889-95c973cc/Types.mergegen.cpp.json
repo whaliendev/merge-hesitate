@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tassert(false); // @todo add other tyes",
+        "b_contents": "\t\tBOOST_ASSERT(false); // @todo add other tyes\n\treturn std::shared_ptr<Type>();",
+        "base_contents": "\t\tBOOST_ASSERT(false); // @todo add other tyes",
+        "res_region": "\t\tassert(false); // @todo add other tyes\n\treturn std::shared_ptr<Type>();",
+        "lookback": "\treturn std::shared_ptr<Type>();",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 54,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.7194316387176514,
+        "hesitated": true
+    }
+]

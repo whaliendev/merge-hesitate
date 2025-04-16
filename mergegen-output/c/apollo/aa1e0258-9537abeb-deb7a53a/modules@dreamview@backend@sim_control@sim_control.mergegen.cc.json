@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "void SimControl::InitStartPoint(double x, double y, double start_velocity,\n                                double start_acceleration) {\n  TrajectoryPoint point;\n  // Use the scenario start point as start point,\n  start_point_from_localization_ = false;\n  point.mutable_path_point()->set_x(x);\n  point.mutable_path_point()->set_y(y);\n  // z use default 0\n  point.mutable_path_point()->set_z(0);\n  double theta = 0.0;\n  double s = 0.0;\n  map_service_->GetPoseWithRegardToLane(x, y, &theta, &s);\n  point.mutable_path_point()->set_theta(theta);\n  point.set_v(start_velocity);\n  point.set_a(start_acceleration);\n  SetStartPoint(point);\n}\n",
+        "b_contents": "void SimControl::InitStartPoint(double x, double y, double start_velocity,\n                                double start_acceleration) {                             \n  TrajectoryPoint point;\n  // Use the scenario start point as start point,\n  start_point_from_localization_ = false;\n  point.mutable_path_point()->set_x(x);\n  point.mutable_path_point()->set_y(y);\n  // z use default 0\n  point.mutable_path_point()->set_z(0);\n  double theta = 0.0;\n  double s = 0.0;\n  map_service_->GetPoseWithRegardToLane(x, y, &theta, &s);\n  point.mutable_path_point()->set_theta(theta);\n  point.set_v(start_velocity);\n  point.set_a(start_acceleration);\n  SetStartPoint(point);\n}\n",
+        "base_contents": "",
+        "res_region": "void SimControl::InitStartPoint(double x, double y, double start_velocity,\n                                double start_acceleration) {\n  TrajectoryPoint point;\n  // Use the scenario start point as start point,\n  start_point_from_localization_ = false;\n  point.mutable_path_point()->set_x(x);\n  point.mutable_path_point()->set_y(y);\n  // z use default 0\n  point.mutable_path_point()->set_z(0);\n  double theta = 0.0;\n  double s = 0.0;\n  map_service_->GetPoseWithRegardToLane(x, y, &theta, &s);\n  point.mutable_path_point()->set_theta(theta);\n  point.set_v(start_velocity);\n  point.set_a(start_acceleration);\n  SetStartPoint(point);\n}\n",
+        "lookback": "                                double start_acceleration) {",
+        "lookahead": "void SimControl::InitStartPoint(double start_velocity,",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 121,
+        "end_line": 160,
+        "merge_gen_region": null,
+        "confidence": 0.8011313080787659,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void SimControl::Restart(double x, double y) {\n  Stop();\n  Start(x, y);\n  return;\n}\n",
+        "b_contents": "void SimControl::Restart(double x, double y){\n  Stop();\n  Start(x,y);\n  return;\n}\n",
+        "base_contents": "",
+        "res_region": "void SimControl::Restart(double x, double y) {\n  Stop();\n  Start(x, y);\n  return;\n}\n",
+        "lookback": "  Stop();",
+        "lookahead": "void SimControl::InternalReset() {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 221,
+        "end_line": 236,
+        "merge_gen_region": null,
+        "confidence": 0.8247594833374023,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void SimControl::Start(double x, double y) {\n  std::lock_guard<std::mutex> lock(mutex_);\n\n  if (!enabled_) {\n    // Do not use localization info. use scenario start point to init start\n    // point.\n    InitStartPoint(x, y, 0, 0);\n    InternalReset();\n    sim_control_timer_->Start();\n    sim_prediction_timer_->Start();\n    enabled_ = true;\n  }\n}\n",
+        "b_contents": "void SimControl::Start(double x, double y) {\n  std::lock_guard<std::mutex> lock(mutex_);\n\n  if (!enabled_) {\n    // Do not use localization info. use scenario start point to init start point.\n    InitStartPoint(x,y,0,0);\n    InternalReset();\n    sim_control_timer_->Start();\n    sim_prediction_timer_->Start();\n    enabled_ = true;\n  }\n}\n",
+        "base_contents": "",
+        "res_region": "void SimControl::Start(double x, double y) {\n  std::lock_guard<std::mutex> lock(mutex_);\n\n  if (!enabled_) {\n    // Do not use localization info. use scenario start point to init start\n    // point.\n    InitStartPoint(x, y, 0, 0);\n    InternalReset();\n    sim_control_timer_->Start();\n    sim_prediction_timer_->Start();\n    enabled_ = true;\n  }\n}\n",
+        "lookback": "  std::lock_guard<std::mutex> lock(mutex_);",
+        "lookahead": "void SimControl::Stop() {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 345,
+        "end_line": 375,
+        "merge_gen_region": null,
+        "confidence": 0.7490202784538269,
+        "hesitated": true
+    }
+]

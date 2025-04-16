@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        reql_version_t::v2_0_is_latest\n    };",
+        "b_contents": "        reql_version_t::v2_0,\n        reql_version_t::v2_1_is_latest};",
+        "base_contents": "        reql_version_t::v2_0_is_latest};",
+        "res_region": "        reql_version_t::v2_0,\n        reql_version_t::v2_1_is_latest\n    };",
+        "lookback": "        reql_version_t::v2_1_is_latest",
+        "lookahead": "    for (reql_version_t rv : versions) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 13,
+        "end_line": 21,
+        "merge_gen_region": null,
+        "confidence": 0.4384441077709198,
+        "hesitated": true
+    }
+]

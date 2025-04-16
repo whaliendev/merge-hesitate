@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tlog_debug(\"Unicode %04x, wcwidth() %d\", wc, width);\n\n#ifndef __OpenBSD__\n\t\t/*\n\t\t * Many platforms (particularly and inevitably OS X) have no\n\t\t * width for relatively common characters (wcwidth() returns\n\t\t * -1); assume width 1 in this case. This will be wrong for\n\t\t * genuinely nonprintable characters, but they should be\n\t\t * rare. We may pass through stuff that ideally we would block,\n\t\t * but this is no worse than sending the same to the terminal\n\t\t * without tmux.\n\t\t */\n\t\tif (width < 0)\n\t\t\treturn (1);\n#endif",
+        "b_contents": "\t\tlog_debug(\"Unicode %04lx, wcwidth() %d\", (long)wc, width);",
+        "base_contents": "\t\tlog_debug(\"Unicode %04x, wcwidth() %d\", wc, width);",
+        "res_region": "\t\tlog_debug(\"Unicode %04x, wcwidth() %d\", wc, width);\n\n#ifndef __OpenBSD__\n\t\t/*\n\t\t * Many platforms (particularly and inevitably OS X) have no\n\t\t * width for relatively common characters (wcwidth() returns\n\t\t * -1); assume width 1 in this case. This will be wrong for\n\t\t * genuinely nonprintable characters, but they should be\n\t\t * rare. We may pass through stuff that ideally we would block,\n\t\t * but this is no worse than sending the same to the terminal\n\t\t * without tmux.\n\t\t */\n\t\tif (width < 0)\n\t\t\treturn (1);\n#endif",
+        "lookback": "",
+        "lookahead": "\t\treturn (-1);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 117,
+        "end_line": 137,
+        "merge_gen_region": null,
+        "confidence": 0.835618257522583,
+        "hesitated": true
+    }
+]

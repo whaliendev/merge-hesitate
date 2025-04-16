@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "b_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "base_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    args.flags = FLAG_STORAGE_CE | FLAG_STORAGE_DE | FLAG_STORAGE_SDK;\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "res_region": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "lookback": "    // Clear the app user data.",
+        "lookahead": "    // Clear the app user data.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1231,
+        "end_line": 1248,
+        "merge_gen_region": null,
+        "confidence": 0.6198101043701172,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "b_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "base_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    args.flags = FLAG_STORAGE_CE | FLAG_STORAGE_DE | FLAG_STORAGE_SDK;\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "res_region": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "lookback": "    // Clear the app user data.",
+        "lookahead": "    // Clear the app user data.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1260,
+        "end_line": 1277,
+        "merge_gen_region": null,
+        "confidence": 0.6198101043701172,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "b_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "base_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    args.flags = FLAG_STORAGE_CE | FLAG_STORAGE_DE | FLAG_STORAGE_SDK;\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "res_region": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "lookback": "    // Clear the app user data",
+        "lookahead": "    // Clear the app user data",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1289,
+        "end_line": 1306,
+        "merge_gen_region": null,
+        "confidence": 0.5683196783065796,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "b_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "base_contents": "    android::os::CreateAppDataResult result;\n    android::os::CreateAppDataArgs args = createAppDataArgs(\"com.foo\");\n    args.packageName = \"com.foo\";\n    args.flags = FLAG_STORAGE_CE | FLAG_STORAGE_DE | FLAG_STORAGE_SDK;\n    // Create the app user data.\n    ASSERT_BINDER_SUCCESS(service->createAppData(args, &result));\n    createTestSdkData(\"com.foo\", {\"sdk1\", \"sdk2\"});",
+        "res_region": "    createTestSdkData(\"com.foo\", {\"shared\", \"sdk1\", \"sdk2\"});",
+        "lookback": "    // Clear the app user data.",
+        "lookahead": "    // Clear the app user data.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1320,
+        "end_line": 1337,
+        "merge_gen_region": null,
+        "confidence": 0.6198101043701172,
+        "hesitated": true
+    }
+]

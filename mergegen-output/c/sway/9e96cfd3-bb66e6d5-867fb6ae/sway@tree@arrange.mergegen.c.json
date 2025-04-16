@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "void arrange_root() {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tstruct wlr_output_layout *output_layout =\n\t\troot_container.sway_root->output_layout;\n\tconst struct wlr_box *layout_box =\n\t\twlr_output_layout_get_box(output_layout, NULL);\n\troot_container.x = layout_box->x;\n\troot_container.y = layout_box->y;\n\troot_container.width = layout_box->width;\n\troot_container.height = layout_box->height;\n\tfor (int i = 0; i < root_container.children->length; ++i) {\n\t\tstruct sway_container *output = root_container.children->items[i];\n\t\tarrange_output(output);\n\t}\n}\n\nvoid arrange_output(struct sway_container *output) {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tif (!sway_assert(output->type == C_OUTPUT,\n\t\t\t\"called arrange_output() on non-output container\")) {\n\t\treturn;\n\t}\n\n\tconst struct wlr_box *output_box = wlr_output_layout_get_box(\n\t\t\troot_container.sway_root->output_layout,\n\t\t\toutput->sway_output->wlr_output);\n\toutput->x = output_box->x;\n\toutput->y = output_box->y;\n\toutput->width = output_box->width;\n\toutput->height = output_box->height;\n\twlr_log(L_DEBUG, \"Arranging output '%s' at %f,%f\",\n\t\t\toutput->name, output->x, output->y);\n\t\n\tfor (int i = 0; i < output->children->length; ++i) {\n\t\tstruct sway_container *workspace = output->children->items[i];\n\t\tarrange_workspace(workspace);\n\t}\n\tcontainer_damage_whole(output);\n}\n\nvoid arrange_workspace(struct sway_container *workspace) {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tif (!sway_assert(workspace->type == C_WORKSPACE,\n\t\t\t\"called arrange_workspace() on non-workspace container\")) {\n\t\treturn;\n\t}\n\n\tstruct sway_container *output = workspace->parent;\n\tstruct wlr_box *area = &output->sway_output->usable_area;\n\twlr_log(L_DEBUG, \"Usable area for ws: %dx%d@%d,%d\",\n\t\t\tarea->width, area->height, area->x, area->y);\n\n\tremove_gaps(workspace);\n\n\tworkspace->width = area->width;\n\tworkspace->height = area->height;\n\tworkspace->x = output->x + area->x;\n\tworkspace->y = output->y + area->y;\n\n\tadd_gaps(workspace);\n\n\twlr_log(L_DEBUG, \"Arranging workspace '%s' at %f, %f\",\n\t\t\tworkspace->name, workspace->x, workspace->y);\n\tarrange_children_of(workspace);\n}\n\nvoid remove_gaps(struct sway_container *c) {\n\tif (c->current_gaps == 0) {\n\t\twlr_log(L_DEBUG, \"Removing gaps: not gapped: %p\", c);\n\t\treturn;\n\t}\n\n\tc->width += c->current_gaps * 2;\n\tc->height += c->current_gaps * 2;\n\tc->x -= c->current_gaps;\n\tc->y -= c->current_gaps;\n\n\tc->current_gaps = 0;\n\n\twlr_log(L_DEBUG, \"Removing gaps %p\", c);\n}\n\nvoid add_gaps(struct sway_container *c) {\n\tif (c->current_gaps > 0 || c->type == C_CONTAINER) {\n\t\twlr_log(L_DEBUG, \"Not adding gaps: %p\", c);\n\t\treturn;\n\t}\n\n\tif (c->type == C_WORKSPACE &&\n\t\t!(config->edge_gaps || (config->smart_gaps && c->children->length > 1))) {\n\t\treturn;\n\t}\n\n\tdouble gaps = c->has_gaps ? c->gaps_inner : config->gaps_inner;\n\n\tc->x += gaps;\n\tc->y += gaps;\n\tc->width -= 2 * gaps;\n\tc->height -= 2 * gaps;\n\tc->current_gaps = gaps;\n\n\twlr_log(L_DEBUG, \"Adding gaps: %p\", c);\n}\n",
+        "base_contents": "void arrange_root() {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tstruct wlr_output_layout *output_layout =\n\t\troot_container.sway_root->output_layout;\n\tconst struct wlr_box *layout_box =\n\t\twlr_output_layout_get_box(output_layout, NULL);\n\troot_container.x = layout_box->x;\n\troot_container.y = layout_box->y;\n\troot_container.width = layout_box->width;\n\troot_container.height = layout_box->height;\n\tfor (int i = 0; i < root_container.children->length; ++i) {\n\t\tstruct sway_container *output = root_container.children->items[i];\n\t\tarrange_output(output);\n\t}\n}\n\nvoid arrange_output(struct sway_container *output) {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tif (!sway_assert(output->type == C_OUTPUT,\n\t\t\t\"called arrange_output() on non-output container\")) {\n\t\treturn;\n\t}\n\tconst struct wlr_box *output_box = wlr_output_layout_get_box(\n\t\t\troot_container.sway_root->output_layout,\n\t\t\toutput->sway_output->wlr_output);\n\toutput->x = output_box->x;\n\toutput->y = output_box->y;\n\toutput->width = output_box->width;\n\toutput->height = output_box->height;\n\twlr_log(L_DEBUG, \"Arranging output '%s' at %f,%f\",\n\t\t\toutput->name, output->x, output->y);\n\tfor (int i = 0; i < output->children->length; ++i) {\n\t\tstruct sway_container *workspace = output->children->items[i];\n\t\tarrange_workspace(workspace);\n\t}\n\tcontainer_damage_whole(output);\n}\n\nvoid arrange_workspace(struct sway_container *workspace) {\n\tif (config->reloading) {\n\t\treturn;\n\t}\n\tif (!sway_assert(workspace->type == C_WORKSPACE,\n\t\t\t\"called arrange_workspace() on non-workspace container\")) {\n\t\treturn;\n\t}\n\tstruct sway_container *output = workspace->parent;\n\tstruct wlr_box *area = &output->sway_output->usable_area;\n\twlr_log(L_DEBUG, \"Usable area for ws: %dx%d@%d,%d\",\n\t\t\tarea->width, area->height, area->x, area->y);\n\tworkspace->width = area->width;\n\tworkspace->height = area->height;\n\tworkspace->x = output->x + area->x;\n\tworkspace->y = output->y + area->y;\n\twlr_log(L_DEBUG, \"Arranging workspace '%s' at %f, %f\",\n\t\t\tworkspace->name, workspace->x, workspace->y);\n\tarrange_children_of(workspace);\n\tcontainer_damage_whole(workspace);\n}\n",
+        "res_region": "",
+        "lookback": "\tsize_t num_children = parent->children->length;",
+        "lookahead": "static void apply_horiz_layout(struct sway_container *parent) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 18,
+        "end_line": 195,
+        "merge_gen_region": null,
+        "confidence": 0.779832661151886,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n\t\t// Make last child use remaining width of parent\n\t\tif (i == num_children - 1) {\n\t\t\tchild->width = parent->x + parent->width - child->x;\n\t\t}",
+        "b_contents": "\n\t\tadd_gaps(child);",
+        "base_contents": "",
+        "res_region": "\n\t\t// Make last child use remaining width of parent\n\t\tif (i == num_children - 1) {\n\t\t\tchild->width = parent->x + parent->width - child->x;\n\t\t}\n\t\tadd_gaps(child);",
+        "lookback": "\t\t// Make last child use remaining width of parent",
+        "lookahead": "\t}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 247,
+        "end_line": 257,
+        "merge_gen_region": null,
+        "confidence": 0.7660287022590637,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n\t\t// Make last child use remaining height of parent\n\t\tif (i == num_children - 1) {\n\t\t\tchild->height =\n\t\t\t\tparent->y + parent_offset + parent_height - child->y;\n\t\t}",
+        "b_contents": "\n\t\tadd_gaps(child);",
+        "base_contents": "",
+        "res_region": "\n\t\t// Make last child use remaining height of parent\n\t\tif (i == num_children - 1) {\n\t\t\tchild->height =\n\t\t\t\tparent->y + parent_offset + parent_height - child->y;\n\t\t}\n\t\tadd_gaps(child);",
+        "lookback": "\t\t// Make last child use remaining height of parent",
+        "lookahead": "\t}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 312,
+        "end_line": 323,
+        "merge_gen_region": null,
+        "confidence": 0.795730471611023,
+        "hesitated": true
+    },
+    {
+        "a_contents": "}\n\nstatic void arrange_children_of(struct sway_container *parent,\n\t\tstruct sway_transaction *transaction) {\n\tif (config->reloading) {",
+        "b_contents": "\n\tif (workspace->sway_workspace->fullscreen) {\n\t\t// Just arrange the fullscreen view and jump out\n\t\tview_autoconfigure(workspace->sway_workspace->fullscreen);",
+        "base_contents": "\tif (workspace->sway_workspace->fullscreen) {\n\t\t// Just arrange the fullscreen view and jump out\n\t\tview_autoconfigure(workspace->sway_workspace->fullscreen);",
+        "res_region": "}\n\nstatic void arrange_children_of(struct sway_container *parent,\n\t\tstruct sway_transaction *transaction) {\n\tif (config->reloading) {",
+        "lookback": "",
+        "lookahead": "\t\treturn;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 364,
+        "end_line": 379,
+        "merge_gen_region": " voidstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstatic",
+        "confidence": 0.9152253866195679,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#include <wlr/xwayland.h>\n#include \"list.h\"",
+        "b_contents": "#include \"sway/xwayland.h\"",
+        "base_contents": "#include <wlr/xwayland.h>",
+        "res_region": "#include \"list.h\"\n#include \"sway/xwayland.h\"",
+        "lookback": "#include \"sway/xwayland.h\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 13,
+        "end_line": 20,
+        "merge_gen_region": null,
+        "confidence": 0.6866229772567749,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n\tstruct wlr_wl_shell *wl_shell;\n\tstruct wl_listener wl_shell_surface;\n\n\tbool debug_txn_timings;\n\n\tlist_t *transactions;\n\n\t// When a view is being destroyed and is waiting for a transaction to\n\t// complete it will be stored here.\n\tlist_t *destroying_containers;",
+        "b_contents": "\tstruct wl_listener xwayland_ready;",
+        "base_contents": "\n\tstruct wlr_wl_shell *wl_shell;\n\tstruct wl_listener wl_shell_surface;",
+        "res_region": "\tstruct wl_listener xwayland_ready;\n\n\tbool debug_txn_timings;\n\n\tlist_t *transactions;\n\n\t// When a view is being destroyed and is waiting for a transaction to\n\t// complete it will be stored here.\n\tlist_t *destroying_containers;",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 66,
+        "merge_gen_region": "structstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstruct",
+        "confidence": 0.8946462869644165,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    status_t setMasterVolume(float value) final EXCLUDES_AudioFlinger_Mutex;\n    status_t setMasterMute(bool muted) final EXCLUDES_AudioFlinger_Mutex;\n    float masterVolume() const final EXCLUDES_AudioFlinger_Mutex;\n    bool masterMute() const final EXCLUDES_AudioFlinger_Mutex;",
+        "b_contents": "// Classes that depend on IAf* interfaces but are not cross-dependent.\n#include \"PatchCommandThread.h\"\n\nnamespace android {",
+        "base_contents": "namespace android {",
+        "res_region": "    status_t setMasterVolume(float value) final EXCLUDES_AudioFlinger_Mutex;\n    status_t setMasterMute(bool muted) final EXCLUDES_AudioFlinger_Mutex;\n    float masterVolume() const final EXCLUDES_AudioFlinger_Mutex;\n    bool masterMute() const final EXCLUDES_AudioFlinger_Mutex;",
+        "lookback": "    status_t setMasterMute(bool muted) final EXCLUDES_AudioFlinger_Mutex;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 81,
+        "end_line": 93,
+        "merge_gen_region": "_ setVolumefloat) EXDESAudio CLKMutex conttMaster( value final CLK&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+        "confidence": 0.8871856331825256,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier = sp<MediaLogNotifier>::make();",
+        "b_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\n    class DeviceEffectManager;\n    // TODO(b/288339104) these should be separate files\npublic:\n    class DeviceEffectManagerCallback;\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n#include \"DeviceEffectManager.h\"\n\n#include \"MelReporter.h\"",
+        "base_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\n    class DeviceEffectManager;\n    // TODO(b/288339104) these should be separate files\npublic:\n    class DeviceEffectManagerCallback;\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n#include \"PatchCommandThread.h\"\n\n#include \"DeviceEffectManager.h\"\n\n#include \"MelReporter.h\"",
+        "res_region": "    const sp<MediaLogNotifier> mMediaLogNotifier = sp<MediaLogNotifier>::make();",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 511,
+        "end_line": 557,
+        "merge_gen_region": null,
+        "confidence": 0.8114749789237976,
+        "hesitated": true
+    }
+]

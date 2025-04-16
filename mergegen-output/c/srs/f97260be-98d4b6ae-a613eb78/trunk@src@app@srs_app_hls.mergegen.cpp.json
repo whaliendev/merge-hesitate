@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    controller->dispose();",
+        "b_contents": "    // Ignore when hls_dispose disabled.\n    // @see https://github.com/ossrs/srs/issues/865\n    int hls_dispose = _srs_config->get_hls_dispose(_req->vhost);\n    if (!hls_dispose) {\n        return;\n    }\n    \n    muxer->dispose();",
+        "base_contents": "    muxer->dispose();",
+        "res_region": "    // Ignore when hls_dispose disabled.\n    // @see https://github.com/ossrs/srs/issues/865\n    int hls_dispose = _srs_config->get_hls_dispose(req->vhost);\n    if (!hls_dispose) {\n        return;\n    }\n    \n    controller->dispose();",
+        "lookback": "    // @see https://github.com/ossrs/srs/issues/865",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 994,
+        "end_line": 1007,
+        "merge_gen_region": null,
+        "confidence": 0.8323096036911011,
+        "hesitated": true
+    }
+]

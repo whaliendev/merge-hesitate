@@ -1,0 +1,172 @@
+[
+    {
+        "a_contents": "static bool anim_run_round;\nstatic lv_task_t * _lv_anim_task;",
+        "b_contents": "static lv_timer_t * _lv_anim_tmr;",
+        "base_contents": "static lv_task_t * _lv_anim_task;",
+        "res_region": "static bool anim_run_round;\nstatic lv_timer_t * _lv_anim_tmr;",
+        "lookback": "static lv_timer_t * _lv_anim_tmr;",
+        "lookahead": "const lv_anim_path_t lv_anim_path_def = {.cb = lv_anim_path_linear};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 40,
+        "end_line": 47,
+        "merge_gen_region": null,
+        "confidence": 0.7479046583175659,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    _lv_anim_task = lv_task_create(anim_task, LV_DISP_DEF_REFR_PERIOD, LV_ANIM_TASK_PRIO, NULL);",
+        "b_contents": "    last_task_run = lv_tick_get();\n    _lv_anim_tmr = lv_timer_create(anim_task, LV_DISP_DEF_REFR_PERIOD, NULL);",
+        "base_contents": "    last_task_run = lv_tick_get();\n    _lv_anim_task = lv_task_create(anim_task, LV_DISP_DEF_REFR_PERIOD, LV_ANIM_TASK_PRIO, NULL);",
+        "res_region": "    _lv_anim_tmr = lv_timer_create(anim_task, LV_DISP_DEF_REFR_PERIOD, NULL);",
+        "lookback": "    anim_mark_list_change(); /*Turn off the animation task*/",
+        "lookahead": "    anim_mark_list_change(); /*Turn off the animation task*/",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 64,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.7695349454879761,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    a->run_round = anim_run_round;\n    _lv_memcpy(new_anim, a, sizeof(lv_anim_t));",
+        "b_contents": "    lv_memcpy(new_anim, a, sizeof(lv_anim_t));",
+        "base_contents": "    _lv_memcpy(new_anim, a, sizeof(lv_anim_t));",
+        "res_region": "    a->run_round = anim_run_round;\n    lv_memcpy(new_anim, a, sizeof(lv_anim_t));",
+        "lookback": "    lv_memcpy(new_anim, a, sizeof(lv_anim_t));",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 117,
+        "end_line": 124,
+        "merge_gen_region": null,
+        "confidence": 0.40708643198013306,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint32_t d    = LV_MATH_ABS(start - end);\n    uint32_t time = (d * 1000) / speed;",
+        "b_contents": "    int32_t d     = LV_ABS((int32_t)start - end);\n    uint32_t time = (int32_t)((int32_t)(d * 1000) / speed);\n\n    if(time > UINT16_MAX) time = UINT16_MAX;",
+        "base_contents": "    int32_t d     = LV_MATH_ABS((int32_t)start - end);\n    uint32_t time = (int32_t)((int32_t)(d * 1000) / speed);\n\n    if(time > UINT16_MAX) time = UINT16_MAX;",
+        "res_region": "    uint32_t d    = LV_ABS(start - end);\n    uint32_t time = (d * 1000) / speed;",
+        "lookback": "    uint32_t time = (d * 1000) / speed;",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 231,
+        "end_line": 244,
+        "merge_gen_region": null,
+        "confidence": 0.66618812084198,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1, 1, 1024);",
+        "b_contents": "    int32_t step = lv_bezier3(t, 0, 0, 580, 1024);",
+        "base_contents": "    int32_t step = _lv_bezier3(t, 0, 1, 1, 1024);",
+        "res_region": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1, 1, 1024);",
+        "lookback": "    int32_t step = _lv_bezier3(t, 0, 1, 1, 1024);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 297,
+        "end_line": 304,
+        "merge_gen_region": null,
+        "confidence": 0.7898948788642883,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1023, 1023, 1024);",
+        "b_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = lv_bezier3(t, 0, 420, 1000, 1024);",
+        "base_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = _lv_bezier3(t, 0, 1023, 1023, 1024);",
+        "res_region": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1023, 1023, 1024);",
+        "lookback": "    int32_t step = _lv_bezier3(t, 0, 1023, 1023, 1024);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 325,
+        "end_line": 344,
+        "merge_gen_region": null,
+        "confidence": 0.7887144684791565,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 100, 924, 1024);",
+        "b_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = lv_bezier3(t, 0, 64, 1024 - 64, 1024);",
+        "base_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = _lv_bezier3(t, 0, 100, 924, 1024);",
+        "res_region": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 100, 924, 1024);",
+        "lookback": "    int32_t step = _lv_bezier3(t, 0, 100, 924, 1024);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 365,
+        "end_line": 384,
+        "merge_gen_region": null,
+        "confidence": 0.795425534248352,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1000, 1300, 1024);",
+        "b_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = lv_bezier3(t, 0, 1000, 1500, 1024);",
+        "base_contents": "    uint32_t t;\n    if(a->time == a->act_time)\n        t = 1024;\n    else\n        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;\n\n    int32_t step = _lv_bezier3(t, 0, 1000, 1300, 1024);",
+        "res_region": "    uint32_t t = _lv_map(a->act_time, 0, a->time, 0, 1024);\n    int32_t step = _lv_bezier3(t, 0, 1000, 1300, 1024);",
+        "lookback": "    int32_t step = _lv_bezier3(t, 0, 1000, 1300, 1024);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 405,
+        "end_line": 424,
+        "merge_gen_region": null,
+        "confidence": 0.7387185096740723,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int32_t step = _lv_bezier3(t, 1024, 800, 500, 0);",
+        "b_contents": "    if(t > 1024) t = 1024;\n    if(t < 0) t = 0;\n\n    int32_t step = lv_bezier3(t, 1024, 800, 500, 0);",
+        "base_contents": "    if(t > 1024) t = 1024;\n    if(t < 0) t = 0;\n\n    int32_t step = _lv_bezier3(t, 1024, 800, 500, 0);",
+        "res_region": "    int32_t step = _lv_bezier3(t, 1024, 800, 500, 0);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 481,
+        "end_line": 493,
+        "merge_gen_region": null,
+        "confidence": 0.4666055738925934,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    lv_anim_t * a;\n    _LV_LL_READ(&LV_GC_ROOT(_lv_anim_ll), a) {\n        a->has_run = 0;\n    }\n",
+        "base_contents": "    lv_anim_t * a;\n    _LV_LL_READ(LV_GC_ROOT(_lv_anim_ll), a) {\n        a->has_run = 0;\n    }\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    uint32_t elaps = lv_tick_elaps(last_task_run);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 531,
+        "end_line": 544,
+        "merge_gen_region": null,
+        "confidence": 0.6853813529014587,
+        "hesitated": true
+    }
+]

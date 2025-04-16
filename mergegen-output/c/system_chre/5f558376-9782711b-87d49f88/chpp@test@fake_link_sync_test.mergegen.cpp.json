@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "static void doWork(void * /*linkContext*/, uint32_t /*signal*/) {}\n\nstatic void reset(void * /*linkContext*/) {}\n\nstruct ChppLinkConfiguration getConfig(void * /*linkContext*/) {\n  return ChppLinkConfiguration{\n      .txBufferLen = CHPP_TEST_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_TEST_LINK_RX_MTU_BYTES,\n  };\n}\n\nuint8_t *getTxBuffer(void *linkContext) {\n  auto context = static_cast<struct ChppTestLinkState *>(linkContext);\n  return &context->txBuffer[0];\n}\n\n}  // namespace",
+        "b_contents": "static void doWork(void * /*linkContext*/, uint32_t /*signal*/) {}\n\nstatic void reset(void * /*linkContext*/) {}\n\nstruct ChppLinkConfiguration getConfig(void * /*linkContext*/) {\n  return ChppLinkConfiguration{\n      .txBufferLen = CHPP_TEST_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_TEST_LINK_RX_MTU_BYTES,\n      .timeoutInMs = CHPP_TEST_TRANSPORT_TIMEOUT_MS,\n  };\n}\n\nuint8_t *getTxBuffer(void *linkContext) {\n  auto context = static_cast<struct ChppTestLinkState *>(linkContext);\n  return &context->txBuffer[0];\n}\n\n}  // namespace",
+        "base_contents": "void chppPlatformLinkDoWork(struct ChppPlatformLinkParameters * /*params*/,\n                            uint32_t /*signal*/) {}",
+        "res_region": "static void doWork(void * /*linkContext*/, uint32_t /*signal*/) {}\n\nstatic void reset(void * /*linkContext*/) {}\n\nstruct ChppLinkConfiguration getConfig(void * /*linkContext*/) {\n  return ChppLinkConfiguration{\n      .txBufferLen = CHPP_TEST_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_TEST_LINK_RX_MTU_BYTES,\n  };\n}\n\nuint8_t *getTxBuffer(void *linkContext) {\n  auto context = static_cast<struct ChppTestLinkState *>(linkContext);\n  return &context->txBuffer[0];\n}\n\n}  // namespace",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 56,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.8521029949188232,
+        "hesitated": true
+    }
+]

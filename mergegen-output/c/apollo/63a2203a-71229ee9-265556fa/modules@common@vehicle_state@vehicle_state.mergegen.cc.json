@@ -1,0 +1,161 @@
+[
+    {
+        "a_contents": "#include \"modules/common/math/euler_angles_zxy.h\"\n#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "b_contents": "#include \"modules/common/util/string_util.h\"\n#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "base_contents": "",
+        "res_region": "#include \"modules/common/util/string_util.h\"\n#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "lookback": "#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "lookahead": "#include \"modules/localization/common/localization_gflags.h\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 31,
+        "merge_gen_region": "#####",
+        "confidence": 0.9143315553665161,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "VehicleState::VehicleState(\n    const localization::LocalizationEstimate &localization) {\n  ConstructExceptLinearVelocity(&localization);\n  if (localization.has_pose() && localization.pose().has_linear_velocity()) {\n    double linear_v_x = localization.pose().linear_velocity().x();\n    double linear_v_y = localization.pose().linear_velocity().y();\n    double linear_v_z = localization.pose().linear_velocity().z();\n    linear_v_ = std::hypot(std::hypot(linear_v_x, linear_v_y), linear_v_z);\n  }\n  gear_ = canbus::Chassis::GEAR_NONE;\n}",
+        "b_contents": "VehicleState::VehicleState() {}",
+        "base_contents": "VehicleState::VehicleState(\n    const localization::LocalizationEstimate &localization) {\n  ConstructExceptLinearVelocity(&localization);\n  if (localization.has_pose() && localization.pose().has_linear_velocity()) {\n    double linear_v_x = localization.pose().linear_velocity().x();\n    double linear_v_y = localization.pose().linear_velocity().y();\n    double linear_v_z = localization.pose().linear_velocity().z();\n    linear_v_ = std::hypot(std::hypot(linear_v_x, linear_v_y), linear_v_z);\n  }\n  gear_ = ::apollo::canbus::Chassis::GEAR_NONE;\n}",
+        "res_region": "VehicleState::VehicleState() {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 37,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.8441065549850464,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const auto &orientation = localization->pose().orientation();\n\n  if (localization->pose().has_heading()) {\n    heading_ = localization->pose().heading();",
+        "b_contents": "  const auto &orientation = localization.pose().orientation();\n\n  if (localization.pose().has_heading()) {\n    heading_ = localization.pose().heading();",
+        "base_contents": "  if (localization->pose().has_heading()) {\n    heading_ = localization->pose().heading();",
+        "res_region": "  const auto &orientation = localization.pose().orientation();\n\n  if (localization.pose().has_heading()) {\n    heading_ = localization.pose().heading();",
+        "lookback": "",
+        "lookahead": "  } else {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 122,
+        "end_line": 135,
+        "merge_gen_region": "ning Radioconst & = Radio Radio Radio Radio Radioconst &/ Radioconst &/ Radio Radio Radio Radio Radio Radioconst &/ Radioconst &/const &/ Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio Radio",
+        "confidence": 0.9179275035858154,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    heading_ = common::math::QuaternionToHeading(\n        orientation.qw(), orientation.qx(), orientation.qy(), orientation.qz());",
+        "b_contents": "    heading_ = math::QuaternionToHeading(orientation.qw(), orientation.qx(),\n                                         orientation.qy(), orientation.qz());",
+        "base_contents": "    const auto &orientation = localization->pose().orientation();\n    heading_ = ::apollo::common::math::QuaternionToHeading(\n        orientation.qw(), orientation.qx(), orientation.qy(), orientation.qz());",
+        "res_region": "    heading_ = math::QuaternionToHeading(orientation.qw(), orientation.qx(),\n                                         orientation.qy(), orientation.qz());",
+        "lookback": "                                         orientation.qy(), orientation.qz());",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 137,
+        "end_line": 147,
+        "merge_gen_region": null,
+        "confidence": 0.8799250721931458,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    angular_v_ = localization->pose().angular_velocity_vrf().z();\n    linear_a_y_ = localization->pose().linear_acceleration_vrf().y();",
+        "b_contents": "    if (!localization.pose().has_angular_velocity_vrf()) {\n      AERROR << \"localization.pose().has_angular_velocity_vrf() must be true \"\n                \"when FLAGS_enable_map_reference_unify is true.\";\n      return false;\n    }\n    angular_v_ = localization.pose().angular_velocity_vrf().z();\n\n    if (!localization.pose().has_linear_acceleration_vrf()) {\n      AERROR << \"localization.pose().has_linear_acceleration_vrf() must be \"\n                \"true when FLAGS_enable_map_reference_unify is true.\";\n      return false;\n    }\n    linear_a_y_ = localization.pose().linear_acceleration_vrf().y();\n  } else {\n    CHECK(localization.pose().has_angular_velocity());\n    angular_v_ = localization.pose().angular_velocity().z();\n    CHECK(localization.pose().has_linear_acceleration());\n    linear_a_y_ = localization.pose().linear_acceleration().y();\n  }\n\n  if (!(linear_v_ > 0.0)) {\n    kappa_ = 0.0;",
+        "base_contents": "    angular_v_ = localization->pose().angular_velocity_vrf().z();\n    linear_a_ = localization->pose().linear_acceleration_vrf().y();",
+        "res_region": "    if (!localization.pose().has_angular_velocity_vrf()) {\n      AERROR << \"localization.pose().has_angular_velocity_vrf() must be true \"\n                \"when FLAGS_enable_map_reference_unify is true.\";\n      return false;\n    }\n    angular_v_ = localization.pose().angular_velocity_vrf().z();\n\n    if (!localization.pose().has_linear_acceleration_vrf()) {\n      AERROR << \"localization.pose().has_linear_acceleration_vrf() must be \"\n                \"true when FLAGS_enable_map_reference_unify is true.\";\n      return false;\n    }\n    linear_a_y_ = localization.pose().linear_acceleration_vrf().y();\n  } else {\n    CHECK(localization.pose().has_angular_velocity());\n    angular_v_ = localization.pose().angular_velocity().z();\n    CHECK(localization.pose().has_linear_acceleration());\n    linear_a_y_ = localization.pose().linear_acceleration().y();\n  }\n\n  if (!(linear_v_ > 0.0)) {\n    kappa_ = 0.0;",
+        "lookback": "      AERROR << \"localization.pose().has_angular_velocity_vrf() must be true \"",
+        "lookahead": "  } else {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 151,
+        "end_line": 180,
+        "merge_gen_region": "new <<local.().____() be \" iflocal.()._____((ization Radio Radio Radio Radio on1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "confidence": 0.9450753331184387,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    angular_v_ = localization->pose().angular_velocity().z();\n    linear_a_y_ = localization->pose().linear_acceleration().y();",
+        "b_contents": "    kappa_ = angular_v_ / linear_v_;",
+        "base_contents": "    angular_v_ = localization->pose().angular_velocity().z();\n    linear_a_ = localization->pose().linear_acceleration().y();",
+        "res_region": "    kappa_ = angular_v_ / linear_v_;",
+        "lookback": "  }",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 182,
+        "end_line": 190,
+        "merge_gen_region": null,
+        "confidence": 0.5145440101623535,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n  common::math::EulerAnglesZXYd euler_angle(orientation.qw(), \\\n          orientation.qx(), orientation.qy(), orientation.qz());\n\n  pitch_ = euler_angle.pitch();",
+        "b_contents": "\n  if (localization.pose().has_euler_angles()) {\n    roll_ = localization.pose().euler_angles().x();\n    pitch_ = localization.pose().euler_angles().y();\n    yaw_ = localization.pose().euler_angles().z();\n  } else {\n    math::EulerAnglesZXYd euler_angle(orientation.qw(), orientation.qx(),\n                                      orientation.qy(), orientation.qz());\n    roll_ = euler_angle.roll();\n    pitch_ = euler_angle.pitch();\n    yaw_ = euler_angle.yaw();\n  }\n\n  return true;",
+        "base_contents": "",
+        "res_region": "\n  if (localization.pose().has_euler_angles()) {\n    roll_ = localization.pose().euler_angles().x();\n    pitch_ = localization.pose().euler_angles().y();\n    yaw_ = localization.pose().euler_angles().z();\n  } else {\n    math::EulerAnglesZXYd euler_angle(orientation.qw(), orientation.qx(),\n                                      orientation.qy(), orientation.qz());\n    roll_ = euler_angle.roll();\n    pitch_ = euler_angle.pitch();\n    yaw_ = euler_angle.yaw();\n  }\n\n  return true;",
+        "lookback": "  if (localization.pose().has_euler_angles()) {",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 192,
+        "end_line": 214,
+        "merge_gen_region": " ({////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.8934569954872131,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "double VehicleState::pitch() const { return pitch_; }\n",
+        "b_contents": "double VehicleState::roll() const { return roll_; }\n\ndouble VehicleState::pitch() const { return pitch_; }\n\ndouble VehicleState::yaw() const { return yaw_; }\n",
+        "base_contents": "",
+        "res_region": "double VehicleState::roll() const { return roll_; }\n\ndouble VehicleState::pitch() const { return pitch_; }\n\ndouble VehicleState::yaw() const { return yaw_; }\n",
+        "lookback": "",
+        "lookahead": "double VehicleState::heading() const { return heading_; }",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 223,
+        "end_line": 234,
+        "merge_gen_region": "doubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledoubledouble",
+        "confidence": 0.9128093123435974,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "void VehicleState::set_pitch(const double pitch) { pitch_ = pitch; }\n",
+        "b_contents": "void VehicleState::set_roll(const double roll) { roll_ = roll; }\n\nvoid VehicleState::set_pitch(const double pitch) { pitch_ = pitch; }\n\n// As of now, use heading instead of yaw angle\nvoid VehicleState::set_yaw(const double yaw) { yaw_ = yaw; }\n",
+        "base_contents": "",
+        "res_region": "void VehicleState::set_roll(const double roll) { roll_ = roll; }\n\nvoid VehicleState::set_pitch(const double pitch) { pitch_ = pitch; }\n\n// As of now, use heading instead of yaw angle\nvoid VehicleState::set_yaw(const double yaw) { yaw_ = yaw; }\n",
+        "lookback": "",
+        "lookahead": "void VehicleState::set_heading(const double heading) { heading_ = heading; }",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 253,
+        "end_line": 265,
+        "merge_gen_region": " Vehiclevoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput&",
+        "confidence": 0.9290090799331665,
+        "hesitated": false,
+        "resolved": false
+    }
+]

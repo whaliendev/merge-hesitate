@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "      mIsAsynchronous(!!getContext().getAsyncCallback()),\n      mStubDriver(getContext()) {",
+        "b_contents": "      mIsAsynchronous(!!getContext().getAsyncCallback()),\n      mCardAndDeviceId(getCardAndDeviceId(devices)) {",
+        "base_contents": "      mIsAsynchronous(!!getContext().getAsyncCallback()) {",
+        "res_region": "      mIsAsynchronous(!!getContext().getAsyncCallback()),\n      mStubDriver(getContext()) {",
+        "lookback": "      mStubDriver(getContext()) {",
+        "lookahead": "    context->startStreamDataProcessor();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 56,
+        "merge_gen_region": null,
+        "confidence": 0.837371289730072,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void StreamPrimary::shutdown() {\n    StreamAlsa::shutdown();\n    mStubDriver.shutdown();",
+        "b_contents": "std::vector<alsa::DeviceProfile> StreamPrimary::getDeviceProfiles() {\n    return {alsa::DeviceProfile{.card = mCardAndDeviceId.first,\n                                .device = mCardAndDeviceId.second,\n                                .direction = mIsInput ? PCM_IN : PCM_OUT,\n                                .isExternal = false}};\n}\n\nstd::pair<int, int> StreamPrimary::getCardAndDeviceId(const std::vector<AudioDevice>& devices) {\n    if (devices.empty() || devices[0].address.getTag() != AudioDeviceAddress::id) {\n        return kDefaultCardAndDeviceId;\n    }\n    std::string deviceAddress = devices[0].address.get<AudioDeviceAddress::id>();\n    std::pair<int, int> cardAndDeviceId;\n    if (const size_t suffixPos = deviceAddress.rfind(\"CARD_\");\n        suffixPos == std::string::npos ||\n        sscanf(deviceAddress.c_str() + suffixPos, \"CARD_%d_DEV_%d\", &cardAndDeviceId.first,\n               &cardAndDeviceId.second) != 2) {\n        return kDefaultCardAndDeviceId;\n    }\n    LOG(DEBUG) << __func__ << \": parsed with card id \" << cardAndDeviceId.first << \", device id \"\n               << cardAndDeviceId.second;\n    return cardAndDeviceId;\n}\n\nStreamInPrimary::StreamInPrimary(StreamContext&& context, const SinkMetadata& sinkMetadata,\n                                 const std::vector<MicrophoneInfo>& microphones)\n    : StreamIn(std::move(context), microphones),\n      StreamSwitcher(&mContextInstance, sinkMetadata),\n      StreamInHwGainHelper(&mContextInstance) {}\n\nbool StreamInPrimary::useStubStream(const AudioDevice& device) {\n    static const bool kSimulateInput =\n            GetBoolProperty(\"ro.boot.audio.tinyalsa.simulate_input\", false);\n    return kSimulateInput || device.type.type == AudioDeviceType::IN_TELEPHONY_RX ||\n           device.type.type == AudioDeviceType::IN_FM_TUNER ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated */;",
+        "base_contents": "std::vector<alsa::DeviceProfile> StreamPrimary::getDeviceProfiles() {\n    static const std::vector<alsa::DeviceProfile> kBuiltInSource{\n            alsa::DeviceProfile{.card = primary::PrimaryMixer::kAlsaCard,\n                                .device = primary::PrimaryMixer::kAlsaDevice,\n                                .direction = PCM_IN,\n                                .isExternal = false}};\n    static const std::vector<alsa::DeviceProfile> kBuiltInSink{\n            alsa::DeviceProfile{.card = primary::PrimaryMixer::kAlsaCard,\n                                .device = primary::PrimaryMixer::kAlsaDevice,\n                                .direction = PCM_OUT,\n                                .isExternal = false}};\n    return mIsInput ? kBuiltInSource : kBuiltInSink;\n}\n\nStreamInPrimary::StreamInPrimary(StreamContext&& context, const SinkMetadata& sinkMetadata,\n                                 const std::vector<MicrophoneInfo>& microphones)\n    : StreamIn(std::move(context), microphones),\n      StreamSwitcher(&mContextInstance, sinkMetadata),\n      StreamInHwGainHelper(&mContextInstance) {}\n\nbool StreamInPrimary::useStubStream(const AudioDevice& device) {\n    static const bool kSimulateInput =\n            GetBoolProperty(\"ro.boot.audio.tinyalsa.simulate_input\", false);\n    return kSimulateInput || device.type.type == AudioDeviceType::IN_TELEPHONY_RX ||\n           device.type.type == AudioDeviceType::IN_FM_TUNER ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated */ ||\n           (device.type.type == AudioDeviceType::IN_BUS && device.type.connection.empty());",
+        "res_region": "void StreamPrimary::shutdown() {\n    StreamAlsa::shutdown();\n    mStubDriver.shutdown();",
+        "lookback": "    StreamAlsa::shutdown();",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 149,
+        "end_line": 218,
+        "merge_gen_region": " Streamsashutdown(); Streamsashutdown",
+        "confidence": 0.9121631383895874,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    return kSimulateOutput || device.type.type == AudioDeviceType::OUT_TELEPHONY_TX ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated*/;",
+        "b_contents": "    return std::unique_ptr<StreamCommonInterfaceEx>(\n            new InnerStreamWrapper<StreamPrimary>(context, metadata, devices));",
+        "base_contents": "    return std::unique_ptr<StreamCommonInterfaceEx>(\n            new InnerStreamWrapper<StreamPrimary>(context, metadata));",
+        "res_region": "    return kSimulateOutput || device.type.type == AudioDeviceType::OUT_TELEPHONY_TX ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated*/;",
+        "lookback": "           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated*/;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 285,
+        "end_line": 294,
+        "merge_gen_region": null,
+        "confidence": 0.5203704833984375,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "bool StreamOutPrimary::useStubStream(const AudioDevice& device) {\n    static const bool kSimulateOutput =\n            GetBoolProperty(\"ro.boot.audio.tinyalsa.ignore_output\", false);\n    return kSimulateOutput || device.type.type == AudioDeviceType::OUT_TELEPHONY_TX ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated*/;\n}\n\nStreamSwitcher::DeviceSwitchBehavior StreamOutPrimary::switchCurrentStream(\n        const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices) {\n    LOG(DEBUG) << __func__;\n    if (devices.size() > 1) {\n        LOG(ERROR) << __func__ << \": primary stream can only be connected to one device, got: \"\n                   << devices.size();\n        return DeviceSwitchBehavior::UNSUPPORTED_DEVICES;\n    }\n    if (devices.empty() || useStubStream(devices[0]) == isStubStream()) {\n        return DeviceSwitchBehavior::USE_CURRENT_STREAM;\n    }\n    return DeviceSwitchBehavior::CREATE_NEW_STREAM;\n}\n\nstd::unique_ptr<StreamCommonInterfaceEx> StreamOutPrimary::createNewStream(\n        const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices,\n        StreamContext* context, const Metadata& metadata) {\n    if (devices.empty()) {\n        LOG(FATAL) << __func__ << \": called with empty devices\";  // see 'switchCurrentStream'\n    }\n    if (useStubStream(devices[0])) {\n        return std::unique_ptr<StreamCommonInterfaceEx>(\n                new InnerStreamWrapper<StreamStub>(context, metadata));\n    }\n    return std::unique_ptr<StreamCommonInterfaceEx>(\n            new InnerStreamWrapper<StreamPrimary>(context, metadata, devices));\n}\n",
+        "base_contents": "bool StreamOutPrimary::useStubStream(const AudioDevice& device) {\n    static const bool kSimulateOutput =\n            GetBoolProperty(\"ro.boot.audio.tinyalsa.ignore_output\", false);\n    return kSimulateOutput || device.type.type == AudioDeviceType::OUT_TELEPHONY_TX ||\n           device.type.connection == AudioDeviceDescription::CONNECTION_BUS /*deprecated*/ ||\n           (device.type.type == AudioDeviceType::OUT_BUS && device.type.connection.empty());\n}\n\nStreamSwitcher::DeviceSwitchBehavior StreamOutPrimary::switchCurrentStream(\n        const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices) {\n    LOG(DEBUG) << __func__;\n    if (devices.size() > 1) {\n        LOG(ERROR) << __func__ << \": primary stream can only be connected to one device, got: \"\n                   << devices.size();\n        return DeviceSwitchBehavior::UNSUPPORTED_DEVICES;\n    }\n    if (devices.empty() || useStubStream(devices[0]) == isStubStream()) {\n        return DeviceSwitchBehavior::USE_CURRENT_STREAM;\n    }\n    return DeviceSwitchBehavior::CREATE_NEW_STREAM;\n}\n\nstd::unique_ptr<StreamCommonInterfaceEx> StreamOutPrimary::createNewStream(\n        const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices,\n        StreamContext* context, const Metadata& metadata) {\n    if (devices.empty()) {\n        LOG(FATAL) << __func__ << \": called with empty devices\";  // see 'switchCurrentStream'\n    }\n    if (useStubStream(devices[0])) {\n        return std::unique_ptr<StreamCommonInterfaceEx>(\n                new InnerStreamWrapper<StreamStub>(context, metadata));\n    }\n    return std::unique_ptr<StreamCommonInterfaceEx>(\n            new InnerStreamWrapper<StreamPrimary>(context, metadata));\n}\n",
+        "res_region": "",
+        "lookback": "    if (isStubStream()) {",
+        "lookahead": "ndk::ScopedAStatus StreamOutPrimary::getHwVolume(std::vector<float>* _aidl_return) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 348,
+        "end_line": 422,
+        "merge_gen_region": null,
+        "confidence": 0.4828368127346039,
+        "hesitated": true
+    }
+]

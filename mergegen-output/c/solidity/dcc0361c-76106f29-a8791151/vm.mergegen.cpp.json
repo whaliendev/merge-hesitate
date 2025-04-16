@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\t\t\to[\"post\"] = mValue(fev.exportState());\n\t\t\to[\"callcreates\"] = fev.exportCallCreates();\n\t\t\to[\"out\"] = \"0x\" + toHex(output);\n\t\t\tfev.push(o, \"gas\", gas);\n\t\t\to[\"logs\"] = mValue(fev.exportLog());",
+        "b_contents": "\t\t\tif (!vmExceptionOccured)\n\t\t\t{\n\t\t\t\to[\"post\"] = mValue(fev.exportState());\n\t\t\t\to[\"callcreates\"] = fev.exportCallCreates();\n\t\t\t\to[\"out\"] = \"0x\" + toHex(output);\n\t\t\t\tfev.push(o, \"gas\", gas);\n\t\t\t}",
+        "base_contents": "\t\t\to[\"post\"] = mValue(fev.exportState());\n\t\t\to[\"callcreates\"] = fev.exportCallCreates();\n\t\t\to[\"out\"] = \"0x\" + toHex(output);\n\t\t\tfev.push(o, \"gas\", gas);",
+        "res_region": "\t\t\tif (!vmExceptionOccured)\n\t\t\t{\n\t\t\t\to[\"post\"] = mValue(fev.exportState());\n\t\t\t\to[\"callcreates\"] = fev.exportCallCreates();\n\t\t\t\to[\"out\"] = \"0x\" + toHex(output);\n\t\t\t\tfev.push(o, \"gas\", gas);\n\t\t\t\to[\"logs\"] = mValue(fev.exportLog());\n\t\t\t}",
+        "lookback": "\t\t\t{",
+        "lookahead": "\t\t}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 382,
+        "end_line": 401,
+        "merge_gen_region": null,
+        "confidence": 0.8450914025306702,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tBOOST_REQUIRE(o.count(\"post\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"callcreates\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"out\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"gas\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"logs\") > 0);",
+        "b_contents": "\t\t\tif (o.count(\"post\") > 0)\t// No exceptions expected\n\t\t\t{\n\t\t\t\tBOOST_CHECK(!vmExceptionOccured);",
+        "base_contents": "\t\t\tBOOST_REQUIRE(o.count(\"post\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"callcreates\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"out\") > 0);\n\t\t\tBOOST_REQUIRE(o.count(\"gas\") > 0);",
+        "res_region": "\t\t\tif (o.count(\"post\") > 0)\t// No exceptions expected\n\t\t\t{\n\t\t\t\tBOOST_CHECK(!vmExceptionOccured);",
+        "lookback": "\t\t\t{",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 405,
+        "end_line": 420,
+        "merge_gen_region": null,
+        "confidence": 0.4877535402774811,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tdev::test::FakeExtVM test;\n\t\t\ttest.importState(o[\"post\"].get_obj());\n\t\t\ttest.importCallCreates(o[\"callcreates\"].get_array());\n\t\t\ttest.importLog(o[\"logs\"].get_obj());",
+        "b_contents": "\t\t\t\tBOOST_REQUIRE(o.count(\"post\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"callcreates\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"out\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"gas\") > 0);",
+        "base_contents": "\t\t\tdev::test::FakeExtVM test;\n\t\t\ttest.importState(o[\"post\"].get_obj());\n\t\t\ttest.importCallCreates(o[\"callcreates\"].get_array());",
+        "res_region": "\t\t\t\tBOOST_REQUIRE(o.count(\"post\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"callcreates\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"out\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"gas\") > 0);\n\t\t\t\tBOOST_REQUIRE(o.count(\"logs\") > 0);",
+        "lookback": "\t\t\t\tBOOST_REQUIRE(o.count(\"callcreates\") > 0);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 422,
+        "end_line": 436,
+        "merge_gen_region": null,
+        "confidence": 0.6274638175964355,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tcheckAddresses<std::map<Address, std::tuple<u256, u256, std::map<u256, u256>, bytes> > >(test.addresses, fev.addresses);\n\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);\n\n\t\t\tcheckLog(fev.sub.logs, test.sub.logs);",
+        "b_contents": "\t\t\t\tcheckAddresses<std::map<Address, std::tuple<u256, u256, std::map<u256, u256>, bytes> > >(test.addresses, fev.addresses);\n\t\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);\n\t\t\t}\n\t\t\telse\t// Exception expected\n\t\t\t\tBOOST_CHECK(vmExceptionOccured);",
+        "base_contents": "\t\t\tcheckAddresses<std::map<Address, std::tuple<u256, u256, std::map<u256, u256>, bytes> > >(test.addresses, fev.addresses);\n\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);",
+        "res_region": "\t\t\t\tcheckAddresses<std::map<Address, std::tuple<u256, u256, std::map<u256, u256>, bytes> > >(test.addresses, fev.addresses);\n\t\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);\n\n\t\t\t\tcheckLog(fev.sub.logs, test.sub.logs);\n\t\t\t}\n\t\t\telse\t// Exception expected\n\t\t\t\tBOOST_CHECK(vmExceptionOccured);",
+        "lookback": "\t\t\t\tBOOST_CHECK(test.callcreates == fev.callcreates);",
+        "lookahead": "\t\t}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 466,
+        "end_line": 480,
+        "merge_gen_region": null,
+        "confidence": 0.8640444874763489,
+        "hesitated": true
+    }
+]

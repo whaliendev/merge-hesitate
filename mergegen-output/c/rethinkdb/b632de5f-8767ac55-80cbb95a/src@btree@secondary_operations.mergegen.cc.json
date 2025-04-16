@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    } else if (\n        data->magic\n        == btree_sindex_block_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return cluster_version_t::v2_0_is_latest_disk;",
+        "b_contents": "    } else if (data->magic\n               == btree_sindex_block_magic_t<cluster_version_t::v2_0>::value) {\n        return cluster_version_t::v2_0;\n    } else if (data->magic\n               == btree_sindex_block_magic_t<cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "base_contents": "    } else if (data->magic\n               == btree_sindex_block_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return cluster_version_t::v2_0_is_latest_disk;",
+        "res_region": "    } else if (data->magic\n               == btree_sindex_block_magic_t<cluster_version_t::v2_0>::value) {\n        return cluster_version_t::v2_0;\n    } else if (data->magic\n               == btree_sindex_block_magic_t<\n                   cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "lookback": "               == btree_sindex_block_magic_t<cluster_version_t::v2_0>::value) {",
+        "lookahead": "    } else {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 64,
+        "end_line": 80,
+        "merge_gen_region": null,
+        "confidence": 0.8157479166984558,
+        "hesitated": true
+    }
+]

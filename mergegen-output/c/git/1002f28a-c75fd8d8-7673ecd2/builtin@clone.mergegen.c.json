@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\tif (parse_tree(tree) < 0)\n\t\texit(128);\n\tinit_tree_desc(&t, tree->buffer, tree->size);",
+        "b_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&t, &tree->object.oid, tree->buffer, tree->size);",
+        "base_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&t, tree->buffer, tree->size);",
+        "res_region": "\tif (parse_tree(tree) < 0)\n\t\texit(128);\n\tinit_tree_desc(&t, &tree->object.oid, tree->buffer, tree->size);",
+        "lookback": "\t\texit(128);",
+        "lookahead": "\tif (unpack_trees(1, &t, &opts) < 0)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 740,
+        "end_line": 750,
+        "merge_gen_region": "__(ifififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.8839793801307678,
+        "hesitated": false,
+        "resolved": false
+    }
+]

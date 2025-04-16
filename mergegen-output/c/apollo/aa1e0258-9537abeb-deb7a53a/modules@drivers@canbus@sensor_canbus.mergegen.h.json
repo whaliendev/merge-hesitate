@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/drivers_msgs/can_card_parameter.pb.h\"\n#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/drivers_msgs/can_card_parameter.pb.h\"\n#include \"modules/common_msgs/drivers_msgs/sensor_canbus_conf.pb.h\"",
+        "base_contents": "#include \"modules/drivers/canbus/proto/can_card_parameter.pb.h\"\n#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/drivers_msgs/can_card_parameter.pb.h\"\n#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"",
+        "lookback": "#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"",
+        "lookahead": "#include \"modules/drivers/canbus/sensor_gflags.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 40,
+        "end_line": 49,
+        "merge_gen_region": "includemodulescommonmsgsdriversmsgscancardparameterpbh",
+        "confidence": 0.9121314287185669,
+        "hesitated": false,
+        "resolved": false
+    }
+]

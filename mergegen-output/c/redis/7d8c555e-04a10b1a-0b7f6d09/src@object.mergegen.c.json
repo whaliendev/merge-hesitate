@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    robj *o;\n",
+        "base_contents": "",
+        "res_region": "    robj *o;\n",
+        "lookback": "",
+        "lookahead": "    zs->dict = dictCreate(&zsetDictType,NULL);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 95,
+        "end_line": 101,
+        "merge_gen_region": null,
+        "confidence": 0.45001956820487976,
+        "hesitated": true
+    }
+]

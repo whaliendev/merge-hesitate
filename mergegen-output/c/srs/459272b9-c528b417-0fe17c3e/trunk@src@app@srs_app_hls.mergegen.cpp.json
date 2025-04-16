@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "srs_error_t SrsHls::initialize(SrsOriginHub* h, SrsRequest* r)",
+        "b_contents": "int SrsHls::initialize(SrsSource* s, SrsRequest* r)",
+        "base_contents": "int SrsHls::initialize(SrsSource* s)",
+        "res_region": "srs_error_t SrsHls::initialize(SrsOriginHub* h, SrsRequest* r)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 996,
+        "end_line": 1002,
+        "merge_gen_region": null,
+        "confidence": 0.5355015993118286,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    srs_error_t err = srs_success;\n    \n    hub = h;\n    req = r;\n    \n    if ((err = controller->initialize()) != srs_success) {\n        return srs_error_wrap(err, \"controller initialize\");",
+        "b_contents": "    int ret = ERROR_SUCCESS;\n\n    srs_assert(!_req);\n    _req = r->copy();\n\n    source = s;\n\n    if ((ret = muxer->initialize()) != ERROR_SUCCESS) {\n        return ret;",
+        "base_contents": "    int ret = ERROR_SUCCESS;\n\n    source = s;\n\n    if ((ret = muxer->initialize()) != ERROR_SUCCESS) {\n        return ret;",
+        "res_region": "    srs_error_t err = srs_success;\n    \n    hub = h;\n    req = r;\n    \n    if ((err = controller->initialize()) != srs_success) {\n        return srs_error_wrap(err, \"controller initialize\");",
+        "lookback": "    ",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1004,
+        "end_line": 1029,
+        "merge_gen_region": null,
+        "confidence": 0.6826095581054688,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    srs_error_t err = srs_success;\n    ",
+        "b_contents": "    int ret = ERROR_SUCCESS;\n    ",
+        "base_contents": "    int ret = ERROR_SUCCESS;\n    \n    srs_freep(_req);\n    _req = req->copy();\n    ",
+        "res_region": "    srs_error_t err = srs_success;\n",
+        "lookback": "",
+        "lookahead": "    // update the hls time, for hls_dispose.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1037,
+        "end_line": 1049,
+        "merge_gen_region": null,
+        "confidence": 0.7352407574653625,
+        "hesitated": true
+    }
+]

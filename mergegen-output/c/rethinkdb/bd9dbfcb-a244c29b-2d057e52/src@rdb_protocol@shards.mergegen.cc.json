@@ -1,0 +1,55 @@
+[
+    {
+        "a_contents": "        std::map<datum_t, std::vector<T *>, counted_datum_less_t>\n            vecs(counted_datum_less_t(env->reql_version));",
+        "b_contents": "        std::map<counted_t<const datum_t>, std::vector<T *>, counted_datum_less_t>\n            vecs(counted_datum_less_t(env->reql_version()));",
+        "base_contents": "        std::map<counted_t<const datum_t>, std::vector<T *>, counted_datum_less_t>\n            vecs(counted_datum_less_t(env->reql_version));",
+        "res_region": "        // TODO! Rename counted_datum_less_t\n        std::map<datum_t, std::vector<T *>, counted_datum_less_t>\n            vecs(counted_datum_less_t(env->reql_version()));",
+        "lookback": "        std::map<datum_t, std::vector<T *>, counted_datum_less_t>",
+        "lookahead": "        for (auto res = results.begin(); res != results.end(); ++res) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 89,
+        "end_line": 98,
+        "merge_gen_region": null,
+        "confidence": 0.8080530762672424,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            rcheck_toplevel(\n                size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                strprintf(\"Grouped data over size limit %zu.  \"\n                          \"Try putting a reduction (like `.reduce` or `.count`) \"\n                          \"on the end.\", env->limits().array_size_limit()).c_str());",
+        "b_contents": "            if (is_grouped_data(gs, kv->first)) {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Grouped data over size limit `%zu`.  \"\n                              \"Try putting a reduction (like `.reduce` or `.count`) \"\n                              \"on the end.\", env->limits().array_size_limit()).c_str());\n            } else {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Array over size limit `%zu`.\", env->limits().array_size_limit()).c_str());\n            }",
+        "base_contents": "            rcheck_toplevel(\n                size <= env->limits.array_size_limit(), base_exc_t::GENERIC,\n                strprintf(\"Grouped data over size limit %zu.  \"\n                          \"Try putting a reduction (like `.reduce` or `.count`) \"\n                          \"on the end.\", env->limits.array_size_limit()).c_str());",
+        "res_region": "            if (is_grouped_data(gs, kv->first)) {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Grouped data over size limit `%zu`.  \"\n                              \"Try putting a reduction (like `.reduce` or `.count`) \"\n                              \"on the end.\", env->limits().array_size_limit()).c_str());\n            } else {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Array over size limit `%zu`.\", env->limits().array_size_limit()).c_str());\n            }",
+        "lookback": "                rcheck_toplevel(",
+        "lookahead": "            lst1->reserve(lst1->size() + lst2->size());",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 228,
+        "end_line": 252,
+        "merge_gen_region": " +&&&&&&&&&&&&&&&&&",
+        "confidence": 0.9234151840209961,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "            rcheck_toplevel(\n                size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                strprintf(\"Grouped data over size limit %zu.  \"\n                          \"Try putting a reduction (like `.reduce` or `.count`) \"\n                          \"on the end.\", env->limits().array_size_limit()).c_str());",
+        "b_contents": "            if (is_grouped_data(streams, kv->first)) {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Grouped data over size limit `%zu`.  \"\n                              \"Try putting a reduction (like `.reduce` or `.count`) \"\n                              \"on the end.\", env->limits().array_size_limit()).c_str());\n            } else {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Array over size limit `%zu`.\", env->limits().array_size_limit()).c_str());\n            }",
+        "base_contents": "            rcheck_toplevel(\n                size <= env->limits.array_size_limit(), base_exc_t::GENERIC,\n                strprintf(\"Grouped data over size limit %zu.  \"\n                          \"Try putting a reduction (like `.reduce` or `.count`) \"\n                          \"on the end.\", env->limits.array_size_limit()).c_str());",
+        "res_region": "            if (is_grouped_data(streams, kv->first)) {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Grouped data over size limit `%zu`.  \"\n                              \"Try putting a reduction (like `.reduce` or `.count`) \"\n                              \"on the end.\", env->limits().array_size_limit()).c_str());\n            } else {\n                rcheck_toplevel(\n                    size <= env->limits().array_size_limit(), base_exc_t::GENERIC,\n                    strprintf(\"Array over size limit `%zu`.\", env->limits().array_size_limit()).c_str());\n            }",
+        "lookback": "                rcheck_toplevel(",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 271,
+        "end_line": 295,
+        "merge_gen_region": " +__()).c&&&&",
+        "confidence": 0.9328995943069458,
+        "hesitated": false,
+        "resolved": false
+    }
+]

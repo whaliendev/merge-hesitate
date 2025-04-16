@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        // In the standard btree algorithm, we would split based on the\n        // existing keys _and_ the new key.  But that's more work to\n        // implement, so we split the existing keys and then add the new key.\n        \n        assert( n > 2 );\n        int split = 0;\n        int rightSize = 0;\n        int rightSizeLimit = topSize * ( keypos == n ? 0.1 : 0.5 ); // see SERVER-983\n        for( int i = n - 1; i > -1; --i ) {\n            rightSize += keyNode( i ).key.objsize();\n            if ( rightSize > rightSizeLimit ) {\n                split = i;\n                break;\n            }\n        }\n        if ( split < 1 ) {\n            split = 1;\n        } else if ( split > n - 2 ) {\n            split = n - 2;",
+        "b_contents": "        int split = n / 2;\n        // when splitting a btree node, if the new key is greater than all the other keys, we should not do an even split, but a 90/10 split. \n        // see SERVER-983\n        if ( keypos == n ) { \n            split = (int) (0.9 * n);\n            if ( split > n - 2 )\n                split = n - 2;",
+        "base_contents": "        int split = n / 2;\n        if ( keypos == n ) { // see SERVER-983\n            split = (int) (0.9 * n);\n            if ( split > n - 2 )\n                split = n - 2;",
+        "res_region": "        // In the standard btree algorithm, we would split based on the\n        // existing keys _and_ the new key.  But that's more work to\n        // implement, so we split the existing keys and then add the new key.\n        \n        assert( n > 2 );\n        int split = 0;\n        int rightSize = 0;\n        // when splitting a btree node, if the new key is greater than all the other keys, we should not do an even split, but a 90/10 split. \n        // see SERVER-983\n        int rightSizeLimit = topSize * ( keypos == n ? 0.1 : 0.5 );\n        for( int i = n - 1; i > -1; --i ) {\n            rightSize += keyNode( i ).key.objsize();\n            if ( rightSize > rightSizeLimit ) {\n                split = i;\n                break;\n            }\n        }\n        if ( split < 1 ) {\n            split = 1;\n        } else if ( split > n - 2 ) {\n            split = n - 2;",
+        "lookback": "        // existing keys _and_ the new key.  But that's more work to",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 745,
+        "end_line": 779,
+        "merge_gen_region": null,
+        "confidence": 0.8479874134063721,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\nTEST(FileMap, large_offset) {\n    // Make sure that an offset > INT32_MAX will not fail the create\n    // function. See http://b/155662887.\n    TemporaryFile tf;\n    ASSERT_TRUE(tf.fd != -1);\n\n    off64_t offset = INT32_MAX + 1024LL;\n\n    // Make the temporary file large enough to pass the mmap.\n    ASSERT_EQ(offset, lseek64(tf.fd, offset, SEEK_SET));\n    char value = 0;\n    ASSERT_EQ(1, write(tf.fd, &value, 1));\n\n    android::FileMap m;\n    ASSERT_TRUE(m.create(\"test\", tf.fd, offset, 0, true));\n    ASSERT_STREQ(\"test\", m.getFileName());\n    ASSERT_EQ(0u, m.getDataLength());\n    ASSERT_EQ(offset, m.getDataOffset());\n}\n\nTEST(FileMap, offset_overflow) {\n    // Make sure that an end that overflows SIZE_MAX will not abort.\n    // See http://b/156997193.\n    TemporaryFile tf;\n    ASSERT_TRUE(tf.fd != -1);\n\n    off64_t offset = 200;\n    size_t length = SIZE_MAX;\n\n    android::FileMap m;\n    ASSERT_FALSE(m.create(\"test\", tf.fd, offset, length, true));\n}",
+        "b_contents": "\nTEST(FileMap, offset_overflow) {\n    // Make sure that an end that overflows SIZE_MAX will not abort.\n    // See http://b/156997193.\n    TemporaryFile tf;\n    ASSERT_TRUE(tf.fd != -1);\n\n    off64_t offset = 200;\n    size_t length = SIZE_MAX;\n\n    android::FileMap m;\n    ASSERT_FALSE(m.create(\"test\", tf.fd, offset, length, true));\n}",
+        "base_contents": "",
+        "res_region": "\nTEST(FileMap, large_offset) {\n    // Make sure that an offset > INT32_MAX will not fail the create\n    // function. See http://b/155662887.\n    TemporaryFile tf;\n    ASSERT_TRUE(tf.fd != -1);\n\n    off64_t offset = INT32_MAX + 1024LL;\n\n    // Make the temporary file large enough to pass the mmap.\n    ASSERT_EQ(offset, lseek64(tf.fd, offset, SEEK_SET));\n    char value = 0;\n    ASSERT_EQ(1, write(tf.fd, &value, 1));\n\n    android::FileMap m;\n    ASSERT_TRUE(m.create(\"test\", tf.fd, offset, 0, true));\n    ASSERT_STREQ(\"test\", m.getFileName());\n    ASSERT_EQ(0u, m.getDataLength());\n    ASSERT_EQ(offset, m.getDataOffset());\n}\n\nTEST(FileMap, offset_overflow) {\n    // Make sure that an end that overflows SIZE_MAX will not abort.\n    // See http://b/156997193.\n    TemporaryFile tf;\n    ASSERT_TRUE(tf.fd != -1);\n\n    off64_t offset = 200;\n    size_t length = SIZE_MAX;\n\n    android::FileMap m;\n    ASSERT_FALSE(m.create(\"test\", tf.fd, offset, length, true));\n}",
+        "lookback": "TEST(FileMap, large_offset) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 34,
+        "end_line": 83,
+        "merge_gen_region": "(Map largeoffset {( {outputFile,_)outputTESTFile,_)outputTESTFile,_)outputTESTTESTTESTTESTTEST {outputFile,_)outputTESTTESTTESTTESTTESTTEST {outputFile,_)outputTESTTEST {(Map largeoffset {(TESToutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9446259140968323,
+        "hesitated": false,
+        "resolved": false
+    }
+]

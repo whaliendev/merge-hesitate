@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"debug.hpp\"\n\nvalue_sizer_t<rdb_value_t>::value_sizer_t(block_size_t bs) : block_size_(bs) { }",
+        "b_contents": "rdb_value_sizer_t::rdb_value_sizer_t(max_block_size_t bs) : block_size_(bs) { }",
+        "base_contents": "value_sizer_t<rdb_value_t>::value_sizer_t(block_size_t bs) : block_size_(bs) { }",
+        "res_region": "rdb_value_sizer_t::rdb_value_sizer_t(max_block_size_t bs) : block_size_(bs) { }",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.7291840314865112,
+        "hesitated": true
+    }
+]

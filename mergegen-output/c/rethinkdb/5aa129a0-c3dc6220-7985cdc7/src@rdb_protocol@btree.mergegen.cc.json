@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            if (!sindex->range.contains(sindex->func_reql_version, sindex_val)) {\n                return continue_bool_t::CONTINUE;",
+        "b_contents": "            if (!sindex->range.contains(sindex_val)) {\n                return done_traversing_t::NO;",
+        "base_contents": "            if (!sindex->range.contains(sindex->func_reql_version, sindex_val)) {\n                return done_traversing_t::NO;",
+        "res_region": "            if (!sindex->range.contains(sindex_val)) {\n                return continue_bool_t::CONTINUE;",
+        "lookback": "                return continue_bool_t::CONTINUE;",
+        "lookahead": "            }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 694,
+        "end_line": 703,
+        "merge_gen_region": null,
+        "confidence": 0.8362664580345154,
+        "hesitated": true
+    }
+]

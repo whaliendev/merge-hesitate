@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "static int GetTrafficGpuId(const pipeline::PipelineConfig& pipeline_config) {\n  if (!pipeline_config.traffic_light_config()\n           .trafficlights_perception_config()\n           .has_gpu_id()) {\n    AERROR << \"traffic light gpu id not found.\";\n    return -1;\n  }\n\n  int gpu_id = pipeline_config.traffic_light_config()\n                   .trafficlights_perception_config()\n                   .gpu_id();\n  return gpu_id;\n}\n\nint IsFileExist(const char* path) { return !access(path, F_OK); }\n\nbool TrafficLightsPerceptionComponent::CreateDir() {\n  if (!IsFileExist(\"/apollo/debug_vis\")) {\n    int status =\n        mkdir(\"/apollo/debug_vis\", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);\n    if (!status) {\n      return true;\n    } else {\n      return false;\n    }\n  } else {\n    AINFO << \"debug_vis dir already exist\";\n    return true;\n  }\n}\n",
+        "b_contents": "static int GetTrafficGpuId(const pipeline::PipelineConfig& pipeline_config) {\n  if (!pipeline_config\n        .traffic_light_config()\n        .trafficlights_perception_config()\n        .has_gpu_id()){\n    AERROR << \"traffic light gpu id not found.\";\n    return -1;\n  }\n\n  int gpu_id = pipeline_config\n                .traffic_light_config()\n                .trafficlights_perception_config()\n                .gpu_id();\n  return gpu_id;\n}\n\nint IsFileExist(const char* path) {\n    return !access(path, F_OK);\n}\n\nbool TrafficLightsPerceptionComponent::CreateDir(){\n  if (!IsFileExist(\"/apollo/debug_vis\")) {\n    int status = mkdir(\"/apollo/debug_vis\", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);\n    if (!status) {\n      return true;\n    } else {\n      return false;\n    }\n  } else {\n    AINFO << \"debug_vis dir already exist\";\n    return true;\n  }\n}\n",
+        "base_contents": "",
+        "res_region": "static int GetTrafficGpuId(const pipeline::PipelineConfig& pipeline_config) {\n  if (!pipeline_config.traffic_light_config()\n           .trafficlights_perception_config()\n           .has_gpu_id()) {\n    AERROR << \"traffic light gpu id not found.\";\n    return -1;\n  }\n\n  int gpu_id = pipeline_config.traffic_light_config()\n                   .trafficlights_perception_config()\n                   .gpu_id();\n  return gpu_id;\n}\n\nint IsFileExist(const char* path) { return !access(path, F_OK); }\n\nbool TrafficLightsPerceptionComponent::CreateDir() {\n  if (!IsFileExist(\"/apollo/debug_vis\")) {\n    int status =\n        mkdir(\"/apollo/debug_vis\", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);\n    if (!status) {\n      return true;\n    } else {\n      return false;\n    }\n  } else {\n    AINFO << \"debug_vis dir already exist\";\n    return true;\n  }\n}\n",
+        "lookback": "  if (!pipeline_config.traffic_light_config()",
+        "lookahead": "bool TrafficLightsPerceptionComponent::Init() {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 93,
+        "end_line": 161,
+        "merge_gen_region": " (!_.___() intTrafficId( pipeline::Config&_) ifpipeline_.___trafficlightconfig .lightsper_() .___hasgpuid {ERROR \" light gpu not.\"; -; int_ =_.trafficlightconfig .lightsper_() .__()gpuid return_; intFile( char path { !(,_); boolfficPerComponentCreate() ifIsExistaplo/_vis { status mk(\"/ollodebugvis SIRU |_W |_TH SIRO |_OTH); (!) return; else return false } else A <<debugvis already\"; true }",
+        "confidence": 0.9333363771438599,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\n  const auto& traffic_light_root_dir =\n      traffic_light_param.camera_traffic_light_perception_conf_dir();\n  const auto& traffic_light_conf_file =\n      traffic_light_param.camera_traffic_light_perception_conf_file();\n\n  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string trafficlight_config_file =\n      GetAbsolutePath(traffic_light_root_dir, traffic_light_conf_file);\n  trafficlight_config_file =\n      GetAbsolutePath(work_root, trafficlight_config_file);\n\n  ACHECK(cyber::common::GetProtoFromFile(trafficlight_config_file,\n                                         &trafficlight_config))\n      << \"failed to load trafficlight config file \" << trafficlight_config_file;",
+        "b_contents": "\n  const auto& traffic_light_root_dir =\n      traffic_light_param.camera_traffic_light_perception_conf_dir();\n  const auto& traffic_light_conf_file =\n      traffic_light_param.camera_traffic_light_perception_conf_file();\n\n  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string trafficlight_config_file =\n      GetAbsolutePath(traffic_light_root_dir, traffic_light_conf_file);\n  trafficlight_config_file =\n      GetAbsolutePath(work_root, trafficlight_config_file);\n\n  ACHECK(\n      cyber::common::GetProtoFromFile(\n          trafficlight_config_file, &trafficlight_config))\n      << \"failed to load trafficlight config file \"\n      << trafficlight_config_file;",
+        "base_contents": "",
+        "res_region": "\n  const auto& traffic_light_root_dir =\n      traffic_light_param.camera_traffic_light_perception_conf_dir();\n  const auto& traffic_light_conf_file =\n      traffic_light_param.camera_traffic_light_perception_conf_file();\n\n  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string trafficlight_config_file =\n      GetAbsolutePath(traffic_light_root_dir, traffic_light_conf_file);\n  trafficlight_config_file =\n      GetAbsolutePath(work_root, trafficlight_config_file);\n\n  ACHECK(cyber::common::GetProtoFromFile(trafficlight_config_file,\n                                         &trafficlight_config))\n      << \"failed to load trafficlight config file \" << trafficlight_config_file;",
+        "lookback": "  const auto& traffic_light_root_dir =",
+        "lookahead": "  return cyber::SUCC;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 259,
+        "end_line": 294,
+        "merge_gen_region": " auto trafficlightrootdir const&____ trafficlightparamcameratrafficlightper___(); auto trafficlightconffile trafficlight { traffic___ traffic__ =ucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharucharuchar",
+        "confidence": 0.9028396010398865,
+        "hesitated": false,
+        "resolved": false
+    }
+]

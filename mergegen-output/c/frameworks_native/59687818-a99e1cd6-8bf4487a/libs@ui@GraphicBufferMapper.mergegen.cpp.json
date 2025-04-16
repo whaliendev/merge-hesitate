@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    const uint64_t usage = static_cast<uint64_t>(ANDROID_NATIVE_UNSIGNED_CAST(\n            android_convertGralloc1To0Usage(producerUsage, consumerUsage)));\n    return mMapper->lock(handle, usage, bounds, fenceFd, vaddr, outBytesPerPixel,\n                         outBytesPerStride);",
+        "b_contents": "    android_ycbcr result = {};\n    status_t status = mMapper->lock(handle, usage, bounds, acquireFence.release(), &result);\n    if (status != OK) {\n        return base::unexpected(ui::Error::statusToCode(status));\n    } else {\n        return result;\n    }",
+        "base_contents": "    const uint64_t usage = static_cast<uint64_t>(\n            android_convertGralloc1To0Usage(producerUsage, consumerUsage));\n    return mMapper->lock(handle, usage, bounds, fenceFd, vaddr, outBytesPerPixel,\n                         outBytesPerStride);",
+        "res_region": "    android_ycbcr result = {};\n    status_t status = mMapper->lock(handle, usage, bounds, acquireFence.release(), &result);\n    if (status != OK) {\n        return base::unexpected(ui::Error::statusToCode(status));\n    } else {\n        return result;\n    }",
+        "lookback": "    status_t status = mMapper->lock(handle, usage, bounds, acquireFence.release(), &result);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 160,
+        "end_line": 178,
+        "merge_gen_region": "_cbcr = statustMapperlockhandle usage bounds acquire.(),result androidy result {};_>(_(,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+        "confidence": 0.897420346736908,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,172 @@
+[
+    {
+        "a_contents": "Status DBImpl::Recover(\n    VersionEdit* edit,\n    MemTable* external_table,\n    bool error_if_log_file_exist) {",
+        "b_contents": "Status DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n                       bool error_if_log_file_exist) {",
+        "base_contents": "Status DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n    bool error_if_log_file_exist) {",
+        "res_region": "Status DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n                       bool error_if_log_file_exist) {",
+        "lookback": "                       bool error_if_log_file_exist) {",
+        "lookahead": "  mutex_.AssertHeld();",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 881,
+        "end_line": 892,
+        "merge_gen_region": null,
+        "confidence": 0.8230618238449097,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  MemTable* mutable_mem;\n  autovector<MemTable*> immutables;\n  Version* version;",
+        "b_contents": "  MemTable* mutable_mem;\n  std::vector<MemTable*> immutables;\n  Version* version;",
+        "base_contents": "  mutex_.Lock();\n  *latest_snapshot = versions_->LastSequence();",
+        "res_region": "  MemTable* mutable_mem;\n  autovector<MemTable*> immutables;\n  Version* version;",
+        "lookback": "  autovector<MemTable*> immutables;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2687,
+        "end_line": 2698,
+        "merge_gen_region": null,
+        "confidence": 0.8245805501937866,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    immutables[i]->Ref();",
+        "b_contents": "    immutables[i]->Ref();\n  }\n  // Collect iterators for files in L0 - Ln\n  versions_->current()->Ref();\n  version = versions_->current();\n  mutex_.Unlock();\n\n  std::vector<Iterator*> list;\n  list.push_back(mutable_mem->NewIterator(options));\n  cleanup->mem.push_back(mutable_mem);\n  for (MemTable* m : immutables) {\n    list.push_back(m->NewIterator(options));\n    cleanup->mem.push_back(m);",
+        "base_contents": "    MemTable* m = immutables[i];\n    m->Ref();\n    list.push_back(m->NewIterator(options));\n    cleanup->mem.push_back(m);",
+        "res_region": "    immutables[i]->Ref();\n  }",
+        "lookback": "  }",
+        "lookahead": "  // Collect iterators for files in L0 - Ln",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2708,
+        "end_line": 2729,
+        "merge_gen_region": null,
+        "confidence": 0.455468088388443,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // Collect iterators for files in L0 - Ln\n  versions_->current()->Ref();\n  version = versions_->current();\n  mutex_.Unlock();\n\n  std::vector<Iterator*> memtables;\n  memtables.push_back(mutable_mem->NewIterator(options));\n  cleanup->mem.push_back(mutable_mem);\n  for (MemTable* m : immutables) {\n    memtables.push_back(m->NewIterator(options));\n    cleanup->mem.push_back(m);\n  }\n  version->AddIterators(options, storage_options_, &memtables);\n  Iterator* internal_iter = NewMergingIterator(\n      env_, &internal_comparator_, memtables.data(), memtables.size()\n  );\n  cleanup->version = version;",
+        "b_contents": "  version->AddIterators(options, storage_options_, &list);\n  Iterator* internal_iter =\n      NewMergingIterator(&internal_comparator_, &list[0], list.size());\n  cleanup->version = version;",
+        "base_contents": "\n  // Collect iterators for files in L0 - Ln\n  versions_->current()->AddIterators(options, storage_options_, &list);\n  Iterator* internal_iter =\n      NewMergingIterator(&internal_comparator_, &list[0], list.size());\n  versions_->current()->Ref();\n",
+        "res_region": "  // Collect iterators for files in L0 - Ln\n  versions_->current()->Ref();\n  version = versions_->current();\n  mutex_.Unlock();\n\n  std::vector<Iterator*> memtables;\n  memtables.push_back(mutable_mem->NewIterator(options));\n  cleanup->mem.push_back(mutable_mem);\n  for (MemTable* m : immutables) {\n    memtables.push_back(m->NewIterator(options));\n    cleanup->mem.push_back(m);\n  }\n  version->AddIterators(options, storage_options_, &memtables);\n  Iterator* internal_iter = NewMergingIterator(\n      env_, &internal_comparator_, memtables.data(), memtables.size()\n  );\n\n  cleanup->version = version;",
+        "lookback": "  versions_->current()->Ref();",
+        "lookahead": "  cleanup->mu = &mutex_;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2731,
+        "end_line": 2762,
+        "merge_gen_region": null,
+        "confidence": 0.7359771132469177,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  StopWatch sw(env_, options_.statistics.get(), DB_GET, false);\n  StopWatchNano snapshot_timer(env_, false);\n  StartPerfTimer(&snapshot_timer);",
+        "b_contents": "  StopWatch sw(env_, options_.statistics.get(), DB_GET, false);",
+        "base_contents": "  StopWatch sw(env_, options_.statistics.get(), DB_GET);",
+        "res_region": "  StopWatch sw(env_, options_.statistics.get(), DB_GET, false);\n  StopWatchNano snapshot_timer(env_, false);\n  StartPerfTimer(&snapshot_timer);",
+        "lookback": "  StopWatchNano snapshot_timer(env_, false);",
+        "lookahead": "  SequenceNumber snapshot;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2830,
+        "end_line": 2838,
+        "merge_gen_region": null,
+        "confidence": 0.8456553220748901,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  StopWatch sw(env_, options_.statistics.get(), DB_MULTIGET, false);",
+        "base_contents": "  StopWatch sw(env_, options_.statistics.get(), DB_MULTIGET);",
+        "res_region": "",
+        "lookback": "  autovector<MemTable*> to_delete;",
+        "lookahead": "  SequenceNumber snapshot;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2921,
+        "end_line": 2926,
+        "merge_gen_region": null,
+        "confidence": 0.7671604752540588,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      StartPerfTimer(&pre_post_process_timer);",
+        "b_contents": "      if (updates == &tmp_batch_) tmp_batch_.Clear();",
+        "base_contents": "",
+        "res_region": "      StartPerfTimer(&pre_post_process_timer);\n      if (updates == &tmp_batch_) tmp_batch_.Clear();",
+        "lookback": "      if (updates == &tmp_batch_) tmp_batch_.Clear();",
+        "lookahead": "      mutex_.Lock();",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 3177,
+        "end_line": 3182,
+        "merge_gen_region": null,
+        "confidence": 0.838549017906189,
+        "hesitated": true
+    },
+    {
+        "a_contents": "          new_mem = new MemTable(\n            internal_comparator_, mem_rep_factory_, NumberLevels(), options_);\n          new_superversion = new SuperVersion();",
+        "b_contents": "          memtmp = new MemTable(internal_comparator_, options_);\n          new_superversion = new SuperVersion(options_.max_write_buffer_number);",
+        "base_contents": "          memtmp = new MemTable(\n            internal_comparator_, mem_rep_factory_, NumberLevels(), options_);\n          new_superversion = new SuperVersion(options_.max_write_buffer_number);",
+        "res_region": "          new_mem = new MemTable(internal_comparator_, options_);\n          new_superversion = new SuperVersion();",
+        "lookback": "          new_superversion = new SuperVersion();",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3443,
+        "end_line": 3454,
+        "merge_gen_region": null,
+        "confidence": 0.6093007922172546,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  VersionEdit edit(maxlevel);\n  DeletionState deletion_state(true);",
+        "b_contents": "  VersionEdit edit;\n  DeletionState deletion_state(0, true);",
+        "base_contents": "  VersionEdit edit(maxlevel);\n  DeletionState deletion_state(0, true);",
+        "res_region": "  VersionEdit edit;\n  DeletionState deletion_state(true);",
+        "lookback": "  DeletionState deletion_state(true);",
+        "lookahead": "  {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3835,
+        "end_line": 3844,
+        "merge_gen_region": null,
+        "confidence": 0.7884871959686279,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  impl->mutex_.Lock();  // DBImpl::Recover() requires lock being held\n  VersionEdit edit(impl->NumberLevels());",
+        "b_contents": "  impl->mutex_.Lock();\n  VersionEdit edit;",
+        "base_contents": "  impl->mutex_.Lock();\n  VersionEdit edit(impl->NumberLevels());",
+        "res_region": "  impl->mutex_.Lock();  // DBImpl::Recover() requires lock being held\n  VersionEdit edit;",
+        "lookback": "  VersionEdit edit;",
+        "lookahead": "  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3964,
+        "end_line": 3973,
+        "merge_gen_region": null,
+        "confidence": 0.789999783039093,
+        "hesitated": true
+    }
+]

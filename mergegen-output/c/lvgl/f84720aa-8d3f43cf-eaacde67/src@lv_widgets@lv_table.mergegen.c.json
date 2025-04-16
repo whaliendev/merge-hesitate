@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        lv_coord_t h = 0;\n        for(i = 0; i < table->row_cnt; i++) h += table->row_h[i];\n\n        p->x = w;\n        p->y = h;",
+        "b_contents": "    return res;\n}\n\n/**\n * Get the style descriptor of a part of the object\n * @param table pointer the object\n * @param part the part from. (LV_TABLE_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_table_get_style(lv_obj_t * table, uint8_t part)\n{\n    LV_ASSERT_OBJ(table, LV_OBJX_NAME);\n\n    lv_table_ext_t * ext = lv_obj_get_ext_attr(table);\n\n    /* Because of the presence of LV_TABLE_PART_BG, LV_TABLE_PART_CELL<i> has an integer value\n       of <i>. This comes in useful to extend above code with more cell types as follows */\n    if(part == LV_TABLE_PART_BG) {\n        return &table->style_list;\n    }\n    else if(part >= 1 && part <= LV_TABLE_CELL_STYLE_CNT) {\n        return &ext->cell_style[part - 1];",
+        "base_contents": "    return res;\n}\n\n\n/**\n * Get the style descriptor of a part of the object\n * @param table pointer the object\n * @param part the part from. (LV_TABLE_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_table_get_style(lv_obj_t * table, uint8_t part)\n{\n    LV_ASSERT_OBJ(table, LV_OBJX_NAME);\n\n    lv_table_ext_t * ext = lv_obj_get_ext_attr(table);\n\n    /* Because of the presence of LV_TABLE_PART_BG, LV_TABLE_PART_CELL<i> has an integer value\n       of <i>. This comes in useful to extend above code with more cell types as follows */\n    if(part == LV_TABLE_PART_BG) {\n        return &table->style_list;\n    }\n    else if(part >= 1 && part <= LV_TABLE_CELL_STYLE_CNT) {\n        return &ext->cell_style[part - 1];",
+        "res_region": "        lv_coord_t h = 0;\n        for(i = 0; i < table->row_cnt; i++) h += table->row_h[i];\n\n        p->x = w;\n        p->y = h;",
+        "lookback": "        for(i = 0; i < table->row_cnt; i++) h += table->row_h[i];",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 816,
+        "end_line": 869,
+        "merge_gen_region": null,
+        "confidence": 0.7370622754096985,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_coord_t letter_space = lv_obj_get_style_text_letter_space(obj, LV_PART_ITEMS);\n    lv_coord_t line_space = lv_obj_get_style_text_line_space(obj, LV_PART_ITEMS);\n    const lv_font_t * font = lv_obj_get_style_text_font(obj, LV_PART_ITEMS);\n\n    for(i = 0; i < table->row_cnt; i++) {\n        table->row_h[i] = get_row_height(obj, i, font, letter_space, line_space,",
+        "b_contents": "    for(i = 0; i < ext->row_cnt; i++) {\n        ext->row_h[i] = get_row_height(table, i, font, letter_space, line_space,",
+        "base_contents": "\n    for(i = 0; i < ext->row_cnt; i++) {\n        ext->row_h[i] = get_row_height(table, i, font, letter_space, line_space,",
+        "res_region": "    lv_coord_t letter_space = lv_obj_get_style_text_letter_space(obj, LV_PART_ITEMS);\n    lv_coord_t line_space = lv_obj_get_style_text_line_space(obj, LV_PART_ITEMS);\n    const lv_font_t * font = lv_obj_get_style_text_font(obj, LV_PART_ITEMS);\n\n    for(i = 0; i < table->row_cnt; i++) {\n        table->row_h[i] = get_row_height(obj, i, font, letter_space, line_space,",
+        "lookback": "    lv_coord_t line_space = lv_obj_get_style_text_line_space(obj, LV_PART_ITEMS);",
+        "lookahead": "                                       cell_left, cell_right, cell_top, cell_bottom);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 887,
+        "end_line": 901,
+        "merge_gen_region": null,
+        "confidence": 0.8382551670074463,
+        "hesitated": true
+    }
+]

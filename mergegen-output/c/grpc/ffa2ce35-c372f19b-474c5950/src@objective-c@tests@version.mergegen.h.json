@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.11.0-dev\"\n#define GRPC_C_VERSION_STRING @\"6.0.0-dev\"",
+        "b_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.10.0\"\n#define GRPC_C_VERSION_STRING @\"6.0.0\"",
+        "base_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.10.0-pre2\"\n#define GRPC_C_VERSION_STRING @\"6.0.0-pre2\"",
+        "res_region": "#define GRPC_OBJC_VERSION_STRING @\"1.11.0-dev\"\n#define GRPC_C_VERSION_STRING @\"6.0.0-dev\"",
+        "lookback": "#define GRPC_C_VERSION_STRING @\"6.0.0-dev\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 34,
+        "merge_gen_region": "mStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemState",
+        "confidence": 0.9331631064414978,
+        "hesitated": false,
+        "resolved": false
+    }
+]

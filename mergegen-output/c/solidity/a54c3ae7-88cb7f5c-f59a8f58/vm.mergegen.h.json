@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tstatic eth::OnOpFunc simpleTrace();\n\tFakeState state() const { return m_s; }\n",
+        "b_contents": "\ttemplate<typename ExtVMType>\n\teth::OnOpFunc simpleTrace();\n\n\tFakeState state() const { return m_s; }\n",
+        "base_contents": "",
+        "res_region": "\ttemplate<typename ExtVMType>\n\teth::OnOpFunc simpleTrace();\n\n\tFakeState state() const { return m_s; }\n",
+        "lookback": "\teth::OnOpFunc simpleTrace();",
+        "lookahead": "\tstd::map<Address, std::tuple<u256, u256, std::map<u256, u256>, bytes>> addresses;",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 83,
+        "end_line": 94,
+        "merge_gen_region": null,
+        "confidence": 0.852240264415741,
+        "hesitated": true
+    }
+]

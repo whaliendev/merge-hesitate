@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "DEFINE_bool(enable_gain_scheduler, false,\n            \"Enable gain scheduler for higher vechile speed\");",
+        "b_contents": "DEFINE_bool(enable_gain_scheduler, false,\n            \"Enable gain scheduler for higher vechile speed\");\nDEFINE_bool(set_steer_limit, false, \"Set steer limit\");",
+        "base_contents": "",
+        "res_region": "DEFINE_bool(enable_gain_scheduler, false,\n            \"Enable gain scheduler for higher vechile speed\");\nDEFINE_bool(set_steer_limit, false, \"Set steer limit\");",
+        "lookback": "            \"Enable gain scheduler for higher vechile speed\");",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 47,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.6885740756988525,
+        "hesitated": true
+    }
+]

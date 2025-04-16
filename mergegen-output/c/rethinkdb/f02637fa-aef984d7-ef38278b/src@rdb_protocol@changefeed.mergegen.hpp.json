@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"clustering/administration/auth/user_context.hpp\"",
+        "b_contents": "#include \"clustering/administration/auth/user_context.hpp\"\n#include \"concurrency/new_mutex.hpp\"",
+        "base_contents": "",
+        "res_region": "#include \"clustering/administration/auth/user_context.hpp\"\n#include \"concurrency/new_mutex.hpp\"",
+        "lookback": "#include \"concurrency/new_mutex.hpp\"",
+        "lookahead": "#include \"concurrency/promise.hpp\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 16,
+        "end_line": 22,
+        "merge_gen_region": "includecluster//.\"\"",
+        "confidence": 0.9067514538764954,
+        "hesitated": false,
+        "resolved": false
+    }
+]

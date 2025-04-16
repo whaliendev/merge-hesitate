@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    /// (e.g. you update data stream traits or correctly remove / add columns).\n    void updateInputStreams(DataStreams input_streams_)\n    {\n        chassert(canUpdateInputStream());\n        input_streams = std::move(input_streams_);\n        updateOutputStream();\n    }\n\n    void updateInputStream(DataStream input_stream) { updateInputStreams(DataStreams{input_stream}); }\n\n    void updateInputStream(DataStream input_stream, size_t idx)\n    {\n        chassert(canUpdateInputStream() && idx < input_streams.size());\n        input_streams[idx] = input_stream;\n        updateOutputStream();\n    }\n\n    virtual bool canUpdateInputStream() const { return false; }\n    String getUniqID() const { return fmt::format(\"{}_{}\", getName(), step_index); }",
+        "b_contents": "    /// (e.g. you correctly remove / add columns).\n    void updateInputHeaders(Headers input_headers_);\n    void updateInputHeader(Header input_header, size_t idx = 0);\n",
+        "base_contents": "    /// (e.g. you update data stream traits or correctly remove / add columns).\n    void updateInputStreams(DataStreams input_streams_)\n    {\n        chassert(canUpdateInputStream());\n        input_streams = std::move(input_streams_);\n        updateOutputStream();\n    }\n\n    void updateInputStream(DataStream input_stream) { updateInputStreams(DataStreams{input_stream}); }\n\n    void updateInputStream(DataStream input_stream, size_t idx)\n    {\n        chassert(canUpdateInputStream() && idx < input_streams.size());\n        input_streams[idx] = input_stream;\n        updateOutputStream();\n    }\n\n    virtual bool canUpdateInputStream() const { return false; }\n",
+        "res_region": "    String getUniqID() const { return fmt::format(\"{}_{}\", getName(), step_index); }\n\n    /// (e.g. you correctly remove / add columns).\n    void updateInputHeaders(Headers input_headers_);\n    void updateInputHeader(Header input_header, size_t idx = 0);\n",
+        "lookback": "",
+        "lookahead": "protected:",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 89,
+        "end_line": 134,
+        "merge_gen_region": null,
+        "confidence": 0.7858848571777344,
+        "hesitated": true
+    }
+]

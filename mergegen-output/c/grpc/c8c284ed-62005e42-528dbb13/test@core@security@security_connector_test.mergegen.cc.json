@@ -1,0 +1,110 @@
+[
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_peer(4, &peer) == TSI_OK);",
+        "b_contents": "  const char* expected_pem_cert_chain = \"pem_cert1_chain\";\n  GPR_ASSERT(tsi_construct_peer(4, &peer) == TSI_OK);",
+        "base_contents": "  GPR_ASSERT(tsi_construct_peer(3, &peer) == TSI_OK);",
+        "res_region": "  const char* expected_pem_cert_chain = \"pem_cert1_chain\";\n  GPR_ASSERT(tsi_construct_peer(5, &peer) == TSI_OK);",
+        "lookback": "  GPR_ASSERT(tsi_construct_peer(5, &peer) == TSI_OK);",
+        "lookahead": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 229,
+        "end_line": 236,
+        "merge_gen_region": " char expectedpemcertchain \"_1_\"; GPRASSERTt const::GPRGPRoutputoutputdexdexdexdexAVAILABLE",
+        "confidence": 0.9221384525299072,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[3]) == TSI_OK);\n",
+        "b_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[3]) == TSI_OK);",
+        "base_contents": "",
+        "res_region": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[3]) == TSI_OK);\n  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[4]) == TSI_OK);",
+        "lookback": "                 TSI_SECURITY_LEVEL_PEER_PROPERTY,",
+        "lookahead": "  grpc_core::RefCountedPtr<grpc_auth_context> ctx =",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 246,
+        "end_line": 257,
+        "merge_gen_region": "GPRGPRGPRGPRGPRGPRGPRGPRoutputoutputoutputReplaceGPRGPRGPR",
+        "confidence": 0.9215595126152039,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_peer(5, &peer) == TSI_OK);",
+        "b_contents": "  const char* expected_pem_cert_chain = \"pem_cert1_chain\";\n  GPR_ASSERT(tsi_construct_peer(5, &peer) == TSI_OK);",
+        "base_contents": "  GPR_ASSERT(tsi_construct_peer(4, &peer) == TSI_OK);",
+        "res_region": "  const char* expected_pem_cert_chain = \"pem_cert1_chain\";\n  GPR_ASSERT(tsi_construct_peer(6, &peer) == TSI_OK);",
+        "lookback": "  GPR_ASSERT(tsi_construct_peer(6, &peer) == TSI_OK);",
+        "lookahead": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 283,
+        "end_line": 290,
+        "merge_gen_region": " char expectedpemcertchain \"_1_\"; GPRASSERTt::___(, &) TSIOK",
+        "confidence": 0.9209794998168945,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[4]) == TSI_OK);",
+        "b_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[4]) == TSI_OK);\n",
+        "base_contents": "",
+        "res_region": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[4]) == TSI_OK);\n  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[5]) == TSI_OK);",
+        "lookback": "                 TSI_SECURITY_LEVEL_PEER_PROPERTY,",
+        "lookahead": "  grpc_core::RefCountedPtr<grpc_auth_context> ctx =",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 303,
+        "end_line": 315,
+        "merge_gen_region": "GPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPR",
+        "confidence": 0.9244421124458313,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[3]) == TSI_OK);",
+        "b_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[3]) == TSI_OK);",
+        "base_contents": "",
+        "res_region": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[3]) == TSI_OK);\n  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[4]) == TSI_OK);",
+        "lookback": "                 TSI_SECURITY_LEVEL_PEER_PROPERTY,",
+        "lookahead": "  for (i = 0; i < GPR_ARRAY_SIZE(expected_sans); i++) {",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 354,
+        "end_line": 364,
+        "merge_gen_region": "GPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPR",
+        "confidence": 0.9341474771499634,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[5]) == TSI_OK);",
+        "b_contents": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[5]) == TSI_OK);",
+        "base_contents": "",
+        "res_region": "  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_SECURITY_LEVEL_PEER_PROPERTY,\n                 tsi_security_level_to_string(TSI_PRIVACY_AND_INTEGRITY),\n                 &peer.properties[5]) == TSI_OK);\n  GPR_ASSERT(tsi_construct_string_peer_property_from_cstring(\n                 TSI_X509_PEM_CERT_CHAIN_PROPERTY, expected_pem_cert_chain,\n                 &peer.properties[6]) == TSI_OK);",
+        "lookback": "                 TSI_SECURITY_LEVEL_PEER_PROPERTY,",
+        "lookahead": "  for (i = 0; i < GPR_ARRAY_SIZE(expected_sans); i++) {",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 413,
+        "end_line": 423,
+        "merge_gen_region": "GPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPRGPR",
+        "confidence": 0.9350236654281616,
+        "hesitated": false,
+        "resolved": false
+    }
+]

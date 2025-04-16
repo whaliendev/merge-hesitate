@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "/*Testing of dependencies*/\n#if LV_USE_LABEL == 0\n    #error \"lv_img: lv_label is required. Enable it in lv_conf.h (LV_USE_LABEL 1)\"\n#endif\n",
+        "base_contents": "/*Testing of dependencies*/\n#if LV_USE_LABEL == 0\n    #error \"lv_img: lv_label is required. Enable it in lv_conf.h (LV_USE_LABEL  1) \"\n#endif\n",
+        "res_region": "",
+        "lookback": "#include \"../lv_themes/lv_theme.h\"",
+        "lookahead": "#include \"../lv_misc/lv_debug.h\"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 11,
+        "end_line": 24,
+        "merge_gen_region": null,
+        "confidence": 0.8025226593017578,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_coord_t obj_w = lv_obj_get_width(obj);\n    lv_coord_t obj_h = lv_obj_get_height(obj);\n\n    lv_area_t bg_coords;\n    _lv_img_buf_get_transformed_area(&bg_coords, obj_w, obj_h,\n                                     angle_final, zoom_final, &img->pivot);",
+        "b_contents": "        int32_t zoom_final = lv_obj_get_style_transform_zoom(img, LV_IMG_PART_MAIN);\n        zoom_final = (zoom_final * ext->zoom) >> 8;",
+        "base_contents": "\n        int32_t zoom_final = lv_obj_get_style_transform_zoom(img, LV_IMG_PART_MAIN);\n        zoom_final = (zoom_final * ext->zoom) >> 8;",
+        "res_region": "    lv_coord_t obj_w = lv_obj_get_width(obj);\n    lv_coord_t obj_h = lv_obj_get_height(obj);\n\n    lv_area_t bg_coords;\n    _lv_img_buf_get_transformed_area(&bg_coords, obj_w, obj_h,\n                                     angle_final, zoom_final, &img->pivot);",
+        "lookback": "    lv_coord_t obj_h = lv_obj_get_height(obj);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 572,
+        "end_line": 586,
+        "merge_gen_region": null,
+        "confidence": 0.8266549110412598,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        lv_coord_t left = lv_obj_get_style_pad_left(obj, LV_PART_MAIN);\n        lv_coord_t right = lv_obj_get_style_pad_right(obj, LV_PART_MAIN);\n        lv_coord_t top = lv_obj_get_style_pad_top(obj, LV_PART_MAIN);\n        lv_coord_t bottom = lv_obj_get_style_pad_bottom(obj, LV_PART_MAIN);\n\n        *s = LV_MAX(*s, left);\n        *s = LV_MAX(*s, right);\n        *s = LV_MAX(*s, top);\n        *s = LV_MAX(*s, bottom);",
+        "b_contents": "        lv_style_int_t left = lv_obj_get_style_pad_left(img, LV_IMG_PART_MAIN);\n        lv_style_int_t right = lv_obj_get_style_pad_right(img, LV_IMG_PART_MAIN);\n        lv_style_int_t top = lv_obj_get_style_pad_top(img, LV_IMG_PART_MAIN);\n        lv_style_int_t bottom = lv_obj_get_style_pad_bottom(img, LV_IMG_PART_MAIN);\n\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, left);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, right);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, top);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, bottom);\n",
+        "base_contents": "        lv_style_int_t left = lv_obj_get_style_pad_left(img, LV_IMG_PART_MAIN);\n        lv_style_int_t right = lv_obj_get_style_pad_right(img, LV_IMG_PART_MAIN);\n        lv_style_int_t top = lv_obj_get_style_pad_top(img, LV_IMG_PART_MAIN);\n        lv_style_int_t bottom = lv_obj_get_style_pad_bottom(img, LV_IMG_PART_MAIN);\n\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, left);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, right);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, top);\n        img->ext_draw_pad = LV_MATH_MAX(img->ext_draw_pad, bottom);\n\n",
+        "res_region": "        lv_coord_t left = lv_obj_get_style_pad_left(obj, LV_PART_MAIN);\n        lv_coord_t right = lv_obj_get_style_pad_right(obj, LV_PART_MAIN);\n        lv_coord_t top = lv_obj_get_style_pad_top(obj, LV_PART_MAIN);\n        lv_coord_t bottom = lv_obj_get_style_pad_bottom(obj, LV_PART_MAIN);\n\n        *s = LV_MAX(*s, left);\n        *s = LV_MAX(*s, right);\n        *s = LV_MAX(*s, top);\n        *s = LV_MAX(*s, bottom);",
+        "lookback": "        lv_coord_t right = lv_obj_get_style_pad_right(obj, LV_PART_MAIN);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 731,
+        "end_line": 764,
+        "merge_gen_region": "___obj * =_ * =_ * =_ * =_ * =_ * =_struct * =_ * =_ * =_ * =_ * =_structstructlvlvobjlvobjlvobjlvobjlvobjlvobjlvobj>(outputoutput void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void void",
+        "confidence": 0.909996509552002,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "static lv_style_list_t * lv_img_get_style(lv_obj_t * img, uint8_t type)\n{\n    lv_style_list_t * style_dsc_p;\n    switch(type) {\n        case LV_IMG_PART_MAIN:\n            style_dsc_p = &img->style_list;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n",
+        "base_contents": "\nstatic lv_style_list_t * lv_img_get_style(lv_obj_t * img, uint8_t type)\n{\n    lv_style_list_t * style_dsc_p;\n    switch(type) {\n        case LV_IMG_PART_MAIN:\n            style_dsc_p = &img->style_list;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 802,
+        "end_line": 835,
+        "merge_gen_region": null,
+        "confidence": 0.6844279766082764,
+        "hesitated": true
+    }
+]

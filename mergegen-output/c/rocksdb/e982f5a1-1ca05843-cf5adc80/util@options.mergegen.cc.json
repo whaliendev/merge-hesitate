@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    Log(log,\"             Options.max_background_compactions: %d\",\n        max_background_compactions);",
+        "b_contents": "    Log(log,\"    Options.delete_obsolete_files_period_micros: %ld\",\n        delete_obsolete_files_period_micros);",
+        "base_contents": "",
+        "res_region": "    Log(log,\"    Options.delete_obsolete_files_period_micros: %ld\",\n        delete_obsolete_files_period_micros);\n    Log(log,\"             Options.max_background_compactions: %d\",\n        max_background_compactions);",
+        "lookback": "        delete_obsolete_files_period_micros);",
+        "lookahead": "}   // Options::Dump",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 98,
+        "end_line": 105,
+        "merge_gen_region": null,
+        "confidence": 0.5383428931236267,
+        "hesitated": true
+    }
+]

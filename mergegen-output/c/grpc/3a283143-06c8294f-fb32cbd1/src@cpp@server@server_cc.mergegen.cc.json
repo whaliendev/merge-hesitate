@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "               internal::RpcServiceMethod::ApiType::SYNC) {\n      for (const auto& value : sync_req_mgrs_) {\n        value->AddSyncMethod(method, method_registration_tag);",
+        "b_contents": "               grpc::internal::RpcServiceMethod::ApiType::SYNC) {\n      for (auto it = sync_req_mgrs_.begin(); it != sync_req_mgrs_.end(); it++) {\n        (*it)->AddSyncMethod(method, method_registration_tag);",
+        "base_contents": "               internal::RpcServiceMethod::ApiType::SYNC) {\n      for (auto it = sync_req_mgrs_.begin(); it != sync_req_mgrs_.end(); it++) {\n        (*it)->AddSyncMethod(method, method_registration_tag);",
+        "res_region": "               grpc::internal::RpcServiceMethod::ApiType::SYNC) {\n      for (const auto& value : sync_req_mgrs_) {\n        value->AddSyncMethod(method, method_registration_tag);",
+        "lookback": "      for (const auto& value : sync_req_mgrs_) {",
+        "lookahead": "      }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1104,
+        "end_line": 1116,
+        "merge_gen_region": null,
+        "confidence": 0.8380184173583984,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (!has_generic_service_) {\n    for (const auto& value : sync_req_mgrs_) {\n      value->AddUnknownSyncMethod();",
+        "b_contents": "  if (!has_async_generic_service_ && !has_callback_generic_service_) {\n    for (auto it = sync_req_mgrs_.begin(); it != sync_req_mgrs_.end(); it++) {\n      (*it)->AddUnknownSyncMethod();",
+        "base_contents": "  if (!has_generic_service_) {\n    for (auto it = sync_req_mgrs_.begin(); it != sync_req_mgrs_.end(); it++) {\n      (*it)->AddUnknownSyncMethod();",
+        "res_region": "  if (!has_async_generic_service_ && !has_callback_generic_service_) {\n    for (const auto& value : sync_req_mgrs_) {\n      value->AddUnknownSyncMethod();",
+        "lookback": "    for (const auto& value : sync_req_mgrs_) {",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1224,
+        "end_line": 1236,
+        "merge_gen_region": null,
+        "confidence": 0.847987949848175,
+        "hesitated": true
+    }
+]

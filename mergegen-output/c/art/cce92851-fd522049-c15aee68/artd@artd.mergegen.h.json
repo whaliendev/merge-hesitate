@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  ndk::ScopedAStatus isInDalvikCache(const std::string& in_dexFile, bool* _aidl_return) override;\n\n  ndk::ScopedAStatus validateDexPath(const std::string& in_dexPath,\n                                     std::optional<std::string>* _aidl_return) override;\n\n  ndk::ScopedAStatus validateClassLoaderContext(const std::string& in_dexPath,\n                                                const std::string& in_classLoaderContext,\n                                                std::optional<std::string>* _aidl_return) override;",
+        "b_contents": "  ndk::ScopedAStatus isInDalvikCache(const std::string& in_dexFile, bool* _aidl_return) override;",
+        "base_contents": "  ndk::ScopedAStatus isIncrementalFsPath(const std::string& in_dexFile,\n                                         bool* _aidl_return) override;",
+        "res_region": "  ndk::ScopedAStatus isInDalvikCache(const std::string& in_dexFile, bool* _aidl_return) override;\n\n  ndk::ScopedAStatus validateDexPath(const std::string& in_dexPath,\n                                     std::optional<std::string>* _aidl_return) override;\n\n  ndk::ScopedAStatus validateClassLoaderContext(const std::string& in_dexPath,\n                                                const std::string& in_classLoaderContext,\n                                                std::optional<std::string>* _aidl_return) override;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 166,
+        "end_line": 180,
+        "merge_gen_region": null,
+        "confidence": 0.7270382642745972,
+        "hesitated": true
+    }
+]

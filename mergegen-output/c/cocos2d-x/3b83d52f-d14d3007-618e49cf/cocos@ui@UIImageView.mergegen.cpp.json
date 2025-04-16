@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \nvoid ImageView::setAnchorPoint(const Vector2 &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _imageRenderer->setAnchorPoint(pt);\n}",
+        "b_contents": "",
+        "base_contents": "    \nvoid ImageView::setAnchorPoint(const Point &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _imageRenderer->setAnchorPoint(pt);\n}",
+        "res_region": "",
+        "lookback": "void ImageView::onSizeChanged()",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 260,
+        "end_line": 275,
+        "merge_gen_region": null,
+        "confidence": 0.5168671011924744,
+        "hesitated": true
+    }
+]

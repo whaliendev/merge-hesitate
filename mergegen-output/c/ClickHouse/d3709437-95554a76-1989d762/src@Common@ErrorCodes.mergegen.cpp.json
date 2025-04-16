@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    M(736, PART_IS_LOCKED) \\",
+        "b_contents": "    M(736, ICEBERG_CATALOG_ERROR) \\",
+        "base_contents": "",
+        "res_region": "    M(736, ICEBERG_CATALOG_ERROR) \\\n    M(737, PART_IS_LOCKED) \\",
+        "lookback": "    M(737, PART_IS_LOCKED) \\",
+        "lookahead": "\\",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 615,
+        "end_line": 620,
+        "merge_gen_region": null,
+        "confidence": 0.7230184674263,
+        "hesitated": true
+    }
+]

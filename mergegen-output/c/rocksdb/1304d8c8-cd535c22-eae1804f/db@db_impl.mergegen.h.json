@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"memtablelist.h\"\n#include \"util/autovector.h\"",
+        "base_contents": "#include \"memtablelist.h\"",
+        "res_region": "",
+        "lookback": "namespace rocksdb {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 27,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.46968668699264526,
+        "hesitated": true
+    }
+]

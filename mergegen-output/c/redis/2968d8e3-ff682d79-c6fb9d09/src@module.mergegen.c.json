@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <sys/stat.h>\n\n#define REDISMODULE_CORE 1\n#include \"redismodule.h\"",
+        "b_contents": "#include <sys/wait.h>",
+        "base_contents": "\n#define REDISMODULE_CORE 1\n#include \"redismodule.h\"",
+        "res_region": "#include <sys/stat.h>\n#include <sys/wait.h>",
+        "lookback": "#include <sys/wait.h>",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 44,
+        "merge_gen_region": null,
+        "confidence": 0.6625303030014038,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    sp<FakeWindowHandle> mSpyWindow;\n    // Mouse would force no-split, set the id as non-zero to verify if drag state could track it.\n    static constexpr int32_t MOUSE_POINTER_ID = 1;",
+        "b_contents": "    // Mouse would force no-split, set the id as non-zero to verify if drag state could track it.\n    static constexpr int32_t MOUSE_POINTER_ID = 1;",
+        "base_contents": "",
+        "res_region": "    sp<FakeWindowHandle> mSpyWindow;\n    // Mouse would force no-split, set the id as non-zero to verify if drag state could track it.\n    static constexpr int32_t MOUSE_POINTER_ID = 1;",
+        "lookback": "    // Mouse would force no-split, set the id as non-zero to verify if drag state could track it.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 6203,
+        "end_line": 6211,
+        "merge_gen_region": null,
+        "confidence": 0.8694265484809875,
+        "hesitated": true
+    }
+]

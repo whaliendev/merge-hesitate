@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/basic_msgs/drive_state.pb.h\"\n#include \"modules/common_msgs/basic_msgs/pnc_point.pb.h\"",
+        "base_contents": "#include \"modules/common/proto/drive_state.pb.h\"\n#include \"modules/common/proto/pnc_point.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/common_msgs/basic_msgs/drive_state.pb.h\"",
+        "lookahead": "#include \"modules/common/vehicle_state/proto/vehicle_state.pb.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 30,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.6061562895774841,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/planning/proto/lattice_structure.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/lattice_structure.pb.h\"\n#include \"modules/planning/proto/planning.pb.h\"",
+        "res_region": "",
+        "lookback": "namespace apollo {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 54,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.687207818031311,
+        "hesitated": true
+    }
+]

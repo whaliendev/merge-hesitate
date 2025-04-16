@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "ChppResetPacket generateResetPacket(uint8_t ackSeq, uint8_t seq) {",
+        "b_contents": "ChppResetPacket generateResetPacket(size_t rxBufferLen, uint8_t ackSeq,\n                                    uint8_t seq) {",
+        "base_contents": "ChppResetPacket generateResetPacket(size_t rxBufferLen, uint16_t timeoutInMs,\n                                    uint8_t ackSeq, uint8_t seq) {",
+        "res_region": "ChppResetPacket generateResetPacket(uint8_t ackSeq, uint8_t seq) {",
+        "lookback": "  // clang-format off",
+        "lookahead": "  // clang-format off",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 44,
+        "end_line": 52,
+        "merge_gen_region": null,
+        "confidence": 0.8408761024475098,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ChppResetPacket generateResetAckPacket(uint8_t ackSeq, uint8_t seq) {\n  ChppResetPacket pkt = generateResetPacket(ackSeq, seq);",
+        "b_contents": "ChppResetPacket generateResetAckPacket(size_t rxBufferLen, uint8_t ackSeq,\n                                       uint8_t seq) {\n  ChppResetPacket pkt = generateResetPacket(rxBufferLen, ackSeq, seq);",
+        "base_contents": "ChppResetPacket generateResetAckPacket(size_t rxBufferLen, uint16_t timeoutInMs,\n                                       uint8_t ackSeq, uint8_t seq) {\n  ChppResetPacket pkt =\n      generateResetPacket(rxBufferLen, timeoutInMs, ackSeq, seq);",
+        "res_region": "ChppResetPacket generateResetAckPacket(uint8_t ackSeq, uint8_t seq) {\n  ChppResetPacket pkt = generateResetPacket(ackSeq, seq);",
+        "lookback": "  ChppResetPacket pkt = generateResetPacket(ackSeq, seq);",
+        "lookahead": "  pkt.header.packetCode =",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 81,
+        "end_line": 93,
+        "merge_gen_region": null,
+        "confidence": 0.8547572493553162,
+        "hesitated": true
+    }
+]

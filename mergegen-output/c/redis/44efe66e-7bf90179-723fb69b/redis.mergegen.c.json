@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "static void version() {\n    printf(\"Redis server version %s\\n\", REDIS_VERSION);\n    exit(0);\n}\n",
+        "b_contents": "static void usage() {\n    fprintf(stderr,\"Usage: ./redis-server [/path/to/redis.conf]\\n\");\n    exit(1);\n}\n",
+        "base_contents": "",
+        "res_region": "static void version() {\n    printf(\"Redis server version %s\\n\", REDIS_VERSION);\n    exit(0);\n}\n\nstatic void usage() {\n    fprintf(stderr,\"Usage: ./redis-server [/path/to/redis.conf]\\n\");\n    exit(1);\n}\n",
+        "lookback": "    printf(\"Redis server version %s\\n\", REDIS_VERSION);",
+        "lookahead": "int main(int argc, char **argv) {",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 9167,
+        "end_line": 9180,
+        "merge_gen_region": null,
+        "confidence": 0.8264232277870178,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if ((strcmp(argv[1], \"-v\") == 0) || (strcmp(argv[1], \"--version\") == 0)) {\n            version();\n        }",
+        "b_contents": "        if (strcmp(argv[1], \"--help\") == 0) {\n            usage();\n        }",
+        "base_contents": "",
+        "res_region": "        if (strcmp(argv[1], \"-v\") == 0 ||\n            strcmp(argv[1], \"--version\") == 0) version();\n        if (strcmp(argv[1], \"--help\") == 0) usage();",
+        "lookback": "            strcmp(argv[1], \"--version\") == 0) version();",
+        "lookahead": "        resetServerSaveParams();",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 9186,
+        "end_line": 9195,
+        "merge_gen_region": " (([ifififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.91551274061203,
+        "hesitated": false,
+        "resolved": false
+    }
+]

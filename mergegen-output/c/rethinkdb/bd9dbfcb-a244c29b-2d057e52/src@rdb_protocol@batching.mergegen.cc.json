@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    counted_t<val_t> v = env->global_optargs.get_optarg(env, \"batch_conf\");\n    return user(batch_type, v.has() ? v->as_datum() : datum_t());",
+        "b_contents": "    counted_t<val_t> v = env->get_optarg(env, \"batch_conf\");\n    return user(batch_type, v.has() ? v->as_datum() : counted_t<const datum_t>());",
+        "base_contents": "    counted_t<val_t> v = env->global_optargs.get_optarg(env, \"batch_conf\");\n    return user(batch_type, v.has() ? v->as_datum() : counted_t<const datum_t>());",
+        "res_region": "    counted_t<val_t> v = env->get_optarg(env, \"batch_conf\");\n    return user(batch_type, v.has() ? v->as_datum() : datum_t());",
+        "lookback": "    return user(batch_type, v.has() ? v->as_datum() : datum_t());",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 107,
+        "merge_gen_region": null,
+        "confidence": 0.5705341696739197,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            \n            stringstream digestBuilder;\n",
+        "b_contents": "            \n            double n = nonce.number();",
+        "base_contents": "\n            double n = nonce.number();",
+        "res_region": "            \n            stringstream digestBuilder;\n",
+        "lookback": "            stringstream digestBuilder;",
+        "lookahead": "            {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 93,
+        "end_line": 103,
+        "merge_gen_region": null,
+        "confidence": 0.6814570426940918,
+        "hesitated": true
+    }
+]

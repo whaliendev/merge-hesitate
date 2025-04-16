@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nCC_DEPRECATED_ATTRIBUTE std::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len = -1);\nCC_DEPRECATED_ATTRIBUTE std::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr);\n\nstd::wstring CC_DLL StringUtf8ToWideChar(const std::string& strUtf8);\nstd::string CC_DLL StringWideCharToUtf8(const std::wstring& strWideChar);\n",
+        "b_contents": "bool isWindowsPhone();\nstd::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len = -1);\nstd::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr);",
+        "base_contents": "\nstd::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len = -1);\nstd::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr);",
+        "res_region": "bool isWindowsPhone();\n\nCC_DEPRECATED_ATTRIBUTE std::wstring CC_DLL CCUtf8ToUnicode(const char * pszUtf8Str, unsigned len = -1);\nCC_DEPRECATED_ATTRIBUTE std::string CC_DLL CCUnicodeToUtf8(const wchar_t* pwszStr);\n\nstd::wstring CC_DLL StringUtf8ToWideChar(const std::string& strUtf8);\nstd::string CC_DLL StringWideCharToUtf8(const std::wstring& strWideChar);\n",
+        "lookback": "",
+        "lookahead": "Platform::Object^ findXamlElement(Platform::Object^ parent, Platform::String^ name);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 39,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.8120793104171753,
+        "hesitated": true
+    }
+]

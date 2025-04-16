@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "AidlCamera3Device::AidlCamera3Device(\n        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,\n        bool legacyClient) :\n        Camera3Device(cameraServiceProxyWrapper, id, overrideForPerfClass, overrideToPortrait,\n        legacyClient) {",
+        "b_contents": "AidlCamera3Device::AidlCamera3Device(const std::string& id, bool overrideForPerfClass,\n        bool overrideToPortrait, bool legacyClient) :\n        Camera3Device(id, overrideForPerfClass, overrideToPortrait, legacyClient) {",
+        "base_contents": "AidlCamera3Device::AidlCamera3Device(const String8& id, bool overrideForPerfClass,\n        bool overrideToPortrait, bool legacyClient) :\n        Camera3Device(id, overrideForPerfClass, overrideToPortrait, legacyClient) {",
+        "res_region": "AidlCamera3Device::AidlCamera3Device(\n        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,\n        bool legacyClient) :\n        Camera3Device(cameraServiceProxyWrapper, id, overrideForPerfClass, overrideToPortrait,\n        legacyClient) {",
+        "lookback": "        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,",
+        "lookahead": "    mCallbacks = ndk::SharedRefBase::make<AidlCameraDeviceCallbacks>(this);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 165,
+        "end_line": 180,
+        "merge_gen_region": null,
+        "confidence": 0.8421551585197449,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    mSupportNativeZoomRatio = manager->supportNativeZoomRatio(mId);\n    mIsCompositeJpegRDisabled = manager->isCompositeJpegRDisabled(mId);",
+        "b_contents": "    mSupportNativeZoomRatio = manager->supportNativeZoomRatio(mId);",
+        "base_contents": "    mSupportNativeZoomRatio = manager->supportNativeZoomRatio(mId.string());",
+        "res_region": "    mSupportNativeZoomRatio = manager->supportNativeZoomRatio(mId);\n    mIsCompositeJpegRDisabled = manager->isCompositeJpegRDisabled(mId);",
+        "lookback": "    mIsCompositeJpegRDisabled = manager->isCompositeJpegRDisabled(mId);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 217,
+        "end_line": 224,
+        "merge_gen_region": null,
+        "confidence": 0.8102009296417236,
+        "hesitated": true
+    }
+]

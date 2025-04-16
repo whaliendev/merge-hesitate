@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "+ (void)setCallSafety:(GRPCCallSafety)callSafety\n                 host:(nonnull NSString *)host\n                 path:(nonnull NSString *)path;\n@property(nullable, atomic, copy, readwrite) NSString *serverName;\n@property NSTimeInterval timeout;\n- (void)setResponseDispatchQueue:(nonnull dispatch_queue_t)queue;",
+        "b_contents": "+ (void)setCallSafety:(GRPCCallSafety)callSafety host:(NSString *)host path:(NSString *)path;\n\n/**\n * Set the dispatch queue to be used for callbacks. Current implementation requires \\a queue to be a\n * serial queue.\n *\n * This configuration is only effective before the call starts.\n */\n- (void)setResponseDispatchQueue:(dispatch_queue_t)queue;",
+        "base_contents": "+ (void)setCallSafety:(GRPCCallSafety)callSafety host:(NSString *)host path:(NSString *)path;\n\n/**\n * Set the dispatch queue to be used for callbacks.\n *\n * This configuration is only effective before the call starts.\n */\n- (void)setResponseDispatchQueue:(dispatch_queue_t)queue;",
+        "res_region": "+ (void)setCallSafety:(GRPCCallSafety)callSafety\n                 host:(nonnull NSString *)host\n                 path:(nonnull NSString *)path;\n@property(nullable, atomic, copy, readwrite) NSString *serverName;\n@property NSTimeInterval timeout;\n- (void)setResponseDispatchQueue:(nonnull dispatch_queue_t)queue;",
+        "lookback": "                 host:(nonnull NSString *)host",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 356,
+        "end_line": 382,
+        "merge_gen_region": null,
+        "confidence": 0.6964142918586731,
+        "hesitated": true
+    }
+]

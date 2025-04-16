@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "                // Enforce the state checking after kDrainSupportedVersion\n                if (getHalVersion(effect) >= kDrainSupportedVersion) {\n                    ASSERT_TRUE(expectState(effect, State::IDLE) ||\n                                expectState(effect, State::DRAINING));\n                }\n                break;",
+        "b_contents": "                // Enforce the state checking after kDrainSupportedVersion\n                if (getHalVersion(effect) >= kDrainSupportedVersion) {\n                    ASSERT_NO_FATAL_FAILURE(expectState(effect, State::IDLE));\n                }\n                break;",
+        "base_contents": "                FALLTHROUGH_INTENDED;",
+        "res_region": "                // Enforce the state checking after kDrainSupportedVersion\n                if (getHalVersion(effect) >= kDrainSupportedVersion) {\n                    ASSERT_TRUE(expectState(effect, State::IDLE) ||\n                                expectState(effect, State::DRAINING));\n                }\n                break;",
+        "lookback": "                if (getHalVersion(effect) >= kDrainSupportedVersion) {",
+        "lookahead": "            case CommandId::RESET:",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 198,
+        "end_line": 213,
+        "merge_gen_region": null,
+        "confidence": 0.8713975548744202,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void generateInput(std::vector<float>& input, float inputFrequency, float samplingFrequency,\n                       size_t inputSize = 0) {\n        if (inputSize == 0 || inputSize > input.size()) {\n            inputSize = input.size();\n        }\n\n        for (size_t i = 0; i < inputSize; i++) {\n            input[i] = sin(2 * M_PI * inputFrequency * i / samplingFrequency);\n        }\n    }\n\n    static int getHalVersion(const std::shared_ptr<IEffect>& effect) {\n        int version = 0;\n        return (effect && effect->getInterfaceVersion(&version).isOk()) ? version : 0;\n    }\n",
+        "b_contents": "    static int getHalVersion(const std::shared_ptr<IEffect>& effect) {\n        int version = 0;\n        return (effect && effect->getInterfaceVersion(&version).isOk()) ? version : 0;\n    }\n",
+        "base_contents": "",
+        "res_region": "    void generateInput(std::vector<float>& input, float inputFrequency, float samplingFrequency,\n                       size_t inputSize = 0) {\n        if (inputSize == 0 || inputSize > input.size()) {\n            inputSize = input.size();\n        }\n\n        for (size_t i = 0; i < inputSize; i++) {\n            input[i] = sin(2 * M_PI * inputFrequency * i / samplingFrequency);\n        }\n    }\n\n    static int getHalVersion(const std::shared_ptr<IEffect>& effect) {\n        int version = 0;\n        return (effect && effect->getInterfaceVersion(&version).isOk()) ? version : 0;\n    }\n",
+        "lookback": "                       size_t inputSize = 0) {",
+        "lookahead": "    bool mIsSpatializer;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 523,
+        "end_line": 547,
+        "merge_gen_region": " generate(outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8823671340942383,
+        "hesitated": false,
+        "resolved": false
+    }
+]

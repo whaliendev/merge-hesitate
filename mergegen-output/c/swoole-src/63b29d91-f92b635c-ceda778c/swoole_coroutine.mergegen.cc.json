@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    task->origin_task = origin_task;\n    task->pcid = Coroutine::get_cid(origin_task->co);\n",
+        "base_contents": "",
+        "res_region": "    task->origin_task = origin_task;\n    task->pcid = Coroutine::get_cid(origin_task->co);\n",
+        "lookback": "    task->pcid = Coroutine::get_cid(origin_task->co);",
+        "lookahead": "    swTraceLog(",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 342,
+        "end_line": 349,
+        "merge_gen_region": null,
+        "confidence": 0.5948116779327393,
+        "hesitated": true
+    }
+]

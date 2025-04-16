@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        imageView->setPosition(Vector2(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f + imageView->getSize().height / 4.0f));",
+        "b_contents": "        imageView->setPosition(Point(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f));",
+        "base_contents": "        imageView->setPosition(Point(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f + imageView->getSize().height / 4.0f));",
+        "res_region": "        imageView->setPosition(Vector2(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f));",
+        "lookback": "                                     widgetSize.height / 2.0f));",
+        "lookahead": "        ",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 22,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.7784076929092407,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        imageView->setPosition(Vector2(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f + imageView->getSize().height / 4.0f));",
+        "b_contents": "        imageView->setPosition(Point(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f));",
+        "base_contents": "        imageView->setPosition(Point(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f + imageView->getSize().height / 4.0f));",
+        "res_region": "        imageView->setPosition(Vector2(widgetSize.width / 2.0f,\n                                     widgetSize.height / 2.0f));",
+        "lookback": "                                     widgetSize.height / 2.0f));",
+        "lookahead": "        ",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 62,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.7784076929092407,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    lv_area_t series_area;\n    get_series_area(chart, &series_area);",
+        "b_contents": "    lv_coord_t w     = lv_obj_get_width(chart);\n    lv_coord_t x_ofs = chart->coords.x1;\n\n    if(i < ext->point_cnt) {\n        lv_area_t coords;\n        lv_obj_get_coords(chart, &coords);\n        if(i < ext->point_cnt - 1) {\n            coords.x1 = ((w * i) / (ext->point_cnt - 1)) + x_ofs - ext->series.width;\n            coords.x2 = ((w * (i + 1)) / (ext->point_cnt - 1)) + x_ofs + ext->series.width;\n            lv_obj_invalidate_area(chart, &coords);\n        }\n\n        if(i > 0) {\n            coords.x1 = ((w * (i - 1)) / (ext->point_cnt - 1)) + x_ofs - ext->series.width;\n            coords.x2 = ((w * i) / (ext->point_cnt - 1)) + x_ofs + ext->series.width;\n            lv_obj_invalidate_area(chart, &coords);\n        }\n    }\n}",
+        "base_contents": "    lv_coord_t w     = lv_obj_get_width(chart);\n    lv_coord_t x_ofs = chart->coords.x1;\n\n    if(i < ext->point_cnt) {\n        lv_area_t coords;\n        lv_obj_get_coords(chart, &coords);\n        if(i < ext->point_cnt - 1) {\n            coords.x1 = ((w * i) / (ext->point_cnt - 1)) + x_ofs - ext->series.width;\n            coords.x2 = ((w * (i + 1)) / (ext->point_cnt - 1)) + x_ofs + ext->series.width;\n            lv_inv_area(lv_obj_get_disp(chart), &coords);\n        }\n\n        if(i > 0) {\n            coords.x1 = ((w * (i - 1)) / (ext->point_cnt - 1)) + x_ofs - ext->series.width;\n            coords.x2 = ((w * i) / (ext->point_cnt - 1)) + x_ofs + ext->series.width;\n            lv_inv_area(lv_obj_get_disp(chart), &coords);\n        }\n    }\n}",
+        "res_region": "    lv_area_t series_area;\n    get_series_area(chart, &series_area);",
+        "lookback": "    get_series_area(chart, &series_area);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1382,
+        "end_line": 1425,
+        "merge_gen_region": null,
+        "confidence": 0.4919285774230957,
+        "hesitated": true
+    }
+]

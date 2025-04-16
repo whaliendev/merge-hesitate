@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#ifdef HAVE_UTEMPTER\n#include <utempter.h>\n#endif\n\n#include \"compat.h\"\n",
+        "b_contents": "#include \"xmalloc.h\"\n",
+        "base_contents": "",
+        "res_region": "#ifdef HAVE_UTEMPTER\n#include <utempter.h>\n#endif\n\n#include \"compat.h\"\n#include \"xmalloc.h\"\n",
+        "lookback": "#include <utempter.h>",
+        "lookahead": "extern char    *__progname;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 43,
+        "merge_gen_region": null,
+        "confidence": 0.842760443687439,
+        "hesitated": true
+    }
+]

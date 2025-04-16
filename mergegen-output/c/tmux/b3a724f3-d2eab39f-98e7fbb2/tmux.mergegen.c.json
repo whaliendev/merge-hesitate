@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#ifdef __OpenBSD__",
+        "b_contents": "\tif (pty_open(&ptm_fd) != 0)\n\t\terrx(1, \"open(\\\"/dev/ptm\\\"\");",
+        "base_contents": "",
+        "res_region": "#ifdef __OpenBSD__\n\tif (pty_open(&ptm_fd) != 0)\n\t\terrx(1, \"open(\\\"/dev/ptm\\\"\");",
+        "lookback": "\tif (pty_open(&ptm_fd) != 0)",
+        "lookahead": "\tif (pledge(\"stdio rpath wpath cpath flock fattr unix getpw sendfd \"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 263,
+        "end_line": 269,
+        "merge_gen_region": null,
+        "confidence": 0.8756280541419983,
+        "hesitated": true
+    }
+]

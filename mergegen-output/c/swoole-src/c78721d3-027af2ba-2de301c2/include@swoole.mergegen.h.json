@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    swString *module_input_buffer;\n    swString *module_output_buffer;",
+        "b_contents": "    swString *module_stack;",
+        "base_contents": "    swString *call_php_func_args;",
+        "res_region": "    swString *module_stack;",
+        "lookback": "    int call_php_func_argc;",
+        "lookahead": "    int call_php_func_argc;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1827,
+        "end_line": 1834,
+        "merge_gen_region": null,
+        "confidence": 0.6327582001686096,
+        "hesitated": true
+    }
+]

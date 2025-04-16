@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    LV_LOG_TRACE(\"lv_bar create started\");\n\n    /*Create the ancestor basic object*/\n    lv_obj_t * bar = lv_obj_create(par, copy);\n    LV_ASSERT_MEM(bar);\n    if(bar == NULL) return NULL;\n\n    if(ancestor_signal == NULL) ancestor_signal = lv_obj_get_signal_cb(bar);\n    if(ancestor_design_f == NULL) ancestor_design_f = lv_obj_get_design_cb(bar);\n\n    /*Allocate the object type specific extended data*/\n    lv_bar_ext_t * ext = lv_obj_allocate_ext_attr(bar, sizeof(lv_bar_ext_t));\n    LV_ASSERT_MEM(ext);\n    if(ext == NULL) {\n        lv_obj_del(bar);\n        return NULL;\n    }\n\n    ext->min_value = 0;\n    ext->start_value = 0;\n    ext->max_value = 100;\n    ext->cur_value = 0;\n#if LV_USE_ANIMATION\n    ext->anim_time  = 200;\n    lv_bar_init_anim(bar, &ext->cur_value_anim);\n    lv_bar_init_anim(bar, &ext->start_value_anim);\n#endif\n    ext->type         = LV_BAR_TYPE_NORMAL;\n\n    lv_style_list_init(&ext->style_indic);\n\n    lv_obj_set_signal_cb(bar, lv_bar_signal);\n    lv_obj_set_design_cb(bar, lv_bar_design);\n\n    /*Init the new bar object*/\n    if(copy == NULL) {\n\n        lv_obj_set_click(bar, false);\n        lv_obj_set_size(bar, LV_DPI * 2, LV_DPI / 10);\n        lv_bar_set_value(bar, ext->cur_value, false);\n\n        lv_theme_apply(bar, LV_THEME_BAR);\n    }\n    else {\n        lv_bar_ext_t * ext_copy = lv_obj_get_ext_attr(copy);\n        ext->min_value          = ext_copy->min_value;\n        ext->start_value        = ext_copy->start_value;\n        ext->max_value          = ext_copy->max_value;\n        ext->cur_value          = ext_copy->cur_value;\n        ext->type                = ext_copy->type;\n\n        lv_style_list_copy(&ext->style_indic, &ext_copy->style_indic);",
+        "base_contents": "    LV_LOG_TRACE(\"lv_bar create started\");\n\n    /*Create the ancestor basic object*/\n    lv_obj_t * bar = lv_obj_create(par, copy);\n    LV_ASSERT_MEM(bar);\n    if(bar == NULL) return NULL;\n\n    if(ancestor_signal == NULL) ancestor_signal = lv_obj_get_signal_cb(bar);\n    if(ancestor_design_f == NULL) ancestor_design_f = lv_obj_get_design_cb(bar);\n\n    /*Allocate the object type specific extended data*/\n    lv_bar_ext_t * ext = lv_obj_allocate_ext_attr(bar, sizeof(lv_bar_ext_t));\n    LV_ASSERT_MEM(ext);\n    if(ext == NULL) {\n        lv_obj_del(bar);\n        return NULL;\n    }\n\n    ext->min_value = 0;\n    ext->start_value = 0;\n    ext->max_value = 100;\n    ext->cur_value = 0;\n#if LV_USE_ANIMATION\n    ext->anim_time  = 200;\n    lv_bar_init_anim(bar, &ext->cur_value_anim);\n    lv_bar_init_anim(bar, &ext->start_value_anim);\n#endif\n    ext->type         = LV_BAR_TYPE_NORMAL;\n\n    lv_style_list_init(&ext->style_indic);\n\n    lv_obj_set_signal_cb(bar, lv_bar_signal);\n    lv_obj_set_design_cb(bar, lv_bar_design);\n\n\n    /*Init the new  bar object*/\n    if(copy == NULL) {\n\n        lv_obj_set_click(bar, false);\n        lv_obj_set_size(bar, LV_DPI * 2, LV_DPI / 10);\n        lv_bar_set_value(bar, ext->cur_value, false);\n\n        lv_theme_apply(bar, LV_THEME_BAR);\n    }\n    else {\n        lv_bar_ext_t * ext_copy = lv_obj_get_ext_attr(copy);\n        ext->min_value          = ext_copy->min_value;\n        ext->start_value        = ext_copy->start_value;\n        ext->max_value          = ext_copy->max_value;\n        ext->cur_value          = ext_copy->cur_value;\n        ext->type                = ext_copy->type;\n\n        lv_style_list_copy(&ext->style_indic, &ext_copy->style_indic);",
+        "res_region": "",
+        "lookback": "}",
+        "lookahead": "    return lv_obj_create_from_class(&lv_bar, parent, copy);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 80,
+        "end_line": 188,
+        "merge_gen_region": null,
+        "confidence": 0.653690755367279,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    if(bar->cur_value == value) return;",
+        "b_contents": "    if(ext->cur_value == new_value) return;",
+        "base_contents": "\n    if(ext->cur_value == new_value) return;",
+        "res_region": "    if(bar->cur_value == value) return;",
+        "lookback": "#if LV_USE_ANIMATION == 0",
+        "lookahead": "#if LV_USE_ANIMATION == 0",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 213,
+        "end_line": 221,
+        "merge_gen_region": null,
+        "confidence": 0.6258769035339355,
+        "hesitated": true
+    },
+    {
+        "a_contents": "   if(copy == NULL) {\n       lv_obj_clear_flag(obj, LV_OBJ_FLAG_CHECKABLE);\n       lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);\n       lv_obj_set_size(obj, LV_DPI * 2, LV_DPI / 10);\n       lv_bar_set_value(obj, 0, LV_ANIM_OFF);\n   } else {\n       lv_bar_t * copy_bar = (lv_bar_t *)copy;\n       bar->min_value   = copy_bar->min_value;\n       bar->start_value = copy_bar->start_value;\n       bar->max_value   = copy_bar->max_value;\n       bar->cur_value   = copy_bar->cur_value;\n       bar->type        = copy_bar->type;\n\n       lv_bar_set_value(obj, bar->cur_value, LV_ANIM_OFF);\n   }\n   LV_LOG_INFO(\"bar created\");\n}\n\nstatic void lv_bar_destructor(lv_obj_t * obj)\n{\n//    lv_bar_t * bar = obj;\n//\n//    _lv_obj_reset_style_list_no_refr(obj, LV_PART_INDICATOR);\n//#if LV_USE_ANIMATION\n//    lv_anim_del(&bar->cur_value_anim, NULL);\n//    lv_anim_del(&bar->start_value_anim, NULL);\n//#endif\n\n//    bar->class_p->base_p->destructor(obj);\n}",
+        "b_contents": "/**********************\n *   STATIC FUNCTIONS\n **********************/",
+        "base_contents": "\n/**********************\n *   STATIC FUNCTIONS\n **********************/",
+        "res_region": "   if(copy == NULL) {\n       lv_obj_clear_flag(obj, LV_OBJ_FLAG_CHECKABLE);\n       lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);\n       lv_obj_set_size(obj, LV_DPI * 2, LV_DPI / 10);\n       lv_bar_set_value(obj, 0, LV_ANIM_OFF);\n   } else {\n       lv_bar_t * copy_bar = (lv_bar_t *)copy;\n       bar->min_value   = copy_bar->min_value;\n       bar->start_value = copy_bar->start_value;\n       bar->max_value   = copy_bar->max_value;\n       bar->cur_value   = copy_bar->cur_value;\n       bar->type        = copy_bar->type;\n\n       lv_bar_set_value(obj, bar->cur_value, LV_ANIM_OFF);\n   }\n   LV_LOG_INFO(\"bar created\");\n}\n\nstatic void lv_bar_destructor(lv_obj_t * obj)\n{\n//    lv_bar_t * bar = obj;\n//\n//    _lv_obj_reset_style_list_no_refr(obj, LV_PART_INDICATOR);\n//#if LV_USE_ANIMATION\n//    lv_anim_del(&bar->cur_value_anim, NULL);\n//    lv_anim_del(&bar->start_value_anim, NULL);\n//#endif\n\n//    bar->class_p->base_p->destructor(obj);\n}",
+        "lookback": "       lv_obj_clear_flag(obj, LV_OBJ_FLAG_CHECKABLE);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 397,
+        "end_line": 437,
+        "merge_gen_region": null,
+        "confidence": 0.8555924296379089,
+        "hesitated": true
+    }
+]

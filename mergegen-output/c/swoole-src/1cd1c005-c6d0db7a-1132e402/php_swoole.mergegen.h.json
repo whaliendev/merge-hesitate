@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define PHP_SWOOLE_VERSION  \"2.0.1-alpha\"",
+        "b_contents": "#define PHP_SWOOLE_VERSION  \"1.8.9-beta\"",
+        "base_contents": "#define PHP_SWOOLE_VERSION  \"1.8.9-alpha\"",
+        "res_region": "#define PHP_SWOOLE_VERSION  \"2.0.1-alpha\"",
+        "lookback": "#define PHP_SWOOLE_CHECK_CALLBACK",
+        "lookahead": "#define PHP_SWOOLE_CHECK_CALLBACK",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 45,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.8714452981948853,
+        "hesitated": true
+    }
+]

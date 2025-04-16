@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "static sw_inline void php_swoole_check_reactor()\n{\n    if (SWOOLE_G(req_status) == PHP_SWOOLE_RSHUTDOWN_BEGIN)\n    {\n        return ;\n    }\n    if (unlikely(!SwooleG.main_reactor))\n    {\n        php_swoole_reactor_init();\n    }\n}\n",
+        "base_contents": "",
+        "res_region": "\nstatic sw_inline void php_swoole_check_reactor()\n{\n    if (SWOOLE_G(req_status) == PHP_SWOOLE_RSHUTDOWN_BEGIN)\n    {\n        return ;\n    }\n    if (unlikely(!SwooleG.main_reactor))\n    {\n        php_swoole_reactor_init();\n    }\n}\n",
+        "lookback": "static sw_inline void php_swoole_check_reactor()",
+        "lookahead": "static sw_inline char* php_swoole_format_date(char *format, size_t format_len, time_t ts, int localtime)",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 1154,
+        "end_line": 1170,
+        "merge_gen_region": null,
+        "confidence": 0.7531742453575134,
+        "hesitated": true
+    }
+]

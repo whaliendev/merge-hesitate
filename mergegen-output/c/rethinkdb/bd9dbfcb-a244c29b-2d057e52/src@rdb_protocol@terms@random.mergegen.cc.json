@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            new array_datum_stream_t(datum_t(std::move(result),\n                                                                 env->env->limits()),",
+        "b_contents": "            new array_datum_stream_t(make_counted<const datum_t>(std::move(result),\n                                                                 env->env->limits()),",
+        "base_contents": "            new array_datum_stream_t(make_counted<const datum_t>(std::move(result),\n                                                                 env->env->limits),",
+        "res_region": "            new array_datum_stream_t(datum_t(std::move(result), env->env->limits()),",
+        "lookback": "                                     backtrace()));",
+        "lookahead": "                                     backtrace()));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 63,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.7822884917259216,
+        "hesitated": true
+    }
+]

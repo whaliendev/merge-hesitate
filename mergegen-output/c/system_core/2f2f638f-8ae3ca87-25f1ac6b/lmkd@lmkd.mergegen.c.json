@@ -1,0 +1,191 @@
+[
+    {
+        "a_contents": "#include <sys/types.h>\n#include <time.h>",
+        "b_contents": "#include <sys/types.h>",
+        "base_contents": "",
+        "res_region": "#include <sys/types.h>\n#include <time.h>",
+        "lookback": "#include <time.h>",
+        "lookahead": "#include <unistd.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.7884567975997925,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#define min(a, b) (((a) < (b)) ? (a) : (b))\n\n#define FAIL_REPORT_RLIMIT_MS 1000\n",
+        "b_contents": "#define FAIL_REPORT_RLIMIT_MS 1000\n",
+        "base_contents": "",
+        "res_region": "#define min(a, b) (((a) < (b)) ? (a) : (b))\n\n#define FAIL_REPORT_RLIMIT_MS 1000\n",
+        "lookback": "",
+        "lookahead": "/* default to old in-kernel interface if no memory pressure events */",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 102,
+        "end_line": 111,
+        "merge_gen_region": null,
+        "confidence": 0.8648958802223206,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    inc_killcnt(procp->oomadj);\n    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);",
+        "b_contents": "    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);\n    pid_remove(pid);",
+        "base_contents": "    ALOGI(\n        \"Killing '%s' (%d), uid %d, adj %d\\n\"\n        \"   to free %ldkB because system is under %s memory pressure oom_adj %d\\n\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k,\n        level_name[level], min_score_adj);\n    pid_remove(pid);",
+        "res_region": "    inc_killcnt(procp->oomadj);\n    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);",
+        "lookback": "    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1313,
+        "end_line": 1328,
+        "merge_gen_region": null,
+        "confidence": 0.4930225908756256,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static int find_and_kill_process(int min_score_adj) {",
+        "b_contents": "static int find_and_kill_processes(int min_score_adj, int pages_to_free) {",
+        "base_contents": "static int find_and_kill_processes(enum vmpressure_level level,\n                                   int min_score_adj, int pages_to_free) {",
+        "res_region": "static int find_and_kill_process(int min_score_adj) {",
+        "lookback": "    int i;",
+        "lookahead": "    int i;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1364,
+        "end_line": 1371,
+        "merge_gen_region": null,
+        "confidence": 0.8039713501930237,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    struct timespec curr_tm;\n    static struct timespec last_kill_tm;\n    static unsigned long kill_skip_count = 0;",
+        "b_contents": "    struct timeval curr_tm;\n    static struct timeval last_kill_tm;\n    static unsigned long kill_skip_count = 0;",
+        "base_contents": "    static struct timeval last_report_tm;\n    static unsigned long skip_count = 0;",
+        "res_region": "    struct timespec curr_tm;\n    static struct timespec last_kill_tm;\n    static unsigned long kill_skip_count = 0;",
+        "lookback": "    static struct timespec last_kill_tm;",
+        "lookahead": "    enum vmpressure_level level = (enum vmpressure_level)data;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1513,
+        "end_line": 1524,
+        "merge_gen_region": " struct currtm static timespec__; unsigned killskipcount 0;structstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstruct",
+        "confidence": 0.9191857576370239,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if (clock_gettime(CLOCK_MONOTONIC_COARSE, &curr_tm) != 0) {\n        ALOGE(\"Failed to get current time\");\n        return;\n    }\n",
+        "b_contents": "    gettimeofday(&curr_tm, NULL);",
+        "base_contents": "",
+        "res_region": "    if (clock_gettime(CLOCK_MONOTONIC_COARSE, &curr_tm) != 0) {\n        ALOGE(\"Failed to get current time\");\n        return;\n    }\n",
+        "lookback": "        ALOGE(\"Failed to get current time\");",
+        "lookahead": "    if (kill_timeout_ms) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1552,
+        "end_line": 1561,
+        "merge_gen_region": null,
+        "confidence": 0.726969838142395,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (find_and_kill_process(level_oomadj[level]) == 0) {",
+        "b_contents": "        if (find_and_kill_processes(level_oomadj[level], 0) == 0) {",
+        "base_contents": "        if (find_and_kill_processes(level, level_oomadj[level], 0) == 0) {",
+        "res_region": "        if (find_and_kill_process(level_oomadj[level]) == 0) {",
+        "lookback": "            if (debug_process_killing) {",
+        "lookahead": "            if (debug_process_killing) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1669,
+        "end_line": 1675,
+        "merge_gen_region": null,
+        "confidence": 0.7785254120826721,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        static struct timespec last_report_tm;\n        static unsigned long report_skip_count = 0;",
+        "b_contents": "        static struct timeval last_report_tm;\n        static unsigned long report_skip_count = 0;",
+        "base_contents": "",
+        "res_region": "        static struct timespec last_report_tm;\n        static unsigned long report_skip_count = 0;",
+        "lookback": "        static unsigned long report_skip_count = 0;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1684,
+        "end_line": 1691,
+        "merge_gen_region": "staticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstaticstatic",
+        "confidence": 0.9257866144180298,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        pages_freed = find_and_kill_process(min_score_adj);",
+        "b_contents": "        pages_freed = find_and_kill_processes(min_score_adj, 0);",
+        "base_contents": "        pages_freed = find_and_kill_processes(level, min_score_adj, pages_to_free);",
+        "res_region": "        pages_freed = find_and_kill_process(min_score_adj);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1716,
+        "end_line": 1722,
+        "merge_gen_region": null,
+        "confidence": 0.8684145212173462,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        /* Log meminfo whenever we kill or when report rate limit allows */\n        meminfo_log(&mi);\n\n        if (use_minfree_levels) {\n            ALOGI(\"Reclaimed %ldkB, cache(%ldkB) and \"\n                \"free(%\" PRId64 \"kB)-reserved(%\" PRId64 \"kB) below min(%ldkB) for oom_adj %d\",\n                pages_freed * page_k,\n                other_file * page_k, mi.field.nr_free_pages * page_k,\n                zi.field.totalreserve_pages * page_k,\n                minfree * page_k, min_score_adj);",
+        "b_contents": "        if (use_minfree_levels) {\n            ALOGI(\"Killing to reclaim %ldkB, reclaimed %ldkB, cache(%ldkB) and \"\n                \"free(%\" PRId64 \"kB)-reserved(%\" PRId64 \"kB) below min(%ldkB) for oom_adj %d\",\n                pages_to_free * page_k, pages_freed * page_k,\n                other_file * page_k, mi.field.nr_free_pages * page_k,\n                zi.field.totalreserve_pages * page_k,\n                minfree * page_k, min_score_adj);",
+        "base_contents": "        if (pages_freed < pages_to_free) {\n            ALOGI(\"Unable to free enough memory (pages to free=%d, pages freed=%d)\",\n                  pages_to_free, pages_freed);",
+        "res_region": "        /* Log meminfo whenever we kill or when report rate limit allows */\n        meminfo_log(&mi);\n\n        if (use_minfree_levels) {\n            ALOGI(\"Reclaimed %ldkB, cache(%ldkB) and \"\n                \"free(%\" PRId64 \"kB)-reserved(%\" PRId64 \"kB) below min(%ldkB) for oom_adj %d\",\n                pages_freed * page_k,\n                other_file * page_k, mi.field.nr_free_pages * page_k,\n                zi.field.totalreserve_pages * page_k,\n                minfree * page_k, min_score_adj);",
+        "lookback": "        meminfo_log(&mi);",
+        "lookahead": "        } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1735,
+        "end_line": 1758,
+        "merge_gen_region": null,
+        "confidence": 0.8506554961204529,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            ALOGI(\"Reclaimed %ldkB at oom_adj %d\",\n                pages_freed * page_k, min_score_adj);",
+        "b_contents": "            ALOGI(\"Killing to reclaim %ldkB, reclaimed %ldkB at oom_adj %d\",\n                pages_to_free * page_k, pages_freed * page_k, min_score_adj);",
+        "base_contents": "            ALOGI(\"Reclaimed enough memory (pages to free=%d, pages freed=%d)\",\n                  pages_to_free, pages_freed);\n            gettimeofday(&last_report_tm, NULL);",
+        "res_region": "            ALOGI(\"Reclaimed %ldkB at oom_adj %d\",\n                pages_freed * page_k, min_score_adj);",
+        "lookback": "                pages_freed * page_k, min_score_adj);",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1760,
+        "end_line": 1770,
+        "merge_gen_region": null,
+        "confidence": 0.8233211636543274,
+        "hesitated": true
+    }
+]

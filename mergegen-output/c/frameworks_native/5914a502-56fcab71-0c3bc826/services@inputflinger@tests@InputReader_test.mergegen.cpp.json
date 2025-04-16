@@ -1,0 +1,124 @@
+[
+    {
+        "a_contents": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "b_contents": "        mReader = sp<InstrumentedInputReader>::make(mFakeEventHub, mFakePolicy, mFakeListener);",
+        "base_contents": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            mFakeListener);",
+        "res_region": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "lookback": "                                                            *mFakeListener);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1571,
+        "end_line": 1579,
+        "merge_gen_region": null,
+        "confidence": 0.875038206577301,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "b_contents": "    sp<TestInputListener> mFakeListener;\n    sp<InstrumentedInputReader> mReader;",
+        "base_contents": "    sp<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "res_region": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookback": "    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookahead": "    std::shared_ptr<InputDevice> mDevice;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2649,
+        "end_line": 2658,
+        "merge_gen_region": null,
+        "confidence": 0.8350775837898254,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "b_contents": "        mFakeListener = new TestInputListener();\n        mReader = sp<InstrumentedInputReader>::make(mFakeEventHub, mFakePolicy, mFakeListener);",
+        "base_contents": "        mFakeListener = new TestInputListener();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            mFakeListener);",
+        "res_region": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "lookback": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,",
+        "lookahead": "        InputDeviceIdentifier identifier;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2664,
+        "end_line": 2675,
+        "merge_gen_region": "m>(>(>(m>(>(outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8926800489425659,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "b_contents": "    sp<TestInputListener> mFakeListener;\n    sp<InstrumentedInputReader> mReader;",
+        "base_contents": "    sp<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "res_region": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookback": "    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookahead": "    std::shared_ptr<InputDevice> mDevice;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2953,
+        "end_line": 2962,
+        "merge_gen_region": null,
+        "confidence": 0.8350775837898254,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "b_contents": "        mFakeListener = new TestInputListener();\n        mReader = sp<InstrumentedInputReader>::make(mFakeEventHub, mFakePolicy, mFakeListener);",
+        "base_contents": "        mFakeListener = new TestInputListener();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            mFakeListener);",
+        "res_region": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "lookback": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,",
+        "lookahead": "        mDevice = newDevice(DEVICE_ID, DEVICE_NAME, DEVICE_LOCATION, EVENTHUB_ID, classes);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2968,
+        "end_line": 2979,
+        "merge_gen_region": "moutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9034847021102905,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "b_contents": "    sp<TestInputListener> mFakeListener;\n    sp<InstrumentedInputReader> mReader;",
+        "base_contents": "    sp<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "res_region": "    std::unique_ptr<TestInputListener> mFakeListener;\n    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookback": "    std::unique_ptr<InstrumentedInputReader> mReader;",
+        "lookahead": "    std::shared_ptr<InputDevice> mDevice;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 9530,
+        "end_line": 9539,
+        "merge_gen_region": null,
+        "confidence": 0.8350775837898254,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "b_contents": "        mFakeListener = new TestInputListener();\n        mReader = sp<InstrumentedInputReader>::make(mFakeEventHub, mFakePolicy, mFakeListener);",
+        "base_contents": "        mFakeListener = new TestInputListener();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            mFakeListener);",
+        "res_region": "        mFakeListener = std::make_unique<TestInputListener>();\n        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,\n                                                            *mFakeListener);",
+        "lookback": "        mReader = std::make_unique<InstrumentedInputReader>(mFakeEventHub, mFakePolicy,",
+        "lookahead": "        mDevice = newDevice(DEVICE_ID, DEVICE_NAME, DEVICE_LOCATION, EVENTHUB_ID, classes);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 9545,
+        "end_line": 9556,
+        "merge_gen_region": "moutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9034847021102905,
+        "hesitated": false,
+        "resolved": false
+    }
+]

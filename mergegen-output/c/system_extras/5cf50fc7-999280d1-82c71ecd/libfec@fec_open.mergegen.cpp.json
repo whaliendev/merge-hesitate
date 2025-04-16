@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    // Don't parse the avb image if FEC_NO_AVB is set. It's used when libavb is\n    // not supported on mac.\n    std::vector<uint8_t> vbmeta;\n    if (parse_vbmeta_from_footer(f.get(), &vbmeta) == 0) {\n        if (parse_avb_image(f.get(), vbmeta) != 0) {\n            error(\"failed to parse avb image.\");\n            return -1;\n        }\n\n        *handle = f.release();\n        return 0;\n    }\n    // TODO(xunchang) For android, handle the case when vbmeta is in a separate\n    // image. We could use avb_slot_verify() && AvbOps from libavb_user.\n\n    // Fall back to use verity format.\n",
+        "b_contents": "    std::vector<uint8_t> vbmeta;\n    if (parse_vbmeta_from_footer(f.get(), &vbmeta) == 0) {\n        if (parse_avb_image(f.get(), vbmeta) != 0) {\n            error(\"failed to parse avb image.\");\n            return -1;\n        }\n\n        *handle = f.release();\n        return 0;\n    }\n    // TODO(xunchang) For android, handle the case when vbmeta is in a separate\n    // image. We could use avb_slot_verify() && AvbOps from libavb_user.\n\n    // Fall back to use verity format.\n",
+        "base_contents": "",
+        "res_region": "    // Don't parse the avb image if FEC_NO_AVB is set. It's used when libavb is\n    // not supported on mac.\n    std::vector<uint8_t> vbmeta;\n    if (parse_vbmeta_from_footer(f.get(), &vbmeta) == 0) {\n        if (parse_avb_image(f.get(), vbmeta) != 0) {\n            error(\"failed to parse avb image.\");\n            return -1;\n        }\n\n        *handle = f.release();\n        return 0;\n    }\n    // TODO(xunchang) For android, handle the case when vbmeta is in a separate\n    // image. We could use avb_slot_verify() && AvbOps from libavb_user.\n\n    // Fall back to use verity format.\n",
+        "lookback": "    // not supported on mac.",
+        "lookahead": "    if (load_ecc(f.get()) == -1) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 690,
+        "end_line": 725,
+        "merge_gen_region": " Don parse av image FECNOAV is.:::::::://'t theb//outputoutputoutputoutputoutputoutputoutputoutputlele */::<outputoutputplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan79outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputFromValue stdvector",
+        "confidence": 0.9369065761566162,
+        "hesitated": false,
+        "resolved": false
+    }
+]

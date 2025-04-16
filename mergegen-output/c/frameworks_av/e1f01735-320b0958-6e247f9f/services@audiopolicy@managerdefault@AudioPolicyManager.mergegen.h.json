@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n        bool checkHapticCompatibilityOnSpatializerOutput(const audio_config_t* config,\n                                                         audio_session_t sessionId) const;\n\n        void updateClientsInternalMute(const sp<SwAudioOutputDescriptor>& desc);\n\n        float adjustDeviceAttenuationForAbsVolume(IVolumeCurves &curves,\n                                                  VolumeSource volumeSource,\n                                                  int index,\n                                                  const DeviceTypeSet &deviceTypes);\n\n        // Contains for devices that support absolute volume the audio attributes\n        // corresponding to the streams that are driving the volume changes\n        std::unordered_map<audio_devices_t, audio_attributes_t> mAbsoluteVolumeDrivingStreams;",
+        "b_contents": "\n        bool checkHapticCompatibilityOnSpatializerOutput(const audio_config_t* config,\n                                                         audio_session_t sessionId) const;",
+        "base_contents": "",
+        "res_region": "\n        bool checkHapticCompatibilityOnSpatializerOutput(const audio_config_t* config,\n                                                         audio_session_t sessionId) const;\n\n        void updateClientsInternalMute(const sp<SwAudioOutputDescriptor>& desc);\n\n        float adjustDeviceAttenuationForAbsVolume(IVolumeCurves &curves,\n                                                  VolumeSource volumeSource,\n                                                  int index,\n                                                  const DeviceTypeSet &deviceTypes);\n\n        // Contains for devices that support absolute volume the audio attributes\n        // corresponding to the streams that are driving the volume changes\n        std::unordered_map<audio_devices_t, audio_attributes_t> mAbsoluteVolumeDrivingStreams;",
+        "lookback": "        bool checkHapticCompatibilityOnSpatializerOutput(const audio_config_t* config,",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1390,
+        "end_line": 1410,
+        "merge_gen_region": " checkapticibilitySpializer( audioconfigt config7979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.9107040762901306,
+        "hesitated": false,
+        "resolved": false
+    }
+]

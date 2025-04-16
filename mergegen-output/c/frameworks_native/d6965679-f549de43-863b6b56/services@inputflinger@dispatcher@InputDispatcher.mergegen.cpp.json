@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <input/PrintTools.h>\n#include <openssl/mem.h>",
+        "b_contents": "#include <openssl/mem.h>",
+        "base_contents": "",
+        "res_region": "#include <input/PrintTools.h>\n#include <openssl/mem.h>",
+        "lookback": "#include <openssl/mem.h>",
+        "lookahead": "#include <powermanager/PowerManager.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.7097265124320984,
+        "hesitated": true
+    }
+]

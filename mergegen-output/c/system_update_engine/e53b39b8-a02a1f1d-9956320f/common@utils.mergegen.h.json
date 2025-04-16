@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "// Gets a string value from the vpd for a given key using the `vpd_get_value`\n// shell command. Returns true on success.\nbool GetVpdValue(std::string key, std::string* result);\n",
+        "b_contents": "// This function gets the file path of the file pointed to by FileDiscriptor.\nstd::string GetFilePath(int fd);\n",
+        "base_contents": "",
+        "res_region": "// Gets a string value from the vpd for a given key using the `vpd_get_value`\n// shell command. Returns true on success.\nbool GetVpdValue(std::string key, std::string* result);\n\n// This function gets the file path of the file pointed to by FileDiscriptor.\nstd::string GetFilePath(int fd);\n",
+        "lookback": "// shell command. Returns true on success.",
+        "lookahead": "// Divide |x| by |y| and round up to the nearest integer.",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 294,
+        "end_line": 304,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8951270580291748,
+        "hesitated": false,
+        "resolved": false
+    }
+]

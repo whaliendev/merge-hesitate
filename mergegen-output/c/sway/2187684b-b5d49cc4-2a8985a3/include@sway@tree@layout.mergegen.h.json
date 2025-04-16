@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "// TODO move to tree.h\nvoid container_add_child(struct sway_container *parent, struct sway_container *child);",
+        "b_contents": "void container_add_child(struct sway_container *parent,\n\t\tstruct sway_container *child);",
+        "base_contents": "void container_add_child(struct sway_container *parent, struct sway_container *child);",
+        "res_region": "// TODO move to tree.h\nvoid container_add_child(struct sway_container *parent,\n\t\tstruct sway_container *child);",
+        "lookback": "void container_add_child(struct sway_container *parent,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 31,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.775485634803772,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// TODO move to output.c\nenum sway_container_layout container_get_default_layout(struct sway_container *output);",
+        "b_contents": "void container_move(struct sway_container *container,\n\t\tenum movement_direction dir, int move_amt);\n\nenum sway_container_layout container_get_default_layout(\n\t\tstruct sway_container *output);",
+        "base_contents": "enum sway_container_layout container_get_default_layout(struct sway_container *output);",
+        "res_region": "void container_move(struct sway_container *container,\n\t\tenum movement_direction dir, int move_amt);\n\n// TODO move to output.c\nenum sway_container_layout container_get_default_layout(\n\t\tstruct sway_container *output);",
+        "lookback": "\t\tenum movement_direction dir, int move_amt);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 55,
+        "end_line": 66,
+        "merge_gen_region": null,
+        "confidence": 0.7827433943748474,
+        "hesitated": true
+    }
+]

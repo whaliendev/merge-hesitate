@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include \"swoole_http_client.h\"",
+        "b_contents": "#include \"websocket.h\"\n#include \"thirdparty/php_http_parser.h\"\n\n#include \"ext/standard/base64.h\"\n\n#ifdef SW_HAVE_ZLIB\n#include <zlib.h>\n#endif\n\nenum http_client_state\n{\n    HTTP_CLIENT_STATE_WAIT,\n    HTTP_CLIENT_STATE_READY,\n    HTTP_CLIENT_STATE_BUSY,\n    //WebSocket\n    HTTP_CLIENT_STATE_UPGRADE,\n    HTTP_CLIENT_STATE_WAIT_CLOSE,\n};\n\ntypedef struct\n{\n    zval *onConnect;\n    zval *onError;\n    zval *onClose;\n    zval *onMessage;\n    zval *onResponse;\n\n#if PHP_MAJOR_VERSION >= 7\n    zval _object;\n    zval _request_body;\n    zval _request_header;\n    zval _request_upload_files;\n    zval _download_file;\n    zval _cookies;\n    zval _onConnect;\n    zval _onError;\n    zval _onClose;\n    zval _onMessage;\n#endif\n\n    zval *cookies;\n    zval *request_header;\n    zval *request_body;\n    zval *request_upload_files;\n    zval *download_file;\n    off_t download_offset;\n    char *request_method;\n    int callback_index;\n\n} http_client_property;\n\ntypedef struct\n{\n    swClient *cli;\n    char *host;\n    zend_size_t host_len;\n    long port;\n    double timeout;\n    char* uri;\n    zend_size_t uri_len;\n\n    char *tmp_header_field_name;\n    zend_size_t tmp_header_field_name_len;\n\n#ifdef SW_HAVE_ZLIB\n    z_stream gzip_stream;\n    swString *gzip_buffer;\n#endif\n\n    /**\n     * download page\n     */\n    int file_fd;\n\n    php_http_parser parser;\n\n    swString *body;\n\n    uint8_t state;       //0 wait 1 ready 2 busy\n    uint8_t keep_alive;  //0 no 1 keep\n    uint8_t upgrade;\n    uint8_t gzip;\n    uint8_t chunked;     //Transfer-Encoding: chunked\n    uint8_t completed;\n    uint8_t websocket_mask;\n    uint8_t download;    //save http response to file\n\n} http_client;\n\n\n\n#ifdef SW_HAVE_ZLIB\nextern swString *swoole_zlib_buffer;\n#endif",
+        "base_contents": "#include \"websocket.h\"\n#include \"thirdparty/php_http_parser.h\"\n\n#include \"ext/standard/basic_functions.h\"\n#include \"ext/standard/php_http.h\"\n#include \"ext/standard/base64.h\"\n\n#ifdef SW_HAVE_ZLIB\n#include <zlib.h>\n#endif\n\nenum http_client_state\n{\n    HTTP_CLIENT_STATE_WAIT,\n    HTTP_CLIENT_STATE_READY,\n    HTTP_CLIENT_STATE_BUSY,\n    //WebSocket\n    HTTP_CLIENT_STATE_UPGRADE,\n    HTTP_CLIENT_STATE_WAIT_CLOSE,\n};\n\ntypedef struct\n{\n    zval *onConnect;\n    zval *onError;\n    zval *onClose;\n    zval *onMessage;\n    zval *onResponse;\n\n#if PHP_MAJOR_VERSION >= 7\n    zval _object;\n    zval _request_body;\n    zval _request_header;\n    zval _request_upload_files;\n    zval _download_file;\n    zval _cookies;\n    zval _onConnect;\n    zval _onError;\n    zval _onClose;\n    zval _onMessage;\n#endif\n\n    zval *cookies;\n    zval *request_header;\n    zval *request_body;\n    zval *request_upload_files;\n    zval *download_file;\n    off_t download_offset;\n    char *request_method;\n    int callback_index;\n\n} http_client_property;\n\ntypedef struct\n{\n    swClient *cli;\n    char *host;\n    zend_size_t host_len;\n    long port;\n    double timeout;\n    char* uri;\n    zend_size_t uri_len;\n\n    char *tmp_header_field_name;\n    zend_size_t tmp_header_field_name_len;\n\n#ifdef SW_HAVE_ZLIB\n    z_stream gzip_stream;\n#endif\n\n    /**\n     * download page\n     */\n    int file_fd;\n\n    php_http_parser parser;\n\n    swString *body;\n\n    uint8_t state;       //0 wait 1 ready 2 busy\n    uint8_t keep_alive;  //0 no 1 keep\n    uint8_t upgrade;\n    uint8_t gzip;\n    uint8_t chunked;     //Transfer-Encoding: chunked\n    uint8_t completed;\n    uint8_t websocket_mask;\n    uint8_t download;    //save http response to file\n\n} http_client;\n\n#ifdef SW_HAVE_ZLIB\nextern swString *swoole_zlib_buffer;\n#endif",
+        "res_region": "#include \"swoole_http_client.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 18,
+        "end_line": 209,
+        "merge_gen_region": null,
+        "confidence": 0.7390862703323364,
+        "hesitated": true
+    },
+    {
+        "a_contents": "int http_response_uncompress(z_stream *stream, char *body, int length);",
+        "b_contents": "int http_response_uncompress(z_stream *stream, swString *buffer, char *body, int length);",
+        "base_contents": "static int http_response_uncompress(z_stream *stream, char *body, int length);",
+        "res_region": "int http_response_uncompress(z_stream *stream, swString *buffer, char *body, int length);",
+        "lookback": "static void http_init_gzip_stream(http_client *);",
+        "lookahead": "static void http_init_gzip_stream(http_client *);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 223,
+        "end_line": 229,
+        "merge_gen_region": null,
+        "confidence": 0.571929931640625,
+        "hesitated": true
+    },
+    {
+        "a_contents": "int http_response_uncompress(z_stream *stream, char *body, int length)",
+        "b_contents": "int http_response_uncompress(z_stream *stream, swString *buffer, char *body, int length)",
+        "base_contents": "static int http_response_uncompress(z_stream *stream, char *body, int length)",
+        "res_region": "int http_response_uncompress(z_stream *stream, swString *buffer, char *body, int length)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1714,
+        "end_line": 1720,
+        "merge_gen_region": null,
+        "confidence": 0.524917721748352,
+        "hesitated": true
+    }
+]

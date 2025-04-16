@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/**\n * whether enable the special memory watcher.\n * which used for memory leak debug and hurts performance.\n */\n#define SRS_MEM_WATCH\n#undef SRS_MEM_WATCH\n",
+        "b_contents": "/**\n * whether enable the special memory watcher.\n * which used for memory leak debug and hurts performance.\n */\n#undef SRS_MEM_WATCH\n#define SRS_MEM_WATCH\n",
+        "base_contents": "",
+        "res_region": "/**\n * whether enable the special memory watcher.\n * which used for memory leak debug and hurts performance.\n */\n#undef SRS_MEM_WATCH\n#define SRS_MEM_WATCH\n",
+        "lookback": " * whether enable the special memory watcher.",
+        "lookahead": "#endif",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 190,
+        "end_line": 207,
+        "merge_gen_region": null,
+        "confidence": 0.8313099145889282,
+        "hesitated": true
+    }
+]

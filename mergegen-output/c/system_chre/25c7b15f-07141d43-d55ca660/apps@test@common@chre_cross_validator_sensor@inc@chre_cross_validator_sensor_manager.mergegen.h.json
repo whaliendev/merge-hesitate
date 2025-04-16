@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "   * Send data to be validated to the host.\n   * Handle step counter sensor data from CHRE.\n   *\n   * @param stepCounterDataFromChre The data to parse.\n   */\n  void handleStepCounterData(\n      const chreSensorUint64Data *stepCounterDataFromChre);\n\n  /**\n   * Encode and send data to be validated to host.",
+        "b_contents": "   * Send data to be validated to the host.\n   *\n   * @param data The data to send.\n   */\n  void sendDataToHost(const chre_cross_validation_sensor_Data &data);\n\n  /**\n   * Encode and send the info response to the host.\n   *\n   * @param hostEndpoint The endpoint to send the response to.\n   * @param infoResponse The info response to be encoded and sent.\n   */\n  void sendInfoResponse(\n      uint16_t hostEndpoint,\n      const chre_cross_validation_sensor_SensorInfoResponse &infoResponse);\n\n  /**\n   * Sends the provided message to the host.",
+        "base_contents": "   * Encode and send data to be validated to host.",
+        "res_region": "   * Send data to be validated to the host.\n   * Handle step counter sensor data from CHRE.\n   *\n   * @param stepCounterDataFromChre The data to parse.\n   */\n  void handleStepCounterData(\n      const chreSensorUint64Data *stepCounterDataFromChre);\n\n  /**\n   * Encode and send data to be validated to host.\n   *",
+        "lookback": "   * Handle step counter sensor data from CHRE.",
+        "lookahead": "   * @param data The data to send.",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 324,
+        "end_line": 356,
+        "merge_gen_region": " Send to valid to host * Handle counter data. * @ stepDataChr The to.",
+        "confidence": 0.9390795826911926,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "   * @param data The data to send.\n   */\n  void sendDataToHost(const chre_cross_validation_sensor_Data &data);\n\n  /**\n   * Encode and send the info response to the host.\n   *\n   * @param hostEndpoint The endpoint to send the response to.\n   * @param infoResponse The info response to be encoded and sent.\n   */\n  void sendInfoResponse(\n      uint16_t hostEndpoint,\n      const chre_cross_validation_sensor_SensorInfoResponse &infoResponse);\n\n  /**\n   * Sends the provided message to the host.\n   *\n   * @param hostEndpoint The endpoint to send the message to.\n   * @param messageType The type of message being sent to the host.\n   * @param fields The fields of the provided struct that should be encoded.\n   * @param srcStruct The struct that should be encoded prior to sending to the\n   *     host.",
+        "b_contents": "   * @param hostEndpoint The endpoint to send the message to.\n   * @param messageType The type of message being sent to the host.\n   * @param fields The fields of the provided struct that should be encoded.\n   * @param srcStruct The struct that should be encoded prior to sending to the\n   *     host.",
+        "base_contents": "   * @param data The data to encode and send.",
+        "res_region": "   * @param data The data to send.\n   */\n  void sendDataToHost(const chre_cross_validation_sensor_Data &data);\n\n  /**\n   * Encode and send the info response to the host.\n   *\n   * @param hostEndpoint The endpoint to send the response to.\n   * @param infoResponse The info response to be encoded and sent.\n   */\n  void sendInfoResponse(\n      uint16_t hostEndpoint,\n      const chre_cross_validation_sensor_SensorInfoResponse &infoResponse);\n\n  /**\n   * Sends the provided message to the host.\n   *\n   * @param hostEndpoint The endpoint to send the message to.\n   * @param messageType The type of message being sent to the host.\n   * @param fields The fields of the provided struct that should be encoded.\n   * @param srcStruct The struct that should be encoded prior to sending to the\n   *     host.",
+        "lookback": "   */",
+        "lookahead": "   */",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 358,
+        "end_line": 389,
+        "merge_gen_region": null,
+        "confidence": 0.8336882591247559,
+        "hesitated": true
+    }
+]

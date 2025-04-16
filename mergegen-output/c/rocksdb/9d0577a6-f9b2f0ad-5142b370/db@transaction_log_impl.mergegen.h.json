@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  TransactionLogIteratorImpl(const std::string& dir, const DBOptions* options,\n                             const EnvOptions& soptions,\n                             const SequenceNumber seqNum,\n                             std::unique_ptr<VectorLogPtr> files,\n                             DBImpl const* const dbimpl);",
+        "b_contents": "  TransactionLogIteratorImpl(\n      const std::string& dir, const Options* options,\n      const TransactionLogIterator::ReadOptions& read_options,\n      const EnvOptions& soptions, const SequenceNumber seqNum,\n      std::unique_ptr<VectorLogPtr> files, DBImpl const* const dbimpl);",
+        "base_contents": "  TransactionLogIteratorImpl(const std::string& dir,\n                             const Options* options,\n                             const EnvOptions& soptions,\n                             const SequenceNumber seqNum,\n                             std::unique_ptr<VectorLogPtr> files,\n                             DBImpl const * const dbimpl);",
+        "res_region": "  TransactionLogIteratorImpl(\n      const std::string& dir, const DBOptions* options,\n      const TransactionLogIterator::ReadOptions& read_options,\n      const EnvOptions& soptions, const SequenceNumber seqNum,\n      std::unique_ptr<VectorLogPtr> files, DBImpl const* const dbimpl);",
+        "lookback": "      const std::string& dir, const DBOptions* options,",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 68,
+        "end_line": 87,
+        "merge_gen_region": null,
+        "confidence": 0.6052992939949036,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const DBOptions* options_;",
+        "b_contents": "  const Options* options_;\n  const TransactionLogIterator::ReadOptions read_options_;",
+        "base_contents": "  const Options* options_;",
+        "res_region": "  const DBOptions* options_;\n  const TransactionLogIterator::ReadOptions read_options_;",
+        "lookback": "  const TransactionLogIterator::ReadOptions read_options_;",
+        "lookahead": "  const EnvOptions& soptions_;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 99,
+        "end_line": 106,
+        "merge_gen_region": null,
+        "confidence": 0.6318691968917847,
+        "hesitated": true
+    }
+]

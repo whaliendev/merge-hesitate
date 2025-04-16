@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tCALLOC_ARRAY(to_clear, array->nr);",
+        "b_contents": "\tto_clear = xcalloc(array->nr, sizeof(struct commit *));",
+        "base_contents": "\tto_clear = xcalloc(sizeof(struct commit *), array->nr);",
+        "res_region": "\tCALLOC_ARRAY(to_clear, array->nr);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2188,
+        "end_line": 2194,
+        "merge_gen_region": null,
+        "confidence": 0.49507936835289,
+        "hesitated": true
+    }
+]

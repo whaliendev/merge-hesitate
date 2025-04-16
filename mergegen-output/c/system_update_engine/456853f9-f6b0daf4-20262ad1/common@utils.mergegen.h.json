@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "// Divide |x| by |y| and round up to the nearest integer.\nconstexpr uint64_t DivRoundUp(uint64_t x, uint64_t y) {\n  return (x + y - 1) / y;\n}\n\n// Round |x| up to be a multiple of |y|.\nconstexpr uint64_t RoundUp(uint64_t x, uint64_t y) {\n  return DivRoundUp(x, y) * y;\n}\n",
+        "b_contents": "// Returns the integer value of the first section of |version|. E.g. for\n//  \"10575.39.\" returns 10575. Returns 0 if |version| is empty, returns -1 if\n// first section of |version| is invalid (e.g. not a number).\nint VersionPrefix(const std::string& version);\n\n// Parses a string in the form high.low, where high and low are 16 bit unsigned\n// integers. If there is more than 1 dot, or if either of the two parts are\n// not valid 16 bit unsigned numbers, then 0xffff is returned for both.\nvoid ParseRollbackKeyVersion(const std::string& raw_version,\n                             uint16_t* high_version,\n                             uint16_t* low_version);\n",
+        "base_contents": "",
+        "res_region": "// Divide |x| by |y| and round up to the nearest integer.\nconstexpr uint64_t DivRoundUp(uint64_t x, uint64_t y) {\n  return (x + y - 1) / y;\n}\n\n// Round |x| up to be a multiple of |y|.\nconstexpr uint64_t RoundUp(uint64_t x, uint64_t y) {\n  return DivRoundUp(x, y) * y;\n}\n\n// Returns the integer value of the first section of |version|. E.g. for\n//  \"10575.39.\" returns 10575. Returns 0 if |version| is empty, returns -1 if\n// first section of |version| is invalid (e.g. not a number).\nint VersionPrefix(const std::string& version);\n\n// Parses a string in the form high.low, where high and low are 16 bit unsigned\n// integers. If there is more than 1 dot, or if either of the two parts are\n// not valid 16 bit unsigned numbers, then 0xffff is returned for both.\nvoid ParseRollbackKeyVersion(const std::string& raw_version,\n                             uint16_t* high_version,\n                             uint16_t* low_version);\n",
+        "lookback": "constexpr uint64_t DivRoundUp(uint64_t x, uint64_t y) {",
+        "lookahead": "}  // namespace utils",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 320,
+        "end_line": 345,
+        "merge_gen_region": " uint__Round(64_ x uint_ y { Div || byy and round to nearest. uint_ DivUpuint_ x uint_ y { ( + -) y; // || up be a ofy constexpr64t(64t64t64t64t) returnRound(,) y } Roundx up be a ofy constexpr64t64t64t) returnRound(, y *;",
+        "confidence": 0.9537091255187988,
+        "hesitated": false,
+        "resolved": false
+    }
+]

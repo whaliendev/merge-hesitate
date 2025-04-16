@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        const lv_style_t * style_label = lv_obj_get_style(ext->label);\n        lv_coord_t font_h              = lv_font_get_height(style_label->text.font);\n        scrl->ext_size = LV_MATH_MAX(scrl->ext_size, style_label->text.line_space + font_h);",
+        "b_contents": "        lv_style_t * style_label = lv_obj_get_style(ext->label);\n        lv_coord_t font_h        = lv_font_get_height(style_label->text.font);\n        scrl->ext_draw_pad = LV_MATH_MAX(scrl->ext_draw_pad, style_label->text.line_space + font_h);",
+        "base_contents": "        lv_style_t * style_label = lv_obj_get_style(ext->label);\n        lv_coord_t font_h        = lv_font_get_height(style_label->text.font);\n        scrl->ext_size = LV_MATH_MAX(scrl->ext_size, style_label->text.line_space + font_h);",
+        "res_region": "        const lv_style_t * style_label = lv_obj_get_style(ext->label);\n        lv_coord_t font_h        = lv_font_get_height(style_label->text.font);\n        scrl->ext_draw_pad = LV_MATH_MAX(scrl->ext_draw_pad, style_label->text.line_space + font_h);",
+        "lookback": "        lv_coord_t font_h        = lv_font_get_height(style_label->text.font);",
+        "lookahead": "    } else if(sign == LV_SIGNAL_CORD_CHG) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1356,
+        "end_line": 1368,
+        "merge_gen_region": "___const__const const__constconst constconst constconst constconst constconst constconst constconst constconst constconst constconst constconst constconstconst const___constconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconstconst constconstconstconstconst constconst constconst constconst const constconst constconst",
+        "confidence": 0.8917880654335022,
+        "hesitated": false,
+        "resolved": false
+    }
+]

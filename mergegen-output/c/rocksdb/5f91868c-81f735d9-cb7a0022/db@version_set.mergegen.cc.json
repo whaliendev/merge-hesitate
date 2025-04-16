@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "      current_(NULL),\n      compactions_in_progress_(options_->num_levels),\n      current_version_number_(0) {",
+        "b_contents": "      current_(NULL),\n      num_levels_(options_->num_levels) {",
+        "base_contents": "      current_(NULL) {",
+        "res_region": "      current_(NULL),\n      num_levels_(options_->num_levels),\n      compactions_in_progress_(options_->num_levels),\n      current_version_number_(0) {",
+        "lookback": "      num_levels_(options_->num_levels),",
+        "lookahead": "  compact_pointer_ = new std::string[options_->num_levels];",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 869,
+        "end_line": 878,
+        "merge_gen_region": null,
+        "confidence": 0.750660240650177,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  max_file_size_ = new uint64_t[options_->num_levels];\n  level_max_bytes_ = new uint64_t[options->num_levels];\n  int target_file_size_multiplier = options_->target_file_size_multiplier;\n  int max_bytes_multiplier = options_->max_bytes_for_level_multiplier;\n  for (int i = 0; i < options_->num_levels; i++) {\n    if (i > 1) {\n      max_file_size_[i] = max_file_size_[i-1] * target_file_size_multiplier;\n      level_max_bytes_[i] = level_max_bytes_[i-1] * max_bytes_multiplier;\n    } else {\n      max_file_size_[i] = options_->target_file_size_base;\n      level_max_bytes_[i] = options_->max_bytes_for_level_base;\n    }\n  }\n  AppendVersion(new Version(this, current_version_number_++));",
+        "b_contents": "  Init(options_->num_levels);\n  AppendVersion(new Version(this));",
+        "base_contents": "  max_file_size_ = new uint64_t[options_->num_levels];\n  level_max_bytes_ = new uint64_t[options->num_levels];\n  int target_file_size_multiplier = options_->target_file_size_multiplier;\n  int max_bytes_multiplier = options_->max_bytes_for_level_multiplier;\n  for (int i = 0; i < options_->num_levels; i++) {\n    if (i > 1) {\n      max_file_size_[i] = max_file_size_[i-1] * target_file_size_multiplier;\n      level_max_bytes_[i] = level_max_bytes_[i-1] * max_bytes_multiplier;\n    } else {\n      max_file_size_[i] = options_->target_file_size_base;\n      level_max_bytes_[i] = options_->max_bytes_for_level_base;\n    }\n  }\n  AppendVersion(new Version(this));",
+        "res_region": "  Init(options_->num_levels);\n  AppendVersion(new Version(this, current_version_number_++));",
+        "lookback": "  AppendVersion(new Version(this, current_version_number_++));",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 880,
+        "end_line": 913,
+        "merge_gen_region": null,
+        "confidence": 0.5674306154251099,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu) {\n  mu->AssertHeld();",
+        "b_contents": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu,\n    bool new_descriptor_log) {\n  if (edit->has_log_number_) {\n    assert(edit->log_number_ >= log_number_);\n    assert(edit->log_number_ < next_file_number_);\n  } else {\n    edit->SetLogNumber(log_number_);\n  }",
+        "base_contents": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu) {\n  if (edit->has_log_number_) {\n    assert(edit->log_number_ >= log_number_);\n    assert(edit->log_number_ < next_file_number_);\n  } else {\n    edit->SetLogNumber(log_number_);\n  }",
+        "res_region": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu,\n    bool new_descriptor_log) {\n  mu->AssertHeld();",
+        "lookback": "    bool new_descriptor_log) {",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 960,
+        "end_line": 980,
+        "merge_gen_region": null,
+        "confidence": 0.7469644546508789,
+        "hesitated": true
+    }
+]

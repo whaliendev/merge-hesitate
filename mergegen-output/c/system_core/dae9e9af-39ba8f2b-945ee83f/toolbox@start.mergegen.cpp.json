@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    std::vector<std::string> services = {\n        \"iorapd\",\n        \"netd\",\n        \"surfaceflinger\",\n        \"audioserver\",\n        \"zygote\",\n    };",
+        "b_contents": "    std::vector<std::string> services = {\n        \"netd\",\n        \"surfaceflinger\",\n        \"audioserver\",\n        \"zygote\",\n    };",
+        "base_contents": "    std::vector<std::string> services = {\"netd\", \"surfaceflinger\", \"zygote\"};",
+        "res_region": "    std::vector<std::string> services = {\n        \"iorapd\",\n        \"netd\",\n        \"surfaceflinger\",\n        \"audioserver\",\n        \"zygote\",\n    };",
+        "lookback": "        \"iorapd\",",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 38,
+        "end_line": 55,
+        "merge_gen_region": "",
+        "confidence": 0.9065544009208679,
+        "hesitated": false,
+        "resolved": false
+    }
+]

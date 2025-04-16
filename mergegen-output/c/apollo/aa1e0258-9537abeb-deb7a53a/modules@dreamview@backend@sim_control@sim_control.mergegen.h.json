@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  /**\n   * @brief Starts the timer to publish simulated localization and chassis\n   * messages. Designated Start point for scenario\n   */\n  void Start(double x, double y);\n",
+        "b_contents": "   /**\n   * @brief Starts the timer to publish simulated localization and chassis\n   * messages. Designated Start point for scenario\n   */\n  void Start(double x, double y);\n",
+        "base_contents": "",
+        "res_region": "  /**\n   * @brief Starts the timer to publish simulated localization and chassis\n   * messages. Designated Start point for scenario\n   */\n  void Start(double x, double y);\n",
+        "lookback": "   * @brief Starts the timer to publish simulated localization and chassis",
+        "lookahead": "  void InitStartPoint(double start_velocity, double start_acceleration);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 116,
+        "end_line": 131,
+        "merge_gen_region": null,
+        "confidence": 0.8753084540367126,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // use scenario start point to init start point under the simulation\n  // condition.\n  void InitStartPoint(double x, double y, double start_velocity,\n                      double start_acceleration);\n",
+        "b_contents": "  // use scenario start point to init start point under the simulation condition.\n  void InitStartPoint(double x, double y, double start_velocity, double start_acceleration);\n",
+        "base_contents": "",
+        "res_region": "  // use scenario start point to init start point under the simulation\n  // condition.\n  void InitStartPoint(double x, double y, double start_velocity,\n                      double start_acceleration);\n",
+        "lookback": "  // condition.",
+        "lookahead": "  // Reset the start point, which can be a dummy point on the map, a current",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 134,
+        "end_line": 145,
+        "merge_gen_region": null,
+        "confidence": 0.7974909543991089,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    virtual void setAnchorPoint(const Vector2 &pt) override;\n    virtual const Size& getContentSize() const override;",
+        "b_contents": "    virtual const Size& getVirtualRendererSize() const override;",
+        "base_contents": "    virtual void setAnchorPoint(const Point &pt) override;\n    virtual const Size& getContentSize() const override;",
+        "res_region": "\n    virtual const Size& getVirtualRendererSize() const override;",
+        "lookback": "    virtual const Size& getVirtualRendererSize() const override;",
+        "lookahead": "    virtual Node* getVirtualRenderer() override;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 68,
+        "end_line": 76,
+        "merge_gen_region": null,
+        "confidence": 0.7355916500091553,
+        "hesitated": true
+    }
+]

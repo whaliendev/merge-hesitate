@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    virtual std::chrono::milliseconds Update(bool log_error) = 0;",
+        "b_contents": "    std::chrono::milliseconds Update(bool log_error = true);",
+        "base_contents": "    std::chrono::milliseconds Update();",
+        "res_region": "    virtual std::chrono::milliseconds Update(bool log_error) = 0;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 61,
+        "end_line": 67,
+        "merge_gen_region": null,
+        "confidence": 0.7963041663169861,
+        "hesitated": true
+    }
+]

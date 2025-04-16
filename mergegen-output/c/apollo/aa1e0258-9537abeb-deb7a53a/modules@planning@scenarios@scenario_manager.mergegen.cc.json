@@ -1,0 +1,430 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/map_msgs/map_lane.pb.h\"",
+        "base_contents": "#include \"modules/map/proto/map_lane.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/planning/common/planning_gflags.h\"",
+        "lookahead": "#include \"modules/planning/common/planning_context.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.6006017327308655,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ScenarioType scenario_type) {",
+        "b_contents": "    planning::ScenarioType scenario_type) {",
+        "base_contents": "    ScenarioConfig::ScenarioType scenario_type) {",
+        "res_region": "    ScenarioType scenario_type) {",
+        "lookback": "  std::unique_ptr<Scenario> ptr;",
+        "lookahead": "  std::unique_ptr<Scenario> ptr;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 72,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.6737744212150574,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    case ScenarioType::DEADEND_TURNAROUND:\n      ptr.reset(new scenario::deadend_turnaround::DeadEndTurnAroundScenario(\n          config_map_[scenario_type], &scenario_context_, injector_));\n      break;",
+        "base_contents": "    case ScenarioConfig::DEADEND_TURNAROUND:\n      ptr.reset(new scenario::deadend_turnaround::DeadEndTurnAroundScenario(\n          config_map_[scenario_type], &scenario_context_, injector_));\n      break;",
+        "res_region": "",
+        "lookback": "      return nullptr;",
+        "lookahead": "    default:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 137,
+        "end_line": 148,
+        "merge_gen_region": "",
+        "confidence": 0.9606643915176392,
+        "hesitated": false,
+        "resolved": true
+    },
+    {
+        "a_contents": "  ACHECK(Scenario::LoadConfig(FLAGS_scenario_emergency_pull_over_config_file,\n                              &config_map_[ScenarioType::EMERGENCY_PULL_OVER]));",
+        "b_contents": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_emergency_pull_over_config_file,\n                           &config_map_[ScenarioType::EMERGENCY_PULL_OVER]));",
+        "base_contents": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_emergency_pull_over_config_file,\n                           &config_map_[ScenarioConfig::EMERGENCY_PULL_OVER]));",
+        "res_region": "  ACHECK(Scenario::LoadConfig(FLAGS_scenario_emergency_pull_over_config_file,\n                              &config_map_[ScenarioType::EMERGENCY_PULL_OVER]));",
+        "lookback": "                              &config_map_[ScenarioType::EMERGENCY_PULL_OVER]));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 177,
+        "end_line": 188,
+        "merge_gen_region": null,
+        "confidence": 0.6011234521865845,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_learning_model_sample_config_file,\n                           &config_map_[ScenarioType::LEARNING_MODEL_SAMPLE]));",
+        "b_contents": "  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_learning_model_sample_config_file,\n      &config_map_[ScenarioType::LEARNING_MODEL_SAMPLE]));",
+        "base_contents": "  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_learning_model_sample_config_file,\n      &config_map_[ScenarioConfig::LEARNING_MODEL_SAMPLE]));",
+        "res_region": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_learning_model_sample_config_file,\n                           &config_map_[ScenarioType::LEARNING_MODEL_SAMPLE]));",
+        "lookback": "      Scenario::LoadConfig(FLAGS_scenario_learning_model_sample_config_file,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 195,
+        "end_line": 207,
+        "merge_gen_region": null,
+        "confidence": 0.7404375076293945,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_stop_sign_unprotected_config_file,\n                           &config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]));",
+        "b_contents": "  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_stop_sign_unprotected_config_file,\n      &config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]));",
+        "base_contents": "  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_stop_sign_unprotected_config_file,\n      &config_map_[ScenarioConfig::STOP_SIGN_UNPROTECTED]));",
+        "res_region": "  ACHECK(\n      Scenario::LoadConfig(FLAGS_scenario_stop_sign_unprotected_config_file,\n                           &config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]));",
+        "lookback": "      Scenario::LoadConfig(FLAGS_scenario_stop_sign_unprotected_config_file,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 218,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.7688396573066711,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                              &config_map_[ScenarioType::YIELD_SIGN]));",
+        "b_contents": "                              &config_map_[ScenarioType::YIELD_SIGN]));\n  // turn around\n  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_deadend_turnaround_config_file,\n      &config_map_[ScenarioType::DEADEND_TURNAROUND]));",
+        "base_contents": "                              &config_map_[ScenarioConfig::YIELD_SIGN]));\n  // turn around\n  ACHECK(Scenario::LoadConfig(\n      FLAGS_scenario_deadend_turnaround_config_file,\n      &config_map_[ScenarioConfig::DEADEND_TURNAROUND]));",
+        "res_region": "                              &config_map_[ScenarioType::YIELD_SIGN]));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 249,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.7680936455726624,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::SelectPullOverScenario(const Frame& frame) {",
+        "b_contents": "ScenarioType ScenarioManager::SelectPullOverScenario(\n    const Frame& frame) {",
+        "base_contents": "ScenarioConfig::ScenarioType ScenarioManager::SelectPullOverScenario(\n    const Frame& frame) {",
+        "res_region": "ScenarioType ScenarioManager::SelectPullOverScenario(const Frame& frame) {",
+        "lookback": "  const auto& scenario_config =",
+        "lookahead": "  const auto& scenario_config =",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 266,
+        "end_line": 274,
+        "merge_gen_region": null,
+        "confidence": 0.7606989741325378,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n    case ScenarioType::EMERGENCY_PULL_OVER:\n    case ScenarioType::PARK_AND_GO:\n    case ScenarioType::PULL_OVER:\n    case ScenarioType::STOP_SIGN_PROTECTED:\n    case ScenarioType::STOP_SIGN_UNPROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n    case ScenarioType::VALET_PARKING:\n    case ScenarioType::YIELD_SIGN:",
+        "b_contents": "    case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n    case ScenarioType::EMERGENCY_PULL_OVER:\n    case ScenarioType::PARK_AND_GO:\n    case ScenarioType::PULL_OVER:\n    case ScenarioType::STOP_SIGN_PROTECTED:\n    case ScenarioType::STOP_SIGN_UNPROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n    case ScenarioType::VALET_PARKING:\n    case ScenarioType::DEADEND_TURNAROUND:\n    case ScenarioType::YIELD_SIGN:",
+        "base_contents": "    case ScenarioConfig::BARE_INTERSECTION_UNPROTECTED:\n    case ScenarioConfig::EMERGENCY_PULL_OVER:\n    case ScenarioConfig::PARK_AND_GO:\n    case ScenarioConfig::PULL_OVER:\n    case ScenarioConfig::STOP_SIGN_PROTECTED:\n    case ScenarioConfig::STOP_SIGN_UNPROTECTED:\n    case ScenarioConfig::TRAFFIC_LIGHT_PROTECTED:\n    case ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n    case ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n    case ScenarioConfig::VALET_PARKING:\n    case ScenarioConfig::DEADEND_TURNAROUND:\n    case ScenarioConfig::YIELD_SIGN:",
+        "res_region": "    case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n    case ScenarioType::EMERGENCY_PULL_OVER:\n    case ScenarioType::PARK_AND_GO:\n    case ScenarioType::PULL_OVER:\n    case ScenarioType::STOP_SIGN_PROTECTED:\n    case ScenarioType::STOP_SIGN_UNPROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n    case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n    case ScenarioType::VALET_PARKING:\n    case ScenarioType::YIELD_SIGN:",
+        "lookback": "    case ScenarioType::EMERGENCY_PULL_OVER:",
+        "lookahead": "      if (current_scenario_->GetStatus() !=",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 380,
+        "end_line": 418,
+        "merge_gen_region": null,
+        "confidence": 0.8216135501861572,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::SelectPadMsgScenario(const Frame& frame) {",
+        "b_contents": "ScenarioType ScenarioManager::SelectPadMsgScenario(\n    const Frame& frame) {",
+        "base_contents": "ScenarioConfig::ScenarioType ScenarioManager::SelectPadMsgScenario(\n    const Frame& frame) {",
+        "res_region": "ScenarioType ScenarioManager::SelectPadMsgScenario(const Frame& frame) {",
+        "lookback": "  const auto& pad_msg_driving_action = frame.GetPadMsgDrivingAction();",
+        "lookahead": "  const auto& pad_msg_driving_action = frame.GetPadMsgDrivingAction();",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 431,
+        "end_line": 439,
+        "merge_gen_region": null,
+        "confidence": 0.6965407729148865,
+        "hesitated": true
+    },
+    {
+        "a_contents": "              ScenarioType::EMERGENCY_PULL_OVER ||\n          current_scenario_->scenario_type() == ScenarioType::EMERGENCY_STOP) {\n        return ScenarioType::PARK_AND_GO;",
+        "b_contents": "              ScenarioType::EMERGENCY_PULL_OVER ||\n          current_scenario_->scenario_type() ==\n              ScenarioType::EMERGENCY_STOP) {\n        return ScenarioType::PARK_AND_GO;",
+        "base_contents": "              ScenarioConfig::EMERGENCY_PULL_OVER ||\n          current_scenario_->scenario_type() ==\n              ScenarioConfig::EMERGENCY_STOP) {\n        return ScenarioConfig::PARK_AND_GO;",
+        "res_region": "              ScenarioType::EMERGENCY_PULL_OVER ||\n          current_scenario_->scenario_type() == ScenarioType::EMERGENCY_STOP) {\n        return ScenarioType::PARK_AND_GO;",
+        "lookback": "          current_scenario_->scenario_type() == ScenarioType::EMERGENCY_STOP) {",
+        "lookahead": "      }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 455,
+        "end_line": 469,
+        "merge_gen_region": null,
+        "confidence": 0.7732747197151184,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::SelectInterceptionScenario(const Frame& frame) {\n  ScenarioType scenario_type = default_scenario_type_;",
+        "b_contents": "ScenarioType ScenarioManager::SelectInterceptionScenario(\n    const Frame& frame) {\n  ScenarioType scenario_type = default_scenario_type_;",
+        "base_contents": "ScenarioConfig::ScenarioType ScenarioManager::SelectInterceptionScenario(\n    const Frame& frame) {\n  ScenarioConfig::ScenarioType scenario_type = default_scenario_type_;",
+        "res_region": "ScenarioType ScenarioManager::SelectInterceptionScenario(const Frame& frame) {\n  ScenarioType scenario_type = default_scenario_type_;",
+        "lookback": "  ScenarioType scenario_type = default_scenario_type_;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 479,
+        "end_line": 490,
+        "merge_gen_region": null,
+        "confidence": 0.7397900223731995,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const auto& scenario_config = config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]\n                                    .stop_sign_unprotected_config();",
+        "b_contents": "  const auto& scenario_config =\n      config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]\n          .stop_sign_unprotected_config();",
+        "base_contents": "  const auto& scenario_config =\n      config_map_[ScenarioConfig::STOP_SIGN_UNPROTECTED]\n          .stop_sign_unprotected_config();",
+        "res_region": "  const auto& scenario_config = config_map_[ScenarioType::STOP_SIGN_UNPROTECTED]\n                                    .stop_sign_unprotected_config();",
+        "lookback": "                                    .stop_sign_unprotected_config();",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 560,
+        "end_line": 571,
+        "merge_gen_region": null,
+        "confidence": 0.8729565739631653,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const double start_check_distance =\n      std::max({config_map_[ScenarioType::TRAFFIC_LIGHT_PROTECTED]\n                    .traffic_light_protected_config()\n                    .start_traffic_light_scenario_distance(),\n                config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN]\n                    .traffic_light_unprotected_left_turn_config()\n                    .start_traffic_light_scenario_distance(),\n                config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN]\n                    .traffic_light_unprotected_right_turn_config()\n                    .start_traffic_light_scenario_distance()});",
+        "b_contents": "  const double start_check_distance = std::max(\n      {config_map_[ScenarioType::TRAFFIC_LIGHT_PROTECTED]\n           .traffic_light_protected_config()\n           .start_traffic_light_scenario_distance(),\n       config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN]\n           .traffic_light_unprotected_left_turn_config()\n           .start_traffic_light_scenario_distance(),\n       config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN]\n           .traffic_light_unprotected_right_turn_config()\n           .start_traffic_light_scenario_distance()});",
+        "base_contents": "  const double start_check_distance = std::max(\n      {config_map_[ScenarioConfig::TRAFFIC_LIGHT_PROTECTED]\n           .traffic_light_protected_config()\n           .start_traffic_light_scenario_distance(),\n       config_map_[ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN]\n           .traffic_light_unprotected_left_turn_config()\n           .start_traffic_light_scenario_distance(),\n       config_map_[ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN]\n           .traffic_light_unprotected_right_turn_config()\n           .start_traffic_light_scenario_distance()});",
+        "res_region": "  const double start_check_distance =\n      std::max({config_map_[ScenarioType::TRAFFIC_LIGHT_PROTECTED]\n                    .traffic_light_protected_config()\n                    .start_traffic_light_scenario_distance(),\n                config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN]\n                    .traffic_light_unprotected_left_turn_config()\n                    .start_traffic_light_scenario_distance(),\n                config_map_[ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN]\n                    .traffic_light_unprotected_right_turn_config()\n                    .start_traffic_light_scenario_distance()});",
+        "lookback": "      std::max({config_map_[ScenarioType::TRAFFIC_LIGHT_PROTECTED]",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 620,
+        "end_line": 653,
+        "merge_gen_region": null,
+        "confidence": 0.8678610920906067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::SelectValetParkingScenario(const Frame& frame) {",
+        "b_contents": "ScenarioType ScenarioManager::SelectValetParkingScenario(\n    const Frame& frame) {",
+        "base_contents": "ScenarioConfig::ScenarioType ScenarioManager::SelectValetParkingScenario(\n    const Frame& frame) {",
+        "res_region": "ScenarioType ScenarioManager::SelectValetParkingScenario(const Frame& frame) {",
+        "lookback": "  const auto& scenario_config =",
+        "lookahead": "  const auto& scenario_config =",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 880,
+        "end_line": 888,
+        "merge_gen_region": null,
+        "confidence": 0.8002805709838867,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::SelectParkAndGoScenario(const Frame& frame) {",
+        "b_contents": "ScenarioType ScenarioManager::SelectDeadEndScenario(\n    const Frame& frame) {\n  size_t waypoint_num =\n    frame.local_view().routing->routing_request().waypoint().size();\n  const auto& routing_type =\n    frame.local_view().routing->routing_request().dead_end_info().\n    dead_end_routing_type();\n  if (routing_type == routing::ROUTING_IN) {\n    dead_end_point_ = frame.local_view().routing->routing_request().\n                    waypoint().at(waypoint_num - 1).pose();\n  } else if (routing_type == routing::ROUTING_OUT) {\n    dead_end_point_ = frame.local_view().routing->routing_request().\n                    waypoint().at(0).pose();\n  }\n  const auto& scenario_config =\n    config_map_[ScenarioType::DEADEND_TURNAROUND].deadend_turnaround_config();\n  double dead_end_start_range =\n      scenario_config.dead_end_start_range();\n  if (scenario::deadend_turnaround::DeadEndTurnAroundScenario::IsTransferable(\n          frame, dead_end_point_, dead_end_start_range) &&\n          routing_type == routing::ROUTING_IN) {\n    return ScenarioType::DEADEND_TURNAROUND;\n  }\n\n  return default_scenario_type_;\n}\n\nScenarioType ScenarioManager::SelectParkAndGoScenario(\n    const Frame& frame) {",
+        "base_contents": "ScenarioConfig::ScenarioType ScenarioManager::SelectDeadEndScenario(\n    const Frame& frame) {\n  size_t waypoint_num =\n    frame.local_view().routing->routing_request().waypoint().size();\n  const auto& routing_type =\n    frame.local_view().routing->routing_request().dead_end_info().\n    dead_end_routing_type();\n  if (routing_type == routing::ROUTING_IN) {\n    dead_end_point_ = frame.local_view().routing->routing_request().\n                    waypoint().at(waypoint_num - 1).pose();\n  } else if (routing_type == routing::ROUTING_OUT) {\n    dead_end_point_ = frame.local_view().routing->routing_request().\n                    waypoint().at(0).pose();\n  }\n  const auto& scenario_config =\n    config_map_[ScenarioConfig::DEADEND_TURNAROUND].deadend_turnaround_config();\n  double dead_end_start_range =\n      scenario_config.dead_end_start_range();\n  if (scenario::deadend_turnaround::DeadEndTurnAroundScenario::IsTransferable(\n          frame, dead_end_point_, dead_end_start_range) &&\n          routing_type == routing::ROUTING_IN) {\n    return ScenarioConfig::DEADEND_TURNAROUND;\n  }\n\n  return default_scenario_type_;\n}\n\nScenarioConfig::ScenarioType ScenarioManager::SelectParkAndGoScenario(\n    const Frame& frame) {",
+        "res_region": "ScenarioType ScenarioManager::SelectParkAndGoScenario(const Frame& frame) {",
+        "lookback": "  bool park_and_go = false;",
+        "lookahead": "  bool park_and_go = false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 903,
+        "end_line": 965,
+        "merge_gen_region": "",
+        "confidence": 0.9388738870620728,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  ADEBUG << \"select scenario: \" << ScenarioType_Name(scenario_type);",
+        "b_contents": "  ADEBUG << \"select scenario: \"\n         << ScenarioType_Name(scenario_type);",
+        "base_contents": "  ADEBUG << \"select scenario: \"\n         << ScenarioConfig::ScenarioType_Name(scenario_type);",
+        "res_region": "  ADEBUG << \"select scenario: \" << ScenarioType_Name(scenario_type);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1057,
+        "end_line": 1065,
+        "merge_gen_region": null,
+        "confidence": 0.7191144227981567,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ScenarioType scenario_type = ScenarioType::LEARNING_MODEL_SAMPLE;",
+        "b_contents": "  ScenarioType scenario_type =\n      ScenarioType::LEARNING_MODEL_SAMPLE;",
+        "base_contents": "  ScenarioConfig::ScenarioType scenario_type =\n      ScenarioConfig::LEARNING_MODEL_SAMPLE;",
+        "res_region": "  ScenarioType scenario_type = ScenarioType::LEARNING_MODEL_SAMPLE;",
+        "lookback": "  return scenario_type;",
+        "lookahead": "  return scenario_type;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1078,
+        "end_line": 1086,
+        "merge_gen_region": null,
+        "confidence": 0.737456202507019,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ScenarioType ScenarioManager::ScenarioDispatchNonLearning(const Frame& frame) {",
+        "b_contents": "bool ScenarioManager::JudgeReachTargetPoint(\n  const common::VehicleState& car_position,\n  const common::PointENU& target_point) {\n  double distance_to_vehicle =\n    (car_position.x() - target_point.x()) *\n    (car_position.x() - target_point.x()) +\n    (car_position.y() - target_point.y()) *\n    (car_position.y() - target_point.y());\n  return distance_to_vehicle < FLAGS_threshold_distance_for_destination;\n}\n\nScenarioType ScenarioManager::ScenarioDispatchNonLearning(\n    const Frame& frame) {",
+        "base_contents": "bool ScenarioManager::JudgeReachTargetPoint(\n  const common::VehicleState& car_position,\n  const common::PointENU& target_point) {\n  double distance_to_vehicle =\n    (car_position.x() - target_point.x()) *\n    (car_position.x() - target_point.x()) +\n    (car_position.y() - target_point.y()) *\n    (car_position.y() - target_point.y());\n  return distance_to_vehicle < FLAGS_threshold_distance_for_destination;\n}\n\nScenarioConfig::ScenarioType ScenarioManager::ScenarioDispatchNonLearning(\n    const Frame& frame) {",
+        "res_region": "ScenarioType ScenarioManager::ScenarioDispatchNonLearning(const Frame& frame) {",
+        "lookback": "  ////////////////////////////////////////",
+        "lookahead": "  ////////////////////////////////////////",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1090,
+        "end_line": 1120,
+        "merge_gen_region": null,
+        "confidence": 0.68256014585495,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ScenarioType scenario_type = default_scenario_type_;\n",
+        "b_contents": "  ScenarioType scenario_type = default_scenario_type_;",
+        "base_contents": "  ScenarioConfig::ScenarioType scenario_type = default_scenario_type_;",
+        "res_region": "  ScenarioType scenario_type = default_scenario_type_;\n",
+        "lookback": "",
+        "lookahead": "  ////////////////////////////////////////",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1123,
+        "end_line": 1130,
+        "merge_gen_region": "",
+        "confidence": 0.8856549263000488,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "      case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n      case ScenarioType::EMERGENCY_PULL_OVER:\n      case ScenarioType::PARK_AND_GO:\n      case ScenarioType::STOP_SIGN_PROTECTED:\n      case ScenarioType::STOP_SIGN_UNPROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n      case ScenarioType::VALET_PARKING:\n      case ScenarioType::YIELD_SIGN:",
+        "b_contents": "      case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n      case ScenarioType::EMERGENCY_PULL_OVER:\n      case ScenarioType::PARK_AND_GO:\n      case ScenarioType::STOP_SIGN_PROTECTED:\n      case ScenarioType::STOP_SIGN_UNPROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n      case ScenarioType::VALET_PARKING:\n      case ScenarioType::DEADEND_TURNAROUND:\n        // transfer dead_end to lane follow, should enhance transfer logic\n        if (JudgeReachTargetPoint(car_position, target_point)) {\n          scenario_type = ScenarioType::LANE_FOLLOW;\n          reach_target_pose_ = true;\n        }\n      case ScenarioType::YIELD_SIGN:",
+        "base_contents": "      case ScenarioConfig::BARE_INTERSECTION_UNPROTECTED:\n      case ScenarioConfig::EMERGENCY_PULL_OVER:\n      case ScenarioConfig::PARK_AND_GO:\n      case ScenarioConfig::STOP_SIGN_PROTECTED:\n      case ScenarioConfig::STOP_SIGN_UNPROTECTED:\n      case ScenarioConfig::TRAFFIC_LIGHT_PROTECTED:\n      case ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n      case ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n      case ScenarioConfig::VALET_PARKING:\n      case ScenarioConfig::DEADEND_TURNAROUND:\n        // transfer dead_end to lane follow, should enhance transfer logic\n        if (JudgeReachTargetPoint(car_position, target_point)) {\n          scenario_type = ScenarioConfig::LANE_FOLLOW;\n          reach_target_pose_ = true;\n        }\n      case ScenarioConfig::YIELD_SIGN:",
+        "res_region": "      case ScenarioType::BARE_INTERSECTION_UNPROTECTED:\n      case ScenarioType::EMERGENCY_PULL_OVER:\n      case ScenarioType::PARK_AND_GO:\n      case ScenarioType::STOP_SIGN_PROTECTED:\n      case ScenarioType::STOP_SIGN_UNPROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_PROTECTED:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN:\n      case ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN:\n      case ScenarioType::VALET_PARKING:\n      case ScenarioType::YIELD_SIGN:",
+        "lookback": "      case ScenarioType::EMERGENCY_PULL_OVER:",
+        "lookahead": "        // must continue until finish",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1141,
+        "end_line": 1186,
+        "merge_gen_region": null,
+        "confidence": 0.8197439312934875,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool ScenarioManager::IsStopSignScenario(const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::STOP_SIGN_PROTECTED ||\n          scenario_type == ScenarioType::STOP_SIGN_UNPROTECTED);",
+        "b_contents": "bool ScenarioManager::IsStopSignScenario(\n    const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::STOP_SIGN_PROTECTED ||\n          scenario_type == ScenarioType::STOP_SIGN_UNPROTECTED);",
+        "base_contents": "bool ScenarioManager::IsStopSignScenario(\n    const ScenarioConfig::ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioConfig::STOP_SIGN_PROTECTED ||\n          scenario_type == ScenarioConfig::STOP_SIGN_UNPROTECTED);",
+        "res_region": "bool ScenarioManager::IsStopSignScenario(const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::STOP_SIGN_PROTECTED ||\n          scenario_type == ScenarioType::STOP_SIGN_UNPROTECTED);",
+        "lookback": "  return (scenario_type == ScenarioType::STOP_SIGN_PROTECTED ||",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1234,
+        "end_line": 1248,
+        "merge_gen_region": null,
+        "confidence": 0.7907885313034058,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::TRAFFIC_LIGHT_PROTECTED ||\n          scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN ||\n          scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN);",
+        "b_contents": "    const ScenarioType& scenario_type) {\n  return (\n      scenario_type == ScenarioType::TRAFFIC_LIGHT_PROTECTED ||\n      scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN ||\n      scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN);",
+        "base_contents": "    const ScenarioConfig::ScenarioType& scenario_type) {\n  return (\n      scenario_type == ScenarioConfig::TRAFFIC_LIGHT_PROTECTED ||\n      scenario_type == ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN ||\n      scenario_type == ScenarioConfig::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN);",
+        "res_region": "    const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::TRAFFIC_LIGHT_PROTECTED ||\n          scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_LEFT_TURN ||\n          scenario_type == ScenarioType::TRAFFIC_LIGHT_UNPROTECTED_RIGHT_TURN);",
+        "lookback": "  return (scenario_type == ScenarioType::TRAFFIC_LIGHT_PROTECTED ||",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1252,
+        "end_line": 1269,
+        "merge_gen_region": null,
+        "confidence": 0.822371780872345,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool ScenarioManager::IsYieldSignScenario(const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::YIELD_SIGN);",
+        "b_contents": "bool ScenarioManager::IsYieldSignScenario(\n    const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::YIELD_SIGN);",
+        "base_contents": "bool ScenarioManager::IsYieldSignScenario(\n    const ScenarioConfig::ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioConfig::YIELD_SIGN);",
+        "res_region": "bool ScenarioManager::IsYieldSignScenario(const ScenarioType& scenario_type) {\n  return (scenario_type == ScenarioType::YIELD_SIGN);",
+        "lookback": "  return (scenario_type == ScenarioType::YIELD_SIGN);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1272,
+        "end_line": 1283,
+        "merge_gen_region": null,
+        "confidence": 0.7759475111961365,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void ScenarioManager::UpdatePlanningContext(const Frame& frame,\n                                            const ScenarioType& scenario_type) {",
+        "b_contents": "void ScenarioManager::UpdatePlanningContext(\n    const Frame& frame, const ScenarioType& scenario_type) {",
+        "base_contents": "void ScenarioManager::UpdatePlanningContext(\n    const Frame& frame, const ScenarioConfig::ScenarioType& scenario_type) {",
+        "res_region": "void ScenarioManager::UpdatePlanningContext(const Frame& frame,\n                                            const ScenarioType& scenario_type) {",
+        "lookback": "                                            const ScenarioType& scenario_type) {",
+        "lookahead": "  // BareIntersection scenario",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1286,
+        "end_line": 1295,
+        "merge_gen_region": null,
+        "confidence": 0.7829504013061523,
+        "hesitated": true
+    }
+]

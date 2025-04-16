@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        swoole_update_time();\n        int32_t timeout_msec = SwooleG.main_reactor->timeout_msec;\n        if (timeout_msec < 0 || timeout_msec > 1000)\n        {\n            SwooleG.main_reactor->timeout_msec = 1000;\n        }",
+        "b_contents": "        swServer_master_onTimer(SwooleG.serv);",
+        "base_contents": "        swoole_update_time();",
+        "res_region": "        swServer_master_onTimer(SwooleG.serv);\n        int32_t timeout_msec = SwooleG.main_reactor->timeout_msec;\n        if (timeout_msec < 0 || timeout_msec > 1000)\n        {\n            SwooleG.main_reactor->timeout_msec = 1000;\n        }",
+        "lookback": "        int32_t timeout_msec = SwooleG.main_reactor->timeout_msec;",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 145,
+        "end_line": 156,
+        "merge_gen_region": null,
+        "confidence": 0.7353124022483826,
+        "hesitated": true
+    }
+]

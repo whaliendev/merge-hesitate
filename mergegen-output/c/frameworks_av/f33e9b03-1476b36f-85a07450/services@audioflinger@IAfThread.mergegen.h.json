@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;\n    virtual bool isNonOffloadableGlobalEffectEnabled_l() const\n            REQUIRES(mutex()) EXCLUDES_ThreadBase_Mutex = 0;  // Tracks",
+        "b_contents": "    virtual audio_utils::mutex& mutex() const = 0;\n    virtual bool isNonOffloadableGlobalEffectEnabled_l() const = 0;  // Tracks",
+        "base_contents": "    virtual Mutex& mutex() const = 0;\n    virtual bool isNonOffloadableGlobalEffectEnabled_l() const = 0;  // Tracks",
+        "res_region": "    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;\n    virtual bool isNonOffloadableGlobalEffectEnabled_l() const\n            REQUIRES(mutex()) EXCLUDES_ThreadBase_Mutex = 0;  // Tracks",
+        "lookback": "            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "lookahead": "    virtual audio_unique_id_t nextUniqueId(audio_unique_id_use_t use) = 0;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 69,
+        "end_line": 80,
+        "merge_gen_region": " audioutilsmutex mutex const_(__) 0; boolNonableEffectEnabledl constRESmutex())CLU_BaseMutex 0",
+        "confidence": 0.9388839602470398,
+        "hesitated": false,
+        "resolved": false
+    }
+]

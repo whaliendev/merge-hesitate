@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            (unsigned long long) raxSize(server.clients_timeout_table));",
+        "b_contents": "            (unsigned long long)raxSize(server.clients_timeout_table));",
+        "base_contents": "            raxSize(server.clients_timeout_table));",
+        "res_region": "            (unsigned long long) raxSize(server.clients_timeout_table));",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 3983,
+        "end_line": 3989,
+        "merge_gen_region": null,
+        "confidence": 0.5995246767997742,
+        "hesitated": true
+    }
+]

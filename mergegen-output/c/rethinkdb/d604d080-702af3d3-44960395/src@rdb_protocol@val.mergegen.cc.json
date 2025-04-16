@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    switch (shortcut) {\n    case CONSTANT_SHORTCUT:\n        return new_constant_func(as_datum(), backtrace());\n    case GET_FIELD_SHORTCUT:\n        return new_get_field_func(as_datum(), backtrace());\n    case PLUCK_SHORTCUT:\n        return new_pluck_func(as_datum(), backtrace());\n    case NO_SHORTCUT:\n        // fallthru\n    default: unreachable();",
+        "b_contents": "    // We use a switch here so that people have to update it if they add another\n    // shortcut.\n    try {\n        switch (shortcut) {\n        case CONSTANT_SHORTCUT:\n            return new_constant_func(as_datum(), backtrace());\n        case GET_FIELD_SHORTCUT:\n            return new_get_field_func(as_datum(), backtrace());\n        case PLUCK_SHORTCUT:\n            return new_pluck_func(as_datum(), backtrace());\n        case PAGE_SHORTCUT:\n            return new_page_func(as_datum(), backtrace());\n        case NO_SHORTCUT:\n            // fallthru\n        default: unreachable();\n        }\n    } catch (const datum_exc_t &ex) {\n        throw exc_t(ex, backtrace().get());",
+        "base_contents": "    // We use a switch here so that people have to update it if they add another\n    // shortcut.\n    switch (shortcut) {\n    case CONSTANT_SHORTCUT:\n        return new_constant_func(as_datum(), backtrace());\n    case GET_FIELD_SHORTCUT:\n        return new_get_field_func(as_datum(), backtrace());\n    case PLUCK_SHORTCUT:\n        return new_pluck_func(as_datum(), backtrace());\n    case NO_SHORTCUT:\n        // fallthru\n    default: unreachable();",
+        "res_region": "    try {\n        switch (shortcut) {\n        case CONSTANT_SHORTCUT:\n            return new_constant_func(as_datum(), backtrace());\n        case GET_FIELD_SHORTCUT:\n            return new_get_field_func(as_datum(), backtrace());\n        case PLUCK_SHORTCUT:\n            return new_pluck_func(as_datum(), backtrace());\n        case PAGE_SHORTCUT:\n            return new_page_func(as_datum(), backtrace());\n        case NO_SHORTCUT:\n            // fallthru\n        default: unreachable();\n        }\n    } catch (const datum_exc_t &ex) {\n        throw exc_t(ex, backtrace().get());",
+        "lookback": "        switch (shortcut) {",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 589,
+        "end_line": 632,
+        "merge_gen_region": null,
+        "confidence": 0.6566117405891418,
+        "hesitated": true
+    }
+]

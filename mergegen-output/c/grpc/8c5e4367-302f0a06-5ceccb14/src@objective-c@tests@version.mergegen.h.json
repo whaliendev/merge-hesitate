@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.21.0-dev\"",
+        "b_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.20.0\"",
+        "base_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.20.0-dev\"",
+        "res_region": "#define GRPC_OBJC_VERSION_STRING @\"1.21.0-dev\"",
+        "lookback": "#define GRPC_C_VERSION_STRING @\"7.0.0\"",
+        "lookahead": "#define GRPC_C_VERSION_STRING @\"7.0.0\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.8241694569587708,
+        "hesitated": true
+    }
+]

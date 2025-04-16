@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "TEST(MultiuserTest, TestSdkSandboxUid) {\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 1000));\n    EXPECT_EQ(20000U, multiuser_get_sdk_sandbox_uid(0, 10000));\n    EXPECT_EQ(25000U, multiuser_get_sdk_sandbox_uid(0, 15000));\n    EXPECT_EQ(29999U, multiuser_get_sdk_sandbox_uid(0, 19999));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 50000));\n\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 1000));\n    EXPECT_EQ(1020000U, multiuser_get_sdk_sandbox_uid(10, 10000));\n    EXPECT_EQ(1025000U, multiuser_get_sdk_sandbox_uid(10, 15000));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 20000));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 50000));\n}\n",
+        "b_contents": "TEST(MultiuserTest, TestSupplementalUid) {\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(0, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(0, 1000));\n    EXPECT_EQ(20000U, multiuser_get_supplemental_uid(0, 10000));\n    EXPECT_EQ(25000U, multiuser_get_supplemental_uid(0, 15000));\n    EXPECT_EQ(29999U, multiuser_get_supplemental_uid(0, 19999));\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(0, 50000));\n\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(10, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(10, 1000));\n    EXPECT_EQ(1020000U, multiuser_get_supplemental_uid(10, 10000));\n    EXPECT_EQ(1025000U, multiuser_get_supplemental_uid(10, 15000));\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(10, 20000));\n    EXPECT_EQ(ERR_UID, multiuser_get_supplemental_uid(10, 50000));\n}\n",
+        "base_contents": "",
+        "res_region": "TEST(MultiuserTest, TestSdkSandboxUid) {\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 1000));\n    EXPECT_EQ(20000U, multiuser_get_sdk_sandbox_uid(0, 10000));\n    EXPECT_EQ(25000U, multiuser_get_sdk_sandbox_uid(0, 15000));\n    EXPECT_EQ(29999U, multiuser_get_sdk_sandbox_uid(0, 19999));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 50000));\n\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 0));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 1000));\n    EXPECT_EQ(1020000U, multiuser_get_sdk_sandbox_uid(10, 10000));\n    EXPECT_EQ(1025000U, multiuser_get_sdk_sandbox_uid(10, 15000));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 20000));\n    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(10, 50000));\n}\n",
+        "lookback": "    EXPECT_EQ(ERR_UID, multiuser_get_sdk_sandbox_uid(0, 0));",
+        "lookahead": "TEST(MultiuserTest, TestSplitUser) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 33,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.7883855700492859,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void clusterReadHandler(connection *conn) {\n    char buf[sizeof(clusterMsg)];",
+        "b_contents": "void clusterReadHandler(aeEventLoop *el, int fd, void *privdata, int mask) {\n    clusterMsg buf[1];",
+        "base_contents": "void clusterReadHandler(aeEventLoop *el, int fd, void *privdata, int mask) {\n    char buf[sizeof(clusterMsg)];",
+        "res_region": "void clusterReadHandler(connection *conn) {\n    clusterMsg buf[1];",
+        "lookback": "    clusterMsg buf[1];",
+        "lookahead": "    ssize_t nread;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2211,
+        "end_line": 2220,
+        "merge_gen_region": null,
+        "confidence": 0.6855246424674988,
+        "hesitated": true
+    }
+]

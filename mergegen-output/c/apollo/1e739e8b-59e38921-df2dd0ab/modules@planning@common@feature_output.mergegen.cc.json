@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void FeatureOutput::WriteLearningData(const std::string& record_file) {\n  if (FLAGS_planning_offline_mode != 2) {",
+        "b_contents": "void FeatureOutput::WriteLearningData(\n    const std::string& record_file) {\n  if (FLAGS_planning_learning_mode != 1) {",
+        "base_contents": "void FeatureOutput::WriteLearningData(\n    const std::string& record_file) {\n  if (FLAGS_planning_offline_mode != 2) {",
+        "res_region": "void FeatureOutput::WriteLearningData(\n    const std::string& record_file) {\n  if (FLAGS_planning_learning_mode != 1) {",
+        "lookback": "    const std::string& record_file) {",
+        "lookahead": "    return;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 67,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.8089703321456909,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    unsigned filenameTableSize = argCount;\n    const char** filenameTable = (const char**)malloc(filenameTableSize * sizeof(const char*));   /* argCount >= 1 */\n    char* tableBuf = NULL;",
+        "b_contents": "    const char** filenameTable = (const char**)malloc((size_t)argCount * sizeof(const char*));   /* argCount >= 1 */",
+        "base_contents": "    const char** filenameTable = (const char**)malloc(argCount * sizeof(const char*));   /* argCount >= 1 */",
+        "res_region": "    unsigned filenameTableSize = argCount;\n    const char** filenameTable = (const char**)malloc(filenameTableSize * sizeof(const char*));   /* argCount >= 1 */\n    char* tableBuf = NULL;",
+        "lookback": "    const char** filenameTable = (const char**)malloc(filenameTableSize * sizeof(const char*));   /* argCount >= 1 */",
+        "lookahead": "    unsigned filenameIdx = 0;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 587,
+        "end_line": 595,
+        "merge_gen_region": null,
+        "confidence": 0.8056809902191162,
+        "hesitated": true
+    }
+]

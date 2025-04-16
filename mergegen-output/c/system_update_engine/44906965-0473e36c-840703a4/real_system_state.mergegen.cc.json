@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "#if USE_CHROME_KIOSK_APP || USE_CHROME_NETWORK_PROXY",
+        "b_contents": "#if USE_CHROME_KIOSK_APP",
+        "base_contents": "#if USE_LIBCROS",
+        "res_region": "#if USE_CHROME_KIOSK_APP",
+        "lookback": "#include <chromeos/dbus/service_constants.h>",
+        "lookahead": "#include <chromeos/dbus/service_constants.h>",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 26,
+        "end_line": 32,
+        "merge_gen_region": null,
+        "confidence": 0.8094183802604675,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#endif  // USE_CHROME_KIOSK_APP || USE_CHROME_NETWORK_PROXY",
+        "b_contents": "#endif  // USE_CHROME_KIOSK_APP",
+        "base_contents": "#endif  // USE_LIBCROS",
+        "res_region": "#endif  // USE_CHROME_KIOSK_APP",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 34,
+        "end_line": 40,
+        "merge_gen_region": null,
+        "confidence": 0.7660170197486877,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#endif  // USE_CHROME_KIOSK_APP\n#if USE_CHROME_NETWORK_PROXY\n  network_proxy_service_proxy_.reset(\n      new org::chromium::NetworkProxyServiceInterfaceProxy(\n          DBusConnection::Get()->GetDBus(),\n          chromeos::kNetworkProxyServiceName));\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "#endif  // USE_CHROME_KIOSK_APP",
+        "base_contents": "  network_proxy_service_proxy_.reset(\n      new org::chromium::NetworkProxyServiceInterfaceProxy(\n          DBusConnection::Get()->GetDBus(),\n          chromeos::kNetworkProxyServiceName));\n#endif  // USE_LIBCROS",
+        "res_region": "#endif  // USE_CHROME_KIOSK_APP",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 83,
+        "end_line": 99,
+        "merge_gen_region": null,
+        "confidence": 0.5397124886512756,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  update_attempter_.reset(\n      new UpdateAttempter(this,\n                          certificate_checker_.get(),\n#if USE_CHROME_NETWORK_PROXY\n                          network_proxy_service_proxy_.get()));\n#else\n                          nullptr));\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "  update_attempter_.reset(new UpdateAttempter(this,\n                                              certificate_checker_.get()));",
+        "base_contents": "#if USE_LIBCROS\n  org::chromium::NetworkProxyServiceInterfaceProxyInterface* net_proxy =\n      network_proxy_service_proxy_.get();\n  org::chromium::LibCrosServiceInterfaceProxyInterface* libcros_proxy =\n      libcros_proxy_.get();\n#else\n  org::chromium::NetworkProxyServiceInterfaceProxyInterface* net_proxy =\n      nullptr;\n  org::chromium::LibCrosServiceInterfaceProxyInterface* libcros_proxy =\n      nullptr;\n#endif  // USE_LIBCROS",
+        "res_region": "  update_attempter_.reset(new UpdateAttempter(this,\n                                              certificate_checker_.get()));",
+        "lookback": "                                              certificate_checker_.get()));",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 170,
+        "end_line": 194,
+        "merge_gen_region": null,
+        "confidence": 0.789972186088562,
+        "hesitated": true
+    }
+]

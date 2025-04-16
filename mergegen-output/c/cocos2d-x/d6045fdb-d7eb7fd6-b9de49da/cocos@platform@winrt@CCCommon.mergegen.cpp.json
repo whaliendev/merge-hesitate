@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#ifndef WP8_SHADER_COMPILER\n    // Create the message dialog and set its content\n    Platform::String^ message = PlatformStringFromString(pszMsg);\n    Platform::String^ title = PlatformStringFromString(pszTitle);",
+        "b_contents": "    // Create the message dialog and set its content\n    Platform::String^ message = ref new Platform::String(CCUtf8ToUnicode(pszMsg, -1).c_str());\n    Platform::String^ title = ref new Platform::String(CCUtf8ToUnicode(pszTitle, -1).c_str());",
+        "base_contents": "    // Create the message dialog and set its content\n    Platform::String^ message = ref new Platform::String(CCUtf8ToUnicode(pszMsg, -1).c_str());\n    Platform::String^ title = ref new Platform::String(CCUtf8ToUnicode(pszTitle, -1).c_str());\n#ifndef WP8_SHADER_COMPILER",
+        "res_region": "    // Create the message dialog and set its content\n    Platform::String^ message = PlatformStringFromString(pszMsg);\n    Platform::String^ title = PlatformStringFromString(pszTitle);",
+        "lookback": "    Platform::String^ message = PlatformStringFromString(pszMsg);",
+        "lookahead": "    GLViewImpl::sharedOpenGLView()->ShowMessageBox(title, message);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 37,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.8118799328804016,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "\n    virtual status_t setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) = 0;\n\n    virtual status_t resetReferencesForTest() = 0;",
+        "b_contents": "\n    virtual status_t resetReferencesForTest() = 0;",
+        "base_contents": "",
+        "res_region": "\n    virtual status_t setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) = 0;\n\n    virtual status_t resetReferencesForTest() = 0;",
+        "lookback": "    virtual status_t setTracksInternalMute(",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 391,
+        "end_line": 401,
+        "merge_gen_region": " statustTracksMute const::&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&,&&&,&&&,&&&,_,__,_,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_,__,__,__,_,__,__,_,__,_,__,_,__,_,__,_,_,_,_,_,__,__,__,__,__,__,__,__,__,__,__,__,",
+        "confidence": 0.8898877501487732,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    status_t setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;\n    status_t resetReferencesForTest() override;",
+        "b_contents": "    status_t resetReferencesForTest() override;",
+        "base_contents": "",
+        "res_region": "    status_t setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;\n    status_t resetReferencesForTest() override;",
+        "lookback": "            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 518,
+        "end_line": 525,
+        "merge_gen_region": null,
+        "confidence": 0.8046720623970032,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            SET_TRACKS_INTERNAL_MUTE = media::BnAudioFlingerService::TRANSACTION_setTracksInternalMute,\n            RESET_REFERENCES_FOR_TEST =\n                    media::BnAudioFlingerService::TRANSACTION_resetReferencesForTest,",
+        "b_contents": "            RESET_REFERENCES_FOR_TEST =\n                    media::BnAudioFlingerService::TRANSACTION_resetReferencesForTest,",
+        "base_contents": "",
+        "res_region": "            SET_TRACKS_INTERNAL_MUTE = media::BnAudioFlingerService::TRANSACTION_setTracksInternalMute,\n            RESET_REFERENCES_FOR_TEST =\n                    media::BnAudioFlingerService::TRANSACTION_resetReferencesForTest,",
+        "lookback": "            RESET_REFERENCES_FOR_TEST =",
+        "lookahead": "        };",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 628,
+        "end_line": 636,
+        "merge_gen_region": null,
+        "confidence": 0.616092324256897,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Status setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;\n    Status resetReferencesForTest() override;",
+        "b_contents": "    Status resetReferencesForTest() override;",
+        "base_contents": "",
+        "res_region": "    Status setTracksInternalMute(\n            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;\n    Status resetReferencesForTest() override;",
+        "lookback": "            const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) override;",
+        "lookahead": "private:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 773,
+        "end_line": 780,
+        "merge_gen_region": null,
+        "confidence": 0.7434097528457642,
+        "hesitated": true
+    }
+]

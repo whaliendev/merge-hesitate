@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <imsg.h>",
+        "base_contents": "#include <getopt.h>\n#include <imsg.h>",
+        "res_region": "",
+        "lookback": "#include <stdarg.h>",
+        "lookahead": "#include <limits.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 27,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.6574175357818604,
+        "hesitated": true
+    }
+]

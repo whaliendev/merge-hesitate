@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    sub->start_artificial(uuid);\n    return make_counted<stream_t>(std::move(sub),\n                                  boost::apply_visitor(pointness_visitor_t(), spec),\n                                  bt);",
+        "b_contents": "    sub->start_artificial(env, uuid);\n    return make_counted<stream_t>(std::move(sub), bt);",
+        "base_contents": "    sub->start_artificial(uuid);\n    return make_counted<stream_t>(std::move(sub), bt);",
+        "res_region": "    sub->start_artificial(env, uuid);\n    return make_counted<stream_t>(std::move(sub),\n                                  boost::apply_visitor(pointness_visitor_t(), spec),\n                                  bt);",
+        "lookback": "    return make_counted<stream_t>(std::move(sub),",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2443,
+        "end_line": 2454,
+        "merge_gen_region": null,
+        "confidence": 0.6952110528945923,
+        "hesitated": true
+    }
+]

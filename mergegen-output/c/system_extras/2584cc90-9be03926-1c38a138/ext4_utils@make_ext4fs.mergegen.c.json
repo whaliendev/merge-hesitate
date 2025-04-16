@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tint fd;\n\tint status;\n\n\treset_ext4fs_info();\n\tinfo.len = len;\n\n\tfd = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);\n\tif (fd < 0) {\n\t\terror_errno(\"open\");\n\t\treturn EXIT_FAILURE;\n\t}\n\n\tstatus = make_ext4fs_internal(fd, NULL, NULL, 0, 0, 0, 0, 1, 0);\n\tclose(fd);\n\n\treturn status;",
+        "b_contents": "\tint fd;\n\tint status;\n\n\treset_ext4fs_info();\n\tinfo.len = len;\n\n\tfd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);\n\tif (fd < 0) {\n\t\terror_errno(\"open\");\n\t\treturn EXIT_FAILURE;\n\t}\n\n\tstatus = make_ext4fs_internal(fd, NULL, NULL, 0, 0, 0, 0, 1, 0);\n\tclose(fd);\n\n\treturn status;",
+        "base_contents": "    reset_ext4fs_info();\n    info.len = len;\n    return make_ext4fs_internal(filename, NULL, NULL, 0, 0, 0, 0, 1, 0);",
+        "res_region": "\tint fd;\n\tint status;\n\n\treset_ext4fs_info();\n\tinfo.len = len;\n\n\tfd = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);\n\tif (fd < 0) {\n\t\terror_errno(\"open\");\n\t\treturn EXIT_FAILURE;\n\t}\n\n\tstatus = make_ext4fs_internal(fd, NULL, NULL, 0, 0, 0, 0, 1, 0);\n\tclose(fd);\n\n\treturn status;",
+        "lookback": "\tint status;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 287,
+        "end_line": 325,
+        "merge_gen_region": null,
+        "confidence": 0.8607190251350403,
+        "hesitated": true
+    }
+]

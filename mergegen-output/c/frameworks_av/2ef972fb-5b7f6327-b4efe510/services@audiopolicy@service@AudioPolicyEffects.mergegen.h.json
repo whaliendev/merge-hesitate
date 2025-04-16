@@ -1,0 +1,224 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    ~AudioPolicyEffects() override;",
+        "base_contents": "    virtual ~AudioPolicyEffects();",
+        "res_region": "",
+        "lookback": "    // NOTE: methods on AudioPolicyEffects should never be called with the AudioPolicyService",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 58,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.45433309674263,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Initializes the Effects (AudioSystem must be ready as this creates audio client objects).\n    void initDefaultDeviceEffects() EXCLUDES(mDeviceEffectsMutex) EXCLUDES_EffectHandle_Mutex;",
+        "b_contents": "    // Called by AudioPolicyService::onFirstRef() to load device effects\n    // on a separate worker thread.\n    // TODO(b/319515492) move this initialization after AudioPolicyService::onFirstRef().\n    void setDefaultDeviceEffects();",
+        "base_contents": "    void setDefaultDeviceEffects();",
+        "res_region": "    // Initializes the Effects (AudioSystem must be ready as this creates audio client objects).\n    void initDefaultDeviceEffects() EXCLUDES(mDeviceEffectsMutex) EXCLUDES_EffectHandle_Mutex;",
+        "lookback": "    void initDefaultDeviceEffects() EXCLUDES(mDeviceEffectsMutex) EXCLUDES_EffectHandle_Mutex;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 124,
+        "end_line": 134,
+        "merge_gen_region": "// thes// thes// thes// thes// thes// thes// the// the// the//outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8901341557502747,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    status_t loadAudioEffectConfig_ll(const sp<EffectsFactoryHalInterface>& effectsFactoryHal)\n            REQUIRES(mMutex, mDeviceEffectsMutex);",
+        "b_contents": "    // Called on an async thread because it creates AudioEffects\n    // which register with AudioFlinger and AudioPolicy.\n    // We must therefore exclude the EffectHandle_Mutex.\n    void initDefaultDeviceEffects() EXCLUDES(mDeviceEffectsMutex) EXCLUDES_EffectHandle_Mutex;",
+        "base_contents": "    static const char * const kInputSourceNames[AUDIO_SOURCE_CNT -1];\n    static audio_source_t inputSourceNameToEnum(const char *name);",
+        "res_region": "    status_t loadAudioEffectConfig_ll(const sp<EffectsFactoryHalInterface>& effectsFactoryHal)\n            REQUIRES(mMutex, mDeviceEffectsMutex);",
+        "lookback": "            REQUIRES(mMutex, mDeviceEffectsMutex);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 216,
+        "end_line": 227,
+        "merge_gen_region": null,
+        "confidence": 0.6633772253990173,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Legacy: Begin methods below.\n    // Parse audio_effects.conf - called from constructor.\n    status_t loadAudioEffectConfigLegacy_l(const char* path) REQUIRES(mMutex);",
+        "b_contents": "    status_t loadAudioEffectConfig_ll(const sp<EffectsFactoryHalInterface>& effectsFactoryHal)\n            REQUIRES(mMutex, mDeviceEffectsMutex);",
+        "base_contents": "    static const char *kStreamNames[AUDIO_STREAM_PUBLIC_CNT+1]; //+1 required as streams start from -1\n    audio_stream_type_t streamNameToEnum(const char *name);",
+        "res_region": "    // Legacy: Begin methods below.\n    // Parse audio_effects.conf - called from constructor.\n    status_t loadAudioEffectConfigLegacy_l(const char* path) REQUIRES(mMutex);",
+        "lookback": "    // Parse audio_effects.conf - called from constructor.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 229,
+        "end_line": 239,
+        "merge_gen_region": null,
+        "confidence": 0.8424642086029053,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Legacy: Load all automatic effect configurations\n    status_t loadInputEffectConfigurations_l(cnode* root,\n            const EffectDescVector& effects) REQUIRES(mMutex);\n    status_t loadStreamEffectConfigurations_l(cnode* root,\n            const EffectDescVector& effects) REQUIRES(mMutex);",
+        "b_contents": "    // Legacy: Begin methods below.\n    // Parse audio_effects.conf - called from constructor.\n    status_t loadAudioEffectConfigLegacy_l(const char* path) REQUIRES(mMutex);",
+        "base_contents": "    // Parse audio_effects.conf\n    status_t loadAudioEffectConfigLegacy(const char *path);\n    status_t loadAudioEffectConfig(const sp<EffectsFactoryHalInterface>& effectsFactoryHal);",
+        "res_region": "    // Legacy: Load all automatic effect configurations\n    status_t loadInputEffectConfigurations_l(cnode* root,\n            const EffectDescVector& effects) REQUIRES(mMutex);\n    status_t loadStreamEffectConfigurations_l(cnode* root,\n            const EffectDescVector& effects) REQUIRES(mMutex);",
+        "lookback": "    status_t loadInputEffectConfigurations_l(cnode* root,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 241,
+        "end_line": 255,
+        "merge_gen_region": null,
+        "confidence": 0.7518218159675598,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Legacy: static methods below.\n\n    static audio_source_t inputSourceNameToEnum(const char *name);\n\n    static audio_stream_type_t streamNameToEnum(const char* name);",
+        "b_contents": "    // Legacy: Load all automatic effect configurations\n    status_t loadInputEffectConfigurations_l(\n            cnode* root, const Vector<EffectDesc*>& effects) REQUIRES(mMutex);\n    status_t loadStreamEffectConfigurations_l(\n            cnode* root, const Vector<EffectDesc*>& effects) REQUIRES(mMutex);\n\n    // Legacy: static methods below.\n\n    static audio_source_t inputSourceNameToEnum(const char *name);",
+        "base_contents": "    // Load all effects descriptors in configuration file\n    status_t loadEffects(cnode *root, Vector <EffectDesc *>& effects);\n    EffectDesc *loadEffect(cnode *root);",
+        "res_region": "    // Legacy: static methods below.\n\n    static audio_source_t inputSourceNameToEnum(const char *name);\n\n    static audio_stream_type_t streamNameToEnum(const char* name);\n",
+        "lookback": "",
+        "lookahead": "    // Load all effects descriptors in configuration file",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 257,
+        "end_line": 277,
+        "merge_gen_region": null,
+        "confidence": 0.5258346796035767,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Load all effects descriptors in configuration file\n    static EffectDescVector loadEffects(cnode* root);\n    static std::shared_ptr<AudioPolicyEffects::EffectDesc> loadEffect(cnode* root);\n    static std::shared_ptr<EffectDescVector> loadEffectConfig(cnode* root,\n            const EffectDescVector& effects);",
+        "b_contents": "    static audio_stream_type_t streamNameToEnum(const char* name);\n\n    // Load all effects descriptors in configuration file\n    static status_t loadEffects(cnode* root, Vector<EffectDesc*>& effects);\n    static EffectDesc* loadEffect(cnode* root);\n    static EffectDescVector *loadEffectConfig(cnode *root, const Vector <EffectDesc *>& effects);",
+        "base_contents": "    // Load all automatic effect configurations\n    status_t loadInputEffectConfigurations(cnode *root, const Vector <EffectDesc *>& effects);\n    status_t loadStreamEffectConfigurations(cnode *root, const Vector <EffectDesc *>& effects);\n    EffectDescVector *loadEffectConfig(cnode *root, const Vector <EffectDesc *>& effects);",
+        "res_region": "    // Load all effects descriptors in configuration file\n    static EffectDescVector loadEffects(cnode* root);\n    static std::shared_ptr<AudioPolicyEffects::EffectDesc> loadEffect(cnode* root);\n    static std::shared_ptr<EffectDescVector> loadEffectConfig(cnode* root,\n            const EffectDescVector& effects);",
+        "lookback": "    static EffectDescVector loadEffects(cnode* root);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 279,
+        "end_line": 297,
+        "merge_gen_region": null,
+        "confidence": 0.7083226442337036,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    static void loadEffectParameters(\n            cnode* root, std::vector<std::shared_ptr<const effect_param_t>>& params);\n\n    // loadEffectParameter returns a shared_ptr instead of a unique_ptr as there may\n    // be multiple references to the same effect parameter.\n    static std::shared_ptr<const effect_param_t> loadEffectParameter(cnode* root);\n    static size_t readParamValue(cnode* node,",
+        "b_contents": "    static void loadEffectParameters(cnode* root, Vector<effect_param_t*>& params);\n    static effect_param_t* loadEffectParameter(cnode* root);\n    static size_t readParamValue(cnode* node,",
+        "base_contents": "    void loadEffectParameters(cnode *root, Vector <effect_param_t *>& params);\n    effect_param_t *loadEffectParameter(cnode *root);\n    size_t readParamValue(cnode *node,",
+        "res_region": "    static void loadEffectParameters(\n            cnode* root, std::vector<std::shared_ptr<const effect_param_t>>& params);\n\n    // loadEffectParameter returns a shared_ptr instead of a unique_ptr as there may\n    // be multiple references to the same effect parameter.\n    static std::shared_ptr<const effect_param_t> loadEffectParameter(cnode* root);\n    static size_t readParamValue(cnode* node,",
+        "lookback": "            cnode* root, std::vector<std::shared_ptr<const effect_param_t>>& params);",
+        "lookahead": "                          char **param,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 300,
+        "end_line": 316,
+        "merge_gen_region": null,
+        "confidence": 0.6683415174484253,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Legacy: End methods above.\n\n    // Note: The association of Effects to audio source, session, or stream\n    // is done through std::map instead of std::unordered_map.  This gives\n    // better reproducibility of issues, since map is ordered and more predictable\n    // in enumeration.\n",
+        "b_contents": "    // Legacy: End methods above.\n",
+        "base_contents": "",
+        "res_region": "    // Legacy: End methods above.\n\n    // Note: The association of Effects to audio source, session, or stream\n    // is done through std::map instead of std::unordered_map.  This gives\n    // better reproducibility of issues, since map is ordered and more predictable\n    // in enumeration.\n",
+        "lookback": "",
+        "lookahead": "    // protects access to mInputSources, mInputSessions, mOutputStreams, mOutputSessions",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 325,
+        "end_line": 337,
+        "merge_gen_region": null,
+        "confidence": 0.7937470078468323,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::map<audio_source_t, std::shared_ptr<EffectDescVector>> mInputSources\n            GUARDED_BY(mMutex);\n    // Automatic input effects are unique for an audio_session_t.\n    std::map<audio_session_t, std::shared_ptr<EffectVector>> mInputSessions\n            GUARDED_BY(mMutex);",
+        "b_contents": "    KeyedVector<audio_source_t, EffectDescVector*> mInputSources GUARDED_BY(mMutex);\n    // Automatic input effects are unique for an audio_session_t.\n    KeyedVector<audio_session_t, EffectVector*> mInputSessions GUARDED_BY(mMutex);",
+        "base_contents": "    KeyedVector< audio_source_t, EffectDescVector* > mInputSources;\n    // Automatic input effects are unique for audio_io_handle_t\n    KeyedVector< audio_session_t, EffectVector* > mInputSessions;",
+        "res_region": "    std::map<audio_source_t, std::shared_ptr<EffectDescVector>> mInputSources\n            GUARDED_BY(mMutex);\n    // Automatic input effects are unique for an audio_session_t.\n    std::map<audio_session_t, std::shared_ptr<EffectVector>> mInputSessions\n            GUARDED_BY(mMutex);",
+        "lookback": "            GUARDED_BY(mMutex);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 343,
+        "end_line": 357,
+        "merge_gen_region": null,
+        "confidence": 0.6618820428848267,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::map<audio_stream_type_t, std::shared_ptr<EffectDescVector>> mOutputStreams\n            GUARDED_BY(mMutex);\n    // Automatic output effects are unique for an audio_session_t.\n    std::map<audio_session_t, std::shared_ptr<EffectVector>> mOutputSessions\n            GUARDED_BY(mMutex);",
+        "b_contents": "    KeyedVector<audio_stream_type_t, EffectDescVector*> mOutputStreams GUARDED_BY(mMutex);\n    // Automatic output effects are unique for an audio_session_t.\n    KeyedVector<audio_session_t, EffectVector*> mOutputSessions GUARDED_BY(mMutex);",
+        "base_contents": "    KeyedVector< audio_stream_type_t, EffectDescVector* > mOutputStreams;\n    // Automatic output effects are unique for audiosession ID\n    KeyedVector< audio_session_t, EffectVector* > mOutputSessions;",
+        "res_region": "    std::map<audio_stream_type_t, std::shared_ptr<EffectDescVector>> mOutputStreams\n            GUARDED_BY(mMutex);\n    // Automatic output effects are unique for an audio_session_t.\n    std::map<audio_session_t, std::shared_ptr<EffectVector>> mOutputSessions\n            GUARDED_BY(mMutex);",
+        "lookback": "            GUARDED_BY(mMutex);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 360,
+        "end_line": 374,
+        "merge_gen_region": null,
+        "confidence": 0.6882885098457336,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n    // mDeviceEffects is never accessed through AudioPolicyEffects methods.\n    // We keep a separate mutex here to catch future methods attempting to access this variable.\n    std::mutex mDeviceEffectsMutex;\n    std::map<std::string, std::unique_ptr<DeviceEffects>> mDeviceEffects\n            GUARDED_BY(mDeviceEffectsMutex);",
+        "base_contents": "    std::map<std::string, std::unique_ptr<DeviceEffects>> mDeviceEffects GUARDED_BY(mMutex);",
+        "res_region": "\n    // mDeviceEffects is never accessed through AudioPolicyEffects methods.\n    // We keep a separate mutex here to catch future methods attempting to access this variable.\n    std::mutex mDeviceEffectsMutex;\n    std::map<std::string, std::unique_ptr<DeviceEffects>> mDeviceEffects\n            GUARDED_BY(mDeviceEffectsMutex);",
+        "lookback": "    // mDeviceEffects is never accessed through AudioPolicyEffects methods.",
+        "lookahead": "};",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 379,
+        "end_line": 389,
+        "merge_gen_region": null,
+        "confidence": 0.30812203884124756,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // mDeviceEffects is never accessed through AudioPolicyEffects methods.\n    // We keep a separate mutex here to catch future methods attempting to access this variable.\n    std::mutex mDeviceEffectsMutex;\n    std::map<std::string, std::unique_ptr<DeviceEffects>> mDeviceEffects\n            GUARDED_BY(mDeviceEffectsMutex);",
+        "b_contents": "    /**\n     * Device Effect initialization must be asynchronous: the audio_policy service parses and init\n     * effect on first reference. AudioFlinger will handle effect creation and register these\n     * effect on audio_policy service.\n     *\n     * The future is associated with the std::async launched thread - no need to lock as\n     * it is only set once on init.  Due to the async nature, it is conceivable that\n     * some device effects are not available immediately after AudioPolicyService::onFirstRef()\n     * while the effects are being created.\n     */\n    std::future<void> mDefaultDeviceEffectFuture;",
+        "base_contents": "    /**\n     * Device Effect initialization must be asynchronous: the audio_policy service parses and init\n     * effect on first reference. AudioFlinger will handle effect creation and register these\n     * effect on audio_policy service.\n     * We must store the reference of the furture garantee real asynchronous operation.\n     */\n    std::future<void> mDefaultDeviceEffectFuture;",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 391,
+        "end_line": 417,
+        "merge_gen_region": null,
+        "confidence": 0.8641371726989746,
+        "hesitated": true
+    }
+]

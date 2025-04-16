@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "namespace {\n// Sentinel value to be returned when extension session with a stale or invalid key is reported.\nconst std::string POISON_EXT_STATS_KEY(\"poisoned_stats\");\n} // anonymous namespace",
+        "b_contents": "Mutex CameraServiceProxyWrapper::sProxyMutex;\nsp<hardware::ICameraServiceProxy> CameraServiceProxyWrapper::sCameraServiceProxy;\n\nMutex CameraServiceProxyWrapper::mLock;\nstd::map<std::string, std::shared_ptr<CameraServiceProxyWrapper::CameraSessionStatsWrapper>>\n        CameraServiceProxyWrapper::mSessionStatsMap;",
+        "base_contents": "Mutex CameraServiceProxyWrapper::sProxyMutex;\nsp<hardware::ICameraServiceProxy> CameraServiceProxyWrapper::sCameraServiceProxy;\n\nMutex CameraServiceProxyWrapper::mLock;\nstd::map<String8, std::shared_ptr<CameraServiceProxyWrapper::CameraSessionStatsWrapper>>\n        CameraServiceProxyWrapper::mSessionStatsMap;",
+        "res_region": "namespace {\n// Sentinel value to be returned when extension session with a stale or invalid key is reported.\nconst std::string POISON_EXT_STATS_KEY(\"poisoned_stats\");\n} // anonymous namespace",
+        "lookback": "// Sentinel value to be returned when extension session with a stale or invalid key is reported.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 34,
+        "end_line": 53,
+        "merge_gen_region": null,
+        "confidence": 0.6915198564529419,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        // Generate a new log ID for open events\n        int64_t logId = generateLogId(mRandomDevice);\n\n        sessionStats = std::make_shared<CameraSessionStatsWrapper>(\n                id, facing, CameraSessionStats::CAMERA_STATE_OPEN, clientPackageName,\n                apiLevel, isNdk, latencyMs, logId);",
+        "b_contents": "        sessionStats = std::make_shared<CameraSessionStatsWrapper>(id, facing,\n                CameraSessionStats::CAMERA_STATE_OPEN, clientPackageName,\n                apiLevel, isNdk, latencyMs);",
+        "base_contents": "        sessionStats = std::make_shared<CameraSessionStatsWrapper>(String16(id), facing,\n                CameraSessionStats::CAMERA_STATE_OPEN, clientPackageName,\n                apiLevel, isNdk, latencyMs);",
+        "res_region": "        // Generate a new log ID for open events\n        int64_t logId = generateLogId(mRandomDevice);\n\n        sessionStats = std::make_shared<CameraSessionStatsWrapper>(\n                id, facing, CameraSessionStats::CAMERA_STATE_OPEN, clientPackageName,\n                apiLevel, isNdk, latencyMs, logId);",
+        "lookback": "        int64_t logId = generateLogId(mRandomDevice);",
+        "lookahead": "        mSessionStatsMap.emplace(id, sessionStats);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 342,
+        "end_line": 357,
+        "merge_gen_region": null,
+        "confidence": 0.8523880243301392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void CameraServiceProxyWrapper::logClose(const std::string& id, int32_t latencyMs,\n        bool deviceError) {",
+        "b_contents": "void CameraServiceProxyWrapper::logClose(const std::string& id, int32_t latencyMs) {",
+        "base_contents": "void CameraServiceProxyWrapper::logClose(const String8& id, int32_t latencyMs) {",
+        "res_region": "void CameraServiceProxyWrapper::logClose(const std::string& id, int32_t latencyMs,\n        bool deviceError) {",
+        "lookback": "        bool deviceError) {",
+        "lookahead": "    std::shared_ptr<CameraSessionStatsWrapper> sessionStats;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 368,
+        "end_line": 375,
+        "merge_gen_region": null,
+        "confidence": 0.5786281824111938,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include \"modules/planning/planner_factory.h\"",
+        "b_contents": "#include \"modules/planning/planner/rtk_replay_planner.h\"\n#include \"modules/planning/planning.h\"\n#include \"modules/planning/planning.h\"",
+        "base_contents": "#include \"modules/planning/planner_factory.h\"\n#include \"modules/planning/planning.h\"",
+        "res_region": "#include \"modules/planning/planner/rtk_replay_planner.h\"\n#include \"modules/planning/planning.h\"\n#include \"modules/planning/planning.h\"",
+        "lookback": "#include \"modules/planning/planning.h\"",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.6687866449356079,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool Planning::Plan(const common::vehicle_state::VehicleState &vehicle_state,",
+        "b_contents": "Status Planning::Start() {\n  static ros::Rate loop_rate(FLAGS_planning_loop_rate);\n  while (ros::ok()) {\n    RunOnce();\n    ros::spinOnce();\n    loop_rate.sleep();\n  }\n\n  return Status::OK();\n}\n\nvoid Planning::RunOnce() {\n  AdapterManager::Observe();\n  if (AdapterManager::GetLocalization() == nullptr) {\n    AERROR << \"Localization is not available; skip the planning cycle\";\n    return;\n  }\n  if (AdapterManager::GetLocalization()->Empty()) {\n    AERROR << \"localization messages are missing; skip the planning cycle\";\n    return;\n  } else {\n    AINFO << \"Get localization message;\";\n  }\n\n  if (AdapterManager::GetChassis() == nullptr) {\n    AERROR << \"Chassis is not available; skip the planning cycle\";\n    return;\n  }\n  if (AdapterManager::GetChassis()->Empty()) {\n    AERROR << \"Chassis messages are missing; skip the planning cycle\";\n    return;\n  } else {\n    AINFO << \"Get localization message;\";\n  }\n\n  AINFO << \"Start planning ...\";\n\n  const auto& localization =\n      AdapterManager::GetLocalization()->GetLatestObserved();\n  VehicleState vehicle_state(localization);\n\n  const auto& chassis = AdapterManager::GetChassis()->GetLatestObserved();\n  bool is_on_auto_mode = chassis.driving_mode() == chassis.COMPLETE_AUTO_DRIVE;\n\n  double planning_cycle_time = 1.0 / FLAGS_planning_loop_rate;\n  // the execution_start_time is the estimated time when the planned trajectory\n  // will be executed by the controller.\n  double execution_start_time =\n      apollo::common::time::ToSecond(apollo::common::time::Clock::Now()) +\n      planning_cycle_time;\n\n  std::vector<TrajectoryPoint> planning_trajectory;\n  bool res_planning = Plan(vehicle_state, is_on_auto_mode, execution_start_time,\n                           &planning_trajectory);\n  if (res_planning) {\n    ADCTrajectory trajectory_pb =\n        ToADCTrajectory(execution_start_time, planning_trajectory);\n    AdapterManager::PublishPlanningTrajectory(trajectory_pb);\n    AINFO << \"Planning succeeded\";\n  } else {\n    AINFO << \"Planning failed\";\n  }\n}\n\nvoid Planning::Stop() {}\n\nbool Planning::Plan(const common::vehicle_state::VehicleState& vehicle_state,",
+        "base_contents": "bool Planning::Plan(const common::vehicle_state::VehicleState& vehicle_state,",
+        "res_region": "Status Planning::Start() {\n  static ros::Rate loop_rate(FLAGS_planning_loop_rate);\n  while (ros::ok()) {\n    RunOnce();\n    ros::spinOnce();\n    loop_rate.sleep();\n  }\n\n  return Status::OK();\n}\n\nvoid Planning::RunOnce() {\n  AdapterManager::Observe();\n  if (AdapterManager::GetLocalization() == nullptr) {\n    AERROR << \"Localization is not available; skip the planning cycle\";\n    return;\n  }\n  if (AdapterManager::GetLocalization()->Empty()) {\n    AERROR << \"localization messages are missing; skip the planning cycle\";\n    return;\n  } else {\n    AINFO << \"Get localization message;\";\n  }\n\n  if (AdapterManager::GetChassis() == nullptr) {\n    AERROR << \"Chassis is not available; skip the planning cycle\";\n    return;\n  }\n  if (AdapterManager::GetChassis()->Empty()) {\n    AERROR << \"Chassis messages are missing; skip the planning cycle\";\n    return;\n  } else {\n    AINFO << \"Get localization message;\";\n  }\n\n  AINFO << \"Start planning ...\";\n\n  const auto& localization =\n      AdapterManager::GetLocalization()->GetLatestObserved();\n  VehicleState vehicle_state(localization);\n\n  const auto& chassis = AdapterManager::GetChassis()->GetLatestObserved();\n  bool is_on_auto_mode = chassis.driving_mode() == chassis.COMPLETE_AUTO_DRIVE;\n\n  double planning_cycle_time = 1.0 / FLAGS_planning_loop_rate;\n  // the execution_start_time is the estimated time when the planned trajectory\n  // will be executed by the controller.\n  double execution_start_time =\n      apollo::common::time::ToSecond(apollo::common::time::Clock::Now()) +\n      planning_cycle_time;\n\n  std::vector<TrajectoryPoint> planning_trajectory;\n  bool res_planning = Plan(vehicle_state, is_on_auto_mode, execution_start_time,\n                           &planning_trajectory);\n  if (res_planning) {\n    ADCTrajectory trajectory_pb =\n        ToADCTrajectory(execution_start_time, planning_trajectory);\n    AdapterManager::PublishPlanningTrajectory(trajectory_pb);\n    AINFO << \"Planning succeeded\";\n  } else {\n    AINFO << \"Planning failed\";\n  }\n}\n\nvoid Planning::Stop() {}\n\nbool Planning::Plan(const common::vehicle_state::VehicleState& vehicle_state,",
+        "lookback": "  static ros::Rate loop_rate(FLAGS_planning_loop_rate);",
+        "lookahead": "                    const bool is_on_auto_mode, const double publish_time,",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 70,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.8363006114959717,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    point.set_kappa(vehicle_state.angular_velocity() /\n                    vehicle_state.linear_velocity());",
+        "b_contents": "    point.mutable_path_point()->set_kappa(vehicle_state.angular_velocity() /\n                                          vehicle_state.linear_velocity());",
+        "base_contents": "    point.set_kappa(\n        vehicle_state.angular_velocity() / vehicle_state.linear_velocity());",
+        "res_region": "    point.mutable_path_point()->set_kappa(vehicle_state.angular_velocity() /\n                                          vehicle_state.linear_velocity());",
+        "lookback": "                                          vehicle_state.linear_velocity());",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 246,
+        "end_line": 255,
+        "merge_gen_region": null,
+        "confidence": 0.754399836063385,
+        "hesitated": true
+    }
+]

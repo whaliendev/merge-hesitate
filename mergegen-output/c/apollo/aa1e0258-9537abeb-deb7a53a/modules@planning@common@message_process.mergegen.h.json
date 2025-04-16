@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/prediction/proto/prediction_obstacle.pb.h\"\n#include \"modules/routing/proto/routing.pb.h\"\n#include \"modules/storytelling/proto/story.pb.h\"",
+        "res_region": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"\n#include \"modules/common_msgs/storytelling_msgs/story.pb.h\"",
+        "lookback": "#include \"modules/common_msgs/prediction_msgs/prediction_obstacle.pb.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 38,
+        "end_line": 53,
+        "merge_gen_region": "includemodulescommonmsgspredictionmsgspredictionob..\"# \"/_//.\"includemodulescommon/_/.\"includemodulescommon.\"includemodulescommon.\"includemodulescommonInIn..\"includemodulescommonInInInh",
+        "confidence": 0.8912904262542725,
+        "hesitated": false,
+        "resolved": false
+    }
+]

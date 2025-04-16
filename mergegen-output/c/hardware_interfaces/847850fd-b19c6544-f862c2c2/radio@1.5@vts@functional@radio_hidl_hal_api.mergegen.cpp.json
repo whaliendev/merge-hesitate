@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    Return<void> res = radio_v1_5->setSystemSelectionChannels_1_5(\n            serial, true, {specifier3, specifier17, specifier20, specifier40});",
+        "b_contents": "    Return<void> res =\n            radio_v1_5->setSystemSelectionChannels_1_5(serial, true, {specifier3, specifier17, specifier20, specifier40});",
+        "base_contents": "    Return<void> res =\n            radio_v1_5->setSystemSelectionChannels_1_5(serial, true, {specifierP900, specifier850});",
+        "res_region": "    Return<void> res = radio_v1_5->setSystemSelectionChannels_1_5(\n            serial, true, {specifier3, specifier17, specifier20, specifier40});",
+        "lookback": "            serial, true, {specifier3, specifier17, specifier20, specifier40});",
+        "lookahead": "    ASSERT_OK(res);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 546,
+        "end_line": 555,
+        "merge_gen_region": null,
+        "confidence": 0.8337281942367554,
+        "hesitated": true
+    }
+]

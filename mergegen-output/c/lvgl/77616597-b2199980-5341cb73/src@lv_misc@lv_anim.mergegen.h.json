@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#if LV_USE_USER_DATA\n    lv_user_data_t user_data;    /**< Custom user data*/\n#endif",
+        "base_contents": "#if LV_USE_USER_DATA\n    lv_anim_user_data_t user_data; /**< Custom user data*/\n#endif",
+        "res_region": "",
+        "lookback": "    /*Animation system use these - user shouldn't set*/",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 91,
+        "end_line": 100,
+        "merge_gen_region": null,
+        "confidence": 0.43643754720687866,
+        "hesitated": true
+    }
+]

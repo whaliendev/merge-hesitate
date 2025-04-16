@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#if LV_ANTIALIAS\n    uint32_t antialiasing : 1; /**< 1: antialiasing is enabled on this display. */\n#endif\n    uint32_t rotated : 2;\n    uint32_t sw_rotate : 1; /**< 1: use software rotation (slower) */",
+        "b_contents": "    uint32_t antialiasing : 1; /**< 1: anti-aliasing is enabled on this display. */\n    uint32_t rotated : 1; /**< 1: turn the display by 90 degree. @warning Does not update coordinates for you!*/",
+        "base_contents": "#if LV_ANTIALIAS\n    uint32_t antialiasing : 1; /**< 1: antialiasing is enabled on this display. */\n#endif\n    uint32_t rotated : 1; /**< 1: turn the display by 90 degree. @warning Does not update coordinates for you!*/",
+        "res_region": "<<<<<<< HEAD\n#if LV_ANTIALIAS\n    uint32_t antialiasing : 1; /**< 1: antialiasing is enabled on this display. */\n#endif\n    uint32_t rotated : 2;\n    uint32_t sw_rotate : 1; /**< 1: use software rotation (slower) */\n=======\n    uint32_t antialiasing : 1; /**< 1: anti-aliasing is enabled on this display. */\n    uint32_t rotated : 1; /**< 1: turn the display by 90 degree. @warning Does not update coordinates for you!*/\n>>>>>>> dev-v8",
+        "lookback": "#if LV_ANTIALIAS",
+        "lookahead": "",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 82,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.793357789516449,
+        "hesitated": true
+    }
+]

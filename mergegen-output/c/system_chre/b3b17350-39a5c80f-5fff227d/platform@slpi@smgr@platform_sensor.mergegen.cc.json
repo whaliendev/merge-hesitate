@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    LOGE(\"Sensor ID: %\" PRIu8\n         \" in status update doesn't correspond to \"\n         \"valid sensor.\",\n         sensorId);\n    // SMGR should send all callbacks back on the same thread which means the\n    // following code won't result in any timers overriding one another.",
+        "b_contents": "    LOGE(\"Sensor ID: %\" PRIu8 \" in status update doesn't correspond to \"\n         \"valid sensor.\", sensorId);\n  // SMGR should send all callbacks back on the same thread which\n  // means the following code won't result in any timers overriding one\n  // another.",
+        "base_contents": "    LOGE(\"Sensor ID: %\" PRIu8 \" in status update doesn't correspond to \"\n         \"valid sensor.\", sensorId);\n  // SMGR should send all callbacks back on the same thread which \n  // means the following code won't result in any timers overriding one\n  // another.",
+        "res_region": "    LOGE(\"Sensor ID: %\" PRIu8\n         \" in status update doesn't correspond to \"\n         \"valid sensor.\",\n         sensorId);\n    // SMGR should send all callbacks back on the same thread which means the\n    // following code won't result in any timers overriding one another.",
+        "lookback": "         \" in status update doesn't correspond to \"",
+        "lookahead": "  } else if (sensor->timerHandle.load() == CHRE_TIMER_INVALID) {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 921,
+        "end_line": 940,
+        "merge_gen_region": null,
+        "confidence": 0.8794676661491394,
+        "hesitated": true
+    }
+]

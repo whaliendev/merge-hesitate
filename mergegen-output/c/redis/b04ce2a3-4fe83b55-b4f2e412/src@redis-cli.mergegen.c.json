@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    if (fd == ANET_ERR) {\n        if (config.hostsocket == NULL) {\n            fd = anetTcpConnect(err,config.hostip,config.hostport);\n        } else {\n            fd = anetUnixConnect(err,config.hostsocket);\n            if (fd == ANET_ERR) {\n                fprintf(stderr, \"Could not connect to Redis at %s: %s\", config.hostsocket, err);\n                return -1;\n            }\n        }",
+        "b_contents": "    if (fd == ANET_ERR || force) {\n        if (force) close(fd);\n        fd = anetTcpConnect(err,config.hostip,config.hostport);",
+        "base_contents": "    if (fd == ANET_ERR) {\n        fd = anetTcpConnect(err,config.hostip,config.hostport);",
+        "res_region": "    if (fd == ANET_ERR || force) {\n        if (force) close(fd);\n        if (config.hostsocket == NULL) {\n            fd = anetTcpConnect(err,config.hostip,config.hostport);\n        } else {\n            fd = anetUnixConnect(err,config.hostsocket);\n        }",
+        "lookback": "        if (force) close(fd);",
+        "lookahead": "        if (fd == ANET_ERR) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 98,
+        "merge_gen_region": " (./ifconfighost ==ifconfighost ==ifconfighost ==ifconfighost ==ififififififififififififififififififconfighost ==&&&&ififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.9014075994491577,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    fprintf(stderr, \"usage: redis-cli [-iv] [-h host] [-p port] [-s /path/to/socket] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 arg3 ... argN\\n\");\n    fprintf(stderr, \"usage: echo \\\"argN\\\" | redis-cli -c [-h host] [-p port] [-s /path/to/socket] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 ... arg(N-1)\\n\");\n    fprintf(stderr, \"\\nIf a pipe from standard input is detected this data is used as last argument.\\n\\n\");\n    fprintf(stderr, \"example: cat /etc/passwd | redis-cli set my_passwd\\n\");",
+        "b_contents": "    fprintf(stderr, \"usage: redis-cli [-iv] [-h host] [-p port] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 arg3 ... argN\\n\");\n    fprintf(stderr, \"usage: echo \\\"argN\\\" | redis-cli -x [options] cmd arg1 arg2 ... arg(N-1)\\n\\n\");\n    fprintf(stderr, \"example: cat /etc/passwd | redis-cli -x set my_passwd\\n\");",
+        "base_contents": "    fprintf(stderr, \"usage: redis-cli [-iv] [-h host] [-p port] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 arg3 ... argN\\n\");\n    fprintf(stderr, \"usage: echo \\\"argN\\\" | redis-cli -c [-h host] [-p port] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 ... arg(N-1)\\n\");\n    fprintf(stderr, \"\\nIf a pipe from standard input is detected this data is used as last argument.\\n\\n\");\n    fprintf(stderr, \"example: cat /etc/passwd | redis-cli set my_passwd\\n\");",
+        "res_region": "    fprintf(stderr, \"usage: redis-cli [-iv] [-h host] [-p port] [-s /path/to/socket] [-a authpw] [-r repeat_times] [-n db_num] cmd arg1 arg2 arg3 ... argN\\n\");\n    fprintf(stderr, \"usage: echo \\\"argN\\\" | redis-cli -x [options] cmd arg1 arg2 ... arg(N-1)\\n\\n\");\n    fprintf(stderr, \"example: cat /etc/passwd | redis-cli -x set my_passwd\\n\");",
+        "lookback": "    fprintf(stderr, \"usage: echo \\\"argN\\\" | redis-cli -x [options] cmd arg1 arg2 ... arg(N-1)\\n\\n\");",
+        "lookahead": "    fprintf(stderr, \"example: redis-cli get my_passwd\\n\");",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 417,
+        "end_line": 431,
+        "merge_gen_region": null,
+        "confidence": 0.6782979965209961,
+        "hesitated": true
+    }
+]

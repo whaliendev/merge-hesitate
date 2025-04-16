@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_opt_generic(ZSTD_CCtx* ctx,\n                                      const void* src, size_t srcSize,\n                                      const int ultra)",
+        "b_contents": "FORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_opt_generic(ZSTD_CCtx* ctx,\n                                    const void* src, size_t srcSize, const int ultra)",
+        "base_contents": "FORCE_INLINE\nvoid ZSTD_compressBlock_opt_generic(ZSTD_CCtx* ctx,\n                                    const void* src, size_t srcSize, const int ultra)",
+        "res_region": "FORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_opt_generic(ZSTD_CCtx* ctx,\n                                      const void* src, size_t srcSize, const int ultra)",
+        "lookback": "size_t ZSTD_compressBlock_opt_generic(ZSTD_CCtx* ctx,",
+        "lookahead": "{",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 414,
+        "end_line": 427,
+        "merge_gen_region": null,
+        "confidence": 0.681745707988739,
+        "hesitated": true
+    },
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_opt_extDict_generic(ZSTD_CCtx* ctx,\n                                              const void* src, size_t srcSize,\n                                              const int ultra)",
+        "b_contents": "FORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_opt_extDict_generic(ZSTD_CCtx* ctx,\n                                     const void* src, size_t srcSize, const int ultra)",
+        "base_contents": "FORCE_INLINE\nvoid ZSTD_compressBlock_opt_extDict_generic(ZSTD_CCtx* ctx,\n                                     const void* src, size_t srcSize, const int ultra)",
+        "res_region": "FORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_opt_extDict_generic(ZSTD_CCtx* ctx,\n                                     const void* src, size_t srcSize, const int ultra)",
+        "lookback": "size_t ZSTD_compressBlock_opt_extDict_generic(ZSTD_CCtx* ctx,",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 672,
+        "end_line": 685,
+        "merge_gen_region": null,
+        "confidence": 0.6399081349372864,
+        "hesitated": true
+    }
+]

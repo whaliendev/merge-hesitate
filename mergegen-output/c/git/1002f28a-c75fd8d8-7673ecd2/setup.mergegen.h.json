@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tunsigned int ref_storage_format;",
+        "b_contents": "\tint compat_hash_algo;",
+        "base_contents": "",
+        "res_region": "\tint compat_hash_algo;\n\tunsigned int ref_storage_format;",
+        "lookback": "\tunsigned int ref_storage_format;",
+        "lookahead": "\tint sparse_index;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 117,
+        "end_line": 122,
+        "merge_gen_region": null,
+        "confidence": 0.8268014788627625,
+        "hesitated": true
+    }
+]

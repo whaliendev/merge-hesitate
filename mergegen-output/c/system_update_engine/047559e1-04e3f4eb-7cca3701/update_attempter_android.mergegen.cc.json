@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"update_engine/daemon_state_interface.h\"\n#include \"update_engine/network_selector.h\"",
+        "b_contents": "#include \"update_engine/daemon_state_android.h\"\n#include \"update_engine/network_selector.h\"",
+        "base_contents": "#include \"update_engine/daemon_state_android.h\"",
+        "res_region": "#include \"update_engine/daemon_state_interface.h\"\n#include \"update_engine/network_selector.h\"",
+        "lookback": "#include \"update_engine/network_selector.h\"",
+        "lookahead": "#include \"update_engine/payload_consumer/download_action.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.8350290060043335,
+        "hesitated": true
+    }
+]

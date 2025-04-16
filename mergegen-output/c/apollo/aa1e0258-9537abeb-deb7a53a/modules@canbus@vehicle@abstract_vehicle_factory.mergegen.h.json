@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/chassis_msgs/chassis_detail.pb.h\"",
+        "base_contents": "#include \"modules/canbus/proto/chassis_detail.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/common_msgs/control_msgs/control_cmd.pb.h\"",
+        "lookahead": "#include \"modules/canbus/proto/vehicle_parameter.pb.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 29,
+        "merge_gen_region": null,
+        "confidence": 0.8216469883918762,
+        "hesitated": true
+    }
+]

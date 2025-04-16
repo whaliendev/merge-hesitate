@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    srs_info(\"listen thread, current_cid=%d, \"\n        \"listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\",\n        _srs_context->get_id(), port, type, fd, ip.c_str(), port);\n",
+        "base_contents": "    srs_info(\"listen thread cid=%d, current_cid=%d, \"\n        \"listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\",\n        pthread->cid(), _srs_context->get_id(), port, type, fd, ip.c_str(), port);\n",
+        "res_region": "",
+        "lookback": "    ",
+        "lookahead": "    srs_trace(\"%s listen at tcp://%s:%d, fd=%d\", srs_listener_type2string(type).c_str(), ip.c_str(), port, listener->fd());",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 215,
+        "end_line": 226,
+        "merge_gen_region": null,
+        "confidence": 0.8268724679946899,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    srs_info(\"listen thread current_cid=%d, listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\", port, type, listener->fd(), ip.c_str(), port);",
+        "b_contents": "    srs_info(\"listen thread, current_cid=%d, \"\n             \"listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\",\n             _srs_context->get_id(), port, type, fd, ip.c_str(), port);",
+        "base_contents": "    srs_info(\"listen thread cid=%d, current_cid=%d, \"\n             \"listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\",\n             pthread->cid(), _srs_context->get_id(), port, type, fd, ip.c_str(), port);",
+        "res_region": "    srs_info(\"listen thread listen at port=%d, type=%d, fd=%d started success, ep=%s:%d\", port, type, listener->fd(), ip.c_str(), port);",
+        "lookback": "    ",
+        "lookahead": "    ",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 285,
+        "end_line": 295,
+        "merge_gen_region": null,
+        "confidence": 0.5312691330909729,
+        "hesitated": true
+    }
+]

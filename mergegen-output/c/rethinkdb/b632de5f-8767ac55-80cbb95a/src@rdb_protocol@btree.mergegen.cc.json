@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                keys_out->push_back(\n                    std::make_pair(\n                        store_key_t(\n                            skey.print_secondary(\n                                ql::skey_version_from_reql_version(reql_version),\n                                primary_key,\n                                i)),\n                        skey));",
+        "b_contents": "                try {\n                    keys_out->push_back(\n                        std::make_pair(\n                            store_key_t(\n                                skey.print_secondary(\n                                    reql_version, primary_key, i)),\n                            skey));\n                } catch (const ql::base_exc_t &e) {\n                    if (reql_version < reql_version_t::v2_1) {\n                        throw e;\n                    }\n                    // One of the values couldn't be converted to an index key.\n                    // Ignore it and move on to the next one.\n                }",
+        "base_contents": "                keys_out->push_back(\n                    std::make_pair(\n                        store_key_t(\n                            skey.print_secondary(\n                                reql_version, primary_key, i)),\n                        skey));",
+        "res_region": "                try {\n                    keys_out->push_back(\n                        std::make_pair(\n                            store_key_t(\n                                skey.print_secondary(\n                                    ql::skey_version_from_reql_version(reql_version),\n                                    primary_key,\n                                    i)),\n                            skey));\n                } catch (const ql::base_exc_t &e) {\n                    if (reql_version < reql_version_t::v2_1) {\n                        throw e;\n                    }\n                    // One of the values couldn't be converted to an index key.\n                    // Ignore it and move on to the next one.\n                }",
+        "lookback": "                    keys_out->push_back(",
+        "lookahead": "            }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1223,
+        "end_line": 1254,
+        "merge_gen_region": null,
+        "confidence": 0.8440964818000793,
+        "hesitated": true
+    }
+]

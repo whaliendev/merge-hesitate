@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "        //assert(false);",
+        "base_contents": "        assert(false);",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 63,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.5061642527580261,
+        "hesitated": true
+    }
+]

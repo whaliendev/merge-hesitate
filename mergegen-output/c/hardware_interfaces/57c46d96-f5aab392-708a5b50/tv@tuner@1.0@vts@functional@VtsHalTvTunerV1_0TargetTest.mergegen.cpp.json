@@ -1,0 +1,376 @@
+[
+    {
+        "a_contents": "    ASSERT_TRUE(mDemuxTests.getDemuxCaps(caps));\n    ASSERT_TRUE(caps.bTimeFilter);",
+        "b_contents": "    ASSERT_TRUE(mDemuxTests.getDemuxCaps(caps));\n    if (!caps.bTimeFilter) {\n        return;\n    }",
+        "base_contents": "",
+        "res_region": "    ASSERT_TRUE(mDemuxTests.getDemuxCaps(caps));\n    ASSERT_TRUE(caps.bTimeFilter);",
+        "lookback": "    ASSERT_TRUE(caps.bTimeFilter);",
+        "lookahead": "    mFilterTests.setDemux(demux);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 63,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.8786853551864624,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (lnbConf.name.compare(emptyHardwareId) == 0) {\n        vector<uint32_t> ids;\n        ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n        ASSERT_TRUE(ids.size() > 0);\n        ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n        mLnbId = &ids[0];\n    } else {\n        mLnbId = (uint32_t*)malloc(sizeof(uint32_t));\n        ASSERT_TRUE(mLnbTests.openLnbByName(lnbConf.name, *mLnbId));",
+        "b_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (ids.size() == 0) {\n        return;",
+        "base_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (!lnbConf.usingLnb) {\n        return;",
+        "res_region": "    if (lnbConf.name.compare(emptyHardwareId) == 0) {\n        vector<uint32_t> ids;\n        ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n        ASSERT_TRUE(ids.size() > 0);\n        ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n        mLnbId = &ids[0];\n    } else {\n        mLnbId = (uint32_t*)malloc(sizeof(uint32_t));\n        ASSERT_TRUE(mLnbTests.openLnbByName(lnbConf.name, *mLnbId));",
+        "lookback": "        vector<uint32_t> ids;",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 123,
+        "end_line": 143,
+        "merge_gen_region": null,
+        "confidence": 0.8394085168838501,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    if (!frontendConf.enable) {\n        return;\n    }\n    uint32_t feId;",
+        "base_contents": "    uint32_t feId;",
+        "res_region": "",
+        "lookback": "    sp<IDemux> demux;",
+        "lookahead": "    uint32_t demuxId;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 183,
+        "end_line": 191,
+        "merge_gen_region": null,
+        "confidence": 0.6026690006256104,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (lnbConf.name.compare(emptyHardwareId) == 0) {\n        vector<uint32_t> ids;\n        ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n        ASSERT_TRUE(ids.size() > 0);\n        ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n        mLnbId = &ids[0];\n    } else {\n        mLnbId = (uint32_t*)malloc(sizeof(uint32_t));\n        ASSERT_TRUE(mLnbTests.openLnbByName(lnbConf.name, *mLnbId));",
+        "b_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (ids.size() == 0) {\n        return;",
+        "base_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (!lnbConf.usingLnb) {\n        return;",
+        "res_region": "    if (lnbConf.name.compare(emptyHardwareId) == 0) {\n        vector<uint32_t> ids;\n        ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n        ASSERT_TRUE(ids.size() > 0);\n        ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n        mLnbId = &ids[0];\n    } else {\n        mLnbId = (uint32_t*)malloc(sizeof(uint32_t));\n        ASSERT_TRUE(mLnbTests.openLnbByName(lnbConf.name, *mLnbId));",
+        "lookback": "        vector<uint32_t> ids;",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 273,
+        "end_line": 293,
+        "merge_gen_region": null,
+        "confidence": 0.8394085168838501,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n    *mLnbId = ids[0];",
+        "base_contents": "    ASSERT_TRUE(ids.size() > 0);\n    ASSERT_TRUE(mLnbTests.openLnbById(ids[0]));\n    *mLnbId = ids[0];",
+        "res_region": "",
+        "lookback": "    ASSERT_TRUE(mLnbTests.setVoltage(lnbConf.voltage));",
+        "lookahead": "    ASSERT_TRUE(mLnbTests.setLnbCallback());",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 295,
+        "end_line": 303,
+        "merge_gen_region": null,
+        "confidence": 0.671570897102356,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    if (!frontendConf.enable) {\n        return;\n    }\n    uint32_t feId;",
+        "base_contents": "    uint32_t feId;",
+        "res_region": "",
+        "lookback": "    sp<IDemux> demux;",
+        "lookahead": "    uint32_t demuxId;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 371,
+        "end_line": 379,
+        "merge_gen_region": null,
+        "confidence": 0.6026690006256104,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.tuneTest(frontendMap[live.frontendId]);",
+        "b_contents": "    mFrontendTests.tuneTest(frontendArray[defaultFrontend]);",
+        "base_contents": "    mFrontendTests.tuneTest(frontendArray[DVBT]);",
+        "res_region": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.tuneTest(frontendMap[live.frontendId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 472,
+        "end_line": 481,
+        "merge_gen_region": null,
+        "confidence": 0.6956909894943237,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!scan.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.scanTest(frontendMap[scan.frontendId], FrontendScanType::SCAN_AUTO);",
+        "b_contents": "    mFrontendTests.scanTest(frontendScanArray[defaultScanFrontend], FrontendScanType::SCAN_AUTO);",
+        "base_contents": "    mFrontendTests.scanTest(frontendScanArray[SCAN_DVBT], FrontendScanType::SCAN_AUTO);",
+        "res_region": "    if (!scan.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.scanTest(frontendMap[scan.frontendId], FrontendScanType::SCAN_AUTO);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 486,
+        "end_line": 495,
+        "merge_gen_region": null,
+        "confidence": 0.7059805989265442,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!scan.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.scanTest(frontendMap[scan.frontendId], FrontendScanType::SCAN_BLIND);",
+        "b_contents": "    mFrontendTests.scanTest(frontendScanArray[defaultScanFrontend], FrontendScanType::SCAN_BLIND);\n}\n\nTEST_P(TunerLnbHidlTest, OpenLnbByName) {\n    description(\"Open and configure an Lnb with name then send a diseqc msg to it.\");\n    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (ids.size() == 0) {\n        return;\n    }\n    ASSERT_TRUE(mLnbTests.openLnbByName(lnbArray[LNB_EXTERNAL].name));\n    ASSERT_TRUE(mLnbTests.setLnbCallback());\n    ASSERT_TRUE(mLnbTests.setVoltage(lnbArray[LNB_EXTERNAL].voltage));\n    ASSERT_TRUE(mLnbTests.setTone(lnbArray[LNB_EXTERNAL].tone));\n    ASSERT_TRUE(mLnbTests.setSatellitePosition(lnbArray[LNB_EXTERNAL].position));\n    ASSERT_TRUE(mLnbTests.sendDiseqcMessage(diseqcMsgArray[DISEQC_POWER_ON]));\n    ASSERT_TRUE(mLnbTests.closeLnb());",
+        "base_contents": "    mFrontendTests.scanTest(frontendScanArray[SCAN_DVBT], FrontendScanType::SCAN_BLIND);\n}\n\nTEST_P(TunerLnbHidlTest, OpenLnbByName) {\n    description(\"Open and configure an Lnb with name then send a diseqc msg to it.\");\n    ASSERT_TRUE(mLnbTests.openLnbByName(lnbArray[LNB_EXTERNAL].name));\n    ASSERT_TRUE(mLnbTests.setLnbCallback());\n    ASSERT_TRUE(mLnbTests.setVoltage(lnbArray[LNB_EXTERNAL].voltage));\n    ASSERT_TRUE(mLnbTests.setTone(lnbArray[LNB_EXTERNAL].tone));\n    ASSERT_TRUE(mLnbTests.setSatellitePosition(lnbArray[LNB_EXTERNAL].position));\n    ASSERT_TRUE(mLnbTests.sendDiseqcMessage(diseqcMsgArray[DISEQC_POWER_ON]));\n    ASSERT_TRUE(mLnbTests.closeLnb());",
+        "res_region": "    if (!scan.hasFrontendConnection) {\n        return;\n    }\n    mFrontendTests.scanTest(frontendMap[scan.frontendId], FrontendScanType::SCAN_BLIND);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 500,
+        "end_line": 536,
+        "merge_gen_region": null,
+        "confidence": 0.7402859330177307,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!lnbLive.support) {",
+        "b_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (ids.size() == 0) {",
+        "base_contents": "    vector<uint32_t> ids;\n    ASSERT_TRUE(mLnbTests.getLnbIds(ids));\n    if (!lnbArray[LNB0].usingLnb) {",
+        "res_region": "    if (!lnbLive.support) {",
+        "lookback": "        return;",
+        "lookahead": "        return;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 541,
+        "end_line": 551,
+        "merge_gen_region": null,
+        "confidence": 0.8240134716033936,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    mFrontendTests.getFrontendIdByType(frontendMap[live.frontendId].type, feId);",
+        "b_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[defaultFrontend].type, feId);",
+        "base_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[DVBT].type, feId);",
+        "res_region": "    mFrontendTests.getFrontendIdByType(frontendMap[live.frontendId].type, feId);",
+        "lookback": "    ASSERT_TRUE(feId != INVALID_ID);",
+        "lookahead": "    ASSERT_TRUE(feId != INVALID_ID);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 581,
+        "end_line": 587,
+        "merge_gen_region": null,
+        "confidence": 0.7109552621841431,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    mFrontendTests.getFrontendIdByType(frontendMap[live.frontendId].type, feId);",
+        "b_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[defaultFrontend].type, feId);",
+        "base_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[DVBT].type, feId);",
+        "res_region": "    mFrontendTests.getFrontendIdByType(frontendMap[live.frontendId].type, feId);",
+        "lookback": "    ASSERT_TRUE(feId != INVALID_ID);",
+        "lookahead": "    ASSERT_TRUE(feId != INVALID_ID);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 613,
+        "end_line": 619,
+        "merge_gen_region": null,
+        "confidence": 0.7109552621841431,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    configSingleFilterInDemuxTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "b_contents": "    configSingleFilterInDemuxTest(filterArray[TS_VIDEO0], frontendArray[defaultFrontend]);",
+        "base_contents": "    configSingleFilterInDemuxTest(filterArray[TS_VIDEO0], frontendArray[DVBT]);",
+        "res_region": "    configSingleFilterInDemuxTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 650,
+        "end_line": 656,
+        "merge_gen_region": null,
+        "confidence": 0.5430405735969543,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "b_contents": "    broadcastSingleFilterTest(filterArray[TS_VIDEO1], frontendArray[defaultFrontend]);",
+        "base_contents": "    broadcastSingleFilterTest(filterArray[TS_VIDEO1], frontendArray[DVBT]);",
+        "res_region": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 698,
+        "end_line": 707,
+        "merge_gen_region": null,
+        "confidence": 0.6612027883529663,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.audioFilterId], frontendMap[live.frontendId]);",
+        "b_contents": "    broadcastSingleFilterTest(filterArray[TS_AUDIO0], frontendArray[defaultFrontend]);",
+        "base_contents": "    broadcastSingleFilterTest(filterArray[TS_AUDIO0], frontendArray[DVBT]);",
+        "res_region": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.audioFilterId], frontendMap[live.frontendId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 712,
+        "end_line": 721,
+        "merge_gen_region": null,
+        "confidence": 0.6674855947494507,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    if (live.sectionFilterId.compare(emptyHardwareId) == 0) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.sectionFilterId], frontendMap[live.frontendId]);",
+        "b_contents": "    broadcastSingleFilterTest(filterArray[TS_SECTION0], frontendArray[defaultFrontend]);",
+        "base_contents": "    broadcastSingleFilterTest(filterArray[TS_SECTION0], frontendArray[DVBT]);",
+        "res_region": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    if (live.sectionFilterId.compare(emptyHardwareId) == 0) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.sectionFilterId], frontendMap[live.frontendId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 726,
+        "end_line": 738,
+        "merge_gen_region": null,
+        "confidence": 0.719359278678894,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "b_contents": "    broadcastSingleFilterTest(filterArray[TS_VIDEO0], frontendArray[defaultFrontend]);",
+        "base_contents": "    broadcastSingleFilterTest(filterArray[TS_VIDEO0], frontendArray[DVBT]);",
+        "res_region": "    if (!live.hasFrontendConnection) {\n        return;\n    }\n    broadcastSingleFilterTest(filterMap[live.videoFilterId], frontendMap[live.frontendId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 743,
+        "end_line": 752,
+        "merge_gen_region": null,
+        "confidence": 0.6612027883529663,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!record.support) {\n        return;\n    }\n    attachSingleFilterToRecordDvrTest(filterMap[record.recordFilterId],\n                                      frontendMap[record.frontendId], dvrMap[record.dvrRecordId]);",
+        "b_contents": "    attachSingleFilterToRecordDvrTest(filterArray[TS_RECORD0], frontendArray[defaultFrontend],\n                                      dvrArray[DVR_RECORD0]);",
+        "base_contents": "    attachSingleFilterToRecordDvrTest(filterArray[TS_RECORD0], frontendArray[DVBT],\n                                      dvrArray[DVR_RECORD0]);",
+        "res_region": "    if (!record.support) {\n        return;\n    }\n    attachSingleFilterToRecordDvrTest(filterMap[record.recordFilterId],\n                                      frontendMap[record.frontendId], dvrMap[record.dvrRecordId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 791,
+        "end_line": 803,
+        "merge_gen_region": null,
+        "confidence": 0.7586502432823181,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!record.support) {\n        return;\n    }\n    recordSingleFilterTest(filterMap[record.recordFilterId], frontendMap[record.frontendId],\n                           dvrMap[record.dvrRecordId]);",
+        "b_contents": "    recordSingleFilterTest(filterArray[TS_RECORD0], frontendArray[defaultFrontend],\n                           dvrArray[DVR_RECORD0]);",
+        "base_contents": "    recordSingleFilterTest(filterArray[TS_RECORD0], frontendArray[DVBT], dvrArray[DVR_RECORD0]);",
+        "res_region": "    if (!record.support) {\n        return;\n    }\n    recordSingleFilterTest(filterMap[record.recordFilterId], frontendMap[record.frontendId],\n                           dvrMap[record.dvrRecordId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 808,
+        "end_line": 819,
+        "merge_gen_region": null,
+        "confidence": 0.736155092716217,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!lnbRecord.support) {\n        return;\n    }\n    recordSingleFilterTestWithLnb(filterMap[lnbRecord.recordFilterId],\n                                  frontendMap[lnbRecord.frontendId], dvrMap[lnbRecord.dvrRecordId],\n                                  lnbMap[lnbRecord.lnbId]);",
+        "b_contents": "    recordSingleFilterTestWithLnb(filterArray[TS_RECORD0], frontendArray[DVBS],\n                                  dvrArray[DVR_RECORD0], lnbArray[LNB0]);",
+        "base_contents": "    recordSingleFilterTest(filterArray[TS_RECORD0], frontendArray[DVBS], dvrArray[DVR_RECORD0]);",
+        "res_region": "    if (!lnbRecord.support) {\n        return;\n    }\n    recordSingleFilterTestWithLnb(filterMap[lnbRecord.recordFilterId],\n                                  frontendMap[lnbRecord.frontendId], dvrMap[lnbRecord.dvrRecordId],\n                                  lnbMap[lnbRecord.lnbId]);",
+        "lookback": "        return;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 824,
+        "end_line": 836,
+        "merge_gen_region": null,
+        "confidence": 0.8306570649147034,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[defaultFrontend].type, feId);\n    ASSERT_TRUE(feId != INVALID_ID);\n    ASSERT_TRUE(mFrontendTests.openFrontendById(feId));\n    ASSERT_TRUE(mFrontendTests.setFrontendCallback());",
+        "base_contents": "    mFrontendTests.getFrontendIdByType(frontendArray[DVBT].type, feId);\n    ASSERT_TRUE(feId != INVALID_ID);\n    ASSERT_TRUE(mFrontendTests.openFrontendById(feId));\n    ASSERT_TRUE(mFrontendTests.setFrontendCallback());",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    ASSERT_TRUE(mDemuxTests.openDemux(demux, demuxId));",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 846,
+        "end_line": 857,
+        "merge_gen_region": null,
+        "confidence": 0.7879648804664612,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    filterConfs.insert(static_cast<FilterConfig>(filterMap[descrambling.audioFilterId]));\n    filterConfs.insert(static_cast<FilterConfig>(filterMap[descrambling.videoFilterId]));\n    scrambledBroadcastTest(filterConfs, frontendMap[descrambling.frontendId],\n                           descramblerMap[descrambling.descramblerId]);",
+        "b_contents": "    filterConfs.insert(filterArray[TS_AUDIO0]);\n    filterConfs.insert(filterArray[TS_VIDEO1]);\n    scrambledBroadcastTest(filterConfs, frontendArray[defaultFrontend], descramblerArray[DESC_0]);",
+        "base_contents": "    filterConfs.insert(filterArray[TS_AUDIO0]);\n    filterConfs.insert(filterArray[TS_VIDEO1]);\n    scrambledBroadcastTest(filterConfs, frontendArray[DVBT], descramblerArray[DESC_0]);",
+        "res_region": "    filterConfs.insert(static_cast<FilterConfig>(filterMap[descrambling.audioFilterId]));\n    filterConfs.insert(static_cast<FilterConfig>(filterMap[descrambling.videoFilterId]));\n    scrambledBroadcastTest(filterConfs, frontendMap[descrambling.frontendId],\n                           descramblerMap[descrambling.descramblerId]);",
+        "lookback": "    filterConfs.insert(static_cast<FilterConfig>(filterMap[descrambling.videoFilterId]));",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 884,
+        "end_line": 897,
+        "merge_gen_region": null,
+        "confidence": 0.866067111492157,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                        long long keys = id.head.btree()->fullValidate(id.head, id.keyPattern());",
+        "b_contents": "                        long long keys = id.idxInterface().fullValidate(id.head, id.keyPattern());\n                        ss << \"    \" << id.indexNamespace() << \" keys:\" << keys << endl;",
+        "base_contents": "                        long long keys = id.head.btree()->fullValidate(id.head, id.keyPattern());\n                        ss << \"    \" << id.indexNamespace() << \" keys:\" << keys << endl;",
+        "res_region": "                        long long keys = id.idxInterface().fullValidate(id.head, id.keyPattern());",
+        "lookback": "                        indexes.appendNumber(id.indexNamespace(), keys);",
+        "lookahead": "                        indexes.appendNumber(id.indexNamespace(), keys);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 358,
+        "end_line": 366,
+        "merge_gen_region": null,
+        "confidence": 0.6848801970481873,
+        "hesitated": true
+    }
+]

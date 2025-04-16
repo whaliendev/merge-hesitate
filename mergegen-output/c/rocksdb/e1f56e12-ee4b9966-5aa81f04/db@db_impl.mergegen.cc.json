@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    if (!read_only) {\n      // no need to refcount since client still doesn't have access\n      // to the DB and can not drop column families while we iterate\n      for (auto cfd : *versions_->GetColumnFamilySet()) {\n        if (cfd->mem()->ApproximateMemoryUsage() >\n            cfd->options()->write_buffer_size) {\n          // If this asserts, it means that InsertInto failed in\n          // filtering updates to already-flushed column families\n          assert(cfd->GetLogNumber() <= log_number);\n          auto iter = version_edits.find(cfd->GetID());\n          assert(iter != version_edits.end());\n          VersionEdit* edit = &iter->second;\n          status = WriteLevel0TableForRecovery(cfd, cfd->mem(), edit);\n          // we still want to clear the memtable, even if the recovery failed\n          cfd->CreateNewMemtable();\n          if (!status.ok()) {\n            // Reflect errors immediately so that conditions like full\n            // file-systems cause the DB::Open() to fail.\n            return status;\n          }\n        }",
+        "b_contents": "    if (!read_only && mem_->ShouldFlush()) {\n      status = WriteLevel0TableForRecovery(mem_, &edit);\n      // we still want to clear memtable, even if the recovery failed\n      delete mem_->Unref();\n      mem_ = new MemTable(internal_comparator_, options_);\n      mem_->Ref();\n      memtable_empty = true;\n      if (!status.ok()) {\n        // Reflect errors immediately so that conditions like full\n        // file-systems cause the DB::Open() to fail.\n        return status;",
+        "base_contents": "    if (!read_only &&\n        mem_->ApproximateMemoryUsage() > options_.write_buffer_size) {\n      status = WriteLevel0TableForRecovery(mem_, &edit);\n      // we still want to clear memtable, even if the recovery failed\n      delete mem_->Unref();\n      mem_ = new MemTable(internal_comparator_, options_);\n      mem_->Ref();\n      memtable_empty = true;\n      if (!status.ok()) {\n        // Reflect errors immediately so that conditions like full\n        // file-systems cause the DB::Open() to fail.\n        return status;",
+        "res_region": "    if (!read_only) {\n      // no need to refcount since client still doesn't have access\n      // to the DB and can not drop column families while we iterate\n      for (auto cfd : *versions_->GetColumnFamilySet()) {\n        if (cfd->mem()->ShouldFlush()) {\n          // If this asserts, it means that InsertInto failed in\n          // filtering updates to already-flushed column families\n          assert(cfd->GetLogNumber() <= log_number);\n          auto iter = version_edits.find(cfd->GetID());\n          assert(iter != version_edits.end());\n          VersionEdit* edit = &iter->second;\n          status = WriteLevel0TableForRecovery(cfd, cfd->mem(), edit);\n          // we still want to clear the memtable, even if the recovery failed\n          cfd->CreateNewMemtable();\n          if (!status.ok()) {\n            // Reflect errors immediately so that conditions like full\n            // file-systems cause the DB::Open() to fail.\n            return status;\n          }\n        }",
+        "lookback": "      // no need to refcount since client still doesn't have access",
+        "lookahead": "      }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 958,
+        "end_line": 1005,
+        "merge_gen_region": " no to since still't access (!_) // need refcount client doesn have // the and not columnamilies we forautofd *_->ColumnSet { { If assert, means Insert failed // updates alreadyfl columnamilies(fdGetNumber <=_); iter versioned.(fdGetID assertiter versioned.());Edit* =itersecond status Write0For(fd c->(),); we want clear memtable even the failedfdCreateMem(); (!.()) { Ref errors immediately that like",
+        "confidence": 0.9019615054130554,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    } else if (!force && (cfd->mem()->ApproximateMemoryUsage() <=\n                          cfd->options()->write_buffer_size)) {",
+        "b_contents": "    } else if (!force && !mem_->ShouldFlush()) {",
+        "base_contents": "    } else if (!force &&\n               (mem_->ApproximateMemoryUsage() <= options_.write_buffer_size)) {",
+        "res_region": "    } else if (!force && !cfd->mem()->ShouldFlush()) {",
+        "lookback": "      // There is room in current memtable",
+        "lookahead": "      // There is room in current memtable",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3665,
+        "end_line": 3673,
+        "merge_gen_region": null,
+        "confidence": 0.6550160050392151,
+        "hesitated": true
+    }
+]

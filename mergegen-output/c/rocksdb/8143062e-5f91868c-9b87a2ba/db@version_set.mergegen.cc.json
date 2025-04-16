@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "      current_(NULL),\n      num_levels_(options_->num_levels),\n      compactions_in_progress_(options_->num_levels),\n      current_version_number_(0) {",
+        "b_contents": "      current_(NULL) {",
+        "base_contents": "      current_(NULL),\n      num_levels_(options_->num_levels) {",
+        "res_region": "      current_(NULL),\n      compactions_in_progress_(options_->num_levels),\n      current_version_number_(0) {",
+        "lookback": "      compactions_in_progress_(options_->num_levels),",
+        "lookahead": "  compact_pointer_ = new std::string[options_->num_levels];",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 900,
+        "end_line": 910,
+        "merge_gen_region": null,
+        "confidence": 0.5241071581840515,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  //\n  // Find the compactions by size on all levels.\n  for (int i = 0; i < NumberLevels()-1; i++) {\n    level = current_->compaction_level_[i];\n    if ((current_->compaction_score_[i] >= 1)) {\n      c = PickCompactionBySize(level);\n      if (c != NULL) {",
+        "b_contents": "  const bool size_compaction = (current_->compaction_score_ >= 1);\n  const bool seek_compaction = (current_->file_to_compact_ != NULL);\n  if (size_compaction) {\n    level = current_->compaction_level_;\n    assert(level >= 0);\n    assert(level+1 < NumberLevels());\n    c = new Compaction(level, MaxFileSizeForLevel(level),\n        MaxGrandParentOverlapBytes(level), NumberLevels());\n\n    // Pick the first file that comes after compact_pointer_[level]\n    for (size_t i = 0; i < current_->files_[level].size(); i++) {\n      FileMetaData* f = current_->files_[level][i];\n      if (compact_pointer_[level].empty() ||\n          icmp_.Compare(f->largest.Encode(), compact_pointer_[level]) > 0) {\n        c->inputs_[0].push_back(f);\n        c->base_index_ = i;",
+        "base_contents": "  const bool size_compaction = (current_->compaction_score_ >= 1);\n  const bool seek_compaction = (current_->file_to_compact_ != NULL);\n  if (size_compaction) {\n    level = current_->compaction_level_;\n    assert(level >= 0);\n    assert(level+1 < NumberLevels());\n    c = new Compaction(level, MaxFileSizeForLevel(level),\n        MaxGrandParentOverlapBytes(level), NumberLevels());\n\n    // Pick the first file that comes after compact_pointer_[level]\n    for (size_t i = 0; i < current_->files_[level].size(); i++) {\n      FileMetaData* f = current_->files_[level][i];\n      if (compact_pointer_[level].empty() ||\n          icmp_.Compare(f->largest.Encode(), compact_pointer_[level]) > 0) {\n        c->inputs_[0].push_back(f);",
+        "res_region": "  //\n  // Find the compactions by size on all levels.\n  for (int i = 0; i < NumberLevels()-1; i++) {\n    level = current_->compaction_level_[i];\n    if ((current_->compaction_score_[i] >= 1)) {\n      c = PickCompactionBySize(level);\n      if (c != NULL) {",
+        "lookback": "  // Find the compactions by size on all levels.",
+        "lookahead": "        break;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1796,
+        "end_line": 1837,
+        "merge_gen_region": null,
+        "confidence": 0.86441570520401,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  }\n\n  // Find compactions needed by seeks\n  if (c == NULL && (current_->file_to_compact_ != NULL)) {",
+        "b_contents": "    if (c->inputs_[0].empty()) {\n      // Wrap-around to the beginning of the key space\n      c->inputs_[0].push_back(current_->files_[level][0]);\n      c->base_index_ = 0;\n    }\n  } else if (seek_compaction) {",
+        "base_contents": "    if (c->inputs_[0].empty()) {\n      // Wrap-around to the beginning of the key space\n      c->inputs_[0].push_back(current_->files_[level][0]);\n    }\n  } else if (seek_compaction) {",
+        "res_region": "  }\n\n  // Find compactions needed by seeks\n  if (c == NULL && (current_->file_to_compact_ != NULL)) {",
+        "lookback": "",
+        "lookahead": "    level = current_->file_to_compact_level_;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1841,
+        "end_line": 1859,
+        "merge_gen_region": null,
+        "confidence": 0.8053200244903564,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                                     &expanded1);\n      if (expanded1.size() == c->inputs_[1].size() && \n          !FilesInCompaction(expanded1)) {",
+        "b_contents": "                                     &expanded1, c->parent_index_,\n                                     &c->parent_index_);\n      if (expanded1.size() == c->inputs_[1].size()) {",
+        "base_contents": "                                     &expanded1);\n      if (expanded1.size() == c->inputs_[1].size()) {",
+        "res_region": "                                     &expanded1, c->parent_index_,\n                                     &c->parent_index_);\n      if (expanded1.size() == c->inputs_[1].size() && \n          !FilesInCompaction(expanded1)) {",
+        "lookback": "                                     &c->parent_index_);",
+        "lookahead": "        Log(options_->info_log,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1949,
+        "end_line": 1960,
+        "merge_gen_region": null,
+        "confidence": 0.6329280138015747,
+        "hesitated": true
+    }
+]

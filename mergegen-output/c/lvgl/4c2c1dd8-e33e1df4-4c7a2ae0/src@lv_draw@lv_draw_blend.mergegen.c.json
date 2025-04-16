@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"../lv_gpu/lv_gpu_nxp_pxp.h\"\n#elif LV_USE_GPU_NXP_VG_LITE\n    #include \"../lv_gpu/lv_gpu_nxp_vglite.h\"",
+        "b_contents": "    #include \"../lv_gpu/lv_gpu_nxp_pxp.h\"",
+        "base_contents": "#include \"../lv_gpu/lv_gpu_nxp_pxp.h\"",
+        "res_region": "    #include \"../lv_gpu/lv_gpu_nxp_pxp.h\"\n#elif LV_USE_GPU_NXP_VG_LITE\n    #include \"../lv_gpu/lv_gpu_nxp_vglite.h\"",
+        "lookback": "#elif LV_USE_GPU_NXP_VG_LITE",
+        "lookahead": "#elif LV_USE_GPU_STM32_DMA2D",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 15,
+        "end_line": 23,
+        "merge_gen_region": null,
+        "confidence": 0.846027672290802,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (lv_area_get_size(draw_area) >= GPU_NXP_PXP_BLIT_SIZE_LIMIT) {\n            lv_gpu_nxp_pxp_blit(disp_buf_first, disp_w, map_buf_first, map_w, draw_area_w, draw_area_h, opa);\n            return;\n        }\n#elif (LV_USE_GPU_NXP_VG_LITE)\n            if(lv_area_get_size(draw_area) >= LV_GPU_NXP_VG_LITE_BLIT_SIZE_LIMIT) {\n\n                lv_gpu_nxp_vglite_blit_info_t blit;\n\n                blit.src = map_buf;\n                blit.src_width = draw_area_w;\n                blit.src_height = draw_area_h;\n                blit.src_stride = lv_area_get_width(map_area) * sizeof(lv_color_t);\n                blit.src_area.x1 = (draw_area->x1 - (map_area->x1 - disp_area->x1));\n                blit.src_area.y1 = (draw_area->y1 - (map_area->y1 - disp_area->y1));\n                blit.src_area.x2 = blit.src_area.x1 + draw_area_w;\n                blit.src_area.y2 = blit.src_area.y1 + draw_area_h;\n\n\n                blit.dst = disp_buf;\n                blit.dst_width = lv_area_get_width(disp_area);\n                blit.dst_height = lv_area_get_height(disp_area);\n                blit.dst_stride = lv_area_get_width(disp_area) * sizeof(lv_color_t);\n                blit.dst_area.x1 = draw_area->x1;\n                blit.dst_area.y1 = draw_area->y1;\n                blit.dst_area.x2 = blit.dst_area.x1 + draw_area_w;\n                blit.dst_area.y2 = blit.dst_area.y1 + draw_area_h;\n\n                blit.opa = opa;\n\n                if(lv_gpu_nxp_vglite_blit(&blit) == LV_RES_OK) {\n                    return;\n                }\n                /* Fall down to SW render in case of error */\n            }",
+        "b_contents": "            if(lv_area_get_size(draw_area) >= LV_GPU_NXP_PXP_BLIT_SIZE_LIMIT) {\n                lv_gpu_nxp_pxp_blit(disp_buf_first, disp_w, map_buf_first, map_w, draw_area_w, draw_area_h, opa);\n                return;\n            }",
+        "base_contents": "        if (lv_area_get_size(draw_area) >= GPU_NXP_PXP_BLIT_SIZE_LIMIT) {\n            lv_gpu_nxp_pxp_blit(disp_buf_first, disp_w, map_buf_first, map_w, draw_area_w, draw_area_h, opa);\n            return;\n        }",
+        "res_region": "<<<<<<< HEAD\n        if (lv_area_get_size(draw_area) >= GPU_NXP_PXP_BLIT_SIZE_LIMIT) {\n            lv_gpu_nxp_pxp_blit(disp_buf_first, disp_w, map_buf_first, map_w, draw_area_w, draw_area_h, opa);\n            return;\n        }\n#elif (LV_USE_GPU_NXP_VG_LITE)\n            if(lv_area_get_size(draw_area) >= LV_GPU_NXP_VG_LITE_BLIT_SIZE_LIMIT) {\n\n                lv_gpu_nxp_vglite_blit_info_t blit;\n\n                blit.src = map_buf;\n                blit.src_width = draw_area_w;\n                blit.src_height = draw_area_h;\n                blit.src_stride = lv_area_get_width(map_area) * sizeof(lv_color_t);\n                blit.src_area.x1 = (draw_area->x1 - (map_area->x1 - disp_area->x1));\n                blit.src_area.y1 = (draw_area->y1 - (map_area->y1 - disp_area->y1));\n                blit.src_area.x2 = blit.src_area.x1 + draw_area_w;\n                blit.src_area.y2 = blit.src_area.y1 + draw_area_h;\n\n\n                blit.dst = disp_buf;\n                blit.dst_width = lv_area_get_width(disp_area);\n                blit.dst_height = lv_area_get_height(disp_area);\n                blit.dst_stride = lv_area_get_width(disp_area) * sizeof(lv_color_t);\n                blit.dst_area.x1 = draw_area->x1;\n                blit.dst_area.y1 = draw_area->y1;\n                blit.dst_area.x2 = blit.dst_area.x1 + draw_area_w;\n                blit.dst_area.y2 = blit.dst_area.y1 + draw_area_h;\n\n                blit.opa = opa;\n\n                if(lv_gpu_nxp_vglite_blit(&blit) == LV_RES_OK) {\n                    return;\n                }\n                /* Fall down to SW render in case of error */\n=======\n            if(lv_area_get_size(draw_area) >= LV_GPU_NXP_PXP_BLIT_SIZE_LIMIT) {\n                lv_gpu_nxp_pxp_blit(disp_buf_first, disp_w, map_buf_first, map_w, draw_area_w, draw_area_h, opa);\n                return;\n>>>>>>> 4c7a2ae0b7d8f564b22e7774039f6cbe5385926c\n            }",
+        "lookback": "        if (lv_area_get_size(draw_area) >= GPU_NXP_PXP_BLIT_SIZE_LIMIT) {",
+        "lookahead": "#elif LV_USE_GPU_STM32_DMA2D",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 765,
+        "end_line": 811,
+        "merge_gen_region": null,
+        "confidence": 0.7376158237457275,
+        "hesitated": true
+    }
+]

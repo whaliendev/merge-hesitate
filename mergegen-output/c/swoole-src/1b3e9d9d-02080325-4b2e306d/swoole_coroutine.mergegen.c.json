@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    free_cidmap(COROG.current_coro->cid);",
+        "b_contents": "    if (COROG.current_coro->function)\n    {\n        sw_zval_free(COROG.current_coro->function);\n    }",
+        "base_contents": "",
+        "res_region": "    free_cidmap(COROG.current_coro->cid);\n    if (COROG.current_coro->function)\n    {\n        sw_zval_free(COROG.current_coro->function);\n    }",
+        "lookback": "    if (COROG.current_coro->function)",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 284,
+        "end_line": 292,
+        "merge_gen_region": null,
+        "confidence": 0.662362813949585,
+        "hesitated": true
+    }
+]

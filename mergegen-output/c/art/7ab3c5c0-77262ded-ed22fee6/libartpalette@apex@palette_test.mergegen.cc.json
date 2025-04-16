@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  std::string boot_class_path_string =\n      GetClassPathOption(\"-Xbootclasspath:\", GetLibCoreDexFileNames());\n  std::string boot_class_path_locations_string =\n      GetClassPathOption(\"-Xbootclasspath-locations:\", GetLibCoreDexLocations());\n",
+        "b_contents": "  // This calls JniInvocationInit, which is necessary to load the VM. It's not\n  // public but still stable.\n  JniInvocation jni_invocation;\n  ASSERT_TRUE(jni_invocation.Init(nullptr));\n\n  JavaVMInitArgs vm_args;",
+        "base_contents": "  JavaVMInitArgs vm_args;",
+        "res_region": "  std::string boot_class_path_string =\n      GetClassPathOption(\"-Xbootclasspath:\", GetLibCoreDexFileNames());\n  std::string boot_class_path_locations_string =\n      GetClassPathOption(\"-Xbootclasspath-locations:\", GetLibCoreDexLocations());\n",
+        "lookback": "      GetClassPathOption(\"-Xbootclasspath:\", GetLibCoreDexFileNames());",
+        "lookahead": "  JavaVMOption options[] = {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.8607431054115295,
+        "hesitated": true
+    }
+]

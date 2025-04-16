@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    CHPP_LOGI(\"Scan request success=%d at service\", result->pending);",
+        "b_contents": "\n    // TODO(b/193540354): Remove when resolved\n    {\n      static uint32_t sNumConsecutiveError = 0;\n      if (result->errorCode != CHRE_ERROR_NONE) {\n        sNumConsecutiveError++;\n      } else {\n        sNumConsecutiveError = 0;\n      }\n      if (sNumConsecutiveError > 20) {\n        CHPP_ASSERT(\"Too many consecutive WiFi scan errors\");\n      }\n    }\n\n    CHPP_LOGI(\"Scan request success=%d (at service)\", result->pending);",
+        "base_contents": "    CHPP_LOGI(\"Scan request success=%d (at service)\", result->pending);",
+        "res_region": "    CHPP_LOGI(\"Scan request success=%d at service\", result->pending);",
+        "lookback": "    gCallbacks->scanResponseCallback(result->pending, result->errorCode);",
+        "lookahead": "    gCallbacks->scanResponseCallback(result->pending, result->errorCode);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 481,
+        "end_line": 501,
+        "merge_gen_region": null,
+        "confidence": 0.7689435482025146,
+        "hesitated": true
+    }
+]

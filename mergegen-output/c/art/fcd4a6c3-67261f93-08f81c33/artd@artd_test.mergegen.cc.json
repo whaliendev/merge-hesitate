@@ -1,0 +1,89 @@
+[
+    {
+        "a_contents": "#include <cstdio>\n#include <cstring>",
+        "b_contents": "#include <cstdio>",
+        "base_contents": "",
+        "res_region": "#include <cstdio>\n#include <cstring>",
+        "lookback": "#include <cstring>",
+        "lookahead": "#include <filesystem>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 27,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.6942486763000488,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  template <bool kExpectOk>\n  using RunCopyAndRewriteProfileResult = Result<\n      std::pair<std::conditional_t<kExpectOk, CopyAndRewriteProfileResult, ndk::ScopedAStatus>,\n                OutputProfile>>;\n\n  // Runs `copyAndRewriteProfile` with `tmp_profile_path_` and `dex_file_`.\n  template <bool kExpectOk = true>\n  RunCopyAndRewriteProfileResult<kExpectOk> RunCopyAndRewriteProfile() {\n    OutputProfile dst{.profilePath = tmp_profile_path_,\n                      .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n    dst.profilePath.id = \"\";\n    dst.profilePath.tmpPath = \"\";\n\n    CopyAndRewriteProfileResult result;\n    ndk::ScopedAStatus status =\n        artd_->copyAndRewriteProfile(tmp_profile_path_, &dst, dex_file_, &result);\n    if constexpr (kExpectOk) {\n      if (!status.isOk()) {\n        return Error() << status.getMessage();\n      }\n      return std::make_pair(std::move(result), std::move(dst));\n    } else {\n      return std::make_pair(std::move(status), std::move(dst));\n    }\n  }\n\n  // Runs `copyAndRewriteEmbeddedProfile` with `dex_file_`.\n  template <bool kExpectOk = true>\n  RunCopyAndRewriteProfileResult<kExpectOk> RunCopyAndRewriteEmbeddedProfile() {\n    OutputProfile dst{.profilePath = tmp_profile_path_,\n                      .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n    dst.profilePath.id = \"\";\n    dst.profilePath.tmpPath = \"\";\n\n    CopyAndRewriteProfileResult result;\n    ndk::ScopedAStatus status = artd_->copyAndRewriteEmbeddedProfile(&dst, dex_file_, &result);\n    if constexpr (kExpectOk) {\n      if (!status.isOk()) {\n        return Error() << status.getMessage();\n      }\n      return std::make_pair(std::move(result), std::move(dst));\n    } else {\n      return std::make_pair(std::move(status), std::move(dst));\n    }\n  }\n",
+        "b_contents": "  // Runs `copyAndRewriteProfile` with `tmp_profile_path_` and `dex_file_`.\n  template <bool kExpectOk = true>\n  Result<std::pair<std::conditional_t<kExpectOk, CopyAndRewriteProfileResult, ndk::ScopedAStatus>,\n                   OutputProfile>>\n  RunCopyAndRewriteProfile() {\n    OutputProfile dst{.profilePath = tmp_profile_path_,\n                      .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n    dst.profilePath.id = \"\";\n    dst.profilePath.tmpPath = \"\";\n\n    CopyAndRewriteProfileResult result;\n    ndk::ScopedAStatus status =\n        artd_->copyAndRewriteProfile(tmp_profile_path_, &dst, dex_file_, &result);\n    if constexpr (kExpectOk) {\n      if (!status.isOk()) {\n        return Error() << status.getMessage();\n      }\n      return std::make_pair(std::move(result), std::move(dst));\n    } else {\n      return std::make_pair(std::move(status), std::move(dst));\n    }\n  }\n",
+        "base_contents": "",
+        "res_region": "  template <bool kExpectOk>\n  using RunCopyAndRewriteProfileResult = Result<\n      std::pair<std::conditional_t<kExpectOk, CopyAndRewriteProfileResult, ndk::ScopedAStatus>,\n                OutputProfile>>;\n\n  // Runs `copyAndRewriteProfile` with `tmp_profile_path_` and `dex_file_`.\n  template <bool kExpectOk = true>\n  RunCopyAndRewriteProfileResult<kExpectOk> RunCopyAndRewriteProfile() {\n    OutputProfile dst{.profilePath = tmp_profile_path_,\n                      .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n    dst.profilePath.id = \"\";\n    dst.profilePath.tmpPath = \"\";\n\n    CopyAndRewriteProfileResult result;\n    ndk::ScopedAStatus status =\n        artd_->copyAndRewriteProfile(tmp_profile_path_, &dst, dex_file_, &result);\n    if constexpr (kExpectOk) {\n      if (!status.isOk()) {\n        return Error() << status.getMessage();\n      }\n      return std::make_pair(std::move(result), std::move(dst));\n    } else {\n      return std::make_pair(std::move(status), std::move(dst));\n    }\n  }\n\n  // Runs `copyAndRewriteEmbeddedProfile` with `dex_file_`.\n  template <bool kExpectOk = true>\n  RunCopyAndRewriteProfileResult<kExpectOk> RunCopyAndRewriteEmbeddedProfile() {\n    OutputProfile dst{.profilePath = tmp_profile_path_,\n                      .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n    dst.profilePath.id = \"\";\n    dst.profilePath.tmpPath = \"\";\n\n    CopyAndRewriteProfileResult result;\n    ndk::ScopedAStatus status = artd_->copyAndRewriteEmbeddedProfile(&dst, dex_file_, &result);\n    if constexpr (kExpectOk) {\n      if (!status.isOk()) {\n        return Error() << status.getMessage();\n      }\n      return std::make_pair(std::move(result), std::move(dst));\n    } else {\n      return std::make_pair(std::move(status), std::move(dst));\n    }\n  }\n",
+        "lookback": "  using RunCopyAndRewriteProfileResult = Result<",
+        "lookahead": "  void CreateFile(const std::string& filename, const std::string& content = \"\") {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 439,
+        "end_line": 511,
+        "merge_gen_region": " RunAndProfile =< templateboolExpect> RunCopyRewriteResult Result stdpairstdconditionaltkOk CopyRewriteResult n::A>,Profile; RunscopyRewrite` `____` `__ template < kExpect => RunAndProfileResultkOk RunAndProfile() Output dstprofile =____,fs =sPermissionuid -, . =1 dstprofile.id \"\";.Pathtmp = CopyRewriteResult result n::A status art_->AndProfile(___,dst de__,result if (Expect) ifstatus.Ok { (!.Ok { Error <<.Message } stdmakepairstdmoveresult stdmovedst } else return::_(::(::(),::()); }",
+        "confidence": 0.9388027191162109,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  void CreateZipWithSingleEntry(const std::string& filename,\n                                const std::string& entry_name,\n                                const std::string& content = \"\") {\n    std::filesystem::path path(filename);\n    std::filesystem::create_directories(path.parent_path());\n    std::unique_ptr<File> file(OS::CreateEmptyFileWriteOnly(filename.c_str()));\n    ASSERT_NE(file, nullptr) << strerror(errno);\n    file->MarkUnchecked();  // `writer.Finish()` flushes the file and the destructor closes it.\n    ZipWriter writer(fdopen(file->Fd(), \"wb\"));\n    ASSERT_EQ(writer.StartEntry(entry_name, /*flags=*/0), 0);\n    ASSERT_EQ(writer.WriteBytes(content.c_str(), content.size()), 0);\n    ASSERT_EQ(writer.FinishEntry(), 0);\n    ASSERT_EQ(writer.Finish(), 0);\n  }\n",
+        "b_contents": "  void CreateZipWithSingleEntry(const std::string& filename,\n                                const std::string& entry_name,\n                                const std::string& content = \"\") {\n    std::unique_ptr<File> file(OS::CreateEmptyFileWriteOnly(filename.c_str()));\n    ASSERT_NE(file, nullptr);\n    file->MarkUnchecked();  // `writer.Finish()` flushes the file and the destructor closes it.\n    ZipWriter writer(fdopen(file->Fd(), \"wb\"));\n    ASSERT_EQ(writer.StartEntry(entry_name, /*flags=*/0), 0);\n    ASSERT_EQ(writer.WriteBytes(content.c_str(), content.size()), 0);\n    ASSERT_EQ(writer.FinishEntry(), 0);\n    ASSERT_EQ(writer.Finish(), 0);\n  }\n",
+        "base_contents": "",
+        "res_region": "  void CreateZipWithSingleEntry(const std::string& filename,\n                                const std::string& entry_name,\n                                const std::string& content = \"\") {\n    std::filesystem::path path(filename);\n    std::filesystem::create_directories(path.parent_path());\n    std::unique_ptr<File> file(OS::CreateEmptyFileWriteOnly(filename.c_str()));\n    ASSERT_NE(file, nullptr) << strerror(errno);\n    file->MarkUnchecked();  // `writer.Finish()` flushes the file and the destructor closes it.\n    ZipWriter writer(fdopen(file->Fd(), \"wb\"));\n    ASSERT_EQ(writer.StartEntry(entry_name, /*flags=*/0), 0);\n    ASSERT_EQ(writer.WriteBytes(content.c_str(), content.size()), 0);\n    ASSERT_EQ(writer.FinishEntry(), 0);\n    ASSERT_EQ(writer.Finish(), 0);\n  }\n",
+        "lookback": "                                const std::string& entry_name,",
+        "lookahead": "  std::shared_ptr<Artd> artd_;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 518,
+        "end_line": 549,
+        "merge_gen_region": null,
+        "confidence": 0.7988969683647156,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  EXPECT_CALL(*mock_exec_utils_, DoExecAndReturnCode(_, _, _))\n      .WillOnce(Return(ProfmanResult::kCopyAndUpdateNoMatch));",
+        "b_contents": "  EXPECT_CALL(*mock_exec_utils_, DoExecAndReturnCode(_, _, _))\n      .WillOnce(Return(ProfmanResult::kCopyAndUpdateNoMatch));\n\n  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());",
+        "base_contents": "  const TmpProfilePath& src = profile_path_->get<ProfilePath::tmpProfilePath>();\n  OutputProfile dst{.profilePath = src, .fsPermission = FsPermission{.uid = -1, .gid = -1}};\n  dst.profilePath.id = \"\";\n  dst.profilePath.tmpPath = \"\";",
+        "res_region": "  EXPECT_CALL(*mock_exec_utils_, DoExecAndReturnCode(_, _, _))\n      .WillOnce(Return(ProfmanResult::kCopyAndUpdateNoMatch));\n",
+        "lookback": "      .WillOnce(Return(ProfmanResult::kCopyAndUpdateNoMatch));",
+        "lookahead": "  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1504,
+        "end_line": 1517,
+        "merge_gen_region": null,
+        "confidence": 0.8544458746910095,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());\n\n  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);\n  EXPECT_THAT(dst.profilePath.id, IsEmpty());\n  EXPECT_THAT(dst.profilePath.tmpPath, IsEmpty());\n}\n\n// The input does not exist.\nTEST_F(ArtdTest, copyAndRewriteProfileNoProfileNoFile) {\n  CreateFile(dex_file_);\n\n  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());\n\n  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);",
+        "b_contents": "  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);\n  EXPECT_THAT(dst.profilePath.id, IsEmpty());\n  EXPECT_THAT(dst.profilePath.tmpPath, IsEmpty());\n}\n\n// The input does not exist.\nTEST_F(ArtdTest, copyAndRewriteProfileNoProfileNoFile) {\n  CreateFile(dex_file_);\n\n  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());\n\n  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);",
+        "base_contents": "  bool result;\n  EXPECT_TRUE(artd_->copyAndRewriteProfile(src, &dst, dex_file_, &result).isOk());\n  EXPECT_FALSE(result);",
+        "res_region": "  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());\n\n  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);\n  EXPECT_THAT(dst.profilePath.id, IsEmpty());\n  EXPECT_THAT(dst.profilePath.tmpPath, IsEmpty());\n}\n\n// The input does not exist.\nTEST_F(ArtdTest, copyAndRewriteProfileNoProfileNoFile) {\n  CreateFile(dex_file_);\n\n  auto [result, dst] = OR_FAIL(RunCopyAndRewriteProfile());\n\n  EXPECT_EQ(result.status, CopyAndRewriteProfileResult::Status::NO_PROFILE);",
+        "lookback": "",
+        "lookahead": "  EXPECT_THAT(dst.profilePath.id, IsEmpty());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1519,
+        "end_line": 1551,
+        "merge_gen_region": " [result dst =_(CopyRewrite());_(.&&..,Empty EXPECTTHAT..,Empty EXPECTTHATdstprofile.tmp,Empty } The input not...88881dex&...,Empty",
+        "confidence": 0.8898714184761047,
+        "hesitated": false,
+        "resolved": false
+    }
+]

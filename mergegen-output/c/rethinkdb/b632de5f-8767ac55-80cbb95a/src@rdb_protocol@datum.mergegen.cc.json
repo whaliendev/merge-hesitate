@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "    switch (skey_version) {\n    case skey_version_t::pre_1_16: break;\n    case skey_version_t::post_1_16:",
+        "b_contents": "    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0:\n    case reql_version_t::v2_1_is_latest:",
+        "base_contents": "    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0_is_latest:",
+        "res_region": "    switch (skey_version) {\n    case skey_version_t::pre_1_16: break;\n    case skey_version_t::post_1_16:",
+        "lookback": "    case skey_version_t::pre_1_16: break;",
+        "lookahead": "        secondary_key_string.append(1, '\\x00');",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1080,
+        "end_line": 1099,
+        "merge_gen_region": null,
+        "confidence": 0.7395802736282349,
+        "hesitated": true
+    },
+    {
+        "a_contents": "int datum_t::cmp(const datum_t &rhs) const {",
+        "b_contents": "int datum_t::v1_13_cmp(const datum_t &rhs) const {\n    if (get_type() == MINVAL && rhs.get_type() != MINVAL) return -1;\n    if (get_type() == MAXVAL && rhs.get_type() != MAXVAL) return 1;\n    if (get_type() != MINVAL && rhs.get_type() == MINVAL) return 1;\n    if (get_type() != MAXVAL && rhs.get_type() == MAXVAL) return -1;\n\n    if (is_ptype() && !rhs.is_ptype()) {\n        return 1;\n    } else if (!is_ptype() && rhs.is_ptype()) {\n        return -1;\n    }\n\n    if (get_type() != rhs.get_type()) {\n        return derived_cmp(get_type(), rhs.get_type());\n    }\n    switch (get_type()) {\n    case R_NULL: return 0;\n    case MINVAL: return 0;\n    case MAXVAL: return 0;\n    case R_BOOL: return derived_cmp(as_bool(), rhs.as_bool());\n    case R_NUM: return derived_cmp(as_num(), rhs.as_num());\n    case R_STR: return as_str().compare(rhs.as_str());\n    case R_ARRAY: {\n        size_t i;\n        const size_t sz = arr_size();\n        const size_t rhs_sz = rhs.arr_size();\n        for (i = 0; i < sz; ++i) {\n            if (i >= rhs_sz) return 1;\n            int cmpval = unchecked_get(i).v1_13_cmp(rhs.unchecked_get(i));\n            if (cmpval != 0) return cmpval;\n        }\n        guarantee(i <= rhs_sz);\n        return i == rhs_sz ? 0 : -1;\n    } unreachable();\n    case R_OBJECT: {\n        if (is_ptype() && !pseudo_compares_as_obj()) {\n            if (get_reql_type() != rhs.get_reql_type()) {\n                return derived_cmp(get_reql_type(), rhs.get_reql_type());\n            }\n            return pseudo_cmp(reql_version_t::v1_13, rhs);\n        } else {\n            size_t i = 0;\n            size_t i2 = 0;\n            const size_t sz = obj_size();\n            const size_t rhs_sz = rhs.obj_size();\n            while (i < sz && i2 < rhs_sz) {\n                auto pair = unchecked_get_pair(i);\n                auto pair2 = rhs.unchecked_get_pair(i2);\n                int key_cmpval = pair.first.compare(pair2.first);\n                if (key_cmpval != 0) {\n                    return key_cmpval;\n                }\n                int val_cmpval = pair.second.v1_13_cmp(pair2.second);\n                if (val_cmpval != 0) {\n                    return val_cmpval;\n                }\n                ++i;\n                ++i2;\n            }\n            if (i != sz) return 1;\n            if (i2 != rhs_sz) return -1;\n            return 0;\n        }\n    } unreachable();\n    case R_BINARY: // This should be handled by the ptype code above\n    case UNINITIALIZED: // fallthru\n    default: unreachable();\n    }\n}\n\nint datum_t::cmp(reql_version_t reql_version, const datum_t &rhs) const {\n    // If the ordering of ReQL terms changes, rename\n    // LATEST_has_v1_14_ordering in version.hpp\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        return v1_13_cmp(rhs);\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0:\n    case reql_version_t::v2_1_is_latest:\n        return modern_cmp(rhs);\n    default:\n        unreachable();\n    }\n}\n\nint datum_t::modern_cmp(const datum_t &rhs) const {",
+        "base_contents": "int datum_t::v1_13_cmp(const datum_t &rhs) const {\n    if (is_ptype() && !rhs.is_ptype()) {\n        return 1;\n    } else if (!is_ptype() && rhs.is_ptype()) {\n        return -1;\n    }\n\n    if (get_type() != rhs.get_type()) {\n        return derived_cmp(get_type(), rhs.get_type());\n    }\n    switch (get_type()) {\n    case R_NULL: return 0;\n    case MINVAL: return 0;\n    case MAXVAL: return 0;\n    case R_BOOL: return derived_cmp(as_bool(), rhs.as_bool());\n    case R_NUM: return derived_cmp(as_num(), rhs.as_num());\n    case R_STR: return as_str().compare(rhs.as_str());\n    case R_ARRAY: {\n        size_t i;\n        const size_t sz = arr_size();\n        const size_t rhs_sz = rhs.arr_size();\n        for (i = 0; i < sz; ++i) {\n            if (i >= rhs_sz) return 1;\n            int cmpval = unchecked_get(i).v1_13_cmp(rhs.unchecked_get(i));\n            if (cmpval != 0) return cmpval;\n        }\n        guarantee(i <= rhs_sz);\n        return i == rhs_sz ? 0 : -1;\n    } unreachable();\n    case R_OBJECT: {\n        if (is_ptype() && !pseudo_compares_as_obj()) {\n            if (get_reql_type() != rhs.get_reql_type()) {\n                return derived_cmp(get_reql_type(), rhs.get_reql_type());\n            }\n            return pseudo_cmp(reql_version_t::v1_13, rhs);\n        } else {\n            size_t i = 0;\n            size_t i2 = 0;\n            const size_t sz = obj_size();\n            const size_t rhs_sz = rhs.obj_size();\n            while (i < sz && i2 < rhs_sz) {\n                auto pair = unchecked_get_pair(i);\n                auto pair2 = rhs.unchecked_get_pair(i2);\n                int key_cmpval = pair.first.compare(pair2.first);\n                if (key_cmpval != 0) {\n                    return key_cmpval;\n                }\n                int val_cmpval = pair.second.v1_13_cmp(pair2.second);\n                if (val_cmpval != 0) {\n                    return val_cmpval;\n                }\n                ++i;\n                ++i2;\n            }\n            if (i != sz) return 1;\n            if (i2 != rhs_sz) return -1;\n            return 0;\n        }\n    } unreachable();\n    case R_BINARY: // This should be handled by the ptype code above\n    case UNINITIALIZED: // fallthru\n    default: unreachable();\n    }\n}\n\nint datum_t::cmp(reql_version_t reql_version, const datum_t &rhs) const {\n    // If the ordering of ReQL terms changes, rename\n    // LATEST_has_v1_14_ordering in version.hpp\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        return v1_13_cmp(rhs);\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0_is_latest:\n        return modern_cmp(rhs);\n    default:\n        unreachable();\n    }\n}\n\nint datum_t::modern_cmp(const datum_t &rhs) const {",
+        "res_region": "int datum_t::cmp(const datum_t &rhs) const {",
+        "lookback": "    bool lhs_ptype = is_ptype() && !pseudo_compares_as_obj();",
+        "lookahead": "    bool lhs_ptype = is_ptype() && !pseudo_compares_as_obj();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1592,
+        "end_line": 1764,
+        "merge_gen_region": null,
+        "confidence": 0.6304706335067749,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);",
+        "b_contents": "\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0:\n    case reql_version_t::v2_1_is_latest:\n        rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);\n        break;\n    default:\n        unreachable();\n    }",
+        "base_contents": "\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0_is_latest:\n        rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);\n        break;\n    default:\n        unreachable();\n    }",
+        "res_region": "    rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2228,
+        "end_line": 2257,
+        "merge_gen_region": null,
+        "confidence": 0.46466636657714844,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);",
+        "b_contents": "    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0:\n    case reql_version_t::v2_1_is_latest:\n        rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);\n        break;\n    default:\n        unreachable();\n    }",
+        "base_contents": "    switch (reql_version) {\n    case reql_version_t::v1_13:\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0_is_latest:\n        rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);\n        break;\n    default:\n        unreachable();\n    }",
+        "res_region": "    rcheck_array_size_datum(vector, limits, base_exc_t::GENERIC);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2278,
+        "end_line": 2305,
+        "merge_gen_region": null,
+        "confidence": 0.46466636657714844,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void datum_array_builder_t::erase_range(size_t start, size_t end) {\n    rcheck_datum(start <= vector.size(),\n                 base_exc_t::NON_EXISTENCE,\n                 strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                           start, vector.size()));",
+        "b_contents": "void datum_array_builder_t::erase_range(reql_version_t reql_version,\n                                        size_t start, size_t end) {\n\n    // See https://github.com/rethinkdb/rethinkdb/issues/2696 about the backwards\n    // compatible implementation for v1_13.\n\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        rcheck_datum(start < vector.size(),\n                     base_exc_t::NON_EXISTENCE,\n                     strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                               start, vector.size()));\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0:\n    case reql_version_t::v2_1_is_latest:\n        rcheck_datum(start <= vector.size(),\n                     base_exc_t::NON_EXISTENCE,\n                     strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                               start, vector.size()));\n        break;\n    default:\n        unreachable();\n    }\n\n",
+        "base_contents": "void datum_array_builder_t::erase_range(reql_version_t reql_version,\n                                        size_t start, size_t end) {\n\n    // See https://github.com/rethinkdb/rethinkdb/issues/2696 about the backwards\n    // compatible implementation for v1_13.\n\n    switch (reql_version) {\n    case reql_version_t::v1_13:\n        rcheck_datum(start < vector.size(),\n                     base_exc_t::NON_EXISTENCE,\n                     strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                               start, vector.size()));\n        break;\n    case reql_version_t::v1_14: // v1_15 is the same as v1_14\n    case reql_version_t::v1_16:\n    case reql_version_t::v2_0_is_latest:\n        rcheck_datum(start <= vector.size(),\n                     base_exc_t::NON_EXISTENCE,\n                     strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                               start, vector.size()));\n        break;\n    default:\n        unreachable();\n    }\n\n",
+        "res_region": "void datum_array_builder_t::erase_range(size_t start, size_t end) {\n    rcheck_datum(start <= vector.size(),\n                 base_exc_t::NON_EXISTENCE,\n                 strprintf(\"Index `%zu` out of bounds for array of size: `%zu`.\",\n                           start, vector.size()));",
+        "lookback": "    rcheck_datum(start <= vector.size(),",
+        "lookahead": "    rcheck_datum(end <= vector.size(),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2308,
+        "end_line": 2369,
+        "merge_gen_region": null,
+        "confidence": 0.5033257603645325,
+        "hesitated": true
+    }
+]

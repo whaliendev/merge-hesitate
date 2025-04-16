@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    EXPECT_TRUE(DoTest(in, test_deadline_file.path(), &install_plan));",
+        "b_contents": "    // Because rollback happened, the deadline shouldn't be written into the\n    // file.\n    EXPECT_CALL(*(fake_system_state_.mock_payload_state()),\n                GetRollbackHappened())\n        .WillOnce(Return(true));\n    EXPECT_TRUE(DoTest(in, test_deadline_file, &install_plan));\n    EXPECT_EQ(in.packages[0].payload_urls[0], install_plan.download_url);\n    EXPECT_EQ(expected_hash_, install_plan.payloads[0].hash);\n    EXPECT_EQ(1U, install_plan.target_slot);\n    string deadline;\n    EXPECT_TRUE(utils::ReadFile(test_deadline_file, &deadline));\n    EXPECT_TRUE(deadline.empty());\n    EXPECT_EQ(in.version, install_plan.version);\n  }\n  {\n    OmahaResponse in;\n    in.update_exists = true;\n    in.version = \"a.b.c.d\";\n    in.packages.push_back(\n        {.payload_urls = {kLongName}, .size = 12, .hash = kPayloadHashHex});\n    in.more_info_url = \"http://more/info\";\n    in.prompt = true;\n    in.deadline = \"some-deadline\";\n    InstallPlan install_plan;\n    fake_system_state_.fake_boot_control()->SetCurrentSlot(0);\n    EXPECT_CALL(*(fake_system_state_.mock_payload_state()),\n                GetRollbackHappened())\n        .WillOnce(Return(false));\n    EXPECT_TRUE(DoTest(in, test_deadline_file, &install_plan));",
+        "base_contents": "    EXPECT_TRUE(DoTest(in, test_deadline_file, &install_plan));",
+        "res_region": "    // Because rollback happened, the deadline shouldn't be written into the\n    // file.\n    EXPECT_CALL(*(fake_system_state_.mock_payload_state()),\n                GetRollbackHappened())\n        .WillOnce(Return(true));\n    EXPECT_TRUE(DoTest(in, test_deadline_file.path(), &install_plan));\n    EXPECT_EQ(in.packages[0].payload_urls[0], install_plan.download_url);\n    EXPECT_EQ(expected_hash_, install_plan.payloads[0].hash);\n    EXPECT_EQ(1U, install_plan.target_slot);\n    string deadline;\n    EXPECT_TRUE(utils::ReadFile(test_deadline_file.path(), &deadline));\n    EXPECT_TRUE(deadline.empty());\n    EXPECT_EQ(in.version, install_plan.version);\n  }\n  {\n    OmahaResponse in;\n    in.update_exists = true;\n    in.version = \"a.b.c.d\";\n    in.packages.push_back(\n        {.payload_urls = {kLongName}, .size = 12, .hash = kPayloadHashHex});\n    in.more_info_url = \"http://more/info\";\n    in.prompt = true;\n    in.deadline = \"some-deadline\";\n    InstallPlan install_plan;\n    fake_system_state_.fake_boot_control()->SetCurrentSlot(0);\n    EXPECT_CALL(*(fake_system_state_.mock_payload_state()),\n                GetRollbackHappened())\n        .WillOnce(Return(false));\n    EXPECT_TRUE(DoTest(in, test_deadline_file.path(), &install_plan));",
+        "lookback": "    // file.",
+        "lookahead": "    EXPECT_EQ(in.packages[0].payload_urls[0], install_plan.download_url);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 239,
+        "end_line": 273,
+        "merge_gen_region": null,
+        "confidence": 0.8427639007568359,
+        "hesitated": true
+    }
+]

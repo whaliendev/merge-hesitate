@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\nswayc_t *get_swayc_in_direction(swayc_t *container, enum movement_direction dir) {\n\tswayc_t *parent = container->parent;\n\n\tif (dir == MOVE_PARENT) {\n\t\tif (parent->type == C_OUTPUT) {\n\t\t\treturn NULL;\n\t\t} else {\n\t\t\treturn parent;\n\t\t}\n\t}\n\twhile (true) {\n\t\t// Test if we can even make a difference here\n\t\tbool can_move = false;\n\t\tint diff = 0;\n\t\tif (dir == MOVE_LEFT || dir == MOVE_RIGHT) {\n\t\t\tif (parent->layout == L_HORIZ || parent->type == C_ROOT) {\n\t\t\t\tcan_move = true;\n\t\t\t\tdiff = dir == MOVE_LEFT ? -1 : 1;\n\t\t\t}\n\t\t} else {\n\t\t\tif (parent->layout == L_VERT) {\n\t\t\t\tcan_move = true;\n\t\t\t\tdiff = dir == MOVE_UP ? -1 : 1;\n\t\t\t}\n\t\t}\n\t\tif (can_move) {\n\t\t\tint i;\n\t\t\tfor (i = 0; i < parent->children->length; ++i) {\n\t\t\t\tswayc_t *child = parent->children->items[i];\n\t\t\t\tif (child == container) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t\tint desired = i + diff;\n\t\t\tif (desired < 0 || desired >= parent->children->length) {\n\t\t\t\tcan_move = false;\n\t\t\t} else {\n\t\t\t\treturn parent->children->items[desired];\n\t\t\t}\n\t\t}\n\t\tif (!can_move) {\n\t\t\tcontainer = parent;\n\t\t\tparent = parent->parent;\n\t\t\tif (!parent) {\n\t\t\t\t// Nothing we can do\n\t\t\t\treturn NULL;\n\t\t\t}\n\t\t}\n\t}\n}",
+        "base_contents": "",
+        "res_region": "\nswayc_t *get_swayc_in_direction(swayc_t *container, enum movement_direction dir) {\n\tswayc_t *parent = container->parent;\n\n\tif (dir == MOVE_PARENT) {\n\t\tif (parent->type == C_OUTPUT) {\n\t\t\treturn NULL;\n\t\t} else {\n\t\t\treturn parent;\n\t\t}\n\t}\n\twhile (true) {\n\t\t// Test if we can even make a difference here\n\t\tbool can_move = false;\n\t\tint diff = 0;\n\t\tif (dir == MOVE_LEFT || dir == MOVE_RIGHT) {\n\t\t\tif (parent->layout == L_HORIZ || parent->type == C_ROOT) {\n\t\t\t\tcan_move = true;\n\t\t\t\tdiff = dir == MOVE_LEFT ? -1 : 1;\n\t\t\t}\n\t\t} else {\n\t\t\tif (parent->layout == L_VERT) {\n\t\t\t\tcan_move = true;\n\t\t\t\tdiff = dir == MOVE_UP ? -1 : 1;\n\t\t\t}\n\t\t}\n\t\tif (can_move) {\n\t\t\tint i;\n\t\t\tfor (i = 0; i < parent->children->length; ++i) {\n\t\t\t\tswayc_t *child = parent->children->items[i];\n\t\t\t\tif (child == container) {\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t\tint desired = i + diff;\n\t\t\tif (desired < 0 || desired >= parent->children->length) {\n\t\t\t\tcan_move = false;\n\t\t\t} else {\n\t\t\t\treturn parent->children->items[desired];\n\t\t\t}\n\t\t}\n\t\tif (!can_move) {\n\t\t\tcontainer = parent;\n\t\t\tparent = parent->parent;\n\t\t\tif (!parent) {\n\t\t\t\t// Nothing we can do\n\t\t\t\treturn NULL;\n\t\t\t}\n\t\t}\n\t}\n}",
+        "lookback": "swayc_t *get_swayc_in_direction(swayc_t *container, enum movement_direction dir) {",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 359,
+        "end_line": 414,
+        "merge_gen_region": null,
+        "confidence": 0.54766446352005,
+        "hesitated": true
+    }
+]

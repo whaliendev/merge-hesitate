@@ -1,0 +1,55 @@
+[
+    {
+        "a_contents": "    if ((traceFlags & LayerTracing::TRACE_INPUT) && needsInputInfo()) {",
+        "b_contents": "    if (traceFlags & SurfaceTracing::TRACE_INPUT && needsInputInfo()) {",
+        "base_contents": "    if (traceFlags & SurfaceTracing::TRACE_INPUT) {",
+        "res_region": "    if ((traceFlags & LayerTracing::TRACE_INPUT) && needsInputInfo()) {",
+        "lookback": "        WindowInfo info;",
+        "lookahead": "        WindowInfo info;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2161,
+        "end_line": 2167,
+        "merge_gen_region": null,
+        "confidence": 0.740535318851471,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// Applies the given transform to the region, while protecting against overflows caused by any\n// offsets. If applying the offset in the transform to any of the Rects in the region would result\n// in an overflow, they are not added to the output Region.\nstatic Region transformTouchableRegionSafely(const ui::Transform& t, const Region& r,\n                                             const std::string& debugWindowName) {\n    // Round the translation using the same rounding strategy used by ui::Transform.\n    const auto tx = static_cast<int32_t>(t.tx() + 0.5);\n    const auto ty = static_cast<int32_t>(t.ty() + 0.5);\n\n    ui::Transform transformWithoutOffset = t;\n    transformWithoutOffset.set(0.f, 0.f);\n\n    const Region transformed = transformWithoutOffset.transform(r);\n\n    // Apply the translation to each of the Rects in the region while discarding any that overflow.\n    Region ret;\n    for (const auto& rect : transformed) {\n        Rect newRect;\n        if (__builtin_add_overflow(rect.left, tx, &newRect.left) ||\n            __builtin_add_overflow(rect.top, ty, &newRect.top) ||\n            __builtin_add_overflow(rect.right, tx, &newRect.right) ||\n            __builtin_add_overflow(rect.bottom, ty, &newRect.bottom)) {\n            ALOGE(\"Applying transform to touchable region of window '%s' resulted in an overflow.\",\n                  debugWindowName.c_str());\n            continue;\n        }\n        ret.orSelf(newRect);",
+        "b_contents": "void Layer::fillInputFrameInfo(WindowInfo& info, const ui::Transform& toNonRotatedDisplay) {\n    // Transform layer size to screen space and inset it by surface insets.\n    // If this is a portal window, set the touchableRegion to the layerBounds.\n    Rect layerBounds = info.portalToDisplayId == ADISPLAY_ID_NONE\n            ? getInputBounds()\n            : info.touchableRegion.getBounds();\n    if (!layerBounds.isValid()) {\n        layerBounds = getInputBounds();\n    }\n\n    if (!layerBounds.isValid()) {\n        // If the layer bounds is empty, set the frame to empty and clear the transform\n        info.frameLeft = 0;\n        info.frameTop = 0;\n        info.frameRight = 0;\n        info.frameBottom = 0;\n        info.transform.reset();\n        info.touchableRegion = Region();\n        info.flags |= WindowInfo::Flag::NOT_TOUCH_MODAL | WindowInfo::Flag::NOT_FOCUSABLE;\n        return;\n    }\n\n    ui::Transform layerToDisplay = getInputTransform();\n    // Transform that takes window coordinates to non-rotated display coordinates\n    ui::Transform t = toNonRotatedDisplay * layerToDisplay;\n    int32_t xSurfaceInset = info.surfaceInset;\n    int32_t ySurfaceInset = info.surfaceInset;\n    // Bring screenBounds into non-rotated space\n    Rect screenBounds = toNonRotatedDisplay.transform(Rect{mScreenBounds});\n\n    const float xScale = t.getScaleX();\n    const float yScale = t.getScaleY();\n    if (xScale != 1.0f || yScale != 1.0f) {\n        xSurfaceInset = std::round(xSurfaceInset * xScale);\n        ySurfaceInset = std::round(ySurfaceInset * yScale);",
+        "base_contents": "void Layer::fillInputFrameInfo(WindowInfo& info, const ui::Transform& toNonRotatedDisplay) {\n    // Transform layer size to screen space and inset it by surface insets.\n    // If this is a portal window, set the touchableRegion to the layerBounds.\n    Rect layerBounds = info.portalToDisplayId == ADISPLAY_ID_NONE\n            ? getInputBounds()\n            : info.touchableRegion.getBounds();\n    if (!layerBounds.isValid()) {\n        layerBounds = getInputBounds();\n    }\n\n    if (!layerBounds.isValid()) {\n        // If the layer bounds is empty, set the frame to empty and clear the transform\n        info.frameLeft = 0;\n        info.frameTop = 0;\n        info.frameRight = 0;\n        info.frameBottom = 0;\n        info.transform.reset();\n        info.touchableRegion = Region();\n        info.flags = WindowInfo::Flag::NOT_TOUCH_MODAL | WindowInfo::Flag::NOT_FOCUSABLE;\n        return;\n    }\n\n    ui::Transform layerToDisplay = getInputTransform();\n    // Transform that takes window coordinates to non-rotated display coordinates\n    ui::Transform t = toNonRotatedDisplay * layerToDisplay;\n    int32_t xSurfaceInset = info.surfaceInset;\n    int32_t ySurfaceInset = info.surfaceInset;\n    // Bring screenBounds into non-rotated space\n    Rect screenBounds = toNonRotatedDisplay.transform(Rect{mScreenBounds});\n\n    const float xScale = t.getScaleX();\n    const float yScale = t.getScaleY();\n    if (xScale != 1.0f || yScale != 1.0f) {\n        xSurfaceInset = std::round(xSurfaceInset * xScale);\n        ySurfaceInset = std::round(ySurfaceInset * yScale);",
+        "res_region": "// Applies the given transform to the region, while protecting against overflows caused by any\n// offsets. If applying the offset in the transform to any of the Rects in the region would result\n// in an overflow, they are not added to the output Region.\nstatic Region transformTouchableRegionSafely(const ui::Transform& t, const Region& r,\n                                             const std::string& debugWindowName) {\n    // Round the translation using the same rounding strategy used by ui::Transform.\n    const auto tx = static_cast<int32_t>(t.tx() + 0.5);\n    const auto ty = static_cast<int32_t>(t.ty() + 0.5);\n\n    ui::Transform transformWithoutOffset = t;\n    transformWithoutOffset.set(0.f, 0.f);\n\n    const Region transformed = transformWithoutOffset.transform(r);\n\n    // Apply the translation to each of the Rects in the region while discarding any that overflow.\n    Region ret;\n    for (const auto& rect : transformed) {\n        Rect newRect;\n        if (__builtin_add_overflow(rect.left, tx, &newRect.left) ||\n            __builtin_add_overflow(rect.top, ty, &newRect.top) ||\n            __builtin_add_overflow(rect.right, tx, &newRect.right) ||\n            __builtin_add_overflow(rect.bottom, ty, &newRect.bottom)) {\n            ALOGE(\"Applying transform to touchable region of window '%s' resulted in an overflow.\",\n                  debugWindowName.c_str());\n            continue;\n        }\n        ret.orSelf(newRect);",
+        "lookback": "// offsets. If applying the offset in the transform to any of the Rects in the region would result",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2202,
+        "end_line": 2302,
+        "merge_gen_region": " offsets Ifing offset in transform any of Rect in region result App the transform the, protect againsts by //. apply the in transform any of Rect in region result in overflow they not to output. Region static transformableSaf( uiTransform t const&, stdstring debugName { Round translation the rounding used uiTransform const tx staticcastint_<32tt.() 0.); auto =_<::>32tt.() 05 const ty staticcastint_<32tt.() 05 uiTransformWithout =;Without.(..,.); Region =Without.(.,.); Region =Without.((); Apply translation each thes thes the whileing that. ret forconst& :) RectRect ifbuiltinaddoverflowrectleft tx &Rectleft ||builtinaddoverflowrecttop ty &Recttop || ____(.,,,.); Region =Without.(r // the to of Rect in region discard any overflow Region; ( auto rect :) RectRect ifbuiltinaddoverflowrect.,,,new.) ____(.,,,,.); Region =Without.( debugNamecstr continue }.Selfnew);",
+        "confidence": 0.9083547592163086,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "b_contents": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputFeatures.test(WindowInfo::Feature::NO_INPUT_CHANNEL);",
+        "base_contents": "    return mDrawingState.inputInfo.token != nullptr;",
+        "res_region": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "lookback": "            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2526,
+        "end_line": 2534,
+        "merge_gen_region": "outputoutputreturnreturnoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9098413586616516,
+        "hesitated": false,
+        "resolved": false
+    }
+]

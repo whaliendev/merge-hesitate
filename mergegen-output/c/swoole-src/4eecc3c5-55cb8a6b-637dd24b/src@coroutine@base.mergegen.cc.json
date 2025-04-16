@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    Coroutine::call_stack[call_stack_size++] = this;",
+        "b_contents": "    origin = current;\n    current = this;",
+        "base_contents": "    call_stack[call_stack_size++] = this;",
+        "res_region": "    origin = current;\n    current = this;",
+        "lookback": "    current = this;",
+        "lookahead": "    ctx.SwapIn();",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 49,
+        "end_line": 56,
+        "merge_gen_region": null,
+        "confidence": 0.42252445220947266,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Coroutine::call_stack[call_stack_size++] = this;",
+        "b_contents": "    origin = current;\n    current = this;",
+        "base_contents": "    call_stack[call_stack_size++] = this;",
+        "res_region": "    origin = current;\n    current = this;",
+        "lookback": "    current = this;",
+        "lookahead": "    ctx.SwapIn();",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 74,
+        "end_line": 81,
+        "merge_gen_region": null,
+        "confidence": 0.42252445220947266,
+        "hesitated": true
+    }
+]

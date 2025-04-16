@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    friend class Client; // removeClient_l();\n    friend class DeviceEffectManager;\n    friend class DeviceEffectManagerCallback;\n    friend class PatchPanel;\n    // TODO(b/291012167) replace the Thread friends with an interface.\n    friend class DirectOutputThread;\n    friend class MixerThread;\n    friend class MmapPlaybackThread;\n    friend class MmapThread;\n    friend class PlaybackThread;\n    friend class RecordThread;\n    friend class ThreadBase;\n",
+        "base_contents": "    friend class Client; // removeClient_l();\n    friend class PatchPanel;\n    // TODO(b/291012167) replace the Thread friends with an interface.\n    friend class DirectOutputThread;\n    friend class MixerThread;\n    friend class MmapPlaybackThread;\n    friend class MmapThread;\n    friend class PlaybackThread;\n    friend class RecordThread;\n    friend class ThreadBase;\n",
+        "res_region": "",
+        "lookback": "    static void instantiate() ANDROID_API;",
+        "lookahead": "public:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 59,
+        "end_line": 86,
+        "merge_gen_region": " void instantiate ANDROIDAPI",
+        "confidence": 0.9147387742996216,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n#include \"MelReporter.h\"\n",
+        "base_contents": "    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\n    class DeviceEffectManager;\n    // TODO(b/288339104) these should be separate files\npublic:\n    class DeviceEffectManagerCallback;\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n#include \"DeviceEffectManager.h\"\n\n#include \"MelReporter.h\"\n",
+        "res_region": "",
+        "lookback": "    // Preference is given to an io handle with a matching effect chain to session id.",
+        "lookahead": "    // Find io handle by session id.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 492,
+        "end_line": 527,
+        "merge_gen_region": " P is to io with matching chain session.",
+        "confidence": 0.8852927088737488,
+        "hesitated": false,
+        "resolved": false
+    }
+]

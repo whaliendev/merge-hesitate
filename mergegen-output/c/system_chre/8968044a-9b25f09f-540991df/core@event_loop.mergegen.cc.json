@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    // Events are delivered in a single stage: they arrive in the inbound event\n    // queue mEvents (potentially posted from another thread), then within\n    // this context these events are distributed to all interested Nanoapps,\n    // with their free callback invoked after distribution.\n    if (mEvents.size() > mMaxEventPoolUsage) {\n      mMaxEventPoolUsage = mEvents.size();",
+        "b_contents": "    // Events are delivered in two stages: first they arrive in the inbound\n    // event queue mEvents (potentially posted from another thread), then within\n    // this context these events are distributed to smaller event queues\n    // associated with each Nanoapp that should receive the event. Once the\n    // event is delivered to all interested Nanoapps, its free callback is\n    // invoked.\n    if (!havePendingEvents || !mEvents.empty()) {\n      if (mEvents.size() > mMaxEventPoolUsage) {\n        mMaxEventPoolUsage = mEvents.size();\n      }\n\n      // mEvents.pop() will be a blocking call if mEvents.empty()\n      Event *event = mEvents.pop();\n      // Need size() + 1 since the to-be-processed event has already been\n      // removed.\n      mPowerControlManager.preEventLoopProcess(mEvents.size() + 1);\n      distributeEvent(event);",
+        "base_contents": "    // Events are delivered in two stages: first they arrive in the inbound\n    // event queue mEvents (potentially posted from another thread), then within\n    // this context these events are distributed to smaller event queues\n    // associated with each Nanoapp that should receive the event. Once the\n    // event is delivered to all interested Nanoapps, its free callback is\n    // invoked.\n    if (!havePendingEvents || !mEvents.empty()) {\n      if (mEvents.size() > mMaxEventPoolUsage) {\n        mMaxEventPoolUsage = mEvents.size();\n      }\n\n      // mEvents.pop() will be a blocking call if mEvents.empty()\n      distributeEvent(mEvents.pop());",
+        "res_region": "    // Events are delivered in a single stage: they arrive in the inbound event\n    // queue mEvents (potentially posted from another thread), then within\n    // this context these events are distributed to all interested Nanoapps,\n    // with their free callback invoked after distribution.\n    if (mEvents.size() > mMaxEventPoolUsage) {\n      mMaxEventPoolUsage = mEvents.size();",
+        "lookback": "    // queue mEvents (potentially posted from another thread), then within",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 107,
+        "end_line": 146,
+        "merge_gen_region": null,
+        "confidence": 0.8278292417526245,
+        "hesitated": true
+    }
+]

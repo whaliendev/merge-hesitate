@@ -1,0 +1,106 @@
+[
+    {
+        "a_contents": "    std::string tcUrl, schema, ip, vhost, app, stream, param;\n    int port;",
+        "b_contents": "    std::string tcUrl, schema, ip, vhost, app, stream, port, param;",
+        "base_contents": "    std::string tcUrl; \n    std::string schema; std::string host; std::string vhost; \n    std::string app; std::string port; std::string param;",
+        "res_region": "    std::string tcUrl, schema, ip, vhost, app, stream, param;\n    int port;",
+        "lookback": "    int port;",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 432,
+        "end_line": 441,
+        "merge_gen_region": null,
+        "confidence": 0.7189755439758301,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    \n    tcUrl = \"rtmp://winlin.cn:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc&&vhost=demo.com\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // vhost in app\n    tcUrl = \"rtmp://winlin.cn/live?key=abc\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live?key=abc&&vhost=demo.com\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // without stream\n    tcUrl = \"rtmp://winlin.cn/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    \n    tcUrl = \"rtmp://127.0.0.1:1935/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());",
+        "b_contents": "    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc&&vhost=demo.com\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // vhost in app\n    tcUrl = \"rtmp://winlin.cn/live?key=abc\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live?key=abc&&vhost=demo.com\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // without stream\n    tcUrl = \"rtmp://winlin.cn/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());\n    \n    tcUrl = \"rtmp://127.0.0.1:1935/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());",
+        "base_contents": "    EXPECT_STREQ(\"127.0.0.1\", host.c_str());",
+        "res_region": "    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    \n    tcUrl = \"rtmp://winlin.cn:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live\"; stream= \"show?key=abc&&vhost=demo.com\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // vhost in app\n    tcUrl = \"rtmp://winlin.cn/live?key=abc\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc\", param.c_str());\n    \n    tcUrl = \"rtmp://winlin.cn/live?key=abc&&vhost=demo.com\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"demo.com\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    EXPECT_STREQ(\"?key=abc&&vhost=demo.com\", param.c_str());\n    \n    // without stream\n    tcUrl = \"rtmp://winlin.cn/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"winlin.cn\", ip.c_str());\n    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(1935, port);\n    \n    tcUrl = \"rtmp://127.0.0.1:1935/live\"; stream=\"\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"\", stream.c_str());",
+        "lookback": "    EXPECT_STREQ(\"winlin.cn\", vhost.c_str());",
+        "lookahead": "    EXPECT_EQ(1935, port);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 447,
+        "end_line": 591,
+        "merge_gen_region": "_STREQwin.\",._());_(\"win.\", ipcstr EXPECTSTREQwin.\", vhostcstr EXPECTSTREQlive appcstr EXPECTSTREQshow streamcstr EXPECTEQ1935 port tc =rtmpwin.cn19/live stream \"show srsdiscoverytcurltc,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, param EXPECTSTREQrtmp schemacstr EXPECT_(\"win.\", ipcstr EXPECTSTREQwin.\", vhostcstr EXPECTSTREQlive appcstr EXPECTSTREQshow streamcstr EXPECTEQ19, port tc =rtmp://lin./live stream \"showkeyabc srsdiscoverytcurltc,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+        "confidence": 0.8811582326889038,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(1935, port);",
+        "b_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_STREQ(\"1935\", port.c_str());",
+        "base_contents": "    EXPECT_STREQ(\"1935\", port.c_str());",
+        "res_region": "    EXPECT_EQ(1935, port);",
+        "lookback": "    ",
+        "lookahead": "    ",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 594,
+        "end_line": 602,
+        "merge_gen_region": null,
+        "confidence": 0.8429846167564392,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "b_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());",
+        "base_contents": "    EXPECT_STREQ(\"19351\", port.c_str());",
+        "res_region": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "lookback": "    EXPECT_EQ(19351, port);",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 610,
+        "end_line": 618,
+        "merge_gen_region": null,
+        "confidence": 0.7977060079574585,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(19351, port);\n    \n    // no vhost\n    tcUrl = \"rtmp://127.0.0.1:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "b_contents": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());\n    \n    // no vhost\n    tcUrl = \"rtmp://127.0.0.1:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());",
+        "base_contents": "    EXPECT_STREQ(\"19351\", port.c_str());",
+        "res_region": "    EXPECT_STREQ(\"\", stream.c_str());\n    EXPECT_EQ(19351, port);\n    \n    // no vhost\n    tcUrl = \"rtmp://127.0.0.1:19351/live\"; stream= \"show\";\n    srs_discovery_tc_url(tcUrl, schema, ip, vhost, app, stream, port, param);\n    EXPECT_STREQ(\"rtmp\", schema.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", ip.c_str());\n    EXPECT_STREQ(\"127.0.0.1\", vhost.c_str());\n    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "lookback": "    EXPECT_EQ(19351, port);",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 626,
+        "end_line": 654,
+        "merge_gen_region": "_(\"\",._ EXPECTSTREQ streamcstr EXPECT kDefault._ streamcstr EXPECT kDefault._ streamcstr EXPECT",
+        "confidence": 0.8937985897064209,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "b_contents": "    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());",
+        "base_contents": "    EXPECT_STREQ(\"live/show\", app.c_str());\n    EXPECT_STREQ(\"19351\", port.c_str());",
+        "res_region": "    EXPECT_STREQ(\"live\", app.c_str());\n    EXPECT_STREQ(\"show\", stream.c_str());\n    EXPECT_EQ(19351, port);",
+        "lookback": "    EXPECT_STREQ(\"show\", stream.c_str());",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 662,
+        "end_line": 673,
+        "merge_gen_region": null,
+        "confidence": 0.802483856678009,
+        "hesitated": true
+    }
+]

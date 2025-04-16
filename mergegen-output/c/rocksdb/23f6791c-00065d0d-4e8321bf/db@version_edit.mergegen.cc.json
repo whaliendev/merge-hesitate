@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if ((int)v >= number_levels_) {\n      *msg = \"column family already has more levels than specified\";\n    }",
+        "b_contents": "",
+        "base_contents": "    if ((int)v >= number_levels_) {\n      *msg = \"db already has more levels than options.num_levels\";\n    }",
+        "res_region": "",
+        "lookback": "  }",
+        "lookahead": "    return false;",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 135,
+        "end_line": 144,
+        "merge_gen_region": null,
+        "confidence": 0.568459689617157,
+        "hesitated": true
+    }
+]

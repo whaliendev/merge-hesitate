@@ -1,0 +1,523 @@
+[
+    {
+        "a_contents": "\n/// The root (abstract) class of the AST inheritance tree.\n/// It is possible to traverse all direct and indirect children of an AST node by calling\n/// accept, providing an ASTVisitor.",
+        "b_contents": "\n/**\n * The root (abstract) class of the AST inheritance tree.\n * It is possible to traverse all direct and indirect children of an AST node by calling\n * accept, providing an ASTVisitor.\n */",
+        "base_contents": "",
+        "res_region": "\n/**\n * The root (abstract) class of the AST inheritance tree.\n * It is possible to traverse all direct and indirect children of an AST node by calling\n * accept, providing an ASTVisitor.\n */",
+        "lookback": "/**",
+        "lookahead": "class ASTNode: private boost::noncopyable",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 42,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.6970188021659851,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Abstract AST class for a declaration (contract, function, struct, variable).",
+        "b_contents": "/**\n * Abstract AST class for a declaration (contract, function, struct, variable).\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Abstract AST class for a declaration (contract, function, struct, variable).\n */",
+        "lookback": " * Abstract AST class for a declaration (contract, function, struct, variable).",
+        "lookahead": "class Declaration: public ASTNode",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 89,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.6800458431243896,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t/// Returns the declared name.\n\tconst ASTString& getName() const { return *m_name; }",
+        "b_contents": "\t/// Returns the declared name.\n\tASTString const& getName() const { return *m_name; }",
+        "base_contents": "\tconst ASTString& getName() const { return *m_name; }",
+        "res_region": "\t/// Returns the declared name.\n\tASTString const& getName() const { return *m_name; }",
+        "lookback": "\tASTString const& getName() const { return *m_name; }",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 103,
+        "end_line": 111,
+        "merge_gen_region": null,
+        "confidence": 0.4485354721546173,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Definition of a contract. This is the only AST nodes where child nodes are not visited in\n/// document order. It first visits all struct declarations, then all variable declarations and\n/// finally all function declarations.",
+        "b_contents": "/**\n * Definition of a contract. This is the only AST nodes where child nodes are not visited in\n * document order. It first visits all struct declarations, then all variable declarations and\n * finally all function declarations.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Definition of a contract. This is the only AST nodes where child nodes are not visited in\n * document order. It first visits all struct declarations, then all variable declarations and\n * finally all function declarations.\n */",
+        "lookback": " * Definition of a contract. This is the only AST nodes where child nodes are not visited in",
+        "lookahead": "class ContractDefinition: public Declaration",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 117,
+        "end_line": 128,
+        "merge_gen_region": "",
+        "confidence": 0.9030340909957886,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Parameter list, used as function parameter list and return list.\n/// None of the parameters is allowed to contain mappings (not even recursively\n/// inside structs), but (@todo) this is not yet enforced.",
+        "b_contents": "/**\n * Parameter list, used as function parameter list and return list.\n * None of the parameters is allowed to contain mappings (not even recursively\n * inside structs), but (@todo) this is not yet enforced.\n */",
+        "base_contents": "/// Used as function parameter list and return list\n/// None of the parameters is allowed to contain mappings (not even recursively\n/// inside structs)",
+        "res_region": "/**\n * Parameter list, used as function parameter list and return list.\n * None of the parameters is allowed to contain mappings (not even recursively\n * inside structs), but (@todo) this is not yet enforced.\n */",
+        "lookback": " * Parameter list, used as function parameter list and return list.",
+        "lookahead": "class ParameterList: public ASTNode",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 168,
+        "end_line": 182,
+        "merge_gen_region": null,
+        "confidence": 0.8497012853622437,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Declaration of a variable. This can be used in various places, e.g. in function parameter\n/// lists, struct definitions and even function bodys.",
+        "b_contents": "/**\n * Declaration of a variable. This can be used in various places, e.g. in function parameter\n * lists, struct definitions and even function bodys.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Declaration of a variable. This can be used in various places, e.g. in function parameter\n * lists, struct definitions and even function bodys.\n */",
+        "lookback": " * Declaration of a variable. This can be used in various places, e.g. in function parameter",
+        "lookahead": "class VariableDeclaration: public Declaration",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 230,
+        "end_line": 239,
+        "merge_gen_region": null,
+        "confidence": 0.8682124614715576,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Abstract base class of a type name, can be any built-in or user-defined type.",
+        "b_contents": "/**\n * Abstract base class of a type name, can be any built-in or user-defined type.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Abstract base class of a type name, can be any built-in or user-defined type.\n */",
+        "lookback": " * Abstract base class of a type name, can be any built-in or user-defined type.",
+        "lookahead": "class TypeName: public ASTNode",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 265,
+        "end_line": 272,
+        "merge_gen_region": null,
+        "confidence": 0.8195297122001648,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Any pre-defined type name represented by a single keyword, i.e. it excludes mappings,\n/// contracts, functions, etc.",
+        "b_contents": "/**\n * Any pre-defined type name represented by a single keyword, i.e. it excludes mappings,\n * contracts, functions, etc.\n */",
+        "base_contents": "/// any pre-defined type that is not a mapping",
+        "res_region": "/**\n * Any pre-defined type name represented by a single keyword, i.e. it excludes mappings,\n * contracts, functions, etc.\n */",
+        "lookback": " * Any pre-defined type name represented by a single keyword, i.e. it excludes mappings,",
+        "lookahead": "class ElementaryTypeName: public TypeName",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 284,
+        "end_line": 294,
+        "merge_gen_region": " predefined name***********************************************************************************************************",
+        "confidence": 0.8842889070510864,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Name referring to a user-defined type (i.e. a struct).\n/// @todo some changes are necessary if this is also used to refer to contract types later",
+        "b_contents": "/**\n * Name referring to a user-defined type (i.e. a struct).\n * @todo some changes are necessary if this is also used to refer to contract types later\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Name referring to a user-defined type (i.e. a struct).\n * @todo some changes are necessary if this is also used to refer to contract types later\n */",
+        "lookback": " * Name referring to a user-defined type (i.e. a struct).",
+        "lookahead": "class UserDefinedTypeName: public TypeName",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 309,
+        "end_line": 318,
+        "merge_gen_region": "output*******************************************************************************************",
+        "confidence": 0.8903381824493408,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// A mapping type. Its source form is \"mapping('keyType' => 'valueType')\"",
+        "b_contents": "/**\n * A mapping type. Its source form is \"mapping('keyType' => 'valueType')\"\n */",
+        "base_contents": "",
+        "res_region": "/**\n * A mapping type. Its source form is \"mapping('keyType' => 'valueType')\"\n */",
+        "lookback": " * A mapping type. Its source form is \"mapping('keyType' => 'valueType')\"",
+        "lookahead": "class Mapping: public TypeName",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 337,
+        "end_line": 344,
+        "merge_gen_region": null,
+        "confidence": 0.8472821712493896,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n/// Abstract base class for statements.",
+        "b_contents": "\n/**\n * Abstract base class for statements.\n */",
+        "base_contents": "",
+        "res_region": "\n/**\n * Abstract base class for statements.\n */",
+        "lookback": "/**",
+        "lookahead": "class Statement: public ASTNode",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 364,
+        "end_line": 373,
+        "merge_gen_region": null,
+        "confidence": 0.7618848085403442,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t//! Check all type requirements, throws exception if some requirement is not met.\n\t//! This includes checking that operators are applicable to their arguments but also that\n\t//! the number of function call arguments matches the number of formal parameters and so forth.",
+        "b_contents": "\t/// Check all type requirements, throws exception if some requirement is not met.\n\t/// This includes checking that operators are applicable to their arguments but also that\n\t/// the number of function call arguments matches the number of formal parameters and so forth.",
+        "base_contents": "\t//! Check all type requirements, throws exception if some requirement is not met.\n\t//! For expressions, this also returns the inferred type of the expression. For other\n\t//! statements, returns the empty pointer.",
+        "res_region": "\t/// Check all type requirements, throws exception if some requirement is not met.\n\t/// This includes checking that operators are applicable to their arguments but also that\n\t/// the number of function call arguments matches the number of formal parameters and so forth.",
+        "lookback": "\t/// This includes checking that operators are applicable to their arguments but also that",
+        "lookahead": "\tvirtual void checkTypeRequirements() = 0;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 380,
+        "end_line": 392,
+        "merge_gen_region": null,
+        "confidence": 0.8197289705276489,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\nprotected:\n\t/// Helper function, check that the inferred type for @a _expression is @a _expectedType or at\n\t/// least implicitly convertible to @a _expectedType. If not, throw exception.\n\tvoid expectType(Expression& _expression, Type const& _expectedType);",
+        "base_contents": "\nprotected:\n\t//! Check that the inferred type for _expression is _expectedType or at least implicitly\n\t//! convertible to _expectedType. If not, throw exception.\n\tvoid expectType(Expression& _expression, Type const& _expectedType);",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 394,
+        "end_line": 407,
+        "merge_gen_region": null,
+        "confidence": 0.5810700058937073,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Brace-enclosed block containing zero or more statements.",
+        "b_contents": "/**\n * Brace-enclosed block containing zero or more statements.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Brace-enclosed block containing zero or more statements.\n */",
+        "lookback": " * Brace-enclosed block containing zero or more statements.",
+        "lookahead": "class Block: public Statement",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 410,
+        "end_line": 417,
+        "merge_gen_region": null,
+        "confidence": 0.7336961627006531,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// If-statement with an optional \"else\" part. Note that \"else if\" is modeled by having a new\n/// if-statement as the false (else) body.",
+        "b_contents": "/**\n * If-statement with an optional \"else\" part. Note that \"else if\" is modeled by having a new\n * if-statement as the false (else) body.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * If-statement with an optional \"else\" part. Note that \"else if\" is modeled by having a new\n * if-statement as the false (else) body.\n */",
+        "lookback": " * If-statement with an optional \"else\" part. Note that \"else if\" is modeled by having a new",
+        "lookahead": "class IfStatement: public Statement",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 431,
+        "end_line": 440,
+        "merge_gen_region": "InInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInIn",
+        "confidence": 0.9047048687934875,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Statement in which a break statement is legal.\n/// @todo actually check this requirement.",
+        "b_contents": "/**\n * Statement in which a break statement is legal.\n * @todo actually check this requirement.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Statement in which a break statement is legal.\n * @todo actually check this requirement.\n */",
+        "lookback": " * Statement in which a break statement is legal.",
+        "lookahead": "class BreakableStatement: public Statement",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 460,
+        "end_line": 469,
+        "merge_gen_region": null,
+        "confidence": 0.8378372192382812,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Definition of a variable as a statement inside a function. It requires a type name (which can\n/// also be \"var\") but the actual assignment can be missing.\n/// Examples: var a = 2; uint256 a;",
+        "b_contents": "/**\n * Definition of a variable as a statement inside a function. It requires a type name (which can\n * also be \"var\") but the actual assignment can be missing.\n * Examples: var a = 2; uint256 a;\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Definition of a variable as a statement inside a function. It requires a type name (which can\n * also be \"var\") but the actual assignment can be missing.\n * Examples: var a = 2; uint256 a;\n */",
+        "lookback": " * Definition of a variable as a statement inside a function. It requires a type name (which can",
+        "lookahead": "class VariableDefinition: public Statement",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 528,
+        "end_line": 539,
+        "merge_gen_region": null,
+        "confidence": 0.8081919550895691,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/**\n * A statement that contains only an expression (i.e. an assignment, function call, ...).\n */\nclass ExpressionStatement: public Statement",
+        "b_contents": "/**\n * An expression, i.e. something that has a value (which can also be of type \"void\" in case\n * of function calls).\n */\nclass Expression: public Statement",
+        "base_contents": "class Expression: public Statement",
+        "res_region": "/**\n * A statement that contains only an expression (i.e. an assignment, function call, ...).\n */\nclass ExpressionStatement: public Statement",
+        "lookback": " * A statement that contains only an expression (i.e. an assignment, function call, ...).",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 557,
+        "end_line": 570,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.892411470413208,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\tExpressionStatement(Location const& _location, ASTPointer<Expression> _expression):\n\t\tStatement(_location), m_expression(_expression) {}\n\tvirtual void accept(ASTVisitor& _visitor) override;\n\tvirtual void checkTypeRequirements() override;",
+        "b_contents": "\tExpression(Location const& _location): Statement(_location) {}\n\n\tstd::shared_ptr<Type const> const& getType() const { return m_type; }",
+        "base_contents": "\tExpression(Location const& _location): Statement(_location) {}\n\tstd::shared_ptr<Type const> const& getType() const { return m_type; }",
+        "res_region": "\tExpressionStatement(Location const& _location, ASTPointer<Expression> _expression):\n\t\tStatement(_location), m_expression(_expression) {}\n\tvirtual void accept(ASTVisitor& _visitor) override;\n\tvirtual void checkTypeRequirements() override;\n",
+        "lookback": "\t\tStatement(_location), m_expression(_expression) {}",
+        "lookahead": "\tExpression& getExpression() const { return *m_expression; }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 573,
+        "end_line": 585,
+        "merge_gen_region": null,
+        "confidence": 0.8532984256744385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tExpression& getExpression() const { return *m_expression; }\n\nprivate:\n\tASTPointer<Expression> m_expression;",
+        "b_contents": "protected:\n\t/// Inferred type of the expression, only filled after a call to checkTypeRequirements().\n\tstd::shared_ptr<Type const> m_type;",
+        "base_contents": "protected:\n\t//! Inferred type of the expression, only filled after a call to checkTypeRequirements().\n\tstd::shared_ptr<Type const> m_type;",
+        "res_region": "\tExpression& getExpression() const { return *m_expression; }\n\nprivate:\n\tASTPointer<Expression> m_expression;",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 587,
+        "end_line": 600,
+        "merge_gen_region": null,
+        "confidence": 0.6359859108924866,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/**\n * An expression, i.e. something that has a value (which can also be of type \"void\" in case\n * of some function calls).\n * @abstract\n */\nclass Expression: public ASTNode\n{\npublic:\n\tExpression(Location const& _location): ASTNode(_location), m_isLvalue(false) {}\n\tvirtual void checkTypeRequirements() = 0;\n\n\tstd::shared_ptr<Type const> const& getType() const { return m_type; }\n\tbool isLvalue() const { return m_isLvalue; }\n\n\t/// Helper function, infer the type via @ref checkTypeRequirements and then check that it\n\t/// is implicitly convertible to @a _expectedType. If not, throw exception.\n\tvoid expectType(Type const& _expectedType);\n\nprotected:\n\t//! Inferred type of the expression, only filled after a call to checkTypeRequirements().\n\tstd::shared_ptr<Type const> m_type;\n\t//! Whether or not this expression is an lvalue, i.e. something that can be assigned to.\n\t//! This is set during calls to @a checkTypeRequirements()\n\tbool m_isLvalue;\n};\n\n/// Assignment, can also be a compound assignment.\n/// Examples: (a = 7 + 8) or (a *= 2)",
+        "b_contents": "/**\n * Assignment, can also be a compound assignment.\n * Examples: (a = 7 + 8) or (a *= 2)\n */",
+        "base_contents": "",
+        "res_region": "/**\n * An expression, i.e. something that has a value (which can also be of type \"void\" in case\n * of some function calls).\n * @abstract\n */\nclass Expression: public ASTNode\n{\npublic:\n\tExpression(Location const& _location): ASTNode(_location), m_isLvalue(false) {}\n\tvirtual void checkTypeRequirements() = 0;\n\n\tstd::shared_ptr<Type const> const& getType() const { return m_type; }\n\tbool isLvalue() const { return m_isLvalue; }\n\n\t/// Helper function, infer the type via @ref checkTypeRequirements and then check that it\n\t/// is implicitly convertible to @a _expectedType. If not, throw exception.\n\tvoid expectType(Type const& _expectedType);\n\nprotected:\n\t//! Inferred type of the expression, only filled after a call to checkTypeRequirements().\n\tstd::shared_ptr<Type const> m_type;\n\t//! Whether or not this expression is an lvalue, i.e. something that can be assigned to.\n\t//! This is set during calls to @a checkTypeRequirements()\n\tbool m_isLvalue;\n};\n\n/// Assignment, can also be a compound assignment.\n/// Examples: (a = 7 + 8) or (a *= 2)",
+        "lookback": " * An expression, i.e. something that has a value (which can also be of type \"void\" in case",
+        "lookahead": "class Assignment: public Expression",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 608,
+        "end_line": 643,
+        "merge_gen_region": " An,/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.9173247218132019,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Operation involving a unary operator, pre- or postfix.\n/// Examples: ++i, delete x or !true",
+        "b_contents": "/**\n * Operation involving a unary operator, pre- or postfix.\n * Examples: ++i, delete x or !true\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Operation involving a unary operator, pre- or postfix.\n * Examples: ++i, delete x or !true\n */",
+        "lookback": " * Operation involving a unary operator, pre- or postfix.",
+        "lookahead": "class UnaryOperation: public Expression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 664,
+        "end_line": 673,
+        "merge_gen_region": "**************************************************************************************************************************",
+        "confidence": 0.9275752305984497,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Operation involving a binary operator.\n/// Examples: 1 + 2, true && false or 1 <= 4",
+        "b_contents": "/**\n * Operation involving a binary operator.\n * Examples: 1 + 2, true && false or 1 <= 4\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Operation involving a binary operator.\n * Examples: 1 + 2, true && false or 1 <= 4\n */",
+        "lookback": " * Operation involving a binary operator.",
+        "lookahead": "class BinaryOperation: public Expression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 693,
+        "end_line": 702,
+        "merge_gen_region": "**************************************************************************************************************",
+        "confidence": 0.9283327460289001,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\tExpression& getExpression() const { return *m_expression; }\n\tstd::vector<ASTPointer<Expression>> const& getArguments() const { return m_arguments; }\n\n\t/// Returns true if this is not an actual function call, but an explicit type conversion\n\t/// or constructor call.\n\tbool isTypeConversion() const;\n",
+        "b_contents": "\t/// Returns true if this is not an actual function call, but an explicit type conversion\n\t/// or constructor call.\n\tbool isTypeConversion() const;\n",
+        "base_contents": "",
+        "res_region": "\tExpression& getExpression() const { return *m_expression; }\n\tstd::vector<ASTPointer<Expression>> const& getArguments() const { return m_arguments; }\n\n\t/// Returns true if this is not an actual function call, but an explicit type conversion\n\t/// or constructor call.\n\tbool isTypeConversion() const;\n",
+        "lookback": "\tstd::vector<ASTPointer<Expression>> const& getArguments() const { return m_arguments; }",
+        "lookahead": "private:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 736,
+        "end_line": 750,
+        "merge_gen_region": "&&stdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.8969522714614868,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// Access to a member of an object. Example: x.name",
+        "b_contents": "/**\n * Access to a member of an object. Example: x.name\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Access to a member of an object. Example: x.name\n */",
+        "lookback": " * Access to a member of an object. Example: x.name",
+        "lookahead": "class MemberAccess: public Expression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 756,
+        "end_line": 763,
+        "merge_gen_region": null,
+        "confidence": 0.7313658595085144,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Index access to an array. Example: a[2]",
+        "b_contents": "/**\n * Index access to an array. Example: a[2]\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Index access to an array. Example: a[2]\n */",
+        "lookback": " * Index access to an array. Example: a[2]",
+        "lookahead": "class IndexAccess: public Expression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 779,
+        "end_line": 786,
+        "merge_gen_region": null,
+        "confidence": 0.8483909368515015,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// Primary expression, i.e. an expression that do not be divided any further like a literal or\n/// a variable reference.",
+        "b_contents": "/**\n * Primary expression, i.e. an expression that cannot be divided any further. Examples are literals\n * or variable references.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * Primary expression, i.e. an expression that cannot be divided any further. Examples are literals\n * or variable references.\n */",
+        "lookback": " * Primary expression, i.e. an expression that cannot be divided any further. Examples are literals",
+        "lookahead": "class PrimaryExpression: public Expression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 801,
+        "end_line": 810,
+        "merge_gen_region": null,
+        "confidence": 0.8608635067939758,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// An identifier, i.e. a reference to a declaration by name like a variable or function.",
+        "b_contents": "/**\n * An identifier, i.e. a reference to a declaration by name like a variable or function.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * An identifier, i.e. a reference to a declaration by name like a variable or function.\n */",
+        "lookback": " * An identifier, i.e. a reference to a declaration by name like a variable or function.",
+        "lookahead": "class Identifier: public PrimaryExpression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 817,
+        "end_line": 824,
+        "merge_gen_region": null,
+        "confidence": 0.8079922795295715,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/// An elementary type name expression is used in expressions like \"a = uint32(2)\" to change the\n/// type of an expression explicitly. Here, \"uint32\" is the elementary type name expression and\n/// \"uint32(2)\" is a @ref FunctionCall.",
+        "b_contents": "/**\n * An elementary type name expression is used in expressions like \"a = uint32(2)\" to change the\n * type of an expression explicitly. Here, \"uint32\" is the elementary type name expression and\n * \"uint32(2)\" is a @ref FunctionCall.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * An elementary type name expression is used in expressions like \"a = uint32(2)\" to change the\n * type of an expression explicitly. Here, \"uint32\" is the elementary type name expression and\n * \"uint32(2)\" is a @ref FunctionCall.\n */",
+        "lookback": " * An elementary type name expression is used in expressions like \"a = uint32(2)\" to change the",
+        "lookahead": "class ElementaryTypeNameExpression: public PrimaryExpression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 845,
+        "end_line": 856,
+        "merge_gen_region": "ough*ough*********************************************************************************************************************",
+        "confidence": 0.9200244545936584,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/// A literal string or number. @see Type::literalToBigEndian is used to actually parse its value.",
+        "b_contents": "/**\n * A literal string or number. @see Type::literalToBigEndian is used to actually parse its value.\n */",
+        "base_contents": "",
+        "res_region": "/**\n * A literal string or number. @see Type::literalToBigEndian is used to actually parse its value.\n */",
+        "lookback": " * A literal string or number. @see Type::literalToBigEndian is used to actually parse its value.",
+        "lookahead": "class Literal: public PrimaryExpression",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 871,
+        "end_line": 878,
+        "merge_gen_region": "Texture********************************************************************************",
+        "confidence": 0.9153178334236145,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "        pathspec_t pathspec(datum_t(std::move(paths),\n                                                        env->env->limits()), this);\n        return new_val(project(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "b_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits()), this);\n        return new_val(project(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "base_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits), this);\n        return new_val(project(obj, pathspec, DONT_RECURSE, env->env->limits));",
+        "res_region": "        pathspec_t pathspec(datum_t(std::move(paths), env->env->limits()), this);\n        return new_val(project(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "lookback": "        return new_val(project(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 129,
+        "end_line": 141,
+        "merge_gen_region": null,
+        "confidence": 0.7198647856712341,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        pathspec_t pathspec(datum_t(std::move(paths),\n                                                        env->env->limits()), this);\n        return new_val(unproject(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "b_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits()), this);\n        return new_val(unproject(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "base_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits), this);\n        return new_val(unproject(obj, pathspec, DONT_RECURSE, env->env->limits));",
+        "res_region": "        pathspec_t pathspec(datum_t(std::move(paths), env->env->limits()), this);\n        return new_val(unproject(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "lookback": "        return new_val(unproject(obj, pathspec, DONT_RECURSE, env->env->limits()));",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 161,
+        "end_line": 173,
+        "merge_gen_region": null,
+        "confidence": 0.7274110913276672,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        pathspec_t pathspec(datum_t(std::move(paths),\n                                                        env->env->limits()), this);",
+        "b_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits()), this);",
+        "base_contents": "        pathspec_t pathspec(make_counted<const datum_t>(std::move(paths),\n                                                        env->env->limits), this);",
+        "res_region": "        pathspec_t pathspec(datum_t(std::move(paths), env->env->limits()), this);",
+        "lookback": "        return new_val_bool(contains(obj, pathspec));",
+        "lookahead": "        return new_val_bool(contains(obj, pathspec));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 242,
+        "end_line": 251,
+        "merge_gen_region": null,
+        "confidence": 0.5775012969970703,
+        "hesitated": true
+    }
+]

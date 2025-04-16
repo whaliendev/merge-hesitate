@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <base/metrics/statistics_recorder.h>\n#include <base/strings/stringprintf.h>",
+        "base_contents": "#include <base/strings/stringprintf.h>",
+        "res_region": "#include <base/metrics/statistics_recorder.h>\n#include <base/strings/stringprintf.h>",
+        "lookback": "#include <base/strings/stringprintf.h>",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.6691256761550903,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      http_fetcher_(new MultiRangeHttpFetcher(http_fetcher)),",
+        "b_contents": "      http_fetcher_(http_fetcher),\n      is_interactive_(is_interactive),",
+        "base_contents": "      http_fetcher_(http_fetcher),",
+        "res_region": "      http_fetcher_(new MultiRangeHttpFetcher(http_fetcher)),\n      is_interactive_(is_interactive),",
+        "lookback": "      is_interactive_(is_interactive),",
+        "lookahead": "      writer_(nullptr),",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 56,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.6399273872375488,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      p2p_visible_(true) {}",
+        "b_contents": "      p2p_visible_(true) {\n  base::StatisticsRecorder::Initialize();\n}",
+        "base_contents": "      p2p_visible_(true) {\n}",
+        "res_region": "      p2p_visible_(true) {\n  base::StatisticsRecorder::Initialize();\n}",
+        "lookback": "  base::StatisticsRecorder::Initialize();",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 68,
+        "end_line": 77,
+        "merge_gen_region": null,
+        "confidence": 0.7421269416809082,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    delta_performer_.reset(new DeltaPerformer(\n        prefs_, boot_control_, hardware_, delegate_, &install_plan_, payload_));",
+        "b_contents": "    delta_performer_.reset(new DeltaPerformer(prefs_,\n                                              boot_control_,\n                                              hardware_,\n                                              delegate_,\n                                              &install_plan_,\n                                              is_interactive_));",
+        "base_contents": "    delta_performer_.reset(new DeltaPerformer(\n        prefs_, boot_control_, hardware_, delegate_, &install_plan_));",
+        "res_region": "    delta_performer_.reset(new DeltaPerformer(prefs_,\n                                              boot_control_,\n                                              hardware_,\n                                              delegate_,\n                                              &install_plan_,\n                                              payload_,\n                                              is_interactive_));",
+        "lookback": "                                              boot_control_,",
+        "lookahead": "    writer_ = delta_performer_.get();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 265,
+        "end_line": 278,
+        "merge_gen_region": null,
+        "confidence": 0.8234046101570129,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (code == ErrorCode::kSuccess) {\n    if (delta_performer_ && !payload_->already_applied)\n      code = delta_performer_->VerifyPayload(payload_->hash, payload_->size);\n    if (code != ErrorCode::kSuccess) {",
+        "b_contents": "  if (code == ErrorCode::kSuccess && delta_performer_.get()) {\n    code = delta_performer_->VerifyPayload(install_plan_.payload_hash,\n                                           install_plan_.payload_size);\n    if (code == ErrorCode::kSuccess) {\n      // Log UpdateEngine.DownloadAction.* histograms to help diagnose\n      // long-blocking oeprations.\n      std::string histogram_output;\n      base::StatisticsRecorder::WriteGraph(\n          \"UpdateEngine.DownloadAction.\", &histogram_output);\n      LOG(INFO) << histogram_output;\n    } else {",
+        "base_contents": "  if (code == ErrorCode::kSuccess && delta_performer_.get()) {\n    code = delta_performer_->VerifyPayload(install_plan_.payload_hash,\n                                           install_plan_.payload_size);\n    if (code != ErrorCode::kSuccess) {",
+        "res_region": "  if (code == ErrorCode::kSuccess) {\n    if (delta_performer_ && !payload_->already_applied)\n      code = delta_performer_->VerifyPayload(payload_->hash, payload_->size);\n    if (code == ErrorCode::kSuccess) {\n      if (payload_ < &install_plan_.payloads.back() &&\n                 system_state_->payload_state()->NextPayload()) {\n        LOG(INFO) << \"Incrementing to next payload\";\n        // No need to reset if this payload was already applied.\n        if (delta_performer_ && !payload_->already_applied)\n          DeltaPerformer::ResetUpdateProgress(prefs_, false);\n        // Start downloading next payload.\n        bytes_received_previous_payloads_ += payload_->size;\n        payload_++;\n        install_plan_.download_url =\n            system_state_->payload_state()->GetCurrentUrl();\n        StartDownloading();\n        return;\n      }\n      // Log UpdateEngine.DownloadAction.* histograms to help diagnose\n      // long-blocking oeprations.\n      std::string histogram_output;\n      base::StatisticsRecorder::WriteGraph(\n          \"UpdateEngine.DownloadAction.\", &histogram_output);\n      LOG(INFO) << histogram_output;\n    } else {",
+        "lookback": "    if (delta_performer_ && !payload_->already_applied)",
+        "lookahead": "      LOG(ERROR) << \"Download of \" << install_plan_.download_url",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 396,
+        "end_line": 418,
+        "merge_gen_region": null,
+        "confidence": 0.8134310841560364,
+        "hesitated": true
+    }
+]

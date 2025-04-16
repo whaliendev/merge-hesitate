@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t/* Set process title, log and signals now this is the client. */\n#ifdef HAVE_SETPROCTITLE\n\tsetproctitle(\"client (%s)\", socket_path);\n#endif\n\tlogfile(\"client\");\n",
+        "b_contents": "",
+        "base_contents": "\t/* Set process title, log and signals now this is the client. */\n\tsetproctitle(\"client (%s)\", socket_path);\n\tlogfile(\"client\");\n",
+        "res_region": "\t/* Set process title, log and signals now this is the client. */\n#ifdef HAVE_SETPROCTITLE\n\tsetproctitle(\"client (%s)\", socket_path);\n#endif\n\tlogfile(\"client\");\n",
+        "lookback": "#ifdef HAVE_SETPROCTITLE",
+        "lookahead": "\t/* Create imsg. */",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 271,
+        "end_line": 284,
+        "merge_gen_region": null,
+        "confidence": 0.8467096090316772,
+        "hesitated": true
+    }
+]

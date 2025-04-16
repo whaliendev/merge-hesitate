@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": " * Configuration file for v7.11.0",
+        "b_contents": " * Configuration file for v7.10.1",
+        "base_contents": " * Configuration file for v7.10.0",
+        "res_region": " * Configuration file for v7.10.1",
+        "lookback": " */",
+        "lookahead": " */",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2,
+        "end_line": 8,
+        "merge_gen_region": null,
+        "confidence": 0.4964853823184967,
+        "hesitated": true
+    }
+]

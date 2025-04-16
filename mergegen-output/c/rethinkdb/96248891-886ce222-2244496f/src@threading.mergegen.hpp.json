@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <stdint.h>\n",
+        "b_contents": "#include <functional>\n#include <vector>\n",
+        "base_contents": "",
+        "res_region": "#include <stdint.h>\n#include <functional>\n#include <vector>\n",
+        "lookback": "#include <functional>",
+        "lookahead": "#include \"errors.hpp\"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 3,
+        "end_line": 11,
+        "merge_gen_region": null,
+        "confidence": 0.8675842881202698,
+        "hesitated": true
+    }
+]

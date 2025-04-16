@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "using apollo::storytelling::CloseToJunction;\nusing apollo::storytelling::Stories;\n",
+        "base_contents": "\n",
+        "res_region": "using apollo::storytelling::CloseToJunction;\nusing apollo::storytelling::Stories;\n",
+        "lookback": "using apollo::storytelling::Stories;",
+        "lookahead": "bool MessageProcess::Init(const PlanningConfig& planning_config) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 57,
+        "end_line": 66,
+        "merge_gen_region": null,
+        "confidence": 0.8713775873184204,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } else if (message.channel_name == planning_config_.topic_config()\n                                           .traffic_light_detection_topic()) {",
+        "b_contents": "    } else if (message.channel_name ==\n               planning_config_.topic_config().story_telling_topic()) {\n      Stories stories;\n      if (stories.ParseFromString(message.content)) {\n        OnStoryTelling(stories);\n      }\n    } else if (message.channel_name ==planning_config_.topic_config()\n                                       .traffic_light_detection_topic()) {",
+        "base_contents": "    } else if (message.channel_name ==planning_config_.topic_config()\n                                       .traffic_light_detection_topic()) {",
+        "res_region": "    } else if (message.channel_name ==\n               planning_config_.topic_config().story_telling_topic()) {\n      Stories stories;\n      if (stories.ParseFromString(message.content)) {\n        OnStoryTelling(stories);\n      }\n    } else if (message.channel_name ==planning_config_.topic_config()\n                                       .traffic_light_detection_topic()) {",
+        "lookback": "               planning_config_.topic_config().story_telling_topic()) {",
+        "lookahead": "      TrafficLightDetection traffic_light_detection;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 376,
+        "end_line": 391,
+        "merge_gen_region": null,
+        "confidence": 0.8215672373771667,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  virtual void SetExcludePid(pid_t pid) = 0;\n  virtual void SetBinaryFilter(const RegEx* binary_name_regex) = 0;",
+        "b_contents": "  virtual void SetExcludePid(pid_t pid) = 0;",
+        "base_contents": "",
+        "res_region": "  virtual void SetExcludePid(pid_t pid) = 0;\n  virtual void SetBinaryFilter(const RegEx* binary_name_regex) = 0;",
+        "lookback": "  virtual void SetBinaryFilter(const RegEx* binary_name_regex) = 0;",
+        "lookahead": "  virtual bool ProcessRecord(const Record& r, bool& consumed) = 0;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 141,
+        "end_line": 147,
+        "merge_gen_region": null,
+        "confidence": 0.8680623173713684,
+        "hesitated": true
+    }
+]

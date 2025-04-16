@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"misc/gfx/font.h\"\n#include \"misc/gfx/text.h\"\n#include \"misc/gfx/fonts/symbol_def.h\"",
+        "b_contents": "#include \"../misc/gfx/font.h\"\n#include \"../misc/gfx/text.h\"",
+        "base_contents": "#include \"misc/gfx/font.h\"\n#include \"misc/gfx/text.h\"",
+        "res_region": "#include \"misc/gfx/font.h\"\n#include \"misc/gfx/text.h\"\n#include \"misc/gfx/fonts/symbol_def.h\"",
+        "lookback": "#include \"misc/gfx/text.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 29,
+        "merge_gen_region": null,
+        "confidence": 0.8451799750328064,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\twarning(_(\"protocol does not support --negotiate-only, exiting\"));\n\t\t\treturn 1;",
+        "b_contents": "\t\t\twarning(_(\"Protocol does not support --negotiate-only, exiting.\"));\n\t\t\tresult = 1;\n\t\t\tgoto cleanup;",
+        "base_contents": "\t\t\twarning(_(\"Protocol does not support --negotiate-only, exiting.\"));\n\t\t\treturn 1;",
+        "res_region": "\t\t\twarning(_(\"protocol does not support --negotiate-only, exiting\"));\n\t\t\tresult = 1;\n\t\t\tgoto cleanup;",
+        "lookback": "\t\t\tresult = 1;",
+        "lookahead": "\t\t}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2124,
+        "end_line": 2134,
+        "merge_gen_region": null,
+        "confidence": 0.7386154532432556,
+        "hesitated": true
+    }
+]

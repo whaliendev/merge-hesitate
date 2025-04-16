@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#ifndef CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n#define CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n\n#include <string>\n\n#include \"rpc/serialize_macros.hpp\"\n\nnamespace auth {\n\nclass username_t\n{\npublic:\n    username_t();\n    username_t(std::string const &username);\n\n    bool is_admin() const;\n\n    std::string const &to_string() const;\n\n    bool operator<(username_t const &rhs) const;\n    bool operator==(username_t const &rhs) const;\n\n    RDB_DECLARE_ME_SERIALIZABLE(username_t);\n\nprivate:\n    std::string m_username;\n};\n\n}  // namespace auth\n\n#endif  // CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP",
+        "b_contents": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#ifndef CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n#define CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n\n#include <string>\n\n#include \"rpc/serialize_macros.hpp\"\n\nnamespace auth {\n\nclass username_t\n{\npublic:\n    username_t();\n    username_t(std::string username);\n\n    bool is_admin() const;\n\n    std::string const &to_string() const;\n\n    bool operator<(username_t const &rhs) const;\n    bool operator==(username_t const &rhs) const;\n\n    RDB_DECLARE_ME_SERIALIZABLE(username_t);\n\nprivate:\n    std::string m_username;\n};\n\n}  // namespace auth\n\n#endif  // CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP",
+        "base_contents": "",
+        "res_region": "// Copyright 2010-2015 RethinkDB, all rights reserved.\n#ifndef CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n#define CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP\n\n#include <string>\n\n#include \"rpc/serialize_macros.hpp\"\n\nnamespace auth {\n\nclass username_t\n{\npublic:\n    username_t();\n    username_t(std::string const &username);\n\n    bool is_admin() const;\n\n    std::string const &to_string() const;\n\n    bool operator<(username_t const &rhs) const;\n    bool operator==(username_t const &rhs) const;\n\n    RDB_DECLARE_ME_SERIALIZABLE(username_t);\n\nprivate:\n    std::string m_username;\n};\n\n}  // namespace auth\n\n#endif  // CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP",
+        "lookback": "#ifndef CLUSTERING_ADMINISTRATION_AUTH_USERNAME_HPP",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 0,
+        "end_line": 67,
+        "merge_gen_region": null,
+        "confidence": 0.8160303831100464,
+        "hesitated": true
+    }
+]

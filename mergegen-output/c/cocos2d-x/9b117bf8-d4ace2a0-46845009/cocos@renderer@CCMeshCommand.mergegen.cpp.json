@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    _renderStateCullFaceEnabled = glIsEnabled(GL_CULL_FACE);\n    _renderStateDepthTest = glIsEnabled(GL_DEPTH_TEST);",
+        "b_contents": "    _renderStateCullFaceEnabled = glIsEnabled(GL_CULL_FACE) != GL_FALSE;\n    _renderStateDepthTest = glIsEnabled(GL_DEPTH_TEST) != GL_FALSE;",
+        "base_contents": "    _renderStateCullFace = glIsEnabled(GL_CULL_FACE);\n    _renderStateDepthTest = glIsEnabled(GL_DEPTH_TEST);",
+        "res_region": "    _renderStateCullFaceEnabled = glIsEnabled(GL_CULL_FACE) != GL_FALSE;\n    _renderStateDepthTest = glIsEnabled(GL_DEPTH_TEST) != GL_FALSE;",
+        "lookback": "    _renderStateDepthTest = glIsEnabled(GL_DEPTH_TEST) != GL_FALSE;",
+        "lookahead": "    glGetBooleanv(GL_DEPTH_WRITEMASK, &_renderStateDepthWrite);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 194,
+        "end_line": 203,
+        "merge_gen_region": null,
+        "confidence": 0.7301391363143921,
+        "hesitated": true
+    }
+]

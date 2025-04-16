@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    else\n    {\n        return SW_ERR;\n    }",
+        "b_contents": "#ifndef SW_COROUTINE",
+        "base_contents": "",
+        "res_region": "    else\n    {\n        return SW_ERR;\n    }\n#ifndef SW_COROUTINE",
+        "lookback": "    {",
+        "lookahead": "    if (cli->async)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 261,
+        "end_line": 269,
+        "merge_gen_region": null,
+        "confidence": 0.772024393081665,
+        "hesitated": true
+    }
+]

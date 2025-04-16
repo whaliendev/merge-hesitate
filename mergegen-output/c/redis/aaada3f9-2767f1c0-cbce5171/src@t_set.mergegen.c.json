@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    if (setTypeAdd(set,c->argv[2])) {",
+        "b_contents": "    if (dictAdd(set->ptr,c->argv[2],NULL) == DICT_OK) {\n        incrRefCount(c->argv[2]);\n        touchWatchedKey(c->db,c->argv[1]);",
+        "base_contents": "    if (dictAdd(set->ptr,c->argv[2],NULL) == DICT_OK) {\n        incrRefCount(c->argv[2]);",
+        "res_region": "    if (setTypeAdd(set,c->argv[2])) {\n        touchWatchedKey(c->db,c->argv[1]);",
+        "lookback": "        touchWatchedKey(c->db,c->argv[1]);",
+        "lookahead": "        server.dirty++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 189,
+        "end_line": 198,
+        "merge_gen_region": null,
+        "confidence": 0.7056118249893188,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "        touchWatchedKey(c->db,c->argv[1]);\n        if (htNeedsResize(set->ptr)) dictResize(set->ptr);\n        if (dictSize((dict*)set->ptr) == 0) dbDelete(c->db,c->argv[1]);",
+        "base_contents": "        if (htNeedsResize(set->ptr)) dictResize(set->ptr);\n        if (dictSize((dict*)set->ptr) == 0) dbDelete(c->db,c->argv[1]);",
+        "res_region": "",
+        "lookback": "    } else {",
+        "lookahead": "        addReply(c,shared.cone);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 215,
+        "end_line": 223,
+        "merge_gen_region": null,
+        "confidence": 0.6089802980422974,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    /* Remove the src set from the database when empty */\n    if (setTypeSize(srcset) == 0) dbDelete(c->db,c->argv[1]);",
+        "b_contents": "    if (dictSize((dict*)srcset->ptr) == 0 && srcset != dstset)\n        dbDelete(c->db,c->argv[1]);\n    touchWatchedKey(c->db,c->argv[1]);\n    touchWatchedKey(c->db,c->argv[2]);",
+        "base_contents": "    if (dictSize((dict*)srcset->ptr) == 0 && srcset != dstset)\n        dbDelete(c->db,c->argv[1]);",
+        "res_region": "\n    /* Remove the src set from the database when empty */\n    if (setTypeSize(srcset) == 0) dbDelete(c->db,c->argv[1]);\n    touchWatchedKey(c->db,c->argv[1]);\n    touchWatchedKey(c->db,c->argv[2]);",
+        "lookback": "    /* Remove the src set from the database when empty */",
+        "lookahead": "    server.dirty++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 258,
+        "end_line": 270,
+        "merge_gen_region": null,
+        "confidence": 0.6416595578193665,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        decrRefCount(ele);\n        if (setTypeSize(set) == 0) dbDelete(c->db,c->argv[1]);",
+        "b_contents": "        dictDelete(set->ptr,ele);\n        if (htNeedsResize(set->ptr)) dictResize(set->ptr);\n        if (dictSize((dict*)set->ptr) == 0) dbDelete(c->db,c->argv[1]);\n        touchWatchedKey(c->db,c->argv[1]);",
+        "base_contents": "        dictDelete(set->ptr,ele);\n        if (htNeedsResize(set->ptr)) dictResize(set->ptr);\n        if (dictSize((dict*)set->ptr) == 0) dbDelete(c->db,c->argv[1]);",
+        "res_region": "        decrRefCount(ele);\n        if (setTypeSize(set) == 0) dbDelete(c->db,c->argv[1]);\n        touchWatchedKey(c->db,c->argv[1]);",
+        "lookback": "        if (setTypeSize(set) == 0) dbDelete(c->db,c->argv[1]);",
+        "lookahead": "        server.dirty++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 317,
+        "end_line": 329,
+        "merge_gen_region": null,
+        "confidence": 0.821378231048584,
+        "hesitated": true
+    }
+]

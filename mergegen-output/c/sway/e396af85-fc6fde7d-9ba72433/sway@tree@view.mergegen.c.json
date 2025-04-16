@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "\tcontainer_set_geometry_from_floating_view(view->swayc);",
+        "b_contents": "\t// Don't maximize floating windows\n\tview_set_tiled(view, false);\n\n\tview_configure(view, lx, ly, width, height);",
+        "base_contents": "\tview_configure(view, lx, ly, width, height);",
+        "res_region": "\tcontainer_set_geometry_from_floating_view(view->swayc);\n\n\t// Don't maximize floating windows\n\tview_set_tiled(view, false);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 165,
+        "end_line": 174,
+        "merge_gen_region": null,
+        "confidence": 0.6981040239334106,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tview->width = width;\n\tview->height = height;",
+        "b_contents": "\tview_set_tiled(view, true);\n\tview_configure(view, x, y, width, height);",
+        "base_contents": "\tview_configure(view, x, y, width, height);",
+        "res_region": "\tview->width = width;\n\tview->height = height;\n\tview_set_tiled(view, true);",
+        "lookback": "\tview->height = height;",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 284,
+        "end_line": 292,
+        "merge_gen_region": null,
+        "confidence": 0.7645718455314636,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void view_set_fullscreen(struct sway_view *view, bool fullscreen) {",
+        "b_contents": "void view_set_tiled(struct sway_view *view, bool tiled) {\n\tview->border = tiled ? config->border : B_NONE;\n\tif (view->impl->set_tiled) {\n\t\tview->impl->set_tiled(view, tiled);\n\t}\n}\n\n// Set fullscreen, but without IPC events or arranging windows.\nvoid view_set_fullscreen_raw(struct sway_view *view, bool fullscreen) {",
+        "base_contents": "// Set fullscreen, but without IPC events or arranging windows.\nvoid view_set_fullscreen_raw(struct sway_view *view, bool fullscreen) {",
+        "res_region": "void view_set_tiled(struct sway_view *view, bool tiled) {\n\tview->border = tiled ? config->border : B_NONE;\n\tif (view->impl->set_tiled) {\n\t\tview->impl->set_tiled(view, tiled);\n\t}\n}\n\nvoid view_set_fullscreen(struct sway_view *view, bool fullscreen) {",
+        "lookback": "\tview->border = tiled ? config->border : B_NONE;",
+        "lookahead": "\tif (view->is_fullscreen == fullscreen) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 301,
+        "end_line": 316,
+        "merge_gen_region": null,
+        "confidence": 0.8214641809463501,
+        "hesitated": true
+    }
+]

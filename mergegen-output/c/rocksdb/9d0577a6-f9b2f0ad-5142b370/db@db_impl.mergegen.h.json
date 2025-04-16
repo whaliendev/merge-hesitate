@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "  void TEST_GetFilesMetaData(ColumnFamilyHandle* column_family,\n                             std::vector<std::vector<FileMetaData>>* metadata);",
+        "b_contents": "  void TEST_GetFilesMetaData(std::vector<std::vector<FileMetaData>>* metadata);\n\n  // holds references to memtable, all immutable memtables and version\n  struct SuperVersion {\n    MemTable* mem;\n    MemTableListVersion* imm;\n    Version* current;\n    std::atomic<uint32_t> refs;\n    // We need to_delete because during Cleanup(), imm->Unref() returns\n    // all memtables that we need to free through this vector. We then\n    // delete all those memtables outside of mutex, during destruction\n    autovector<MemTable*> to_delete;\n    // Version number of the current SuperVersion\n    uint64_t version_number;\n    DBImpl* db;\n\n    // should be called outside the mutex\n    SuperVersion() = default;\n    ~SuperVersion();\n    SuperVersion* Ref();\n    // Returns true if this was the last reference and caller should\n    // call Clenaup() and delete the object\n    bool Unref();\n\n    // call these two methods with db mutex held\n    // Cleanup unrefs mem, imm and current. Also, it stores all memtables\n    // that needs to be deleted in to_delete vector. Unrefing those\n    // objects needs to be done in the mutex\n    void Cleanup();\n    void Init(MemTable* new_mem, MemTableListVersion* new_imm,\n              Version* new_current);\n  };",
+        "base_contents": "  void TEST_GetFilesMetaData(std::vector<std::vector<FileMetaData>>* metadata);\n\n  // holds references to memtable, all immutable memtables and version\n  struct SuperVersion {\n    MemTable* mem;\n    MemTableListVersion* imm;\n    Version* current;\n    std::atomic<uint32_t> refs;\n    // We need to_delete because during Cleanup(), imm->Unref() returns\n    // all memtables that we need to free through this vector. We then\n    // delete all those memtables outside of mutex, during destruction\n    autovector<MemTable*> to_delete;\n\n    // should be called outside the mutex\n    SuperVersion() = default;\n    ~SuperVersion();\n    SuperVersion* Ref();\n    // Returns true if this was the last reference and caller should\n    // call Clenaup() and delete the object\n    bool Unref();\n\n    // call these two methods with db mutex held\n    // Cleanup unrefs mem, imm and current. Also, it stores all memtables\n    // that needs to be deleted in to_delete vector. Unrefing those\n    // objects needs to be done in the mutex\n    void Cleanup();\n    void Init(MemTable* new_mem, MemTableListVersion* new_imm,\n              Version* new_current);\n  };",
+        "res_region": "  void TEST_GetFilesMetaData(ColumnFamilyHandle* column_family,\n                             std::vector<std::vector<FileMetaData>>* metadata);",
+        "lookback": "                             std::vector<std::vector<FileMetaData>>* metadata);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 181,
+        "end_line": 247,
+        "merge_gen_region": null,
+        "confidence": 0.795204222202301,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    SuperVersion* superversion_to_free;  // if nullptr nothing to free",
+        "b_contents": "    autovector<SuperVersion*> superversions_to_free;",
+        "base_contents": "    SuperVersion* superversion_to_free; // if nullptr nothing to free",
+        "res_region": "    autovector<SuperVersion*> superversions_to_free;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 284,
+        "end_line": 290,
+        "merge_gen_region": null,
+        "confidence": 0.5764455795288086,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      superversion_to_free = nullptr;\n      new_superversion = create_superversion ? new SuperVersion() : nullptr;",
+        "b_contents": "      new_superversion =\n          create_superversion ? new SuperVersion() : nullptr;",
+        "base_contents": "      superversion_to_free = nullptr;\n      new_superversion =\n          create_superversion ? new SuperVersion() : nullptr;",
+        "res_region": "      new_superversion = create_superversion ? new SuperVersion() : nullptr;",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 302,
+        "end_line": 312,
+        "merge_gen_region": null,
+        "confidence": 0.7325546145439148,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ColumnFamilyHandleImpl* default_cf_handle_;\n  unique_ptr<ColumnFamilyMemTablesImpl> column_family_memtables_;\n  std::deque<uint64_t> alive_log_files_;",
+        "b_contents": "\n  SuperVersion* super_version_;\n\n  // An ordinal representing the current SuperVersion. Updated by\n  // InstallSuperVersion(), i.e. incremented every time super_version_\n  // changes.\n  std::atomic<uint64_t> super_version_number_;\n  // Thread's local copy of SuperVersion pointer\n  // This needs to be destructed after mutex_\n  ThreadLocalPtr* local_sv_;",
+        "base_contents": "\n  SuperVersion* super_version_;\n\n  // An ordinal representing the current SuperVersion. Updated by\n  // InstallSuperVersion(), i.e. incremented every time super_version_\n  // changes.\n  std::atomic<uint64_t> super_version_number_;",
+        "res_region": "  ColumnFamilyHandleImpl* default_cf_handle_;\n  unique_ptr<ColumnFamilyMemTablesImpl> column_family_memtables_;\n  std::deque<uint64_t> alive_log_files_;",
+        "lookback": "  unique_ptr<ColumnFamilyMemTablesImpl> column_family_memtables_;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 482,
+        "end_line": 505,
+        "merge_gen_region": null,
+        "confidence": 0.6743017435073853,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  using DB::GetPropertiesOfAllTables;\n  virtual Status GetPropertiesOfAllTables(ColumnFamilyHandle* column_family,\n                                          TablePropertiesCollection* props)",
+        "b_contents": "  void ResetThreadLocalSuperVersions(DeletionState* deletion_state);\n\n  virtual Status GetPropertiesOfAllTables(TablePropertiesCollection* props)",
+        "base_contents": "  virtual Status GetPropertiesOfAllTables(TablePropertiesCollection* props)",
+        "res_region": "  using DB::GetPropertiesOfAllTables;\n  virtual Status GetPropertiesOfAllTables(ColumnFamilyHandle* column_family,\n                                          TablePropertiesCollection* props)",
+        "lookback": "  virtual Status GetPropertiesOfAllTables(ColumnFamilyHandle* column_family,",
+        "lookahead": "      override;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 617,
+        "end_line": 627,
+        "merge_gen_region": null,
+        "confidence": 0.7033981084823608,
+        "hesitated": true
+    }
+]

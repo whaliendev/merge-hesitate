@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \"Default prediciton module name\");\nDEFINE_string(prediction_conf_file, \"modules/prediction/conf/prediction_conf.pb.txt\",\n    \"Default conf file for prediction\");",
+        "b_contents": "              \"Default prediciton module name\");\n\nDEFINE_double(double_precision, 1e-6, \"precision of double\");\nDEFINE_double(max_acc, 4.0, \"Upper bound of acceleration\");\nDEFINE_double(min_acc, -4.0, \"Lower bound of deceleration\");",
+        "base_contents": "              \"Default prediciton module name\");",
+        "res_region": "    \"Default prediciton module name\");\nDEFINE_string(prediction_conf_file, \"modules/prediction/conf/prediction_conf.pb.txt\",\n    \"Default conf file for prediction\");\n\n// Features\nDEFINE_double(double_precision, 1e-6, \"precision of double\");\nDEFINE_double(max_acc, 4.0, \"Upper bound of acceleration\");\nDEFINE_double(min_acc, -4.0, \"Lower bound of deceleration\");",
+        "lookback": "DEFINE_string(prediction_conf_file, \"modules/prediction/conf/prediction_conf.pb.txt\",",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 20,
+        "end_line": 32,
+        "merge_gen_region": null,
+        "confidence": 0.8766162395477295,
+        "hesitated": true
+    }
+]

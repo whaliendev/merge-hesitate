@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#define PTHREAD_MUTEX_LOCK(mutex) {               \\\n    if (ZSTD_DEBUG >= MUTEX_WAIT_TIME_DLEVEL) {   \\",
+        "b_contents": "#define ZSTD_PTHREAD_MUTEX_LOCK(mutex) {               \\\n    if (ZSTD_DEBUG>=MUTEX_WAIT_TIME_DLEVEL) {   \\",
+        "base_contents": "#define PTHREAD_MUTEX_LOCK(mutex) {               \\\n    if (ZSTD_DEBUG>=MUTEX_WAIT_TIME_DLEVEL) {   \\",
+        "res_region": "#define ZSTD_PTHREAD_MUTEX_LOCK(mutex) {          \\\n    if (ZSTD_DEBUG >= MUTEX_WAIT_TIME_DLEVEL) {   \\",
+        "lookback": "    if (ZSTD_DEBUG >= MUTEX_WAIT_TIME_DLEVEL) {   \\",
+        "lookahead": "        unsigned long long const beforeTime = GetCurrentClockTimeMicroseconds(); \\",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 55,
+        "end_line": 64,
+        "merge_gen_region": null,
+        "confidence": 0.8333442211151123,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } else {                                      \\\n        pthread_mutex_lock(mutex);                \\\n    }                                             \\",
+        "b_contents": "    } else ZSTD_pthread_mutex_lock(mutex);             \\",
+        "base_contents": "    } else pthread_mutex_lock(mutex);             \\",
+        "res_region": "    } else {                                      \\\n        ZSTD_pthread_mutex_lock(mutex);           \\\n    }                                             \\",
+        "lookback": "        ZSTD_pthread_mutex_lock(mutex);           \\",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 73,
+        "end_line": 81,
+        "merge_gen_region": null,
+        "confidence": 0.8141298294067383,
+        "hesitated": true
+    }
+]

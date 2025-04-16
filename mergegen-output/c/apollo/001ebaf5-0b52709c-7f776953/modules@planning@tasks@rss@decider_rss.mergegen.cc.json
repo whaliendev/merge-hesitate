@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  ADEBUG << \" is_rss_safe : \" << reference_line_info->rss_info().is_rss_safe();\n  ADEBUG << \" cur_dist_lon: \" << reference_line_info->rss_info().cur_dist_lon();",
+        "b_contents": "  ADEBUG << \" TrajectoryLength(): \"\n         << reference_line_info->TrajectoryLength();\n  ADEBUG << \" is_rss_safe : \"\n         << reference_line_info->rss_info().is_rss_safe();\n  ADEBUG << \" cur_dist_lon: \"\n         << reference_line_info->rss_info().cur_dist_lon();",
+        "base_contents": "  ADEBUG << \" TrajectoryLength(): \" << reference_line_info->TrajectoryLength();\n  ADEBUG << \" is_rss_safe : \" << reference_line_info->rss_info().is_rss_safe();\n  ADEBUG << \" cur_dist_lon: \" << reference_line_info->rss_info().cur_dist_lon();",
+        "res_region": "  ADEBUG << \" is_rss_safe : \" << reference_line_info->rss_info().is_rss_safe();\n  ADEBUG << \" cur_dist_lon: \" << reference_line_info->rss_info().cur_dist_lon();\n  ADEBUG << \" is_rss_safe : \"\n         << reference_line_info->rss_info().is_rss_safe();\n  ADEBUG << \" cur_dist_lon: \"\n         << reference_line_info->rss_info().cur_dist_lon();",
+        "lookback": "  ADEBUG << \" cur_dist_lon: \" << reference_line_info->rss_info().cur_dist_lon();",
+        "lookahead": "  ADEBUG << \" rss_safe_dist_lon: \"",
+        "label": [
+            "interleave",
+            "base_underutilized"
+        ],
+        "start_line": 342,
+        "end_line": 356,
+        "merge_gen_region": null,
+        "confidence": 0.7660638689994812,
+        "hesitated": true
+    }
+]

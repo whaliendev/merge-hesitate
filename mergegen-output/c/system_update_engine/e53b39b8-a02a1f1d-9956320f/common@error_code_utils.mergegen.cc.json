@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    case ErrorCode::kPackageExcludedFromUpdate:\n      return \"ErrorCode::kPackageExcludedFromUpdate\";",
+        "b_contents": "    case ErrorCode::kNotEnoughSpace:\n      return \"ErrorCode::kNotEnoughSpace\";\n    case ErrorCode::kDeviceCorrupted:\n      return \"ErrorCode::kDeviceCorrupted\";",
+        "base_contents": "",
+        "res_region": "    case ErrorCode::kNotEnoughSpace:\n      return \"ErrorCode::kNotEnoughSpace\";\n    case ErrorCode::kDeviceCorrupted:\n      return \"ErrorCode::kDeviceCorrupted\";\n    case ErrorCode::kPackageExcludedFromUpdate:\n      return \"ErrorCode::kPackageExcludedFromUpdate\";",
+        "lookback": "      return \"ErrorCode::kNotEnoughSpace\";",
+        "lookahead": "      // Don't add a default case to let the compiler warn about newly added",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 169,
+        "end_line": 178,
+        "merge_gen_region": null,
+        "confidence": 0.8660852313041687,
+        "hesitated": true
+    }
+]

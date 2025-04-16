@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tif (!data)\n\t\t\t\tdie(_(\"unable to read tree %s\"), oid_to_hex(&ce->oid));\n\t\t\tinit_tree_desc(&tree, data, size);",
+        "b_contents": "\t\t\tinit_tree_desc(&tree, &ce->oid, data, size);",
+        "base_contents": "\t\t\tinit_tree_desc(&tree, data, size);",
+        "res_region": "\t\t\tif (!data)\n\t\t\t\tdie(_(\"unable to read tree %s\"), oid_to_hex(&ce->oid));\n\t\t\tinit_tree_desc(&tree, &ce->oid, data, size);",
+        "lookback": "\t\t\t\tdie(_(\"unable to read tree %s\"), oid_to_hex(&ce->oid));",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 573,
+        "end_line": 581,
+        "merge_gen_region": null,
+        "confidence": 0.7660898566246033,
+        "hesitated": true
+    }
+]

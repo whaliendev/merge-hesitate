@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "      operation.set_type(version.OperationAllowed(InstallOperation::SOURCE_COPY)\n                             ? InstallOperation::SOURCE_COPY\n                             : InstallOperation::MOVE);\n      data_blob = brillo::Blob();",
+        "b_contents": "      operation.set_type(version.OperationAllowed(InstallOperation::SOURCE_COPY)\n                             ? InstallOperation::SOURCE_COPY\n                             : InstallOperation::MOVE);\n      data_blob = &empty_blob;",
+        "base_contents": "      if (src_ops_allowed) {\n        operation.set_type(InstallOperation::SOURCE_COPY);\n      } else {\n        operation.set_type(InstallOperation::MOVE);\n      }\n      data_blob = &empty_blob;",
+        "res_region": "      operation.set_type(version.OperationAllowed(InstallOperation::SOURCE_COPY)\n                             ? InstallOperation::SOURCE_COPY\n                             : InstallOperation::MOVE);\n      data_blob = brillo::Blob();",
+        "lookback": "                             ? InstallOperation::SOURCE_COPY",
+        "lookahead": "    } else if (bsdiff_allowed || imgdiff_allowed) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 613,
+        "end_line": 630,
+        "merge_gen_region": null,
+        "confidence": 0.7144677042961121,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (bsdiff_delta.size() < data_blob.size()) {\n          operation.set_type(\n              version.OperationAllowed(InstallOperation::SOURCE_BSDIFF)\n                  ? InstallOperation::SOURCE_BSDIFF\n                  : InstallOperation::BSDIFF);\n          data_blob = std::move(bsdiff_delta);",
+        "b_contents": "        if (bsdiff_delta.size() < data_blob->size()) {\n          operation.set_type(\n              version.OperationAllowed(InstallOperation::SOURCE_BSDIFF)\n                  ? InstallOperation::SOURCE_BSDIFF\n                  : InstallOperation::BSDIFF);\n          data_blob = &bsdiff_delta;",
+        "base_contents": "        if (bsdiff_delta.size() < data_blob->size()) {\n          if (src_ops_allowed) {\n            operation.set_type(InstallOperation::SOURCE_BSDIFF);\n          } else {\n            operation.set_type(InstallOperation::BSDIFF);\n          }\n          data_blob = &bsdiff_delta;",
+        "res_region": "        if (bsdiff_delta.size() < data_blob.size()) {\n          operation.set_type(\n              version.OperationAllowed(InstallOperation::SOURCE_BSDIFF)\n                  ? InstallOperation::SOURCE_BSDIFF\n                  : InstallOperation::BSDIFF);\n          data_blob = std::move(bsdiff_delta);",
+        "lookback": "          operation.set_type(",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 650,
+        "end_line": 672,
+        "merge_gen_region": "._(.ifbsd_.ifififififififififififififififoperationsettypeoperationsettypeififoperationsettypeifififoperationsettypeifififoperationsettypeififififoperationsetififoperationset",
+        "confidence": 0.9107068181037903,
+        "hesitated": false,
+        "resolved": false
+    }
+]

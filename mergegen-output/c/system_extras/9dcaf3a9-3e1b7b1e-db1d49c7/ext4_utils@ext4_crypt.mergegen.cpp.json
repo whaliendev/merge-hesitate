@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "#define EXT4_KEY_DESCRIPTOR_SIZE 8\nstruct ext4_encryption_policy {\n    char version;\n    char contents_encryption_mode;\n    char filenames_encryption_mode;\n    char flags;\n    char master_key_descriptor[EXT4_KEY_DESCRIPTOR_SIZE];\n} __attribute__((__packed__));\n\n#define EXT4_ENCRYPTION_MODE_AES_256_XTS    1\n#define EXT4_ENCRYPTION_MODE_AES_256_CTS    4\n\n// ext4enc:TODO Get value from somewhere sensible\n#define EXT4_IOC_SET_ENCRYPTION_POLICY \\\n    _IOR('f', 19, struct ext4_encryption_policy)",
+        "b_contents": "#define EXT4_KEY_DESCRIPTOR_SIZE 8\nstruct ext4_encryption_policy {\n    char version;\n    char contents_encryption_mode;\n    char filenames_encryption_mode;\n    char master_key_descriptor[EXT4_KEY_DESCRIPTOR_SIZE];\n} __attribute__((__packed__));\n\n#define EXT4_ENCRYPTION_MODE_AES_256_XTS    1\n#define EXT4_ENCRYPTION_MODE_AES_256_CTS    4\n\n// ext4enc:TODO Get value from somewhere sensible\n#define EXT4_IOC_SET_ENCRYPTION_POLICY \\\n    _IOR('f', 19, struct ext4_encryption_policy)",
+        "base_contents": "#define EXT4_MAX_KEY_SIZE 76\nstruct ext4_encryption_key {\n        uint32_t mode;\n        char raw[EXT4_MAX_KEY_SIZE];\n        uint32_t size;\n};",
+        "res_region": "#define EXT4_KEY_DESCRIPTOR_SIZE 8\nstruct ext4_encryption_policy {\n    char version;\n    char contents_encryption_mode;\n    char filenames_encryption_mode;\n    char flags;\n    char master_key_descriptor[EXT4_KEY_DESCRIPTOR_SIZE];\n} __attribute__((__packed__));\n\n#define EXT4_ENCRYPTION_MODE_AES_256_XTS    1\n#define EXT4_ENCRYPTION_MODE_AES_256_CTS    4\n\n// ext4enc:TODO Get value from somewhere sensible\n#define EXT4_IOC_SET_ENCRYPTION_POLICY \\\n    _IOR('f', 19, struct ext4_encryption_policy)",
+        "lookback": "struct ext4_encryption_policy {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 66,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9066973328590393,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    int fd = open(directory, O_DIRECTORY);\n    if (fd == -1) {\n        KLOG_ERROR(TAG, \"Failed to open directory (%s)\\n\", directory);\n        return -EINVAL;\n    }\n\n    ext4_encryption_policy eep;\n    eep.version = 0;\n    eep.contents_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_XTS;\n    eep.filenames_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_CTS;\n    eep.flags = 0;\n    memcpy(eep.master_key_descriptor, policy, EXT4_KEY_DESCRIPTOR_SIZE);\n    ret = ioctl(fd, EXT4_IOC_SET_ENCRYPTION_POLICY, &eep);\n    auto preserve_errno = errno;\n    close(fd);",
+        "b_contents": "    int fd = open(directory, O_DIRECTORY);\n    if (fd == -1) {\n        KLOG_ERROR(TAG, \"Failed to open directory (%s)\\n\", directory);\n        return -EINVAL;\n    }\n\n    ext4_encryption_policy eep;\n    eep.version = 0;\n    eep.contents_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_XTS;\n    eep.filenames_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_CTS;\n    memcpy(eep.master_key_descriptor, policy, EXT4_KEY_DESCRIPTOR_SIZE);\n    ret = ioctl(fd, EXT4_IOC_SET_ENCRYPTION_POLICY, &eep);\n    auto preserve_errno = errno;\n    close(fd);",
+        "base_contents": "    ret = lsetxattr(directory, XATTR_NAME_ENCRYPTION_POLICY, policy,\n                    strlen(policy), 0);",
+        "res_region": "    int fd = open(directory, O_DIRECTORY);\n    if (fd == -1) {\n        KLOG_ERROR(TAG, \"Failed to open directory (%s)\\n\", directory);\n        return -EINVAL;\n    }\n\n    ext4_encryption_policy eep;\n    eep.version = 0;\n    eep.contents_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_XTS;\n    eep.filenames_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_CTS;\n    eep.flags = 0;\n    memcpy(eep.master_key_descriptor, policy, EXT4_KEY_DESCRIPTOR_SIZE);\n    ret = ioctl(fd, EXT4_IOC_SET_ENCRYPTION_POLICY, &eep);\n    auto preserve_errno = errno;\n    close(fd);",
+        "lookback": "    if (fd == -1) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 123,
+        "end_line": 157,
+        "merge_gen_region": " fd opendirectory,__); ( ==1 {LOGERRORTAG \" to directorys)\\\",); -; }4encryptionpolicyeep . =;eepcontentsencryptionmode1state EXTint4int4int4int =(,___); ( ==1 {4int4outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9252336025238037,
+        "hesitated": false,
+        "resolved": false
+    }
+]

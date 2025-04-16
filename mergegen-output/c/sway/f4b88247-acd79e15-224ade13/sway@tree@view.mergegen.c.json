@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\n\tcont = container_view_create(target_sibling, view);",
+        "b_contents": "\tlist_free(criterias);\n\tcont = container_view_create(focus, view);",
+        "base_contents": "\tfree(criterias);\n\tcont = container_view_create(focus, view);",
+        "res_region": "\n\tcont = container_view_create(target_sibling, view);",
+        "lookback": "\tcont = container_view_create(target_sibling, view);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 619,
+        "end_line": 628,
+        "merge_gen_region": null,
+        "confidence": 0.4442718029022217,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif (prev_focus == target_sibling) {\n\t\tinput_manager_set_focus(input_manager, cont);",
+        "b_contents": "\tif (should_focus(view)) {\n\t\tinput_manager_set_focus(input_manager, cont);\n\t\tif (workspace) {\n\t\t\tworkspace_switch(workspace);\n\t\t}",
+        "base_contents": "\tinput_manager_set_focus(input_manager, cont);\n\tif (workspace) {\n\t\tworkspace_switch(workspace);",
+        "res_region": "\tif (should_focus(view) && prev_focus == target_sibling) {\n\t\tinput_manager_set_focus(input_manager, cont);\n\t\tif (workspace) {\n\t\t\tworkspace_switch(workspace);\n\t\t}",
+        "lookback": "\t\tinput_manager_set_focus(input_manager, cont);",
+        "lookahead": "\t}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 651,
+        "end_line": 664,
+        "merge_gen_region": null,
+        "confidence": 0.8611890077590942,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "      HostProtocolChre::getSettingEnabledFromFbs(state, &chreSettingEnabled)) {\n    EventLoopManagerSingleton::get()->getSettingManager().postSettingChange(\n        chreSetting, chreSettingEnabled);",
+        "b_contents": "      HostProtocolChre::getSettingStateFromFbs(state, &chreSettingState)) {\n    EventLoopManagerSingleton::get()->getSettingManager().postSettingChange(\n        chreSetting, chreSettingState);",
+        "base_contents": "      HostProtocolChre::getSettingStateFromFbs(state, &chreSettingState)) {\n    postSettingChange(chreSetting, chreSettingState);",
+        "res_region": "      HostProtocolChre::getSettingEnabledFromFbs(state, &chreSettingEnabled)) {\n    EventLoopManagerSingleton::get()->getSettingManager().postSettingChange(\n        chreSetting, chreSettingEnabled);",
+        "lookback": "    EventLoopManagerSingleton::get()->getSettingManager().postSettingChange(",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 984,
+        "end_line": 995,
+        "merge_gen_region": null,
+        "confidence": 0.860668957233429,
+        "hesitated": true
+    }
+]

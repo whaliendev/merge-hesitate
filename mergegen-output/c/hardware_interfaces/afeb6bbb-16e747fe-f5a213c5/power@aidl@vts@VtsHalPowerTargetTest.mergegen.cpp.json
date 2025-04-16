@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "        if (!mSessionSupport) {\n            GTEST_SKIP() << \"DEVICE not support Hint Session.\";\n        }\n        ASSERT_NE(nullptr, mSession);\n    }\n};\n\nclass FMQAidl : public PowerAidl {\n  public:\n    virtual void SetUp() override {\n        PowerAidl::SetUp();\n        if (mServiceVersion < 5) {\n            GTEST_SKIP() << \"DEVICE not launching with Power V5 and beyond.\";\n        }\n\n        auto status =\n                power->createHintSessionWithConfig(getpid(), getuid(), kSelfTids, 16666666L,\n                                                   SessionTag::OTHER, &mSessionConfig, &mSession);\n        mSessionSupport = status.isOk();\n        if (!mSessionSupport) {\n            GTEST_SKIP() << \"DEVICE not support Hint Session.\";\n        }",
+        "b_contents": "        if (!mSessionSupport) {\n            GTEST_SKIP() << \"DEVICE not support Hint Session.\";\n        }",
+        "base_contents": "\n        auto status = power->createHintSession(getpid(), getuid(), kSelfTids, 16666666L, &mSession);\n        ASSERT_TRUE(status.isOk());",
+        "res_region": "        if (!mSessionSupport) {\n            GTEST_SKIP() << \"DEVICE not support Hint Session.\";\n        }\n        ASSERT_NE(nullptr, mSession);\n    }\n};\n\nclass FMQAidl : public PowerAidl {\n  public:\n    virtual void SetUp() override {\n        PowerAidl::SetUp();\n        if (mServiceVersion < 5) {\n            GTEST_SKIP() << \"DEVICE not launching with Power V5 and beyond.\";\n        }\n\n        auto status =\n                power->createHintSessionWithConfig(getpid(), getuid(), kSelfTids, 16666666L,\n                                                   SessionTag::OTHER, &mSessionConfig, &mSession);\n        mSessionSupport = status.isOk();\n        if (!mSessionSupport) {\n            GTEST_SKIP() << \"DEVICE not support Hint Session.\";\n        }",
+        "lookback": "            GTEST_SKIP() << \"DEVICE not support Hint Session.\";",
+        "lookahead": "        ASSERT_NE(nullptr, mSession);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 143,
+        "end_line": 174,
+        "merge_gen_region": " (!Session) GTESTSKIP <<DEVICE supportint.\"; }_(,Session } classMQidl publicA { public virtual SetUp override Poweridl::Up ifmVersion 5) GTESTSKIP <<DEVICEMatrix797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.9632172584533691,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    virtual void TearDown() {\n        if (mSession) {\n            mSession->close();\n            if (mChannel->isValid()) {\n                ASSERT_TRUE(power->closeSessionChannel(getpid(), getuid()).isOk());\n            }\n        }\n    }\n\n  protected:\n    std::shared_ptr<IPowerHintSession> mSession;\n    std::shared_ptr<SessionMessageQueue> mChannel;\n    std::shared_ptr<FlagMessageQueue> mFlagChannel;\n    SessionConfig mSessionConfig;\n    ChannelConfig mChannelConfig;\n    ::android::hardware::EventFlag* mEventFlag;",
+        "b_contents": "",
+        "base_contents": "    std::shared_ptr<IPowerHintSession> mSession;",
+        "res_region": "    virtual void TearDown() {\n        if (mSession) {\n            mSession->close();\n            if (mChannel->isValid()) {\n                ASSERT_TRUE(power->closeSessionChannel(getpid(), getuid()).isOk());\n            }\n        }\n    }\n\n  protected:\n    std::shared_ptr<IPowerHintSession> mSession;\n    std::shared_ptr<SessionMessageQueue> mChannel;\n    std::shared_ptr<FlagMessageQueue> mFlagChannel;\n    SessionConfig mSessionConfig;\n    ChannelConfig mChannelConfig;\n    ::android::hardware::EventFlag* mEventFlag;",
+        "lookback": "        if (mSession) {",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 194,
+        "end_line": 214,
+        "merge_gen_region": null,
+        "confidence": 0.8365405797958374,
+        "hesitated": true
+    }
+]

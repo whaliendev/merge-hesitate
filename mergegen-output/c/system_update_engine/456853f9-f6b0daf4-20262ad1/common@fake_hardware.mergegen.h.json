@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  void SetBuildTimestamp(int64_t build_timestamp) {\n    build_timestamp_ = build_timestamp;\n  }\n",
+        "b_contents": "  // Getters to verify state.\n  int GetMaxKernelKeyRollforward() const { return kernel_max_rollforward_; }\n",
+        "base_contents": "",
+        "res_region": "  void SetBuildTimestamp(int64_t build_timestamp) {\n    build_timestamp_ = build_timestamp;\n  }\n\n  // Getters to verify state.\n  int GetMaxKernelKeyRollforward() const { return kernel_max_rollforward_; }\n",
+        "lookback": "    build_timestamp_ = build_timestamp;",
+        "lookahead": " private:",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 189,
+        "end_line": 199,
+        "merge_gen_region": null,
+        "confidence": 0.8351502418518066,
+        "hesitated": true
+    }
+]

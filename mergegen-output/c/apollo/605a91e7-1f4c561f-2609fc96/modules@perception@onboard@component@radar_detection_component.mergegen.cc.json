@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  if (!common::SensorManager::Instance()->GetSensorInfo(\n      comp_config.radar_name(), &radar_info_)) {",
+        "b_contents": "  if (!common::SensorManager::Instance()->GetSensorInfo(\n          comp_config.radar_name(), &radar_info_)) {",
+        "base_contents": "  bool ret = common::SensorManager::Instance()->GetSensorInfo(\n      comp_config.radar_name(), &radar_info_);\n  if (!ret) {",
+        "res_region": "  if (!common::SensorManager::Instance()->GetSensorInfo(\n          comp_config.radar_name(), &radar_info_)) {",
+        "lookback": "          comp_config.radar_name(), &radar_info_)) {",
+        "lookahead": "    AERROR << \"Failed to get sensor info, sensor name: \"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 38,
+        "end_line": 48,
+        "merge_gen_region": null,
+        "confidence": 0.8610652685165405,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (!GetCarLocalizationSpeed(\n          timestamp, &(options.detector_options.car_linear_speed),\n          &(options.detector_options.car_angular_speed))) {",
+        "b_contents": "  if (!GetCarLocalizationSpeed(timestamp,\n                               &(options.detector_options.car_linear_speed),\n                               &(options.detector_options.car_angular_speed))) {",
+        "base_contents": "  if (GetCarLocalizationSpeed(\n          timestamp, &(options.detector_options.car_linear_speed),\n          &(options.detector_options.car_angular_speed)) != true) {",
+        "res_region": "  if (!GetCarLocalizationSpeed(timestamp,\n                               &(options.detector_options.car_linear_speed),\n                               &(options.detector_options.car_angular_speed))) {",
+        "lookback": "                               &(options.detector_options.car_linear_speed),",
+        "lookahead": "    AERROR << \"Failed to call get_car_speed. [timestamp: \"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 158,
+        "end_line": 170,
+        "merge_gen_region": null,
+        "confidence": 0.8516063094139099,
+        "hesitated": true
+    }
+]

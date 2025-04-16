@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  DeltaPerformer performer_{&prefs_,\n                            &fake_boot_control_,\n                            &fake_hardware_,\n                            &mock_delegate_,\n                            &install_plan_,\n                            &payload_};",
+        "b_contents": "  DeltaPerformer performer_{&prefs_,\n                            &fake_boot_control_,\n                            &fake_hardware_,\n                            &mock_delegate_,\n                            &install_plan_,\n                            false /* is_interactive*/};",
+        "base_contents": "  DeltaPerformer performer_{\n      &prefs_, &fake_boot_control_, &fake_hardware_, &mock_delegate_, &install_plan_};",
+        "res_region": "  DeltaPerformer performer_{&prefs_,\n                            &fake_boot_control_,\n                            &fake_hardware_,\n                            &mock_delegate_,\n                            &install_plan_,\n                            &payload_,\n                            false /* is_interactive*/};",
+        "lookback": "                            &fake_boot_control_,",
+        "lookahead": "};",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 386,
+        "end_line": 403,
+        "merge_gen_region": null,
+        "confidence": 0.7000332474708557,
+        "hesitated": true
+    }
+]

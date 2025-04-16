@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  for (const HalClient &client : mClients) {\n    if (client.callback != nullptr) {\n      client.callback->handleContextHubAsyncEvent(AsyncEventType::RESTARTED);\n    }",
+        "b_contents": "  for (auto &[_, clientInfo] : mClientIdsToClientInfo) {\n    if (clientInfo.callback != nullptr) {\n      clientInfo.callback->handleContextHubAsyncEvent(\n          AsyncEventType::RESTARTED);\n    }",
+        "base_contents": "  for (auto &[_, clientInfo] : mClientIdsToClientInfo) {\n    clientInfo.callback->handleContextHubAsyncEvent(AsyncEventType::RESTARTED);",
+        "res_region": "  for (const HalClient &client : mClients) {\n    if (client.callback != nullptr) {\n      client.callback->handleContextHubAsyncEvent(AsyncEventType::RESTARTED);\n    }",
+        "lookback": "    if (client.callback != nullptr) {",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 486,
+        "end_line": 500,
+        "merge_gen_region": null,
+        "confidence": 0.8364012837409973,
+        "hesitated": true
+    }
+]

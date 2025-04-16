@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tret = reftable_backend_read_ref(be, refname, &oid, referent, &type);\n\tif (type != REF_ISSYMREF)\n\t\tret = -1;",
+        "b_contents": "\tret = reftable_stack_read_ref(stack, refname, &ref);\n\tif (ret)\n\t\tret = -1;\n\telse if (ref.value_type == REFTABLE_REF_SYMREF)\n\t\tstrbuf_addstr(referent, ref.value.symref);\n\telse\n\t\tret = NOT_A_SYMREF;\n\n\treftable_ref_record_release(&ref);",
+        "base_contents": "\tret = reftable_stack_read_ref(stack, refname, &ref);\n\tif (ret == 0 && ref.value_type == REFTABLE_REF_SYMREF)\n\t\tstrbuf_addstr(referent, ref.value.symref);\n\telse\n\t\tret = -1;\n\n\treftable_ref_record_release(&ref);",
+        "res_region": "\tret = reftable_backend_read_ref(be, refname, &oid, referent, &type);\n\tif (ret)\n\t\tret = -1;\n\telse if (type == REF_ISSYMREF)\n\t\t; /* happy */\n\telse\n\t\tret = NOT_A_SYMREF;",
+        "lookback": "\tif (ret)",
+        "lookahead": "\treturn ret;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 921,
+        "end_line": 943,
+        "merge_gen_region": null,
+        "confidence": 0.8767282962799072,
+        "hesitated": true
+    }
+]

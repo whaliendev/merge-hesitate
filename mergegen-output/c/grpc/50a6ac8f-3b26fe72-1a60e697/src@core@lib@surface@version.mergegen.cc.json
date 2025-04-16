@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "const char* grpc_version_string(void) { return \"6.0.0-dev\"; }",
+        "b_contents": "const char* grpc_version_string(void) { return \"6.0.0\"; }",
+        "base_contents": "const char* grpc_version_string(void) { return \"6.0.0-pre1\"; }",
+        "res_region": "const char* grpc_version_string(void) { return \"6.0.0-dev\"; }",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 31,
+        "merge_gen_region": " database database database database database database database database database database database database databasePARAMPARAMPARAMPARAMPARAM database database database databasePARAMPARAMPARAMPARAMPARAMPARAM database database databasePARAMPARAMPARAMPARAMPARAMPARAM database database databasePARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAM database databasePARAMPARAMPARAMPARAMPARAMPARAM databasePARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAM",
+        "confidence": 0.9229634404182434,
+        "hesitated": false,
+        "resolved": false
+    }
+]

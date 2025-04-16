@@ -1,0 +1,72 @@
+[
+    {
+        "a_contents": "#include \"modules/common/util/factory.h\"",
+        "b_contents": "#include \"modules/common/proto/pnc_point.pb.h\"\n#include \"modules/planning/proto/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n\n#include \"modules/common/apollo_app.h\"\n#include \"modules/common/status/status.h\"\n#include \"modules/common/util/factory.h\"",
+        "base_contents": "",
+        "res_region": "#include \"modules/common/proto/pnc_point.pb.h\"\n#include \"modules/planning/proto/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n\n#include \"modules/common/apollo_app.h\"\n#include \"modules/common/status/status.h\"\n#include \"modules/common/util/factory.h\"",
+        "lookback": "#include \"modules/planning/proto/planning.pb.h\"",
+        "lookahead": "#include \"modules/common/vehicle_state/vehicle_state.h\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 35,
+        "merge_gen_region": "#####################",
+        "confidence": 0.8970160484313965,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "   * @brief Plan the trajectory given current vehicle state\n   * @param vehicle_state variable describes the vehicle state, including\n   * position, velocity, acceleration, heading, etc\n   * @param is_on_auto_mode whether the current system is on auto-driving mode\n   * @param publishable_trajectory the computed planning trajectory",
+        "b_contents": "   * @brief module start function\n   * @return start status",
+        "base_contents": "   * @brief Plan the trajectory given current vehicle state\n   * @param vehicle_state variable describes the vehicle state, including\n   * position,\n   *        velocity, acceleration, heading, etc\n   * @param is_on_auto_mode whether the current system is on auto-driving mode\n   * @param publishable_trajectory the computed planning trajectory",
+        "res_region": "   * @brief module start function\n   * @return start status",
+        "lookback": "   * @return start status",
+        "lookahead": "   */",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 69,
+        "end_line": 85,
+        "merge_gen_region": "",
+        "confidence": 0.9112401604652405,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  void RegisterPlanners();\n\n private:\n  std::pair<common::TrajectoryPoint, std::size_t>\n  ComputeStartingPointFromLastTrajectory(const double curr_time) const;",
+        "b_contents": "  // Watch dog timer\n  void OnTimer(const ros::TimerEvent&);\n\n  void PublishPlanningPb(ADCTrajectory* trajectory_pb);\n\n  void PublishPlanningPb(ADCTrajectory* trajectory_pb, double timestamp);\n\n  void RegisterPlanners();\n\n  apollo::common::util::Factory<PlanningConfig::PlannerType, Planner>\n      planner_factory_;\n\n  PlanningConfig config_;",
+        "base_contents": "  std::pair<common::TrajectoryPoint, std::size_t>\n  ComputeStartingPointFromLastTrajectory(const double curr_time) const;",
+        "res_region": "  // Watch dog timer\n  void OnTimer(const ros::TimerEvent&);\n\n  void PublishPlanningPb(ADCTrajectory* trajectory_pb);\n\n  void PublishPlanningPb(ADCTrajectory* trajectory_pb, double timestamp);\n\n  void RegisterPlanners();\n\n  apollo::common::util::Factory<PlanningConfig::PlannerType, Planner>\n      planner_factory_;\n\n  PlanningConfig config_;",
+        "lookback": "  void OnTimer(const ros::TimerEvent&);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 109,
+        "end_line": 132,
+        "merge_gen_region": null,
+        "confidence": 0.7124626040458679,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  enum PlannerType {\n    RTK_PLANNER,\n  };\n\n  common::util::Factory<PlannerType, Planner> planner_factory_;\n\n  std::vector<common::TrajectoryPoint> last_trajectory_;",
+        "b_contents": "  PublishableTrajectory last_publishable_trajectory_;",
+        "base_contents": "  std::vector<common::TrajectoryPoint> last_trajectory_;",
+        "res_region": "  PublishableTrajectory last_publishable_trajectory_;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 140,
+        "end_line": 152,
+        "merge_gen_region": null,
+        "confidence": 0.6480624079704285,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common/util/data_extraction.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"\n#include \"modules/common/util/data_extraction.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/prediction/util/data_extraction.h\"",
+        "res_region": "#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common/util/data_extraction.h\"",
+        "lookback": "#include \"modules/common/util/data_extraction.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.7420822381973267,
+        "hesitated": true
+    }
+]

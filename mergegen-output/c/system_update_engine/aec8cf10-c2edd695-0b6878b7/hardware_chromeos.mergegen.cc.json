@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "int64_t HardwareChromeOS::GetBuildTimestamp() const {\n  // TODO(senj): implement this in Chrome OS.\n  return 0;\n}\n\nvoid HardwareChromeOS::LoadConfig(const string& root_prefix, bool normal_mode) {\n  brillo::KeyValueStore store;\n\n  if (normal_mode) {\n    store.Load(base::FilePath(root_prefix + kConfigFilePath));\n  } else {\n    if (store.Load(base::FilePath(root_prefix + kStatefulPartition +\n                                  kConfigFilePath))) {\n      LOG(INFO) << \"UpdateManager Config loaded from stateful partition.\";\n    } else {\n      store.Load(base::FilePath(root_prefix + kConfigFilePath));\n    }\n  }\n\n  if (!store.GetBoolean(kConfigOptsIsOOBEEnabled, &is_oobe_enabled_))\n    is_oobe_enabled_ = true;  // Default value.\n}\n",
+        "b_contents": "int64_t HardwareChromeOS::GetBuildTimestamp() const {\n  // TODO(senj): implement this in Chrome OS.\n  return 0;\n}\n",
+        "base_contents": "",
+        "res_region": "int64_t HardwareChromeOS::GetBuildTimestamp() const {\n  // TODO(senj): implement this in Chrome OS.\n  return 0;\n}\n\nvoid HardwareChromeOS::LoadConfig(const string& root_prefix, bool normal_mode) {\n  brillo::KeyValueStore store;\n\n  if (normal_mode) {\n    store.Load(base::FilePath(root_prefix + kConfigFilePath));\n  } else {\n    if (store.Load(base::FilePath(root_prefix + kStatefulPartition +\n                                  kConfigFilePath))) {\n      LOG(INFO) << \"UpdateManager Config loaded from stateful partition.\";\n    } else {\n      store.Load(base::FilePath(root_prefix + kConfigFilePath));\n    }\n  }\n\n  if (!store.GetBoolean(kConfigOptsIsOOBEEnabled, &is_oobe_enabled_))\n    is_oobe_enabled_ = true;  // Default value.\n}\n",
+        "lookback": "  // TODO(senj): implement this in Chrome OS.",
+        "lookahead": "}  // namespace chromeos_update_engine",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 232,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.8635086417198181,
+        "hesitated": true
+    }
+]

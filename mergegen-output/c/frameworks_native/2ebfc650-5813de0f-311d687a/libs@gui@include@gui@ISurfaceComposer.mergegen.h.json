@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    /* Returns the frame timestamps supported by SurfaceFlinger.\n     */\n    virtual status_t getSupportedFrameTimestamps(\n            std::vector<FrameEvent>* outSupported) const = 0;\n\n    /* returns display statistics for a given display\n     * intended to be used by the media framework to properly schedule\n     * video frames */\n    virtual status_t getDisplayStats(const sp<IBinder>& display,\n            DisplayStatInfo* stats) = 0;\n\n    /**\n     * Get transactional state of given display.\n     */\n    virtual status_t getDisplayState(const sp<IBinder>& display, ui::DisplayState*) = 0;\n\n    /**\n     * Gets immutable information about given physical display.\n     */\n    virtual status_t getStaticDisplayInfo(const sp<IBinder>& display, ui::StaticDisplayInfo*) = 0;\n\n    /**\n     * Gets dynamic information about given physical display.\n     */\n    virtual status_t getDynamicDisplayInfo(const sp<IBinder>& display, ui::DynamicDisplayInfo*) = 0;\n\n    virtual status_t getDisplayNativePrimaries(const sp<IBinder>& display,\n            ui::DisplayPrimaries& primaries) = 0;\n    virtual status_t setActiveColorMode(const sp<IBinder>& display,\n            ui::ColorMode colorMode) = 0;\n\n    /**\n     * Sets the user-preferred display mode that a device should boot in.\n     */\n    virtual status_t setBootDisplayMode(const sp<IBinder>& display, ui::DisplayModeId) = 0;\n\n    /* Clears the frame statistics for animations.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t clearAnimationFrameStats() = 0;\n\n    /* Gets the frame statistics for animations.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getAnimationFrameStats(FrameStats* outStats) const = 0;\n\n    /* Overrides the supported HDR modes for the given display device.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t overrideHdrTypes(const sp<IBinder>& display,\n                                      const std::vector<ui::Hdr>& hdrTypes) = 0;\n\n    /* Pulls surfaceflinger atoms global stats and layer stats to pipe to statsd.\n     *\n     * Requires the calling uid be from system server.\n     */\n    virtual status_t onPullAtom(const int32_t atomId, std::string* outData, bool* success) = 0;\n\n    virtual status_t enableVSyncInjections(bool enable) = 0;\n\n    virtual status_t injectVSync(nsecs_t when) = 0;\n\n    /* Gets the list of active layers in Z order for debugging purposes\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getLayerDebugInfo(std::vector<LayerDebugInfo>* outLayers) = 0;\n\n    virtual status_t getColorManagement(bool* outGetColorManagement) const = 0;\n\n    /* Gets the composition preference of the default data space and default pixel format,\n     * as well as the wide color gamut data space and wide color gamut pixel format.\n     * If the wide color gamut data space is V0_SRGB, then it implies that the platform\n     * has no wide color gamut support.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getCompositionPreference(ui::Dataspace* defaultDataspace,\n                                              ui::PixelFormat* defaultPixelFormat,\n                                              ui::Dataspace* wideColorGamutDataspace,\n                                              ui::PixelFormat* wideColorGamutPixelFormat) const = 0;\n    /*\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getDisplayedContentSamplingAttributes(const sp<IBinder>& display,\n                                                           ui::PixelFormat* outFormat,\n                                                           ui::Dataspace* outDataspace,\n                                                           uint8_t* outComponentMask) const = 0;\n\n    /* Turns on the color sampling engine on the display.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t setDisplayContentSamplingEnabled(const sp<IBinder>& display, bool enable,\n                                                      uint8_t componentMask,\n                                                      uint64_t maxFrames) = 0;\n",
+        "base_contents": "    /* Returns the frame timestamps supported by SurfaceFlinger.\n     */\n    virtual status_t getSupportedFrameTimestamps(\n            std::vector<FrameEvent>* outSupported) const = 0;\n\n    /* set display power mode. depending on the mode, it can either trigger\n     * screen on, off or low power mode and wait for it to complete.\n     * requires ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual void setPowerMode(const sp<IBinder>& display, int mode) = 0;\n\n\n    /* returns display statistics for a given display\n     * intended to be used by the media framework to properly schedule\n     * video frames */\n    virtual status_t getDisplayStats(const sp<IBinder>& display,\n            DisplayStatInfo* stats) = 0;\n\n    /**\n     * Get transactional state of given display.\n     */\n    virtual status_t getDisplayState(const sp<IBinder>& display, ui::DisplayState*) = 0;\n\n    /**\n     * Gets immutable information about given physical display.\n     */\n    virtual status_t getStaticDisplayInfo(const sp<IBinder>& display, ui::StaticDisplayInfo*) = 0;\n\n    /**\n     * Gets dynamic information about given physical display.\n     */\n    virtual status_t getDynamicDisplayInfo(const sp<IBinder>& display, ui::DynamicDisplayInfo*) = 0;\n\n    virtual status_t getDisplayNativePrimaries(const sp<IBinder>& display,\n            ui::DisplayPrimaries& primaries) = 0;\n    virtual status_t setActiveColorMode(const sp<IBinder>& display,\n            ui::ColorMode colorMode) = 0;\n\n    /**\n     * Sets the user-preferred display mode that a device should boot in.\n     */\n    virtual status_t setBootDisplayMode(const sp<IBinder>& display, ui::DisplayModeId) = 0;\n\n    /**\n     * Clears the user-preferred display mode. The device should now boot in system preferred\n     * display mode.\n     */\n    virtual status_t clearBootDisplayMode(const sp<IBinder>& display) = 0;\n\n    /**\n     * Gets whether boot time display mode operations are supported on the device.\n     *\n     * outSupport\n     *      An output parameter for whether boot time display mode operations are supported.\n     *\n     * Returns NO_ERROR upon success. Otherwise,\n     *      NAME_NOT_FOUND if the display is invalid, or\n     *      BAD_VALUE      if the output parameter is invalid.\n     */\n    virtual status_t getBootDisplayModeSupport(bool* outSupport) const = 0;\n\n    /**\n     * Switches Auto Low Latency Mode on/off on the connected display, if it is\n     * available. This should only be called if the display supports Auto Low\n     * Latency Mode as reported in #getDynamicDisplayInfo.\n     * For more information, see the HDMI 2.1 specification.\n     */\n    virtual void setAutoLowLatencyMode(const sp<IBinder>& display, bool on) = 0;\n\n    /**\n     * This will start sending infoframes to the connected display with\n     * ContentType=Game (if on=true). This should only be called if the display\n     * Game Content Type as reported in #getDynamicDisplayInfo.\n     * For more information, see the HDMI 1.4 specification.\n     */\n    virtual void setGameContentType(const sp<IBinder>& display, bool on) = 0;\n\n    /* Clears the frame statistics for animations.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t clearAnimationFrameStats() = 0;\n\n    /* Gets the frame statistics for animations.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getAnimationFrameStats(FrameStats* outStats) const = 0;\n\n    /* Overrides the supported HDR modes for the given display device.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t overrideHdrTypes(const sp<IBinder>& display,\n                                      const std::vector<ui::Hdr>& hdrTypes) = 0;\n\n    /* Pulls surfaceflinger atoms global stats and layer stats to pipe to statsd.\n     *\n     * Requires the calling uid be from system server.\n     */\n    virtual status_t onPullAtom(const int32_t atomId, std::string* outData, bool* success) = 0;\n\n    virtual status_t enableVSyncInjections(bool enable) = 0;\n\n    virtual status_t injectVSync(nsecs_t when) = 0;\n\n    /* Gets the list of active layers in Z order for debugging purposes\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getLayerDebugInfo(std::vector<LayerDebugInfo>* outLayers) = 0;\n\n    virtual status_t getColorManagement(bool* outGetColorManagement) const = 0;\n\n    /* Gets the composition preference of the default data space and default pixel format,\n     * as well as the wide color gamut data space and wide color gamut pixel format.\n     * If the wide color gamut data space is V0_SRGB, then it implies that the platform\n     * has no wide color gamut support.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getCompositionPreference(ui::Dataspace* defaultDataspace,\n                                              ui::PixelFormat* defaultPixelFormat,\n                                              ui::Dataspace* wideColorGamutDataspace,\n                                              ui::PixelFormat* wideColorGamutPixelFormat) const = 0;\n    /*\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getDisplayedContentSamplingAttributes(const sp<IBinder>& display,\n                                                           ui::PixelFormat* outFormat,\n                                                           ui::Dataspace* outDataspace,\n                                                           uint8_t* outComponentMask) const = 0;\n\n    /* Turns on the color sampling engine on the display.\n     *\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t setDisplayContentSamplingEnabled(const sp<IBinder>& display, bool enable,\n                                                      uint8_t componentMask,\n                                                      uint64_t maxFrames) = 0;\n",
+        "res_region": "",
+        "lookback": "     *",
+        "lookahead": "    /* Returns statistics on the color profile of the last frame displayed for a given display",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 156,
+        "end_line": 400,
+        "merge_gen_region": null,
+        "confidence": 0.828683078289032,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    /*\n     * Gets whether SurfaceFlinger can support protected content in GPU composition.\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getProtectedContentSupport(bool* outSupported) const = 0;\n",
+        "base_contents": "    /*\n     * Gets whether SurfaceFlinger can support protected content in GPU composition.\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t getProtectedContentSupport(bool* outSupported) const = 0;\n\n    /*\n     * Queries whether the given display is a wide color display.\n     * Requires the ACCESS_SURFACE_FLINGER permission.\n     */\n    virtual status_t isWideColorDisplay(const sp<IBinder>& token,\n                                        bool* outIsWideColorDisplay) const = 0;\n",
+        "res_region": "",
+        "lookback": "     *",
+        "lookahead": "    /* Registers a listener to stream median luma updates from SurfaceFlinger.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 409,
+        "end_line": 431,
+        "merge_gen_region": null,
+        "confidence": 0.7857169508934021,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        CAPTURE_DISPLAY,             // Deprecated. Autogenerated by .aidl now.\n        CAPTURE_LAYERS,              // Deprecated. Autogenerated by .aidl now.\n        CLEAR_ANIMATION_FRAME_STATS, // Deprecated. Autogenerated by .aidl now.\n        GET_ANIMATION_FRAME_STATS,   // Deprecated. Autogenerated by .aidl now.\n        SET_POWER_MODE,              // Deprecated. Autogenerated by .aidl now.",
+        "b_contents": "        CAPTURE_DISPLAY, // Deprecated. Autogenerated by .aidl now.\n        CAPTURE_LAYERS,  // Deprecated. Autogenerated by .aidl now.\n        CLEAR_ANIMATION_FRAME_STATS,\n        GET_ANIMATION_FRAME_STATS,\n        SET_POWER_MODE, // Deprecated. Autogenerated by .aidl now.",
+        "base_contents": "        CAPTURE_DISPLAY, // Deprecated. Autogenerated by .aidl now.\n        CAPTURE_LAYERS,  // Deprecated. Autogenerated by .aidl now.\n        CLEAR_ANIMATION_FRAME_STATS,\n        GET_ANIMATION_FRAME_STATS,\n        SET_POWER_MODE,",
+        "res_region": "        CAPTURE_DISPLAY,             // Deprecated. Autogenerated by .aidl now.\n        CAPTURE_LAYERS,              // Deprecated. Autogenerated by .aidl now.\n        CLEAR_ANIMATION_FRAME_STATS, // Deprecated. Autogenerated by .aidl now.\n        GET_ANIMATION_FRAME_STATS,   // Deprecated. Autogenerated by .aidl now.\n        SET_POWER_MODE,              // Deprecated. Autogenerated by .aidl now.",
+        "lookback": "        CAPTURE_LAYERS,              // Deprecated. Autogenerated by .aidl now.",
+        "lookahead": "        GET_DISPLAY_STATS,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 627,
+        "end_line": 645,
+        "merge_gen_region": null,
+        "confidence": 0.8040919303894043,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        GET_PROTECTED_CONTENT_SUPPORT, // Deprecated. Autogenerated by .aidl now.\n        IS_WIDE_COLOR_DISPLAY,         // Deprecated. Autogenerated by .aidl now.\n        GET_DISPLAY_NATIVE_PRIMARIES,  // Deprecated. Autogenerated by .aidl now.\n        GET_PHYSICAL_DISPLAY_IDS,      // Deprecated. Autogenerated by .aidl now.",
+        "b_contents": "        GET_PROTECTED_CONTENT_SUPPORT,\n        IS_WIDE_COLOR_DISPLAY, // Deprecated. Autogenerated by .aidl now.\n        GET_DISPLAY_NATIVE_PRIMARIES,\n        GET_PHYSICAL_DISPLAY_IDS, // Deprecated. Autogenerated by .aidl now.",
+        "base_contents": "        GET_PROTECTED_CONTENT_SUPPORT,\n        IS_WIDE_COLOR_DISPLAY,\n        GET_DISPLAY_NATIVE_PRIMARIES,\n        GET_PHYSICAL_DISPLAY_IDS, // Deprecated. Autogenerated by .aidl now.",
+        "res_region": "        GET_PROTECTED_CONTENT_SUPPORT, // Deprecated. Autogenerated by .aidl now.\n        IS_WIDE_COLOR_DISPLAY,         // Deprecated. Autogenerated by .aidl now.\n        GET_DISPLAY_NATIVE_PRIMARIES,  // Deprecated. Autogenerated by .aidl now.\n        GET_PHYSICAL_DISPLAY_IDS,      // Deprecated. Autogenerated by .aidl now.",
+        "lookback": "        IS_WIDE_COLOR_DISPLAY,         // Deprecated. Autogenerated by .aidl now.",
+        "lookahead": "        ADD_REGION_SAMPLING_LISTENER,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 659,
+        "end_line": 674,
+        "merge_gen_region": null,
+        "confidence": 0.7297993302345276,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        OVERRIDE_HDR_TYPES,             // Deprecated. Autogenerated by .aidl now.\n        ADD_HDR_LAYER_INFO_LISTENER,    // Deprecated. Autogenerated by .aidl now.\n        REMOVE_HDR_LAYER_INFO_LISTENER, // Deprecated. Autogenerated by .aidl now.\n        ON_PULL_ATOM,                   // Deprecated. Autogenerated by .aidl now.",
+        "b_contents": "        OVERRIDE_HDR_TYPES,\n        ADD_HDR_LAYER_INFO_LISTENER,    // Deprecated. Autogenerated by .aidl now.\n        REMOVE_HDR_LAYER_INFO_LISTENER, // Deprecated. Autogenerated by .aidl now.\n        ON_PULL_ATOM,",
+        "base_contents": "        OVERRIDE_HDR_TYPES,\n        ADD_HDR_LAYER_INFO_LISTENER,\n        REMOVE_HDR_LAYER_INFO_LISTENER,\n        ON_PULL_ATOM,",
+        "res_region": "        OVERRIDE_HDR_TYPES,             // Deprecated. Autogenerated by .aidl now.\n        ADD_HDR_LAYER_INFO_LISTENER,    // Deprecated. Autogenerated by .aidl now.\n        REMOVE_HDR_LAYER_INFO_LISTENER, // Deprecated. Autogenerated by .aidl now.\n        ON_PULL_ATOM,                   // Deprecated. Autogenerated by .aidl now.",
+        "lookback": "        ADD_HDR_LAYER_INFO_LISTENER,    // Deprecated. Autogenerated by .aidl now.",
+        "lookahead": "        ADD_TUNNEL_MODE_ENABLED_LISTENER,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 698,
+        "end_line": 713,
+        "merge_gen_region": null,
+        "confidence": 0.820878803730011,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        GET_BOOT_DISPLAY_MODE_SUPPORT, // Deprecated. Autogenerated by .aidl now.\n        SET_BOOT_DISPLAY_MODE,         // Deprecated. Autogenerated by .aidl now.\n        CLEAR_BOOT_DISPLAY_MODE,       // Deprecated. Autogenerated by .aidl now.",
+        "b_contents": "        GET_BOOT_DISPLAY_MODE_SUPPORT, // Deprecated. Autogenerated by .aidl now.\n        SET_BOOT_DISPLAY_MODE,\n        CLEAR_BOOT_DISPLAY_MODE, // Deprecated. Autogenerated by .aidl now.",
+        "base_contents": "        GET_BOOT_DISPLAY_MODE_SUPPORT,\n        SET_BOOT_DISPLAY_MODE,\n        CLEAR_BOOT_DISPLAY_MODE,",
+        "res_region": "        GET_BOOT_DISPLAY_MODE_SUPPORT, // Deprecated. Autogenerated by .aidl now.\n        SET_BOOT_DISPLAY_MODE,         // Deprecated. Autogenerated by .aidl now.\n        CLEAR_BOOT_DISPLAY_MODE,       // Deprecated. Autogenerated by .aidl now.",
+        "lookback": "        SET_BOOT_DISPLAY_MODE,         // Deprecated. Autogenerated by .aidl now.",
+        "lookahead": "        SET_OVERRIDE_FRAME_RATE,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 720,
+        "end_line": 732,
+        "merge_gen_region": null,
+        "confidence": 0.7232407927513123,
+        "hesitated": true
+    }
+]

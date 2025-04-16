@@ -1,0 +1,155 @@
+[
+    {
+        "a_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    for (int i = 0; i < 12; i++) {",
+        "lookahead": "      key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2398,
+        "end_line": 2410,
+        "merge_gen_region": null,
+        "confidence": 0.8042004704475403,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookahead": "    key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2419,
+        "end_line": 2428,
+        "merge_gen_region": null,
+        "confidence": 0.7647116780281067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    for (int i = 0; i < 11; i++) {",
+        "lookahead": "      key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2450,
+        "end_line": 2462,
+        "merge_gen_region": null,
+        "confidence": 0.770496129989624,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookahead": "    key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2471,
+        "end_line": 2480,
+        "merge_gen_region": null,
+        "confidence": 0.7647116780281067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    for (int i = 0; i < 11; i++) {",
+        "lookahead": "      key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2496,
+        "end_line": 2508,
+        "merge_gen_region": null,
+        "confidence": 0.770496129989624,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookahead": "    key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2532,
+        "end_line": 2541,
+        "merge_gen_region": null,
+        "confidence": 0.7647116780281067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "  for (int i = 0; i < 12; i++) {\n    ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "  for (int i = 0; i < 11; i++) {\n    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookahead": "    key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2554,
+        "end_line": 2563,
+        "merge_gen_region": null,
+        "confidence": 0.7647116780281067,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    for (int i = 0; i < 11; i++) {",
+        "lookahead": "      key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2591,
+        "end_line": 2603,
+        "merge_gen_region": null,
+        "confidence": 0.770496129989624,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int num = 0; num < options.level0_file_num_compaction_trigger; num++) {\n    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "b_contents": "  for (int num = 0;\n       num < options.level0_file_num_compaction_trigger;\n       num++) {\n    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "base_contents": "  for (int num = 0;\n       num < options.level0_file_num_compaction_trigger;\n       num++) {\n    // Write 120KB (12 values, each 10K)\n    for (int i = 0; i < 12; i++) {\n      ASSERT_OK(Put(Key(key_idx), RandomString(&rnd, 10000)));",
+        "res_region": "  for (int num = 0; num < options.level0_file_num_compaction_trigger; num++) {\n    // Write 110KB (11 values, each 10K)\n    for (int i = 0; i < 11; i++) {\n      ASSERT_OK(Put(1, Key(key_idx), RandomString(&rnd, 10000)));",
+        "lookback": "    // Write 110KB (11 values, each 10K)",
+        "lookahead": "      key_idx++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2634,
+        "end_line": 2653,
+        "merge_gen_region": null,
+        "confidence": 0.8017295598983765,
+        "hesitated": true
+    }
+]

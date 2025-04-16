@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "SrsSample::SrsSample()",
+        "b_contents": "/**\n* the public data, event HLS disable, others can use it.\n*/\n// 0 = 5.5 kHz = 5512 Hz\n// 1 = 11 kHz = 11025 Hz\n// 2 = 22 kHz = 22050 Hz\n// 3 = 44 kHz = 44100 Hz\nint flv_sample_rates[] = {5512, 11025, 22050, 44100, 0};\n\n// the sample rates in the codec,\n// in the sequence header.\nint aac_sample_rates[] = ",
+        "base_contents": "/**\n* the public data, event HLS disable, others can use it.\n*/\n// 0 = 5.5 kHz = 5512 Hz\n// 1 = 11 kHz = 11025 Hz\n// 2 = 22 kHz = 22050 Hz\n// 3 = 44 kHz = 44100 Hz\nint flv_sample_rates[] = {5512, 11025, 22050, 44100};\n\n// the sample rates in the codec,\n// in the sequence header.\nint aac_sample_rates[] = ",
+        "res_region": "SrsSample::SrsSample()",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 343,
+        "end_line": 371,
+        "merge_gen_region": null,
+        "confidence": 0.5122257471084595,
+        "hesitated": true
+    }
+]

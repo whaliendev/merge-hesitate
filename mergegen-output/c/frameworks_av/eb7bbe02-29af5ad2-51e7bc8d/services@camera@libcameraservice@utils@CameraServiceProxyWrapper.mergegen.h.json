@@ -1,0 +1,155 @@
+[
+    {
+        "a_contents": "#include <random>\n#include <string>",
+        "b_contents": "#include <string>",
+        "base_contents": "",
+        "res_region": "#include <random>\n#include <string>",
+        "lookback": "#include <string>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.7921741604804993,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        /**\n         * Update the session stats of a given camera device (open/close/active/idle) with\n         * the camera proxy service in the system service\n         */\n        void updateProxyDeviceState(sp<hardware::ICameraServiceProxy>& proxyBinder);\n\n      public:\n        CameraSessionStatsWrapper(const std::string& cameraId, int facing, int newCameraState,\n                                  const std::string& clientName, int apiLevel, bool isNdk,\n                                  int32_t latencyMs, int64_t logId)\n            : mSessionStats(cameraId, facing, newCameraState, clientName, apiLevel, isNdk,\n                            latencyMs, logId) {}\n\n        void onOpen(sp<hardware::ICameraServiceProxy>& proxyBinder);\n        void onClose(sp<hardware::ICameraServiceProxy>& proxyBinder, int32_t latencyMs,\n                bool deviceError);",
+        "b_contents": "        CameraSessionStatsWrapper(const std::string& cameraId, int facing, int newCameraState,\n                const std::string& clientName, int apiLevel, bool isNdk, int32_t latencyMs) :\n            mSessionStats(cameraId, facing, newCameraState, clientName, apiLevel, isNdk, latencyMs)\n            {}\n\n        void onOpen();\n        void onClose(int32_t latencyMs);",
+        "base_contents": "        CameraSessionStatsWrapper(const String16& cameraId, int facing, int newCameraState,\n                const String16& clientName, int apiLevel, bool isNdk, int32_t latencyMs) :\n            mSessionStats(cameraId, facing, newCameraState, clientName, apiLevel, isNdk, latencyMs)\n            {}\n\n        void onOpen();\n        void onClose(int32_t latencyMs);",
+        "res_region": "        /**\n         * Update the session stats of a given camera device (open/close/active/idle) with\n         * the camera proxy service in the system service\n         */\n        void updateProxyDeviceState(sp<hardware::ICameraServiceProxy>& proxyBinder);\n\n      public:\n        CameraSessionStatsWrapper(const std::string& cameraId, int facing, int newCameraState,\n                                  const std::string& clientName, int apiLevel, bool isNdk,\n                                  int32_t latencyMs, int64_t logId)\n            : mSessionStats(cameraId, facing, newCameraState, clientName, apiLevel, isNdk,\n                            latencyMs, logId) {}\n\n        void onOpen(sp<hardware::ICameraServiceProxy>& proxyBinder);\n        void onClose(sp<hardware::ICameraServiceProxy>& proxyBinder, int32_t latencyMs,\n                bool deviceError);",
+        "lookback": "         * Update the session stats of a given camera device (open/close/active/idle) with",
+        "lookahead": "        void onStreamConfigured(int operatingMode, bool internalReconfig, int32_t latencyMs);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 81,
+        "merge_gen_region": null,
+        "confidence": 0.8748467564582825,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::map<std::string, std::shared_ptr<CameraSessionStatsWrapper>> mSessionStatsMap;",
+        "b_contents": "    static std::map<std::string, std::shared_ptr<CameraSessionStatsWrapper>> mSessionStatsMap;",
+        "base_contents": "    static std::map<String8, std::shared_ptr<CameraSessionStatsWrapper>> mSessionStatsMap;",
+        "res_region": "    std::map<std::string, std::shared_ptr<CameraSessionStatsWrapper>> mSessionStatsMap;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 99,
+        "end_line": 105,
+        "merge_gen_region": null,
+        "confidence": 0.5054702758789062,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void logOpen(const std::string& id, int facing,\n            const std::string& clientPackageName, int apiLevel, bool isNdk,",
+        "b_contents": "    static void logOpen(const std::string& id, int facing,\n            const std::string& clientPackageName, int apiLevel, bool isNdk,",
+        "base_contents": "    static void logOpen(const String8& id, int facing,\n            const String16& clientPackageName, int apiLevel, bool isNdk,",
+        "res_region": "    void logOpen(const std::string& id, int facing,\n            const std::string& clientPackageName, int apiLevel, bool isNdk,",
+        "lookback": "            const std::string& clientPackageName, int apiLevel, bool isNdk,",
+        "lookahead": "            int32_t latencyMs);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 124,
+        "end_line": 133,
+        "merge_gen_region": null,
+        "confidence": 0.6742294430732727,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void logClose(const std::string& id, int32_t latencyMs, bool deviceError);",
+        "b_contents": "    static void logClose(const std::string& id, int32_t latencyMs);",
+        "base_contents": "    static void logClose(const String8& id, int32_t latencyMs);",
+        "res_region": "    void logClose(const std::string& id, int32_t latencyMs, bool deviceError);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 137,
+        "end_line": 143,
+        "merge_gen_region": null,
+        "confidence": 0.818166971206665,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void logStreamConfigured(const std::string& id, int operatingMode, bool internalReconfig,",
+        "b_contents": "    static void logStreamConfigured(const std::string& id, int operatingMode, bool internalReconfig,",
+        "base_contents": "    static void logStreamConfigured(const String8& id, int operatingMode, bool internalReconfig,",
+        "res_region": "    void logStreamConfigured(const std::string& id, int operatingMode, bool internalReconfig,",
+        "lookback": "            int32_t latencyMs);",
+        "lookahead": "            int32_t latencyMs);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 146,
+        "end_line": 152,
+        "merge_gen_region": null,
+        "confidence": 0.7638887763023376,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void logActive(const std::string& id, float maxPreviewFps);",
+        "b_contents": "    static void logActive(const std::string& id, float maxPreviewFps);",
+        "base_contents": "    static void logActive(const String8& id, float maxPreviewFps);",
+        "res_region": "    void logActive(const std::string& id, float maxPreviewFps);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 156,
+        "end_line": 162,
+        "merge_gen_region": null,
+        "confidence": 0.854023277759552,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void logIdle(const std::string& id,",
+        "b_contents": "    static void logIdle(const std::string& id,",
+        "base_contents": "    static void logIdle(const String8& id,",
+        "res_region": "    void logIdle(const std::string& id,",
+        "lookback": "            int64_t requestCount, int64_t resultErrorCount, bool deviceError,",
+        "lookahead": "            int64_t requestCount, int64_t resultErrorCount, bool deviceError,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 165,
+        "end_line": 171,
+        "merge_gen_region": null,
+        "confidence": 0.7263655662536621,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int getRotateAndCropOverride(const std::string &packageName, int lensFacing, int userId);\n\n    // Return the current top activity autoframing.\n    int getAutoframingOverride(const std::string& packageName);",
+        "b_contents": "    static int getRotateAndCropOverride(const std::string &packageName, int lensFacing, int userId);",
+        "base_contents": "    static int getRotateAndCropOverride(String16 packageName, int lensFacing, int userId);",
+        "res_region": "    int getRotateAndCropOverride(const std::string &packageName, int lensFacing, int userId);\n\n    // Return the current top activity autoframing.\n    int getAutoframingOverride(const std::string& packageName);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 180,
+        "end_line": 189,
+        "merge_gen_region": null,
+        "confidence": 0.6476649045944214,
+        "hesitated": true
+    }
+]

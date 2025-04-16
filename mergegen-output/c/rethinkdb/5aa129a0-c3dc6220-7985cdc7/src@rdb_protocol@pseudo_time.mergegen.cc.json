@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    // anything (between v1_13 and raft_is_latest).  But it's safer not to have to prove\n    // that, so we take it and pass it anyway.\n    return x.get_field(epoch_time_key).cmp(reql_version, y.get_field(epoch_time_key));",
+        "b_contents": "    // anything (between v1_13 and v2_1_is_latest).  But it's safer not to have to\n    // prove that, so we take it and pass it anyway.\n    return x.get_field(epoch_time_key).cmp(y.get_field(epoch_time_key));",
+        "base_contents": "    // anything (between v1_13 and v2_1_is_latest).  But it's safer not to have to\n    // prove that, so we take it and pass it anyway.\n    return x.get_field(epoch_time_key).cmp(reql_version, y.get_field(epoch_time_key));",
+        "res_region": "    // anything (between v1_13 and v2_1_is_latest).  But it's safer not to have to\n    // prove that, so we take it and pass it anyway.\n    return x.get_field(epoch_time_key).cmp(y.get_field(epoch_time_key));",
+        "lookback": "    // prove that, so we take it and pass it anyway.",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 458,
+        "end_line": 470,
+        "merge_gen_region": null,
+        "confidence": 0.8544615507125854,
+        "hesitated": true
+    }
+]

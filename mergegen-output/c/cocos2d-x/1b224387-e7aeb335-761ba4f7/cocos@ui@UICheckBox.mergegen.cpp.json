@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        dispatchSelectChangedEvent(true);",
+        "b_contents": "        selectedEvent();\n    }\n}\n\n\nvoid CheckBox::onPressStateChangedToNormal()\n{\n    _backGroundBoxRenderer->setVisible(true);\n    _backGroundSelectedBoxRenderer->setVisible(false);\n    _backGroundBoxDisabledRenderer->setVisible(false);\n    _frontCrossDisabledRenderer->setVisible(false);\n    \n    _backGroundBoxRenderer->setGLProgramState(this->getNormalGLProgramState());\n    _frontCrossRenderer->setGLProgramState(this->getNormalGLProgramState());\n    \n    \n    _backGroundBoxRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    _frontCrossRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n\n    \n    if (_isSelected)\n    {\n        _frontCrossRenderer->setVisible(true);\n        _frontCrossRendererAdaptDirty = true;",
+        "base_contents": "        selectedEvent();\n    }\n}\n\n\nvoid CheckBox::onPressStateChangedToNormal()\n{\n    _backGroundBoxRenderer->setVisible(true);\n    _backGroundSelectedBoxRenderer->setVisible(false);\n    _backGroundBoxDisabledRenderer->setVisible(false);\n    _frontCrossDisabledRenderer->setVisible(false);\n    \n    _backGroundBoxRenderer->setGLProgramState(this->getNormalGLProgramState());\n    _frontCrossRenderer->setGLProgramState(this->getNormalGLProgramState());\n    \n    \n    _backGroundBoxRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    _frontCrossRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n\n    \n    if (_isSelected)\n    {\n        _frontCrossRenderer->setVisible(true);",
+        "res_region": "        dispatchSelectChangedEvent(true);",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 108,
+        "end_line": 159,
+        "merge_gen_region": null,
+        "confidence": 0.5072312355041504,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    if (!_isBackgroundSelectedTextureLoaded)\n    {\n        _backGroundBoxRenderer->setScale(_backgroundTextureScaleX + _zoomScale,\n                                         _backgroundTextureScaleY + _zoomScale);\n        _frontCrossRenderer->setScale(_backgroundTextureScaleX + _zoomScale,\n                                      _backgroundTextureScaleY + _zoomScale);\n    }\n    else\n    {\n        _backGroundBoxRenderer->setVisible(false);\n        _backGroundSelectedBoxRenderer->setVisible(true);\n        _backGroundBoxDisabledRenderer->setVisible(false);\n        _frontCrossDisabledRenderer->setVisible(false);\n    }\n}\n\nvoid CheckBox::onPressStateChangedToDisabled()\n{\n    if (!_isBackgroundDisabledTextureLoaded\n        || !_isFrontCrossDisabledTextureLoaded)\n    {\n        _backGroundBoxRenderer->setGLProgramState(this->getGrayGLProgramState());\n        _frontCrossRenderer->setGLProgramState(this->getGrayGLProgramState());\n    }\n    else\n    {\n        _backGroundBoxRenderer->setVisible(false);\n        _backGroundBoxDisabledRenderer->setVisible(true);\n        \n    }\n    \n    _backGroundSelectedBoxRenderer->setVisible(false);\n    _frontCrossRenderer->setVisible(false);\n    _backGroundBoxRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    _frontCrossRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    \n    if (_isSelected)\n    {\n        _frontCrossDisabledRenderer->setVisible(true);\n        _frontCrossDisabledRendererAdaptDirty = true;\n    }\n}\n    \nvoid CheckBox::setZoomScale(float scale)\n{\n    _zoomScale = scale;\n}\n\nfloat CheckBox::getZoomScale()const\n{\n    return _zoomScale;\n}\n\nvoid CheckBox::setSelected(bool selected)\n{\n    if (selected == _isSelected)\n    {\n        return;\n    }\n    _isSelected = selected;\n    _frontCrossRenderer->setVisible(_isSelected);\n}\n    \nbool CheckBox::isSelected()const\n{\n    return _isSelected;\n}\n\nvoid CheckBox::selectedEvent()\n{",
+        "base_contents": "    if (!_isBackgroundSelectedTextureLoaded)\n    {\n        _backGroundBoxRenderer->setScale(_backgroundTextureScaleX + _zoomScale,\n                                         _backgroundTextureScaleY + _zoomScale);\n        _frontCrossRenderer->setScale(_backgroundTextureScaleX + _zoomScale,\n                                      _backgroundTextureScaleY + _zoomScale);\n    }\n    else\n    {\n        _backGroundBoxRenderer->setVisible(false);\n        _backGroundSelectedBoxRenderer->setVisible(true);\n        _backGroundBoxDisabledRenderer->setVisible(false);\n        _frontCrossDisabledRenderer->setVisible(false);\n    }\n}\n\nvoid CheckBox::onPressStateChangedToDisabled()\n{\n    if (!_isBackgroundDisabledTextureLoaded\n        || !_isFrontCrossDisabledTextureLoaded)\n    {\n        _backGroundBoxRenderer->setGLProgramState(this->getGrayGLProgramState());\n        _frontCrossRenderer->setGLProgramState(this->getGrayGLProgramState());\n    }\n    else\n    {\n        _backGroundBoxRenderer->setVisible(false);\n        _backGroundBoxDisabledRenderer->setVisible(true);\n        \n    }\n    \n    _backGroundSelectedBoxRenderer->setVisible(false);\n    _frontCrossRenderer->setVisible(false);\n    _backGroundBoxRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    _frontCrossRenderer->setScale(_backgroundTextureScaleX, _backgroundTextureScaleY);\n    \n    if (_isSelected)\n    {\n        _frontCrossDisabledRenderer->setVisible(true);\n    }\n}\n    \nvoid CheckBox::setZoomScale(float scale)\n{\n    _zoomScale = scale;\n}\n\nfloat CheckBox::getZoomScale()const\n{\n    return _zoomScale;\n}\n\nvoid CheckBox::setSelected(bool selected)\n{\n    if (selected == _isSelected)\n    {\n        return;\n    }\n    _isSelected = selected;\n    _frontCrossRenderer->setVisible(_isSelected);\n}\n    \nbool CheckBox::isSelected()const\n{\n    return _isSelected;\n}\n\nvoid CheckBox::selectedEvent()\n{",
+        "res_region": "",
+        "lookback": "    if (_checkBoxEventCallback)",
+        "lookahead": "    this->retain();",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 168,
+        "end_line": 310,
+        "merge_gen_region": null,
+        "confidence": 0.8584096431732178,
+        "hesitated": true
+    }
+]

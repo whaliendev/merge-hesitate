@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        SrsJsonObject* video = SrsJsonAny::object();\n        obj->set(\"video\", video);\n        \n        video->set(\"codec\", SrsJsonAny::str(srs_codec_video2str(vcodec).c_str()));\n        video->set(\"profile\", SrsJsonAny::str(srs_codec_avc_profile2str(avc_profile).c_str()));\n        video->set(\"level\", SrsJsonAny::str(srs_codec_avc_level2str(avc_level).c_str()));\n        video->set(\"width\", SrsJsonAny::integer(width));\n        video->set(\"height\", SrsJsonAny::integer(height));",
+        "b_contents": "        ss  << SRS_JFIELD_NAME(\"video\") << SRS_JOBJECT_START\n                << SRS_JFIELD_STR(\"codec\", srs_codec_video2str(vcodec)) << SRS_JFIELD_CONT\n                << SRS_JFIELD_STR(\"profile\", srs_codec_avc_profile2str(avc_profile)) << SRS_JFIELD_CONT\n                << SRS_JFIELD_STR(\"level\", srs_codec_avc_level2str(avc_level))\n                << SRS_JOBJECT_END\n            << SRS_JFIELD_CONT;",
+        "base_contents": "        ss  << SRS_JFIELD_NAME(\"video\") << SRS_JOBJECT_START\n                << SRS_JFIELD_STR(\"codec\", srs_codec_video2str(vcodec)) << SRS_JFIELD_CONT\n                << SRS_JFIELD_STR(\"profile\", srs_codec_avc_profile2str(avc_profile)) << SRS_JFIELD_CONT\n                << SRS_JFIELD_ORG(\"level\", srs_codec_avc_level2str(avc_level))\n                << SRS_JOBJECT_END\n            << SRS_JFIELD_CONT;",
+        "res_region": "        SrsJsonObject* video = SrsJsonAny::object();\n        obj->set(\"video\", video);\n        \n        video->set(\"codec\", SrsJsonAny::str(srs_codec_video2str(vcodec).c_str()));\n        video->set(\"profile\", SrsJsonAny::str(srs_codec_avc_profile2str(avc_profile).c_str()));\n        video->set(\"level\", SrsJsonAny::str(srs_codec_avc_level2str(avc_level).c_str()));\n        video->set(\"width\", SrsJsonAny::integer(width));\n        video->set(\"height\", SrsJsonAny::integer(height));",
+        "lookback": "        obj->set(\"video\", video);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 152,
+        "end_line": 175,
+        "merge_gen_region": null,
+        "confidence": 0.8142280578613281,
+        "hesitated": true
+    }
+]

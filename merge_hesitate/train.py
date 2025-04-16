@@ -181,50 +181,73 @@ def train(args):
             )
 
             # --- Corrected Vectorized Correctness Calculation ---
-            # Get model predictions directly from logits for confidence target calculation
             with torch.no_grad():
                 # Get predictions from logits [batch_size, seq_len, vocab_size] -> [batch_size, seq_len]
+                # predictions[b, t] is prediction for original label token t+1
                 predictions = torch.argmax(logits, dim=-1)
 
                 # Need pad_token_id and eos_token_id
                 pad_token_id = tokenizer.pad_token_id
                 eos_token_id = tokenizer.eos_token_id
 
-                # Ensure labels are correctly shifted and padded (already done before)
-                # labels shape: [batch_size, seq_len]
-                # predictions shape: [batch_size, seq_len]
-                batch_size, seq_len = predictions.shape
+                # Get original labels (WITH initial BOS) from the batch
+                original_labels_with_bos = batch["labels"]
+
+                # Prepare target labels for comparison: shift original labels right
+                # Target labels should align with predictions: target[b,t] should be original label[b, t+1]
+                target_labels = original_labels_with_bos.clone()
+                target_labels = torch.cat([ # Append PAD
+                    target_labels,
+                    torch.ones((target_labels.size(0), 1), dtype=torch.long, device=target_labels.device) * pad_token_id
+                ], dim=-1)
+                target_labels = target_labels[:, 1:] # SHIFT RIGHT
+
+                # Pad predictions or target_labels to the same length
+                batch_size, seq_len_pred = predictions.shape
+                _, seq_len_labels = target_labels.shape
+                seq_len = max(seq_len_pred, seq_len_labels)
+
+                if seq_len_pred < seq_len:
+                    padding_size = seq_len - seq_len_pred
+                    predictions = torch.cat([
+                        predictions,
+                        torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
+                    ], dim=1)
+                elif seq_len_labels < seq_len:
+                    padding_size = seq_len - seq_len_labels
+                    target_labels = torch.cat([
+                        target_labels,
+                        torch.full((batch_size, padding_size), pad_token_id, device=target_labels.device, dtype=target_labels.dtype)
+                    ], dim=1)
+
+                # Now predictions and target_labels have shape [batch_size, seq_len]
+                # and target_labels[b, t] is the original label token t+1
 
                 # 1. Create prediction mask (True up to and including first EOS)
                 pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
                 eos_mask_pred = (predictions == eos_token_id)
-                # Find index of first EOS, default to seq_len if not found
-                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len) # Shape: [batch_size]
-                # Mask is True for indices <= first_eos_idx_pred
-                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1) # Shape: [batch_size, seq_len]
+                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
+                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1)
 
-                # 2. Create label mask (True up to PAD)
-                label_mask = (labels != pad_token_id) # Shape: [batch_size, seq_len]
+                # 2. Create label mask (True up to PAD) - Use the SHIFTED target_labels
+                label_mask = (target_labels != pad_token_id)
 
-                # 3. Combine masks: Compare tokens present in both processed prediction and label
-                combined_mask = pred_mask & label_mask # Shape: [batch_size, seq_len]
+                # 3. Combine masks
+                combined_mask = pred_mask & label_mask
 
-                # 4. Calculate correct tokens using the combined mask
-                correct_tokens = (predictions == labels) & combined_mask # Shape: [batch_size, seq_len]
+                # 4. Calculate correct tokens using the combined mask and SHIFTED target_labels
+                correct_tokens = (predictions == target_labels) & combined_mask
 
                 # 5. Calculate num_correct_tokens and num_valid_tokens based on combined_mask
-                num_correct_tokens = correct_tokens.sum(dim=1) # Shape: [batch_size]
-                num_valid_tokens = combined_mask.sum(dim=1) # Shape: [batch_size]
-
+                num_correct_tokens = correct_tokens.sum(dim=1)
+                num_valid_tokens = combined_mask.sum(dim=1)
 
                 # 6. Calculate per-sample accuracy (correctness target for confidence)
-                # Handle cases with zero valid tokens under the combined mask
-                sample_correctness = torch.zeros_like(confidence, dtype=torch.float) # Initialize with zeros
+                sample_correctness = torch.zeros_like(confidence, dtype=torch.float)
                 valid_mask_sum = num_valid_tokens > 0
                 sample_correctness[valid_mask_sum] = (
-                    num_correct_tokens[valid_mask_sum].float() / num_valid_tokens[valid_mask_sum].float()
+                    num_correct_tokens[valid_mask_sum].float() / (num_valid_tokens[valid_mask_sum].float() + 1e-9)
                 )
-                # Shape: [batch_size]
                 # --- End Corrected Calculation ---
 
 

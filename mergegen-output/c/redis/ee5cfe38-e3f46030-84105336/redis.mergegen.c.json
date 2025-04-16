@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "static void zrevrankCommand(redisClient *c);\nstatic void hsetCommand(redisClient *c);\nstatic void hgetCommand(redisClient *c);",
+        "b_contents": "static void zremrangebyrankCommand(redisClient *c);",
+        "base_contents": "",
+        "res_region": "static void zrevrankCommand(redisClient *c);\nstatic void hsetCommand(redisClient *c);\nstatic void hgetCommand(redisClient *c);\nstatic void zremrangebyrankCommand(redisClient *c);",
+        "lookback": "static void hsetCommand(redisClient *c);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 676,
+        "end_line": 683,
+        "merge_gen_region": null,
+        "confidence": 0.8201408386230469,
+        "hesitated": true
+    }
+]

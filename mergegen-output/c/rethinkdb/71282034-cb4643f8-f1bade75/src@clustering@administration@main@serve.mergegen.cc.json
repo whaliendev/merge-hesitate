@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                    logNTC(\"Listening on addresses: %s\\n\", addresses_string.c_str());",
+        "b_contents": "                    logINF(\"Listening on address%s: %s\\n\",\n                           serve_info.ports.local_addresses.size() == 1 ? \"\" : \"es\",\n                           addresses_string.c_str());",
+        "base_contents": "                    logINF(\"Listening on addresses: %s\\n\", addresses_string.c_str());",
+        "res_region": "                    logNTC(\"Listening on address%s: %s\\n\",\n                           serve_info.ports.local_addresses.size() == 1 ? \"\" : \"es\",\n                           addresses_string.c_str());",
+        "lookback": "                           serve_info.ports.local_addresses.size() == 1 ? \"\" : \"es\",",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 347,
+        "end_line": 355,
+        "merge_gen_region": null,
+        "confidence": 0.8340476155281067,
+        "hesitated": true
+    }
+]

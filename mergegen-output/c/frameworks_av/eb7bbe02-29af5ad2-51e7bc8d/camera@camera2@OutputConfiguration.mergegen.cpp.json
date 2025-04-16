@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "          mPhysicalCameraId.c_str(), mIsMultiResolution, mStreamUseCase, timestampBase,\n          mMirrorMode, mUseReadoutTimestamp);",
+        "b_contents": "          mPhysicalCameraId.c_str(), mIsMultiResolution, mStreamUseCase, timestampBase,\n          mMirrorMode);",
+        "base_contents": "          String8(mPhysicalCameraId).string(), mIsMultiResolution, mStreamUseCase, timestampBase,\n          mMirrorMode);",
+        "res_region": "          mPhysicalCameraId.c_str(), mIsMultiResolution, mStreamUseCase, timestampBase,\n          mMirrorMode, mUseReadoutTimestamp);",
+        "lookback": "          mMirrorMode, mUseReadoutTimestamp);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 263,
+        "end_line": 272,
+        "merge_gen_region": null,
+        "confidence": 0.595970869064331,
+        "hesitated": true
+    }
+]

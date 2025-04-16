@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "      // On Level-0, we read through all files to check for overlap.\n      start_index = 0;",
+        "b_contents": "      // Level-0 files may overlap each other.  Find all files that\n      // overlap user_key and process them in order from newest to oldest.\n      tmp.reserve(num_files);\n      for (uint32_t i = 0; i < num_files; i++) {\n        FileMetaData* f = files[i];\n        if (ucmp->Compare(user_key, f->smallest.user_key()) >= 0 &&\n            ucmp->Compare(user_key, f->largest.user_key()) <= 0) {\n          tmp.push_back(f);\n        }\n      }\n      if (tmp.empty()) continue;\n\n      if (vset_->options_->compaction_style == kCompactionStyleUniversal) {\n        std::sort(tmp.begin(), tmp.end(), NewestFirstBySeqNo);\n      } else {\n        std::sort(tmp.begin(), tmp.end(), NewestFirst);\n      }\n      files = &tmp[0];\n      num_files = tmp.size();",
+        "base_contents": "      // Level-0 files may overlap each other.  Find all files that\n      // overlap user_key and process them in order from newest to oldest.\n      tmp.reserve(num_files);\n      for (uint32_t i = 0; i < num_files; i++) {\n        FileMetaData* f = files[i];\n        if (ucmp->Compare(user_key, f->smallest.user_key()) >= 0 &&\n            ucmp->Compare(user_key, f->largest.user_key()) <= 0) {\n          tmp.push_back(f);\n        }\n      }\n      if (tmp.empty()) continue;\n\n      std::sort(tmp.begin(), tmp.end(), NewestFirst);\n      files = &tmp[0];\n      num_files = tmp.size();",
+        "res_region": "      // On Level-0, we read through all files to check for overlap.\n      start_index = 0;",
+        "lookback": "      start_index = 0;",
+        "lookahead": "    } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 420,
+        "end_line": 459,
+        "merge_gen_region": null,
+        "confidence": 0.7901278734207153,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      if (!ParentRangeInCompaction(&f->smallest, &f->largest, level,\n                                   &parent_index)) {\n        c = new Compaction(level, MaxFileSizeForLevel(level+1),",
+        "b_contents": "      if(!ParentRangeInCompaction(&f->smallest, &f->largest, level,\n                                  &parent_index)) {\n        c = new Compaction(level, level, MaxFileSizeForLevel(level+1),",
+        "base_contents": "      if(!ParentRangeInCompaction(&f->smallest, &f->largest, level,\n                                  &parent_index)) {\n        c = new Compaction(level, MaxFileSizeForLevel(level+1),",
+        "res_region": "      if(!ParentRangeInCompaction(&f->smallest, &f->largest, level,\n                                  &parent_index)) {\n        c = new Compaction(level, level, MaxFileSizeForLevel(level+1),",
+        "lookback": "                                  &parent_index)) {",
+        "lookahead": "                MaxGrandParentOverlapBytes(level), NumberLevels(), true);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 2437,
+        "end_line": 2449,
+        "merge_gen_region": null,
+        "confidence": 0.8196741342544556,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  Compaction* c = new Compaction(level, MaxFileSizeForLevel(level+1),",
+        "b_contents": "  int out_level = (options_->compaction_style == kCompactionStyleUniversal) ?\n                  level : level+1;\n\n  Compaction* c = new Compaction(level, out_level, MaxFileSizeForLevel(out_level),",
+        "base_contents": "\n  Compaction* c = new Compaction(level, MaxFileSizeForLevel(level+1),",
+        "res_region": "  int out_level = (options_->compaction_style == kCompactionStyleUniversal) ?\n                  level : level+1;\n\n  Compaction* c = new Compaction(level, out_level, MaxFileSizeForLevel(out_level),",
+        "lookback": "                  level : level+1;",
+        "lookahead": "    MaxGrandParentOverlapBytes(level), NumberLevels());",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 2692,
+        "end_line": 2702,
+        "merge_gen_region": null,
+        "confidence": 0.7894352078437805,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "class LabelAddChildTest : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelAddChildTest);\n\n    LabelAddChildTest();\n\n    virtual std::string title() const override;\n};\n\nclass LabelIssue12775Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue12775Test);\n\n    LabelIssue12775Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n\nclass LabelIssue11585Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue11585Test);\n\n    LabelIssue11585Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n\nclass LabelFullTypeFontTest : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelFullTypeFontTest);\n\n    LabelFullTypeFontTest();\n\n    virtual std::string title() const override;\n};\n\nclass LabelIssue10688Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue10688Test);\n\n    LabelIssue10688Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n",
+        "b_contents": "class LabelIssue12775Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue12775Test);\n    \n    LabelIssue12775Test();\n    \n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n",
+        "base_contents": "",
+        "res_region": "class LabelAddChildTest : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelAddChildTest);\n\n    LabelAddChildTest();\n\n    virtual std::string title() const override;\n};\n\nclass LabelIssue12775Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue12775Test);\n\n    LabelIssue12775Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n\nclass LabelIssue11585Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue11585Test);\n\n    LabelIssue11585Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n\nclass LabelFullTypeFontTest : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelFullTypeFontTest);\n\n    LabelFullTypeFontTest();\n\n    virtual std::string title() const override;\n};\n\nclass LabelIssue10688Test : public AtlasDemoNew\n{\npublic:\n    CREATE_FUNC(LabelIssue10688Test);\n\n    LabelIssue10688Test();\n\n    virtual std::string title() const override;\n    virtual std::string subtitle() const override;\n};\n",
+        "lookback": "{",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 607,
+        "end_line": 674,
+        "merge_gen_region": null,
+        "confidence": 0.5552867650985718,
+        "hesitated": true
+    }
+]

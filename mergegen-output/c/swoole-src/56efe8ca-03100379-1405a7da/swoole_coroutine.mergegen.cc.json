@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        activate();",
+        "b_contents": "        if (SWOOLE_G(enable_preemptive_scheduler))\n        {\n            // create a thread to interrupt the coroutine that takes up too much time\n            start_scheduler_thread();\n        }\n\n        if (zend_hash_str_find_ptr(&module_registry, ZEND_STRL(\"xdebug\")))\n        {\n            php_swoole_fatal_error(E_WARNING, \"Using Xdebug in coroutines is extremely dangerous, please notice that it may lead to coredump!\");\n        }\n\n        inject_function();\n\n        // init reactor and register event wait\n        php_swoole_check_reactor();\n\n        // TODO: enable hook in v5.0.0\n        // enable_hook(SW_HOOK_ALL);\n\n        active = true;",
+        "base_contents": "        if (SWOOLE_G(enable_preemptive_scheduler))\n        {\n            // create a thread to interrupt the coroutine that takes up too much time\n            create_scheduler_thread();\n        }\n\n        if (zend_hash_str_find_ptr(&module_registry, ZEND_STRL(\"xdebug\")))\n        {\n            php_swoole_fatal_error(E_WARNING, \"Using Xdebug in coroutines is extremely dangerous, please notice that it may lead to coredump!\");\n        }\n\n        inject_function();\n\n        // init reactor and register event wait\n        php_swoole_check_reactor();\n\n        // TODO: enable hook in v5.0.0\n        // enable_hook(SW_HOOK_ALL);\n\n        active = true;",
+        "res_region": "        activate();",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 509,
+        "end_line": 553,
+        "merge_gen_region": null,
+        "confidence": 0.3942161798477173,
+        "hesitated": true
+    }
+]

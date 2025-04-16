@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <paths.h>\n#include <signal.h>",
+        "base_contents": "#include <paths.h>",
+        "res_region": "",
+        "lookback": "#include <string.h>",
+        "lookahead": "#include <stdlib.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 22,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.5276803970336914,
+        "hesitated": true
+    }
+]

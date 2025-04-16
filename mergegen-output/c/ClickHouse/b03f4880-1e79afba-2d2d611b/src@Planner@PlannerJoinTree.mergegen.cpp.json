@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "    extern const SettingsBoolAuto query_plan_join_swap_table;",
+        "b_contents": "    extern const SettingsUInt64 min_joined_block_size_bytes;",
+        "base_contents": "",
+        "res_region": "    extern const SettingsBoolAuto query_plan_join_swap_table;\n    extern const SettingsUInt64 min_joined_block_size_bytes;",
+        "lookback": "    extern const SettingsUInt64 min_joined_block_size_bytes;",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 106,
+        "end_line": 111,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9040942788124084,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "std::optional<ActionsDAG> createStepToDropColumns(\n    const Block & header,\n    const ColumnIdentifierSet & outer_scope_columns,\n    const PlannerContextPtr & planner_context)\n{\n    ActionsDAG drop_unused_columns_after_join_actions_dag(header.getColumnsWithTypeAndName());\n    ActionsDAG::NodeRawConstPtrs drop_unused_columns_after_join_actions_dag_updated_outputs;\n    std::unordered_set<std::string_view> drop_unused_columns_after_join_actions_dag_updated_outputs_names;\n    std::optional<size_t> first_skipped_column_node_index;\n\n    auto & drop_unused_columns_after_join_actions_dag_outputs = drop_unused_columns_after_join_actions_dag.getOutputs();\n    size_t drop_unused_columns_after_join_actions_dag_outputs_size = drop_unused_columns_after_join_actions_dag_outputs.size();\n\n    const auto & global_planner_context = planner_context->getGlobalPlannerContext();\n\n    for (size_t i = 0; i < drop_unused_columns_after_join_actions_dag_outputs_size; ++i)\n    {\n        const auto & output = drop_unused_columns_after_join_actions_dag_outputs[i];\n\n        if (drop_unused_columns_after_join_actions_dag_updated_outputs_names.contains(output->result_name)\n            || !global_planner_context->hasColumnIdentifier(output->result_name))\n            continue;\n\n        if (!outer_scope_columns.contains(output->result_name))\n        {\n            if (!first_skipped_column_node_index)\n                first_skipped_column_node_index = i;\n            continue;\n        }\n\n        drop_unused_columns_after_join_actions_dag_updated_outputs.push_back(output);\n        drop_unused_columns_after_join_actions_dag_updated_outputs_names.insert(output->result_name);\n    }\n\n    if (!first_skipped_column_node_index)\n        return {};\n\n    /** It is expected that JOIN TREE query plan will contain at least 1 column, even if there are no columns in outer scope.\n      *\n      * Example: SELECT count() FROM test_table_1 AS t1, test_table_2 AS t2;\n      */\n    if (drop_unused_columns_after_join_actions_dag_updated_outputs.empty() && first_skipped_column_node_index)\n        drop_unused_columns_after_join_actions_dag_updated_outputs.push_back(drop_unused_columns_after_join_actions_dag_outputs[*first_skipped_column_node_index]);\n\n    drop_unused_columns_after_join_actions_dag_outputs = std::move(drop_unused_columns_after_join_actions_dag_updated_outputs);\n\n    return drop_unused_columns_after_join_actions_dag;\n}\n\nJoinTreeQueryPlan buildQueryPlanForJoinNode(const QueryTreeNodePtr & join_table_expression,",
+        "b_contents": "JoinTreeQueryPlan buildQueryPlanForJoinNode(\n    const QueryTreeNodePtr & join_table_expression,",
+        "base_contents": "JoinTreeQueryPlan buildQueryPlanForJoinNode(const QueryTreeNodePtr & join_table_expression,",
+        "res_region": "std::optional<ActionsDAG> createStepToDropColumns(\n    const Block & header,\n    const ColumnIdentifierSet & outer_scope_columns,\n    const PlannerContextPtr & planner_context)\n{\n    ActionsDAG drop_unused_columns_after_join_actions_dag(header.getColumnsWithTypeAndName());\n    ActionsDAG::NodeRawConstPtrs drop_unused_columns_after_join_actions_dag_updated_outputs;\n    std::unordered_set<std::string_view> drop_unused_columns_after_join_actions_dag_updated_outputs_names;\n    std::optional<size_t> first_skipped_column_node_index;\n\n    auto & drop_unused_columns_after_join_actions_dag_outputs = drop_unused_columns_after_join_actions_dag.getOutputs();\n    size_t drop_unused_columns_after_join_actions_dag_outputs_size = drop_unused_columns_after_join_actions_dag_outputs.size();\n\n    const auto & global_planner_context = planner_context->getGlobalPlannerContext();\n\n    for (size_t i = 0; i < drop_unused_columns_after_join_actions_dag_outputs_size; ++i)\n    {\n        const auto & output = drop_unused_columns_after_join_actions_dag_outputs[i];\n\n        if (drop_unused_columns_after_join_actions_dag_updated_outputs_names.contains(output->result_name)\n            || !global_planner_context->hasColumnIdentifier(output->result_name))\n            continue;\n\n        if (!outer_scope_columns.contains(output->result_name))\n        {\n            if (!first_skipped_column_node_index)\n                first_skipped_column_node_index = i;\n            continue;\n        }\n\n        drop_unused_columns_after_join_actions_dag_updated_outputs.push_back(output);\n        drop_unused_columns_after_join_actions_dag_updated_outputs_names.insert(output->result_name);\n    }\n\n    if (!first_skipped_column_node_index)\n        return {};\n\n    /** It is expected that JOIN TREE query plan will contain at least 1 column, even if there are no columns in outer scope.\n      *\n      * Example: SELECT count() FROM test_table_1 AS t1, test_table_2 AS t2;\n      */\n    if (drop_unused_columns_after_join_actions_dag_updated_outputs.empty() && first_skipped_column_node_index)\n        drop_unused_columns_after_join_actions_dag_updated_outputs.push_back(drop_unused_columns_after_join_actions_dag_outputs[*first_skipped_column_node_index]);\n\n    drop_unused_columns_after_join_actions_dag_outputs = std::move(drop_unused_columns_after_join_actions_dag_updated_outputs);\n\n    return drop_unused_columns_after_join_actions_dag;\n}\n\nJoinTreeQueryPlan buildQueryPlanForJoinNode(\n    const QueryTreeNodePtr & join_table_expression,",
+        "lookback": "    const Block & header,",
+        "lookahead": "    JoinTreeQueryPlan left_join_tree_query_plan,",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1275,
+        "end_line": 1331,
+        "merge_gen_region": null,
+        "confidence": 0.6582266688346863,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto join_algorithm = chooseJoinAlgorithm(table_join, join_node.getRightTableExpression(), left_header, right_header, planner_context);",
+        "b_contents": "    const Block & right_header = right_plan.getCurrentHeader();\n    auto join_algorithm = chooseJoinAlgorithm(\n        table_join, join_node.getRightTableExpression(), left_header, right_header, planner_context, select_query_info);",
+        "base_contents": "    const Block & right_header = right_plan.getCurrentHeader();\n    auto join_algorithm = chooseJoinAlgorithm(table_join, join_node.getRightTableExpression(), left_header, right_header, planner_context);",
+        "res_region": "    auto join_algorithm = chooseJoinAlgorithm(table_join, join_node.getRightTableExpression(), left_header, right_header, planner_context, select_query_info);",
+        "lookback": "    auto result_plan = QueryPlan();",
+        "lookahead": "    auto result_plan = QueryPlan();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1645,
+        "end_line": 1654,
+        "merge_gen_region": null,
+        "confidence": 0.666513979434967,
+        "hesitated": true
+    }
+]

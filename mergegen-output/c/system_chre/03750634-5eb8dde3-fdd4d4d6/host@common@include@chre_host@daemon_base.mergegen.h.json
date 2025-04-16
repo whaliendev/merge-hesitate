@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#ifdef CHRE_LOG_ATOM_EXTENSION_ENABLED\n  /**\n   * Handles additional metrics that aren't logged by the common CHRE code.\n   *\n   */\n  virtual void handleVendorMetricLog(\n      const ::chre::fbs::MetricLogT *metric_msg) = 0;\n#endif  // CHRE_LOG_ATOM_EXTENSION_ENABLED\n",
+        "b_contents": "#ifdef CHRE_LOG_ATOM_EXTENSION_ENABLED\n  /**\n   * Handles additional metrics that aren't logged by the common CHRE code.\n   */\n  virtual void handleVendorMetricLog(\n      const ::chre::fbs::MetricLogT *metric_msg) = 0;\n#endif  // CHRE_LOG_ATOM_EXTENSION_ENABLED\n",
+        "base_contents": "#ifdef CHRE_DAEMON_METRIC_ENABLED",
+        "res_region": "#ifdef CHRE_LOG_ATOM_EXTENSION_ENABLED\n  /**\n   * Handles additional metrics that aren't logged by the common CHRE code.\n   *\n   */\n  virtual void handleVendorMetricLog(\n      const ::chre::fbs::MetricLogT *metric_msg) = 0;\n#endif  // CHRE_LOG_ATOM_EXTENSION_ENABLED\n",
+        "lookback": "  /**",
+        "lookahead": "  /**",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 223,
+        "end_line": 244,
+        "merge_gen_region": null,
+        "confidence": 0.8457821011543274,
+        "hesitated": true
+    }
+]

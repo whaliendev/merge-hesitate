@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define PHP_GRPC_VERSION \"1.14.0dev\"",
+        "b_contents": "#define PHP_GRPC_VERSION \"1.13.0RC2\"",
+        "base_contents": "#define PHP_GRPC_VERSION \"1.13.0dev\"",
+        "res_region": "#define PHP_GRPC_VERSION \"1.14.0dev\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 22,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.8725917935371399,
+        "hesitated": true
+    }
+]

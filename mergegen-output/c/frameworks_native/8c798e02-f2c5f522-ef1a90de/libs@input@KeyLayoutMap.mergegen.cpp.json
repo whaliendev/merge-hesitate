@@ -1,0 +1,123 @@
+[
+    {
+        "a_contents": "std::optional<AxisInfo> KeyLayoutMap::mapAxis(int32_t scanCode) const {\n    auto it = mAxes.find(scanCode);\n    if (it == mAxes.end()) {\n        ALOGD_IF(DEBUG_MAPPING, \"mapAxis: scanCode=%d ~ Failed.\", scanCode);\n        return std::nullopt;",
+        "b_contents": "status_t KeyLayoutMap::mapAxis(int32_t scanCode, AxisInfo* outAxisInfo) const {\n    ssize_t index = mAxes.indexOfKey(scanCode);\n    if (index < 0) {\n        ALOGD_IF(DEBUG_MAPPING, \"mapAxis: scanCode=%d ~ Failed.\", scanCode);\n        return NAME_NOT_FOUND;",
+        "base_contents": "status_t KeyLayoutMap::mapAxis(int32_t scanCode, AxisInfo* outAxisInfo) const {\n    ssize_t index = mAxes.indexOfKey(scanCode);\n    if (index < 0) {\n#if DEBUG_MAPPING\n        ALOGD(\"mapAxis: scanCode=%d ~ Failed.\", scanCode);\n#endif\n        return NAME_NOT_FOUND;",
+        "res_region": "std::optional<AxisInfo> KeyLayoutMap::mapAxis(int32_t scanCode) const {\n    auto it = mAxes.find(scanCode);\n    if (it == mAxes.end()) {\n        ALOGD_IF(DEBUG_MAPPING, \"mapAxis: scanCode=%d ~ Failed.\", scanCode);\n        return std::nullopt;",
+        "lookback": "    auto it = mAxes.find(scanCode);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 252,
+        "merge_gen_region": "::>(stdString&&String&&&&String&&&&String&&&&&String&&&&&String&&StringdexdexdexdexCODINGCODINGString&&String&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+        "confidence": 0.8975082039833069,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    const AxisInfo& axisInfo = it->second;\n    ALOGD_IF(DEBUG_MAPPING,\n             \"mapAxis: scanCode=%d ~ Result mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, axisInfo.mode, axisInfo.axis, axisInfo.highAxis, axisInfo.splitValue,\n             axisInfo.flatOverride);\n    return axisInfo;",
+        "b_contents": "    *outAxisInfo = mAxes.valueAt(index);\n\n    ALOGD_IF(DEBUG_MAPPING,\n             \"mapAxis: scanCode=%d ~ Result mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, outAxisInfo->mode, outAxisInfo->axis, outAxisInfo->highAxis,\n             outAxisInfo->splitValue, outAxisInfo->flatOverride);\n\n    return NO_ERROR;",
+        "base_contents": "    *outAxisInfo = mAxes.valueAt(index);\n\n#if DEBUG_MAPPING\n    ALOGD(\"mapAxis: scanCode=%d ~ Result mode=%d, axis=%d, highAxis=%d, \"\n            \"splitValue=%d, flatOverride=%d.\",\n            scanCode,\n            outAxisInfo->mode, outAxisInfo->axis, outAxisInfo->highAxis,\n            outAxisInfo->splitValue, outAxisInfo->flatOverride);\n#endif\n    return NO_ERROR;",
+        "res_region": "    const AxisInfo& axisInfo = it->second;\n    ALOGD_IF(DEBUG_MAPPING,\n             \"mapAxis: scanCode=%d ~ Result mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, axisInfo.mode, axisInfo.axis, axisInfo.highAxis, axisInfo.splitValue,\n             axisInfo.flatOverride);\n    return axisInfo;",
+        "lookback": "    ALOGD_IF(DEBUG_MAPPING,",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 255,
+        "end_line": 284,
+        "merge_gen_region": null,
+        "confidence": 0.8775452971458435,
+        "hesitated": true
+    },
+    {
+        "a_contents": "std::optional<int32_t> KeyLayoutMap::findScanCodeForLed(int32_t ledCode) const {\n    for (const auto& [scanCode, led] : mLedsByScanCode) {\n        if (led.ledCode == ledCode) {\n            ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d, scanCode=%d.\", __func__, ledCode, scanCode);\n            return scanCode;",
+        "b_contents": "status_t KeyLayoutMap::findScanCodeForLed(int32_t ledCode, int32_t* outScanCode) const {\n    const size_t N = mLedsByScanCode.size();\n    for (size_t i = 0; i < N; i++) {\n        if (mLedsByScanCode.valueAt(i).ledCode == ledCode) {\n            *outScanCode = mLedsByScanCode.keyAt(i);\n            ALOGD_IF(DEBUG_MAPPING, \"findScanCodeForLed: ledCode=%d, scanCode=%d.\", ledCode,\n                     *outScanCode);\n            return NO_ERROR;",
+        "base_contents": "status_t KeyLayoutMap::findScanCodeForLed(int32_t ledCode, int32_t* outScanCode) const {\n    const size_t N = mLedsByScanCode.size();\n    for (size_t i = 0; i < N; i++) {\n        if (mLedsByScanCode.valueAt(i).ledCode == ledCode) {\n            *outScanCode = mLedsByScanCode.keyAt(i);\n#if DEBUG_MAPPING\n            ALOGD(\"findScanCodeForLed: ledCode=%d, scanCode=%d.\", ledCode, *outScanCode);\n#endif\n            return NO_ERROR;",
+        "res_region": "std::optional<int32_t> KeyLayoutMap::findScanCodeForLed(int32_t ledCode) const {\n    for (const auto& [scanCode, led] : mLedsByScanCode) {\n        if (led.ledCode == ledCode) {\n            ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d, scanCode=%d.\", __func__, ledCode, scanCode);\n            return scanCode;",
+        "lookback": "    for (const auto& [scanCode, led] : mLedsByScanCode) {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 287,
+        "end_line": 312,
+        "merge_gen_region": null,
+        "confidence": 0.8108304142951965,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d ~ Not found.\", __func__, ledCode);\n    return std::nullopt;",
+        "b_contents": "    ALOGD_IF(DEBUG_MAPPING, \"findScanCodeForLed: ledCode=%d ~ Not found.\", ledCode);\n    return NAME_NOT_FOUND;",
+        "base_contents": "#if DEBUG_MAPPING\n            ALOGD(\"findScanCodeForLed: ledCode=%d ~ Not found.\", ledCode);\n#endif\n    return NAME_NOT_FOUND;",
+        "res_region": "    ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d ~ Not found.\", __func__, ledCode);\n    return std::nullopt;",
+        "lookback": "    return std::nullopt;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 315,
+        "end_line": 326,
+        "merge_gen_region": null,
+        "confidence": 0.8329743146896362,
+        "hesitated": true
+    },
+    {
+        "a_contents": "std::optional<int32_t> KeyLayoutMap::findUsageCodeForLed(int32_t ledCode) const {\n    for (const auto& [usageCode, led] : mLedsByUsageCode) {\n        if (led.ledCode == ledCode) {\n            ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d, usage=%x.\", __func__, ledCode, usageCode);\n            return usageCode;",
+        "b_contents": "status_t KeyLayoutMap::findUsageCodeForLed(int32_t ledCode, int32_t* outUsageCode) const {\n    const size_t N = mLedsByUsageCode.size();\n    for (size_t i = 0; i < N; i++) {\n        if (mLedsByUsageCode.valueAt(i).ledCode == ledCode) {\n            *outUsageCode = mLedsByUsageCode.keyAt(i);\n            ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d, usage=%x.\", __func__, ledCode, *outUsageCode);\n            return NO_ERROR;",
+        "base_contents": "status_t KeyLayoutMap::findUsageCodeForLed(int32_t ledCode, int32_t* outUsageCode) const {\n    const size_t N = mLedsByUsageCode.size();\n    for (size_t i = 0; i < N; i++) {\n        if (mLedsByUsageCode.valueAt(i).ledCode == ledCode) {\n            *outUsageCode = mLedsByUsageCode.keyAt(i);\n#if DEBUG_MAPPING\n            ALOGD(\"findUsageForLed: ledCode=%d, usage=%x.\", ledCode, *outUsageCode);\n#endif\n            return NO_ERROR;",
+        "res_region": "std::optional<int32_t> KeyLayoutMap::findUsageCodeForLed(int32_t ledCode) const {\n    for (const auto& [usageCode, led] : mLedsByUsageCode) {\n        if (led.ledCode == ledCode) {\n            ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d, usage=%x.\", __func__, ledCode, usageCode);\n            return usageCode;",
+        "lookback": "    for (const auto& [usageCode, led] : mLedsByUsageCode) {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 329,
+        "end_line": 353,
+        "merge_gen_region": null,
+        "confidence": 0.8309479355812073,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d ~ Not found.\", __func__, ledCode);\n    return std::nullopt;",
+        "b_contents": "    ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d ~ Not found.\", __func__, ledCode);\n\n    return NAME_NOT_FOUND;",
+        "base_contents": "#if DEBUG_MAPPING\n            ALOGD(\"findUsageForLed: ledCode=%d ~ Not found.\", ledCode);\n#endif\n    return NAME_NOT_FOUND;",
+        "res_region": "    ALOGD_IF(DEBUG_MAPPING, \"%s: ledCode=%d ~ Not found.\", __func__, ledCode);\n    return std::nullopt;",
+        "lookback": "    return std::nullopt;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 356,
+        "end_line": 368,
+        "merge_gen_region": null,
+        "confidence": 0.7823495268821716,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ALOGD_IF(DEBUG_PARSER,\n             \"Parsed axis: scanCode=%d, mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, axisInfo.mode, axisInfo.axis, axisInfo.highAxis, axisInfo.splitValue,\n             axisInfo.flatOverride);\n    mMap->mAxes.insert({scanCode, axisInfo});",
+        "b_contents": "    ALOGD_IF(DEBUG_PARSER,\n             \"Parsed axis: scanCode=%d, mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, axisInfo.mode, axisInfo.axis, axisInfo.highAxis, axisInfo.splitValue,\n             axisInfo.flatOverride);\n\n    mMap->mAxes.add(scanCode, axisInfo);",
+        "base_contents": "#if DEBUG_PARSER\n    ALOGD(\"Parsed axis: scanCode=%d, mode=%d, axis=%d, highAxis=%d, \"\n            \"splitValue=%d, flatOverride=%d.\",\n            scanCode,\n            axisInfo.mode, axisInfo.axis, axisInfo.highAxis,\n            axisInfo.splitValue, axisInfo.flatOverride);\n#endif\n    mMap->mAxes.add(scanCode, axisInfo);",
+        "res_region": "    ALOGD_IF(DEBUG_PARSER,\n             \"Parsed axis: scanCode=%d, mode=%d, axis=%d, highAxis=%d, \"\n             \"splitValue=%d, flatOverride=%d.\",\n             scanCode, axisInfo.mode, axisInfo.axis, axisInfo.highAxis, axisInfo.splitValue,\n             axisInfo.flatOverride);\n    mMap->mAxes.insert({scanCode, axisInfo});",
+        "lookback": "             \"Parsed axis: scanCode=%d, mode=%d, axis=%d, highAxis=%d, \"",
+        "lookahead": "    return NO_ERROR;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 582,
+        "end_line": 606,
+        "merge_gen_region": "_d moded axisd high=%, \"DIFDEBUGPARSER \" axis scan=%d moded axisd high=%, \"split=%, flat=%.\",Code axisInfomode axis.,Infoaxis axis.Axis,Infosplit, axis.Override",
+        "confidence": 0.9303134083747864,
+        "hesitated": false,
+        "resolved": false
+    }
+]

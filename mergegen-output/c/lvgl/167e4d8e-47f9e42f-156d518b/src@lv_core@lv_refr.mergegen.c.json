@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        lv_draw_rect_dsc_t draw_dsc;\n        lv_draw_rect_dsc_init(&draw_dsc);\n        draw_dsc.bg_color.full = debug_color.full;\n        draw_dsc.bg_opa = LV_OPA_50;\n        draw_dsc.border_width = 2;\n        draw_dsc.border_color.full = (debug_color.full + 0x13) * 9;\n\n        lv_draw_rect(&obj_ext_mask, &obj_ext_mask, &draw_dsc);",
+        "b_contents": "        LV_STYLE_CREATE(style_debug, &lv_style_plain);\n        style_debug.body.main_color = debug_color;\n        style_debug.body.grad_color = debug_color;\n        style_debug.body.border.width = 2;\n        style_debug.body.border.color.full = (debug_color.full + 0x13) * 9;\n        lv_draw_rect(&obj_ext_mask, &obj_ext_mask, &style_debug, LV_OPA_20);",
+        "base_contents": "        LV_STYLE_CREATE(style_debug, &lv_style_plain);\n        style_debug.body.main_color = debug_color;\n        style_debug.body.grad_color = debug_color;\n        style_debug.body.border.width = 2;\n        style_debug.body.border.color.full = (debug_color.full + 0x13) * 9;\n        lv_draw_rect(&obj_ext_mask, &obj_ext_mask, &style_debug, LV_OPA_50);",
+        "res_region": "<<<<<<< HEAD\n        lv_draw_rect_dsc_t draw_dsc;\n        lv_draw_rect_dsc_init(&draw_dsc);\n        draw_dsc.bg_color.full = debug_color.full;\n        draw_dsc.bg_opa = LV_OPA_50;\n        draw_dsc.border_width = 2;\n        draw_dsc.border_color.full = (debug_color.full + 0x13) * 9;\n\n        lv_draw_rect(&obj_ext_mask, &obj_ext_mask, &draw_dsc);\n=======\n        LV_STYLE_CREATE(style_debug, &lv_style_plain);\n        style_debug.body.main_color = debug_color;\n        style_debug.body.grad_color = debug_color;\n        style_debug.body.border.width = 2;\n        style_debug.body.border.color.full = (debug_color.full + 0x13) * 9;\n        lv_draw_rect(&obj_ext_mask, &obj_ext_mask, &style_debug, LV_OPA_20);\n>>>>>>> dev-7.0",
+        "lookback": "        lv_draw_rect_dsc_t draw_dsc;",
+        "lookahead": "        debug_color.full *= 17;",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 535,
+        "end_line": 558,
+        "merge_gen_region": null,
+        "confidence": 0.8579285144805908,
+        "hesitated": true
+    }
+]

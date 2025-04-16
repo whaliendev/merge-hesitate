@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // If prev_value for key exits, attempts to update it inplace.\n  // else returns false\n  // Pseudocode\n  //   if key exists in current memtable && prev_value is of type kTypeValue\n  //     new_value = delta(prev_value)\n  //     if sizeof(new_value) <= sizeof(prev_value)\n  //       update inplace\n  //     else add(key, new_value)\n  //   else return false\n  bool UpdateCallback(SequenceNumber seq,\n                      const Slice& key,\n                      const Slice& delta,\n                      const Options& options);\n",
+        "b_contents": "  // Returns the number of successive merge entries starting from the newest\n  // entry for the key up to the last non-merge entry or last entry for the\n  // key in the memtable.\n  size_t CountSuccessiveMergeEntries(const LookupKey& key);\n",
+        "base_contents": "",
+        "res_region": "  // If prev_value for key exits, attempts to update it inplace.\n  // else returns false\n  // Pseudocode\n  //   if key exists in current memtable && prev_value is of type kTypeValue\n  //     new_value = delta(prev_value)\n  //     if sizeof(new_value) <= sizeof(prev_value)\n  //       update inplace\n  //     else add(key, new_value)\n  //   else return false\n  bool UpdateCallback(SequenceNumber seq,\n                      const Slice& key,\n                      const Slice& delta,\n                      const Options& options);\n\n  // Returns the number of successive merge entries starting from the newest\n  // entry for the key up to the last non-merge entry or last entry for the\n  // key in the memtable.\n  size_t CountSuccessiveMergeEntries(const LookupKey& key);\n",
+        "lookback": "  // else returns false",
+        "lookahead": "  // Returns the edits area that is needed for flushing the memtable",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 108,
+        "end_line": 130,
+        "merge_gen_region": null,
+        "confidence": 0.8492618799209595,
+        "hesitated": true
+    }
+]

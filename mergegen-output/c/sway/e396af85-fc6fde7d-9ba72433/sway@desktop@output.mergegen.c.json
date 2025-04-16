@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tif (con->current.border == B_NORMAL) {\n\t\t\trender_titlebar(soutput, damage, con, con->current.swayc_x,\n\t\t\t\t\tcon->current.swayc_y, con->current.swayc_width, colors,\n\t\t\t\t\ttitle_texture, marks_texture);\n\t\t} else {",
+        "b_contents": "\t\tif (con->sway_view->border == B_NORMAL) {\n\t\t\trender_titlebar(soutput, damage, con, con->x, con->y, con->width,\n\t\t\t\t\tcolors, title_texture, marks_texture);\n\t\t} else if (con->sway_view->border != B_NONE) {",
+        "base_contents": "\t\tif (con->sway_view->border == B_NORMAL) {\n\t\t\trender_titlebar(soutput, damage, con, con->x, con->y, con->width,\n\t\t\t\t\tcolors, title_texture, marks_texture);\n\t\t} else {",
+        "res_region": "\t\tif (con->current.border == B_NORMAL) {\n\t\t\trender_titlebar(soutput, damage, con, con->current.swayc_x,\n\t\t\t\t\tcon->current.swayc_y, con->current.swayc_width, colors,\n\t\t\t\t\ttitle_texture, marks_texture);\n\t\t} else if (con->current.border != B_NONE) {",
+        "lookback": "\t\t\trender_titlebar(soutput, damage, con, con->current.swayc_x,",
+        "lookahead": "\t\t\trender_top_border(soutput, damage, con, colors);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 868,
+        "end_line": 884,
+        "merge_gen_region": null,
+        "confidence": 0.6545888185501099,
+        "hesitated": true
+    }
+]

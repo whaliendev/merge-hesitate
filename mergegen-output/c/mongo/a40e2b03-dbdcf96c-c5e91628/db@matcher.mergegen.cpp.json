@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    int Matcher::matchesNe(const char *fieldName, const BSONElement &toMatch, const BSONObj &obj, const ElementMatcher& bm , MatchDetails * details ) const {\n        int ret = matchesDotted( fieldName, toMatch, obj, BSONObj::Equality, bm , false , details );\n        if ( bm._toMatch.type() != jstNULL )\n            return ( ret <= 0 ) ? 1 : 0;\n        else\n            return -ret;",
+        "b_contents": "    int Matcher::inverseMatch(const char *fieldName, const BSONElement &toMatch, const BSONObj &obj, const ElementMatcher& bm , MatchDetails * details ) {\n        int inverseRet = matchesDotted( fieldName, toMatch, obj, bm.inverseOfNegativeCompareOp(), bm , false , details );\n        if ( bm.negativeCompareOpContainsNull() ) {\n            return ( inverseRet <= 0 ) ? 1 : 0;\n        }\n        return -inverseRet;",
+        "base_contents": "    int Matcher::matchesNe(const char *fieldName, const BSONElement &toMatch, const BSONObj &obj, const ElementMatcher& bm , MatchDetails * details ) {\n        int ret = matchesDotted( fieldName, toMatch, obj, BSONObj::Equality, bm , false , details );\n        if ( bm._toMatch.type() != jstNULL )\n            return ( ret <= 0 ) ? 1 : 0;\n        else\n            return -ret;",
+        "res_region": "    int Matcher::inverseMatch(const char *fieldName, const BSONElement &toMatch, const BSONObj &obj, const ElementMatcher& bm , MatchDetails * details ) const {\n        int inverseRet = matchesDotted( fieldName, toMatch, obj, bm.inverseOfNegativeCompareOp(), bm , false , details );\n        if ( bm.negativeCompareOpContainsNull() ) {\n            return ( inverseRet <= 0 ) ? 1 : 0;\n        }\n        return -inverseRet;",
+        "lookback": "        int inverseRet = matchesDotted( fieldName, toMatch, obj, bm.inverseOfNegativeCompareOp(), bm , false , details );",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 588,
+        "end_line": 609,
+        "merge_gen_region": null,
+        "confidence": 0.8608943819999695,
+        "hesitated": true
+    }
+]

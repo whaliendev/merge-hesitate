@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/* Type of coordinates. Should be `int16_t` (or `int32_t` for extreme cases) */\n\n/* Maximum buffer size to allocate for rotation. Only used if software rotation is enabled. */\n#ifndef LV_DISP_ROT_MAX_BUF\n#  ifdef CONFIG_LV_DISP_ROT_MAX_BUF\n#    define LV_DISP_ROT_MAX_BUF CONFIG_LV_DISP_ROT_MAX_BUF\n#  else\n#    define  LV_DISP_ROT_MAX_BUF  (10U * 1024U)\n#  endif\n#endif\n",
+        "b_contents": "",
+        "base_contents": "/* Type of coordinates. Should be `int16_t` (or `int32_t` for extreme cases) */\n",
+        "res_region": "",
+        "lookback": "   MEMORY SETTINGS",
+        "lookahead": "/*=========================",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 90,
+        "end_line": 106,
+        "merge_gen_region": null,
+        "confidence": 0.5820494294166565,
+        "hesitated": true
+    }
+]

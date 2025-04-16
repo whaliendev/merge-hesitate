@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (parse_tree(tree) < 0)\n\t\texit(128);\n\tinit_tree_desc(&t, tree->buffer, tree->size);",
+        "b_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&t, &tree->object.oid, tree->buffer, tree->size);",
+        "base_contents": "\tparse_tree(tree);\n\tinit_tree_desc(&t, tree->buffer, tree->size);",
+        "res_region": "\tif (parse_tree(tree) < 0)\n\t\texit(128);\n\tinit_tree_desc(&t, &tree->object.oid, tree->buffer, tree->size);",
+        "lookback": "\t\texit(128);",
+        "lookahead": "\tif (unpack_trees(1, &t, &opts))",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 333,
+        "end_line": 343,
+        "merge_gen_region": null,
+        "confidence": 0.8764298558235168,
+        "hesitated": true
+    }
+]

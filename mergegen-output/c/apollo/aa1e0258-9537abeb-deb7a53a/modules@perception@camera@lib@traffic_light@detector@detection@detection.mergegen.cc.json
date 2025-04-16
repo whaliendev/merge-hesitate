@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // todo:determine details\n",
+        "b_contents": "  //todo:determine details\n",
+        "base_contents": "",
+        "res_region": "  // todo:determine details\n",
+        "lookback": "",
+        "lookahead": "  std::string model_root =",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 50,
+        "end_line": 57,
+        "merge_gen_region": null,
+        "confidence": 0.6513714790344238,
+        "hesitated": true
+    }
+]

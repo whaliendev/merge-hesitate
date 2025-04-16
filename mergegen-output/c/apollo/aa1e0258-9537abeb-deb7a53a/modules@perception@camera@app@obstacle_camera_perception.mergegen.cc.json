@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "bool ObstacleCameraPerception::Init(const PipelineConfig &pipeline_config) {\n  return Initialize(pipeline_config);\n}\n\nbool ObstacleCameraPerception::Process(DataFrame *data_frame) {\n  if (data_frame == nullptr) return false;\n\n  return InnerProcess(data_frame);\n}\n",
+        "b_contents": "bool ObstacleCameraPerception::Init(const PipelineConfig& pipeline_config) {\n   return Initialize(pipeline_config);\n}\n\nbool ObstacleCameraPerception::Process(DataFrame* data_frame) {\n  if (data_frame == nullptr)\n    return false;\n\n  return InnerProcess(data_frame);\n}\n",
+        "base_contents": "",
+        "res_region": "bool ObstacleCameraPerception::Init(const PipelineConfig &pipeline_config) {\n  return Initialize(pipeline_config);\n}\n\nbool ObstacleCameraPerception::Process(DataFrame *data_frame) {\n  if (data_frame == nullptr) return false;\n\n  return InnerProcess(data_frame);\n}\n",
+        "lookback": "  return Initialize(pipeline_config);",
+        "lookahead": "void ObstacleCameraPerception::InitLane(",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 184,
+        "end_line": 208,
+        "merge_gen_region": null,
+        "confidence": 0.8534223437309265,
+        "hesitated": true
+    }
+]

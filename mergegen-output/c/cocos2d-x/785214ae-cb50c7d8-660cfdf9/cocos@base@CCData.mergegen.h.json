@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/*\n * @js NA\n */",
+        "b_contents": "/**\n * @lua NA\n */",
+        "base_contents": "",
+        "res_region": "/*\n * @js NA\n * @lua NA\n */",
+        "lookback": " * @js NA",
+        "lookahead": "class CC_DLL Data",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 35,
+        "end_line": 44,
+        "merge_gen_region": null,
+        "confidence": 0.8154300451278687,
+        "hesitated": true
+    }
+]

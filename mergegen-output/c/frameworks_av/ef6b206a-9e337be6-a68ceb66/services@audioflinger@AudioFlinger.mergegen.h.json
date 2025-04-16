@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    status_t moveEffectChain_ll(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final\n            REQUIRES(mutex(), audio_utils::ThreadBase_Mutex);",
+        "b_contents": "    status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final REQUIRES(mutex());",
+        "base_contents": "    status_t moveEffectChain_l(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final;",
+        "res_region": "    status_t moveEffectChain_ll(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final\n            REQUIRES(mutex(), audio_utils::ThreadBase_Mutex);",
+        "lookback": "            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 369,
+        "end_line": 379,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9087151885032654,
+        "hesitated": false,
+        "resolved": false
+    }
+]

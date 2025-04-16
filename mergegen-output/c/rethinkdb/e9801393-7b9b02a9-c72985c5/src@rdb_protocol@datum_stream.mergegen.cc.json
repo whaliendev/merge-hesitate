@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if (fresh != nullptr || cached_index > 0) {\n            raw_stream_t new_cache;\n            new_cache.reserve((cached->cache.size() - cached_index)\n                              + (fresh ? (fresh->stream.size() - fresh_index) : 0));\n            std::move(cached->cache.begin() + cached_index,\n                      cached->cache.end(),",
+        "b_contents": "        if (fresh || cached_index > 0) {\n            raw_stream_t new_cache;\n            new_cache.reserve((cached->cache.size() - cached_index)\n                              + (fresh ? (fresh->stream.size() - fresh_index) : 0));\n            std::move(cached->cache.begin() + cached_index,\n                      cached->cache.end(),",
+        "base_contents": "        raw_stream_t new_cache;\n        new_cache.reserve((cached->cache.size() - cached_index)\n                          + (fresh ? (fresh->stream.size() - fresh_index) : 0));\n        std::move(cached->cache.begin() + cached_index,\n                  cached->cache.end(),\n                  std::back_inserter(new_cache));\n        if (fresh != nullptr) {\n            std::move(fresh->stream.begin() + fresh_index,\n                      fresh->stream.end(),",
+        "res_region": "        if (fresh != nullptr || cached_index > 0) {\n            raw_stream_t new_cache;\n            new_cache.reserve((cached->cache.size() - cached_index)\n                              + (fresh ? (fresh->stream.size() - fresh_index) : 0));\n            std::move(cached->cache.begin() + cached_index,\n                      cached->cache.end(),",
+        "lookback": "            raw_stream_t new_cache;",
+        "lookahead": "                      std::back_inserter(new_cache));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 248,
+        "end_line": 272,
+        "merge_gen_region": null,
+        "confidence": 0.8608250021934509,
+        "hesitated": true
+    }
+]

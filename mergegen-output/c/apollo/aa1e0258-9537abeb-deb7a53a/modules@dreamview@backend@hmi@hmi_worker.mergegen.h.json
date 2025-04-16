@@ -1,0 +1,89 @@
+[
+    {
+        "a_contents": "#include \"nlohmann/json.hpp\"\n\n#include \"modules/common_msgs/audio_msgs/audio_event.pb.h\"\n#include \"modules/common_msgs/basic_msgs/drive_event.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/control_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/dreamview_msgs/hmi_status.pb.h\"\n#include \"modules/common_msgs/localization_msgs/localization.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/audio_msgs/audio_event.pb.h\"\n#include \"modules/common_msgs/basic_msgs/drive_event.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/control_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/dreamview_msgs/hmi_status.pb.h\"\n#include \"modules/common_msgs/localization_msgs/localization.pb.h\"\n#include \"nlohmann/json.hpp\"",
+        "base_contents": "#include \"modules/audio/proto/audio_event.pb.h\"\n#include \"modules/canbus/proto/chassis.pb.h\"\n#include \"modules/common/proto/drive_event.pb.h\"\n#include \"modules/control/proto/pad_msg.pb.h\"",
+        "res_region": "#include \"nlohmann/json.hpp\"\n\n#include \"modules/common_msgs/audio_msgs/audio_event.pb.h\"\n#include \"modules/common_msgs/basic_msgs/drive_event.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/control_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/dreamview_msgs/hmi_status.pb.h\"\n#include \"modules/common_msgs/localization_msgs/localization.pb.h\"",
+        "lookback": "",
+        "lookahead": "#include \"modules/dreamview/proto/hmi_config.pb.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 50,
+        "merge_gen_region": "includemodulescommonmsgsaudiomsgsaudioeventpbh # \"/commonmsgsbasicmsgsdriveeventpbh # \"//ismsgschis..\"includemodulescommonmsgscontrolmsgs__..\"includemodulescommon/./.\"includemodulescommon/.//>(.\"includemodulescommon/./>(.\"includemodulescommon/./>(.\"includemodulescommon/./>(.\"includemodulescommon//>(.\"includemodulescommon//>(h",
+        "confidence": 0.926764726638794,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  using DvCallback = std::function<nlohmann::json(\n      const std::string& function_name, const nlohmann::json& param_json)>;",
+        "b_contents": "\n  using DvCallback = std::function<nlohmann::json(const std::string &function_name,\n                                        const nlohmann::json &param_json)>;",
+        "base_contents": "",
+        "res_region": "  using DvCallback = std::function<nlohmann::json(\n      const std::string& function_name, const nlohmann::json& param_json)>;",
+        "lookback": "      const std::string& function_name, const nlohmann::json& param_json)>;",
+        "lookahead": "  HMIWorker() : HMIWorker(cyber::CreateNode(\"HMI\")) {}",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 67,
+        "end_line": 75,
+        "merge_gen_region": null,
+        "confidence": 0.8427802920341492,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool UpdateScenarioSetToStatus(const std::string& scenario_set_id,\n                                 const std::string& scenario_set_name);\n  bool UpdateScenarioSet(const std::string& scenario_set_id,\n                         const std::string& scenario_set_name,\n                         ScenarioSet* new_scenario_set);\n  bool UpdateDynamicModelToStatus(const std::string& dynamic_model_name);\n  void UpdateComponentStatus();\n  // bool UpdateRecordToStatus(const std::string& record_id,\n  //                     const std::string& record_status);\n  bool LoadRecords();\n  bool ReloadVehicles();\n  void GetScenarioSetPath(const std::string& scenario_set_id,\n                          std::string* scenario_set_path);\n  void UpdateCameraSensorChannelToStatus(const std::string& channel_name);\n  void UpdatePointCloudChannelToStatus(const std::string& channel_name);",
+        "b_contents": "  bool UpdateScenarioSetToStatus(const std::string& scenario_set_id, const std::string& scenario_set_name);\n  bool UpdateScenarioSet(const std::string& scenario_set_id, const std::string& scenario_set_name,ScenarioSet& new_scenario_set);\n  bool UpdateDynamicModelToStatus(std::string& dynamic_model_name);\n  void UpdateComponentStatus();\n  bool UpdateRecordToStatus(const std::string& record_id,\n                      const std::string& record_status);\n\n  void GetScenarioSetPath(const std::string& scenario_set_id, std::string& scenario_set_path);\n",
+        "base_contents": "",
+        "res_region": "  bool UpdateScenarioSetToStatus(const std::string& scenario_set_id,\n                                 const std::string& scenario_set_name);\n  bool UpdateScenarioSet(const std::string& scenario_set_id,\n                         const std::string& scenario_set_name,\n                         ScenarioSet* new_scenario_set);\n  bool UpdateDynamicModelToStatus(const std::string& dynamic_model_name);\n  void UpdateComponentStatus();\n  // bool UpdateRecordToStatus(const std::string& record_id,\n  //                     const std::string& record_status);\n  bool LoadRecords();\n  bool ReloadVehicles();\n  void GetScenarioSetPath(const std::string& scenario_set_id,\n                          std::string* scenario_set_path);\n  void UpdateCameraSensorChannelToStatus(const std::string& channel_name);\n  void UpdatePointCloudChannelToStatus(const std::string& channel_name);",
+        "lookback": "                                 const std::string& scenario_set_name);",
+        "lookahead": "  // Load HMIConfig and HMIMode.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 114,
+        "end_line": 141,
+        "merge_gen_region": null,
+        "confidence": 0.7313902974128723,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool LoadScenarios();\n\n  bool LoadDynamicModels();\n\n  void DeleteScenarioSet(const std::string& scenario_set_id);\n  void DeleteRecord(const std::string& record_id);\n  void DeleteDynamicModel(const std::string& dynamic_model_name);\n\n  void GetScenarioResourcePath(std::string* scenario_resource_path);\n  void GetRecordPath(std::string* record_path);\n\n  bool RePlayRecord(const std::string& record_id);\n",
+        "b_contents": "  bool LoadScenarios();\n  bool LoadRecords();\n  bool LoadDynamicModels();\n\n  void DeleteScenarioSet(const std::string& scenario_set_id);\n  void DeleteRecord(const std::string& record_id);\n  void DeleteDynamicModel(const std::string& dynamic_model_name);\n\n  void GetScenarioResourcePath(std::string& scenario_resource_path);\n  void GetRecordPath(std::string& record_path);\n\n  bool RePlayRecord(const std::string& record_id);\n",
+        "base_contents": "",
+        "res_region": "  bool LoadScenarios();\n\n  bool LoadDynamicModels();\n\n  void DeleteScenarioSet(const std::string& scenario_set_id);\n  void DeleteRecord(const std::string& record_id);\n  void DeleteDynamicModel(const std::string& dynamic_model_name);\n\n  void GetScenarioResourcePath(std::string* scenario_resource_path);\n  void GetRecordPath(std::string* record_path);\n\n  bool RePlayRecord(const std::string& record_id);\n",
+        "lookback": "",
+        "lookahead": "  // Start / stop a module.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 166,
+        "end_line": 195,
+        "merge_gen_region": " Loadenos bool LoadModels(); Deleteenario( stdstring scenariosetid voidRecord::&__); DeleteModelconst::&_);",
+        "confidence": 0.9211724400520325,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "",
+        "base_contents": "  void UpdateComponentStatus();",
+        "res_region": "",
+        "lookback": "  HMIConfig config_;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 203,
+        "end_line": 208,
+        "merge_gen_region": null,
+        "confidence": 0.6139538884162903,
+        "hesitated": true
+    }
+]

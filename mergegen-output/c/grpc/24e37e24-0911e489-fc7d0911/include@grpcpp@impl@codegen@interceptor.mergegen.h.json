@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // Checks whether the RECV MESSAGE op completed successfully\n  virtual bool GetRecvMessageStatus() = 0;\n\n  // Returns a modifiable multimap of the received initial metadata",
+        "b_contents": "  /// Returns a modifiable multimap of the received initial metadata.\n  /// Valid for POST_RECV_INITIAL_METADATA interceptions; nullptr if not valid",
+        "base_contents": "  // Returns a modifiable multimap of the received initial metadata",
+        "res_region": "  /// Returns a modifiable multimap of the received initial metadata.\n  /// Valid for POST_RECV_INITIAL_METADATA interceptions; nullptr if not valid",
+        "lookback": "  /// Valid for POST_RECV_INITIAL_METADATA interceptions; nullptr if not valid",
+        "lookahead": "  virtual std::multimap<grpc::string_ref, grpc::string_ref>*",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 138,
+        "end_line": 148,
+        "merge_gen_region": null,
+        "confidence": 0.7502157688140869,
+        "hesitated": true
+    }
+]

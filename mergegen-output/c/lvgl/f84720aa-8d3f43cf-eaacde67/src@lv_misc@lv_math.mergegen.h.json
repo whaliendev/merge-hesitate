@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "int32_t lv_bezier3(uint32_t t, int32_t u0, int32_t u1, int32_t u2, int32_t u3);",
+        "b_contents": "uint32_t _lv_bezier3(uint32_t t, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3);",
+        "base_contents": "int32_t _lv_bezier3(uint32_t t, int32_t u0, int32_t u1, int32_t u2, int32_t u3);",
+        "res_region": "uint32_t lv_bezier3(uint32_t t, uint32_t u0, uint32_t u1, uint32_t u2, uint32_t u3);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 65,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.8432890772819519,
+        "hesitated": true
+    },
+    {
+        "a_contents": "int16_t lv_map(int32_t x, int32_t min_in, int32_t max_in, int32_t min, int32_t max);\n",
+        "b_contents": "int32_t _lv_map(int32_t x, int32_t min_in, int32_t max_in, int32_t min, int32_t max);",
+        "base_contents": "int16_t _lv_map(int32_t x, int32_t min_in, int32_t max_in, int32_t min, int32_t max);",
+        "res_region": "int32_t lv_map(int32_t x, int32_t min_in, int32_t max_in, int32_t min, int32_t max);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 114,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.40622562170028687,
+        "hesitated": true
+    }
+]

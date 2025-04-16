@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    return \"cocos2d-x-3.8-github\";",
+        "b_contents": "    return \"cocos2d-x-3.7.1\";",
+        "base_contents": "    return \"cocos2d-x-3.7\";",
+        "res_region": "    return \"cocos2d-x-3.8-github\";",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.8310015797615051,
+        "hesitated": true
+    }
+]

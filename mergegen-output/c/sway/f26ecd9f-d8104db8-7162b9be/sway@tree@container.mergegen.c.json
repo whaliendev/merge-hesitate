@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tadd_child(&root_container, output);\n\tload_swaybars();",
+        "b_contents": "\n\tcontainer_add_child(&root_container, output);",
+        "base_contents": "\n\tadd_child(&root_container, output);",
+        "res_region": "\tcontainer_add_child(&root_container, output);\n\tload_swaybars();",
+        "lookback": "\tload_swaybars();",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 133,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.46566465497016907,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        lv_obj_set_size(new_tabview, lv_obj_get_width_fit(lv_obj_get_parent(new_tabview)),\n                lv_obj_get_height_fit(lv_obj_get_parent(new_tabview)));",
+        "b_contents": "        lv_coord_t w;\n        lv_coord_t h;\n        if(par) {\n            w = lv_obj_get_width_fit(lv_obj_get_parent(new_tabview));\n            h = lv_obj_get_height_fit(lv_obj_get_parent(new_tabview));\n        } else {\n            w = lv_disp_get_hor_res(NULL);\n            h = lv_disp_get_ver_res(NULL);\n        }\n\n        lv_obj_set_size(new_tabview, w, h);",
+        "base_contents": "        lv_obj_set_size(new_tabview, lv_obj_get_width_fit(lv_obj_get_parent(new_tabview)),\n                        lv_obj_get_height_fit(lv_obj_get_parent(new_tabview)));",
+        "res_region": "        lv_coord_t w;\n        lv_coord_t h;\n        if(par) {\n            w = lv_obj_get_width_fit(lv_obj_get_parent(new_tabview));\n            h = lv_obj_get_height_fit(lv_obj_get_parent(new_tabview));\n        } else {\n            w = lv_disp_get_hor_res(NULL);\n            h = lv_disp_get_ver_res(NULL);\n        }\n\n        lv_obj_set_size(new_tabview, w, h);",
+        "lookback": "        lv_coord_t h;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 114,
+        "end_line": 132,
+        "merge_gen_region": null,
+        "confidence": 0.8614622950553894,
+        "hesitated": true
+    }
+]

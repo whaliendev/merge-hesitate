@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // All data will be in level 0 without any automatic compaction.\n  // It's recommended to manually call CompactRange(NULL, NULL) before reading\n  // from the database, because otherwise the read can be very slow.\n  Options* PrepareForBulkLoad();",
+        "b_contents": "  // Default: 0 (disabled)\n  size_t max_successive_merges;\n\n  // Allow RocksDB to use thread local storage to optimize performance.\n  // Default: true\n  bool allow_thread_local;",
+        "base_contents": "  // Default: 0 (disabled)\n  size_t max_successive_merges;",
+        "res_region": "  // All data will be in level 0 without any automatic compaction.\n  // It's recommended to manually call CompactRange(NULL, NULL) before reading\n  // from the database, because otherwise the read can be very slow.\n  Options* PrepareForBulkLoad();",
+        "lookback": "  // It's recommended to manually call CompactRange(NULL, NULL) before reading",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 744,
+        "end_line": 759,
+        "merge_gen_region": null,
+        "confidence": 0.761526346206665,
+        "hesitated": true
+    }
+]

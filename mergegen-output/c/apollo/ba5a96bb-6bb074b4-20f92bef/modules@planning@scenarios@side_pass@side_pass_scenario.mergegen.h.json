@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  bool IsTransferable(\n      const Scenario& current_scenario,\n      const Frame& frame);",
+        "b_contents": "  static bool IsTransferable(const Frame& frame, const ScenarioConfig& config,\n                             const Scenario& current_scenario);",
+        "base_contents": "  static bool IsTransferable(const Frame& frame,\n                             const ScenarioConfig& config,\n                             const Scenario& current_scenario);",
+        "res_region": "  bool IsTransferable(\n      const Scenario& current_scenario,\n      const Frame& frame);",
+        "lookback": "      const Scenario& current_scenario,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 48,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.7147381901741028,
+        "hesitated": true
+    }
+]

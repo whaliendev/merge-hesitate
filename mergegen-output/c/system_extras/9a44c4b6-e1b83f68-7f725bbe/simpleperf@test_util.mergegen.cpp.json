@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "#if defined(__linux__)\n\nstatic std::optional<bool> CanSampleRegsFor32BitABI() {\n  std::vector<std::unique_ptr<Workload>> workloads;\n  CreateProcesses(1, &workloads);\n  std::string pid = std::to_string(workloads[0]->GetPid());\n  std::unique_ptr<Command> cmd = CreateCommandInstance(\"record\");\n  TemporaryFile tmpfile;\n  if (!cmd->Run({\"-p\", pid, \"--call-graph\", \"dwarf,8\", \"--no-unwind\", \"-e\", \"cpu-clock:u\",\n                 \"--duration\", \"3\", \"-o\", tmpfile.path})) {\n    return std::nullopt;\n  }\n  auto reader = RecordFileReader::CreateInstance(tmpfile.path);\n  if (!reader) {\n    return std::nullopt;\n  }\n  for (const std::unique_ptr<Record>& record : reader->DataSection()) {\n    if (record->type() == PERF_RECORD_SAMPLE) {\n      auto sample = static_cast<const SampleRecord*>(record.get());\n      if (sample->regs_user_data.abi == PERF_SAMPLE_REGS_ABI_32) {\n        return true;\n      }\n    }\n  }\n  return false;\n}\n\nstd::optional<bool> IsInNativeAbi() {",
+        "b_contents": "#if defined(__linux__)\n\nstatic std::optional<bool> CanSampleRegsFor32BitABI() {\n  std::vector<std::unique_ptr<Workload>> workloads;\n  CreateProcesses(1, &workloads);\n  std::string pid = std::to_string(workloads[0]->GetPid());\n  std::unique_ptr<Command> cmd = CreateCommandInstance(\"record\");\n  TemporaryFile tmpfile;\n  if (!cmd->Run({\"-p\", pid, \"--call-graph\", \"dwarf,8\", \"--no-unwind\", \"-e\", \"cpu-clock:u\",\n                 \"--duration\", \"3\", \"-o\", tmpfile.path})) {\n    return std::nullopt;\n  }\n  auto reader = RecordFileReader::CreateInstance(tmpfile.path);\n  if (!reader) {\n    return std::nullopt;\n  }\n  for (const std::unique_ptr<Record>& record : reader->DataSection()) {\n    if (record->type() == PERF_RECORD_SAMPLE) {\n      auto sample = static_cast<const SampleRecord*>(record.get());\n      if (sample->regs_user_data.abi == PERF_SAMPLE_REGS_ABI_32) {\n        return true;\n      }\n    }\n  }\n  return false;\n}\n\nbool IsInNativeAbi() {",
+        "base_contents": "bool IsInNativeAbi() {",
+        "res_region": "#if defined(__linux__)\n\nstatic std::optional<bool> CanSampleRegsFor32BitABI() {\n  std::vector<std::unique_ptr<Workload>> workloads;\n  CreateProcesses(1, &workloads);\n  std::string pid = std::to_string(workloads[0]->GetPid());\n  std::unique_ptr<Command> cmd = CreateCommandInstance(\"record\");\n  TemporaryFile tmpfile;\n  if (!cmd->Run({\"-p\", pid, \"--call-graph\", \"dwarf,8\", \"--no-unwind\", \"-e\", \"cpu-clock:u\",\n                 \"--duration\", \"3\", \"-o\", tmpfile.path})) {\n    return std::nullopt;\n  }\n  auto reader = RecordFileReader::CreateInstance(tmpfile.path);\n  if (!reader) {\n    return std::nullopt;\n  }\n  for (const std::unique_ptr<Record>& record : reader->DataSection()) {\n    if (record->type() == PERF_RECORD_SAMPLE) {\n      auto sample = static_cast<const SampleRecord*>(record.get());\n      if (sample->regs_user_data.abi == PERF_SAMPLE_REGS_ABI_32) {\n        return true;\n      }\n    }\n  }\n  return false;\n}\n\nstd::optional<bool> IsInNativeAbi() {",
+        "lookback": "",
+        "lookahead": "  static int in_native_abi = -1;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 31,
+        "end_line": 91,
+        "merge_gen_region": "if(____) stdoptionalbool CanRegs32ABI {::<<>SampleForBit() stdvectorstduniqueptrWork>>loads CreatePro(,work);:: pid stdtostringwork[]->Pid stduniqueptrCommand cmd CreateInstancerecord Temporary tmp; (!->Run{\"p pid \"---\",,callgraph \",\",8 \"---\",e\",cpuclocku\",duration \"\",3 \"-\", tmp.} { stdnul; auto =FileReaderCreate(filepath ifreader { stdnul; forconst::__<>& :->Section { (::lopt } (::_<>& :->Section { (->type ==____) return::lopt } ( stduniqueptrRecord record :->Section { (->type ==___) return::lopt } ( stduniqueptrRecord record :->Section { (->type ==___) return; } } return;",
+        "confidence": 0.8951390981674194,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "      if (GetTargetArch() == ARCH_ARM) {\n        // If we can't get ARM registers in samples, probably we are running with a 32-bit\n        // translator on 64-bit only CPUs. Then we should make in_native_abi = 0.\n        if (auto result = CanSampleRegsFor32BitABI(); result.has_value()) {\n          in_native_abi = result.value() ? 1 : 0;\n        } else {\n          in_native_abi = 2;\n        }\n      }",
+        "b_contents": "      if (GetTargetArch() == ARCH_ARM) {\n        // If we can't get ARM registers in samples, probably we are running with a 32-bit\n        // translator on 64-bit only CPUs.\n        if (CanSampleRegsFor32BitABI() != std::optional<bool>(true)) {\n          in_native_abi = 0;\n        }\n      }",
+        "base_contents": "",
+        "res_region": "      if (GetTargetArch() == ARCH_ARM) {\n        // If we can't get ARM registers in samples, probably we are running with a 32-bit\n        // translator on 64-bit only CPUs. Then we should make in_native_abi = 0.\n        if (auto result = CanSampleRegsFor32BitABI(); result.has_value()) {\n          in_native_abi = result.value() ? 1 : 0;\n        } else {\n          in_native_abi = 2;\n        }\n      }",
+        "lookback": "        // If we can't get ARM registers in samples, probably we are running with a 32-bit",
+        "lookahead": "    } else if (GetTargetArch() == ARCH_RISCV64) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 109,
+        "end_line": 128,
+        "merge_gen_region": " (Arch ==_)",
+        "confidence": 0.92600417137146,
+        "hesitated": false,
+        "resolved": false
+    }
+]

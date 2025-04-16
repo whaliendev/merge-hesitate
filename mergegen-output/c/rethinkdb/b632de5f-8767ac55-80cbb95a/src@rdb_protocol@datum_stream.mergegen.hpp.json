@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                                    const protob_t<const Backtrace> &bt) = 0;\n    virtual bool add_stamp(changefeed_stamp_t stamp);\n    virtual boost::optional<active_state_t> get_active_state() const;",
+        "b_contents": "                                    backtrace_id_t bt) = 0;",
+        "base_contents": "                                    const protob_t<const Backtrace> &bt) = 0;",
+        "res_region": "    virtual void add_transformation(transform_variant_t &&tv, backtrace_id_t bt) = 0;\n    virtual bool add_stamp(changefeed_stamp_t stamp);\n    virtual boost::optional<active_state_t> get_active_state() const;",
+        "lookback": "    virtual bool add_stamp(changefeed_stamp_t stamp);",
+        "lookahead": "    void add_grouping(transform_variant_t &&tv,",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 76,
+        "end_line": 84,
+        "merge_gen_region": null,
+        "confidence": 0.6808791160583496,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                         const protob_t<const Backtrace> &bt_src,\n                         size_t expected_states = 0);",
+        "b_contents": "                         backtrace_id_t bt);",
+        "base_contents": "                         const protob_t<const Backtrace> &bt_src);",
+        "res_region": "                         backtrace_id_t bt);\n                         size_t expected_states = 0);",
+        "lookback": "                         size_t expected_states = 0);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 274,
+        "end_line": 281,
+        "merge_gen_region": null,
+        "confidence": 0.8316064476966858,
+        "hesitated": true
+    }
+]

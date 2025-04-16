@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    case ErrorCode::kPackageExcludedFromUpdate:",
+        "b_contents": "    case ErrorCode::kNotEnoughSpace:\n    case ErrorCode::kDeviceCorrupted:",
+        "base_contents": "",
+        "res_region": "    case ErrorCode::kNotEnoughSpace:\n    case ErrorCode::kDeviceCorrupted:\n    case ErrorCode::kPackageExcludedFromUpdate:",
+        "lookback": "    case ErrorCode::kDeviceCorrupted:",
+        "lookahead": "      LOG(INFO) << \"Not changing URL index or failure count due to error \"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 156,
+        "end_line": 162,
+        "merge_gen_region": " ErrorCodekExcludedUpdate caseCodekExcludedUpdate caseCodekEnSpace case Error::Deviceupt:() <<casecasecasecasecasecasecasecasecasecasecaseCodekExcludeFromc caseCodekExcludeFromccasecase caseCodekExcludeFromc caseCode caseCode caseCode caseCodecasecasecasecasecasecasecasecase caseCodecasecasecase",
+        "confidence": 0.9201706647872925,
+        "hesitated": false,
+        "resolved": false
+    }
+]

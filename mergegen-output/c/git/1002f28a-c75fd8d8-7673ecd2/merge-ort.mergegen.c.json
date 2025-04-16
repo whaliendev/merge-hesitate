@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\tif (parse_tree(merge_base) < 0 ||\n\t    parse_tree(side1) < 0 ||\n\t    parse_tree(side2) < 0)\n\t\treturn -1;\n\tinit_tree_desc(t + 0, merge_base->buffer, merge_base->size);\n\tinit_tree_desc(t + 1, side1->buffer, side1->size);\n\tinit_tree_desc(t + 2, side2->buffer, side2->size);",
+        "b_contents": "\tparse_tree(merge_base);\n\tparse_tree(side1);\n\tparse_tree(side2);\n\tinit_tree_desc(t + 0, &merge_base->object.oid,\n\t\t       merge_base->buffer, merge_base->size);\n\tinit_tree_desc(t + 1, &side1->object.oid, side1->buffer, side1->size);\n\tinit_tree_desc(t + 2, &side2->object.oid, side2->buffer, side2->size);",
+        "base_contents": "\tparse_tree(merge_base);\n\tparse_tree(side1);\n\tparse_tree(side2);\n\tinit_tree_desc(t + 0, merge_base->buffer, merge_base->size);\n\tinit_tree_desc(t + 1, side1->buffer, side1->size);\n\tinit_tree_desc(t + 2, side2->buffer, side2->size);",
+        "res_region": "\tif (parse_tree(merge_base) < 0 ||\n\t    parse_tree(side1) < 0 ||\n\t    parse_tree(side2) < 0)\n\t\treturn -1;\n\tinit_tree_desc(t + 0, &merge_base->object.oid,\n\t\t       merge_base->buffer, merge_base->size);\n\tinit_tree_desc(t + 1, &side1->object.oid, side1->buffer, side1->size);\n\tinit_tree_desc(t + 2, &side2->object.oid, side2->buffer, side2->size);",
+        "lookback": "\t    parse_tree(side1) < 0 ||",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1663,
+        "end_line": 1686,
+        "merge_gen_region": null,
+        "confidence": 0.8697028160095215,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif (parse_tree(prev) < 0)\n\t\treturn -1;\n\tinit_tree_desc(&trees[0], prev->buffer, prev->size);\n\tif (parse_tree(next) < 0)\n\t\treturn -1;\n\tinit_tree_desc(&trees[1], next->buffer, next->size);",
+        "b_contents": "\tparse_tree(prev);\n\tinit_tree_desc(&trees[0], &prev->object.oid, prev->buffer, prev->size);\n\tparse_tree(next);\n\tinit_tree_desc(&trees[1], &next->object.oid, next->buffer, next->size);",
+        "base_contents": "\tparse_tree(prev);\n\tinit_tree_desc(&trees[0], prev->buffer, prev->size);\n\tparse_tree(next);\n\tinit_tree_desc(&trees[1], next->buffer, next->size);",
+        "res_region": "\tif (parse_tree(prev) < 0)\n\t\treturn -1;\n\tinit_tree_desc(&trees[0], &prev->object.oid, prev->buffer, prev->size);\n\tif (parse_tree(next) < 0)\n\t\treturn -1;\n\tinit_tree_desc(&trees[1], &next->object.oid, next->buffer, next->size);",
+        "lookback": "\t\treturn -1;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 4463,
+        "end_line": 4480,
+        "merge_gen_region": null,
+        "confidence": 0.8785484433174133,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "#include <camera/StringUtils.h>\n#include <ui/PublicFormat.h>",
+        "b_contents": "#include <camera/StringUtils.h>",
+        "base_contents": "",
+        "res_region": "#include <camera/StringUtils.h>\n#include <ui/PublicFormat.h>",
+        "lookback": "#include <ui/PublicFormat.h>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 30,
+        "end_line": 36,
+        "merge_gen_region": null,
+        "confidence": 0.7079182863235474,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        std::string msg = fmt::sprintf(\"Camera %s: Failed to query Surface dataspace: %s (%d)\",\n                logicalCameraId.c_str(), strerror(-err), err);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_INVALID_OPERATION, msg.c_str());\n    }\n\n    if (colorSpace != ANDROID_REQUEST_AVAILABLE_COLOR_SPACE_PROFILES_MAP_UNSPECIFIED &&\n            format != HAL_PIXEL_FORMAT_BLOB) {\n        if (!dataSpaceFromColorSpace(&dataSpace, colorSpace)) {\n            std::string msg = fmt::sprintf(\"Camera %s: color space %d not supported, failed to \"\n                    \"convert to data space\", logicalCameraId.c_str(), colorSpace);\n            ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n            return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());\n        }",
+        "b_contents": "        std::string msg = fmt::sprintf(\"Camera %s: Failed to query Surface dataspace: %s (%d)\",\n                logicalCameraId.c_str(), strerror(-err), err);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_INVALID_OPERATION, msg.c_str());",
+        "base_contents": "        String8 msg = String8::format(\"Camera %s: Failed to query Surface dataspace: %s (%d)\",\n                logicalCameraId.string(), strerror(-err), err);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.string());\n        return STATUS_ERROR(CameraService::ERROR_INVALID_OPERATION, msg.string());",
+        "res_region": "        std::string msg = fmt::sprintf(\"Camera %s: Failed to query Surface dataspace: %s (%d)\",\n                logicalCameraId.c_str(), strerror(-err), err);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_INVALID_OPERATION, msg.c_str());\n    }\n\n    if (colorSpace != ANDROID_REQUEST_AVAILABLE_COLOR_SPACE_PROFILES_MAP_UNSPECIFIED &&\n            format != HAL_PIXEL_FORMAT_BLOB) {\n        if (!dataSpaceFromColorSpace(&dataSpace, colorSpace)) {\n            std::string msg = fmt::sprintf(\"Camera %s: color space %d not supported, failed to \"\n                    \"convert to data space\", logicalCameraId.c_str(), colorSpace);\n            ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n            return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());\n        }",
+        "lookback": "                logicalCameraId.c_str(), strerror(-err), err);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 496,
+        "end_line": 521,
+        "merge_gen_region": null,
+        "confidence": 0.8462206125259399,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            physicalCameraMetadata, &overriddenSensorPixelModes) != OK) {\n        std::string msg = fmt::sprintf(\"Camera %s: sensor pixel modes for stream with \"\n                \"format %#x are not valid\",logicalCameraId.c_str(), format);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "b_contents": "            physicalCameraMetadata, flexibleConsumer, &overriddenSensorPixelModes) != OK) {\n        std::string msg = fmt::sprintf(\"Camera %s: sensor pixel modes for stream with \"\n                \"format %#x are not valid\",logicalCameraId.c_str(), format);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "base_contents": "            physicalCameraMetadata, flexibleConsumer, &overriddenSensorPixelModes) != OK) {\n        String8 msg = String8::format(\"Camera %s: sensor pixel modes for stream with \"\n                \"format %#x are not valid\",logicalCameraId.string(), format);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.string());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.string());",
+        "res_region": "            physicalCameraMetadata, &overriddenSensorPixelModes) != OK) {\n        std::string msg = fmt::sprintf(\"Camera %s: sensor pixel modes for stream with \"\n                \"format %#x are not valid\",logicalCameraId.c_str(), format);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "lookback": "        std::string msg = fmt::sprintf(\"Camera %s: sensor pixel modes for stream with \"",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 535,
+        "end_line": 553,
+        "merge_gen_region": null,
+        "confidence": 0.8080698847770691,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            !SessionConfigurationUtils::is10bitCompatibleFormat(format, dataSpace)) {\n        std::string msg = fmt::sprintf(\"Camera %s: No 10-bit supported stream configurations with \"",
+        "b_contents": "            !SessionConfigurationUtils::is10bitCompatibleFormat(format)) {\n        std::string msg = fmt::sprintf(\"Camera %s: No 10-bit supported stream configurations with \"",
+        "base_contents": "            !SessionConfigurationUtils::is10bitCompatibleFormat(format)) {\n        String8 msg = String8::format(\"Camera %s: No 10-bit supported stream configurations with \"",
+        "res_region": "            !SessionConfigurationUtils::is10bitCompatibleFormat(format, dataSpace)) {\n        std::string msg = fmt::sprintf(\"Camera %s: No 10-bit supported stream configurations with \"",
+        "lookback": "        std::string msg = fmt::sprintf(\"Camera %s: No 10-bit supported stream configurations with \"",
+        "lookahead": "                \"format %#x defined and profile %\" PRIx64 \", failed to create output stream\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 581,
+        "end_line": 590,
+        "merge_gen_region": null,
+        "confidence": 0.6661362051963806,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                logicalCameraId.c_str(), format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());\n    }\n    if (colorSpace != ANDROID_REQUEST_AVAILABLE_COLOR_SPACE_PROFILES_MAP_UNSPECIFIED &&\n            SessionConfigurationUtils::deviceReportsColorSpaces(physicalCameraMetadata) &&\n            !SessionConfigurationUtils::isColorSpaceSupported(colorSpace, format, dataSpace,\n                    dynamicRangeProfile, physicalCameraMetadata)) {\n        std::string msg = fmt::sprintf(\"Camera %s: Color space %d not supported, failed to \"\n                \"create output stream (pixel format %d dynamic range profile %\" PRId64 \")\",\n                logicalCameraId.c_str(), colorSpace, format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "b_contents": "                logicalCameraId.c_str(), format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "base_contents": "                logicalCameraId.string(), format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.string());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.string());",
+        "res_region": "                logicalCameraId.c_str(), format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());\n    }\n    if (colorSpace != ANDROID_REQUEST_AVAILABLE_COLOR_SPACE_PROFILES_MAP_UNSPECIFIED &&\n            SessionConfigurationUtils::deviceReportsColorSpaces(physicalCameraMetadata) &&\n            !SessionConfigurationUtils::isColorSpaceSupported(colorSpace, format, dataSpace,\n                    dynamicRangeProfile, physicalCameraMetadata)) {\n        std::string msg = fmt::sprintf(\"Camera %s: Color space %d not supported, failed to \"\n                \"create output stream (pixel format %d dynamic range profile %\" PRId64 \")\",\n                logicalCameraId.c_str(), colorSpace, format, dynamicRangeProfile);\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(CameraService::ERROR_ILLEGAL_ARGUMENT, msg.c_str());",
+        "lookback": "        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 592,
+        "end_line": 614,
+        "merge_gen_region": null,
+        "confidence": 0.7459092736244202,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        const std::string &logicalCameraId, const CameraMetadata &deviceInfo,\n        bool isCompositeJpegRDisabled,",
+        "b_contents": "        const std::string &logicalCameraId, const CameraMetadata &deviceInfo,",
+        "base_contents": "        const String8 &logicalCameraId, const CameraMetadata &deviceInfo,",
+        "res_region": "        const std::string &logicalCameraId, const CameraMetadata &deviceInfo,\n        bool isCompositeJpegRDisabled,",
+        "lookback": "        bool isCompositeJpegRDisabled,",
+        "lookahead": "        metadataGetter getMetadata, const std::vector<std::string> &physicalCameraIds,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 729,
+        "end_line": 736,
+        "merge_gen_region": null,
+        "confidence": 0.6290519833564758,
+        "hesitated": true
+    }
+]

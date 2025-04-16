@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    lv_coord_t ext_size; /*EXTtend the size of the object in every direction. E.g. for shadow drawing*/\n#if LV_OBJ_REALIGN",
+        "b_contents": "    lv_coord_t ext_draw_pad; /*EXTtend the size in every direction for drawing. */\n#if LV_USE_OBJ_REALIGN",
+        "base_contents": "    lv_coord_t\n        ext_size; /*EXTtend the size of the object in every direction. E.g. for shadow drawing*/\n#if LV_OBJ_REALIGN",
+        "res_region": "    lv_coord_t ext_draw_pad; /*EXTtend the size in every direction for drawing. */\n",
+        "lookback": "",
+        "lookahead": "    lv_reailgn_t realign;",
+        "label": [
+            "newcode",
+            "style_related"
+        ],
+        "start_line": 224,
+        "end_line": 234,
+        "merge_gen_region": null,
+        "confidence": 0.7352436184883118,
+        "hesitated": true
+    }
+]

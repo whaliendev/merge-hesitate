@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        ql::groups_t data(counted_datum_less_t(job.env->reql_version));\n        data = {{ql::datum_t(), ql::datums_t{val}}};",
+        "b_contents": "        ql::groups_t data(counted_datum_less_t(job.env->reql_version()));\n        data = {{counted_t<const ql::datum_t>(), ql::datums_t{val}}};",
+        "base_contents": "        ql::groups_t data(counted_datum_less_t(job.env->reql_version));\n        data = {{counted_t<const ql::datum_t>(), ql::datums_t{val}}};",
+        "res_region": "        ql::groups_t data(counted_datum_less_t(job.env->reql_version()));\n        data = {{ql::datum_t(), ql::datums_t{val}}};",
+        "lookback": "        data = {{ql::datum_t(), ql::datums_t{val}}};",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 948,
+        "end_line": 957,
+        "merge_gen_region": null,
+        "confidence": 0.4966758191585541,
+        "hesitated": true
+    }
+]

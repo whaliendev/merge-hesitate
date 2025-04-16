@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": " * This version of the CHRE API shipped with the Android S release. It adds\n * support for multiple sensors of the same type, permissions for sensitive CHRE\n * APIs / data usage, ability to receive user settings updates, step counter and\n * hinge angle sensors, improved WiFi scan preferences to support power\n * optimization, new WiFi security types, increased the lower bound for the\n * maximum CHRE to host message size, and increased GNSS measurements in\n * chreGnssDataEvent.\n *\n * @see CHRE_API_VERSION\n */\n#define CHRE_API_VERSION_1_5 UINT32_C(0x01050000)\n\n/**\n * Value for version 1.6 of the Context Hub Runtime Environment API interface.\n *\n * This version of the CHRE API is shipped with the Android T release.\n *\n * @note This version of the CHRE API has not been finalized yet, and is\n * currently considered a preview that is subject to change.",
+        "b_contents": " * This version of the CHRE API shipped with the Android S release. It adds\n * support for multiple sensors of the same type, permissions for sensitive CHRE\n * APIs / data usage, ability to receive user settings updates, step counter and\n * hinge angle sensors, improved WiFi scan preferences to support power\n * optimization, new WiFi security types, increased the lower bound for the\n * maximum CHRE to host message size, and increased GNSS measurements in\n * chreGnssDataEvent.",
+        "base_contents": " * The version of the CHRE API shipped with the Android S release.\n *\n * @note This version of the CHRE API has not been finalized yet, and is\n * currently considered a preview that is subject to change.",
+        "res_region": " * This version of the CHRE API shipped with the Android S release. It adds\n * support for multiple sensors of the same type, permissions for sensitive CHRE\n * APIs / data usage, ability to receive user settings updates, step counter and\n * hinge angle sensors, improved WiFi scan preferences to support power\n * optimization, new WiFi security types, increased the lower bound for the\n * maximum CHRE to host message size, and increased GNSS measurements in\n * chreGnssDataEvent.\n *\n * @see CHRE_API_VERSION\n */\n#define CHRE_API_VERSION_1_5 UINT32_C(0x01050000)\n\n/**\n * Value for version 1.6 of the Context Hub Runtime Environment API interface.\n *\n * This version of the CHRE API is shipped with the Android T release.\n *\n * @note This version of the CHRE API has not been finalized yet, and is\n * currently considered a preview that is subject to change.",
+        "lookback": " * support for multiple sensors of the same type, permissions for sensitive CHRE",
+        "lookahead": " *",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 99,
+        "end_line": 132,
+        "merge_gen_region": " support multiple of same, body/ release. adds support multiple of same, body///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.9538109302520752,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "#define CHRE_API_VERSION_1_6 UINT32_C(0x01060000)",
+        "b_contents": "#define CHRE_API_VERSION_1_5 UINT32_C(0x01050000)",
+        "base_contents": "#define CHRE_API_VERSION_1_5  UINT32_C(0x01050000)",
+        "res_region": "#define CHRE_API_VERSION_1_6 UINT32_C(0x01060000)",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 136,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.7051411867141724,
+        "hesitated": true
+    }
+]

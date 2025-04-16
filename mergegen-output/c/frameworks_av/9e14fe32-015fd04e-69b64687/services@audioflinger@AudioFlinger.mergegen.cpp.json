@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "// not needed with the includes above, added to prevent transitive include dependency.\n#include <chrono>\n#include <thread>",
+        "b_contents": "//#define BUFLOG_NDEBUG 0\n#include <afutils/DumpTryLock.h>\n#include <afutils/BufLog.h>\n#include <afutils/Permission.h>\n#include <afutils/TypedLogger.h>",
+        "base_contents": "//#define BUFLOG_NDEBUG 0\n#include <afutils/DumpTryLock.h>\n#include <afutils/BufLog.h>\n#include <afutils/TypedLogger.h>",
+        "res_region": "// not needed with the includes above, added to prevent transitive include dependency.\n#include <chrono>\n#include <thread>",
+        "lookback": "#include <chrono>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 59,
+        "end_line": 74,
+        "merge_gen_region": null,
+        "confidence": 0.6806087493896484,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "// ----------------------------------------------------------------------------\n\nstd::string formatToString(audio_format_t format) {\n    std::string result;\n    FormatConverter::toString(format, result);\n    return result;\n}\n",
+        "base_contents": "// TODO b/182392769: use attribution source util\n/* static */\nAttributionSourceState AudioFlinger::checkAttributionSourcePackage(\n        const AttributionSourceState& attributionSource) {\n    Vector<String16> packages;\n    PermissionController{}.getPackagesForUid(attributionSource.uid, packages);\n\n    AttributionSourceState checkedAttributionSource = attributionSource;\n    if (!attributionSource.packageName.has_value()\n            || attributionSource.packageName.value().size() == 0) {\n        if (!packages.isEmpty()) {\n            checkedAttributionSource.packageName =\n                std::move(legacy2aidl_String16_string(packages[0]).value());\n        }\n    } else {\n        String16 opPackageLegacy = VALUE_OR_FATAL(\n            aidl2legacy_string_view_String16(attributionSource.packageName.value_or(\"\")));\n        if (std::find_if(packages.begin(), packages.end(),\n                [&opPackageLegacy](const auto& package) {\n                return opPackageLegacy == package; }) == packages.end()) {\n            ALOGW(\"The package name(%s) provided does not correspond to the uid %d\",\n                    attributionSource.packageName.value_or(\"\").c_str(), attributionSource.uid);\n        }\n    }\n    return checkedAttributionSource;\n}\n\n// ----------------------------------------------------------------------------\n\nstd::string formatToString(audio_format_t format) {\n    std::string result;\n    FormatConverter::toString(format, result);\n    return result;\n}\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "// ----------------------------------------------------------------------------",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 237,
+        "end_line": 283,
+        "merge_gen_region": null,
+        "confidence": 0.8120471835136414,
+        "hesitated": true
+    }
+]

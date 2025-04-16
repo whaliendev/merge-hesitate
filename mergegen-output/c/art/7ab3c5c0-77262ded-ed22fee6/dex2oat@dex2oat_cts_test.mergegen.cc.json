@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// Run dex2oat with --force-palette-compilation-hooks to force calls to",
+        "b_contents": "}  // namespace\n\n// Run dex2oat with --enable-palette-compilation-hooks to force calls to",
+        "base_contents": "// Run dex2oat with --enable-palette-compilation-hooks to force calls to",
+        "res_region": "// Run dex2oat with --force-palette-compilation-hooks to force calls to",
+        "lookback": "// PaletteNotify{Start,End}Dex2oatCompilation.",
+        "lookahead": "// PaletteNotify{Start,End}Dex2oatCompilation.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 293,
+        "end_line": 301,
+        "merge_gen_region": null,
+        "confidence": 0.6824904680252075,
+        "hesitated": true
+    }
+]

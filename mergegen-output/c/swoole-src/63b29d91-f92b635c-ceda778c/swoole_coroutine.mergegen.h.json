@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    static bool is_in()",
+        "b_contents": "    static inline void init()\n    {\n        Coroutine::set_on_yield(on_yield);\n        Coroutine::set_on_resume(on_resume);\n        Coroutine::set_on_close(on_close);\n    }\n\n    static inline bool is_in()",
+        "base_contents": "    static void init()\n    {\n        Coroutine::set_on_yield(on_yield);\n        Coroutine::set_on_resume(on_resume);\n        Coroutine::set_on_close(on_close);\n    }\n\n    static bool is_in()",
+        "res_region": "    static bool is_in()",
+        "lookback": "    {",
+        "lookahead": "    {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 111,
+        "end_line": 131,
+        "merge_gen_region": "",
+        "confidence": 0.9407563805580139,
+        "hesitated": false,
+        "resolved": false
+    }
+]

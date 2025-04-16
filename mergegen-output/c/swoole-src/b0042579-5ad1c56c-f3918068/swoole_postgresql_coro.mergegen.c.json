@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "    zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, zobject, \"error\", 5, \"ontimeout\");\n    int ret = coro_resume(ctx, result, &retval);",
+        "b_contents": "    int ret = sw_coro_resume(ctx, result, retval);",
+        "base_contents": "    int ret = coro_resume(ctx, result, &retval);",
+        "res_region": "    zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, zobject, \"error\", 5, \"ontimeout\");\n    int ret = sw_coro_resume(ctx, result, retval);",
+        "lookback": "    int ret = sw_coro_resume(ctx, result, retval);",
+        "lookahead": "    if (ret == CORO_END && retval)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 261,
+        "end_line": 268,
+        "merge_gen_region": null,
+        "confidence": 0.6562477946281433,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    zend_update_property_null(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5);\n    int ret  = coro_resume(sw_current_context, &return_value, &retval);",
+        "b_contents": "    int ret  = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "base_contents": "    int ret  = coro_resume(sw_current_context, &return_value, &retval);",
+        "res_region": "    zend_update_property_null(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5);\n    int ret  = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookback": "    int ret  = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookahead": "    if (ret == CORO_END && retval)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 439,
+        "end_line": 446,
+        "merge_gen_region": null,
+        "confidence": 0.5611651539802551,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5, err_msg);\n            ret = coro_resume(sw_current_context, &return_value,  &retval);",
+        "b_contents": "            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "base_contents": "            ret = coro_resume(sw_current_context, &return_value,  &retval);",
+        "res_region": "            zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5, err_msg);\n            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookback": "            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookahead": "            if (ret == CORO_END && retval)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 485,
+        "end_line": 492,
+        "merge_gen_region": null,
+        "confidence": 0.579512894153595,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            zend_update_property_null(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5);\n            ret = coro_resume(sw_current_context, &return_value,  &retval);",
+        "b_contents": "            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "base_contents": "            ret = coro_resume(sw_current_context, &return_value,  &retval);",
+        "res_region": "            zend_update_property_null(swoole_postgresql_coro_class_entry_ptr, pg_object->object, \"error\", 5);\n            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookback": "            ret = sw_coro_resume(sw_current_context, &return_value, retval);",
+        "lookahead": "            if (ret == CORO_END && retval)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 506,
+        "end_line": 513,
+        "merge_gen_region": null,
+        "confidence": 0.5717869400978088,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, zobject, \"error\", 5, \"onerror\");\n    int ret = coro_resume(sw_current_context, result, &retval);",
+        "b_contents": "    int ret = sw_coro_resume(sw_current_context, result, retval);",
+        "base_contents": "    int ret = coro_resume(sw_current_context, result, &retval);",
+        "res_region": "    zend_update_property_string(swoole_postgresql_coro_class_entry_ptr, zobject, \"error\", 5, \"onerror\");\n    int ret = sw_coro_resume(sw_current_context, result, retval);",
+        "lookback": "    int ret = sw_coro_resume(sw_current_context, result, retval);",
+        "lookahead": "    zval_ptr_dtor(result);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1063,
+        "end_line": 1070,
+        "merge_gen_region": null,
+        "confidence": 0.553575336933136,
+        "hesitated": true
+    }
+]

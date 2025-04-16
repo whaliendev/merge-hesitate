@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\treturn TMUX_VERSION;",
+        "b_contents": "\tstatic char\t*version;\n\tstruct utsname\t u;\n\n\tif (version == NULL) {\n\t\tif (uname(&u) < 0)\n\t\t\tfatalx(\"uname failed\");\n\t\txasprintf(&version, \"openbsd-%s\", u.release);\n\t}\n\treturn (version);",
+        "base_contents": "\tstatic char\t*version;\n\tstruct utsname\t u;\n\n\tif (version == NULL) {\n\t\tif (uname(&u) < 0)\n\t\t\tfatalx(\"uname failed\");\n\t\txasprintf(&version, \"openbsd-%s\", u.release);\n\t}\n\treturn version;",
+        "res_region": "\treturn TMUX_VERSION;",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 215,
+        "end_line": 237,
+        "merge_gen_region": null,
+        "confidence": 0.6423627734184265,
+        "hesitated": true
+    }
+]

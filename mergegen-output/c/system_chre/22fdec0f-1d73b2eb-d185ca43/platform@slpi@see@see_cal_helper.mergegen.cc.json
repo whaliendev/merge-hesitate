@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "bool SeeCalHelper::areCalUpdatesEnabled(const sns_std_suid &suid) const {\n  size_t index = getCalIndexFromSuid(suid);\n  if (index < ARRAY_SIZE(mCalInfo)) {\n    return mCalInfo[index].enabled;\n  }\n  return false;\n}\n\nbool SeeCalHelper::configureCalUpdates(const sns_std_suid &suid, bool enable,\n                                       SeeHelper &helper) {\n  bool success = false;\n\n  size_t index = getCalIndexFromSuid(suid);\n  if (index >= ARRAY_SIZE(mCalInfo)) {\n    CHRE_ASSERT(false);\n  } else if ((mCalInfo[index].enabled == enable) ||\n             helper.configureOnChangeSensor(suid, enable)) {\n    success = true;\n    mCalInfo[index].enabled = enable;\n  }",
+        "b_contents": "bool SeeCalHelper::areCalUpdatesEnabled(const sns_std_suid &suid) const {\n  size_t index = getCalIndexFromSuid(suid);\n  if (index < ARRAY_SIZE(mCalInfo)) {\n    return mCalInfo[index].enabled;\n  }\n  return false;\n}\n\nbool SeeCalHelper::configureCalUpdates(const sns_std_suid &suid, bool enable,\n                                       SeeHelper &helper) {\n  bool success = false;",
+        "base_contents": "const sns_std_suid& SeeCalHelper::getCalSuidFromSensorType(\n    SensorType sensorType) const {\n  static sns_std_suid suid = sns_suid_sensor_init_zero;",
+        "res_region": "bool SeeCalHelper::areCalUpdatesEnabled(const sns_std_suid &suid) const {\n  size_t index = getCalIndexFromSuid(suid);\n  if (index < ARRAY_SIZE(mCalInfo)) {\n    return mCalInfo[index].enabled;\n  }\n  return false;\n}\n\nbool SeeCalHelper::configureCalUpdates(const sns_std_suid &suid, bool enable,\n                                       SeeHelper &helper) {\n  bool success = false;\n\n  size_t index = getCalIndexFromSuid(suid);\n  if (index >= ARRAY_SIZE(mCalInfo)) {\n    CHRE_ASSERT(false);\n  } else if ((mCalInfo[index].enabled == enable) ||\n             helper.configureOnChangeSensor(suid, enable)) {\n    success = true;\n    mCalInfo[index].enabled = enable;\n  }\n",
+        "lookback": "  size_t index = getCalIndexFromSuid(suid);",
+        "lookahead": "  return success;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 78,
+        "end_line": 115,
+        "merge_gen_region": null,
+        "confidence": 0.8739034533500671,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return success;\n}\n\nconst sns_std_suid *SeeCalHelper::getCalSuidFromSensorType(\n    uint8_t sensorType) const {",
+        "b_contents": "  size_t index = getCalIndexFromSuid(suid);\n  if (index >= ARRAY_SIZE(mCalInfo)) {\n    CHRE_ASSERT(false);\n  } else if ((mCalInfo[index].enabled == enable) ||\n             helper.configureOnChangeSensor(suid, enable)) {\n    success = true;\n    mCalInfo[index].enabled = enable;\n  }\n\n  return success;\n}\n\nconst sns_std_suid *SeeCalHelper::getCalSuidFromSensorType(\n    SensorType sensorType) const {",
+        "base_contents": "",
+        "res_region": "  return success;\n}\n\nconst sns_std_suid *SeeCalHelper::getCalSuidFromSensorType(\n    uint8_t sensorType) const {",
+        "lookback": "}",
+        "lookahead": "  // Mutex not needed, SUID is not modified after init",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 117,
+        "end_line": 139,
+        "merge_gen_region": null,
+        "confidence": 0.8262732028961182,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n#ifndef CHRE_SLPI_DEFAULT_BUILD",
+        "b_contents": "      // The calibrated sensor type uses power on the default build\n#ifndef CHRE_SLPI_DEFAULT_BUILD",
+        "base_contents": "",
+        "res_region": "\n#ifndef CHRE_SLPI_DEFAULT_BUILD",
+        "lookback": "#ifndef CHRE_SLPI_DEFAULT_BUILD",
+        "lookahead": "      if (!seeHelper.configureOnChangeSensor(suids[0], true /* enable */)) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 161,
+        "end_line": 168,
+        "merge_gen_region": null,
+        "confidence": 0.7841694355010986,
+        "hesitated": true
+    }
+]

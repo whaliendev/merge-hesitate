@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                 InstallPlan* install_plan,\n                 InstallPlan::Payload* payload)",
+        "b_contents": "                 InstallPlan* install_plan,\n                 bool is_interactive)",
+        "base_contents": "                 InstallPlan* install_plan)",
+        "res_region": "                 InstallPlan* install_plan,\n                 InstallPlan::Payload* payload,\n                 bool is_interactive)",
+        "lookback": "                 InstallPlan::Payload* payload,",
+        "lookahead": "      : prefs_(prefs),",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 81,
+        "end_line": 89,
+        "merge_gen_region": null,
+        "confidence": 0.6478284597396851,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        install_plan_(install_plan),\n        payload_(payload) {}",
+        "b_contents": "        install_plan_(install_plan),\n        is_interactive_(is_interactive) {}",
+        "base_contents": "        install_plan_(install_plan) {}",
+        "res_region": "        install_plan_(install_plan),\n        payload_(payload),\n        is_interactive_(is_interactive) {}",
+        "lookback": "        payload_(payload),",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 94,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.784839391708374,
+        "hesitated": true
+    }
+]

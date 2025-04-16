@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define LVGL_VERSION_MAJOR 7\n#define LVGL_VERSION_MINOR 7\n#define LVGL_VERSION_PATCH 0\n#define LVGL_VERSION_INFO \"dev\"",
+        "b_contents": "#define LVGL_VERSION_MAJOR   7\n#define LVGL_VERSION_MINOR   6\n#define LVGL_VERSION_PATCH   0\n#define LVGL_VERSION_INFO \"\"",
+        "base_contents": "#define LVGL_VERSION_MAJOR   7\n#define LVGL_VERSION_MINOR   6\n#define LVGL_VERSION_PATCH   0\n#define LVGL_VERSION_INFO \"dev\"",
+        "res_region": "#define LVGL_VERSION_MAJOR 7\n#define LVGL_VERSION_MINOR 7\n#define LVGL_VERSION_PATCH 0\n#define LVGL_VERSION_INFO \"dev\"",
+        "lookback": "#define LVGL_VERSION_MINOR 7",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 16,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.8126270771026611,
+        "hesitated": true
+    }
+]

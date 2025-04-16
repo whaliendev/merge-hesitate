@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "    if (madeProgress) {\n      *madeProgress = 1;\n    }",
+        "b_contents": "    // Commit to the new state\n    imm_->Unref();\n    imm_ = NULL;\n    has_imm_.Release_Store(NULL);",
+        "base_contents": "    // Commit to the new state\n    imm_->Unref();\n    imm_ = NULL;\n    has_imm_.Release_Store(NULL);\n    DeleteObsoleteFiles();",
+        "res_region": "    if (madeProgress) {\n      *madeProgress = 1;\n    }",
+        "lookback": "      *madeProgress = 1;",
+        "lookahead": "    MaybeScheduleLogDBDeployStats();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 712,
+        "end_line": 727,
+        "merge_gen_region": null,
+        "confidence": 0.7302366495132446,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool madeProgress;\n  DeletionState deletion_state;",
+        "b_contents": "  DeletionState deletion_state;",
+        "base_contents": "",
+        "res_region": "  bool madeProgress;\n  DeletionState deletion_state;",
+        "lookback": "  DeletionState deletion_state;",
+        "lookahead": "  MutexLock l(&mutex_);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 896,
+        "end_line": 902,
+        "merge_gen_region": null,
+        "confidence": 0.8549882769584656,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Status s = BackgroundCompaction(&madeProgress, deletion_state);",
+        "b_contents": "    Status s = BackgroundCompaction(deletion_state);",
+        "base_contents": "    Status s = BackgroundCompaction();",
+        "res_region": "    Status s = BackgroundCompaction(&madeProgress, deletion_state);",
+        "lookback": "    if (!s.ok()) {",
+        "lookahead": "    if (!s.ok()) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 907,
+        "end_line": 913,
+        "merge_gen_region": null,
+        "confidence": 0.7278052568435669,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // delete unnecessary files if any, this is done outside the mutex\n  if (!deletion_state.live.empty()) {\n    mutex_.Unlock();\n    PurgeObsoleteFiles(deletion_state);\n    mutex_.Lock();\n    EvictObsoleteFiles(deletion_state);\n  }\n\n  bg_compaction_scheduled_--;",
+        "b_contents": "  // delete unnecessary files if any, this is done outside the mutex\n  if (!deletion_state.live.empty()) {\n    mutex_.Unlock();\n    PurgeObsoleteFiles(deletion_state);\n    mutex_.Lock();\n    EvictObsoleteFiles(deletion_state);\n  }\n\n  bg_compaction_scheduled_ = false;",
+        "base_contents": "  bg_compaction_scheduled_ = false;",
+        "res_region": "  // delete unnecessary files if any, this is done outside the mutex\n  if (!deletion_state.live.empty()) {\n    mutex_.Unlock();\n    PurgeObsoleteFiles(deletion_state);\n    mutex_.Lock();\n    EvictObsoleteFiles(deletion_state);\n  }\n\n  bg_compaction_scheduled_--;",
+        "lookback": "  if (!deletion_state.live.empty()) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 928,
+        "end_line": 950,
+        "merge_gen_region": null,
+        "confidence": 0.8326748609542847,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status DBImpl::BackgroundCompaction(bool* madeProgress, \n  DeletionState& deletion_state) {\n  *madeProgress = false;",
+        "b_contents": "Status DBImpl::BackgroundCompaction(DeletionState& deletion_state) {",
+        "base_contents": "Status DBImpl::BackgroundCompaction() {",
+        "res_region": "Status DBImpl::BackgroundCompaction(bool* madeProgress, \n  DeletionState& deletion_state) {\n  *madeProgress = false;",
+        "lookback": "  DeletionState& deletion_state) {",
+        "lookahead": "  mutex_.AssertHeld();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 963,
+        "end_line": 971,
+        "merge_gen_region": null,
+        "confidence": 0.7827795147895813,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    FindObsoleteFiles(deletion_state);\n    *madeProgress = true;",
+        "b_contents": "    FindObsoleteFiles(deletion_state);",
+        "base_contents": "    DeleteObsoleteFiles();",
+        "res_region": "    FindObsoleteFiles(deletion_state);\n    *madeProgress = true;",
+        "lookback": "    *madeProgress = true;",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1034,
+        "end_line": 1041,
+        "merge_gen_region": null,
+        "confidence": 0.7565114498138428,
+        "hesitated": true
+    }
+]

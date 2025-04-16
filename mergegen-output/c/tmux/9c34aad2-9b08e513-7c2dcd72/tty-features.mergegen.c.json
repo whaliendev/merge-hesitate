@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "static const char *tty_feature_hyperlinks_capabilities[] = {\n#if defined (__OpenBSD__) || (defined(NCURSES_VERSION_MAJOR) && \\\n\t(NCURSES_VERSION_MAJOR > 5 || \\\n\t(NCURSES_VERSION_MAJOR == 5 && NCURSES_VERSION_MINOR > 8)))",
+        "b_contents": "static const char *const tty_feature_hyperlinks_capabilities[] = {",
+        "base_contents": "static const char *tty_feature_hyperlinks_capabilities[] = {",
+        "res_region": "static const char *tty_feature_hyperlinks_capabilities[] = {\n#if defined (__OpenBSD__) || (defined(NCURSES_VERSION_MAJOR) && \\\n\t(NCURSES_VERSION_MAJOR > 5 || \\\n\t(NCURSES_VERSION_MAJOR == 5 && NCURSES_VERSION_MINOR > 8)))",
+        "lookback": "#if defined (__OpenBSD__) || (defined(NCURSES_VERSION_MAJOR) && \\",
+        "lookahead": "\t\"*:Hls=\\\\E]8;%?%p1%l%tid=%p1%s%;;%p2%s\\\\E\\\\\\\\\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 96,
+        "end_line": 105,
+        "merge_gen_region": null,
+        "confidence": 0.8585621118545532,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "double CrossProd(const Vec2d &start_point, const Vec2d &end_point_1,\n                 const Vec2d &end_point_2) {",
+        "b_contents": "double Sqr(const double x) { return x * x; }\n\ndouble CrossProd(const Vec2d& start_point, const Vec2d& end_point_1,\n                 const Vec2d& end_point_2) {",
+        "base_contents": "double CrossProd(const Vec2d& start_point, const Vec2d& end_point_1,\n                 const Vec2d& end_point_2) {",
+        "res_region": "double Sqr(const double x) { return x * x; }\n\ndouble CrossProd(const Vec2d& start_point, const Vec2d& end_point_1,\n                 const Vec2d& end_point_2) {",
+        "lookback": "",
+        "lookahead": "  return (end_point_1 - start_point).CrossProd(end_point_2 - start_point);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 26,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.8355621695518494,
+        "hesitated": true
+    }
+]

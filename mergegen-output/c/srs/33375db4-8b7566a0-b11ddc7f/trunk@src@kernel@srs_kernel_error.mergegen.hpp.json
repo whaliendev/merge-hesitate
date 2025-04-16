@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#define ERROR_OpenSslCreateHMAC             2050\n//\n// system control message,",
+        "b_contents": "#define ERROR_RTMP_STREAM_NAME_EMPTY        2050\n//                                           \n// system control message, ",
+        "base_contents": "//                                           \n// system control message, ",
+        "res_region": "#define ERROR_OpenSslCreateHMAC             2050\n#define ERROR_RTMP_STREAM_NAME_EMPTY        2051\n//                                           \n// system control message,",
+        "lookback": "#define ERROR_RTMP_STREAM_NAME_EMPTY        2051",
+        "lookahead": "// not an error, but special control logic.",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 159,
+        "end_line": 170,
+        "merge_gen_region": null,
+        "confidence": 0.835750162601471,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#define ERROR_EDGE_PORT_INVALID             3067\n#define ERROR_EXPECT_FILE_IO                3068\n#define ERROR_MP4_BOX_OVERFLOW              3069\n#define ERROR_MP4_BOX_REQUIRE_SPACE         3070\n#define ERROR_MP4_BOX_ILLEGAL_TYPE          3071\n#define ERROR_MP4_BOX_ILLEGAL_SCHEMA        3072\n#define ERROR_MP4_BOX_STRING                3073\n#define ERROR_MP4_BOX_ILLEGAL_BRAND         3074\n#define ERROR_MP4_ESDS_SL_Config            3075\n#define ERROR_MP4_ILLEGAL_MOOV              3076\n#define ERROR_MP4_ILLEGAL_HANDLER           3077\n#define ERROR_MP4_ILLEGAL_TRACK             3078\n#define ERROR_MP4_MOOV_OVERFLOW             3079\n#define ERROR_MP4_ILLEGAL_SAMPLES           3080\n#define ERROR_MP4_ILLEGAL_TIMESTAMP         3081\n#define ERROR_DVR_CANNOT_APPEND             3082\n#define ERROR_DVR_ILLEGAL_PLAN              3083\n#define ERROR_FLV_REQUIRE_SPACE             3084\n#define ERROR_MP4_AVCC_CHANGE               3085\n#define ERROR_MP4_ASC_CHANGE                3086\n#define ERROR_DASH_WRITE_FAILED             3087",
+        "b_contents": "#define ERROR_TS_CONTEXT_NOT_READY          3067",
+        "base_contents": "",
+        "res_region": "#define ERROR_EDGE_PORT_INVALID             3067\n#define ERROR_EXPECT_FILE_IO                3068\n#define ERROR_MP4_BOX_OVERFLOW              3069\n#define ERROR_MP4_BOX_REQUIRE_SPACE         3070\n#define ERROR_MP4_BOX_ILLEGAL_TYPE          3071\n#define ERROR_MP4_BOX_ILLEGAL_SCHEMA        3072\n#define ERROR_MP4_BOX_STRING                3073\n#define ERROR_MP4_BOX_ILLEGAL_BRAND         3074\n#define ERROR_MP4_ESDS_SL_Config            3075\n#define ERROR_MP4_ILLEGAL_MOOV              3076\n#define ERROR_MP4_ILLEGAL_HANDLER           3077\n#define ERROR_MP4_ILLEGAL_TRACK             3078\n#define ERROR_MP4_MOOV_OVERFLOW             3079\n#define ERROR_MP4_ILLEGAL_SAMPLES           3080\n#define ERROR_MP4_ILLEGAL_TIMESTAMP         3081\n#define ERROR_DVR_CANNOT_APPEND             3082\n#define ERROR_DVR_ILLEGAL_PLAN              3083\n#define ERROR_FLV_REQUIRE_SPACE             3084\n#define ERROR_MP4_AVCC_CHANGE               3085\n#define ERROR_MP4_ASC_CHANGE                3086\n#define ERROR_DASH_WRITE_FAILED             3087\n#define ERROR_TS_CONTEXT_NOT_READY          3088",
+        "lookback": "#define ERROR_EXPECT_FILE_IO                3068",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 250,
+        "end_line": 275,
+        "merge_gen_region": null,
+        "confidence": 0.8419022560119629,
+        "hesitated": true
+    }
+]

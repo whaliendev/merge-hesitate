@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n    // Methods of 'DriverInterface'.\n    ::android::status_t init() override;\n    ::android::status_t drain(StreamDescriptor::DrainMode) override;\n    ::android::status_t flush() override;\n    ::android::status_t pause() override;\n    ::android::status_t standby() override;\n    ::android::status_t start() override;\n    ::android::status_t transfer(void* buffer, size_t frameCount, size_t* actualFrameCount,\n                                 int32_t* latencyMs) override;\n    void shutdown() override;\n\n  private:\n    const size_t mBufferSizeFrames;\n    const size_t mFrameSizeBytes;\n    const int mSampleRate;\n    const bool mIsAsynchronous;\n    const bool mIsInput;\n    bool mIsInitialized = false;  // Used for validating the state machine logic.\n    bool mIsStandby = true;       // Used for validating the state machine logic.\n\n    // Used by the worker thread.\n    int64_t mStartTimeNs = 0;\n    long mFramesSinceStart = 0;",
+        "base_contents": "\n    // Methods of 'DriverInterface'.\n    ::android::status_t init() override;\n    ::android::status_t drain(StreamDescriptor::DrainMode) override;\n    ::android::status_t flush() override;\n    ::android::status_t pause() override;\n    ::android::status_t standby() override;\n    ::android::status_t start() override;\n    ::android::status_t transfer(void* buffer, size_t frameCount, size_t* actualFrameCount,\n                                 int32_t* latencyMs) override;\n    void shutdown() override;\n\n  private:\n    const size_t mBufferSizeFrames;\n    const size_t mFrameSizeBytes;\n    const int mSampleRate;\n    const bool mIsAsynchronous;\n    const bool mIsInput;\n    bool mIsInitialized = false;  // Used for validating the state machine logic.\n    bool mIsStandby = true;       // Used for validating the state machine logic.",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 27,
+        "end_line": 74,
+        "merge_gen_region": "",
+        "confidence": 0.9788641333580017,
+        "hesitated": false,
+        "resolved": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "static int add_ref_to_set(const char *refname,\n\t\t\t  const struct object_id *oid,\n\t\t\t  int flags, void *cb_data)",
+        "b_contents": "static void compute_bloom_filters(struct write_commit_graph_context *ctx)\n{\n\tint i;\n\tstruct progress *progress = NULL;\n\tstruct commit **sorted_commits;\n\n\tinit_bloom_filters();\n\n\tif (ctx->report_progress)\n\t\tprogress = start_delayed_progress(\n\t\t\t_(\"Computing commit changed paths Bloom filters\"),\n\t\t\tctx->commits.nr);\n\n\tALLOC_ARRAY(sorted_commits, ctx->commits.nr);\n\tCOPY_ARRAY(sorted_commits, ctx->commits.list, ctx->commits.nr);\n\n\tif (ctx->order_by_pack)\n\t\tQSORT(sorted_commits, ctx->commits.nr, commit_pos_cmp);\n\telse\n\t\tQSORT(sorted_commits, ctx->commits.nr, commit_gen_cmp);\n\n\tfor (i = 0; i < ctx->commits.nr; i++) {\n\t\tstruct commit *c = sorted_commits[i];\n\t\tstruct bloom_filter *filter = get_bloom_filter(ctx->r, c, 1);\n\t\tctx->total_bloom_filter_data_size += sizeof(unsigned char) * filter->len;\n\t\tdisplay_progress(progress, i + 1);\n\t}\n\n\tfree(sorted_commits);\n\tstop_progress(&progress);\n}\n\nstatic int add_ref_to_list(const char *refname,\n\t\t\t   const struct object_id *oid,\n\t\t\t   int flags, void *cb_data)",
+        "base_contents": "static int add_ref_to_list(const char *refname,\n\t\t\t   const struct object_id *oid,\n\t\t\t   int flags, void *cb_data)",
+        "res_region": "static void compute_bloom_filters(struct write_commit_graph_context *ctx)\n{\n\tint i;\n\tstruct progress *progress = NULL;\n\tstruct commit **sorted_commits;\n\n\tinit_bloom_filters();\n\n\tif (ctx->report_progress)\n\t\tprogress = start_delayed_progress(\n\t\t\t_(\"Computing commit changed paths Bloom filters\"),\n\t\t\tctx->commits.nr);\n\n\tALLOC_ARRAY(sorted_commits, ctx->commits.nr);\n\tCOPY_ARRAY(sorted_commits, ctx->commits.list, ctx->commits.nr);\n\n\tif (ctx->order_by_pack)\n\t\tQSORT(sorted_commits, ctx->commits.nr, commit_pos_cmp);\n\telse\n\t\tQSORT(sorted_commits, ctx->commits.nr, commit_gen_cmp);\n\n\tfor (i = 0; i < ctx->commits.nr; i++) {\n\t\tstruct commit *c = sorted_commits[i];\n\t\tstruct bloom_filter *filter = get_bloom_filter(ctx->r, c, 1);\n\t\tctx->total_bloom_filter_data_size += sizeof(unsigned char) * filter->len;\n\t\tdisplay_progress(progress, i + 1);\n\t}\n\n\tfree(sorted_commits);\n\tstop_progress(&progress);\n}\n\nstatic int add_ref_to_set(const char *refname,\n\t\t\t  const struct object_id *oid,\n\t\t\t  int flags, void *cb_data)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1274,
+        "end_line": 1318,
+        "merge_gen_region": null,
+        "confidence": 0.7358546853065491,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif (!pack_indexes && !commits)",
+        "b_contents": "\tif (!pack_indexes && !commit_hex) {\n\t\tctx->order_by_pack = 1;",
+        "base_contents": "\tif (!pack_indexes && !commit_hex)",
+        "res_region": "\tif (!pack_indexes && !commits) {\n\t\tctx->order_by_pack = 1;",
+        "lookback": "\t\tctx->order_by_pack = 1;",
+        "lookahead": "\t\tfill_oids_from_all_packs(ctx);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2072,
+        "end_line": 2079,
+        "merge_gen_region": null,
+        "confidence": 0.7937437891960144,
+        "hesitated": true
+    }
+]

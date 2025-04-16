@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"mongo/util/concurrency/qlock.h\"\n#include \"mongo/util/concurrency/mutex.h\"\n#include \"mongo/bson/stringdata.h\"\n#include \"mongo/db/jsobj.h\"\n",
+        "b_contents": "#include \"lockstat.h\"\n",
+        "base_contents": "",
+        "res_region": "#include \"mongo/util/concurrency/qlock.h\"\n#include \"mongo/util/concurrency/mutex.h\"\n#include \"mongo/bson/stringdata.h\"\n#include \"mongo/db/jsobj.h\"\n#include \"mongo/db/lockstat.h\"\n",
+        "lookback": "#include \"mongo/util/concurrency/mutex.h\"",
+        "lookahead": "namespace mongo {",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 6,
+        "end_line": 16,
+        "merge_gen_region": "#######################################################################",
+        "confidence": 0.923033595085144,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"update_engine/common/test_utils.h\"\n#include \"update_engine/payload_generator/xz.h\"",
+        "b_contents": "#include \"update_engine/payload_generator/xz.h\"",
+        "base_contents": "",
+        "res_region": "#include \"update_engine/common/test_utils.h\"\n#include \"update_engine/payload_generator/xz.h\"",
+        "lookback": "#include \"update_engine/payload_generator/xz.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 29,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.8284660577774048,
+        "hesitated": true
+    }
+]

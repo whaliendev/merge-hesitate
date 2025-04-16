@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "/* Wrapper around redisSecureConnection to avoid hiredis_ssl dependencies if\n * not building with TLS support.\n */\nstatic int cliSecureConnection(redisContext *c, const char **err) {\n#ifdef USE_OPENSSL\n    static SSL_CTX *ssl_ctx = NULL;\n\n    if (!ssl_ctx) {\n        ssl_ctx = SSL_CTX_new(SSLv23_client_method());\n        if (!ssl_ctx) {\n            *err = \"Failed to create SSL_CTX\";\n            goto error;\n        }\n\n        SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);\n        SSL_CTX_set_verify(ssl_ctx, SSL_VERIFY_PEER, NULL);\n\n        if (config.cacert || config.cacertdir) {\n            if (!SSL_CTX_load_verify_locations(ssl_ctx, config.cacert, config.cacertdir)) {\n                *err = \"Invalid CA Certificate File/Directory\";\n                goto error;\n            }\n        } else {\n            if (!SSL_CTX_set_default_verify_paths(ssl_ctx)) {\n                *err = \"Failed to use default CA paths\";\n                goto error;\n            }\n        }\n\n        if (config.cert && !SSL_CTX_use_certificate_chain_file(ssl_ctx, config.cert)) {\n            *err = \"Invalid client certificate\";\n            goto error;\n        }\n\n        if (config.key && !SSL_CTX_use_PrivateKey_file(ssl_ctx, config.key, SSL_FILETYPE_PEM)) {\n            *err = \"Invalid private key\";\n            goto error;\n        }\n    }\n\n    SSL *ssl = SSL_new(ssl_ctx);\n    if (!ssl) {\n        *err = \"Failed to create SSL object\";\n        return REDIS_ERR;\n    }\n\n    if (config.sni && !SSL_set_tlsext_host_name(ssl, config.sni)) {\n        *err = \"Failed to configure SNI\";\n        SSL_free(ssl);\n        return REDIS_ERR;\n    }\n\n    return redisInitiateSSL(c, ssl);\n\nerror:\n    SSL_CTX_free(ssl_ctx);\n    ssl_ctx = NULL;\n    return REDIS_ERR;\n#else\n    (void) c;\n    (void) err;\n    return REDIS_OK;\n#endif\n}\n",
+        "b_contents": "/* Select RESP3 mode if redis-cli was started with the -3 option.  */\nstatic int cliSwitchProto(void) {\n    redisReply *reply;\n    if (config.resp3 == 0) return REDIS_OK;\n\n    reply = redisCommand(context,\"HELLO 3\");\n    if (reply != NULL) {\n        int result = REDIS_OK;\n        if (reply->type == REDIS_REPLY_ERROR) result = REDIS_ERR;\n        freeReplyObject(reply);\n        return result;\n    }\n    return REDIS_ERR;\n}\n",
+        "base_contents": "",
+        "res_region": "/* Wrapper around redisSecureConnection to avoid hiredis_ssl dependencies if\n * not building with TLS support.\n */\nstatic int cliSecureConnection(redisContext *c, const char **err) {\n#ifdef USE_OPENSSL\n    static SSL_CTX *ssl_ctx = NULL;\n\n    if (!ssl_ctx) {\n        ssl_ctx = SSL_CTX_new(SSLv23_client_method());\n        if (!ssl_ctx) {\n            *err = \"Failed to create SSL_CTX\";\n            goto error;\n        }\n\n        SSL_CTX_set_options(ssl_ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);\n        SSL_CTX_set_verify(ssl_ctx, SSL_VERIFY_PEER, NULL);\n\n        if (config.cacert || config.cacertdir) {\n            if (!SSL_CTX_load_verify_locations(ssl_ctx, config.cacert, config.cacertdir)) {\n                *err = \"Invalid CA Certificate File/Directory\";\n                goto error;\n            }\n        } else {\n            if (!SSL_CTX_set_default_verify_paths(ssl_ctx)) {\n                *err = \"Failed to use default CA paths\";\n                goto error;\n            }\n        }\n\n        if (config.cert && !SSL_CTX_use_certificate_chain_file(ssl_ctx, config.cert)) {\n            *err = \"Invalid client certificate\";\n            goto error;\n        }\n\n        if (config.key && !SSL_CTX_use_PrivateKey_file(ssl_ctx, config.key, SSL_FILETYPE_PEM)) {\n            *err = \"Invalid private key\";\n            goto error;\n        }\n    }\n\n    SSL *ssl = SSL_new(ssl_ctx);\n    if (!ssl) {\n        *err = \"Failed to create SSL object\";\n        return REDIS_ERR;\n    }\n\n    if (config.sni && !SSL_set_tlsext_host_name(ssl, config.sni)) {\n        *err = \"Failed to configure SNI\";\n        SSL_free(ssl);\n        return REDIS_ERR;\n    }\n\n    return redisInitiateSSL(c, ssl);\n\nerror:\n    SSL_CTX_free(ssl_ctx);\n    ssl_ctx = NULL;\n    return REDIS_ERR;\n#else\n    (void) c;\n    (void) err;\n    return REDIS_OK;\n#endif\n}\n\n/* Select RESP3 mode if redis-cli was started with the -3 option.  */\nstatic int cliSwitchProto(void) {\n    redisReply *reply;\n    if (config.resp3 == 0) return REDIS_OK;\n\n    reply = redisCommand(context,\"HELLO 3\");\n    if (reply != NULL) {\n        int result = REDIS_OK;\n        if (reply->type == REDIS_REPLY_ERROR) result = REDIS_ERR;\n        freeReplyObject(reply);\n        return result;\n    }\n    return REDIS_ERR;\n}\n",
+        "lookback": " * not building with TLS support.",
+        "lookahead": "/* Connect to the server. It is possible to pass certain flags to the function:",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 770,
+        "end_line": 853,
+        "merge_gen_region": null,
+        "confidence": 0.8289824724197388,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\"\\n\");",
+        "b_contents": "\"\\n\",\n    REDIS_CLI_DEFAULT_PIPE_TIMEOUT);",
+        "base_contents": "\"\\n\",\n    version, REDIS_CLI_DEFAULT_PIPE_TIMEOUT);",
+        "res_region": "\"\\n\");",
+        "lookback": "    /* Using another fprintf call to avoid -Woverlength-strings compile warning */",
+        "lookahead": "    /* Using another fprintf call to avoid -Woverlength-strings compile warning */",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1762,
+        "end_line": 1770,
+        "merge_gen_region": null,
+        "confidence": 0.49052539467811584,
+        "hesitated": true
+    }
+]

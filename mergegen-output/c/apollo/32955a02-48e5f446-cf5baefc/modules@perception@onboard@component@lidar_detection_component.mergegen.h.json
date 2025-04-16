@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  std::unique_ptr<lidar::LidarObstacleDetection> lidar_detection_pipeline_;\n",
+        "b_contents": "  std::unique_ptr<lidar::BaseLidarObstacleDetection> lidar_detection_pipeline_;",
+        "base_contents": "  std::unique_ptr<lidar::BaseLidarObstacleDetection> lidar_detection_pipeline_;\n",
+        "res_region": "  std::unique_ptr<lidar::LidarObstacleDetection> lidar_detection_pipeline_;\n",
+        "lookback": "",
+        "lookahead": "  pipeline::PipelineConfig lidardetection_config;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 67,
+        "end_line": 75,
+        "merge_gen_region": null,
+        "confidence": 0.7051294445991516,
+        "hesitated": true
+    }
+]

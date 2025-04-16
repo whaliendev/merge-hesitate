@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\tpmap(get_num_threads(), [&f, this](int i) {\n\t\ton_thread_t th((threadnum_t(i)));\n\t\tfor (auto const &pair : this->point_subs) {\n\t\t\tfor (point_sub_t *sub : pair.second[i]) {\n\t\t\t\tf(sub);\n\t\t\t}\n\t\t}\n\t});",
+        "b_contents": "    spot.read_signal()->wait_lazily_unordered();\n    pmap(get_num_threads(),\n         std::bind(&feed_t::each_point_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_point_sub_cb(const std::function<void(point_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : point_subs) {\n        for (point_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "base_contents": "    pmap(get_num_threads(),\n         std::bind(&feed_t::each_point_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_point_sub_cb(const std::function<void(point_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : point_subs) {\n        for (point_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "res_region": "    spot.read_signal()->wait_lazily_unordered();\n    pmap(get_num_threads(),\n         std::bind(&feed_t::each_point_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_point_sub_cb(const std::function<void(point_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : point_subs) {\n        for (point_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "lookback": "    pmap(get_num_threads(),",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2937,
+        "end_line": 2977,
+        "merge_gen_region": null,
+        "confidence": 0.8297767639160156,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    pmap(get_num_threads(), [this, &f](int i) {\n\t\ton_thread_t th((threadnum_t(i)));\n\t\tfor (auto const &pair : limit_subs) {\n\t\t\tfor (limit_sub_t *sub : pair.second[i]) {\n\t\t\t\tf(sub);\n\t\t\t}\n\t\t}\n\t});",
+        "b_contents": "    spot.read_signal()->wait_lazily_unordered();\n    pmap(get_num_threads(),\n         std::bind(&feed_t::each_limit_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_limit_sub_cb(const std::function<void(limit_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : limit_subs) {\n        for (limit_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "base_contents": "    pmap(get_num_threads(),\n         std::bind(&feed_t::each_limit_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_limit_sub_cb(const std::function<void(limit_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : limit_subs) {\n        for (limit_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "res_region": "    spot.read_signal()->wait_lazily_unordered();\n    pmap(get_num_threads(),\n         std::bind(&feed_t::each_limit_sub_cb,\n                   this,\n                   std::cref(f),\n                   ph::_1));\n}\n\nvoid feed_t::each_limit_sub_cb(const std::function<void(limit_sub_t *)> &f, int i) {\n    on_thread_t th((threadnum_t(i)));\n    for (auto const &pair : limit_subs) {\n        for (limit_sub_t *sub : pair.second[i]) {\n            f(sub);\n        }\n    }",
+        "lookback": "    pmap(get_num_threads(),",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2984,
+        "end_line": 3024,
+        "merge_gen_region": null,
+        "confidence": 0.8103316426277161,
+        "hesitated": true
+    }
+]

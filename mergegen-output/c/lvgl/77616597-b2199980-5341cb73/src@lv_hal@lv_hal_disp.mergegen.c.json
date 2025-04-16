@@ -1,0 +1,72 @@
+[
+    {
+        "a_contents": "    driver->rotated          = LV_DISP_ROT_NONE;\n    driver->sw_rotate        = 0;\n    driver->color_chroma_key = LV_COLOR_TRANSP;\n    driver->dpi = LV_DPI;",
+        "b_contents": "    driver->rotated          = 0;\n    driver->color_chroma_key = LV_COLOR_CHROMA_KEY;\n    driver->dpi = LV_DPI_DEF;",
+        "base_contents": "    driver->rotated          = 0;\n    driver->color_chroma_key = LV_COLOR_TRANSP;\n    driver->dpi = LV_DPI;",
+        "res_region": "    driver->rotated          = LV_DISP_ROT_NONE;\n    driver->sw_rotate        = 0;\n    driver->color_chroma_key = LV_COLOR_CHROMA_KEY;\n    driver->dpi = LV_DPI_DEF;",
+        "lookback": "    driver->sw_rotate        = 0;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 59,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.8221441507339478,
+        "hesitated": true
+    },
+    {
+        "a_contents": "{    \n    if(new_drv != &disp->driver)\n        memcpy(&disp->driver, new_drv, sizeof(lv_disp_drv_t));\n      \n    lv_obj_t * scr;\n    _LV_LL_READ(disp->scr_ll, scr) {\n        lv_obj_set_size(scr, lv_disp_get_hor_res(disp), lv_disp_get_ver_res(disp));",
+        "b_contents": "{\n    memcpy(&disp->driver, new_drv, sizeof(lv_disp_drv_t));\n\n    uint32_t i;\n    for(i = 0; disp->screens[i]; i++) {\n        lv_obj_set_size(disp->screens[i], lv_disp_get_hor_res(disp), lv_disp_get_ver_res(disp));",
+        "base_contents": "{\n    memcpy(&disp->driver, new_drv, sizeof(lv_disp_drv_t));\n\n    lv_obj_t * scr;\n    _LV_LL_READ(disp->scr_ll, scr) {\n        lv_obj_set_size(scr, lv_disp_get_hor_res(disp), lv_disp_get_ver_res(disp));",
+        "res_region": "{\n    memcpy(&disp->driver, new_drv, sizeof(lv_disp_drv_t));\n\n    uint32_t i;\n    for(i = 0; disp->screens[i]; i++) {\n        lv_obj_set_size(disp->screens[i], lv_disp_get_hor_res(disp), lv_disp_get_ver_res(disp));",
+        "lookback": "    memcpy(&disp->driver, new_drv, sizeof(lv_disp_drv_t));",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 173,
+        "end_line": 195,
+        "merge_gen_region": null,
+        "confidence": 0.8629378080368042,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if(disp == NULL)\n        return LV_HOR_RES_MAX;\n    else {\n        switch(disp->driver.rotated) {\n            case LV_DISP_ROT_90:\n            case LV_DISP_ROT_270:\n                return disp->driver.ver_res;\n            default:\n                return disp->driver.hor_res;\n        }\n    }",
+        "b_contents": "    if(disp == NULL) return 0;\n    else return disp->driver.rotated == 0 ? disp->driver.hor_res : disp->driver.ver_res;",
+        "base_contents": "    if(disp == NULL)\n        return LV_HOR_RES_MAX;\n    else\n        return disp->driver.rotated == 0 ? disp->driver.hor_res : disp->driver.ver_res;",
+        "res_region": "    if(disp == NULL) {\n        return 0;\n    } else {\n        switch(disp->driver.rotated) {\n            case LV_DISP_ROT_90:\n            case LV_DISP_ROT_270:\n                return disp->driver.ver_res;\n            default:\n                return disp->driver.hor_res;\n        }\n    }",
+        "lookback": "        return 0;",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 263,
+        "end_line": 283,
+        "merge_gen_region": "((ifif onififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.8843379020690918,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if(disp == NULL)\n        return LV_VER_RES_MAX;\n    else {\n        switch(disp->driver.rotated) {\n            case LV_DISP_ROT_90:\n            case LV_DISP_ROT_270:\n                return disp->driver.hor_res;\n            default:\n                return disp->driver.ver_res;\n        }\n    }",
+        "b_contents": "    if(disp == NULL) return 0;\n    else return disp->driver.rotated == 0 ? disp->driver.ver_res : disp->driver.hor_res;",
+        "base_contents": "    if(disp == NULL)\n        return LV_VER_RES_MAX;\n    else\n        return disp->driver.rotated == 0 ? disp->driver.ver_res : disp->driver.hor_res;",
+        "res_region": "    if(disp == NULL) {\n        return 0;\n    } else {\n        switch(disp->driver.rotated) {\n            case LV_DISP_ROT_90:\n            case LV_DISP_ROT_270:\n                return disp->driver.hor_res;\n            default:\n                return disp->driver.ver_res;\n        }\n    }",
+        "lookback": "        return 0;",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 295,
+        "end_line": 315,
+        "merge_gen_region": "((ififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.8900180459022522,
+        "hesitated": false,
+        "resolved": false
+    }
+]

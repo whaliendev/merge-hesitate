@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/navigation.pb.h\"",
+        "base_contents": "#include \"modules/map/relative_map/proto/navigation.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/planning/math/smoothing_spline/spline_2d_solver.h\"",
+        "lookahead": "#include \"modules/planning/common/indexed_queue.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 40,
+        "end_line": 45,
+        "merge_gen_region": null,
+        "confidence": 0.7143989205360413,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_config.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/planning/reference_line/qp_spline_reference_line_smoother.h\"",
+        "lookahead": "#include \"modules/planning/reference_line/discrete_points_reference_line_smoother.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 48,
+        "end_line": 53,
+        "merge_gen_region": null,
+        "confidence": 0.7411471605300903,
+        "hesitated": true
+    }
+]

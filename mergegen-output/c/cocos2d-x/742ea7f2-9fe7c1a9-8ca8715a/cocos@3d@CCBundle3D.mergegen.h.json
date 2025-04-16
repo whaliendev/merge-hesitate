@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\nstruct Animation3DData\n{\n    Animation3D* animation;\n};\n",
+        "base_contents": "",
+        "res_region": "struct Animation3DData\n{\n    Animation3D* animation;\n};\n",
+        "lookback": "{",
+        "lookahead": "class Bundle3D",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 41,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.7113348841667175,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    struct MeshData\n    {\n        float* vertex;\n        int vertexSizeInFloat;\n        unsigned short* indices;\n        int numIndex;\n        MeshVertexAttrib* attribs;\n        int attribCount;\n        void resetData();\n        MeshData();\n        ~MeshData();\n    };\n    struct SkinData\n    {\n        Mat4                     bindShape;\n        std::vector<std::string> boneNames;\n        std::vector<Mat4>        inverseBindPoseMatrices; //bind pose of bone\n        \n        std::map<int, std::vector<int> > boneChild;//key parent, value child\n        int                              rootBoneIndex;\n        void resetData()\n        {\n            bindShape.setIdentity();\n            boneNames.clear();\n            inverseBindPoseMatrices.clear();\n            boneChild.clear();\n            rootBoneIndex = -1;\n        }\n\n        int getBoneNameIndex(const std::string& name);\n        \n        void getChildMap(std::map<int, std::vector<int> >& map, const rapidjson::Value& val, int index);\n    };\n    struct MaterialData\n    {\n        std::string texturePath;\n    };\n    struct Animation3DData\n    {\n        Animation3D* animation;\n    };",
+        "b_contents": "",
+        "base_contents": "    struct MeshData\n    {\n        float* vertex;\n        int vertexSizeInFloat;\n        unsigned short* indices;\n        int numIndex;\n        MeshVertexAttrib* attribs;\n        int attribCount;\n        void resetData();\n        MeshData();\n        ~MeshData();\n    };\n    struct SkinData\n    {\n        Mat4                     bindShape;\n        std::vector<std::string> boneNames;\n        std::vector<Mat4>        inverseBindPoseMatrices; //bind pose of bone\n        \n        std::map<int, std::vector<int> > boneChild;//key parent, value child\n        int                              rootBoneIndex;\n        void resetData()\n        {\n            bindShape.setIdentity();\n            boneNames.clear();\n            inverseBindPoseMatrices.clear();\n            boneChild.clear();\n            rootBoneIndex = -1;\n        }\n    };\n    struct MaterialData\n    {\n        std::string texturePath;\n    };\n    struct Animation3DData\n    {\n        Animation3D* animation;\n    };",
+        "res_region": "",
+        "lookback": "    static Bundle3D* getInstance();",
+        "lookahead": "    ",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 55,
+        "end_line": 136,
+        "merge_gen_region": null,
+        "confidence": 0.8089410662651062,
+        "hesitated": true
+    }
+]

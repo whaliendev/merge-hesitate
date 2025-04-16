@@ -1,0 +1,89 @@
+[
+    {
+        "a_contents": "    // create forwarders",
+        "b_contents": "    if (_req->vhost != vhost) {\n        return ret;\n    }\n\n    // forwarders\n    destroy_forwarders();\n    \n    // Don't start forwarders when source is not active.\n    if (_can_publish) {\n        return ret;\n    }\n    ",
+        "base_contents": "    if (_req->vhost != vhost) {\n        return ret;\n    }\n\n    // forwarders\n    destroy_forwarders();",
+        "res_region": "    // create forwarders",
+        "lookback": "    if ((ret = create_forwarders()) != ERROR_SUCCESS) {",
+        "lookahead": "    if ((ret = create_forwarders()) != ERROR_SUCCESS) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1101,
+        "end_line": 1123,
+        "merge_gen_region": null,
+        "confidence": 0.666254460811615,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if ((ret = hls->on_publish(false)) != ERROR_SUCCESS) {\n        srs_error(\"start hls failed. ret=%d\", ret);",
+        "b_contents": "    hls->on_unpublish();\n    \n    // Don't start forwarders when source is not active.\n    if (_can_publish) {\n        return ret;\n    }\n    \n    if ((ret = hls->on_publish(_req, true)) != ERROR_SUCCESS) {\n        srs_error(\"hls publish failed. ret=%d\", ret);",
+        "base_contents": "    hls->on_unpublish();\n    if ((ret = hls->on_publish(_req, true)) != ERROR_SUCCESS) {\n        srs_error(\"hls publish failed. ret=%d\", ret);",
+        "res_region": "    if ((ret = hls->on_publish(false)) != ERROR_SUCCESS) {\n        srs_error(\"start hls failed. ret=%d\", ret);",
+        "lookback": "        srs_error(\"start hls failed. ret=%d\", ret);",
+        "lookahead": "        return ret;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1138,
+        "end_line": 1155,
+        "merge_gen_region": null,
+        "confidence": 0.4198892116546631,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#ifdef SRS_AUTO_DVR\n    if ((ret = dvr->on_publish(false)) != ERROR_SUCCESS) {\n        srs_error(\"start dvr failed. ret=%d\", ret);",
+        "b_contents": "    return ret;\n}\n\nint SrsSource::on_reload_vhost_hds(string vhost)\n{\n    int ret = ERROR_SUCCESS;\n\n    if (_req->vhost != vhost) {\n        return ret;\n    }\n\n#ifdef SRS_AUTO_HDS\n    hds->on_unpublish();\n    \n    // Don't start forwarders when source is not active.\n    if (_can_publish) {\n        return ret;\n    }\n    \n    if ((ret = hds->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"hds publish failed. ret=%d\", ret);",
+        "base_contents": "    return ret;\n}\n\nint SrsSource::on_reload_vhost_hds(string vhost)\n{\n    int ret = ERROR_SUCCESS;\n\n    if (_req->vhost != vhost) {\n        return ret;\n    }\n\n#ifdef SRS_AUTO_HDS\n    hds->on_unpublish();\n    if ((ret = hds->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"hds publish failed. ret=%d\", ret);",
+        "res_region": "#ifdef SRS_AUTO_DVR\n    if ((ret = dvr->on_publish(false)) != ERROR_SUCCESS) {\n        srs_error(\"start dvr failed. ret=%d\", ret);",
+        "lookback": "    if ((ret = dvr->on_publish(false)) != ERROR_SUCCESS) {",
+        "lookahead": "        return ret;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1160,
+        "end_line": 1202,
+        "merge_gen_region": "\"ononoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8922637701034546,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    // TODO: FIXME: use initialize to set req.\n    if ((ret = ng_exec->on_publish(req)) != ERROR_SUCCESS) {\n        srs_error(\"start exec failed. ret=%d\", ret);",
+        "b_contents": "#ifdef SRS_AUTO_DVR\n    // cleanup dvr\n    dvr->on_unpublish();\n    \n    // Don't start forwarders when source is not active.\n    if (_can_publish) {\n        return ret;\n    }\n    \n    // reinitialize the dvr, update plan.\n    if ((ret = dvr->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n\n    // start to publish by new plan.\n    if ((ret = dvr->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"dvr publish failed. ret=%d\", ret);",
+        "base_contents": "#ifdef SRS_AUTO_DVR\n    // cleanup dvr\n    dvr->on_unpublish();\n\n    // reinitialize the dvr, update plan.\n    if ((ret = dvr->initialize(this, _req)) != ERROR_SUCCESS) {\n        return ret;\n    }\n\n    // start to publish by new plan.\n    if ((ret = dvr->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"dvr publish failed. ret=%d\", ret);",
+        "res_region": "    // TODO: FIXME: use initialize to set req.\n    if ((ret = ng_exec->on_publish(req)) != ERROR_SUCCESS) {\n        srs_error(\"start exec failed. ret=%d\", ret);\n        return ret;\n    }\n    \n    is_active = true;",
+        "lookback": "    if ((ret = ng_exec->on_publish(req)) != ERROR_SUCCESS) {",
+        "lookahead": "    ",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1215,
+        "end_line": 1250,
+        "merge_gen_region": null,
+        "confidence": 0.3768857419490814,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    \n    // Don't start forwarders when source is not active.\n    if (_can_publish) {\n        return ret;\n    }\n    \n    if ((ret = encoder->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"start encoder failed. ret=%d\", ret);\n        return ret;\n    }\n    srs_trace(\"vhost %s transcode reload success\", vhost.c_str());",
+        "base_contents": "    if ((ret = encoder->on_publish(_req)) != ERROR_SUCCESS) {\n        srs_error(\"start encoder failed. ret=%d\", ret);\n        return ret;\n    }\n    srs_trace(\"vhost %s transcode reload success\", vhost.c_str());",
+        "res_region": "",
+        "lookback": "    ",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1264,
+        "end_line": 1283,
+        "merge_gen_region": "",
+        "confidence": 0.9429376125335693,
+        "hesitated": false,
+        "resolved": true
+    }
+]

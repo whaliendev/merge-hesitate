@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    /*Calculate the position of each row*/\n    lv_coord_t max_h_no_gap = max_h - (row_gap * (row_cnt - 1));",
+        "b_contents": "    lv_coord_t btn_h = max_h - ((line_cnt - 1) * inner);\n    btn_h            = (btn_h + line_cnt / 2) / line_cnt;\n    btn_h--; /*-1 because e.g. height = 100 means 101 pixels (0..100)*/",
+        "base_contents": "    lv_coord_t btn_h = max_h - ((line_cnt - 1) * inner);\n    btn_h            = btn_h / line_cnt;\n    btn_h--; /*-1 because e.g. height = 100 means 101 pixels (0..100)*/",
+        "res_region": "    /*Calculate the position of each row*/\n    lv_coord_t max_h_no_gap = max_h - (row_gap * (row_cnt - 1));",
+        "lookback": "    lv_coord_t max_h_no_gap = max_h - (row_gap * (row_cnt - 1));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 168,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.8129231929779053,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    hostCommsMgr.sendLogMessageV2(tempLogBufferData, bytesCopied,\n                                  static_cast<uint32_t>(numDroppedLogs));",
+        "b_contents": "    // TODO(b/178033433): Keep track of and passs the number of logs dropped\n    hostCommsMgr.sendLogMessageV2(tempLogBufferData, bytesCopied, 0);",
+        "base_contents": "    hostCommsMgr.sendLogMessageV2(tempLogBufferData, bytesCopied);",
+        "res_region": "    hostCommsMgr.sendLogMessageV2(tempLogBufferData, bytesCopied,\n                                  static_cast<uint32_t>(numDroppedLogs));",
+        "lookback": "                                  static_cast<uint32_t>(numDroppedLogs));",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 88,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.5777775645256042,
+        "hesitated": true
+    }
+]

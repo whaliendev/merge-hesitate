@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nDEFINE_double(vehicle_low_speed_threshold, 1.0,\n              \"Vehicle low speed threshold.\");\n",
+        "b_contents": "DEFINE_bool(enable_cuda, false, \"True to enable cuda parallel implementation.\");",
+        "base_contents": "",
+        "res_region": "\nDEFINE_double(vehicle_low_speed_threshold, 1.0,\n              \"Vehicle low speed threshold.\");\n\nDEFINE_bool(enable_cuda, false, \"True to enable cuda parallel implementation.\");",
+        "lookback": "DEFINE_double(vehicle_low_speed_threshold, 1.0,",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 499,
+        "end_line": 507,
+        "merge_gen_region": null,
+        "confidence": 0.807245671749115,
+        "hesitated": true
+    }
+]

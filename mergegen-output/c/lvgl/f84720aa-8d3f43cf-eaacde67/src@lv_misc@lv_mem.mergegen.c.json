@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "    lv_memset_00(work_mem, (LV_MEM_SIZE / sizeof(MEM_UNIT)) * sizeof(MEM_UNIT));",
+        "b_contents": "",
+        "base_contents": "    _lv_memset_00(work_mem, (LV_MEM_SIZE / sizeof(MEM_UNIT)) * sizeof(MEM_UNIT));",
+        "res_region": "    lv_memset_00(work_mem, (LV_MEM_SIZE / sizeof(MEM_UNIT)) * sizeof(MEM_UNIT));",
+        "lookback": "    lv_mem_ent_t * full = (lv_mem_ent_t *)work_mem;",
+        "lookahead": "    lv_mem_ent_t * full = (lv_mem_ent_t *)work_mem;",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 140,
+        "end_line": 145,
+        "merge_gen_region": null,
+        "confidence": 0.6173702478408813,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#else",
+        "b_contents": "#endif /*LV_MEM_AUTO_DEFRAG*/\n#else /*Use custom, user defined free function*/",
+        "base_contents": "\n\n#endif /*LV_MEM_AUTO_DEFRAG*/\n#else /*Use custom, user defined free function*/",
+        "res_region": "#else",
+        "lookback": "#if LV_ENABLE_GC == 0",
+        "lookahead": "#if LV_ENABLE_GC == 0",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 244,
+        "end_line": 254,
+        "merge_gen_region": null,
+        "confidence": 0.5068966746330261,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if(old_size != 0) {\n            lv_memcpy(new_p, data_p, LV_MIN(new_size, old_size));\n            lv_mem_free(data_p);",
+        "b_contents": "        if(old_size != 0 && new_size != 0) {\n            _lv_memcpy(new_p, data_p, LV_MATH_MIN(new_size, old_size));",
+        "base_contents": "        if(old_size != 0) {\n            _lv_memcpy(new_p, data_p, LV_MATH_MIN(new_size, old_size));\n            lv_mem_free(data_p);",
+        "res_region": "        if(old_size != 0) {\n            lv_memcpy(new_p, data_p, LV_MIN(new_size, old_size));\n            lv_mem_free(data_p);",
+        "lookback": "            lv_memcpy(new_p, data_p, LV_MIN(new_size, old_size));",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 308,
+        "end_line": 319,
+        "merge_gen_region": null,
+        "confidence": 0.7666995525360107,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if(LV_GC_ROOT(lv_mem_buf[i]).used == 0) {\n            LV_GC_ROOT(lv_mem_buf[i]).used = 1;\n            LV_GC_ROOT(lv_mem_buf[i]).size = size;",
+        "b_contents": "        if(LV_GC_ROOT(_lv_mem_buf[i]).used == 0) {",
+        "base_contents": "        if(LV_GC_ROOT(_lv_mem_buf[i]).used == 0) {\n            LV_GC_ROOT(_lv_mem_buf[i]).used = 1;\n            LV_GC_ROOT(_lv_mem_buf[i]).size = size;",
+        "res_region": "        if(LV_GC_ROOT(lv_mem_buf[i]).used == 0) {",
+        "lookback": "            /*if this fails you probably need to increase your LV_MEM_SIZE/heap size*/",
+        "lookahead": "            /*if this fails you probably need to increase your LV_MEM_SIZE/heap size*/",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 509,
+        "end_line": 519,
+        "merge_gen_region": null,
+        "confidence": 0.5947611927986145,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            LV_GC_ROOT(lv_mem_buf[i]).p = lv_mem_realloc(LV_GC_ROOT(lv_mem_buf[i]).p, size);\n            if(LV_GC_ROOT(lv_mem_buf[i]).p == NULL) {\n                LV_DEBUG_ASSERT(false, \"Out of memory, can't allocate a new  buffer (increase your LV_MEM_SIZE/heap size\", 0x00);",
+        "b_contents": "            void * buf = lv_mem_realloc(LV_GC_ROOT(_lv_mem_buf[i]).p, size);\n            if(buf == NULL) {\n                LV_DEBUG_ASSERT(false, \"Out of memory, can't allocate a new buffer (increase your LV_MEM_SIZE/heap size)\", 0x00);\n                return NULL;",
+        "base_contents": "            LV_GC_ROOT(_lv_mem_buf[i]).p = lv_mem_realloc(LV_GC_ROOT(_lv_mem_buf[i]).p, size);\n            if(LV_GC_ROOT(_lv_mem_buf[i]).p == NULL) {\n                LV_DEBUG_ASSERT(false, \"Out of memory, can't allocate a new  buffer (increase your LV_MEM_SIZE/heap size\", 0x00);",
+        "res_region": "            void * buf = lv_mem_realloc(LV_GC_ROOT(lv_mem_buf[i]).p, size);\n            if(buf == NULL) {\n                LV_DEBUG_ASSERT(false, \"Out of memory, can't allocate a new buffer (increase your LV_MEM_SIZE/heap size)\", 0x00);\n                return NULL;",
+        "lookback": "            if(buf == NULL) {",
+        "lookahead": "            }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 521,
+        "end_line": 534,
+        "merge_gen_region": null,
+        "confidence": 0.7511354088783264,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            return  LV_GC_ROOT(lv_mem_buf[i]).p;",
+        "b_contents": "            LV_GC_ROOT(_lv_mem_buf[i]).used = 1;\n            LV_GC_ROOT(_lv_mem_buf[i]).size = size;\n            LV_GC_ROOT(_lv_mem_buf[i]).p    = buf;\n            return LV_GC_ROOT(_lv_mem_buf[i]).p;",
+        "base_contents": "            return  LV_GC_ROOT(_lv_mem_buf[i]).p;",
+        "res_region": "            LV_GC_ROOT(lv_mem_buf[i]).used = 1;\n            LV_GC_ROOT(lv_mem_buf[i]).size = size;\n            LV_GC_ROOT(lv_mem_buf[i]).p    = buf;\n            return LV_GC_ROOT(lv_mem_buf[i]).p;",
+        "lookback": "            LV_GC_ROOT(lv_mem_buf[i]).size = size;",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 536,
+        "end_line": 545,
+        "merge_gen_region": null,
+        "confidence": 0.7948797345161438,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  void UpdateThreadsList(Thread* thread);\n\n  uint16_t GetThreadEncoding(pid_t thread_id) REQUIRES(tracing_lock_);\n",
+        "b_contents": "  void UpdateThreadsList(Thread* thread);\n",
+        "base_contents": "",
+        "res_region": "  void UpdateThreadsList(Thread* thread);\n\n  uint16_t GetThreadEncoding(pid_t thread_id) REQUIRES(tracing_lock_);\n",
+        "lookback": "",
+        "lookahead": "  // Singleton instance of the Trace or null when no method tracing is active.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 344,
+        "end_line": 353,
+        "merge_gen_region": "ThreadsThreadsThread thread(\"%_ GetEncodingpidt threadid REQUI(REStracinglock79oughoughFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "confidence": 0.8968845009803772,
+        "hesitated": false,
+        "resolved": false
+    }
+]

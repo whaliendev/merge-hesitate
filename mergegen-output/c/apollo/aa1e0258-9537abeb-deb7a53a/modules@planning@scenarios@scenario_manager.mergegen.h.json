@@ -1,0 +1,138 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_config.pb.h\"",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "#include \"modules/planning/scenarios/scenario.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 25,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.7253581881523132,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::unique_ptr<Scenario> CreateScenario(ScenarioType scenario_type);",
+        "b_contents": "  std::unique_ptr<Scenario> CreateScenario(\n      ScenarioType scenario_type);",
+        "base_contents": "  std::unique_ptr<Scenario> CreateScenario(\n      ScenarioConfig::ScenarioType scenario_type);",
+        "res_region": "  std::unique_ptr<Scenario> CreateScenario(ScenarioType scenario_type);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 54,
+        "end_line": 62,
+        "merge_gen_region": null,
+        "confidence": 0.6890217661857605,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ScenarioType SelectYieldSignScenario(",
+        "b_contents": "  ScenarioType SelectDeadEndScenario(const Frame& frame);\n\n  ScenarioType SelectYieldSignScenario(",
+        "base_contents": "  ScenarioConfig::ScenarioType SelectDeadEndScenario(const Frame& frame);\n\n  ScenarioConfig::ScenarioType SelectYieldSignScenario(",
+        "res_region": "  ScenarioType SelectYieldSignScenario(",
+        "lookback": "      const Frame& frame, const hdmap::PathOverlap& yield_sign_overlap);",
+        "lookahead": "      const Frame& frame, const hdmap::PathOverlap& yield_sign_overlap);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 83,
+        "end_line": 93,
+        "merge_gen_region": null,
+        "confidence": 0.5848392844200134,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool IsBareIntersectionScenario(const ScenarioType& scenario_type);\n  bool IsStopSignScenario(const ScenarioType& scenario_type);\n  bool IsTrafficLightScenario(const ScenarioType& scenario_type);\n  bool IsYieldSignScenario(const ScenarioType& scenario_type);",
+        "b_contents": "  bool IsBareIntersectionScenario(\n      const ScenarioType& scenario_type);\n  bool IsStopSignScenario(const ScenarioType& scenario_type);\n  bool IsTrafficLightScenario(\n      const ScenarioType& scenario_type);\n  bool IsYieldSignScenario(const ScenarioType& scenario_type);",
+        "base_contents": "  bool IsBareIntersectionScenario(\n      const ScenarioConfig::ScenarioType& scenario_type);\n  bool IsStopSignScenario(const ScenarioConfig::ScenarioType& scenario_type);\n  bool IsTrafficLightScenario(\n      const ScenarioConfig::ScenarioType& scenario_type);\n  bool IsYieldSignScenario(const ScenarioConfig::ScenarioType& scenario_type);",
+        "res_region": "  bool IsBareIntersectionScenario(const ScenarioType& scenario_type);\n  bool IsStopSignScenario(const ScenarioType& scenario_type);\n  bool IsTrafficLightScenario(const ScenarioType& scenario_type);\n  bool IsYieldSignScenario(const ScenarioType& scenario_type);",
+        "lookback": "  bool IsStopSignScenario(const ScenarioType& scenario_type);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 102,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.7352042198181152,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  void UpdatePlanningContextPullOverScenario(const Frame& frame,\n                                             const ScenarioType& scenario_type);",
+        "b_contents": "  void UpdatePlanningContextPullOverScenario(\n      const Frame& frame, const ScenarioType& scenario_type);",
+        "base_contents": "  void UpdatePlanningContextPullOverScenario(\n      const Frame& frame, const ScenarioConfig::ScenarioType& scenario_type);",
+        "res_region": "  void UpdatePlanningContextPullOverScenario(const Frame& frame,\n                                             const ScenarioType& scenario_type);",
+        "lookback": "                                             const ScenarioType& scenario_type);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 132,
+        "end_line": 141,
+        "merge_gen_region": null,
+        "confidence": 0.6543849110603333,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  void UpdatePlanningContextStopSignScenario(const Frame& frame,\n                                             const ScenarioType& scenario_type);",
+        "b_contents": "  void UpdatePlanningContextStopSignScenario(\n      const Frame& frame, const ScenarioType& scenario_type);",
+        "base_contents": "  void UpdatePlanningContextStopSignScenario(\n      const Frame& frame, const ScenarioConfig::ScenarioType& scenario_type);",
+        "res_region": "  void UpdatePlanningContextStopSignScenario(const Frame& frame,\n                                             const ScenarioType& scenario_type);",
+        "lookback": "                                             const ScenarioType& scenario_type);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 143,
+        "end_line": 152,
+        "merge_gen_region": null,
+        "confidence": 0.7318631410598755,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      const Frame& frame, const ScenarioType& scenario_type);",
+        "b_contents": "      const Frame& frame, const ScenarioType& scenario_type);\n\n  bool JudgeReachTargetPoint(const common::VehicleState& car_position,\n                             const common::PointENU& target_point);",
+        "base_contents": "      const Frame& frame, const ScenarioConfig::ScenarioType& scenario_type);\n\n  bool JudgeReachTargetPoint(const common::VehicleState& car_position,\n                             const common::PointENU& target_point);",
+        "res_region": "      const Frame& frame, const ScenarioType& scenario_type);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 158,
+        "end_line": 170,
+        "merge_gen_region": null,
+        "confidence": 0.5440021753311157,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::unordered_map<ScenarioType, ScenarioConfig, std::hash<int>> config_map_;",
+        "b_contents": "  std::unordered_map<ScenarioType, ScenarioConfig,\n                     std::hash<int>>\n      config_map_;",
+        "base_contents": "  std::unordered_map<ScenarioConfig::ScenarioType, ScenarioConfig,\n                     std::hash<int>>\n      config_map_;",
+        "res_region": "  std::unordered_map<ScenarioType, ScenarioConfig, std::hash<int>> config_map_;",
+        "lookback": "  std::unique_ptr<Scenario> current_scenario_;",
+        "lookahead": "  std::unique_ptr<Scenario> current_scenario_;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 175,
+        "end_line": 185,
+        "merge_gen_region": null,
+        "confidence": 0.7668389081954956,
+        "hesitated": true
+    }
+]

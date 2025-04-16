@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/* =================================== Hashes =============================== */",
+        "b_contents": "static void zrankCommand(redisClient *c) {\n    zrankGenericCommand(c, 0);\n}\n\nstatic void zrevrankCommand(redisClient *c) {\n    zrankGenericCommand(c, 1);\n}\n\n/* ==================================== Hash ================================ */",
+        "base_contents": "/* ==================================== Hash ================================ */",
+        "res_region": "static void zrankCommand(redisClient *c) {\n    zrankGenericCommand(c, 0);\n}\n\nstatic void zrevrankCommand(redisClient *c) {\n    zrankGenericCommand(c, 1);\n}\n\n/* =================================== Hashes =============================== */",
+        "lookback": "    zrankGenericCommand(c, 0);",
+        "lookahead": "static void hsetCommand(redisClient *c) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 5676,
+        "end_line": 5690,
+        "merge_gen_region": null,
+        "confidence": 0.667880117893219,
+        "hesitated": true
+    }
+]

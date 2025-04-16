@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "        datum_t merged\n            = std::move(stats).to_datum()->merge(insert_stats, stats_merge,\n                                                 env->limits(), &conditions);",
+        "b_contents": "        counted_t<const datum_t> merged\n            = std::move(stats).to_counted()->merge(insert_stats, stats_merge,\n                                                   env->limits(), &conditions);",
+        "base_contents": "        counted_t<const datum_t> merged\n            = std::move(stats).to_counted()->merge(insert_stats, stats_merge,\n                                                   env->limits, &conditions);",
+        "res_region": "        datum_t merged\n            = std::move(stats).to_datum()->merge(insert_stats, stats_merge,\n                                                 env->limits(), &conditions);",
+        "lookback": "            = std::move(stats).to_datum()->merge(insert_stats, stats_merge,",
+        "lookahead": "        datum_object_builder_t result(std::move(merged)->as_object());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 66,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.7133277654647827,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        result.add_warnings(conditions, env->limits());\n        return std::move(result).to_datum();",
+        "b_contents": "        result.add_warnings(conditions, env->limits());\n        return std::move(result).to_counted();",
+        "base_contents": "        result.add_warnings(conditions, env->limits);\n        return std::move(result).to_counted();",
+        "res_region": "        result.add_warnings(conditions, env->limits());\n        return std::move(result).to_datum();",
+        "lookback": "        return std::move(result).to_datum();",
+        "lookahead": "    } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 89,
+        "merge_gen_region": null,
+        "confidence": 0.7599914073944092,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    datum_t merged\n        = std::move(stats).to_datum()->merge(insert_stats, stats_merge,\n                                               env->limits(), &conditions);",
+        "b_contents": "    counted_t<const datum_t> merged\n        = std::move(stats).to_counted()->merge(insert_stats, stats_merge,\n                                               env->limits(), &conditions);",
+        "base_contents": "    counted_t<const datum_t> merged\n        = std::move(stats).to_counted()->merge(insert_stats, stats_merge,\n                                               env->limits, &conditions);",
+        "res_region": "    datum_t merged\n        = std::move(stats).to_datum()->merge(insert_stats, stats_merge,\n                                               env->limits(), &conditions);",
+        "lookback": "        = std::move(stats).to_datum()->merge(insert_stats, stats_merge,",
+        "lookahead": "    datum_object_builder_t result(std::move(merged)->as_object());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 130,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.7133277654647827,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    result.add_warnings(conditions, env->limits());\n    return std::move(result).to_datum();",
+        "b_contents": "    result.add_warnings(conditions, env->limits());\n    return std::move(result).to_counted();",
+        "base_contents": "    result.add_warnings(conditions, env->limits);\n    return std::move(result).to_counted();",
+        "res_region": "    result.add_warnings(conditions, env->limits());\n    return std::move(result).to_datum();",
+        "lookback": "    return std::move(result).to_datum();",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 144,
+        "end_line": 153,
+        "merge_gen_region": null,
+        "confidence": 0.5975104570388794,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return datum_t(std::move(array), env->limits());",
+        "b_contents": "    return make_counted<datum_t>(std::move(array), env->limits());",
+        "base_contents": "    return make_counted<datum_t>(std::move(array), env->limits);",
+        "res_region": "    return datum_t(std::move(array), env->limits());",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 184,
+        "end_line": 190,
+        "merge_gen_region": null,
+        "confidence": 0.7946942448616028,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return datum_t(std::move(array), env->limits());",
+        "b_contents": "    return make_counted<const datum_t>(std::move(array), env->limits());",
+        "base_contents": "    return make_counted<const datum_t>(std::move(array), env->limits);",
+        "res_region": "    return datum_t(std::move(array), env->limits());",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 212,
+        "end_line": 218,
+        "merge_gen_region": null,
+        "confidence": 0.7946942448616028,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\t\t\t\t\t\t\t+ block->separator_block_width/2, margin);",
+        "b_contents": "\t\t\t\t\t\t\t\t+ block->separator_block_width/2, margin);",
+        "base_contents": "\t\t\t\t\t\t    + block->separator_block_width/2, margin);",
+        "res_region": "\t\t\t\t\t\t\t\t+ block->separator_block_width/2, margin);",
+        "lookback": "\t\t\t\t\tcairo_line_to(window->cairo, blockpos + width",
+        "lookahead": "\t\t\t\t\tcairo_line_to(window->cairo, blockpos + width",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 449,
+        "end_line": 455,
+        "merge_gen_region": null,
+        "confidence": 0.5266917943954468,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t\t\t\t\t+ block->separator_block_width/2, window->height - margin);",
+        "b_contents": "\t\t\t\t\t\t\t\t+ block->separator_block_width/2, window->height - margin);",
+        "base_contents": "\t\t\t\t\t\t    + block->separator_block_width/2, window->height - margin);",
+        "res_region": "\t\t\t\t\t\t\t\t+ block->separator_block_width/2, window->height - margin);",
+        "lookback": "\t\t\t\t\tcairo_stroke(window->cairo);",
+        "lookahead": "\t\t\t\t\tcairo_stroke(window->cairo);",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 457,
+        "end_line": 463,
+        "merge_gen_region": null,
+        "confidence": 0.44365182518959045,
+        "hesitated": true
+    }
+]

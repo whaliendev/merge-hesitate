@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "      acceleration_cmd_closeloop + debug->preview_acceleration_reference() + \\\n      digital_filter_acceleration_.Filter(GRA_ACC \\\n              * std::sin(vehicle_state_.pitch()));\n      debug->set_is_full_stop(false);",
+        "b_contents": "      acceleration_cmd_closeloop + debug->preview_acceleration_reference() +\n      digital_filter_pitch_angle_.Filter(\n          GRA_ACC * std::sin(VehicleState::instance()->pitch()));\n  debug->set_is_full_stop(false);",
+        "base_contents": "      acceleration_cmd_closeloop + debug->preview_acceleration_reference();\n  debug->set_is_full_stop(false);",
+        "res_region": "      acceleration_cmd_closeloop + debug->preview_acceleration_reference() +\n      digital_filter_pitch_angle_.Filter(\n          GRA_ACC * std::sin(VehicleState::instance()->pitch()));\n  debug->set_is_full_stop(false);",
+        "lookback": "      digital_filter_pitch_angle_.Filter(",
+        "lookahead": "  if (std::abs(debug->preview_acceleration_reference()) <=",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 218,
+        "end_line": 231,
+        "merge_gen_region": "digitaldigitaldigitaldigitaldigital",
+        "confidence": 0.8975067734718323,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  if (std::abs(vehicle_state_.linear_velocity()) <=\n          FLAGS_max_abs_speed_when_stopped ||",
+        "b_contents": "  if (std::abs(VehicleState::instance()->linear_velocity()) <=\n          FLAGS_max_abs_speed_when_stopped ||",
+        "base_contents": "  if (std::abs(vehicle_state_.linear_velocity())\n      <= FLAGS_max_abs_speed_when_stopped ||",
+        "res_region": "  if (std::abs(VehicleState::instance()->linear_velocity()) <=\n          FLAGS_max_abs_speed_when_stopped ||",
+        "lookback": "          FLAGS_max_abs_speed_when_stopped ||",
+        "lookahead": "      chassis->gear_location() == trajectory_message_->gear() ||",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 290,
+        "end_line": 299,
+        "merge_gen_region": null,
+        "confidence": 0.8488091826438904,
+        "hesitated": true
+    }
+]

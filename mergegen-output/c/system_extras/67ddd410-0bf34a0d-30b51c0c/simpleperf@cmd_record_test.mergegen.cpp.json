@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--exclude-perf\"}));\n}\n\nTEST(record_cmd, binary_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--binary\", \".*\"}));",
+        "b_contents": "  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--exclude-perf\"}));",
+        "base_contents": "",
+        "res_region": "  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--exclude-perf\"}));\n}\n\nTEST(record_cmd, binary_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--decode-etm\", \"--binary\", \".*\"}));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1064,
+        "end_line": 1077,
+        "merge_gen_region": "_(Record::&& ASSERTTRUERun ASSERT111111111111111111111111111111111111111111111111111111111111111111111111111111 onstruct",
+        "confidence": 0.9219382405281067,
+        "hesitated": false,
+        "resolved": false
+    }
+]

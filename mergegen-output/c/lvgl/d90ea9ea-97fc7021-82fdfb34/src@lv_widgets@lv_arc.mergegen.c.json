@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    }\n    else if(sign == LV_SIGNAL_CLEANUP) {\n        _lv_obj_reset_style_list_no_refr(arc, LV_ARC_PART_KNOB);\n        _lv_obj_reset_style_list_no_refr(arc, LV_ARC_PART_INDIC);",
+        "b_contents": "    }else if(sign == LV_SIGNAL_GET_EDITABLE) {\n#if LV_USE_GROUP\n        bool * editable = (bool *)param;\n        *editable = true;\n#endif\n    }else if(sign == LV_SIGNAL_CLEANUP) {\n        lv_obj_clean_style_list(arc, LV_ARC_PART_KNOB);\n        lv_obj_clean_style_list(arc, LV_ARC_PART_INDIC);",
+        "base_contents": "    }\n    else if(sign == LV_SIGNAL_CLEANUP) {\n        lv_obj_clean_style_list(arc, LV_ARC_PART_KNOB);\n        lv_obj_clean_style_list(arc, LV_ARC_PART_INDIC);",
+        "res_region": "    }\n    else if(sign == LV_SIGNAL_CLEANUP) {\n        _lv_obj_reset_style_list_no_refr(arc, LV_ARC_PART_KNOB);\n        _lv_obj_reset_style_list_no_refr(arc, LV_ARC_PART_INDIC);\n    }\n    else if(sign == LV_SIGNAL_GET_EDITABLE) {\n#if LV_USE_GROUP\n        bool * editable = (bool *)param;\n        *editable = true;\n#endif",
+        "lookback": "    else if(sign == LV_SIGNAL_CLEANUP) {",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 862,
+        "end_line": 881,
+        "merge_gen_region": null,
+        "confidence": 0.8145852088928223,
+        "hesitated": true
+    }
+]

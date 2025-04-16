@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#if PHP_MAJOR_VERSION >= 7\n#include <ext/standard/php_string.h>\n\nstatic void load_module(char *extension_dir, zval *name)\n{\n    zend_string *tmp = php_trim(Z_STR_P(name), NULL, 0, 3);\n    zend_string *file = strpprintf(0, \"%s/%s\", extension_dir, ZSTR_VAL(tmp));\n    swModule_load(ZSTR_VAL(file));\n    zend_string_free(file);\n}\n#endif\n",
+        "b_contents": "#ifdef SW_COROUTINE\n#include \"swoole_coroutine.h\"\n#endif\n",
+        "base_contents": "",
+        "res_region": "#ifdef SW_COROUTINE\n#include \"swoole_coroutine.h\"\n#endif\n\n#if PHP_MAJOR_VERSION >= 7\n#include <ext/standard/php_string.h>\n\nstatic void load_module(char *extension_dir, zval *name)\n{\n    zend_string *tmp = php_trim(Z_STR_P(name), NULL, 0, 3);\n    zend_string *file = strpprintf(0, \"%s/%s\", extension_dir, ZSTR_VAL(tmp));\n    swModule_load(ZSTR_VAL(file));\n    zend_string_free(file);\n}\n#endif\n",
+        "lookback": "#include \"swoole_coroutine.h\"",
+        "lookahead": "ZEND_DECLARE_MODULE_GLOBALS(swoole)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 47,
+        "merge_gen_region": null,
+        "confidence": 0.7082908749580383,
+        "hesitated": true
+    }
+]

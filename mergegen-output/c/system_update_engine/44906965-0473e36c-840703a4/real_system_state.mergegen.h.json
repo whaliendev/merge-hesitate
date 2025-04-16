@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#endif  // USE_CHROME_KIOSK_APP\n#if USE_CHROME_NETWORK_PROXY\n#include <network_proxy/dbus-proxies.h>\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "#endif  // USE_CHROME_KIOSK_APP",
+        "base_contents": "#include <network_proxy/dbus-proxies.h>\n#endif  // USE_LIBCROS",
+        "res_region": "#endif  // USE_CHROME_KIOSK_APP",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.45889049768447876,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#endif  // USE_CHROME_KIOSK_APP\n#if USE_CHROME_NETWORK_PROXY\n  std::unique_ptr<org::chromium::NetworkProxyServiceInterfaceProxy>\n      network_proxy_service_proxy_;\n#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "#endif  // USE_CHROME_KIOSK_APP",
+        "base_contents": "  std::unique_ptr<org::chromium::NetworkProxyServiceInterfaceProxy>\n      network_proxy_service_proxy_;\n#endif  // USE_LIBCROS",
+        "res_region": "#endif  // USE_CHROME_KIOSK_APP",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 142,
+        "end_line": 154,
+        "merge_gen_region": null,
+        "confidence": 0.49511754512786865,
+        "hesitated": true
+    }
+]

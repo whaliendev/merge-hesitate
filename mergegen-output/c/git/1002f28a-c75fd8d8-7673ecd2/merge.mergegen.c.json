@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\t\tif (parse_tree(trees[i]) < 0) {\n\t\t\trollback_lock_file(&lock_file);\n\t\t\treturn -1;\n\t\t}\n\t\tinit_tree_desc(t+i, trees[i]->buffer, trees[i]->size);",
+        "b_contents": "\t\tparse_tree(trees[i]);\n\t\tinit_tree_desc(t+i, &trees[i]->object.oid,\n\t\t\t       trees[i]->buffer, trees[i]->size);",
+        "base_contents": "\t\tparse_tree(trees[i]);\n\t\tinit_tree_desc(t+i, trees[i]->buffer, trees[i]->size);",
+        "res_region": "\t\tif (parse_tree(trees[i]) < 0) {\n\t\t\trollback_lock_file(&lock_file);\n\t\t\treturn -1;\n\t\t}\n\t\tinit_tree_desc(t+i, &trees[i]->object.oid,\n\t\t\t       trees[i]->buffer, trees[i]->size);",
+        "lookback": "\t\t\trollback_lock_file(&lock_file);",
+        "lookahead": "\t}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 79,
+        "end_line": 92,
+        "merge_gen_region": " (ifififififififififififififififififififififififififififififoutput>(ifififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.8912371397018433,
+        "hesitated": false,
+        "resolved": false
+    }
+]

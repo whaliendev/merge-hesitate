@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        int32_t serial, const aidl::Dial& info, int32_t categories,",
+        "b_contents": "        int32_t serial, const aidl::Dial& info, aidl::EmergencyServiceCategory categories,",
+        "base_contents": "        int32_t serial, const aidl::Dial& dialInfo, aidl::EmergencyServiceCategory categories,",
+        "res_region": "        int32_t serial, const aidl::Dial& info, int32_t categories,",
+        "lookback": "        const std::vector<std::string>& urns, aidl::EmergencyCallRouting routing,",
+        "lookahead": "        const std::vector<std::string>& urns, aidl::EmergencyCallRouting routing,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 55,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.3421294689178467,
+        "hesitated": true
+    }
+]

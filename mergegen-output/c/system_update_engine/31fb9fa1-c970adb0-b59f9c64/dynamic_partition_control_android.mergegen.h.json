@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) override;",
+        "b_contents": "  ErrorCode CleanupSuccessfulUpdate() override;\n  std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) override;",
+        "base_contents": "  ErrorCode CleanupSuccessfulUpdate() override;",
+        "res_region": "  std::unique_ptr<AbstractAction> GetCleanupPreviousUpdateAction(\n      BootControlInterface* boot_control,\n      PrefsInterface* prefs,\n      CleanupPreviousUpdateActionDelegateInterface* delegate) override;",
+        "lookback": "      BootControlInterface* boot_control,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 47,
+        "end_line": 60,
+        "merge_gen_region": null,
+        "confidence": 0.7911183834075928,
+        "hesitated": true
+    }
+]

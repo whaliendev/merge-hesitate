@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tlist_free(config->output_configs);",
+        "b_contents": "\tlist_free(config->pid_workspaces);\n\tif (config->output_configs) {\n\t\tfor (int i = 0; i < config->output_configs->length; i++) {\n\t\t\tfree_output_config(config->output_configs->items[i]);\n\t\t}\n\t\tlist_free(config->output_configs);\n\t}",
+        "base_contents": "\tlist_free(config->pid_workspaces);\n\tlist_free(config->output_configs);",
+        "res_region": "\tif (config->output_configs) {\n\t\tfor (int i = 0; i < config->output_configs->length; i++) {\n\t\t\tfree_output_config(config->output_configs->items[i]);\n\t\t}\n\t\tlist_free(config->output_configs);\n\t}",
+        "lookback": "\t\tfor (int i = 0; i < config->output_configs->length; i++) {",
+        "lookahead": "\tif (config->input_configs) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 89,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.7612663507461548,
+        "hesitated": true
+    }
+]

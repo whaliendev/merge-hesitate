@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if (!base::ContainsKey(allowed_types, shill::kTypeCellular)) {\n          LOG(INFO) << \"Disabling updates over cellular connection as it's not \"\n                       \"allowed in the device policy.\";",
+        "b_contents": "        if (!base::ContainsKey(allowed_types, shill::kTypeCellular)) {\n          LOG(INFO) << \"Disabling updates over cellular per device policy.\";",
+        "base_contents": "        if (!ContainsKey(allowed_types, shill::kTypeCellular)) {\n          LOG(INFO) << \"Disabling updates over cellular per device policy.\";",
+        "res_region": "        if (!base::ContainsKey(allowed_types, shill::kTypeCellular)) {\n          LOG(INFO) << \"Disabling updates over cellular connection as it's not \"\n                       \"allowed in the device policy.\";",
+        "lookback": "          LOG(INFO) << \"Disabling updates over cellular connection as it's not \"",
+        "lookahead": "          return false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 76,
+        "end_line": 86,
+        "merge_gen_region": null,
+        "confidence": 0.8683621883392334,
+        "hesitated": true
+    }
+]

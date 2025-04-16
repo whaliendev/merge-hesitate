@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n#include <Columns/IColumn_fwd.h>",
+        "b_contents": "#include <Columns/IColumn.h>",
+        "base_contents": "#include <Columns/IColumn.h>\n#include <Core/BackgroundSchedulePool.h>",
+        "res_region": "\n#include <Columns/IColumn_fwd.h>",
+        "lookback": "#include <Columns/IColumn_fwd.h>",
+        "lookahead": "#include <Core/Names.h>",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5,
+        "end_line": 13,
+        "merge_gen_region": null,
+        "confidence": 0.7297793626785278,
+        "hesitated": true
+    }
+]

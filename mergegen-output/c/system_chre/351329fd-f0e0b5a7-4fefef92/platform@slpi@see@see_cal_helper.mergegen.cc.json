@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "      *sensorType = CHRE_SENSOR_TYPE_ACCELEROMETER;\n      break;\n#endif  // CHRE_ENABLE_ACCEL_CAL",
+        "b_contents": "      return SensorType::Accelerometer;\n#endif  // CHRE_ENABLE_ACCEL_CAL",
+        "base_contents": "      return SensorType::Accelerometer;",
+        "res_region": "      *sensorType = CHRE_SENSOR_TYPE_ACCELEROMETER;\n      break;\n#endif  // CHRE_ENABLE_ACCEL_CAL",
+        "lookback": "      break;",
+        "lookahead": "    case SeeCalSensor::GyroCal:",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 150,
+        "end_line": 159,
+        "merge_gen_region": null,
+        "confidence": 0.81522536277771,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      // Don't assert here as SEE may send us calibration updates for other\n      // sensors even if CHRE doesn't request them.\n      found = false;\n      break;",
+        "b_contents": "      // Fall-through as CHRE can receive calibration events for other sensors\n      // even if it doesn't request them.\n      break;",
+        "base_contents": "      CHRE_ASSERT(false);",
+        "res_region": "      // Don't assert here as SEE may send us calibration updates for other\n      // sensors even if CHRE doesn't request them.\n      found = false;\n      break;",
+        "lookback": "      // sensors even if CHRE doesn't request them.",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 167,
+        "end_line": 178,
+        "merge_gen_region": "RE't/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.8880823254585266,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "#ifdef CHRE_ENABLE_ACCEL_CAL\n    case CHRE_SENSOR_TYPE_ACCELEROMETER:",
+        "b_contents": "#ifdef CHRE_ENABLE_ACCEL_CAL\n    case SensorType::Accelerometer:",
+        "base_contents": "    case SensorType::Accelerometer:",
+        "res_region": "#ifdef CHRE_ENABLE_ACCEL_CAL\n    case CHRE_SENSOR_TYPE_ACCELEROMETER:",
+        "lookback": "    case CHRE_SENSOR_TYPE_ACCELEROMETER:",
+        "lookahead": "      index = SeeCalSensor::AccelCal;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 186,
+        "end_line": 194,
+        "merge_gen_region": null,
+        "confidence": 0.8014827966690063,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#endif  // CHRE_ENABLE_ACCEL_CAL\n    case CHRE_SENSOR_TYPE_GYROSCOPE:",
+        "b_contents": "#endif  // CHRE_ENABLE_ACCEL_CAL\n    case SensorType::Gyroscope:",
+        "base_contents": "    case SensorType::Gyroscope:",
+        "res_region": "#endif  // CHRE_ENABLE_ACCEL_CAL\n    case CHRE_SENSOR_TYPE_GYROSCOPE:",
+        "lookback": "    case CHRE_SENSOR_TYPE_GYROSCOPE:",
+        "lookahead": "      index = SeeCalSensor::GyroCal;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 197,
+        "end_line": 205,
+        "merge_gen_region": null,
+        "confidence": 0.7851203083992004,
+        "hesitated": true
+    }
+]

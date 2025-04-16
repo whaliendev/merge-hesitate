@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "ProfileAction::CacheUseResult SetCgroupAction::UseCachedFd(ResourceCacheType cache_type,\n                                                           int id) const {\n    std::lock_guard<std::mutex> lock(fd_mutex_);\n    if (FdCacheHelper::IsCached(fd_[cache_type])) {\n        // fd is cached, reuse it\n        if (!AddTidToCgroup(id, fd_[cache_type], controller()->name())) {\n            LOG(ERROR) << \"Failed to add task into cgroup\";\n            return ProfileAction::FAIL;\n        }\n        return ProfileAction::SUCCESS;",
+        "b_contents": "bool SetCgroupAction::AddTidToCgroup(int tid, int fd, const char* controller_name) {\n    if (tid <= 0) {\n        return true;",
+        "base_contents": "bool SetCgroupAction::AddTidToCgroup(int tid, int fd) {\n    if (tid <= 0) {\n        return true;",
+        "res_region": "ProfileAction::CacheUseResult SetCgroupAction::UseCachedFd(ResourceCacheType cache_type,\n                                                           int id) const {\n    std::lock_guard<std::mutex> lock(fd_mutex_);\n    if (FdCacheHelper::IsCached(fd_[cache_type])) {\n        // fd is cached, reuse it\n        if (!AddTidToCgroup(id, fd_[cache_type], controller()->name())) {\n            LOG(ERROR) << \"Failed to add task into cgroup\";\n            return ProfileAction::FAIL;\n        }\n        return ProfileAction::SUCCESS;",
+        "lookback": "                                                           int id) const {",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 269,
+        "end_line": 288,
+        "merge_gen_region": null,
+        "confidence": 0.6892892122268677,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (cache_type == ResourceCacheType::RCT_TASK &&\n        fd_[cache_type] == FdCacheHelper::FDS_APP_DEPENDENT) {\n        // application-dependent path can't be used with tid\n        PLOG(ERROR) << \"Application profile can't be applied to a thread\";\n        return ProfileAction::FAIL;",
+        "b_contents": "    if (TEMP_FAILURE_RETRY(write(fd, value.c_str(), value.length())) == value.length()) {\n        return true;\n    }\n\n    // If the thread is in the process of exiting, don't flag an error\n    if (errno == ESRCH) {\n        return true;\n    }\n\n    // ENOSPC is returned when cpuset cgroup that we are joining has no online cpus\n    if (errno == ENOSPC && !strcmp(controller_name, \"cpuset\")) {\n        // This is an abnormal case happening only in testing, so report it only once\n        static bool empty_cpuset_reported = false;\n\n        if (empty_cpuset_reported) {\n            return true;\n        }\n\n        LOG(ERROR) << \"Failed to add task '\" << value\n                   << \"' into cpuset because all cpus in that cpuset are offline\";\n        empty_cpuset_reported = true;\n    } else {\n        PLOG(ERROR) << \"AddTidToCgroup failed to write '\" << value << \"'; fd=\" << fd;",
+        "base_contents": "    if (TEMP_FAILURE_RETRY(write(fd, value.c_str(), value.length())) < 0) {\n        // If the thread is in the process of exiting, don't flag an error\n        if (errno != ESRCH) {\n            PLOG(ERROR) << \"AddTidToCgroup failed to write '\" << value << \"'; fd=\" << fd;\n            return false;\n        }",
+        "res_region": "    if (cache_type == ResourceCacheType::RCT_TASK &&\n        fd_[cache_type] == FdCacheHelper::FDS_APP_DEPENDENT) {\n        // application-dependent path can't be used with tid\n        PLOG(ERROR) << \"Application profile can't be applied to a thread\";\n        return ProfileAction::FAIL;\n    }\n",
+        "lookback": "        fd_[cache_type] == FdCacheHelper::FDS_APP_DEPENDENT) {",
+        "lookahead": "    return ProfileAction::UNUSED;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 296,
+        "end_line": 333,
+        "merge_gen_region": null,
+        "confidence": 0.7385605573654175,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return ProfileAction::UNUSED;",
+        "b_contents": "    return false;",
+        "base_contents": "    return true;",
+        "res_region": "    return ProfileAction::UNUSED;",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 336,
+        "end_line": 342,
+        "merge_gen_region": null,
+        "confidence": 0.40260374546051025,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    CacheUseResult result = UseCachedFd(ProfileAction::RCT_TASK, tid);\n    if (result != ProfileAction::UNUSED) {\n        return result == ProfileAction::SUCCESS;",
+        "b_contents": "    std::lock_guard<std::mutex> lock(fd_mutex_);\n    if (IsFdValid()) {\n        // fd is cached, reuse it\n        if (!AddTidToCgroup(tid, fd_, controller()->name())) {\n            LOG(ERROR) << \"Failed to add task into cgroup\";\n            return false;\n        }\n        return true;\n    }\n\n    if (fd_ == FDS_INACCESSIBLE) {\n        // no permissions to access the file, ignore\n        return true;",
+        "base_contents": "    std::lock_guard<std::mutex> lock(fd_mutex_);\n    if (IsFdValid()) {\n        // fd is cached, reuse it\n        if (!AddTidToCgroup(tid, fd_)) {\n            LOG(ERROR) << \"Failed to add task into cgroup\";\n            return false;\n        }\n        return true;\n    }\n\n    if (fd_ == FDS_INACCESSIBLE) {\n        // no permissions to access the file, ignore\n        return true;",
+        "res_region": "    CacheUseResult result = UseCachedFd(ProfileAction::RCT_TASK, tid);\n    if (result != ProfileAction::UNUSED) {\n        return result == ProfileAction::SUCCESS;",
+        "lookback": "    if (result != ProfileAction::UNUSED) {",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 367,
+        "end_line": 399,
+        "merge_gen_region": null,
+        "confidence": 0.534271240234375,
+        "hesitated": true
+    }
+]

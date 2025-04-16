@@ -1,0 +1,106 @@
+[
+    {
+        "a_contents": "/* static */\nsp<IAfPatchPanel> IAfPatchPanel::create(const sp<IAfPatchPanelCallback>& afPatchPanelCallback) {\n    return sp<PatchPanel>::make(afPatchPanelCallback);",
+        "b_contents": "/* List connected audio ports and their attributes */\nstatus_t AudioFlinger::listAudioPorts(unsigned int *num_ports,\n                                struct audio_port *ports)\n{\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel->listAudioPorts(num_ports, ports);",
+        "base_contents": "/* List connected audio ports and their attributes */\nstatus_t AudioFlinger::listAudioPorts(unsigned int *num_ports,\n                                struct audio_port *ports)\n{\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel.listAudioPorts(num_ports, ports);",
+        "res_region": "/* static */\nsp<IAfPatchPanel> IAfPatchPanel::create(const sp<IAfPatchPanelCallback>& afPatchPanelCallback) {\n    return sp<PatchPanel>::make(afPatchPanelCallback);",
+        "lookback": "sp<IAfPatchPanel> IAfPatchPanel::create(const sp<IAfPatchPanelCallback>& afPatchPanelCallback) {",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 49,
+        "end_line": 67,
+        "merge_gen_region": "<spIAspIAspspspspspspspspspspspspspspsp",
+        "confidence": 0.8827333450317383,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "status_t SoftwarePatch::getLatencyMs_l(double* latencyMs) const {\n    return mPatchPanel->getLatencyMs_l(mPatchHandle, latencyMs);",
+        "b_contents": "/* Get supported attributes for a given audio port */\nstatus_t AudioFlinger::getAudioPort(struct audio_port_v7 *port) {\n    status_t status = AudioValidator::validateAudioPort(*port);\n    if (status != NO_ERROR) {\n        return status;\n    }\n\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel->getAudioPort(port);",
+        "base_contents": "/* Get supported attributes for a given audio port */\nstatus_t AudioFlinger::getAudioPort(struct audio_port_v7 *port) {\n    status_t status = AudioValidator::validateAudioPort(*port);\n    if (status != NO_ERROR) {\n        return status;\n    }\n\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel.getAudioPort(port);",
+        "res_region": "status_t SoftwarePatch::getLatencyMs_l(double* latencyMs) const {\n    return mPatchPanel->getLatencyMs_l(mPatchHandle, latencyMs);",
+        "lookback": "    return mPatchPanel->getLatencyMs_l(mPatchHandle, latencyMs);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 70,
+        "end_line": 93,
+        "merge_gen_region": null,
+        "confidence": 0.6409894824028015,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel->createAudioPatch(patch, handle);\n}\n\n/* Disconnect a patch */\nstatus_t AudioFlinger::releaseAudioPatch(audio_patch_handle_t handle)\n{\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel->releaseAudioPatch(handle);",
+        "base_contents": "\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel.createAudioPatch(patch, handle);\n}\n\n/* Disconnect a patch */\nstatus_t AudioFlinger::releaseAudioPatch(audio_patch_handle_t handle)\n{\n    Mutex::Autolock _l(mLock);\n    return mPatchPanel.releaseAudioPatch(handle);",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 105,
+        "end_line": 128,
+        "merge_gen_region": null,
+        "confidence": 0.7284196019172668,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (const auto recordThread = thread->asIAfRecordThread();\n            recordThread) {\n        mAfPatchPanelCallback->closeThreadInternal_l(recordThread);\n    } else if (const auto playbackThread = thread->asIAfPlaybackThread();\n            playbackThread) {\n        mAfPatchPanelCallback->closeThreadInternal_l(playbackThread);",
+        "b_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->listAudioPatches(num_patches, patches);\n}\n\n/* static */\nsp<IAfPatchPanel> IAfPatchPanel::create(AudioFlinger* audioFlinger) {\n    return sp<AudioFlinger::PatchPanel>::make(audioFlinger);\n}\n\nstatus_t SoftwarePatch::getLatencyMs_l(double* latencyMs) const {\n    return mPatchPanel->getLatencyMs_l(mPatchHandle, latencyMs);\n}\n\nstatus_t AudioFlinger::PatchPanel::getLatencyMs_l(\n        audio_patch_handle_t patchHandle, double* latencyMs) const\n{\n    const auto& iter = mPatches.find(patchHandle);\n    if (iter != mPatches.end()) {\n        return iter->second.getLatencyMs(latencyMs);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel.listAudioPatches(num_patches, patches);\n}\n\nstatus_t AudioFlinger::PatchPanel::SoftwarePatch::getLatencyMs_l(double *latencyMs) const\n{\n    const auto& iter = mPatchPanel.mPatches.find(mPatchHandle);\n    if (iter != mPatchPanel.mPatches.end()) {\n        return iter->second.getLatencyMs(latencyMs);",
+        "res_region": "    if (const auto recordThread = thread->asIAfRecordThread();\n            recordThread) {\n        mAfPatchPanelCallback->closeThreadInternal_l(recordThread);\n    } else if (const auto playbackThread = thread->asIAfPlaybackThread();\n            playbackThread) {\n        mAfPatchPanelCallback->closeThreadInternal_l(playbackThread);",
+        "lookback": "            recordThread) {",
+        "lookahead": "    } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 133,
+        "end_line": 170,
+        "merge_gen_region": null,
+        "confidence": 0.7358360886573792,
+        "hesitated": true
+    },
+    {
+        "a_contents": "status_t PatchPanel::Patch::createConnections(const sp<IAfPatchPanel>& panel)",
+        "b_contents": "status_t AudioFlinger::PatchPanel::Patch::createConnections(const sp<IAfPatchPanel>& panel)",
+        "base_contents": "status_t AudioFlinger::PatchPanel::Patch::createConnections(PatchPanel *panel)",
+        "res_region": "status_t PatchPanel::Patch::createConnections(const sp<IAfPatchPanel>& panel)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 564,
+        "end_line": 570,
+        "merge_gen_region": "AVAILABLEAVAILABLEAVAILABLEAVAILABLEAVAILABLEAVAILABLEreadyreadystatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughstatusoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusAVAILABLEAVAILABLEAVAILABLEAVAILABLEstatusAVAILABLEAVAILABLEoughoughstatusoughstatusoughstatusoughoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughstatusoughoughoughoughstatusoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughough",
+        "confidence": 0.901138186454773,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "void PatchPanel::Patch::clearConnections(const sp<IAfPatchPanel>& panel)",
+        "b_contents": "void AudioFlinger::PatchPanel::Patch::clearConnections(const sp<IAfPatchPanel>& panel)",
+        "base_contents": "void AudioFlinger::PatchPanel::Patch::clearConnections(PatchPanel *panel)",
+        "res_region": "void PatchPanel::Patch::clearConnections(const sp<IAfPatchPanel>& panel)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 734,
+        "end_line": 740,
+        "merge_gen_region": null,
+        "confidence": 0.8326734304428101,
+        "hesitated": true
+    }
+]

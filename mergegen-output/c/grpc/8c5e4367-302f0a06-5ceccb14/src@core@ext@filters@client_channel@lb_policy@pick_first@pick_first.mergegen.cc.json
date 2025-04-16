@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    if (subchannel_list_ == nullptr ||\n        subchannel_list_->num_subchannels() == 0) {\n      grpc_error* error = grpc_error_set_int(\n          GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"No addresses to connect to\"),\n          GRPC_ERROR_INT_GRPC_STATUS, GRPC_STATUS_UNAVAILABLE);\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE,\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    } else {",
+        "b_contents": "    if (subchannel_list_ == nullptr ||\n        subchannel_list_->num_subchannels() == 0) {\n      grpc_error* error =\n          GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"No addresses to connect to\");\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE, GRPC_ERROR_REF(error),\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    } else {",
+        "base_contents": "    if (subchannel_list_ != nullptr &&\n        subchannel_list_->num_subchannels() > 0) {",
+        "res_region": "    if (subchannel_list_ == nullptr ||\n        subchannel_list_->num_subchannels() == 0) {\n      grpc_error* error = grpc_error_set_int(\n          GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"No addresses to connect to\"),\n          GRPC_ERROR_INT_GRPC_STATUS, GRPC_STATUS_UNAVAILABLE);\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE,\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    } else {",
+        "lookback": "        subchannel_list_->num_subchannels() == 0) {",
+        "lookahead": "      subchannel_list_->subchannel(0)",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 189,
+        "end_line": 211,
+        "merge_gen_region": null,
+        "confidence": 0.8149072527885437,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // If not idle, put the channel in TRANSIENT_FAILURE.\n    // (If we are idle, then this will happen in ExitIdleLocked() if we\n    // haven't gotten a non-empty update by the time the application tries\n    // to start a new call.)\n    if (!idle_) {\n      grpc_error* error = grpc_error_set_int(\n          GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"Empty update\"),\n          GRPC_ERROR_INT_GRPC_STATUS, GRPC_STATUS_UNAVAILABLE);\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE,\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    }",
+        "b_contents": "    // If not idle, put the channel in TRANSIENT_FAILURE.\n    // (If we are idle, then this will happen in ExitIdleLocked() if we\n    // haven't gotten a non-empty update by the time the application tries\n    // to start a new call.)\n    if (!idle_) {\n      grpc_error* error = GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"Empty update\");\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE, GRPC_ERROR_REF(error),\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    }",
+        "base_contents": "    grpc_error* error = GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"Empty update\");\n    channel_control_helper()->UpdateState(\n        GRPC_CHANNEL_TRANSIENT_FAILURE, GRPC_ERROR_REF(error),\n        UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));",
+        "res_region": "    // If not idle, put the channel in TRANSIENT_FAILURE.\n    // (If we are idle, then this will happen in ExitIdleLocked() if we\n    // haven't gotten a non-empty update by the time the application tries\n    // to start a new call.)\n    if (!idle_) {\n      grpc_error* error = grpc_error_set_int(\n          GRPC_ERROR_CREATE_FROM_STATIC_STRING(\"Empty update\"),\n          GRPC_ERROR_INT_GRPC_STATUS, GRPC_STATUS_UNAVAILABLE);\n      channel_control_helper()->UpdateState(\n          GRPC_CHANNEL_TRANSIENT_FAILURE,\n          UniquePtr<SubchannelPicker>(New<TransientFailurePicker>(error)));\n    }",
+        "lookback": "    // (If we are idle, then this will happen in ExitIdleLocked() if we",
+        "lookahead": "    return;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 278,
+        "end_line": 307,
+        "merge_gen_region": null,
+        "confidence": 0.8519834876060486,
+        "hesitated": true
+    }
+]

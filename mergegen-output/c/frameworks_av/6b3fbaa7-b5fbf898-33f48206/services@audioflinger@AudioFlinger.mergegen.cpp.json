@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            IAfMmapPlaybackThread* const mmapPlaybackThread =\n                    mMmapThreads.valueAt(i)->asIAfMmapPlaybackThread().get();\n            volumeInterfaces.push_back(mmapPlaybackThread);",
+        "b_contents": "            MmapPlaybackThread *mmapPlaybackThread =\n                    static_cast<MmapPlaybackThread *>(mMmapThreads.valueAt(i).get());\n            volumeInterfaces.push_back(mmapPlaybackThread);",
+        "base_contents": "            MmapPlaybackThread *mmapPlaybackThread =\n                    static_cast<MmapPlaybackThread *>(mMmapThreads.valueAt(i).get());\n            volumeInterfaces.add(mmapPlaybackThread);",
+        "res_region": "            IAfMmapPlaybackThread* const mmapPlaybackThread =\n                    mMmapThreads.valueAt(i)->asIAfMmapPlaybackThread().get();\n            volumeInterfaces.push_back(mmapPlaybackThread);",
+        "lookback": "                    mMmapThreads.valueAt(i)->asIAfMmapPlaybackThread().get();",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3648,
+        "end_line": 3660,
+        "merge_gen_region": null,
+        "confidence": 0.8538634181022644,
+        "hesitated": true
+    }
+]

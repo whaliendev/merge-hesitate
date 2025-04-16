@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "void Heap::EnsureObjectUserfaulted(ObjPtr<mirror::Object> obj) {\n  if (gUseUserfaultfd) {\n    // Use volatile to ensure that compiler loads from memory to trigger userfaults, if required.\n    const uint8_t* start = reinterpret_cast<uint8_t*>(obj.Ptr());\n    const uint8_t* end = AlignUp(start + obj->SizeOf(), kPageSize);\n    // The first page is already touched by SizeOf().\n    start += kPageSize;\n    while (start < end) {\n      ForceRead(start);\n      start += kPageSize;\n    }\n  }\n}\n",
+        "b_contents": "void Heap::EnsureObjectUserfaulted(ObjPtr<mirror::Object> obj) {\n  if (kUseUserfaultfd) {\n    // Use volatile to ensure that compiler loads from memory to trigger userfaults, if required.\n    volatile uint8_t volatile_sum;\n    volatile uint8_t* start = reinterpret_cast<volatile uint8_t*>(obj.Ptr());\n    volatile uint8_t* end = AlignUp(start + obj->SizeOf(), kPageSize);\n    uint8_t sum = 0;\n    // The first page is already touched by SizeOf().\n    start += kPageSize;\n    while (start < end) {\n      sum += *start;\n      start += kPageSize;\n    }\n    volatile_sum = sum;\n  }\n}\n",
+        "base_contents": "",
+        "res_region": "void Heap::EnsureObjectUserfaulted(ObjPtr<mirror::Object> obj) {\n  if (gUseUserfaultfd) {\n    // Use volatile to ensure that compiler loads from memory to trigger userfaults, if required.\n    const uint8_t* start = reinterpret_cast<uint8_t*>(obj.Ptr());\n    const uint8_t* end = AlignUp(start + obj->SizeOf(), kPageSize);\n    // The first page is already touched by SizeOf().\n    start += kPageSize;\n    while (start < end) {\n      ForceRead(start);\n      start += kPageSize;\n    }\n  }\n}\n",
+        "lookback": "  if (gUseUserfaultfd) {",
+        "lookahead": "void Heap::DecrementDisableThreadFlip(Thread* self) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1003,
+        "end_line": 1037,
+        "merge_gen_region": null,
+        "confidence": 0.859876811504364,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  LOG(INFO) << \"Using \" << foreground_collector_type_ << \" GC.\";\n  if (gUseUserfaultfd) {\n    DCHECK_NE(mark_compact_, nullptr);\n    mark_compact_->CreateUserfaultfd(/*post_fork*/true);",
+        "b_contents": "  if (kUseUserfaultfd) {\n    DCHECK_NE(mark_compact_, nullptr);\n    mark_compact_->CreateUserfaultfd(/*post_fork*/true);",
+        "base_contents": "#if defined(__BIONIC__) && defined(ART_TARGET)\n  uffd_ = syscall(__NR_userfaultfd, O_CLOEXEC | O_NONBLOCK | UFFD_USER_MODE_ONLY);\n  if (uffd_ >= 0) {\n    struct uffdio_api api = {.api = UFFD_API, .features = 0};\n    int ret = ioctl(uffd_, UFFDIO_API, &api);\n    CHECK_EQ(ret, 0) << \"ioctl_userfaultfd: API: \" << strerror(errno);\n  } else {\n    // The syscall should fail only if it doesn't exist in the kernel or if it's\n    // denied by SELinux.\n    CHECK(errno == ENOSYS || errno == EACCES) << \"userfaultfd: \" << strerror(errno);",
+        "res_region": "  LOG(INFO) << \"Using \" << foreground_collector_type_ << \" GC.\";\n  if (gUseUserfaultfd) {\n    DCHECK_NE(mark_compact_, nullptr);\n    mark_compact_->CreateUserfaultfd(/*post_fork*/true);",
+        "lookback": "  if (gUseUserfaultfd) {",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4668,
+        "end_line": 4688,
+        "merge_gen_region": "() \" \" \" foregroundcollectortype << GC",
+        "confidence": 0.9101004600524902,
+        "hesitated": false,
+        "resolved": false
+    }
+]

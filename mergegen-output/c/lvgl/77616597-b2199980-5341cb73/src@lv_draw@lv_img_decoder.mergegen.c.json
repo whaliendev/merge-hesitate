@@ -1,0 +1,363 @@
+[
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n    lv_fs_file_t f;\n#endif",
+        "b_contents": "    lv_fs_file_t * f;",
+        "base_contents": "#if LV_USE_FILESYSTEM\n    lv_fs_file_t * f;\n#endif",
+        "res_region": "    lv_fs_file_t * f;",
+        "lookback": "    lv_color_t * palette;",
+        "lookahead": "    lv_color_t * palette;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.6552422046661377,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "        LV_ASSERT_MALLOC(decoder);",
+        "base_contents": "        LV_ASSERT_MEM(decoder);",
+        "res_region": "",
+        "lookback": "    }",
+        "lookahead": "        return;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 75,
+        "end_line": 80,
+        "merge_gen_region": null,
+        "confidence": 0.7921492457389832,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    _LV_LL_READ(LV_GC_ROOT(_lv_img_defoder_ll), d) {",
+        "b_contents": "    _LV_LL_READ(&LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        res = LV_RES_INV;",
+        "base_contents": "    _LV_LL_READ(LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        res = LV_RES_INV;",
+        "res_region": "    _LV_LL_READ(&LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        res = LV_RES_INV;",
+        "lookback": "        res = LV_RES_INV;",
+        "lookahead": "        if(d->info_cb) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 103,
+        "end_line": 111,
+        "merge_gen_region": "resresresresresresresresresresresresresresresresresresresres",
+        "confidence": 0.8935438990592957,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    _LV_LL_READ(LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        /*Info and Open callbacks are required*/",
+        "b_contents": "    _LV_LL_READ(&LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        /*Info an Open callbacks are required*/",
+        "base_contents": "    _LV_LL_READ(LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        /*Info an Open callbacks are required*/",
+        "res_region": "    _LV_LL_READ(&LV_GC_ROOT(_lv_img_defoder_ll), d) {\n        /*Info an Open callbacks are required*/",
+        "lookback": "        /*Info an Open callbacks are required*/",
+        "lookahead": "        if(d->info_cb == NULL || d->open_cb == NULL) continue;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 157,
+        "end_line": 166,
+        "merge_gen_region": null,
+        "confidence": 0.8286146521568298,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        /*Support only \"*.bin\" files*/\n        if(strcmp(lv_fs_get_ext(src), \"bin\")) return LV_RES_INV;\n\n        lv_fs_file_t file;\n        lv_fs_res_t res;",
+        "b_contents": "        lv_fs_file_t * f;",
+        "base_contents": "        lv_fs_file_t file;\n        lv_fs_res_t res;",
+        "res_region": "        /*Support only \"*.bin\" files*/\n        if(strcmp(lv_fs_get_ext(src), \"bin\")) return LV_RES_INV;\n\n        lv_fs_res_t res;\n        lv_fs_file_t * f;",
+        "lookback": "        if(strcmp(lv_fs_get_ext(src), \"bin\")) return LV_RES_INV;",
+        "lookahead": "        uint32_t rn;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 313,
+        "end_line": 324,
+        "merge_gen_region": "/* only.\" files/* only.\" btreeDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDoDo",
+        "confidence": 0.8968048095703125,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM",
+        "b_contents": "",
+        "base_contents": "#if LV_USE_FILESYSTEM\n",
+        "res_region": "",
+        "lookback": "        if(strcmp(lv_fs_get_ext(dsc->src), \"bin\")) return LV_RES_INV;",
+        "lookahead": "        /*Support only \"*.bin\" files*/",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 364,
+        "end_line": 370,
+        "merge_gen_region": null,
+        "confidence": 0.8392943739891052,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _lv_memcpy_small(&user_data->f, &f, sizeof(f));\n#else\n        LV_LOG_WARN(\"Image built-in decoder cannot read file because LV_USE_FILESYSTEM = 0\");\n        return LV_RES_INV;\n#endif",
+        "b_contents": "        user_data->f = f;",
+        "base_contents": "        user_data->f = lv_mem_alloc(sizeof(f));\n        LV_ASSERT_MEM(user_data->f);\n        if(user_data->f == NULL) {\n            LV_LOG_ERROR(\"img_decoder_built_in_open: out of memory\");\n            lv_img_decoder_built_in_close(decoder, dsc);\n            return LV_RES_INV;\n        }\n\n        _lv_memcpy_small(user_data->f, &f, sizeof(f));\n\n#else\n        LV_LOG_WARN(\"Image built-in decoder cannot read file because LV_USE_FILESYSTEM = 0\");\n        return LV_RES_INV;\n#endif",
+        "res_region": "        user_data->f = f;",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 393,
+        "end_line": 416,
+        "merge_gen_region": null,
+        "confidence": 0.5466111898422241,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_IMG_CF_INDEXED",
+        "b_contents": "",
+        "base_contents": "\n#if LV_IMG_CF_INDEXED",
+        "res_region": "",
+        "lookback": "        uint32_t palette_size = 1 << px_size;",
+        "lookahead": "        uint8_t px_size       = lv_img_cf_get_px_size(cf);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 442,
+        "end_line": 449,
+        "merge_gen_region": null,
+        "confidence": 0.5221771597862244,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n            lv_fs_seek(&user_data->f, 4); /*Skip the header*/",
+        "b_contents": "            lv_fs_seek(user_data->f, 4, LV_FS_SEEK_SET); /*Skip the header*/",
+        "base_contents": "#if LV_USE_FILESYSTEM\n            lv_fs_seek(user_data->f, 4); /*Skip the header*/",
+        "res_region": "            lv_fs_seek(user_data->f, 4, LV_FS_SEEK_SET); /*Skip the header*/",
+        "lookback": "            lv_color32_t cur_color;",
+        "lookahead": "            lv_color32_t cur_color;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 477,
+        "end_line": 485,
+        "merge_gen_region": null,
+        "confidence": 0.7455072999000549,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#else\n        LV_LOG_WARN(\"Indexed (palette) images are not enabled in lv_conf.h. See LV_IMG_CF_INDEXED\");\n        lv_img_decoder_built_in_close(decoder, dsc);\n        return LV_RES_INV;\n#endif",
+        "b_contents": "",
+        "base_contents": "#else\n        LV_LOG_WARN(\"Indexed (palette) images are not enabled in lv_conf.h. See LV_IMG_CF_INDEXED\");\n        return LV_RES_INV;\n#endif",
+        "res_region": "",
+        "lookback": "    /*Alpha indexed images. */",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 506,
+        "end_line": 518,
+        "merge_gen_region": null,
+        "confidence": 0.5828776955604553,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_IMG_CF_ALPHA",
+        "b_contents": "        dsc->img_data = NULL;",
+        "base_contents": "#if LV_IMG_CF_ALPHA\n        dsc->img_data = NULL;",
+        "res_region": "        dsc->img_data = NULL;",
+        "lookback": "        return LV_RES_OK; /*Nothing to process*/",
+        "lookahead": "        return LV_RES_OK; /*Nothing to process*/",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 523,
+        "end_line": 530,
+        "merge_gen_region": null,
+        "confidence": 0.4506676197052002,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#else\n        LV_LOG_WARN(\"Alpha indexed images are not enabled in lv_conf.h. See LV_IMG_CF_ALPHA\");\n        lv_img_decoder_built_in_close(decoder, dsc);\n        return LV_RES_INV;\n#endif",
+        "b_contents": "",
+        "base_contents": "#else\n        LV_LOG_WARN(\"Alpha indexed images are not enabled in lv_conf.h. See LV_IMG_CF_ALPHA\");\n        return LV_RES_INV;\n#endif",
+        "res_region": "",
+        "lookback": "    /*Unknown format. Can't decode it.*/",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 532,
+        "end_line": 544,
+        "merge_gen_region": null,
+        "confidence": 0.6110035181045532,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n        if(dsc->src_type == LV_IMG_SRC_FILE)\n            lv_fs_close(&user_data->f);\n#endif",
+        "b_contents": "        if(user_data->f) {\n            lv_fs_close(user_data->f);\n        }",
+        "base_contents": "#if LV_USE_FILESYSTEM\n        if(user_data->f) {\n            lv_fs_close(user_data->f);\n            lv_mem_free(user_data->f);\n        }\n#endif",
+        "res_region": "        if(user_data->f) {\n            lv_fs_close(user_data->f);\n        }",
+        "lookback": "            lv_fs_close(user_data->f);",
+        "lookahead": "        if(user_data->palette) lv_mem_free(user_data->palette);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 609,
+        "end_line": 625,
+        "merge_gen_region": null,
+        "confidence": 0.743901789188385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = lv_fs_seek(&user_data->f, pos);",
+        "b_contents": "    res = lv_fs_seek(user_data->f, pos, LV_FS_SEEK_SET);",
+        "base_contents": "    res = lv_fs_seek(user_data->f, pos);",
+        "res_region": "    res = lv_fs_seek(user_data->f, pos, LV_FS_SEEK_SET);",
+        "lookback": "    if(res != LV_FS_RES_OK) {",
+        "lookahead": "    if(res != LV_FS_RES_OK) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 647,
+        "end_line": 653,
+        "merge_gen_region": null,
+        "confidence": 0.7153394222259521,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_IMG_CF_ALPHA",
+        "b_contents": "",
+        "base_contents": "\n#if LV_IMG_CF_ALPHA",
+        "res_region": "",
+        "lookback": "    const lv_opa_t alpha2_opa_table[4]  = {0, 85, 170, 255}; /*Opacity mapping with bpp = 2*/",
+        "lookahead": "    const lv_opa_t alpha1_opa_table[2]  = {0, 255};          /*Opacity mapping with bpp = 1 (Just for compatibility)*/",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 672,
+        "end_line": 679,
+        "merge_gen_region": null,
+        "confidence": 0.5367708206176758,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    uint8_t * fs_buf = _lv_mem_buf_get(w);\n    if (fs_buf == NULL) return LV_RES_INV;\n#endif",
+        "b_contents": "    uint8_t * fs_buf = lv_mem_buf_get(w);",
+        "base_contents": "    uint8_t * fs_buf = _lv_mem_buf_get(w);\n#endif",
+        "res_region": "    uint8_t * fs_buf = lv_mem_buf_get(w);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 737,
+        "end_line": 746,
+        "merge_gen_region": null,
+        "confidence": 0.7383182644844055,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n        lv_fs_seek(&user_data->f, ofs + 4); /*+4 to skip the header*/\n        lv_fs_read(&user_data->f, fs_buf, w, NULL);",
+        "b_contents": "        lv_fs_seek(user_data->f, ofs + 4, LV_FS_SEEK_SET); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "base_contents": "#if LV_USE_FILESYSTEM\n        lv_fs_seek(user_data->f, ofs + 4); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "res_region": "        lv_fs_seek(user_data->f, ofs + 4, LV_FS_SEEK_SET); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "lookback": "        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "lookahead": "        data_tmp = fs_buf;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 755,
+        "end_line": 766,
+        "merge_gen_region": "__(&_->,,_,,_,,_,,_,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,__,,__,,__,,__,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__",
+        "confidence": 0.8975123167037964,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "#else\n    LV_LOG_WARN(\"Image built-in alpha line reader failed because LV_IMG_CF_ALPHA is 0 in lv_conf.h\");\n    return LV_RES_INV;\n#endif",
+        "b_contents": "",
+        "base_contents": "\n#else\n    LV_LOG_WARN(\"Image built-in alpha line reader failed because LV_IMG_CF_ALPHA is 0 in lv_conf.h\");\n    return LV_RES_INV;\n#endif",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 784,
+        "end_line": 796,
+        "merge_gen_region": null,
+        "confidence": 0.5620454549789429,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_IMG_CF_INDEXED",
+        "b_contents": "",
+        "base_contents": "\n#if LV_IMG_CF_INDEXED",
+        "res_region": "",
+        "lookback": "    uint16_t mask   = (1 << px_size) - 1; /*E.g. px_size = 2; mask = 0x03*/",
+        "lookahead": "    uint8_t px_size = lv_img_cf_get_px_size(dsc->header.cf);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 802,
+        "end_line": 808,
+        "merge_gen_region": null,
+        "confidence": 0.6471891403198242,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n    uint8_t * fs_buf = _lv_mem_buf_get(w);\n    if (fs_buf == NULL) return LV_RES_INV;\n#endif",
+        "b_contents": "    uint8_t * fs_buf = lv_mem_buf_get(w);",
+        "base_contents": "#if LV_USE_FILESYSTEM\n    uint8_t * fs_buf = _lv_mem_buf_get(w);\n#endif",
+        "res_region": "    uint8_t * fs_buf = lv_mem_buf_get(w);",
+        "lookback": "    const uint8_t * data_tmp = NULL;",
+        "lookahead": "    const uint8_t * data_tmp = NULL;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 844,
+        "end_line": 855,
+        "merge_gen_region": null,
+        "confidence": 0.7832631468772888,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#if LV_USE_FILESYSTEM\n        lv_fs_seek(&user_data->f, ofs + 4); /*+4 to skip the header*/\n        lv_fs_read(&user_data->f, fs_buf, w, NULL);",
+        "b_contents": "        lv_fs_seek(user_data->f, ofs + 4, LV_FS_SEEK_SET); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "base_contents": "#if LV_USE_FILESYSTEM\n        lv_fs_seek(user_data->f, ofs + 4); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "res_region": "        lv_fs_seek(user_data->f, ofs + 4, LV_FS_SEEK_SET); /*+4 to skip the header*/\n        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "lookback": "        lv_fs_read(user_data->f, fs_buf, w, NULL);",
+        "lookahead": "        data_tmp = fs_buf;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 862,
+        "end_line": 873,
+        "merge_gen_region": "__(&_->,,_,,_,,_,,_,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,__,,__,,__,,__,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__",
+        "confidence": 0.8975123167037964,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "bool Audio::IsSoundEffectPaused(unsigned int sound)\n{\n    if (m_soundEffects.end() == m_soundEffects.find(sound))\n        return false;\n\n    return m_soundEffects[sound].m_soundEffectPaused;\n}\n\nstd::wstring CCUtf8ToUnicode(const char * pszUtf8Str)\n{\n    std::wstring ret;\n    do\n    {\n        if (! pszUtf8Str) break;\n        size_t len = strlen(pszUtf8Str);\n        if (len <= 0) break;\n\t\t++len;\n        wchar_t * pwszStr = new wchar_t[len];\n        if (! pwszStr) break;\n        pwszStr[len - 1] = 0;\n        MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, pwszStr, len);\n        ret = pwszStr;\n\n\t\tif(pwszStr) { \n\t\t\tdelete[] (pwszStr); \n\t\t\t(pwszStr) = 0; \n\t\t}\n\n\n    } while (0);\n    return ret;\n}\n\nstd::string CCUnicodeToUtf8(const wchar_t* pwszStr)\n{\n\tstd::string ret;\n\tdo\n\t{\n\t\tif(! pwszStr) break;\n\t\tsize_t len = wcslen(pwszStr);\n\t\tif (len <= 0) break;\n\t\t\n\t\tchar * pszUtf8Str = new char[len*3 + 1];\n\t\tWideCharToMultiByte(CP_UTF8, 0, pwszStr, len+1, pszUtf8Str, len*3 + 1, 0, 0);\n\t\tret = pszUtf8Str;\n\t\t\t\t\n\t\tif(pszUtf8Str) { \n\t\t\tdelete[] (pszUtf8Str); \n\t\t\t(pszUtf8Str) = 0; \n\t\t}\n\t}while(0);\n\n\treturn ret;\n}\n",
+        "base_contents": "std::wstring CCUtf8ToUnicode(const char * pszUtf8Str)\n{\n    std::wstring ret;\n    do\n    {\n        if (! pszUtf8Str) break;\n        size_t len = strlen(pszUtf8Str);\n        if (len <= 0) break;\n\t\t++len;\n        wchar_t * pwszStr = new wchar_t[len];\n        if (! pwszStr) break;\n        pwszStr[len - 1] = 0;\n        MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, pwszStr, len);\n        ret = pwszStr;\n\n\t\tif(pwszStr) { \n\t\t\tdelete[] (pwszStr); \n\t\t\t(pwszStr) = 0; \n\t\t}\n\n\n    } while (0);\n    return ret;\n}\n\nstd::string CCUnicodeToUtf8(const wchar_t* pwszStr)\n{\n\tstd::string ret;\n\tdo\n\t{\n\t\tif(! pwszStr) break;\n\t\tsize_t len = wcslen(pwszStr);\n\t\tif (len <= 0) break;\n\t\t\n\t\tchar * pszUtf8Str = new char[len*3 + 1];\n\t\tWideCharToMultiByte(CP_UTF8, 0, pwszStr, len+1, pszUtf8Str, len*3 + 1, 0, 0);\n\t\tret = pszUtf8Str;\n\t\t\t\t\n\t\tif(pszUtf8Str) { \n\t\t\tdelete[] (pszUtf8Str); \n\t\t\t(pszUtf8Str) = 0; \n\t\t}\n\t}while(0);\n\n\treturn ret;\n}\n",
+        "res_region": "bool Audio::IsSoundEffectPaused(unsigned int sound)\n{\n    if (m_soundEffects.end() == m_soundEffects.find(sound))\n        return false;\n\n    return m_soundEffects[sound].m_soundEffectPaused;\n}\n\nstd::wstring CCUtf8ToUnicode(const char * pszUtf8Str)\n{\n    std::wstring ret;\n    do\n    {\n        if (! pszUtf8Str) break;\n        size_t len = strlen(pszUtf8Str);\n        if (len <= 0) break;\n\t\t++len;\n        wchar_t * pwszStr = new wchar_t[len];\n        if (! pwszStr) break;\n        pwszStr[len - 1] = 0;\n        MultiByteToWideChar(CP_UTF8, 0, pszUtf8Str, len, pwszStr, len);\n        ret = pwszStr;\n\n\t\tif(pwszStr) { \n\t\t\tdelete[] (pwszStr); \n\t\t\t(pwszStr) = 0; \n\t\t}\n\n\n    } while (0);\n    return ret;\n}\n\nstd::string CCUnicodeToUtf8(const wchar_t* pwszStr)\n{\n\tstd::string ret;\n\tdo\n\t{\n\t\tif(! pwszStr) break;\n\t\tsize_t len = wcslen(pwszStr);\n\t\tif (len <= 0) break;\n\t\t\n\t\tchar * pszUtf8Str = new char[len*3 + 1];\n\t\tWideCharToMultiByte(CP_UTF8, 0, pwszStr, len+1, pszUtf8Str, len*3 + 1, 0, 0);\n\t\tret = pszUtf8Str;\n\t\t\t\t\n\t\tif(pszUtf8Str) { \n\t\t\tdelete[] (pszUtf8Str); \n\t\t\t(pszUtf8Str) = 0; \n\t\t}\n\t}while(0);\n\n\treturn ret;\n}\n",
+        "lookback": "{",
+        "lookahead": "void Audio::PreloadSoundEffect(const char* pszFilePath, bool isMusic)",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 478,
+        "end_line": 583,
+        "merge_gen_region": null,
+        "confidence": 0.40184149146080017,
+        "hesitated": true
+    }
+]

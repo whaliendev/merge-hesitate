@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "b_contents": "\tif(opa == LV_OPA_TRANSP) return;\n",
+        "base_contents": "",
+        "res_region": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "lookback": "\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;",
+        "lookahead": "    lv_vdb_t * vdb_p = lv_vdb_get();",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 64,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.6851766109466553,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "b_contents": "\tif(opa == LV_OPA_TRANSP) return;\n",
+        "base_contents": "",
+        "res_region": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "lookback": "\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;",
+        "lookahead": "    lv_area_t res_a;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 111,
+        "end_line": 120,
+        "merge_gen_region": null,
+        "confidence": 0.7145062685012817,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "b_contents": "\n\tif(opa == LV_OPA_TRANSP) return;\n",
+        "base_contents": "",
+        "res_region": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "lookback": "\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;",
+        "lookahead": "    if(font_p == NULL) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 241,
+        "end_line": 250,
+        "merge_gen_region": null,
+        "confidence": 0.7079683542251587,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "b_contents": "\tif(opa == LV_OPA_TRANSP) return;\n",
+        "base_contents": "",
+        "res_region": "\tif(opa < LV_OPA_MIN) return;\n\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;\n",
+        "lookback": "\tif(opa > LV_OPA_MAX) opa = LV_OPA_COVER;",
+        "lookahead": "    lv_area_t masked_a;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 388,
+        "end_line": 396,
+        "merge_gen_region": null,
+        "confidence": 0.7156346440315247,
+        "hesitated": true
+    }
+]

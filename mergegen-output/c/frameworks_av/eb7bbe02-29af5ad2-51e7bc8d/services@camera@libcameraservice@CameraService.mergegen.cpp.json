@@ -1,0 +1,308 @@
+[
+    {
+        "a_contents": "#include <android/permission/PermissionChecker.h>",
+        "b_contents": "",
+        "base_contents": "#include <android-base/stringprintf.h>",
+        "res_region": "#include <android/permission/PermissionChecker.h>",
+        "lookback": "#include <binder/ActivityManager.h>",
+        "lookahead": "#include <binder/ActivityManager.h>",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 40,
+        "end_line": 45,
+        "merge_gen_region": null,
+        "confidence": 0.43352004885673523,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include <binder/IServiceManager.h>\n#include <binder/IActivityManager.h>\n#include <camera/StringUtils.h>",
+        "b_contents": "#include <camera/StringUtils.h>",
+        "base_contents": "",
+        "res_region": "#include <binder/IServiceManager.h>\n#include <binder/IActivityManager.h>\n#include <camera/StringUtils.h>",
+        "lookback": "#include <binder/IActivityManager.h>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 77,
+        "end_line": 84,
+        "merge_gen_region": null,
+        "confidence": 0.8129063844680786,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        auto ret = i->getListener()->onTorchStatusChanged(mapToInterface(status),\n                cameraId);\n        i->handleBinderStatus(ret, \"%s: Failed to trigger onTorchStatusChanged for %d:%d: %d\",\n                __FUNCTION__, i->getListenerUid(), i->getListenerPid(), ret.exceptionCode());",
+        "b_contents": "        i->getListener()->onTorchStatusChanged(mapToInterface(status), cameraId);",
+        "base_contents": "        i->getListener()->onTorchStatusChanged(mapToInterface(status), String16{cameraId});",
+        "res_region": "        auto ret = i->getListener()->onTorchStatusChanged(mapToInterface(status),\n                cameraId);\n        i->handleBinderStatus(ret, \"%s: Failed to trigger onTorchStatusChanged for %d:%d: %d\",\n                __FUNCTION__, i->getListenerUid(), i->getListenerPid(), ret.exceptionCode());",
+        "lookback": "                cameraId);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 321,
+        "end_line": 330,
+        "merge_gen_region": null,
+        "confidence": 0.836174726486206,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            auto ret = listener->getListener()->onPhysicalCameraStatusChanged(\n                    mapToInterface(newStatus), id, physicalId);\n            listener->handleBinderStatus(ret,\n                    \"%s: Failed to trigger onPhysicalCameraStatusChanged for %d:%d: %d\",\n                    __FUNCTION__, listener->getListenerUid(), listener->getListenerPid(),\n                    ret.exceptionCode());",
+        "b_contents": "            listener->getListener()->onPhysicalCameraStatusChanged(mapToInterface(newStatus),\n                    id, physicalId);",
+        "base_contents": "            listener->getListener()->onPhysicalCameraStatusChanged(mapToInterface(newStatus),\n                    id16, physicalId16);",
+        "res_region": "            auto ret = listener->getListener()->onPhysicalCameraStatusChanged(\n                    mapToInterface(newStatus), id, physicalId);\n            listener->handleBinderStatus(ret,\n                    \"%s: Failed to trigger onPhysicalCameraStatusChanged for %d:%d: %d\",\n                    __FUNCTION__, listener->getListenerUid(), listener->getListenerPid(),\n                    ret.exceptionCode());",
+        "lookback": "                    mapToInterface(newStatus), id, physicalId);",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 597,
+        "end_line": 610,
+        "merge_gen_region": null,
+        "confidence": 0.6835241913795471,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        auto ret = i->getListener()->onTorchStrengthLevelChanged(cameraId, newStrengthLevel);\n        i->handleBinderStatus(ret,\n                \"%s: Failed to trigger onTorchStrengthLevelChanged for %d:%d: %d\", __FUNCTION__,\n                i->getListenerUid(), i->getListenerPid(), ret.exceptionCode());",
+        "b_contents": "        i->getListener()->onTorchStrengthLevelChanged(cameraId, newStrengthLevel);",
+        "base_contents": "        i->getListener()->onTorchStrengthLevelChanged(String16{cameraId},\n                newStrengthLevel);",
+        "res_region": "        auto ret = i->getListener()->onTorchStrengthLevelChanged(cameraId, newStrengthLevel);\n        i->handleBinderStatus(ret,\n                \"%s: Failed to trigger onTorchStrengthLevelChanged for %d:%d: %d\", __FUNCTION__,\n                i->getListenerUid(), i->getListenerPid(), ret.exceptionCode());",
+        "lookback": "        i->handleBinderStatus(ret,",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 651,
+        "end_line": 661,
+        "merge_gen_region": null,
+        "confidence": 0.8230184316635132,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static bool hasPermissionsForSystemCamera(int callingPid, int callingUid) {\n    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = permissionChecker.checkPermissionForPreflight(\n            toString16(sSystemCameraPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    bool checkPermissionForCamera = permissionChecker.checkPermissionForPreflight(\n            toString16(sCameraPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    return checkPermissionForSystemCamera && checkPermissionForCamera;",
+        "b_contents": "static bool hasPermissionsForSystemCamera(int callingPid, int callingUid,\n        bool logPermissionFailure = false) {\n    return checkPermission(toString16(sSystemCameraPermission), callingPid, callingUid,\n            logPermissionFailure) &&\n            checkPermission(toString16(sCameraPermission), callingPid, callingUid);",
+        "base_contents": "static bool hasPermissionsForSystemCamera(int callingPid, int callingUid,\n        bool logPermissionFailure = false) {\n    return checkPermission(sSystemCameraPermission, callingPid, callingUid,\n            logPermissionFailure) &&\n            checkPermission(sCameraPermission, callingPid, callingUid);",
+        "res_region": "static bool hasPermissionsForSystemCamera(int callingPid, int callingUid) {\n    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = permissionChecker.checkPermissionForPreflight(\n            toString16(sSystemCameraPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    bool checkPermissionForCamera = permissionChecker.checkPermissionForPreflight(\n            toString16(sCameraPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    return checkPermissionForSystemCamera && checkPermissionForCamera;",
+        "lookback": "    permission::PermissionChecker permissionChecker;",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 718,
+        "end_line": 743,
+        "merge_gen_region": null,
+        "confidence": 0.6508793830871582,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = permissionChecker.checkPermissionForPreflight(\n                toString16(sSystemCameraPermission), attributionSource, String16(),\n                AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    if (checkPermissionForSystemCamera || getpid() == callingPid) {",
+        "b_contents": "    if (checkPermission(toString16(sSystemCameraPermission), callingPid, callingUid,\n            /*logPermissionFailure*/false) || getpid() == callingPid) {",
+        "base_contents": "    if (checkPermission(sSystemCameraPermission, callingPid, callingUid,\n            /*logPermissionFailure*/false) || getpid() == callingPid) {",
+        "res_region": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForSystemCamera = permissionChecker.checkPermissionForPreflight(\n                toString16(sSystemCameraPermission), attributionSource, String16(),\n                AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    if (checkPermissionForSystemCamera || getpid() == callingPid) {",
+        "lookback": "    AttributionSourceState attributionSource{};",
+        "lookahead": "        deviceIds = &mNormalDeviceIds;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 822,
+        "end_line": 837,
+        "merge_gen_region": null,
+        "confidence": 0.8057867288589478,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            !checkPermissionForCamera) {",
+        "b_contents": "            !checkPermission(toString16(sCameraPermission), callingPid, callingUid)) {",
+        "base_contents": "            !checkPermission(sCameraPermission, callingPid, callingUid)) {",
+        "res_region": "            !checkPermissionForCamera) {",
+        "lookback": "        res = cameraInfo->removePermissionEntries(",
+        "lookahead": "        res = cameraInfo->removePermissionEntries(",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 915,
+        "end_line": 921,
+        "merge_gen_region": null,
+        "confidence": 0.7604262828826904,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                (deviceKind != SystemCameraKind::SYSTEM_ONLY_CAMERA) && !checkPermissionForCamera) {",
+        "b_contents": "                (deviceKind != SystemCameraKind::SYSTEM_ONLY_CAMERA) &&\n                !checkPermission(toString16(sCameraPermission), clientPid, clientUid)) {",
+        "base_contents": "                (deviceKind != SystemCameraKind::SYSTEM_ONLY_CAMERA) &&\n                !checkPermission(sCameraPermission, clientPid, clientUid)) {",
+        "res_region": "                (deviceKind != SystemCameraKind::SYSTEM_ONLY_CAMERA) && !checkPermissionForCamera) {",
+        "lookback": "        ALOGE(\"Permission Denial: can't use the camera pid=%d, uid=%d\", clientPid, clientUid);",
+        "lookahead": "        ALOGE(\"Permission Denial: can't use the camera pid=%d, uid=%d\", clientPid, clientUid);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1412,
+        "end_line": 1420,
+        "merge_gen_region": null,
+        "confidence": 0.7326827645301819,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (mCameraServiceProxyWrapper->isCameraDisabled(clientUserId)) {\n        std::string msg = \"Camera disabled by device policy\";\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(ERROR_DISABLED, msg.c_str());",
+        "b_contents": "    if (CameraServiceProxyWrapper::isCameraDisabled(clientUserId)) {\n        std::string msg = \"Camera disabled by device policy\";\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(ERROR_DISABLED, msg.c_str());",
+        "base_contents": "    if (CameraServiceProxyWrapper::isCameraDisabled(clientUserId)) {\n        String8 msg =\n                String8::format(\"Camera disabled by device policy\");\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.string());\n        return STATUS_ERROR(ERROR_DISABLED, msg.string());",
+        "res_region": "    if (mCameraServiceProxyWrapper->isCameraDisabled(clientUserId)) {\n        std::string msg = \"Camera disabled by device policy\";\n        ALOGE(\"%s: %s\", __FUNCTION__, msg.c_str());\n        return STATUS_ERROR(ERROR_DISABLED, msg.c_str());",
+        "lookback": "        std::string msg = \"Camera disabled by device policy\";",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1866,
+        "end_line": 1882,
+        "merge_gen_region": null,
+        "confidence": 0.8138282299041748,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            !hasPermissionsForSystemCamera(callingPid, CameraThreadState::getCallingUid()) &&\n            !isTrustedCallingUid(CameraThreadState::getCallingUid())) {\n        std::string msg = fmt::sprintf(\"Cannot change the priority of a client %s pid %d for \"",
+        "b_contents": "            !hasPermissionsForSystemCamera(callingPid, CameraThreadState::getCallingUid())) {\n        std::string msg = fmt::sprintf(\"Cannot change the priority of a client %s pid %d for \"",
+        "base_contents": "            !hasPermissionsForSystemCamera(callingPid, CameraThreadState::getCallingUid())) {\n        String8 msg =\n                String8::format(\"Cannot change the priority of a client %s pid %d for \"",
+        "res_region": "            !hasPermissionsForSystemCamera(callingPid, CameraThreadState::getCallingUid()) &&\n            !isTrustedCallingUid(CameraThreadState::getCallingUid())) {\n        std::string msg = fmt::sprintf(\"Cannot change the priority of a client %s pid %d for \"",
+        "lookback": "            !isTrustedCallingUid(CameraThreadState::getCallingUid())) {",
+        "lookahead": "                        \"camera id %s without SYSTEM_CAMERA permissions\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1887,
+        "end_line": 1898,
+        "merge_gen_region": null,
+        "confidence": 0.7568923830986023,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForCamera = permissionChecker.checkPermissionForPreflight(\n                toString16(sCameraPermission), attributionSource, String16(),\n                AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    if ((callingPid != getpid()) && !checkPermissionForCamera) {",
+        "b_contents": "    if ((callingPid != getpid()) && !checkPermission(toString16(sCameraPermission), callingPid,\n            callingUid)) {",
+        "base_contents": "    if ((callingPid != getpid()) && !checkPermission(sCameraPermission, callingPid, callingUid)) {",
+        "res_region": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.pid = callingPid;\n    attributionSource.uid = callingUid;\n    bool checkPermissionForCamera = permissionChecker.checkPermissionForPreflight(\n                toString16(sCameraPermission), attributionSource, String16(),\n                AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;\n    if ((callingPid != getpid()) && !checkPermissionForCamera) {",
+        "lookback": "    AttributionSourceState attributionSource{};",
+        "lookahead": "        ALOGE(\"%s: pid %d doesn't have camera permissions\", __FUNCTION__, callingPid);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2817,
+        "end_line": 2831,
+        "merge_gen_region": null,
+        "confidence": 0.7217500805854797,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.uid = clientUid;\n    attributionSource.pid = clientPid;\n    bool openCloseCallbackAllowed = permissionChecker.checkPermissionForPreflight(\n            toString16(sCameraOpenCloseListenerPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;",
+        "b_contents": "    bool openCloseCallbackAllowed = checkPermission(toString16(sCameraOpenCloseListenerPermission),\n            clientPid, clientUid, /*logPermissionFailure*/false);",
+        "base_contents": "    bool openCloseCallbackAllowed = checkPermission(sCameraOpenCloseListenerPermission,\n            clientPid, clientUid, /*logPermissionFailure*/false);",
+        "res_region": "    permission::PermissionChecker permissionChecker;\n    AttributionSourceState attributionSource{};\n    attributionSource.uid = clientUid;\n    attributionSource.pid = clientPid;\n    bool openCloseCallbackAllowed = permissionChecker.checkPermissionForPreflight(\n            toString16(sCameraOpenCloseListenerPermission), attributionSource, String16(),\n            AppOpsManager::OP_NONE) != permission::PermissionChecker::PERMISSION_HARD_DENIED;",
+        "lookback": "    AttributionSourceState attributionSource{};",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2878,
+        "end_line": 2892,
+        "merge_gen_region": null,
+        "confidence": 0.7931907773017883,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            toString16(kServiceName), emptyUidArray, 0, mObserverToken);",
+        "b_contents": "            toString16(kServiceName));",
+        "base_contents": "            String16(\"cameraserver\"));",
+        "res_region": "            toString16(kServiceName), emptyUidArray, 0, mObserverToken);",
+        "lookback": "    if (res == OK) {",
+        "lookahead": "    if (res == OK) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4006,
+        "end_line": 4012,
+        "merge_gen_region": null,
+        "confidence": 0.8384857177734375,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                auto ret = listener->getListener()->onStatusChanged(mapToInterface(status),\n                        cameraId);\n                listener->handleBinderStatus(ret,\n                        \"%s: Failed to trigger onStatusChanged callback for %d:%d: %d\",\n                        __FUNCTION__, listener->getListenerUid(), listener->getListenerPid(),\n                        ret.exceptionCode());",
+        "b_contents": "                listener->getListener()->onStatusChanged(mapToInterface(status),\n                        cameraId);",
+        "base_contents": "                listener->getListener()->onStatusChanged(mapToInterface(status),\n                        String16(cameraId));",
+        "res_region": "                auto ret = listener->getListener()->onStatusChanged(mapToInterface(status),\n                        cameraId);\n                listener->handleBinderStatus(ret,\n                        \"%s: Failed to trigger onStatusChanged callback for %d:%d: %d\",\n                        __FUNCTION__, listener->getListenerUid(), listener->getListenerPid(),\n                        ret.exceptionCode());",
+        "lookback": "                        cameraId);",
+        "lookahead": "            }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5060,
+        "end_line": 5073,
+        "merge_gen_region": null,
+        "confidence": 0.8280417919158936,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            ret = it->getListener()->onCameraClosed(cameraId);",
+        "b_contents": "            ret = it->getListener()->onCameraClosed(cameraId);\n        }\n        if (!ret.isOk()) {\n            ALOGE(\"%s: Failed to trigger onCameraOpened/onCameraClosed callback: %d\", __FUNCTION__,\n                    ret.exceptionCode());",
+        "base_contents": "            ret = it->getListener()->onCameraClosed(cameraId64);\n        }\n        if (!ret.isOk()) {\n            ALOGE(\"%s: Failed to trigger onCameraOpened/onCameraClosed callback: %d\", __FUNCTION__,\n                    ret.exceptionCode());",
+        "res_region": "            ret = it->getListener()->onCameraClosed(cameraId);",
+        "lookback": "        }",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5103,
+        "end_line": 5117,
+        "merge_gen_region": null,
+        "confidence": 0.8335210680961609,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } else if (args.size() >= 2 && args[0] == toString16(\"set-autoframing\")) {\n        return handleSetAutoframing(args);\n    } else if (args.size() >= 1 && args[0] == toString16(\"get-autoframing\")) {\n        return handleGetAutoframing(out);\n    } else if (args.size() >= 2 && args[0] == toString16(\"set-image-dump-mask\")) {",
+        "b_contents": "    } else if (args.size() >= 2 && args[0] == toString16(\"set-image-dump-mask\")) {",
+        "base_contents": "    } else if (args.size() >= 2 && args[0] == String16(\"set-image-dump-mask\")) {",
+        "res_region": "    } else if (args.size() >= 2 && args[0] == toString16(\"set-autoframing\")) {\n        return handleSetAutoframing(args);\n    } else if (args.size() >= 1 && args[0] == toString16(\"get-autoframing\")) {\n        return handleGetAutoframing(out);\n    } else if (args.size() >= 2 && args[0] == toString16(\"set-image-dump-mask\")) {",
+        "lookback": "        return handleSetAutoframing(args);",
+        "lookahead": "        return handleSetImageDumpMask(args);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5276,
+        "end_line": 5286,
+        "merge_gen_region": null,
+        "confidence": 0.8337658047676086,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } else if (args.size() >= 1 && args[0] == toString16(\"clear-stream-use-case-override\")) {\n        handleClearStreamUseCaseOverrides();\n        return OK;\n    } else if (args.size() >= 1 && args[0] == toString16(\"set-zoom-override\")) {\n        return handleSetZoomOverride(args);\n    } else if (args.size() >= 2 && args[0] == toString16(\"watch\")) {",
+        "b_contents": "    } else if (args.size() >= 1 && args[0] == toString16(\"clear-stream-use-case-override\")) {\n        return handleClearStreamUseCaseOverrides();\n    } else if (args.size() >= 2 && args[0] == toString16(\"watch\")) {",
+        "base_contents": "    } else if (args.size() >= 1 && args[0] == String16(\"clear-stream-use-case-override\")) {\n        return handleClearStreamUseCaseOverrides();\n    } else if (args.size() >= 2 && args[0] == String16(\"watch\")) {",
+        "res_region": "    } else if (args.size() >= 1 && args[0] == toString16(\"clear-stream-use-case-override\")) {\n        handleClearStreamUseCaseOverrides();\n        return OK;\n    } else if (args.size() >= 1 && args[0] == toString16(\"set-zoom-override\")) {\n        return handleSetZoomOverride(args);\n    } else if (args.size() >= 2 && args[0] == toString16(\"watch\")) {",
+        "lookback": "        handleClearStreamUseCaseOverrides();",
+        "lookahead": "        return handleWatchCommand(args, in, out);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5294,
+        "end_line": 5309,
+        "merge_gen_region": null,
+        "confidence": 0.8600483536720276,
+        "hesitated": true
+    }
+]

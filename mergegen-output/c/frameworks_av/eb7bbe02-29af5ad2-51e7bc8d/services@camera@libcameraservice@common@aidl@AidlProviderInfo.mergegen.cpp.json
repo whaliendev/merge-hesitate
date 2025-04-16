@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            mId, mCameraCharacteristics, mCompositeJpegRDisabled, getMetadata,\n            mPhysicalIds, streamConfiguration, overrideForPerfClass, &earlyExit);",
+        "b_contents": "            mId, mCameraCharacteristics, getMetadata, mPhysicalIds,\n            streamConfiguration, overrideForPerfClass, &earlyExit);",
+        "base_contents": "            String8(mId.c_str()), mCameraCharacteristics, getMetadata, mPhysicalIds,\n            streamConfiguration, overrideForPerfClass, &earlyExit);",
+        "res_region": "            mId, mCameraCharacteristics, mCompositeJpegRDisabled, getMetadata,\n            mPhysicalIds, streamConfiguration, overrideForPerfClass, &earlyExit);",
+        "lookback": "            mPhysicalIds, streamConfiguration, overrideForPerfClass, &earlyExit);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 737,
+        "end_line": 746,
+        "merge_gen_region": null,
+        "confidence": 0.6528627276420593,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    cameraId, deviceInfo,\n                    mManager->isCompositeJpegRDisabledLocked(cameraId), getMetadata,",
+        "b_contents": "                    cameraId, deviceInfo, getMetadata,",
+        "base_contents": "                    String8(cameraId.c_str()), deviceInfo, getMetadata,",
+        "res_region": "                    cameraId, deviceInfo,\n                    mManager->isCompositeJpegRDisabledLocked(cameraId), getMetadata,",
+        "lookback": "                    mManager->isCompositeJpegRDisabledLocked(cameraId), getMetadata,",
+        "lookahead": "                    physicalCameraIds, streamConfiguration,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 811,
+        "end_line": 818,
+        "merge_gen_region": null,
+        "confidence": 0.7509096264839172,
+        "hesitated": true
+    }
+]

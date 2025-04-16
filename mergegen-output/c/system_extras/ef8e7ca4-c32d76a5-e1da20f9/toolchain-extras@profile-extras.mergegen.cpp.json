@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#if defined(__ANDROID_API__) && __ANDROID_API__ >= __ANDROID_API_L__\nstatic char prop_watch_disabled_procs[][128] = {\n  \"zygote\",\n  \"zygote32\",\n  \"app_process\",\n  \"app_process32\",\n  \"adbd\",\n  \"init\",\n};\n\nstatic size_t prop_watch_num_disabled_procs = \\\n  sizeof(prop_watch_disabled_procs) / sizeof(prop_watch_disabled_procs[0]);\n#endif\n",
+        "base_contents": "#if defined(__ANDROID_API__) && __ANDROID_API__ >= __ANDROID_API_L__\nstatic char prop_watch_disabled_procs[][128] = {\n  \"zygote\",\n  \"zygote32\",\n  \"app_process\",\n  \"app_process32\",\n};\n\nstatic size_t prop_watch_num_disabled_procs = \\\n  sizeof(prop_watch_disabled_procs) / sizeof(prop_watch_disabled_procs[0]);\n#endif\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "__attribute__((weak)) int init_profile_extras_once = 0;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 45,
+        "end_line": 74,
+        "merge_gen_region": null,
+        "confidence": 0.8076719641685486,
+        "hesitated": true
+    }
+]

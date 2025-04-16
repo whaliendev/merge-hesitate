@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "  int64_t GetBuildTimestamp() const override { return build_timestamp_; }\n",
+        "b_contents": "  bool GetFirstActiveOmahaPingSent() const override {\n    return first_active_omaha_ping_sent_;\n  }\n\n  void SetFirstActiveOmahaPingSent() override {\n    first_active_omaha_ping_sent_ = true;\n  }\n",
+        "base_contents": "",
+        "res_region": "  int64_t GetBuildTimestamp() const override { return build_timestamp_; }\n\n  bool GetFirstActiveOmahaPingSent() const override {\n    return first_active_omaha_ping_sent_;\n  }\n\n  void SetFirstActiveOmahaPingSent() override {\n    first_active_omaha_ping_sent_ = true;\n  }\n",
+        "lookback": "",
+        "lookahead": "  // Setters",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 83,
+        "end_line": 96,
+        "merge_gen_region": "64tBuild() {oughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughintoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughint>(>(>(>(intintoughoughoughoughoughoughoughoughoughoughoughoughintintoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughoughough",
+        "confidence": 0.8813056349754333,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  int64_t build_timestamp_{0};",
+        "b_contents": "  bool first_active_omaha_ping_sent_{false};",
+        "base_contents": "",
+        "res_region": "  int64_t build_timestamp_{0};\n  bool first_active_omaha_ping_sent_{false};",
+        "lookback": "  bool first_active_omaha_ping_sent_{false};",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 157,
+        "end_line": 162,
+        "merge_gen_region": null,
+        "confidence": 0.7193772792816162,
+        "hesitated": true
+    }
+]

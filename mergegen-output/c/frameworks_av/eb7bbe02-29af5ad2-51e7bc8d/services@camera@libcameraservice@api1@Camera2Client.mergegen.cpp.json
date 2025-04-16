@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,\n        const std::optional<std::string>& clientFeatureId,\n        const std::string& cameraDeviceId,",
+        "b_contents": "        const std::string& clientPackageName,\n        const std::optional<std::string>& clientFeatureId,\n        const std::string& cameraDeviceId,",
+        "base_contents": "        const String16& clientPackageName,\n        const std::optional<String16>& clientFeatureId,\n        const String8& cameraDeviceId,",
+        "res_region": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,\n        const std::optional<std::string>& clientFeatureId,\n        const std::string& cameraDeviceId,",
+        "lookback": "        const std::string& clientPackageName,",
+        "lookahead": "        int api1CameraId,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 57,
+        "end_line": 70,
+        "merge_gen_region": null,
+        "confidence": 0.5763100385665894,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = mFrameProcessor->run((threadName + \"-FrameProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    mFrameProcessor->run((threadName + \"-FrameProc\").c_str());",
+        "base_contents": "    threadName = String8::format(\"C2-%d-FrameProc\",\n            mCameraId);\n    mFrameProcessor->run(threadName.string());",
+        "res_region": "    res = mFrameProcessor->run((threadName + \"-FrameProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    if (res != OK) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 155,
+        "end_line": 168,
+        "merge_gen_region": null,
+        "confidence": 0.7137306928634644,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = mCaptureSequencer->run((threadName + \"-CaptureSeq\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start capture sequencer thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    mCaptureSequencer->run((threadName + \"-CaptureSeq\").c_str());",
+        "base_contents": "    threadName = String8::format(\"C2-%d-CaptureSeq\",\n            mCameraId);\n    mCaptureSequencer->run(threadName.string());",
+        "res_region": "    res = mCaptureSequencer->run((threadName + \"-CaptureSeq\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start capture sequencer thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    if (res != OK) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 171,
+        "end_line": 184,
+        "merge_gen_region": null,
+        "confidence": 0.6316002607345581,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = mJpegProcessor->run((threadName + \"-JpegProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start jpeg processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    mJpegProcessor->run((threadName + \"-JpegProc\").c_str());",
+        "base_contents": "    threadName = String8::format(\"C2-%d-JpegProc\",\n            mCameraId);\n    mJpegProcessor->run(threadName.string());",
+        "res_region": "    res = mJpegProcessor->run((threadName + \"-JpegProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start jpeg processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    if (res != OK) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 187,
+        "end_line": 200,
+        "merge_gen_region": null,
+        "confidence": 0.6875525116920471,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = mZslProcessor->run((threadName + \"-ZslProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start zsl processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    mZslProcessor->run((threadName + \"-ZslProc\").c_str());",
+        "base_contents": "\n    threadName = String8::format(\"C2-%d-ZslProc\",\n            mCameraId);\n    mZslProcessor->run(threadName.string());",
+        "res_region": "    res = mZslProcessor->run((threadName + \"-ZslProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start zsl processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    if (res != OK) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 203,
+        "end_line": 217,
+        "merge_gen_region": null,
+        "confidence": 0.6534839868545532,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    res = mCallbackProcessor->run((threadName + \"-CallbkProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start callback processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    mCallbackProcessor->run((threadName + \"-CallbkProc\").c_str());",
+        "base_contents": "    threadName = String8::format(\"C2-%d-CallbkProc\",\n            mCameraId);\n    mCallbackProcessor->run(threadName.string());",
+        "res_region": "    res = mCallbackProcessor->run((threadName + \"-CallbkProc\").c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start callback processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    if (res != OK) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 220,
+        "end_line": 233,
+        "merge_gen_region": null,
+        "confidence": 0.6469718217849731,
+        "hesitated": true
+    }
+]

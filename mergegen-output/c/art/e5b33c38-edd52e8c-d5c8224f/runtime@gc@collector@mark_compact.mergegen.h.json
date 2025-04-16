@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n  uint8_t* conc_compaction_termination_page_;\n  // Number of objects freed during this GC in moving space. It is decremented\n  // every time an object is discovered. And total-object count is added to it\n  // in MarkingPause(). It reaches the correct count only once the marking phase\n  // is completed.\n  int32_t freed_objects_;\n  // Userfault file descriptor, accessed only by the GC itself.\n  // kFallbackMode value indicates that we are in the fallback mode.\n  int uffd_;\n  // Used to exit from compaction loop at the end of concurrent compaction\n  uint8_t thread_pool_counter_;\n  // True while compacting.",
+        "b_contents": "\n  uint8_t* conc_compaction_termination_page_;\n  // Userfault file descriptor, accessed only by the GC itself.\n  // kFallbackMode value indicates that we are in the fallback mode.\n  int uffd_;\n  // Used to exit from compaction loop at the end of concurrent compaction\n  uint8_t thread_pool_counter_;\n  // True while compacting.",
+        "base_contents": "  // Set to true when compacting starts.",
+        "res_region": "\n  uint8_t* conc_compaction_termination_page_;\n  // Number of objects freed during this GC in moving space. It is decremented\n  // every time an object is discovered. And total-object count is added to it\n  // in MarkingPause(). It reaches the correct count only once the marking phase\n  // is completed.\n  int32_t freed_objects_;\n  // Userfault file descriptor, accessed only by the GC itself.\n  // kFallbackMode value indicates that we are in the fallback mode.\n  int uffd_;\n  // Used to exit from compaction loop at the end of concurrent compaction\n  uint8_t thread_pool_counter_;\n  // True while compacting.",
+        "lookback": "  uint8_t* conc_compaction_termination_page_;",
+        "lookahead": "  bool compacting_;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 520,
+        "end_line": 545,
+        "merge_gen_region": "8t con___ationpage // ofk objects during GC moving. ised every an iscovered And- count added it iningPause Itaches correct only js_; is.32tuint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_uint_",
+        "confidence": 0.88157719373703,
+        "hesitated": false,
+        "resolved": false
+    }
+]

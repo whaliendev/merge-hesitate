@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "                host = resolve(host);\n                if (host.size() == 0)",
+        "b_contents": "                _host = Coroutine::gethostbyname(_host, AF_INET);\n                if (_host.empty())",
+        "base_contents": "                _host = resolve(_host);\n                if (_host.size() == 0)",
+        "res_region": "                host = Coroutine::gethostbyname(host, AF_INET);\n                if (host.empty())",
+        "lookback": "                if (host.empty())",
+        "lookahead": "                {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 465,
+        "end_line": 474,
+        "merge_gen_region": null,
+        "confidence": 0.7099605202674866,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                host = resolve(host);\n                if (host.size() == 0)",
+        "b_contents": "                _host = Coroutine::gethostbyname(_host, AF_INET6);\n                if (_host.empty())",
+        "base_contents": "                _host = resolve(_host);\n                if (_host.size() == 0)",
+        "res_region": "                host = Coroutine::gethostbyname(host, AF_INET6);\n                if (host.empty())",
+        "lookback": "                if (host.empty())",
+        "lookahead": "                {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 495,
+        "end_line": 504,
+        "merge_gen_region": null,
+        "confidence": 0.7098535299301147,
+        "hesitated": true
+    },
+    {
+        "a_contents": "string Socket::resolve(string domain_name)\n{\n    if (unlikely(!is_available()))\n    {\n        return \"\";\n    }\n\n    swAio_event ev;\n    bzero(&ev, sizeof(swAio_event));\n    if (domain_name.size() < SW_IP_MAX_LENGTH)\n    {\n        ev.nbytes = SW_IP_MAX_LENGTH + 1;\n    }\n    else\n    {\n        ev.nbytes = domain_name.size() + 1;\n    }\n    ev.buf = sw_malloc(ev.nbytes);\n    if (!ev.buf)\n    {\n        set_err(errno);\n        return \"\";\n    }\n\n    memcpy(ev.buf, domain_name.c_str(), domain_name.size());\n    ((char *) ev.buf)[domain_name.size()] = 0;\n    ev.flags = sock_domain;\n    ev.type = SW_AIO_GETHOSTBYNAME;\n    ev.object = this;\n    ev.handler = swAio_handler_gethostbyname;\n    ev.callback = socket_dns_callback;\n\n    if (SwooleAIO.init == 0)\n    {\n        swAio_init();\n    }\n\n    if (swAio_dispatch(&ev) < 0)\n    {\n        set_err(SwooleG.error);\n        sw_free(ev.buf);\n        return \"\";\n    }\n\n    /** cannot timeout */\n    double persistent_timeout = get_timeout();\n    set_timeout(-1);\n    yield();\n    set_timeout(persistent_timeout);\n\n    if (errCode == SW_ERROR_DNSLOOKUP_RESOLVE_FAILED || should_be_break())\n    {\n        return \"\";\n    }\n    else\n    {\n        string addr((char *) ev.buf);\n        sw_free(ev.buf);\n        return addr;\n    }\n}\n",
+        "b_contents": "",
+        "base_contents": "string Socket::resolve(string domain_name)\n{\n    if (unlikely(!is_available()))\n    {\n        return \"\";\n    }\n\n    swAio_event ev;\n    bzero(&ev, sizeof(swAio_event));\n    if (domain_name.size() < SW_IP_MAX_LENGTH)\n    {\n        ev.nbytes = SW_IP_MAX_LENGTH + 1;\n    }\n    else\n    {\n        ev.nbytes = domain_name.size() + 1;\n    }\n    ev.buf = sw_malloc(ev.nbytes);\n    if (!ev.buf)\n    {\n        set_err(errno);\n        return \"\";\n    }\n\n    memcpy(ev.buf, domain_name.c_str(), domain_name.size());\n    ((char *) ev.buf)[domain_name.size()] = 0;\n    ev.flags = sock_domain;\n    ev.type = SW_AIO_GETHOSTBYNAME;\n    ev.object = this;\n    ev.handler = swAio_handler_gethostbyname;\n    ev.callback = socket_dns_callback;\n\n    if (SwooleAIO.init == 0)\n    {\n        swAio_init();\n    }\n\n    if (swAio_dispatch(&ev) < 0)\n    {\n        set_err(SwooleG.error);\n        sw_free(ev.buf);\n        return \"\";\n    }\n\n    /** cannot timeout */\n    double persistent_timeout = get_timeout();\n    set_timeout(-1);\n    yield();\n    set_timeout(persistent_timeout);\n\n    if (errCode == SW_ERROR_DNSLOOKUP_RESOLVE_FAILED)\n    {\n        return \"\";\n    }\n    else\n    {\n        string addr((char *) ev.buf);\n        sw_free(ev.buf);\n        return addr;\n    }\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "bool Socket::shutdown(int __how)",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 964,
+        "end_line": 1091,
+        "merge_gen_region": null,
+        "confidence": 0.6149236559867859,
+        "hesitated": true
+    }
+]

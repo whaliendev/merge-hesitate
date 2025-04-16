@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    srs_trace(\"client identified, type=%s, vhost=%s, app=%s, stream=%s, param=%s, duration=%.2f\",\n        srs_client_type_string(info->type).c_str(), req->vhost.c_str(), req->app.c_str(), req->stream.c_str(), req->param.c_str(), req->duration);",
+        "b_contents": "    srs_trace(\"client identified, type=%s, stream_name=%s, duration=%.2f, param=%s\",\n        srs_client_type_string(type).c_str(), req->stream.c_str(), req->duration, req->param.c_str());",
+        "base_contents": "    srs_trace(\"client identified, type=%s, stream_name=%s, duration=%.2f\", \n        srs_client_type_string(type).c_str(), req->stream.c_str(), req->duration);",
+        "res_region": "    srs_trace(\"client identified, type=%s, vhost=%s, app=%s, stream=%s, param=%s, duration=%.2f\",\n        srs_client_type_string(info->type).c_str(), req->vhost.c_str(), req->app.c_str(), req->stream.c_str(), req->param.c_str(), req->duration);",
+        "lookback": "        srs_client_type_string(info->type).c_str(), req->vhost.c_str(), req->app.c_str(), req->stream.c_str(), req->param.c_str(), req->duration);",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 472,
+        "end_line": 481,
+        "merge_gen_region": null,
+        "confidence": 0.7349842190742493,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    srs_trace(\"connected stream, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%d, app=%s, stream=%s, param=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(), req->schema.c_str(), req->vhost.c_str(), req->port,\n        req->app.c_str(), req->stream.c_str(), req->param.c_str(), (req->args? \"(obj)\":\"null\"));",
+        "b_contents": "    \n    srs_trace(\"connected stream, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%s, app=%s, stream=%s, param=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(),\n        req->schema.c_str(), req->vhost.c_str(), req->port.c_str(),\n        req->app.c_str(), req->stream.c_str(), req->param.c_str(), (req->args? \"(obj)\":\"null\"));",
+        "base_contents": "    \n    srs_trace(\"connected stream, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%s, app=%s, stream=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(),\n        req->schema.c_str(), req->vhost.c_str(), req->port.c_str(),\n        req->app.c_str(), req->stream.c_str(), (req->args? \"(obj)\":\"null\"));",
+        "res_region": "\n    srs_trace(\"connected stream, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%d, app=%s, stream=%s, param=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(), req->schema.c_str(), req->vhost.c_str(), req->port,\n        req->app.c_str(), req->stream.c_str(), req->param.c_str(), (req->args? \"(obj)\":\"null\"));",
+        "lookback": "    srs_trace(\"connected stream, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%d, app=%s, stream=%s, param=%s, args=%s\",",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 498,
+        "end_line": 515,
+        "merge_gen_region": null,
+        "confidence": 0.7917926907539368,
+        "hesitated": true
+    }
+]

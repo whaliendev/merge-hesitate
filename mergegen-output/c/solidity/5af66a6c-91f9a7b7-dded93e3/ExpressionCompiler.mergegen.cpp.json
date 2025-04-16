@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tExpression& rightHandSide = _assignment.getRightHandSide();\n\trightHandSide.accept(*this);\n\tType const& resultType = *_assignment.getType();\n\tappendTypeConversion(*rightHandSide.getType(), resultType);\n\n\tm_currentLValue.reset();",
+        "b_contents": "\tm_currentLValue = nullptr;\n\n\t_assignment.getRightHandSide().accept(*this);\n\tappendTypeConversion(*_assignment.getRightHandSide().getType(), *_assignment.getType());",
+        "base_contents": "\tm_currentLValue = nullptr;\n\n\tExpression& rightHandSide = _assignment.getRightHandSide();\n\trightHandSide.accept(*this);\n\tType const& resultType = *_assignment.getType();\n\tappendTypeConversion(*rightHandSide.getType(), resultType);",
+        "res_region": "\t_assignment.getRightHandSide().accept(*this);\n\tappendTypeConversion(*_assignment.getRightHandSide().getType(), *_assignment.getType());\n\tm_currentLValue.reset();",
+        "lookback": "\tappendTypeConversion(*_assignment.getRightHandSide().getType(), *_assignment.getType());",
+        "lookahead": "\t_assignment.getLeftHandSide().accept(*this);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 67,
+        "merge_gen_region": null,
+        "confidence": 0.5540888905525208,
+        "hesitated": true
+    }
+]

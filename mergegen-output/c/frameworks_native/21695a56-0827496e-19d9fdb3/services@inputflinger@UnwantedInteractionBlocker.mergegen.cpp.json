@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "                                                                     std::vector<float>()) {\n        config_.resample_period = ::ui::kResamplePeriod;\n    }",
+        "b_contents": "                                                                     std::vector<float>()) {\n        config_.resample_touch = true;\n    }",
+        "base_contents": "                                                                     std::vector<float>()) {}",
+        "res_region": "                                                                     std::vector<float>()) {\n        config_.resample_period = ::ui::kResamplePeriod;\n    }",
+        "lookback": "        config_.resample_period = ::ui::kResamplePeriod;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 503,
+        "end_line": 513,
+        "merge_gen_region": "stdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.8943731784820557,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n// VectorNet\nDECLARE_string(prediction_target_file);\nDECLARE_double(obstacle_x);\nDECLARE_double(obstacle_y);\nDECLARE_double(obstacle_phi);\nDECLARE_double(road_distance);\nDECLARE_double(point_distance);",
+        "b_contents": "\n// VectorNet\nDECLARE_string(prediction_target_file);\nDECLARE_string(world_coordinate_file);\nDECLARE_string(prediction_target_dir);\nDECLARE_double(obstacle_x);\nDECLARE_double(obstacle_y);\nDECLARE_double(obstacle_phi);\nDECLARE_double(road_distance);\nDECLARE_double(point_distance);",
+        "base_contents": "",
+        "res_region": "\n// VectorNet\nDECLARE_string(prediction_target_file);\nDECLARE_string(world_coordinate_file);\nDECLARE_string(prediction_target_dir);\nDECLARE_double(obstacle_x);\nDECLARE_double(obstacle_y);\nDECLARE_double(obstacle_phi);\nDECLARE_double(road_distance);\nDECLARE_double(point_distance);",
+        "lookback": "// VectorNet",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 53,
+        "end_line": 74,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.898405134677887,
+        "hesitated": false,
+        "resolved": false
+    }
+]

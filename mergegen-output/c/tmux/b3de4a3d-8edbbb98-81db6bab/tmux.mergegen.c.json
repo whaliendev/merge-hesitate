@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t    \"usage: %s [-2lquvV] [-c shell-command] [-f file] [-L socket-name]\\n\"",
+        "b_contents": "\t    \"usage: %s [-2lquv] [-c shell-command] [-f file] [-L socket-name]\\n\"",
+        "base_contents": "\t    \"usage: %s [-28lquv] [-c shell-command] [-f file] [-L socket-name]\\n\"",
+        "res_region": "\t    \"usage: %s [-2lquvV] [-c shell-command] [-f file] [-L socket-name]\\n\"",
+        "lookback": "\t    \"            [-S socket-path] [command [flags]]\\n\",",
+        "lookahead": "\t    \"            [-S socket-path] [command [flags]]\\n\",",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 62,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.6701850295066833,
+        "hesitated": true
+    }
+]

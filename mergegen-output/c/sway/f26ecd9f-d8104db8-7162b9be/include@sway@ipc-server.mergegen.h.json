@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void ipc_event_workspace(swayc_t *old, swayc_t *new, const char *change);\nvoid ipc_event_window(swayc_t *window, const char *change);\nvoid ipc_event_barconfig_update(struct bar_config *bar);\nvoid ipc_event_mode(const char *mode);",
+        "b_contents": "void ipc_event_window(struct sway_container *window, const char *change);",
+        "base_contents": "void ipc_event_window(swayc_t *window, const char *change);",
+        "res_region": "void ipc_event_workspace(struct sway_container *old,\n\t\tstruct sway_container *new, const char *change);\nvoid ipc_event_window(struct sway_container *window, const char *change);\nvoid ipc_event_barconfig_update(struct bar_config *bar);\nvoid ipc_event_mode(const char *mode);",
+        "lookback": "\t\tstruct sway_container *new, const char *change);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 14,
+        "end_line": 23,
+        "merge_gen_region": null,
+        "confidence": 0.872861921787262,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "  bool is_device_policy_set = connection_manager->\n                                  IsAllowedConnectionTypesForUpdateSet();\n  // Treats tethered connection as if it is cellular connection.\n  bool is_over_cellular = type == ConnectionType::kCellular ||\n                          tethering == ConnectionTethering::kConfirmed;\n\n  if (!is_over_cellular) {\n    // There's no need to further check user preferences as we are not over\n    // cellular connection.\n    if (!is_allowed)\n      *error = ErrorCode::kOmahaUpdateIgnoredPerPolicy;\n  } else if (is_device_policy_set) {\n    // There's no need to further check user preferences as the device policy\n    // is set regarding updates over cellular.\n    if (!is_allowed)\n      *error = ErrorCode::kOmahaUpdateIgnoredPerPolicy;\n  } else {\n    // Deivce policy is not set, so user preferences overwrite whether to\n    // allow updates over cellular.\n    is_allowed = IsUpdateAllowedOverCellularByPrefs(response);\n    if (!is_allowed)\n      *error = ErrorCode::kOmahaUpdateIgnoredOverCellular;\n  }\n",
+        "base_contents": "  bool is_device_policy_set = connection_manager->\n                                  IsAllowedConnectionTypesForUpdateSet();\n  // Treats tethered connection as if it is cellular connection.\n  bool is_over_cellular = type == ConnectionType::kCellular ||\n                          tethering == ConnectionTethering::kConfirmed;\n\n  if (!is_over_cellular) {\n    // There's no need to further check user preferences as we are not over\n    // cellular connection.\n    if (!is_allowed)\n      *error = ErrorCode::kOmahaUpdateIgnoredPerPolicy;\n  } else if (is_device_policy_set) {\n    // There's no need to further check user preferences as the device policy\n    // is set regarding updates over cellular.\n    if (!is_allowed)\n      *error = ErrorCode::kOmahaUpdateIgnoredPerPolicy;\n  } else if (!IsUpdateAllowedOverCellularByPrefs(response)) {\n    // The user prefereces does not allow updates over cellular.\n    is_allowed = false;\n    *error = ErrorCode::kOmahaUpdateIgnoredOverCellular;\n  }\n",
+        "res_region": "",
+        "lookback": "            << connection_utils::StringForConnectionType(type)",
+        "lookahead": "  LOG(INFO) << \"We are connected via \"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1709,
+        "end_line": 1758,
+        "merge_gen_region": " connectionutilsStringConnection()",
+        "confidence": 0.9111089110374451,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    grpc_core::channelz::ChannelNode* channelz_channel =\n        grpc_channel_get_channelz_node(call->channel);\n    if (channelz_channel != nullptr) {\n      if (*call->final_op.client.status != GRPC_STATUS_OK) {\n        channelz_channel->RecordCallFailed();\n      } else {\n        channelz_channel->RecordCallSucceeded();\n      }\n    }",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "    grpc_core::channelz::ChannelNode* channelz_channel =\n        grpc_channel_get_channelz_node(call->channel);\n    if (channelz_channel != nullptr) {\n      if (*call->final_op.client.status != GRPC_STATUS_OK) {\n        channelz_channel->RecordCallFailed();\n      } else {\n        channelz_channel->RecordCallSucceeded();\n      }\n    }",
+        "lookback": "        grpc_channel_get_channelz_node(call->channel);",
+        "lookahead": "    GRPC_ERROR_UNREF(error);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1272,
+        "end_line": 1285,
+        "merge_gen_region": "_::grpccorechannel::grpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpcgrpc",
+        "confidence": 0.9015985131263733,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "static void receiving_trailing_metadata_ready(void* bctlp, grpc_error* error) {\n  batch_control* bctl = static_cast<batch_control*>(bctlp);\n  grpc_call* call = bctl->call;\n  GRPC_CALL_COMBINER_STOP(&call->call_combiner, \"recv_trailing_metadata_ready\");\n  add_batch_error(bctl, GRPC_ERROR_REF(error), false);\n  grpc_metadata_batch* md =\n      &call->metadata_batch[1 /* is_receiving */][1 /* is_trailing */];\n  recv_trailing_filter(call, md);\n  finish_batch_step(bctl);\n}\n",
+        "b_contents": "",
+        "base_contents": "static void receiving_trailing_metadata_ready(void* bctlp, grpc_error* error) {\n  batch_control* bctl = static_cast<batch_control*>(bctlp);\n  grpc_call* call = bctl->call;\n  GRPC_CALL_COMBINER_STOP(&call->call_combiner, \"recv_trailing_metadata_ready\");\n  add_batch_error(bctl, GRPC_ERROR_REF(error), false);\n  if (error == GRPC_ERROR_NONE) {\n    grpc_metadata_batch* md =\n        &call->metadata_batch[1 /* is_receiving */][1 /* is_trailing */];\n    recv_trailing_filter(call, md);\n  }\n  finish_batch_step(bctl);\n}\n",
+        "res_region": "static void receiving_trailing_metadata_ready(void* bctlp, grpc_error* error) {\n  batch_control* bctl = static_cast<batch_control*>(bctlp);\n  grpc_call* call = bctl->call;\n  GRPC_CALL_COMBINER_STOP(&call->call_combiner, \"recv_trailing_metadata_ready\");\n  add_batch_error(bctl, GRPC_ERROR_REF(error), false);\n  grpc_metadata_batch* md =\n      &call->metadata_batch[1 /* is_receiving */][1 /* is_trailing */];\n  recv_trailing_filter(call, md);\n  finish_batch_step(bctl);\n}\n",
+        "lookback": "  batch_control* bctl = static_cast<batch_control*>(bctlp);",
+        "lookahead": "static void finish_batch(void* bctlp, grpc_error* error) {",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 1567,
+        "end_line": 1594,
+        "merge_gen_region": null,
+        "confidence": 0.7996047139167786,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    auto *point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);",
+        "b_contents": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);",
+        "base_contents": "    auto* point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);",
+        "res_region": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);",
+        "lookback": "    point->mutable_path_point()->set_x(xs[i]);",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 40,
+        "end_line": 52,
+        "merge_gen_region": null,
+        "confidence": 0.7707839012145996,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto *point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);",
+        "b_contents": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);",
+        "base_contents": "    auto* point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);",
+        "res_region": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);",
+        "lookback": "    point->mutable_path_point()->set_x(xs[i]);",
+        "lookahead": "    point->set_relative_time(ts[i]);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 62,
+        "end_line": 74,
+        "merge_gen_region": null,
+        "confidence": 0.7736002802848816,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto *point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);\n    point->set_accumulated_s(ss[i]);",
+        "b_contents": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);\n    point->mutable_path_point()->set_s(ss[i]);",
+        "base_contents": "    auto* point = adc_trajectory->add_adc_trajectory_point();\n    point->set_x(xs[i]);\n    point->set_y(ys[i]);\n    point->set_accumulated_s(ss[i]);",
+        "res_region": "    auto* point = adc_trajectory->add_trajectory_point();\n    point->mutable_path_point()->set_x(xs[i]);\n    point->mutable_path_point()->set_y(ys[i]);\n    point->mutable_path_point()->set_s(ss[i]);",
+        "lookback": "    point->mutable_path_point()->set_x(xs[i]);",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 83,
+        "end_line": 98,
+        "merge_gen_region": null,
+        "confidence": 0.7830095291137695,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (auto &point : trajectory_analyzer.trajectory_points()) {\n    EXPECT_EQ(xs[i], point.x());\n    EXPECT_EQ(ys[i], point.y());",
+        "b_contents": "  for (auto& point : trajectory_analyzer.trajectory_points()) {\n    EXPECT_EQ(xs[i], point.path_point().x());\n    EXPECT_EQ(ys[i], point.path_point().y());",
+        "base_contents": "  for (auto& point : trajectory_analyzer.trajectory_points()) {\n    EXPECT_EQ(xs[i], point.x());\n    EXPECT_EQ(ys[i], point.y());",
+        "res_region": "  for (auto& point : trajectory_analyzer.trajectory_points()) {\n    EXPECT_EQ(xs[i], point.path_point().x());\n    EXPECT_EQ(ys[i], point.path_point().y());",
+        "lookback": "    EXPECT_EQ(xs[i], point.path_point().x());",
+        "lookahead": "    ++i;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 124,
+        "end_line": 136,
+        "merge_gen_region": null,
+        "confidence": 0.7461233139038086,
+        "hesitated": true
+    }
+]

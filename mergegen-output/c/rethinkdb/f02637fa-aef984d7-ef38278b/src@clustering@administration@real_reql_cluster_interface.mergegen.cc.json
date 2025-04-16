@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "",
+        "base_contents": "    if (!db_drop_uuid(db_id,\n                      name,\n                      interruptor_on_caller,\n                      result_out,\n                      error_out)) {\n        return false;\n    }\n",
+        "res_region": "",
+        "lookback": "    return true;",
+        "lookahead": "    return true;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 218,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.49289780855178833,
+        "hesitated": true
+    }
+]

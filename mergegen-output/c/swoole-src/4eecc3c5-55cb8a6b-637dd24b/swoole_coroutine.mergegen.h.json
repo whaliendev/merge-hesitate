@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "#ifdef SW_CORO_TICK_SCHEDULE\n    int64_t last_msec;\n#endif",
+        "b_contents": "    zend_object *context;",
+        "base_contents": "",
+        "res_region": "    zend_object *context;\n#ifdef SW_CORO_TICK_SCHEDULE\n    int64_t last_msec;\n#endif",
+        "lookback": "#ifdef SW_CORO_TICK_SCHEDULE",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 52,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.7555378079414368,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    static double socket_connect_timeout;\n    static double socket_timeout;\n    static uint32_t max_exec_msec;\n    static bool tick_init;\n\n    static void init();",
+        "b_contents": "",
+        "base_contents": "    static double socket_connect_timeout;\n    static double socket_timeout;\n",
+        "res_region": "    static uint32_t max_exec_msec;\n    static bool tick_init;\n\n    static void init();",
+        "lookback": "    static bool tick_init;",
+        "lookahead": "    static long create(zend_fcall_info_cache *fci_cache, uint32_t argc, zval *argv);",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 85,
+        "end_line": 97,
+        "merge_gen_region": null,
+        "confidence": 0.7247545719146729,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    static bool is_in()",
+        "b_contents": "    static inline void init()\n    {\n        Coroutine::set_on_yield(on_yield);\n        Coroutine::set_on_resume(on_resume);\n        Coroutine::set_on_close(on_close);\n    }\n\n    static inline long get_cid()",
+        "base_contents": "    static inline void init()\n    {\n        Coroutine::set_on_yield(on_yield);\n        Coroutine::set_on_resume(on_resume);\n        Coroutine::set_on_close(on_close);\n    }\n\n    static inline bool is_in()",
+        "res_region": "    static inline long get_cid()",
+        "lookback": "    {",
+        "lookahead": "    {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 112,
+        "end_line": 132,
+        "merge_gen_region": null,
+        "confidence": 0.8691535592079163,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    static inline php_coro_task* get_and_save_current_task();",
+        "b_contents": "    static inline void save_task(php_coro_task *task);\n    static inline void restore_task(php_coro_task *task);\n    static void on_yield(void *arg);",
+        "base_contents": "    static inline php_coro_task* get_and_save_current_task();\n    static void on_yield(void *arg);",
+        "res_region": "    static inline void save_task(php_coro_task *task);\n    static inline void restore_task(php_coro_task *task);",
+        "lookback": "    static inline void restore_task(php_coro_task *task);",
+        "lookahead": "    static void on_resume(void *arg);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 201,
+        "end_line": 210,
+        "merge_gen_region": null,
+        "confidence": 0.7285033464431763,
+        "hesitated": true
+    }
+]

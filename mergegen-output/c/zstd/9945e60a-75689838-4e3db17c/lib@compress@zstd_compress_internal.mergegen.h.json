@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define kSearchStrength      8\n#define HASH_READ_SIZE       8\n#define ZSTD_CLEVEL_CUSTOM 999",
+        "b_contents": "static const U32 g_searchStrength = 8;\n#define HASH_READ_SIZE 8\n#define ZSTD_DUBT_UNSORTED_MARK 1   /* For btlazy2 strategy, index 1 now means \"unsorted\".\n                                       It could be confused for a real successor at index \"1\", if sorted as larger than its predecessor.\n                                       It's not a big deal though : candidate will just be sorted again.\n                                       Additionnally, candidate position 1 will be lost.\n                                       But candidate 1 cannot hide a large tree of candidates, so it's a minimal loss.\n                                       The benefit is that ZSTD_DUBT_UNSORTED_MARK cannot be misdhandled after table re-use with a different strategy */",
+        "base_contents": "static const U32 g_searchStrength = 8;\n#define HASH_READ_SIZE 8",
+        "res_region": "#define kSearchStrength      8\n#define HASH_READ_SIZE       8\n#define ZSTD_CLEVEL_CUSTOM 999\n#define ZSTD_DUBT_UNSORTED_MARK 1   /* For btlazy2 strategy, index 1 now means \"unsorted\".\n                                       It could be confused for a real successor at index \"1\", if sorted as larger than its predecessor.\n                                       It's not a big deal though : candidate will just be sorted again.\n                                       Additionnally, candidate position 1 will be lost.\n                                       But candidate 1 cannot hide a large tree of candidates, so it's a minimal loss.\n                                       The benefit is that ZSTD_DUBT_UNSORTED_MARK cannot be misdhandled after table re-use with a different strategy */",
+        "lookback": "#define HASH_READ_SIZE       8",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 32,
+        "end_line": 48,
+        "merge_gen_region": "####################################################",
+        "confidence": 0.90227872133255,
+        "hesitated": false,
+        "resolved": false
+    }
+]

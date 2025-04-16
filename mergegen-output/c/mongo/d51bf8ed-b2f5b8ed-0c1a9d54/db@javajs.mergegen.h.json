@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": " ",
+        "b_contents": "",
+        "base_contents": " \n private:\n",
+        "res_region": "\n  void run( char * js );\n\n private:",
+        "lookback": "  void run( char * js );",
+        "lookahead": "  ",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 68,
+        "end_line": 76,
+        "merge_gen_region": null,
+        "confidence": 0.6728239059448242,
+        "hesitated": true
+    },
+    {
+        "a_contents": " private:",
+        "b_contents": " \n private:",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "  jobject create( const char * name ){",
+        "lookahead": "  ",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 78,
+        "end_line": 84,
+        "merge_gen_region": null,
+        "confidence": 0.530833899974823,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "SrsLogLevel srs_get_log_level(string level)",
+        "b_contents": "int srs_socket_connect(string server, int port, int64_t timeout, st_netfd_t* pstfd)\n{\n    int ret = ERROR_SUCCESS;\n    \n    *pstfd = NULL;\n    st_netfd_t stfd = NULL;\n    sockaddr_in addr;\n    \n    int sock = socket(AF_INET, SOCK_STREAM, 0);\n    if(sock == -1){\n        ret = ERROR_SOCKET_CREATE;\n        srs_error(\"create socket error. ret=%d\", ret);\n        return ret;\n    }\n    \n    srs_assert(!stfd);\n    stfd = st_netfd_open_socket(sock);\n    if(stfd == NULL){\n        ret = ERROR_ST_OPEN_SOCKET;\n        srs_error(\"st_netfd_open_socket failed. ret=%d\", ret);\n        ::close(sock);\n        return ret;\n    }\n    \n    // connect to server.\n    std::string ip = srs_dns_resolve(server);\n    if (ip.empty()) {\n        ret = ERROR_SYSTEM_IP_INVALID;\n        srs_error(\"dns resolve server error, ip empty. ret=%d\", ret);\n        goto failed;\n    }\n    \n    addr.sin_family = AF_INET;\n    addr.sin_port = htons(port);\n    addr.sin_addr.s_addr = inet_addr(ip.c_str());\n    \n    if (st_connect(stfd, (const struct sockaddr*)&addr, sizeof(sockaddr_in), timeout) == -1){\n        ret = ERROR_ST_CONNECT;\n        srs_error(\"connect to server error. ip=%s, port=%d, ret=%d\", ip.c_str(), port, ret);\n        goto failed;\n    }\n    srs_info(\"connect ok. server=%s, ip=%s, port=%d\", server.c_str(), ip.c_str(), port);\n    \n    *pstfd = stfd;\n    ::close(sock);\n    return ret;\n    \nfailed:\n    if (stfd) {\n        srs_close_stfd(stfd);\n    }\n    ::close(sock);\n    return ret;\n}\n\nint srs_get_log_level(string level)",
+        "base_contents": "int srs_socket_connect(string server, int port, int64_t timeout, st_netfd_t* pstfd)\n{\n    int ret = ERROR_SUCCESS;\n    \n    *pstfd = NULL;\n    st_netfd_t stfd = NULL;\n    sockaddr_in addr;\n    \n    int sock = socket(AF_INET, SOCK_STREAM, 0);\n    if(sock == -1){\n        ret = ERROR_SOCKET_CREATE;\n        srs_error(\"create socket error. ret=%d\", ret);\n        return ret;\n    }\n    \n    srs_assert(!stfd);\n    stfd = st_netfd_open_socket(sock);\n    if(stfd == NULL){\n        ret = ERROR_ST_OPEN_SOCKET;\n        srs_error(\"st_netfd_open_socket failed. ret=%d\", ret);\n        return ret;\n    }\n    \n    // connect to server.\n    std::string ip = srs_dns_resolve(server);\n    if (ip.empty()) {\n        ret = ERROR_SYSTEM_IP_INVALID;\n        srs_error(\"dns resolve server error, ip empty. ret=%d\", ret);\n        goto failed;\n    }\n    \n    addr.sin_family = AF_INET;\n    addr.sin_port = htons(port);\n    addr.sin_addr.s_addr = inet_addr(ip.c_str());\n    \n    if (st_connect(stfd, (const struct sockaddr*)&addr, sizeof(sockaddr_in), timeout) == -1){\n        ret = ERROR_ST_CONNECT;\n        srs_error(\"connect to server error. ip=%s, port=%d, ret=%d\", ip.c_str(), port, ret);\n        goto failed;\n    }\n    srs_info(\"connect ok. server=%s, ip=%s, port=%d\", server.c_str(), ip.c_str(), port);\n    \n    *pstfd = stfd;\n    return ret;\n    \nfailed:\n    if (stfd) {\n        srs_close_stfd(stfd);\n    }\n    return ret;\n}\n\nint srs_get_log_level(string level)",
+        "res_region": "SrsLogLevel srs_get_log_level(string level)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 56,
+        "end_line": 169,
+        "merge_gen_region": null,
+        "confidence": 0.27421435713768005,
+        "hesitated": true
+    }
+]

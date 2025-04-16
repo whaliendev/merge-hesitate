@@ -1,0 +1,6 @@
+repo,merge_scenario,execution_time_seconds
+ClickHouse,11a9da4c-ee597f6a-ec914b10,7.0245
+ClickHouse,2747ca31-9fa60535-ac1745ad,0.6762
+ClickHouse,3f5e3590-64d9cb39-57ed5e36,0.8698
+ClickHouse,5d39ae42-5f04d285-39fb0d57,0.5107
+ClickHouse,6615812d-72a07e00-7bd1ab01,0.6653

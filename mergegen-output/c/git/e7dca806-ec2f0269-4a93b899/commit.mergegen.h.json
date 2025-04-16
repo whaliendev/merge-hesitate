@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "const char *logmsg_reencode(const struct commit *commit,\n\t\t\t    char **commit_encoding,\n\t\t\t    const char *output_encoding);",
+        "b_contents": "int has_non_ascii(const char *text);",
+        "base_contents": "int has_non_ascii(const char *text);\nconst char *logmsg_reencode(const struct commit *commit,\n\t\t\t    char **commit_encoding,\n\t\t\t    const char *output_encoding);",
+        "res_region": "",
+        "lookback": "\t\t\t\t const struct commit *commit,",
+        "lookahead": "const char *repo_logmsg_reencode(struct repository *r,",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 195,
+        "end_line": 206,
+        "merge_gen_region": "",
+        "confidence": 0.8919477462768555,
+        "hesitated": false,
+        "resolved": true
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "  size_t bytes_read = 0;\n  uint64_t millis = 0;",
+        "b_contents": "  ssize_t bytes_read = -1;\n  uint64_t millis = 0;",
+        "base_contents": "  ssize_t bytes_read = -1;",
+        "res_region": "  size_t bytes_read = 0;\n  uint64_t millis = 0;",
+        "lookback": "  uint64_t millis = 0;",
+        "lookahead": "  for (size_t tries = 0; tries < kNumTries; ++tries) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 774,
+        "end_line": 782,
+        "merge_gen_region": "64>(outputoutput>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(",
+        "confidence": 0.9102944135665894,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  LOG(ERROR) << \"Not single threaded: bytes_read = \" << bytes_read << \" stat contents = \\\"\" << buf\n             << \"...\\\"\";\n  LOG(ERROR) << \"Other threads' abbreviated stats: \" << GetOtherThreadOsStats();\n  bytes_read = GetOsThreadStat(getpid(), buf, BUF_PRINT_SIZE);\n  CHECK_NE(bytes_read, 0u);\n  LOG(ERROR) << \"After re-read: bytes_read = \" << bytes_read << \" stat contents = \\\"\" << buf\n             << \"...\\\"\";\n  LOG(FATAL) << \"Failed to reach single-threaded state: wait_time = \" << MilliTime() - millis;",
+        "b_contents": "  LOG(FATAL) << \"Failed to reach single-threaded state: bytes_read = \" << bytes_read\n             << \" stat contents = \\\"\" << buf << \"...\\\" wait_time = \" << MilliTime() - millis;",
+        "base_contents": "  LOG(FATAL) << \"Failed to reach single-threaded state: bytes_read = \" << bytes_read\n             << \" stat contents = \\\"\" << buf << \"...\\\"\";",
+        "res_region": "  LOG(ERROR) << \"Not single threaded: bytes_read = \" << bytes_read << \" stat contents = \\\"\" << buf\n             << \"...\\\"\";\n  LOG(ERROR) << \"Other threads' abbreviated stats: \" << GetOtherThreadOsStats();\n  bytes_read = GetOsThreadStat(getpid(), buf, BUF_PRINT_SIZE);\n  CHECK_NE(bytes_read, 0u);\n  LOG(ERROR) << \"After re-read: bytes_read = \" << bytes_read << \" stat contents = \\\"\" << buf\n             << \"...\\\"\";\n  LOG(FATAL) << \"Failed to reach single-threaded state: wait_time = \" << MilliTime() - millis;",
+        "lookback": "             << \"...\\\"\";",
+        "lookahead": "#else  // Not Linux; shouldn't matter, but this has a high probability of working slowly.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 809,
+        "end_line": 824,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9059016108512878,
+        "hesitated": false,
+        "resolved": false
+    }
+]

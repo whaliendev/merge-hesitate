@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if (create.attach_as_replicated.has_value())\n            throw Exception(\n                ErrorCodes::SUPPORT_IS_DISABLED,\n                \"ATTACH AS [NOT] REPLICATED is not supported for ON CLUSTER queries\");\n\n        auto on_cluster_version = getContext()->getSettingsRef().distributed_ddl_entry_format_version;",
+        "b_contents": "        auto on_cluster_version = getContext()->getSettingsRef()[Setting::distributed_ddl_entry_format_version];",
+        "base_contents": "        auto on_cluster_version = getContext()->getSettingsRef().distributed_ddl_entry_format_version;",
+        "res_region": "        if (create.attach_as_replicated.has_value())\n            throw Exception(\n                ErrorCodes::SUPPORT_IS_DISABLED,\n                \"ATTACH AS [NOT] REPLICATED is not supported for ON CLUSTER queries\");\n\n        auto on_cluster_version = getContext()->getSettingsRef()[Setting::distributed_ddl_entry_format_version];",
+        "lookback": "            throw Exception(",
+        "lookahead": "        if (is_create_database || on_cluster_version < DDLLogEntry::NORMALIZE_CREATE_ON_INITIATOR_VERSION)",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2247,
+        "end_line": 2258,
+        "merge_gen_region": null,
+        "confidence": 0.7812525033950806,
+        "hesitated": true
+    }
+]

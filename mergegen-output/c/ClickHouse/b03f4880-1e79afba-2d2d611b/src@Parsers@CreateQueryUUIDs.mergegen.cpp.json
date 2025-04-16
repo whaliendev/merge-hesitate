@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        /// \"ATTACH MATERIALIZED VIEW mv TO INNER UUID '123e4567-e89b-12d3-a456-426614174000' AS SELECT a FROM b\"",
+        "b_contents": "        /// \"ATTACH MATERIALIZED VIEW mv TO INNER UUID \"248372b7-02c4-4c88-a5e1-282a83cc572a\" AS SELECT a FROM b\"",
+        "base_contents": "        /// \"ATTACH MATERIALIZED VIEW mv TO INNER UUID \"XXXX\" AS SELECT a FROM b\"",
+        "res_region": "        /// \"ATTACH MATERIALIZED VIEW mv TO INNER UUID '123e4567-e89b-12d3-a456-426614174000' AS SELECT a FROM b\"",
+        "lookback": "        /// This replacement is safe only for CREATE queries when inner target tables don't exist yet.",
+        "lookahead": "        /// This replacement is safe only for CREATE queries when inner target tables don't exist yet.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.7291884422302246,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        ",
+        "b_contents": "",
+        "base_contents": "        \n        Director::getInstance()->setDisplayStats(false);",
+        "res_region": "",
+        "lookback": "        // prepare for camera creation, we need create three custom cameras",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 91,
+        "end_line": 97,
+        "merge_gen_region": null,
+        "confidence": 0.5573590993881226,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "class OnDeviceRefresh;\n\nstruct BootImages {\n  static constexpr int kMaxCount = 2;\n\n  bool primary_boot_image : 1;\n  bool boot_image_mainline_extension : 1;\n\n  int Count() const;\n\n  OdrMetrics::BcpCompilationType GetTypeForMetrics() const;\n};\n",
+        "b_contents": "// TODO(jiakaiz): Remove this.\nvoid TestOnlyEnableMainlineExtension();\n\nclass OnDeviceRefresh;\n\nstruct BootImages {\n  static constexpr int kMaxCount = 2;\n\n  bool primary_boot_image : 1;\n  bool boot_image_mainline_extension : 1;\n\n  int Count() const;\n};\n",
+        "base_contents": "",
+        "res_region": "class OnDeviceRefresh;\n\nstruct BootImages {\n  static constexpr int kMaxCount = 2;\n\n  bool primary_boot_image : 1;\n  bool boot_image_mainline_extension : 1;\n\n  int Count() const;\n\n  OdrMetrics::BcpCompilationType GetTypeForMetrics() const;\n};\n",
+        "lookback": "",
+        "lookahead": "struct CompilationOptions {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 41,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.5035350918769836,
+        "hesitated": true
+    }
+]

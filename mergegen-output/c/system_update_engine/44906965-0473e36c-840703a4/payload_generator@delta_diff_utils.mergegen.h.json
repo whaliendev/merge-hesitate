@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// SOURCE_BSDIFF, or PUFFDIFF) wins.\n// |new_extents| must not be empty. Returns true on success.",
+        "b_contents": "// SOURCE_BSDIFF, or PUFFDIFF) wins.\n// |new_extents| must not be empty. |old_deflates| and |new_deflates| are all\n// the deflate locations in |old_part| and |new_part|. Returns true on success.",
+        "base_contents": "// SOURCE_BSDIFF or IMGDIFF) wins.\n// |new_extents| must not be empty. Returns true on success.",
+        "res_region": "// SOURCE_BSDIFF, or PUFFDIFF) wins.\n// |new_extents| must not be empty. |old_deflates| and |new_deflates| are all\n// the deflate locations in |old_part| and |new_part|. Returns true on success.",
+        "lookback": "// |new_extents| must not be empty. |old_deflates| and |new_deflates| are all",
+        "lookahead": "bool ReadExtentsToDiff(const std::string& old_part,",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 99,
+        "end_line": 109,
+        "merge_gen_region": null,
+        "confidence": 0.84130859375,
+        "hesitated": true
+    }
+]

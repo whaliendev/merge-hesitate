@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/conti_radar.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/drivers_msgs/sensor_canbus_conf.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/conti_radar.pb.h\"",
+        "base_contents": "#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"\n#include \"modules/drivers/proto/conti_radar.pb.h\"",
+        "res_region": "#include \"modules/drivers/canbus/proto/sensor_canbus_conf.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/conti_radar.pb.h\"",
+        "lookback": "#include \"modules/common_msgs/sensor_msgs/conti_radar.pb.h\"",
+        "lookahead": "#include \"modules/drivers/radar/conti_radar/conti_radar_canbus_component.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 34,
+        "merge_gen_region": "includemodulescommonmsgsExt___..\"# \"/_/# \"##cc.########## \"# \"# \"########c######c##",
+        "confidence": 0.9220563769340515,
+        "hesitated": false,
+        "resolved": false
+    }
+]

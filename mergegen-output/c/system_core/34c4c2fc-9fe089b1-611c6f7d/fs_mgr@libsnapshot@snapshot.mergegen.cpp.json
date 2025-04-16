@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#ifdef LIBSNAPSHOT_USE_CALLSTACK\n    LOG(WARNING) << \"Logging stack; see b/148818798.\";\n    // Do not use CallStack's log functions because snapshotctl relies on\n    // android-base/logging to save log to files.\n    // TODO(b/148818798): remove this before we ship.\n    CallStack callstack;\n    callstack.update();\n    auto callstack_str = callstack.toString();\n    LOG(WARNING) << callstack_str.c_str();\n    std::stringstream path;\n    path << \"/data/misc/snapshotctl_log/libsnapshot.\" << Now() << \".log\";\n    android::base::WriteStringToFile(callstack_str.c_str(), path.str());\n#endif\n",
+        "base_contents": "#ifdef LIBSNAPSHOT_USE_CALLSTACK\n    LOG(WARNING) << \"Logging stack; see b/148818798.\";\n    // Do not use CallStack's log functions because snapshotctl relies on\n    // android-base/logging to save log to files.\n    // TODO(b/148818798): remove this before we ship.\n    CallStack callstack;\n    callstack.update();\n    auto callstack_str = callstack.toString();\n    LOG(WARNING) << callstack_str.c_str();\n    std::stringstream path;\n    path << \"/data/misc/snapshotctl_log/libsnapshot.\" << Now() << \".log\";\n    std::string path_str = path.str();\n    android::base::WriteStringToFile(callstack_str.c_str(), path_str);\n    if (chmod(path_str.c_str(), 0644) == -1) {\n        PLOG(WARNING) << \"Unable to chmod 0644 \"\n                      << \", file maybe dropped from bugreport:\" << path_str;\n    }\n#endif\n",
+        "res_region": "",
+        "lookback": "        LOG(ERROR) << \"Could not remove all snapshots\";",
+        "lookahead": "    if (!RemoveAllSnapshots(lock)) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 225,
+        "end_line": 261,
+        "merge_gen_region": null,
+        "confidence": 0.7209935784339905,
+        "hesitated": true
+    }
+]

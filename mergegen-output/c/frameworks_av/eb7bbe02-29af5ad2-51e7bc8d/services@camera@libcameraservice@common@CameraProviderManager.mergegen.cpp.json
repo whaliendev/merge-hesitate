@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <ui/PublicFormat.h>\n#include <camera/StringUtils.h>",
+        "b_contents": "#include <camera/StringUtils.h>",
+        "base_contents": "",
+        "res_region": "#include <ui/PublicFormat.h>\n#include <camera/StringUtils.h>",
+        "lookback": "#include <camera/StringUtils.h>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 44,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.7428836226463318,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "      create_if_missing(false),\n      error_if_exists(false),\n      paranoid_checks(false),\n      env(Env::Default()),\n      info_log(nullptr),\n      info_log_level(INFO),",
+        "base_contents": "      create_if_missing(false),\n      error_if_exists(false),\n      paranoid_checks(false),\n      env(Env::Default()),\n      info_log(nullptr),",
+        "res_region": "",
+        "lookback": "      max_write_buffer_number(2),",
+        "lookahead": "      write_buffer_size(4<<20),",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 35,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.7150925397872925,
+        "hesitated": true
+    }
+]

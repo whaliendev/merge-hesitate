@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\twl_container_of(listener, sway_surface, unmap);\n",
+        "b_contents": "\t\twl_container_of(listener, sway_surface, unmap_notify);",
+        "base_contents": "\t\twl_container_of(listener, sway_surface, unmap_notify);\n",
+        "res_region": "\t\twl_container_of(listener, sway_surface, unmap);\n  ",
+        "lookback": "  ",
+        "lookahead": "\twl_list_remove(&sway_surface->view->unmanaged_view_link);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 118,
+        "end_line": 126,
+        "merge_gen_region": null,
+        "confidence": 0.8689208626747131,
+        "hesitated": true
+    }
+]

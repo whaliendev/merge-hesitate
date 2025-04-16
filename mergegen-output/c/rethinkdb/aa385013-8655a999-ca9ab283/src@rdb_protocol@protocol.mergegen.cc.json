@@ -1,0 +1,73 @@
+[
+    {
+        "a_contents": "#include \"rdb_protocol/store.hpp\"\n#include \"rpc/semilattice/view/field.hpp\"",
+        "b_contents": "#include \"rdb_protocol/ql2.pb.h\"\n#include \"concurrency/cross_thread_signal.hpp\"\n#include \"concurrency/cross_thread_watchable.hpp\"\n#include \"rpc/semilattice/view.hpp\"",
+        "base_contents": "#include \"concurrency/cross_thread_watchable.hpp\"\n#include \"rpc/semilattice/view/field.hpp\"",
+        "res_region": "#include \"rdb_protocol/ql2.pb.h\"\n#include \"concurrency/cross_thread_signal.hpp\"\n#include \"concurrency/cross_thread_watchable.hpp\"\n#include \"rpc/semilattice/view.hpp\"",
+        "lookback": "#include \"concurrency/cross_thread_signal.hpp\"",
+        "lookahead": "#include \"rpc/semilattice/watchable.hpp\"",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 13,
+        "end_line": 24,
+        "merge_gen_region": "########",
+        "confidence": 0.8853551149368286,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "RDB_IMPL_ME_SERIALIZABLE_3(rdb_protocol::single_sindex_status_t,",
+        "b_contents": "\nRDB_IMPL_ME_SERIALIZABLE_3(rdb_protocol::single_sindex_status_t, 0,",
+        "base_contents": "\nRDB_IMPL_ME_SERIALIZABLE_3(rdb_protocol::single_sindex_status_t,",
+        "res_region": "\nRDB_IMPL_ME_SERIALIZABLE_3(rdb_protocol::single_sindex_status_t, 0,",
+        "lookback": "RDB_IMPL_ME_SERIALIZABLE_3(rdb_protocol::single_sindex_status_t, 0,",
+        "lookahead": "                           blocks_total, blocks_processed, ready);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 1100,
+        "end_line": 1108,
+        "merge_gen_region": null,
+        "confidence": 0.7678641080856323,
+        "hesitated": true
+    },
+    {
+        "a_contents": "RDB_IMPL_ME_SERIALIZABLE_1(point_delete_response_t, result);\nRDB_IMPL_ME_SERIALIZABLE_2(changefeed_subscribe_response_t, server_uuids, addrs);\nRDB_IMPL_ME_SERIALIZABLE_1(changefeed_stamp_response_t, stamps);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_create_response_t, success);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_drop_response_t, success);\nRDB_IMPL_ME_SERIALIZABLE_0(sync_response_t);",
+        "b_contents": "RDB_IMPL_ME_SERIALIZABLE_1(point_delete_response_t, 0, result);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_create_response_t, 0, success);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_drop_response_t, 0, success);\nRDB_IMPL_ME_SERIALIZABLE_0(sync_response_t, 0);",
+        "base_contents": "RDB_IMPL_ME_SERIALIZABLE_1(point_delete_response_t, result);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_create_response_t, success);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_drop_response_t, success);\nRDB_IMPL_ME_SERIALIZABLE_0(sync_response_t);",
+        "res_region": "RDB_IMPL_ME_SERIALIZABLE_1(point_delete_response_t, 0, result);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_create_response_t, 0, success);\nRDB_IMPL_ME_SERIALIZABLE_1(sindex_drop_response_t, 0, success);\nRDB_IMPL_ME_SERIALIZABLE_0(sync_response_t, 0);",
+        "lookback": "RDB_IMPL_ME_SERIALIZABLE_1(sindex_create_response_t, 0, success);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1143,
+        "end_line": 1160,
+        "merge_gen_region": "DBIMPLMERRRRRR",
+        "confidence": 0.8815748691558838,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "RDB_IMPL_ME_SERIALIZABLE_3(point_write_t, key, data, overwrite);\nRDB_IMPL_ME_SERIALIZABLE_1(point_delete_t, key);\nRDB_IMPL_ME_SERIALIZABLE_2(changefeed_subscribe_t, addr, region);\nRDB_IMPL_ME_SERIALIZABLE_2(changefeed_stamp_t, addr, region);\nRDB_IMPL_ME_SERIALIZABLE_4(sindex_create_t, id, mapping, region, multi);\nRDB_IMPL_ME_SERIALIZABLE_2(sindex_drop_t, id, region);\nRDB_IMPL_ME_SERIALIZABLE_1(sync_t, region);",
+        "b_contents": "RDB_IMPL_ME_SERIALIZABLE_3(point_write_t, 0, key, data, overwrite);\nRDB_IMPL_ME_SERIALIZABLE_1(point_delete_t, 0, key);\n\nRDB_IMPL_ME_SERIALIZABLE_4(sindex_create_t, 0, id, mapping, region, multi);\nRDB_IMPL_ME_SERIALIZABLE_2(sindex_drop_t, 0, id, region);\nRDB_IMPL_ME_SERIALIZABLE_1(sync_t, 0, region);",
+        "base_contents": "RDB_IMPL_ME_SERIALIZABLE_3(point_write_t, key, data, overwrite);\nRDB_IMPL_ME_SERIALIZABLE_1(point_delete_t, key);\n\nRDB_IMPL_ME_SERIALIZABLE_4(sindex_create_t, id, mapping, region, multi);\nRDB_IMPL_ME_SERIALIZABLE_2(sindex_drop_t, id, region);\nRDB_IMPL_ME_SERIALIZABLE_1(sync_t, region);",
+        "res_region": "RDB_IMPL_ME_SERIALIZABLE_3(point_write_t, 0, key, data, overwrite);\nRDB_IMPL_ME_SERIALIZABLE_1(point_delete_t, 0, key);\n\nRDB_IMPL_ME_SERIALIZABLE_4(sindex_create_t, 0, id, mapping, region, multi);\nRDB_IMPL_ME_SERIALIZABLE_2(sindex_drop_t, 0, id, region);\nRDB_IMPL_ME_SERIALIZABLE_1(sync_t, 0, region);",
+        "lookback": "RDB_IMPL_ME_SERIALIZABLE_1(point_delete_t, 0, key);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1169,
+        "end_line": 1191,
+        "merge_gen_region": "DBIMPLMERRR",
+        "confidence": 0.8825960755348206,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            list = _lv_obj_get_style_list(obj, LV_TABLE_PART_BG);",
+        "b_contents": "        {\n            list = lv_obj_get_style_list(obj, LV_TABLE_PART_BG);",
+        "base_contents": "            list = lv_obj_get_style_list(obj, LV_TABLE_PART_BG);",
+        "res_region": "        {\n            list = lv_obj_get_style_list(obj, LV_TABLE_PART_BG);",
+        "lookback": "            list = lv_obj_get_style_list(obj, LV_TABLE_PART_BG);",
+        "lookahead": "            _lv_style_list_add_style(list, &styles->bg);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 722,
+        "end_line": 729,
+        "merge_gen_region": null,
+        "confidence": 0.7424927949905396,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            list = _lv_obj_get_style_list(obj, LV_TABLE_PART_CELL1);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = _lv_obj_get_style_list(obj, LV_TABLE_PART_CELL2);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = _lv_obj_get_style_list(obj, LV_TABLE_PART_CELL3);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = _lv_obj_get_style_list(obj, LV_TABLE_PART_CELL4);\n            _lv_style_list_add_style(list, &styles->bg);",
+        "b_contents": "            int idx = 1; /* start value should be 1, not zero, since cell styles\n                            start at 1 due to presence of LV_TABLE_PART_BG=0\n                            in the enum (lv_table.h) */\n                         /* declaring idx outside loop to work with older compilers */\n            for (; idx <= LV_TABLE_CELL_STYLE_CNT; idx ++ ) {\n              list = lv_obj_get_style_list(obj, idx);\n              _lv_style_list_add_style(list, &styles->bg);\n            }",
+        "base_contents": "            list = lv_obj_get_style_list(obj, LV_TABLE_PART_CELL1);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = lv_obj_get_style_list(obj, LV_TABLE_PART_CELL2);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = lv_obj_get_style_list(obj, LV_TABLE_PART_CELL3);\n            _lv_style_list_add_style(list, &styles->bg);\n\n            list = lv_obj_get_style_list(obj, LV_TABLE_PART_CELL4);\n            _lv_style_list_add_style(list, &styles->bg);",
+        "res_region": "            int idx = 1; /* start value should be 1, not zero, since cell styles\n                            start at 1 due to presence of LV_TABLE_PART_BG=0\n                            in the enum (lv_table.h) */\n                         /* declaring idx outside loop to work with older compilers */\n            for (; idx <= LV_TABLE_CELL_STYLE_CNT; idx ++ ) {\n              list = lv_obj_get_style_list(obj, idx);\n              _lv_style_list_add_style(list, &styles->bg);\n            }",
+        "lookback": "                            start at 1 due to presence of LV_TABLE_PART_BG=0",
+        "lookahead": "            break;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 732,
+        "end_line": 765,
+        "merge_gen_region": null,
+        "confidence": 0.7146064043045044,
+        "hesitated": true
+    }
+]

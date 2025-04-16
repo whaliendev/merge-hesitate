@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // kOmahaUpdateIgnoredOverCellular = 50,\n  kPayloadTimestampError = 51,\n  kUpdatedButNotActive = 52,",
+        "b_contents": "  // kOmahaUpdateIgnoredOverCellular = 50,\n  // kPayloadTimestampError = 51,\n  kUpdatedButNotActive = 52,",
+        "base_contents": "",
+        "res_region": "  // kOmahaUpdateIgnoredOverCellular = 50,\n  kPayloadTimestampError = 51,\n  kUpdatedButNotActive = 52,",
+        "lookback": "  kPayloadTimestampError = 51,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 75,
+        "end_line": 84,
+        "merge_gen_region": null,
+        "confidence": 0.8637645244598389,
+        "hesitated": true
+    }
+]

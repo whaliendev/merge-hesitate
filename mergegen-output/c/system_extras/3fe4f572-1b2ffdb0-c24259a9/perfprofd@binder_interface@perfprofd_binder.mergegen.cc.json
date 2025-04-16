@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"configreader.h\"\n#include \"dropbox.h\"",
+        "b_contents": "#include \"dropbox.h\"",
+        "base_contents": "",
+        "res_region": "#include \"configreader.h\"\n#include \"dropbox.h\"",
+        "lookback": "#include \"dropbox.h\"",
+        "lookahead": "#include \"perfprofdcore.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 50,
+        "end_line": 56,
+        "merge_gen_region": null,
+        "confidence": 0.7377747297286987,
+        "hesitated": true
+    }
+]

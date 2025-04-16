@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "AudioStreamIn* RecordThread::clearInput()",
+        "b_contents": "AudioStreamIn* AudioFlinger::RecordThread::clearInput()",
+        "base_contents": "AudioFlinger::AudioStreamIn* AudioFlinger::RecordThread::clearInput()",
+        "res_region": "AudioStreamIn* RecordThread::clearInput()",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 9594,
+        "end_line": 9600,
+        "merge_gen_region": null,
+        "confidence": 0.7473194599151611,
+        "hesitated": true
+    },
+    {
+        "a_contents": "AudioStreamIn* MmapCaptureThread::clearInput()",
+        "b_contents": "AudioStreamIn* AudioFlinger::MmapCaptureThread::clearInput()",
+        "base_contents": "AudioFlinger::AudioStreamIn* AudioFlinger::MmapCaptureThread::clearInput()",
+        "res_region": "AudioStreamIn* MmapCaptureThread::clearInput()",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 11052,
+        "end_line": 11058,
+        "merge_gen_region": null,
+        "confidence": 0.796633243560791,
+        "hesitated": true
+    }
+]

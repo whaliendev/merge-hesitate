@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    std::string url = out_rtmp->get_url();\n    srs_trace(\"connect output=%s\", url.c_str());",
+        "b_contents": "    srs_trace(\"connect output=%s\", out_rtmp->get_url());\n    \n    // parse uri\n    if (!req) {\n        req = new SrsRequest();\n        \n        string uri = req->tcUrl = out_rtmp->get_url();\n        \n        // tcUrl, stream\n        if (srs_string_contains(uri, \"/\")) {\n            req->stream = srs_path_basename(uri);\n            req->tcUrl = uri = srs_path_dirname(uri);\n        }\n        \n        srs_discovery_tc_url(req->tcUrl,\n            req->schema, req->host, req->vhost, req->app, req->stream, req->port,\n            req->param);\n    }",
+        "base_contents": "    srs_trace(\"connect output=%s\", out_rtmp->get_url());\n    \n    // parse uri\n    if (!req) {\n        req = new SrsRequest();\n        \n        string uri = req->tcUrl = out_rtmp->get_url();\n        \n        // tcUrl, stream\n        if (srs_string_contains(uri, \"/\")) {\n            req->stream = srs_path_basename(uri);\n            req->tcUrl = uri = srs_path_dirname(uri);\n        }\n        \n        srs_discovery_tc_url(req->tcUrl,\n            req->schema, req->host, req->vhost, req->app, req->port,\n            req->param);\n    }",
+        "res_region": "    std::string url = out_rtmp->get_url();\n    srs_trace(\"connect output=%s\", url.c_str());",
+        "lookback": "    srs_trace(\"connect output=%s\", url.c_str());",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1270,
+        "end_line": 1311,
+        "merge_gen_region": null,
+        "confidence": 0.7197742462158203,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,122 @@
+[
+    {
+        "a_contents": "static int GetGpuId(\n    const apollo::perception::pipeline::PipelineConfig &pipeline_config) {\n  if (!pipeline_config.camera_detection_config().has_gpu_id()) {\n    AINFO << \"gpu id not found.\";\n    return -1;\n  }\n  return pipeline_config.camera_detection_config().gpu_id();\n}\n",
+        "b_contents": "static int GetGpuId(const apollo::perception::pipeline::PipelineConfig& pipeline_config){\n  if (!pipeline_config.camera_detection_config().has_gpu_id()){\n    AINFO << \"gpu id not found.\";\n    return -1;\n  }\n  return pipeline_config.camera_detection_config().gpu_id();\n}\n",
+        "base_contents": "",
+        "res_region": "static int GetGpuId(\n    const apollo::perception::pipeline::PipelineConfig &pipeline_config) {\n  if (!pipeline_config.camera_detection_config().has_gpu_id()) {\n    AINFO << \"gpu id not found.\";\n    return -1;\n  }\n  return pipeline_config.camera_detection_config().gpu_id();\n}\n",
+        "lookback": "    const apollo::perception::pipeline::PipelineConfig &pipeline_config) {",
+        "lookahead": "static bool SetCameraHeight(const std::string &sensor_name,",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 67,
+        "end_line": 87,
+        "merge_gen_region": null,
+        "confidence": 0.8715816140174866,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        YAML::LoadFile(params_dir + \"/\" + lidar_sensor_name + \"_height.yaml\");\n",
+        "b_contents": "        YAML::LoadFile(\n          params_dir + \"/\" + lidar_sensor_name + \"_height.yaml\");\n      ",
+        "base_contents": "        YAML::LoadFile(\n          params_dir + \"/\" + lidar_sensor_name + \"_height.yaml\");",
+        "res_region": "        YAML::LoadFile(params_dir + \"/\" + lidar_sensor_name + \"_height.yaml\");\n",
+        "lookback": "",
+        "lookahead": "    base_h = lidar_height[\"vehicle\"][\"parameters\"][\"height\"].as<float>();",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 97,
+        "end_line": 107,
+        "merge_gen_region": null,
+        "confidence": 0.7556279897689819,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // SetCameraHeightAndPitch();",
+        "b_contents": "  //SetCameraHeightAndPitch();",
+        "base_contents": "  SetCameraHeightAndPitch();",
+        "res_region": "  // SetCameraHeightAndPitch();",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 253,
+        "end_line": 259,
+        "merge_gen_region": null,
+        "confidence": 0.5289611220359802,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // homography_im2car_ = visualize_.homography_im2car(visual_camera_);\n  // camera_obstacle_pipeline_->SetIm2CarHomography(homography_im2car_);",
+        "b_contents": "  //homography_im2car_ = visualize_.homography_im2car(visual_camera_);\n  //camera_obstacle_pipeline_->SetIm2CarHomography(homography_im2car_);",
+        "base_contents": "  homography_im2car_ = visualize_.homography_im2car(visual_camera_);\n  camera_obstacle_pipeline_->SetIm2CarHomography(homography_im2car_);",
+        "res_region": "  // homography_im2car_ = visualize_.homography_im2car(visual_camera_);\n  // camera_obstacle_pipeline_->SetIm2CarHomography(homography_im2car_);",
+        "lookback": "  // camera_obstacle_pipeline_->SetIm2CarHomography(homography_im2car_);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 282,
+        "end_line": 291,
+        "merge_gen_region": null,
+        "confidence": 0.7064083814620972,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string camera_obstacle_perception_conf_file =\n      GetAbsolutePath(camera_perception_init_options_.root_dir,\n                      camera_perception_init_options_.conf_file);\n  camera_obstacle_perception_conf_file =\n      GetAbsolutePath(work_root, camera_obstacle_perception_conf_file);\n\n  ACHECK(cyber::common::GetProtoFromFile(camera_obstacle_perception_conf_file,\n                                         &camera_obstacle_detection_config_))\n      << \"failed to load camera obstacle perception config file \"\n      << camera_obstacle_perception_conf_file;",
+        "b_contents": "\n  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string camera_obstacle_perception_conf_file =\n      GetAbsolutePath(camera_perception_init_options_.root_dir, camera_perception_init_options_.conf_file);\n  camera_obstacle_perception_conf_file = GetAbsolutePath(work_root, camera_obstacle_perception_conf_file);\n\n  ACHECK(\n      cyber::common::GetProtoFromFile(camera_obstacle_perception_conf_file, &camera_obstacle_detection_config_))\n      << \"failed to load camera obstacle perception config file \" << camera_obstacle_perception_conf_file;",
+        "base_contents": "",
+        "res_region": "  std::string work_root = apollo::perception::camera::GetCyberWorkRoot();\n  std::string camera_obstacle_perception_conf_file =\n      GetAbsolutePath(camera_perception_init_options_.root_dir,\n                      camera_perception_init_options_.conf_file);\n  camera_obstacle_perception_conf_file =\n      GetAbsolutePath(work_root, camera_obstacle_perception_conf_file);\n\n  ACHECK(cyber::common::GetProtoFromFile(camera_obstacle_perception_conf_file,\n                                         &camera_obstacle_detection_config_))\n      << \"failed to load camera obstacle perception config file \"\n      << camera_obstacle_perception_conf_file;",
+        "lookback": "  std::string camera_obstacle_perception_conf_file =",
+        "lookahead": "  return cyber::SUCC;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 487,
+        "end_line": 510,
+        "merge_gen_region": null,
+        "confidence": 0.8716858625411987,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // if (!camera_obstacle_pipeline_->Init(camera_perception_init_options_)) {\n  if (!camera_obstacle_pipeline_->Init(camera_obstacle_detection_config_)) {",
+        "b_contents": "  //if (!camera_obstacle_pipeline_->Init(camera_perception_init_options_)) {\n    if (!camera_obstacle_pipeline_->Init(camera_obstacle_detection_config_)) {",
+        "base_contents": "  if (!camera_obstacle_pipeline_->Init(camera_perception_init_options_)) {",
+        "res_region": "  // if (!camera_obstacle_pipeline_->Init(camera_perception_init_options_)) {\n  if (!camera_obstacle_pipeline_->Init(camera_obstacle_detection_config_)) {",
+        "lookback": "  if (!camera_obstacle_pipeline_->Init(camera_obstacle_detection_config_)) {",
+        "lookahead": "    AERROR << \"camera_obstacle_pipeline_->Init() failed\";",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 566,
+        "end_line": 574,
+        "merge_gen_region": " (!_______(\"___(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"__(\"StringGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "confidence": 0.920403778553009,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\n  pipeline::DataFrame data_frame;\n  data_frame.camera_frame = &camera_frame;\n  if (!camera_obstacle_pipeline_->Process(&data_frame)) {\n    AERROR << \"camera_obstacle_pipeline_->Process() failed\"",
+        "b_contents": "    \n    pipeline::DataFrame data_frame;\n    data_frame.camera_frame = &camera_frame;\n    if (!camera_obstacle_pipeline_->Process(&data_frame)) {\n    AERROR << \"camera_obstacle_pipeline_->Process() failed\"",
+        "base_contents": "\n  if (!camera_obstacle_pipeline_->Perception(camera_perception_options_,\n                                             &camera_frame)) {\n    AERROR << \"camera_obstacle_pipeline_->Perception() failed\"",
+        "res_region": "\n  pipeline::DataFrame data_frame;\n  data_frame.camera_frame = &camera_frame;\n  if (!camera_obstacle_pipeline_->Process(&data_frame)) {\n    AERROR << \"camera_obstacle_pipeline_->Process() failed\"",
+        "lookback": "  pipeline::DataFrame data_frame;",
+        "lookahead": "           << \" msg_timestamp: \" << msg_timestamp;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 801,
+        "end_line": 818,
+        "merge_gen_region": null,
+        "confidence": 0.8576229214668274,
+        "hesitated": true
+    }
+]

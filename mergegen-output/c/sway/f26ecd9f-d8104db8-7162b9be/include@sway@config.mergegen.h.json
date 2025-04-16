@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"layout.h\"\n#include \"container.h\"\n#include \"wlr-layer-shell-unstable-v1-protocol.h\"\n\n// TODO: Refactor this shit",
+        "b_contents": "#include \"tree/layout.h\"\n#include \"tree/container.h\"",
+        "base_contents": "#include \"layout.h\"\n#include \"container.h\"",
+        "res_region": "#include \"tree/layout.h\"\n#include \"tree/container.h\"\n#include \"wlr-layer-shell-unstable-v1-protocol.h\"\n\n// TODO: Refactor this shit",
+        "lookback": "#include \"tree/container.h\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 10,
+        "end_line": 22,
+        "merge_gen_region": null,
+        "confidence": 0.8622327446937561,
+        "hesitated": true
+    }
+]

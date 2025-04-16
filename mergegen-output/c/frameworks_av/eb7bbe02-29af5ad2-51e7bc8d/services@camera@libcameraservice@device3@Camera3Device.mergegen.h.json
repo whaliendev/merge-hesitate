@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    explicit Camera3Device(std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n            const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "b_contents": "    explicit Camera3Device(const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "base_contents": "    explicit Camera3Device(const String8& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "res_region": "    explicit Camera3Device(std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n            const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "lookback": "            const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "lookahead": "            bool legacyClient = false);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 86,
+        "end_line": 93,
+        "merge_gen_region": null,
+        "confidence": 0.6759302616119385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    const CameraMetadata& infoPhysical(const std::string& physicalId) const override;\n    bool isCompositeJpegRDisabled() const override { return mIsCompositeJpegRDisabled; };",
+        "b_contents": "    const CameraMetadata& infoPhysical(const std::string& physicalId) const override;",
+        "base_contents": "    const CameraMetadata& infoPhysical(const String8& physicalId) const override;",
+        "res_region": "    const CameraMetadata& infoPhysical(const std::string& physicalId) const override;\n    bool isCompositeJpegRDisabled() const override { return mIsCompositeJpegRDisabled; };",
+        "lookback": "    bool isCompositeJpegRDisabled() const override { return mIsCompositeJpegRDisabled; };",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 126,
+        "end_line": 133,
+        "merge_gen_region": null,
+        "confidence": 0.613739550113678,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n            bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "b_contents": "            bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n            bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto,",
+        "base_contents": "            bool isFixedFps, const std::set<std::set<String8>>& physicalCameraIds,\n            bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto,",
+        "res_region": "            bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n            bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "lookback": "            bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "lookahead": "            const std::set<std::string>& cameraIdsWithZoom, const SurfaceMap& outputSurfaces,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1223,
+        "end_line": 1232,
+        "merge_gen_region": null,
+        "confidence": 0.7948155999183655,
+        "hesitated": true
+    }
+]

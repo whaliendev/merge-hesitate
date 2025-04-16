@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    static std::string gethostbyname(const std::string &hostname, int domain, float timeout = -1);\n};",
+        "b_contents": "",
+        "base_contents": "};",
+        "res_region": "    static std::string gethostbyname(const std::string &hostname, int domain, float timeout = -1);\n};",
+        "lookback": "};",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 136,
+        "end_line": 142,
+        "merge_gen_region": null,
+        "confidence": 0.6354732513427734,
+        "hesitated": true
+    }
+]

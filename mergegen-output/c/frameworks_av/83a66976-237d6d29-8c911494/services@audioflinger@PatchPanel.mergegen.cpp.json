@@ -1,0 +1,138 @@
+[
+    {
+        "a_contents": "                    mAfPatchPanelCallback->mutex().unlock();",
+        "b_contents": "                    mAfPatchPanelCallback->unlock();",
+        "base_contents": "                    mAudioFlinger.unlock();",
+        "res_region": "                    mAfPatchPanelCallback->mutex().unlock();",
+        "lookback": "                    status = thread->sendCreateAudioPatchConfigEvent(patch, &halHandle);",
+        "lookahead": "                    status = thread->sendCreateAudioPatchConfigEvent(patch, &halHandle);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 340,
+        "end_line": 346,
+        "merge_gen_region": null,
+        "confidence": 0.8324035406112671,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    mAfPatchPanelCallback->mutex().lock();",
+        "b_contents": "                    mAfPatchPanelCallback->lock();",
+        "base_contents": "                    mAudioFlinger.lock();",
+        "res_region": "                    mAfPatchPanelCallback->mutex().lock();",
+        "lookback": "                    if (status == NO_ERROR) {",
+        "lookahead": "                    if (status == NO_ERROR) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 348,
+        "end_line": 354,
+        "merge_gen_region": null,
+        "confidence": 0.8200913071632385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            mAfPatchPanelCallback->mutex().unlock();",
+        "b_contents": "            mAfPatchPanelCallback->unlock();",
+        "base_contents": "            mAudioFlinger.unlock();",
+        "res_region": "            mAfPatchPanelCallback->mutex().unlock();",
+        "lookback": "            status = thread->sendCreateAudioPatchConfigEvent(patch, &halHandle);",
+        "lookahead": "            status = thread->sendCreateAudioPatchConfigEvent(patch, &halHandle);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 420,
+        "end_line": 426,
+        "merge_gen_region": null,
+        "confidence": 0.8324035406112671,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            mAfPatchPanelCallback->mutex().lock();",
+        "b_contents": "            mAfPatchPanelCallback->lock();",
+        "base_contents": "            mAudioFlinger.lock();",
+        "res_region": "            mAfPatchPanelCallback->mutex().lock();",
+        "lookback": "            if (status == NO_ERROR) {",
+        "lookahead": "            if (status == NO_ERROR) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 428,
+        "end_line": 434,
+        "merge_gen_region": null,
+        "confidence": 0.8200913071632385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                mAfPatchPanelCallback->mutex().unlock();",
+        "b_contents": "                mAfPatchPanelCallback->unlock();",
+        "base_contents": "                mAudioFlinger.unlock();",
+        "res_region": "                mAfPatchPanelCallback->mutex().unlock();",
+        "lookback": "                status = thread->sendReleaseAudioPatchConfigEvent(removedPatch.mHalHandle);",
+        "lookahead": "                status = thread->sendReleaseAudioPatchConfigEvent(removedPatch.mHalHandle);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 783,
+        "end_line": 789,
+        "merge_gen_region": null,
+        "confidence": 0.8494110703468323,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                mAfPatchPanelCallback->mutex().lock();",
+        "b_contents": "                mAfPatchPanelCallback->lock();",
+        "base_contents": "                mAudioFlinger.lock();",
+        "res_region": "                mAfPatchPanelCallback->mutex().lock();",
+        "lookback": "            } else {",
+        "lookahead": "            } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 791,
+        "end_line": 797,
+        "merge_gen_region": null,
+        "confidence": 0.8596451282501221,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            mAfPatchPanelCallback->mutex().unlock();",
+        "b_contents": "            mAfPatchPanelCallback->unlock();",
+        "base_contents": "            mAudioFlinger.unlock();",
+        "res_region": "            mAfPatchPanelCallback->mutex().unlock();",
+        "lookback": "            status = thread->sendReleaseAudioPatchConfigEvent(removedPatch.mHalHandle);",
+        "lookahead": "            status = thread->sendReleaseAudioPatchConfigEvent(removedPatch.mHalHandle);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 818,
+        "end_line": 824,
+        "merge_gen_region": null,
+        "confidence": 0.8494110703468323,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            mAfPatchPanelCallback->mutex().lock();",
+        "b_contents": "            mAfPatchPanelCallback->lock();",
+        "base_contents": "            mAudioFlinger.lock();",
+        "res_region": "            mAfPatchPanelCallback->mutex().lock();",
+        "lookback": "        } break;",
+        "lookahead": "        } break;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 826,
+        "end_line": 832,
+        "merge_gen_region": null,
+        "confidence": 0.5651265382766724,
+        "hesitated": true
+    }
+]

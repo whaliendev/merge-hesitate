@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if(sign == LV_SIGNAL_CLEANUP) {\n        /*Check whether the object being deleted is propagating scroll to the parent */\n        if(ext->scroll_prop) {\n            lv_obj_t * parent_page = lv_obj_get_parent(lv_obj_get_parent(page));\n            lv_page_ext_t * parent_ext = lv_obj_get_ext_attr(parent_page);\n            if(parent_ext->scroll_prop_obj == page) {\n                parent_ext->scroll_prop_obj = NULL;\n            }\n        }\n    }\n    /*Automatically move children to the scrollable object*/\n    else if(sign == LV_SIGNAL_CHILD_CHG) {\n        lv_obj_t * child;",
+        "b_contents": "    lv_obj_t * child;\n    if(sign == LV_SIGNAL_CHILD_CHG) { /*Automatically move children to the scrollable object*/\n        if(ext->scrl == NULL) return LV_RES_OK;\n        const lv_style_t * style_bg = lv_page_get_style(page, LV_PAGE_STYLE_BG);",
+        "base_contents": "    lv_obj_t * child;\n    if(sign == LV_SIGNAL_CHILD_CHG) { /*Automatically move children to the scrollable object*/\n        const lv_style_t * style_bg = lv_page_get_style(page, LV_PAGE_STYLE_BG);",
+        "res_region": "    if(sign == LV_SIGNAL_CLEANUP) {\n        /*Check whether the object being deleted is propagating scroll to the parent */\n        if(ext->scroll_prop) {\n            lv_obj_t * parent_page = lv_obj_get_parent(lv_obj_get_parent(page));\n            lv_page_ext_t * parent_ext = lv_obj_get_ext_attr(parent_page);\n            if(parent_ext->scroll_prop_obj == page) {\n                parent_ext->scroll_prop_obj = NULL;\n            }\n        }\n    }\n    /*Automatically move children to the scrollable object*/\n    else if(sign == LV_SIGNAL_CHILD_CHG) {\n        lv_obj_t * child;\n        if(ext->scrl == NULL) return LV_RES_OK;\n        const lv_style_t * style_bg = lv_page_get_style(page, LV_PAGE_STYLE_BG);",
+        "lookback": "        /*Check whether the object being deleted is propagating scroll to the parent */",
+        "lookahead": "        const lv_style_t * style_scrl = lv_page_get_style(page, LV_PAGE_STYLE_SCRL);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 864,
+        "end_line": 887,
+        "merge_gen_region": null,
+        "confidence": 0.8640202283859253,
+        "hesitated": true
+    }
+]

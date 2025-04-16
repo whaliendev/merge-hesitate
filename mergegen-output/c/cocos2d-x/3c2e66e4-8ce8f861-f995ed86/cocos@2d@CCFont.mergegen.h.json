@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    ",
+        "b_contents": "\n    virtual const char* getCurrentGlyphCollection() const;\n    ",
+        "base_contents": "    virtual const char* getCurrentGlyphCollection() const;\n    \n    ",
+        "res_region": "    ",
+        "lookback": "    virtual int getFontMaxHeight() const { return 0; }",
+        "lookahead": "    virtual int getFontMaxHeight() const { return 0; }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 43,
+        "end_line": 53,
+        "merge_gen_region": null,
+        "confidence": 0.5442664623260498,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    \nprotected: \n    Font();\n    virtual ~Font() {}\n\n    void setCurrentGlyphCollection(GlyphCollection glyphs, const char *customGlyphs = 0);\n    const char * getGlyphCollection(GlyphCollection glyphs) const;\n    \n\n    GlyphCollection     _usedGlyphs;\n    char              * _customGlyphs;\n    static const char * _glyphASCII;\n    static const char * _glyphNEHE;",
+        "base_contents": "    \nprotected:\n    \n    Font();\n    /**\n     * @js NA\n     * @lua NA\n     */\n    virtual ~Font() {}\n    void setCurrentGlyphCollection(GlyphCollection glyphs, const char *customGlyphs = 0);\n    const char * getGlyphCollection(GlyphCollection glyphs) const;\n    \n\n    GlyphCollection     _usedGlyphs;\n    char              * _customGlyphs;\n    static const char * _glyphASCII;\n    static const char * _glyphNEHE;\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 55,
+        "end_line": 89,
+        "merge_gen_region": null,
+        "confidence": 0.8778303265571594,
+        "hesitated": true
+    }
+]

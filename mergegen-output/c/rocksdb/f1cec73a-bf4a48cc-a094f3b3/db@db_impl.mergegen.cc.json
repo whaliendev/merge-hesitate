@@ -1,0 +1,189 @@
+[
+    {
+        "a_contents": "#include \"db/memtable_list.h\"\n#include \"db/merge_context.h\"",
+        "b_contents": "#include \"db/memtablelist.h\"\n#include \"db/merge_context.h\"",
+        "base_contents": "#include \"db/memtablelist.h\"",
+        "res_region": "#include \"db/memtable_list.h\"\n#include \"db/merge_context.h\"",
+        "lookback": "#include \"db/merge_context.h\"",
+        "lookahead": "#include \"db/merge_helper.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 36,
+        "merge_gen_region": null,
+        "confidence": 0.7300942540168762,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::vector<Iterator*> list;\n    for (MemTable* m : mems) {\n      Log(options_.info_log,\n          \"Flushing memtable with log file: %lu\\n\",\n          (unsigned long)m->GetLogNumber());\n      list.push_back(m->NewIterator());\n    }\n    Iterator* iter = NewMergingIterator(env_, &internal_comparator_, &list[0],\n                                        list.size());\n    Log(options_.info_log,\n        \"Level-0 flush table #%lu: started\",\n        (unsigned long)meta.number);",
+        "b_contents": "    std::vector<Iterator*> list;\n    for (MemTable* m : mems) {\n      Log(options_.info_log,\n          \"Flushing memtable with log file: %lu\\n\",\n          (unsigned long)m->GetLogNumber());\n      list.push_back(m->NewIterator());\n    }\n    Iterator* iter = NewMergingIterator(&internal_comparator_, &list[0],\n                                        list.size());\n    Log(options_.info_log,\n        \"Level-0 flush table #%lu: started\",\n        (unsigned long)meta.number);",
+        "base_contents": "",
+        "res_region": "    std::vector<Iterator*> list;\n    for (MemTable* m : mems) {\n      Log(options_.info_log,\n          \"Flushing memtable with log file: %lu\\n\",\n          (unsigned long)m->GetLogNumber());\n      list.push_back(m->NewIterator());\n    }\n    Iterator* iter = NewMergingIterator(env_, &internal_comparator_, &list[0],\n                                        list.size());\n    Log(options_.info_log,\n        \"Level-0 flush table #%lu: started\",\n        (unsigned long)meta.number);",
+        "lookback": "    for (MemTable* m : mems) {",
+        "lookahead": "    // We skip compression if universal compression is used and the size",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1125,
+        "end_line": 1152,
+        "merge_gen_region": null,
+        "confidence": 0.8645093441009521,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  mutex_.Unlock();",
+        "base_contents": "  mutex_.Unlock();\n  LogFlush(options_.info_log);",
+        "res_region": "",
+        "lookback": "}",
+        "lookahead": "  return internal_iter;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2665,
+        "end_line": 2671,
+        "merge_gen_region": null,
+        "confidence": 0.6990387439727783,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  BumpPerfTime(&perf_context.get_snapshot_time, &snapshot_timer);\n  if (mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "b_contents": "  if (get_version->mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "base_contents": "  if (mem->Get(lkey, value, &s, &merge_operands, options_)) {",
+        "res_region": "  BumpPerfTime(&perf_context.get_snapshot_time, &snapshot_timer);\n  if (get_version->mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "lookback": "  if (get_version->mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "lookahead": "    // Done",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2760,
+        "end_line": 2767,
+        "merge_gen_region": null,
+        "confidence": 0.683675229549408,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  } else if (imm.Get(lkey, value, &s, merge_context, options_)) {",
+        "b_contents": "  } else if (get_version->imm.Get(lkey, value, &s, merge_context, options_)) {",
+        "base_contents": "  } else if (imm.Get(lkey, value, &s, &merge_operands, options_)) {",
+        "res_region": "  } else if (get_version->imm.Get(lkey, value, &s, merge_context, options_)) {",
+        "lookback": "    // Done",
+        "lookahead": "    // Done",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2770,
+        "end_line": 2776,
+        "merge_gen_region": null,
+        "confidence": 0.7856642603874207,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    StopWatchNano from_files_timer(env_, false);\n    StartPerfTimer(&from_files_timer);\n\n    current->Get(options, lkey, value, &s, &merge_context, &stats,\n                 options_, value_found);",
+        "b_contents": "    get_version->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                              options_, value_found);",
+        "base_contents": "    current->Get(options, lkey, value, &s, &merge_operands, &stats,\n                 options_, value_found);",
+        "res_region": "    StopWatchNano from_files_timer(env_, false);\n    StartPerfTimer(&from_files_timer);\n\n    get_version->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                              options_, value_found);",
+        "lookback": "    StartPerfTimer(&from_files_timer);",
+        "lookahead": "    have_stat_update = true;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2780,
+        "end_line": 2792,
+        "merge_gen_region": null,
+        "confidence": 0.7678716778755188,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n  StopWatchNano post_process_timer(env_, false);\n  StartPerfTimer(&post_process_timer);\n  mutex_.Lock();",
+        "b_contents": "",
+        "base_contents": "  mutex_.Lock();",
+        "res_region": "\n  StopWatchNano post_process_timer(env_, false);\n  StartPerfTimer(&post_process_timer);",
+        "lookback": "  StopWatchNano post_process_timer(env_, false);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 2797,
+        "end_line": 2805,
+        "merge_gen_region": null,
+        "confidence": 0.7337924242019653,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  LogFlush(options_.info_log);\n",
+        "b_contents": "",
+        "base_contents": "  LogFlush(options_.info_log);",
+        "res_region": "",
+        "lookback": "  RecordTick(options_.statistics.get(), NUMBER_MULTIGET_KEYS_READ, numKeys);",
+        "lookahead": "  RecordTick(options_.statistics.get(), NUMBER_MULTIGET_CALLS);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 2921,
+        "end_line": 2927,
+        "merge_gen_region": null,
+        "confidence": 0.8153770565986633,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        status = log_->AddRecord(WriteBatchInternal::Contents(updates));",
+        "b_contents": "        Slice log_entry = WriteBatchInternal::Contents(updates);\n        status = log_->AddRecord(log_entry);\n        RecordTick(options_.statistics.get(), WAL_FILE_SYNCED, 1);\n        RecordTick(options_.statistics.get(), WAL_FILE_BYTES, log_entry.size());\n        BumpPerfTime(&perf_context.wal_write_time, &timer);",
+        "base_contents": "        status = log_->AddRecord(WriteBatchInternal::Contents(updates));\n        BumpPerfTime(&perf_context.wal_write_time, &timer);",
+        "res_region": "        Slice log_entry = WriteBatchInternal::Contents(updates);\n        status = log_->AddRecord(log_entry);\n        RecordTick(options_.statistics.get(), WAL_FILE_SYNCED, 1);\n        RecordTick(options_.statistics.get(), WAL_FILE_BYTES, log_entry.size());",
+        "lookback": "        status = log_->AddRecord(log_entry);",
+        "lookahead": "        if (status.ok() && options.sync) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3065,
+        "end_line": 3076,
+        "merge_gen_region": null,
+        "confidence": 0.8023320436477661,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      StartPerfTimer(&pre_post_process_timer);\n      LogFlush(options_.info_log);",
+        "b_contents": "",
+        "base_contents": "      LogFlush(options_.info_log);",
+        "res_region": "      StartPerfTimer(&pre_post_process_timer);",
+        "lookback": "      mutex_.Lock();",
+        "lookahead": "      mutex_.Lock();",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 3104,
+        "end_line": 3110,
+        "merge_gen_region": null,
+        "confidence": 0.42470550537109375,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  BumpPerfTime(&perf_context.write_pre_and_post_process_time,\n               &pre_post_process_timer);",
+        "b_contents": "  mutex_.Unlock();\n  delete superversion_to_free;",
+        "base_contents": "",
+        "res_region": "  mutex_.Unlock();\n  delete superversion_to_free;\n  BumpPerfTime(&perf_context.write_pre_and_post_process_time,\n               &pre_post_process_timer);",
+        "lookback": "  delete superversion_to_free;",
+        "lookahead": "  return status;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 3137,
+        "end_line": 3144,
+        "merge_gen_region": null,
+        "confidence": 0.6969159841537476,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/routing_msgs/routing.pb.h\"",
+        "base_contents": "#include \"modules/routing/proto/routing.pb.h\"",
+        "res_region": "",
+        "lookback": "namespace apollo {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 29,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.5085353255271912,
+        "hesitated": true
+    }
+]

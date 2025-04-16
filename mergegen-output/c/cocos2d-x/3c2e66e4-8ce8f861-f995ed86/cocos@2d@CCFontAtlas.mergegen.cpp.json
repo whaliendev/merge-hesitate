@@ -1,0 +1,309 @@
+[
+    {
+        "a_contents": "#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID\n#include <iconv.h>\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n#include \"android/jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h\"\n#endif",
+        "b_contents": "#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID\n#include <iconv.h>\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n#include \"android/jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h\"\n#endif\n",
+        "base_contents": "",
+        "res_region": "#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32 && CC_TARGET_PLATFORM != CC_PLATFORM_WINRT && CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID\n#include <iconv.h>\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n#include \"android/jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h\"\n#endif",
+        "lookback": "#include <iconv.h>",
+        "lookahead": "#include \"2d/CCFontFreeType.h\"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 26,
+        "end_line": 40,
+        "merge_gen_region": null,
+        "confidence": 0.8660068511962891,
+        "hesitated": true
+    },
+    {
+        "a_contents": ", _fontFreeType(nullptr)\n, _iconv(nullptr)",
+        "b_contents": ", _fontFreeType(nullptr)",
+        "base_contents": "",
+        "res_region": ", _fontFreeType(nullptr)\n, _iconv(nullptr)",
+        "lookback": ", _iconv(nullptr)",
+        "lookahead": ", _currentPageData(nullptr)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 57,
+        "end_line": 63,
+        "merge_gen_region": null,
+        "confidence": 0.6399854421615601,
+        "hesitated": true
+    },
+    {
+        "a_contents": ", _currLineHeight(0)",
+        "b_contents": ", _iconv(nullptr)",
+        "base_contents": "",
+        "res_region": ", _currLineHeight(0)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 68,
+        "end_line": 73,
+        "merge_gen_region": null,
+        "confidence": 0.3682437241077423,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _lineHeight = _font->getFontMaxHeight();\n        _fontAscender = _fontFreeType->getFontAscender();",
+        "b_contents": "        _commonLineHeight = _font->getFontMaxHeight();\n        _fontAscender = _fontFreeType->getFontAscender();",
+        "base_contents": "        _commonLineHeight = _font->getFontMaxHeight();\n        _fontAscender = fontTTf->getFontAscender();",
+        "res_region": "        _lineHeight = _font->getFontMaxHeight();\n        _fontAscender = _fontFreeType->getFontAscender();",
+        "lookback": "        _fontAscender = _fontFreeType->getFontAscender();",
+        "lookahead": "        auto texture = new (std::nothrow) Texture2D;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 89,
+        "merge_gen_region": null,
+        "confidence": 0.7733742594718933,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void FontAtlas::conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)\n{\n    size_t strLen = u16Text.length();\n    auto gb2312StrSize = strLen * 2;\n    auto gb2312Text = new (std::nothrow) char[gb2312StrSize];\n    memset(gb2312Text, 0, gb2312StrSize);\n\n    switch (_fontFreeType->getEncoding())\n    {\n    case FT_ENCODING_GB2312:\n    {\n#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT\n        WideCharToMultiByte(936, NULL, (LPCWCH)u16Text.c_str(), strLen, (LPSTR)gb2312Text, gb2312StrSize, NULL, NULL);\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n        conversionEncodingJNI((char*)u16Text.c_str(), gb2312StrSize, \"UTF-16LE\", gb2312Text, \"GB2312\");\n#else\n        if (_iconv == nullptr)\n        {\n            _iconv = iconv_open(\"gb2312\", \"utf-16le\");\n        }\n\n        if (_iconv == (iconv_t)-1)\n        {\n            CCLOG(\"conversion from utf16 to gb2312 not available\");\n        }\n        else\n        {\n            char* pin = (char*)u16Text.c_str();\n            char* pout = gb2312Text;\n            size_t inLen = strLen * 2;\n            size_t outLen = gb2312StrSize;\n\n            iconv(_iconv, (char**)&pin, &inLen, &pout, &outLen);\n        }\n#endif\n    }\n    break;\n    default:\n        CCLOG(\"Unsupported encoding:%d\", _fontFreeType->getEncoding());\n        break;\n    }\n\n    unsigned short gb2312Code = 0;\n    unsigned char* dst = (unsigned char*)&gb2312Code;\n    unsigned short u16Code;\n    for (size_t index = 0, gbIndex = 0; index < strLen; ++index)\n    {\n        u16Code = u16Text[index];\n        if (u16Code < 256)\n        {\n            charCodeMap[u16Code] = u16Code;\n            gbIndex += 1;\n        }\n        else\n        {\n            dst[0] = gb2312Text[gbIndex + 1];\n            dst[1] = gb2312Text[gbIndex];\n            charCodeMap[u16Code] = gb2312Code;\n\n            gbIndex += 2;\n        }\n    }\n\n    delete[] gb2312Text;\n}\n\nvoid FontAtlas::findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)",
+        "b_contents": "void FontAtlas::conversionU16TOGB2312(const std::u16string& newChars, std::unordered_map<unsigned short, unsigned short>& newCharsMap)\n{\n    size_t strLen = newChars.length();\n    auto gb2312StrSize = strLen * 2;\n    auto gb2312Text = new (std::nothrow) char[gb2312StrSize];\n    memset(gb2312Text, 0, gb2312StrSize);\n\n    switch (_fontFreeType->getEncoding())\n    {\n    case FT_ENCODING_GB2312:\n    {\n#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT\n        WideCharToMultiByte(936, NULL, (LPCWCH)newChars.c_str(), strLen, (LPSTR)gb2312Text, gb2312StrSize, NULL, NULL);\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n        conversionEncodingJNI((char*)newChars.c_str(), gb2312StrSize, \"UTF-16LE\", gb2312Text, \"GB2312\");\n#else\n        if (_iconv == nullptr)\n        {\n            _iconv = iconv_open(\"gb2312\", \"utf-16le\");\n        }\n\n        if (_iconv == (iconv_t)-1)\n        {\n            CCLOG(\"conversion from utf16 to gb2312 not available\");\n        }\n        else\n        {\n            char* pin = (char*)newChars.c_str();\n            char* pout = gb2312Text;\n            size_t inLen = strLen * 2;\n            size_t outLen = gb2312StrSize;\n\n            iconv(_iconv, (char**)&pin, &inLen, &pout, &outLen);\n        }\n#endif\n    }\n        break;\n    default:\n        CCLOG(\"Unsupported encoding:%d\", _fontFreeType->getEncoding());\n        break;\n    }\n\n    unsigned short gb2312Code = 0;\n    unsigned char* dst = (unsigned char*)&gb2312Code;\n    unsigned short u16Code;\n    for (size_t index = 0, gbIndex = 0; index < strLen; ++index)\n    {\n        u16Code = newChars[index];\n        if (u16Code < 256)\n        {\n            newCharsMap[u16Code] = u16Code;\n            gbIndex += 1;\n        }\n        else\n        {\n            dst[0] = gb2312Text[gbIndex + 1];\n            dst[1] = gb2312Text[gbIndex];\n            newCharsMap[u16Code] = gb2312Code;\n\n            gbIndex += 2;\n        }\n    }\n\n    delete [] gb2312Text;\n}\n\nvoid FontAtlas::findNewCharacters(const std::u16string& u16SrcString, std::unordered_map<unsigned short, unsigned short>& newCharsMap)\n{\n    std::u16string newChars;\n    FT_Encoding charEncoding = _fontFreeType->getEncoding();\n\n    //find new characters\n    if (_fontLetterDefinitions.empty())\n    {\n        newChars = u16SrcString;\n    }\n    else\n    {\n        auto length = u16SrcString.length();\n        newChars.resize(length);\n        for (size_t i = 0; i < length; ++i)\n        {\n            auto outIterator = _fontLetterDefinitions.find(u16SrcString[i]);\n            if (outIterator == _fontLetterDefinitions.end())\n            {\n                newChars.push_back(u16SrcString[i]);\n            }\n        }\n    }\n\n    if (!newChars.empty())\n    {\n        switch (charEncoding)\n        {\n        case FT_ENCODING_UNICODE:\n        {\n            for (auto u16Code : newChars)\n            {\n                newCharsMap[u16Code] = u16Code;\n            }\n            break;\n        }\n        case FT_ENCODING_GB2312:\n        {\n            conversionU16TOGB2312(newChars, newCharsMap);\n            break;\n        }\n        default:\n            CCLOG(\"Unsupported encoding:%d\", charEncoding);\n            break;\n        }\n    }\n}\n\nbool FontAtlas::prepareLetterDefinitions(const std::u16string& utf16String)",
+        "base_contents": "bool FontAtlas::prepareLetterDefinitions(const std::u16string& utf16String)",
+        "res_region": "void FontAtlas::conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)\n{\n    size_t strLen = u16Text.length();\n    auto gb2312StrSize = strLen * 2;\n    auto gb2312Text = new (std::nothrow) char[gb2312StrSize];\n    memset(gb2312Text, 0, gb2312StrSize);\n\n    switch (_fontFreeType->getEncoding())\n    {\n    case FT_ENCODING_GB2312:\n    {\n#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT\n        WideCharToMultiByte(936, NULL, (LPCWCH)u16Text.c_str(), strLen, (LPSTR)gb2312Text, gb2312StrSize, NULL, NULL);\n#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID\n        conversionEncodingJNI((char*)u16Text.c_str(), gb2312StrSize, \"UTF-16LE\", gb2312Text, \"GB2312\");\n#else\n        if (_iconv == nullptr)\n        {\n            _iconv = iconv_open(\"gb2312\", \"utf-16le\");\n        }\n\n        if (_iconv == (iconv_t)-1)\n        {\n            CCLOG(\"conversion from utf16 to gb2312 not available\");\n        }\n        else\n        {\n            char* pin = (char*)u16Text.c_str();\n            char* pout = gb2312Text;\n            size_t inLen = strLen * 2;\n            size_t outLen = gb2312StrSize;\n\n            iconv(_iconv, (char**)&pin, &inLen, &pout, &outLen);\n        }\n#endif\n    }\n    break;\n    default:\n        CCLOG(\"Unsupported encoding:%d\", _fontFreeType->getEncoding());\n        break;\n    }\n\n    unsigned short gb2312Code = 0;\n    unsigned char* dst = (unsigned char*)&gb2312Code;\n    unsigned short u16Code;\n    for (size_t index = 0, gbIndex = 0; index < strLen; ++index)\n    {\n        u16Code = u16Text[index];\n        if (u16Code < 256)\n        {\n            charCodeMap[u16Code] = u16Code;\n            gbIndex += 1;\n        }\n        else\n        {\n            dst[0] = gb2312Text[gbIndex + 1];\n            dst[1] = gb2312Text[gbIndex];\n            charCodeMap[u16Code] = gb2312Code;\n\n            gbIndex += 2;\n        }\n    }\n\n    delete[] gb2312Text;\n}\n\nvoid FontAtlas::findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap)\n{",
+        "lookback": "{",
+        "lookahead": "    std::u16string newChars;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 202,
+        "end_line": 388,
+        "merge_gen_region": null,
+        "confidence": 0.8663883209228516,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::u16string newChars;\n    FT_Encoding charEncoding = _fontFreeType->getEncoding();\n\n    //find new characters\n    if (_letterDefinitions.empty())\n    {\n        newChars = u16Text;\n    }\n    else\n    {\n        auto length = u16Text.length();\n        newChars.resize(length);\n        for (size_t i = 0; i < length; ++i)\n        {\n            auto outIterator = _letterDefinitions.find(u16Text[i]);\n            if (outIterator == _letterDefinitions.end())\n            {\n                newChars.push_back(u16Text[i]);\n            }\n        }\n    }\n\n    if (!newChars.empty())\n    {\n        switch (charEncoding)\n        {\n        case FT_ENCODING_UNICODE:\n        {\n            for (auto u16Code : newChars)\n            {\n                charCodeMap[u16Code] = u16Code;\n            }\n            break;\n        }\n        case FT_ENCODING_GB2312:\n        {\n            conversionU16TOGB2312(newChars, charCodeMap);\n            break;\n        }\n        default:\n            CCLOG(\"FontAtlas::findNewCharacters: Unsupported encoding:%d\", charEncoding);\n            break;\n        }\n    }\n}\n\nbool FontAtlas::prepareLetterDefinitions(const std::u16string& utf16Text)\n{\n    if (_fontFreeType == nullptr)\n    {",
+        "b_contents": "    if (_fontFreeType == nullptr)\n    {",
+        "base_contents": "    FontFreeType* fontTTf = dynamic_cast<FontFreeType*>(_font);\n    if(fontTTf == nullptr)",
+        "res_region": "    std::u16string newChars;\n    FT_Encoding charEncoding = _fontFreeType->getEncoding();\n\n    //find new characters\n    if (_letterDefinitions.empty())\n    {\n        newChars = u16Text;\n    }\n    else\n    {\n        auto length = u16Text.length();\n        newChars.resize(length);\n        for (size_t i = 0; i < length; ++i)\n        {\n            auto outIterator = _letterDefinitions.find(u16Text[i]);\n            if (outIterator == _letterDefinitions.end())\n            {\n                newChars.push_back(u16Text[i]);\n            }\n        }\n    }\n\n    if (!newChars.empty())\n    {\n        switch (charEncoding)\n        {\n        case FT_ENCODING_UNICODE:\n        {\n            for (auto u16Code : newChars)\n            {\n                charCodeMap[u16Code] = u16Code;\n            }\n            break;\n        }\n        case FT_ENCODING_GB2312:\n        {\n            conversionU16TOGB2312(newChars, charCodeMap);\n            break;\n        }\n        default:\n            CCLOG(\"FontAtlas::findNewCharacters: Unsupported encoding:%d\", charEncoding);\n            break;\n        }\n    }\n}\n\nbool FontAtlas::prepareLetterDefinitions(const std::u16string& utf16Text)\n{\n    if (_fontFreeType == nullptr)\n    {",
+        "lookback": "    FT_Encoding charEncoding = _fontFreeType->getEncoding();",
+        "lookahead": "        return false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 390,
+        "end_line": 447,
+        "merge_gen_region": null,
+        "confidence": 0.8773472309112549,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } ",
+        "b_contents": "    }  ",
+        "base_contents": "",
+        "res_region": "    } ",
+        "lookback": "    ",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 449,
+        "end_line": 454,
+        "merge_gen_region": null,
+        "confidence": 0.5620454549789429,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::unordered_map<unsigned short, unsigned short> codeMapOfNewChar;\n    findNewCharacters(utf16Text, codeMapOfNewChar);\n    if (codeMapOfNewChar.empty())\n    {\n        return false;\n    }",
+        "b_contents": "    std::unordered_map<unsigned short, unsigned short> newCharsMap;\n    findNewCharacters(utf16String, newCharsMap);\n    if (newCharsMap.empty())\n    {\n        return false;\n    }",
+        "base_contents": "    size_t length = utf16String.length();",
+        "res_region": "    std::unordered_map<unsigned short, unsigned short> codeMapOfNewChar;\n    findNewCharacters(utf16Text, codeMapOfNewChar);\n    if (codeMapOfNewChar.empty())\n    {\n        return false;\n    }",
+        "lookback": "    findNewCharacters(utf16Text, codeMapOfNewChar);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 456,
+        "end_line": 472,
+        "merge_gen_region": null,
+        "confidence": 0.8166218400001526,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto  pixelFormat = _fontFreeType->getOutlineSize() > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8;\n",
+        "b_contents": "    auto  pixelFormat = _fontFreeType->getOutlineSize() > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8;\n\n    int bottomHeight = _commonLineHeight - _fontAscender;",
+        "base_contents": "    auto  pixelFormat = fontTTf->getOutlineSize() > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8; \n\n    bool existNewLetter = false;\n    int bottomHeight = _commonLineHeight - _fontAscender;\n",
+        "res_region": "    auto  pixelFormat = _fontFreeType->getOutlineSize() > 0 ? Texture2D::PixelFormat::AI88 : Texture2D::PixelFormat::A8;\n",
+        "lookback": "",
+        "lookahead": "    float startY = _currentPageOrigY;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 482,
+        "end_line": 495,
+        "merge_gen_region": null,
+        "confidence": 0.6700851321220398,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    for (auto&& it : codeMapOfNewChar)",
+        "b_contents": "    \n    for (auto&& it : newCharsMap)",
+        "base_contents": "    for (size_t i = 0; i < length; ++i)",
+        "res_region": "    for (auto&& it : codeMapOfNewChar)",
+        "lookback": "    {",
+        "lookahead": "    {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 498,
+        "end_line": 505,
+        "merge_gen_region": null,
+        "confidence": 0.827971875667572,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        auto bitmap = _fontFreeType->getGlyphBitmap(it.second, bitmapWidth, bitmapHeight, tempRect, tempDef.xAdvance);\n        if (bitmap && bitmapWidth > 0 && bitmapHeight > 0)\n        {\n            tempDef.validDefinition = true;\n            tempDef.width = tempRect.size.width + _letterPadding + _letterEdgeExtend;\n            tempDef.height = tempRect.size.height + _letterPadding + _letterEdgeExtend;\n            tempDef.offsetX = tempRect.origin.x + adjustForDistanceMap + adjustForExtend;\n            tempDef.offsetY = _fontAscender + tempRect.origin.y - adjustForDistanceMap - adjustForExtend;\n\n            if (bitmapHeight > _currLineHeight)",
+        "b_contents": "        auto bitmap = _fontFreeType->getGlyphBitmap(it.second, bitmapWidth, bitmapHeight, tempRect, tempDef.xAdvance);\n        if (bitmap)\n        {\n            tempDef.validDefinition = true;\n            tempDef.letteCharUTF16 = it.first;\n            tempDef.width = tempRect.size.width + _letterPadding;\n            tempDef.height = tempRect.size.height + _letterPadding;\n            tempDef.offsetX = tempRect.origin.x + offsetAdjust;\n            tempDef.offsetY = _fontAscender + tempRect.origin.y - offsetAdjust;\n            tempDef.clipBottom = bottomHeight - (tempDef.height + tempRect.origin.y + offsetAdjust);\n\n            if (_currentPageOrigX + tempDef.width > CacheTextureWidth)",
+        "base_contents": "        auto outIterator = _fontLetterDefinitions.find(utf16String[i]);\n\n        if (outIterator == _fontLetterDefinitions.end())\n        {  \n            existNewLetter = true;\n\n            auto bitmap = fontTTf->getGlyphBitmap(utf16String[i],bitmapWidth,bitmapHeight,tempRect,tempDef.xAdvance);\n            if (bitmap)",
+        "res_region": "        auto bitmap = _fontFreeType->getGlyphBitmap(it.second, bitmapWidth, bitmapHeight, tempRect, tempDef.xAdvance);\n        if (bitmap && bitmapWidth > 0 && bitmapHeight > 0)\n        {\n            tempDef.validDefinition = true;\n            tempDef.width = tempRect.size.width + _letterPadding + _letterEdgeExtend;\n            tempDef.height = tempRect.size.height + _letterPadding + _letterEdgeExtend;\n            tempDef.offsetX = tempRect.origin.x + adjustForDistanceMap + adjustForExtend;\n            tempDef.offsetY = _fontAscender + tempRect.origin.y - adjustForDistanceMap - adjustForExtend;\n\n            if (bitmapHeight > _currLineHeight)",
+        "lookback": "        if (bitmap && bitmapWidth > 0 && bitmapHeight > 0)",
+        "lookahead": "            {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 507,
+        "end_line": 540,
+        "merge_gen_region": " bitmap _Free->Glyph(.,Width bitmap,Height temp,Rect temp.Advance ifbitmap bitmap >) temp.Definition true temp./ temp. {Defvalid =;Def///;Def { {//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.93354731798172,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "                _currLineHeight = static_cast<int>(bitmapHeight) + _letterPadding + _letterEdgeExtend + 1;\n            }\n            if (_currentPageOrigX + tempDef.width > CacheTextureWidth)\n            {\n                _currentPageOrigY += _currLineHeight;\n                _currLineHeight = 0;\n                _currentPageOrigX = 0;\n                if (_currentPageOrigY + _lineHeight >= CacheTextureHeight)",
+        "b_contents": "                _currentPageOrigY += _commonLineHeight;\n                _currentPageOrigX = 0;\n                if (_currentPageOrigY + _commonLineHeight >= CacheTextureHeight)",
+        "base_contents": "                tempDef.validDefinition = true;\n                tempDef.letteCharUTF16   = utf16String[i];\n                tempDef.width            = tempRect.size.width + _letterPadding;\n                tempDef.height           = tempRect.size.height + _letterPadding;\n                tempDef.offsetX          = tempRect.origin.x + offsetAdjust;\n                tempDef.offsetY          = _fontAscender + tempRect.origin.y - offsetAdjust;\n                tempDef.clipBottom     = bottomHeight - (tempDef.height + tempRect.origin.y + offsetAdjust);\n\n                if (_currentPageOrigX + tempDef.width > CacheTextureWidth)",
+        "res_region": "                _currLineHeight = static_cast<int>(bitmapHeight) + _letterPadding + _letterEdgeExtend + 1;\n            }\n            if (_currentPageOrigX + tempDef.width > CacheTextureWidth)\n            {\n                _currentPageOrigY += _currLineHeight;\n                _currLineHeight = 0;\n                _currentPageOrigX = 0;\n                if (_currentPageOrigY + _lineHeight >= CacheTextureHeight)",
+        "lookback": "            }",
+        "lookahead": "                {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 542,
+        "end_line": 565,
+        "merge_gen_region": null,
+        "confidence": 0.4750111699104309,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    unsigned char *data = nullptr;\n                    if (pixelFormat == Texture2D::PixelFormat::AI88)",
+        "b_contents": "                    unsigned char *data = nullptr;\n                    if (pixelFormat == Texture2D::PixelFormat::AI88)\n                    {\n                        data = _currentPageData + CacheTextureWidth * (int)startY * 2;\n                    }\n                    else\n                    {\n                        data = _currentPageData + CacheTextureWidth * (int)startY;\n                    }\n                    _atlasTextures[_currentPage]->updateWithData(data, 0, startY,\n                        CacheTextureWidth, CacheTextureHeight - startY);\n\n                    startY = 0.0f;\n\n                    _currentPageOrigY = 0;\n                    memset(_currentPageData, 0, _currentPageDataSize);\n                    _currentPage++;\n                    auto tex = new (std::nothrow) Texture2D;\n                    if (_antialiasEnabled)\n                    {\n                        tex->setAntiAliasTexParameters();\n                    }\n                    else",
+        "base_contents": "                    _currentPageOrigY += _commonLineHeight;\n                    _currentPageOrigX = 0;\n                    if(_currentPageOrigY + _commonLineHeight >= CacheTextureHeight)",
+        "res_region": "                    unsigned char *data = nullptr;\n                    if (pixelFormat == Texture2D::PixelFormat::AI88)\n                    {",
+        "lookback": "                    if (pixelFormat == Texture2D::PixelFormat::AI88)",
+        "lookahead": "                        data = _currentPageData + CacheTextureWidth * (int)startY * 2;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 567,
+        "end_line": 598,
+        "merge_gen_region": null,
+        "confidence": 0.7753409743309021,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                        data = _currentPageData + CacheTextureWidth * (int)startY * 2;\n                    }\n                    else\n                    {\n                        data = _currentPageData + CacheTextureWidth * (int)startY;\n                    }\n                    _atlasTextures[_currentPage]->updateWithData(data, 0, startY,\n                        CacheTextureWidth, CacheTextureHeight - startY);\n\n                    startY = 0.0f;\n\n                    _currentPageOrigY = 0;\n                    memset(_currentPageData, 0, _currentPageDataSize);\n                    _currentPage++;\n                    auto tex = new (std::nothrow) Texture2D;\n                    if (_antialiasEnabled)\n                    {\n                        tex->setAntiAliasTexParameters();\n                    }\n                    else\n                    {\n                        tex->setAliasTexParameters();\n                    }\n                    tex->initWithData(_currentPageData, _currentPageDataSize,\n                        pixelFormat, CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth, CacheTextureHeight));\n                    addTexture(tex, _currentPage);\n                    tex->release();",
+        "b_contents": "                        tex->setAliasTexParameters();\n                    }\n                    tex->initWithData(_currentPageData, _currentPageDataSize,\n                        pixelFormat, CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth, CacheTextureHeight));\n                    addTexture(tex, _currentPage);\n                    tex->release();",
+        "base_contents": "                        unsigned char *data = nullptr;\n                        if(pixelFormat == Texture2D::PixelFormat::AI88)\n                        {\n                            data = _currentPageData + CacheTextureWidth * (int)startY * 2;\n                        }\n                        else\n                        {\n                            data = _currentPageData + CacheTextureWidth * (int)startY;\n                        }\n                        _atlasTextures[_currentPage]->updateWithData(data, 0, startY, \n                            CacheTextureWidth, CacheTextureHeight - startY);\n\n                        startY = 0.0f;\n\n                        _currentPageOrigY = 0;\n                        memset(_currentPageData, 0, _currentPageDataSize);\n                        _currentPage++;\n                        auto tex = new (std::nothrow) Texture2D;\n                        if (_antialiasEnabled)\n                        {\n                            tex->setAntiAliasTexParameters();\n                        } \n                        else\n                        {\n                            tex->setAliasTexParameters();\n                        }\n                        tex->initWithData(_currentPageData, _currentPageDataSize, \n                            pixelFormat, CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth,CacheTextureHeight) );\n                        addTexture(tex,_currentPage);\n                        tex->release();\n                    }  ",
+        "res_region": "                        data = _currentPageData + CacheTextureWidth * (int)startY * 2;\n                    }\n                    else\n                    {\n                        data = _currentPageData + CacheTextureWidth * (int)startY;\n                    }\n                    _atlasTextures[_currentPage]->updateWithData(data, 0, startY,\n                        CacheTextureWidth, CacheTextureHeight - startY);\n\n                    startY = 0.0f;\n\n                    _currentPageOrigY = 0;\n                    memset(_currentPageData, 0, _currentPageDataSize);\n                    _currentPage++;\n                    auto tex = new (std::nothrow) Texture2D;\n                    if (_antialiasEnabled)\n                    {\n                        tex->setAntiAliasTexParameters();\n                    }\n                    else\n                    {\n                        tex->setAliasTexParameters();\n                    }\n                    tex->initWithData(_currentPageData, _currentPageDataSize,\n                        pixelFormat, CacheTextureWidth, CacheTextureHeight, Size(CacheTextureWidth, CacheTextureHeight));\n                    addTexture(tex, _currentPage);\n                    tex->release();",
+        "lookback": "                    }",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 600,
+        "end_line": 667,
+        "merge_gen_region": null,
+        "confidence": 0.38471075892448425,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            _fontFreeType->renderCharAt(_currentPageData, _currentPageOrigX + adjustForExtend, _currentPageOrigY + adjustForExtend, bitmap, bitmapWidth, bitmapHeight);\n\n            tempDef.U = _currentPageOrigX;\n            tempDef.V = _currentPageOrigY;\n            tempDef.textureID = _currentPage;\n            _currentPageOrigX += tempDef.width + 1;\n            // take from pixels to points\n            tempDef.width = tempDef.width / scaleFactor;\n            tempDef.height = tempDef.height / scaleFactor;\n            tempDef.U = tempDef.U / scaleFactor;\n            tempDef.V = tempDef.V / scaleFactor;\n        }\n        else{\n            if (tempDef.xAdvance)\n                tempDef.validDefinition = true;\n            else\n                tempDef.validDefinition = false;\n\n            tempDef.width = 0;\n            tempDef.height = 0;\n            tempDef.U = 0;\n            tempDef.V = 0;\n            tempDef.offsetX = 0;\n            tempDef.offsetY = 0;\n            tempDef.textureID = 0;\n            _currentPageOrigX += 1;\n        }",
+        "b_contents": "            _fontFreeType->renderCharAt(_currentPageData, _currentPageOrigX, _currentPageOrigY, bitmap, bitmapWidth, bitmapHeight);\n\n            tempDef.U = _currentPageOrigX;\n            tempDef.V = _currentPageOrigY;\n            tempDef.textureID = _currentPage;\n            _currentPageOrigX += tempDef.width + 1;\n            // take from pixels to points\n            tempDef.width = tempDef.width / scaleFactor;\n            tempDef.height = tempDef.height / scaleFactor;\n            tempDef.U = tempDef.U / scaleFactor;\n            tempDef.V = tempDef.V / scaleFactor;\n        }\n        else{\n            if (tempDef.xAdvance)\n                tempDef.validDefinition = true;\n            else\n                tempDef.validDefinition = false;\n\n            tempDef.letteCharUTF16 = it.first;\n            tempDef.width = 0;\n            tempDef.height = 0;\n            tempDef.U = 0;\n            tempDef.V = 0;\n            tempDef.offsetX = 0;\n            tempDef.offsetY = 0;\n            tempDef.textureID = 0;\n            tempDef.clipBottom = 0;\n            _currentPageOrigX += 1;\n        }",
+        "base_contents": "",
+        "res_region": "            _fontFreeType->renderCharAt(_currentPageData, _currentPageOrigX + adjustForExtend, _currentPageOrigY + adjustForExtend, bitmap, bitmapWidth, bitmapHeight);\n\n            tempDef.U = _currentPageOrigX;\n            tempDef.V = _currentPageOrigY;\n            tempDef.textureID = _currentPage;\n            _currentPageOrigX += tempDef.width + 1;\n            // take from pixels to points\n            tempDef.width = tempDef.width / scaleFactor;\n            tempDef.height = tempDef.height / scaleFactor;\n            tempDef.U = tempDef.U / scaleFactor;\n            tempDef.V = tempDef.V / scaleFactor;\n        }\n        else{\n            if (tempDef.xAdvance)\n                tempDef.validDefinition = true;\n            else\n                tempDef.validDefinition = false;\n\n            tempDef.width = 0;\n            tempDef.height = 0;\n            tempDef.U = 0;\n            tempDef.V = 0;\n            tempDef.offsetX = 0;\n            tempDef.offsetY = 0;\n            tempDef.textureID = 0;\n            _currentPageOrigX += 1;\n        }\n",
+        "lookback": "",
+        "lookahead": "        _letterDefinitions[it.first] = tempDef;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 670,
+        "end_line": 729,
+        "merge_gen_region": null,
+        "confidence": 0.7073668241500854,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _letterDefinitions[it.first] = tempDef;",
+        "b_contents": "        _fontLetterDefinitions[tempDef.letteCharUTF16] = tempDef;",
+        "base_contents": "            _fontLetterDefinitions[tempDef.letteCharUTF16] = tempDef;\n        }       ",
+        "res_region": "        _letterDefinitions[it.first] = tempDef;",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 731,
+        "end_line": 738,
+        "merge_gen_region": null,
+        "confidence": 0.6905852556228638,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    _atlasTextures[_currentPage]->updateWithData(data, 0, startY, CacheTextureWidth, _currentPageOrigY - startY + _lineHeight);\n",
+        "b_contents": "    _atlasTextures[_currentPage]->updateWithData(data, 0, startY, CacheTextureWidth, \n        _currentPageOrigY - startY + _commonLineHeight);\n",
+        "base_contents": "",
+        "res_region": "    _atlasTextures[_currentPage]->updateWithData(data, 0, startY, CacheTextureWidth, _currentPageOrigY - startY + _lineHeight);\n",
+        "lookback": "",
+        "lookahead": "    return true;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 750,
+        "end_line": 758,
+        "merge_gen_region": null,
+        "confidence": 0.7364346385002136,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return _atlasTextures[slot];\n}\n\nvoid  FontAtlas::setLineHeight(float newHeight)\n{\n    _lineHeight = newHeight;\n}\n",
+        "b_contents": "    if (_atlasTextures.find(slot) != _atlasTextures.end())\n    {\n        return _atlasTextures[slot];\n    }\n    else\n    {\n        return nullptr;\n    }\n}\n\nvoid  FontAtlas::setCommonLineHeight(float newHeight)\n{\n    _commonLineHeight = newHeight;\n}\n",
+        "base_contents": "    return _atlasTextures[slot];\n}\n\nfloat FontAtlas::getCommonLineHeight() const\n{\n    return _commonLineHeight;\n}\n\nvoid  FontAtlas::setCommonLineHeight(float newHeight)\n{\n    _commonLineHeight = newHeight;\n}\n\nconst Font * FontAtlas::getFont() const\n{\n    return _font;\n}\n",
+        "res_region": "    return _atlasTextures[slot];\n}\n\nvoid  FontAtlas::setLineHeight(float newHeight)\n{\n    _lineHeight = newHeight;\n}\n",
+        "lookback": "}",
+        "lookahead": "void FontAtlas::setAliasTexParameters()",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 770,
+        "end_line": 814,
+        "merge_gen_region": null,
+        "confidence": 0.7949909567832947,
+        "hesitated": true
+    }
+]

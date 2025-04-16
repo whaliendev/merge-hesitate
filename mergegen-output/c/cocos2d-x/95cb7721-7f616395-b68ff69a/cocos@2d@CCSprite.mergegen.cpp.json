@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// Culling function from cocos2d-iphone CCSprite.m file\nbool Sprite::isInsideBounds() const\n{\n    // half size of the screen\n    Size screen_half = Director::getInstance()->getWinSize();\n    screen_half.width /= 2;\n    screen_half.height /= 2;\n\n    float hcsx = _contentSize.width / 2;\n    float hcsy = _contentSize.height / 2;\n\n    // convert to world coordinates\n    float x = hcsx * _modelViewTransform.m[0] + hcsy * _modelViewTransform.m[4] + _modelViewTransform.m[12];\n    float y = hcsx * _modelViewTransform.m[1] + hcsy * _modelViewTransform.m[5] + _modelViewTransform.m[13];\n\n    // center of screen is (0,0)\n    x -= screen_half.width;\n    y -= screen_half.height;\n\n    // convert content size to world coordinates\n    float wchw = hcsx * std::max(fabsf(_modelViewTransform.m[0] + _modelViewTransform.m[4]), fabsf(_modelViewTransform.m[0] - _modelViewTransform.m[4]));\n    float wchh = hcsy * std::max(fabsf(_modelViewTransform.m[1] + _modelViewTransform.m[5]), fabsf(_modelViewTransform.m[1] - _modelViewTransform.m[5]));\n\n    // compare if it in the positive quadrant of the screen\n    float tmpx = (fabsf(x)-wchw);\n    float tmpy = (fabsf(y)-wchh);\n    return (tmpx < screen_half.width && tmpy < screen_half.height);\n}\n",
+        "b_contents": "",
+        "base_contents": "// Culling function from cocos2d-iphone CCSprite.m file\nbool Sprite::isInsideBounds() const\n{\n    // half size of the screen\n    Size screen_half = Director::getInstance()->getWinSize();\n    screen_half.width /= 2;\n    screen_half.height /= 2;\n\n    float hcsx = _contentSize.width / 2;\n    float hcsy = _contentSize.height / 2;\n\n    // convert to world coordinates\n    float x = hcsx * _modelViewTransform.mat[0] + hcsy * _modelViewTransform.mat[4] + _modelViewTransform.mat[12];\n    float y = hcsx * _modelViewTransform.mat[1] + hcsy * _modelViewTransform.mat[5] + _modelViewTransform.mat[13];\n\n    // center of screen is (0,0)\n    x -= screen_half.width;\n    y -= screen_half.height;\n\n    // convert content size to world coordinates\n    float wchw = hcsx * std::max(fabsf(_modelViewTransform.mat[0] + _modelViewTransform.mat[4]), fabsf(_modelViewTransform.mat[0] - _modelViewTransform.mat[4]));\n    float wchh = hcsy * std::max(fabsf(_modelViewTransform.mat[1] + _modelViewTransform.mat[5]), fabsf(_modelViewTransform.mat[1] - _modelViewTransform.mat[5]));\n\n    // compare if it in the positive quadrant of the screen\n    float tmpx = (fabsf(x)-wchw);\n    float tmpy = (fabsf(y)-wchh);\n    return (tmpx < screen_half.width && tmpy < screen_half.height);\n}\n",
+        "res_region": "",
+        "lookback": "void Sprite::addChild(Node *child, int zOrder, int tag)",
+        "lookahead": "// Node overrides",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 624,
+        "end_line": 685,
+        "merge_gen_region": null,
+        "confidence": 0.5585931539535522,
+        "hesitated": true
+    }
+]

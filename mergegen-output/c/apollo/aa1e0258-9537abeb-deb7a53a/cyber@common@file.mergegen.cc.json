@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "bool GetProtoFromJsonFile(const std::string &file_name,\n                          google::protobuf::Message *message) {\n  using google::protobuf::util::JsonParseOptions;\n  using google::protobuf::util::JsonStringToMessage;\n  std::ifstream ifs(file_name);\n  if (!ifs.is_open()) {\n    AERROR << \"Failed to open file \" << file_name;\n    return false;\n  }\n  nlohmann::json Json;\n  ifs >> Json;\n  ifs.close();\n  JsonParseOptions options;\n  options.ignore_unknown_fields = true;\n  google::protobuf::util::Status dump_status;\n  return (JsonStringToMessage(Json.dump(), message, options).ok());\n}\n",
+        "b_contents": "bool GetProtoFromJsonFile(const std::string &file_name,\n                           google::protobuf::Message *message) {\n  using google::protobuf::util::JsonStringToMessage;\n  using google::protobuf::util::JsonParseOptions;\n  std::ifstream ifs(file_name);\n  if(!ifs.is_open()){\n    AERROR << \"Failed to open file \" << file_name;\n    return false;\n  }\n  nlohmann::json Json;\n  ifs>> Json;\n  ifs.close();\n  JsonParseOptions options;\n  options.ignore_unknown_fields = true;\n  google::protobuf::util::Status dump_status;\n  return (JsonStringToMessage(Json.dump(), message, options).ok());\n}\n",
+        "base_contents": "",
+        "res_region": "bool GetProtoFromJsonFile(const std::string &file_name,\n                          google::protobuf::Message *message) {\n  using google::protobuf::util::JsonParseOptions;\n  using google::protobuf::util::JsonStringToMessage;\n  std::ifstream ifs(file_name);\n  if (!ifs.is_open()) {\n    AERROR << \"Failed to open file \" << file_name;\n    return false;\n  }\n  nlohmann::json Json;\n  ifs >> Json;\n  ifs.close();\n  JsonParseOptions options;\n  options.ignore_unknown_fields = true;\n  google::protobuf::util::Status dump_status;\n  return (JsonStringToMessage(Json.dump(), message, options).ok());\n}\n",
+        "lookback": "                          google::protobuf::Message *message) {",
+        "lookahead": "bool GetContent(const std::string &file_name, std::string *content) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 127,
+        "end_line": 166,
+        "merge_gen_region": " GetFromFileconst::boolString::::boolString::::boolString::boolString::::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::boolString::::boolString::::StringString voidString::::StringString; voidString::::StringString; voidString::::StringString; voidString::::StringString; voidString::::StringString; voidString::::StringString; voidString::::outputoutput; voidoutput; voidoutput; voidoutput; voidString::::output; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidoutput; voidString;::bool>(output; voidString;::output; voidString;::output; voidString;::output; voidString;::output; voidString;::output; voidString;::>(String",
+        "confidence": 0.91045081615448,
+        "hesitated": false,
+        "resolved": false
+    }
+]

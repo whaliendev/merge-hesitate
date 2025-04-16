@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nDECLARE_double(vehicle_low_speed_threshold);",
+        "b_contents": "DECLARE_bool(enable_cuda);",
+        "base_contents": "",
+        "res_region": "\nDECLARE_double(vehicle_low_speed_threshold);\n\nDECLARE_bool(enable_cuda);",
+        "lookback": "DECLARE_double(vehicle_low_speed_threshold);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 258,
+        "end_line": 264,
+        "merge_gen_region": null,
+        "confidence": 0.7676699161529541,
+        "hesitated": true
+    }
+]

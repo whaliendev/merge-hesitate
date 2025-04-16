@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\t/* Set process title, log and signals now this is the client. */\n\tsetproctitle(\"client (%s)\", socket_path);\n\tlogfile(\"client\");\n\n\t/* Establish signal handlers. */\n\tset_signals(client_signal);\n",
+        "base_contents": "\t/* Set process title, log and signals now this is the client. */\n\tsetproctitle(\"client (%s)\", socket_path);\n\tlogfile(\"client\");\n",
+        "res_region": "\t/* Establish signal handlers. */\n\tset_signals(client_signal);\n",
+        "lookback": "\tset_signals(client_signal);",
+        "lookahead": "\t/* Initialize the client socket and start the server. */",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 260,
+        "end_line": 274,
+        "merge_gen_region": "",
+        "confidence": 0.9661336541175842,
+        "hesitated": false,
+        "resolved": false
+    }
+]

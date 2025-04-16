@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  VehicleState vehicle_state(&localization_, &chassis_);\n  EXPECT_DOUBLE_EQ(vehicle_state.x(), 357.51331791372041);\n  EXPECT_DOUBLE_EQ(vehicle_state.y(), 96.165912376788725);\n  EXPECT_DOUBLE_EQ(vehicle_state.heading(), -1.8388082455104939);\n  EXPECT_DOUBLE_EQ(vehicle_state.pitch(), -0.010712737572581465);\n  EXPECT_DOUBLE_EQ(vehicle_state.linear_velocity(), 3.0);\n  EXPECT_DOUBLE_EQ(vehicle_state.angular_velocity(), -0.0079623083093763921);\n  EXPECT_DOUBLE_EQ(vehicle_state.linear_acceleration(), -0.079383290718229638);\n  EXPECT_DOUBLE_EQ(vehicle_state.gear(), canbus::Chassis::GEAR_DRIVE);",
+        "b_contents": "  auto* vehicle_state = VehicleState::instance();\n  vehicle_state->Update(localization_, chassis_);\n  EXPECT_DOUBLE_EQ(vehicle_state->x(), 357.51331791372041);\n  EXPECT_DOUBLE_EQ(vehicle_state->y(), 96.165912376788725);\n  EXPECT_DOUBLE_EQ(vehicle_state->heading(), -1.8388082455104939);\n  EXPECT_DOUBLE_EQ(vehicle_state->roll(), 0.047026695713820919);\n  EXPECT_DOUBLE_EQ(vehicle_state->pitch(), -0.010712737572581465);\n  EXPECT_DOUBLE_EQ(vehicle_state->yaw(), 2.8735807348741953);\n  EXPECT_DOUBLE_EQ(vehicle_state->linear_velocity(), 3.0);\n  EXPECT_DOUBLE_EQ(vehicle_state->angular_velocity(), -0.0079623083093763921);\n  EXPECT_DOUBLE_EQ(vehicle_state->linear_acceleration(), -0.079383290718229638);\n  EXPECT_DOUBLE_EQ(vehicle_state->gear(), canbus::Chassis::GEAR_DRIVE);",
+        "base_contents": "  VehicleState vehicle_state(&localization_, &chassis_);\n  EXPECT_DOUBLE_EQ(vehicle_state.x(), 357.51331791372041);\n  EXPECT_DOUBLE_EQ(vehicle_state.y(), 96.165912376788725);\n  EXPECT_DOUBLE_EQ(vehicle_state.heading(), -1.8388082455104939);\n  EXPECT_DOUBLE_EQ(vehicle_state.linear_velocity(), 3.0);\n  EXPECT_DOUBLE_EQ(vehicle_state.angular_velocity(), -0.0079623083093763921);\n  EXPECT_DOUBLE_EQ(vehicle_state.linear_acceleration(), -0.079383290718229638);",
+        "res_region": "  auto* vehicle_state = VehicleState::instance();\n  vehicle_state->Update(localization_, chassis_);\n  EXPECT_DOUBLE_EQ(vehicle_state->x(), 357.51331791372041);\n  EXPECT_DOUBLE_EQ(vehicle_state->y(), 96.165912376788725);\n  EXPECT_DOUBLE_EQ(vehicle_state->heading(), -1.8388082455104939);\n  EXPECT_DOUBLE_EQ(vehicle_state->roll(), 0.047026695713820919);\n  EXPECT_DOUBLE_EQ(vehicle_state->pitch(), -0.010712737572581465);\n  EXPECT_DOUBLE_EQ(vehicle_state->yaw(), 2.8735807348741953);\n  EXPECT_DOUBLE_EQ(vehicle_state->linear_velocity(), 3.0);\n  EXPECT_DOUBLE_EQ(vehicle_state->angular_velocity(), -0.0079623083093763921);\n  EXPECT_DOUBLE_EQ(vehicle_state->linear_acceleration(), -0.079383290718229638);\n  EXPECT_DOUBLE_EQ(vehicle_state->gear(), canbus::Chassis::GEAR_DRIVE);",
+        "lookback": "  vehicle_state->Update(localization_, chassis_);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 53,
+        "end_line": 84,
+        "merge_gen_region": "___auto vehiclestateUpdatelocal_,assis auto vehiclestateUpdatelocal_,assis EXPECTDOUBLEEQvehiclestatex 357517920);___(__y 9616126725 EXPECTDOUBLEEQvehiclestatehead(),(),1838241039 EXPECTDOUBLEEQvehiclestateroll 00476613819 EXPECTDOUBLEEQvehiclestatepitch -.vehiclestateautodexvehiclestateTrackTrackTrackTrack",
+        "confidence": 0.9383959770202637,
+        "hesitated": false,
+        "resolved": false
+    }
+]

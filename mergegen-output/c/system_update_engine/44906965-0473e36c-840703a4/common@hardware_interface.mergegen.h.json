@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n  // Returns the timestamp of the current OS build.\n  virtual int64_t GetBuildTimestamp() const = 0;",
+        "b_contents": "\n  // Returns whether the first active ping was sent to Omaha at some point, and\n  // that the value is persisted across recovery (and powerwash) once set with\n  // |SetFirstActiveOmahaPingSent()|.\n  virtual bool GetFirstActiveOmahaPingSent() const = 0;\n\n  // Persist the fact that first active ping was sent to omaha. It bails out if\n  // it fails.\n  virtual void SetFirstActiveOmahaPingSent() = 0;",
+        "base_contents": "",
+        "res_region": "\n  // Returns the timestamp of the current OS build.\n  virtual int64_t GetBuildTimestamp() const = 0;\n\n  // Returns whether the first active ping was sent to Omaha at some point, and\n  // that the value is persisted across recovery (and powerwash) once set with\n  // |SetFirstActiveOmahaPingSent()|.\n  virtual bool GetFirstActiveOmahaPingSent() const = 0;\n\n  // Persist the fact that first active ping was sent to omaha. It bails out if\n  // it fails.\n  virtual void SetFirstActiveOmahaPingSent() = 0;",
+        "lookback": "  // Returns the timestamp of the current OS build.",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 93,
+        "end_line": 108,
+        "merge_gen_region": null,
+        "confidence": 0.8546198010444641,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  const Comparator* user_comparator() const {\n    return internal_comparator_.user_comparator();\n  }\n\n  // dump the delayed_writes_ to the log file and reset counter.\n  void DelayLoggingAndReset();",
+        "b_contents": "",
+        "base_contents": "  const Comparator* user_comparator() const {\n    return internal_comparator_.user_comparator();\n  }",
+        "res_region": "  // dump the delayed_writes_ to the log file and reset counter.\n  void DelayLoggingAndReset();",
+        "lookback": "  void DelayLoggingAndReset();",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 300,
+        "end_line": 312,
+        "merge_gen_region": null,
+        "confidence": 0.45852458477020264,
+        "hesitated": true
+    }
+]

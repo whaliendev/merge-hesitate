@@ -1,0 +1,139 @@
+[
+    {
+        "a_contents": "\n    lv_btnmatrix_t * btnm = (lv_btnmatrix_t *)obj;;\n    if(btn_id >= btnm->btn_cnt) return;\n    btnm->ctrl_bits[btn_id] &= (~LV_BTNMATRIX_WIDTH_MASK);\n    btnm->ctrl_bits[btn_id] |= (LV_BTNMATRIX_WIDTH_MASK & width);",
+        "b_contents": "    lv_btnmatrix_ext_t * ext = lv_obj_get_ext_attr(btnm);\n    if(btn_id >= ext->btn_cnt) return;\n    ext->ctrl_bits[btn_id] &= (~LV_BTNMATRIX_WIDTH_MASK);\n    ext->ctrl_bits[btn_id] |= (LV_BTNMATRIX_WIDTH_MASK & width);",
+        "base_contents": "\n    lv_btnmatrix_ext_t * ext = lv_obj_get_ext_attr(btnm);\n    if(btn_id >= ext->btn_cnt) return;\n    ext->ctrl_bits[btn_id] &= (~LV_BTNMATRIX_WIDTH_MASK);\n    ext->ctrl_bits[btn_id] |= (LV_BTNMATRIX_WIDTH_MASK & width);",
+        "res_region": "    lv_btnmatrix_t * btnm = (lv_btnmatrix_t *)obj;;\n    if(btn_id >= btnm->btn_cnt) return;\n    btnm->ctrl_bits[btn_id] &= (~LV_BTNMATRIX_WIDTH_MASK);\n    btnm->ctrl_bits[btn_id] |= (LV_BTNMATRIX_WIDTH_MASK & width);",
+        "lookback": "    if(btn_id >= btnm->btn_cnt) return;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 325,
+        "end_line": 342,
+        "merge_gen_region": null,
+        "confidence": 0.8395816683769226,
+        "hesitated": true
+    },
+    {
+        "a_contents": " * Useful in the the `event_cb` to get the text of the button, check if hidden etc.\n * @param obj pointer to button matrix object\n * @return  index of the last released button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "b_contents": " * Useful in the `event_cb` to get the text of the button, check if hidden etc.\n * @param btnm pointer to button matrix object\n * @return index of the last released button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "base_contents": " * Useful in the the `event_cb` to get the text of the button, check if hidden etc.\n * @param btnm pointer to button matrix object\n * @return  index of the last released button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "res_region": "<<<<<<< HEAD\n * Useful in the the `event_cb` to get the text of the button, check if hidden etc.\n * @param obj pointer to button matrix object\n=======\n * Useful in the `event_cb` to get the text of the button, check if hidden etc.\n * @param btnm pointer to button matrix object\n>>>>>>> master\n * @return  index of the last released button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "lookback": " * Useful in the the `event_cb` to get the text of the button, check if hidden etc.",
+        "lookahead": " */",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 398,
+        "end_line": 410,
+        "merge_gen_region": null,
+        "confidence": 0.8629933595657349,
+        "hesitated": true
+    },
+    {
+        "a_contents": " * Useful in the the `event_cb`\n * @param obj pointer to button matrix object",
+        "b_contents": " * Useful in the `event_cb`\n * @param btnm pointer to button matrix object",
+        "base_contents": " * Useful in the the `event_cb`\n * @param btnm pointer to button matrix object",
+        "res_region": "<<<<<<< HEAD\n * Useful in the the `event_cb`\n * @param obj pointer to button matrix object\n=======\n * Useful in the `event_cb`\n * @param btnm pointer to button matrix object\n>>>>>>> master",
+        "lookback": " * Useful in the the `event_cb`",
+        "lookahead": " * @return text of the last released button (NULL: if unset)",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 422,
+        "end_line": 431,
+        "merge_gen_region": null,
+        "confidence": 0.8000715970993042,
+        "hesitated": true
+    },
+    {
+        "a_contents": " * @param obj pointer to button matrix object\n * @return  index of the pressed button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "b_contents": " * @param btnm pointer to button matrix object\n * @return index of the pressed button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "base_contents": " * @param btnm pointer to button matrix object\n * @return  index of the pressed button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "res_region": " * @param obj pointer to button matrix object\n * @return  index of the pressed button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "lookback": " * @return  index of the pressed button (LV_BTNMATRIX_BTN_NONE: if unset)",
+        "lookahead": " */",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 450,
+        "end_line": 459,
+        "merge_gen_region": null,
+        "confidence": 0.6497904062271118,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            invalidate_button_area(obj, btnm->btn_id_pr);\n            invalidate_button_area(obj, btnm->btn_id_focused);\n",
+        "b_contents": "            invalidate_button_area(btnm, ext->btn_id_pr);\n            invalidate_button_area(btnm, ext->btn_id_focused);\n",
+        "base_contents": "            invalidate_button_area(btnm, ext->btn_id_pr);\n            invalidate_button_area(btnm, ext->btn_id_focused);\n\n",
+        "res_region": "            invalidate_button_area(obj, btnm->btn_id_pr);\n            invalidate_button_area(obj, btnm->btn_id_focused);\n",
+        "lookback": "            invalidate_button_area(obj, btnm->btn_id_focused);",
+        "lookahead": "            lv_indev_type_t indev_type = lv_indev_get_type(lv_indev_get_act());",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 857,
+        "end_line": 870,
+        "merge_gen_region": null,
+        "confidence": 0.850327730178833,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));\n\n            /*Find the area below the the current*/\n            if(btnm->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                btnm->btn_id_focused = 0;",
+        "b_contents": "            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;",
+        "base_contents": "            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;",
+        "res_region": "<<<<<<< HEAD\n            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));\n\n            /*Find the area below the the current*/\n            if(btnm->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                btnm->btn_id_focused = 0;\n=======\n            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;\n>>>>>>> master",
+        "lookback": "            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));",
+        "lookahead": "            }",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 971,
+        "end_line": 987,
+        "merge_gen_region": null,
+        "confidence": 0.8526159524917603,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));\n            /*Find the area below the the current*/\n            if(btnm->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                btnm->btn_id_focused = 0;",
+        "b_contents": "            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;",
+        "base_contents": "            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;",
+        "res_region": "<<<<<<< HEAD\n            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));\n            /*Find the area below the the current*/\n            if(btnm->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                btnm->btn_id_focused = 0;\n=======\n            lv_style_int_t pad_inner = lv_obj_get_style_pad_inner(btnm, LV_BTNMATRIX_PART_BG);\n            /*Find the area below the current*/\n            if(ext->btn_id_focused == LV_BTNMATRIX_BTN_NONE) {\n                ext->btn_id_focused = 0;\n>>>>>>> master",
+        "lookback": "            lv_coord_t col_gap = LV_MAX(lv_obj_get_style_margin_left(obj, LV_BTNMATRIX_PART_BTN), lv_obj_get_style_margin_right(obj, LV_BTNMATRIX_PART_BTN));",
+        "lookahead": "            }",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 1010,
+        "end_line": 1025,
+        "merge_gen_region": null,
+        "confidence": 0.8526159524917603,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    if(btnm->button_areas != NULL) {\n        lv_mem_free(btnm->button_areas);\n        btnm->button_areas = NULL;",
+        "b_contents": "    if(ext->button_areas != NULL) {\n        lv_mem_free(ext->button_areas);\n        ext->button_areas = NULL;",
+        "base_contents": "\n    if(ext->button_areas != NULL) {\n        lv_mem_free(ext->button_areas);\n        ext->button_areas = NULL;",
+        "res_region": "    if(btnm->button_areas != NULL) {\n        lv_mem_free(btnm->button_areas);\n        btnm->button_areas = NULL;",
+        "lookback": "        lv_mem_free(btnm->button_areas);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1079,
+        "end_line": 1093,
+        "merge_gen_region": "(->__ifbtQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPDoDoDoDoDoDoQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQPQP",
+        "confidence": 0.8993544578552246,
+        "hesitated": false,
+        "resolved": false
+    }
+]

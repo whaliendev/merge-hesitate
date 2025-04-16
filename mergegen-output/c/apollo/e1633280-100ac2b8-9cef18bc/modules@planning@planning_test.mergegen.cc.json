@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "#include \"modules/planning/common/planning_gflags.h\"\n#include \"modules/planning/planner_factory.h\"\n#include \"modules/planning/proto/planning.pb.h\"",
+        "b_contents": "#include \"modules/common/adapters/adapter_gflags.h\"\n#include \"modules/planning/common/planning_gflags.h\"\n#include \"modules/planning/proto/planning.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning.pb.h\"\n#include \"modules/planning/planner_factory.h\"",
+        "res_region": "#include \"modules/common/adapters/adapter_gflags.h\"\n#include \"modules/planning/common/planning_gflags.h\"\n#include \"modules/planning/proto/planning.pb.h\"",
+        "lookback": "#include \"modules/planning/common/planning_gflags.h\"",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 17,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.8408979773521423,
+        "hesitated": true
+    },
+    {
+        "a_contents": "class PlanningTest : public ::testing::Test {};",
+        "b_contents": "class PlanningTest : public ::testing::Test {\n  virtual void SetUp() {\n    FLAGS_planning_config_file =\n        \"modules/planning/testdata/conf/planning_config.pb.txt\";\n    FLAGS_adapter_config_path = \"modules/planning/testdata/conf/adapter.conf\";\n  }\n};",
+        "base_contents": "class PlanningTest: public ::testing::Test {\n};",
+        "res_region": "class PlanningTest : public ::testing::Test {\n  virtual void SetUp() {\n    FLAGS_planning_config_file =\n        \"modules/planning/testdata/conf/planning_config.pb.txt\";\n    FLAGS_adapter_config_path = \"modules/planning/testdata/conf/adapter.conf\";\n  }\n};",
+        "lookback": "  virtual void SetUp() {",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 39,
+        "end_line": 52,
+        "merge_gen_region": null,
+        "confidence": 0.8601902723312378,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  EXPECT_EQ(trajectory1.size(), (std::size_t)FLAGS_rtk_trajectory_forward);\n  const auto &p1_start = trajectory1.front();\n  const auto &p1_end = trajectory1.back();",
+        "b_contents": "  EXPECT_EQ(trajectory1.size(), (std::size_t)FLAGS_rtk_trajectory_forward);\n  const auto& p1_start = trajectory1.front();\n  const auto& p1_end = trajectory1.back();",
+        "base_contents": "  EXPECT_EQ(trajectory1.size(),\n      (std::size_t)FLAGS_rtk_trajectory_forward);\n  const auto& p1_start = trajectory1.front();\n  const auto& p1_end = trajectory1.back();",
+        "res_region": "  EXPECT_EQ(trajectory1.size(), (std::size_t)FLAGS_rtk_trajectory_forward);\n  const auto& p1_start = trajectory1.front();\n  const auto& p1_end = trajectory1.back();",
+        "lookback": "  const auto& p1_start = trajectory1.front();",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 70,
+        "end_line": 83,
+        "merge_gen_region": null,
+        "confidence": 0.6633924245834351,
+        "hesitated": true
+    },
+    {
+        "a_contents": "TEST_F(PlanningTest, PlannerFactory) {\n  auto ptr_planner = PlannerFactory::CreateInstance(PlannerType::OTHER);\n  EXPECT_TRUE(ptr_planner == nullptr);\n}\n\n}  // namespace planning",
+        "b_contents": "}  // namespace control",
+        "base_contents": "TEST_F(PlanningTest, PlannerFactory) {\n  auto ptr_planner = PlannerFactory::CreateInstance(PlannerType::OTHER);\n  EXPECT_TRUE(ptr_planner == nullptr);\n}\n\n}  // namespace control",
+        "res_region": "}  // namespace control",
+        "lookback": "}  // namespace apollo",
+        "lookahead": "}  // namespace apollo",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 132,
+        "end_line": 148,
+        "merge_gen_region": null,
+        "confidence": 0.40845951437950134,
+        "hesitated": true
+    }
+]

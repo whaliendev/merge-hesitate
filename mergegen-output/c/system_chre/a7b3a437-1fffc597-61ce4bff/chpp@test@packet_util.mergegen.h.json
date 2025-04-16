@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "ChppResetPacket generateResetPacket(uint8_t ackSeq = 0, uint8_t seq = 0);\nChppResetPacket generateResetAckPacket(uint8_t ackSeq = 1, uint8_t seq = 0);",
+        "b_contents": "ChppResetPacket generateResetPacket(size_t rxBufferLen, uint8_t ackSeq = 0,\n                                    uint8_t seq = 0);\nChppResetPacket generateResetAckPacket(size_t rxBufferLen, uint8_t ackSeq = 1,\n                                       uint8_t seq = 0);",
+        "base_contents": "ChppResetPacket generateResetPacket(size_t rxBufferLen, uint16_t timeoutInMs,\n                                    uint8_t ackSeq = 0, uint8_t seq = 0);\nChppResetPacket generateResetAckPacket(size_t rxBufferLen, uint16_t timeoutInMs,\n                                       uint8_t ackSeq = 1, uint8_t seq = 0);",
+        "res_region": "ChppResetPacket generateResetPacket(uint8_t ackSeq = 0, uint8_t seq = 0);\nChppResetPacket generateResetAckPacket(uint8_t ackSeq = 1, uint8_t seq = 0);",
+        "lookback": "ChppResetPacket generateResetAckPacket(uint8_t ackSeq = 1, uint8_t seq = 0);",
+        "lookahead": "ChppEmptyPacket generateEmptyPacket(uint8_t ackSeq = 1, uint8_t seq = 0,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 64,
+        "end_line": 77,
+        "merge_gen_region": null,
+        "confidence": 0.7708505988121033,
+        "hesitated": true
+    }
+]

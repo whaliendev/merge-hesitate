@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\n    logException(context, elem);",
+        "b_contents": "\n    bool log_error = elem.exception_code != ErrorCodes::QUERY_WAS_CANCELLED_BY_CLIENT && elem.exception_code !=  ErrorCodes::QUERY_WAS_CANCELLED;\n    logException(context, elem, log_error);",
+        "base_contents": "    logException(context, elem);",
+        "res_region": "\n    bool log_error = elem.exception_code != ErrorCodes::QUERY_WAS_CANCELLED_BY_CLIENT && elem.exception_code !=  ErrorCodes::QUERY_WAS_CANCELLED;\n    logException(context, elem, log_error);",
+        "lookback": "    bool log_error = elem.exception_code != ErrorCodes::QUERY_WAS_CANCELLED_BY_CLIENT && elem.exception_code !=  ErrorCodes::QUERY_WAS_CANCELLED;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 760,
+        "end_line": 769,
+        "merge_gen_region": null,
+        "confidence": 0.6870058178901672,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (auto query_log = context->getQueryLog())\n    {\n        if (settings.log_queries && elem.type >= settings.log_queries_min_type\n            && !settings.log_queries_min_query_duration_ms.totalMilliseconds())\n        {\n            if (!settings.log_query_settings && settings.log_query_settings.changed)\n                LOG_TRACE(\n                    getLogger(\"executeQuery\"),\n                    \"Query settings will not be added to query_log since setting `log_query_settings` has been set to false.\"\n                    \" The setting has been changed for the query\");\n",
+        "b_contents": "    if (settings[Setting::log_queries] && elem.type >= settings[Setting::log_queries_min_type]\n        && !settings[Setting::log_queries_min_query_duration_ms].totalMilliseconds())\n        if (auto query_log = context->getQueryLog())",
+        "base_contents": "    if (settings.log_queries && elem.type >= settings.log_queries_min_type && !settings.log_queries_min_query_duration_ms.totalMilliseconds())\n        if (auto query_log = context->getQueryLog())",
+        "res_region": "    if (auto query_log = context->getQueryLog())\n    {\n        if (settings[Setting::log_queries] && elem.type >= settings[Setting::log_queries_min_type]\n            && !settings[Setting::log_queries_min_query_duration_ms].totalMilliseconds())\n        {\n            if (!settings[Setting::log_query_settings] && settings[Setting::log_query_settings].changed)\n                LOG_TRACE(\n                    getLogger(\"executeQuery\"),\n                    \"Query settings will not be added to query_log since setting `log_query_settings` has been set to false.\"\n                    \" The setting has been changed for the query\");\n",
+        "lookback": "    {",
+        "lookahead": "            query_log->add(elem);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 774,
+        "end_line": 793,
+        "merge_gen_region": null,
+        "confidence": 0.6841061115264893,
+        "hesitated": true
+    }
+]

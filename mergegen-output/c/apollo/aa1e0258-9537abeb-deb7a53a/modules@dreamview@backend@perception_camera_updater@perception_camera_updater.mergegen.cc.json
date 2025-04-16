@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"cyber/common/file.h\"\n#include \"modules/common/adapters/adapter_gflags.h\"\n#include \"modules/common_msgs/basic_msgs/geometry.pb.h\"",
+        "base_contents": "#include \"cyber/common/file.h\"\n#include \"modules/common/adapters/adapter_gflags.h\"\n#include \"modules/common/proto/geometry.pb.h\"",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "#include \"opencv2/opencv.hpp\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 22,
+        "end_line": 31,
+        "merge_gen_region": "",
+        "confidence": 0.8809964060783386,
+        "hesitated": false,
+        "resolved": true
+    }
+]

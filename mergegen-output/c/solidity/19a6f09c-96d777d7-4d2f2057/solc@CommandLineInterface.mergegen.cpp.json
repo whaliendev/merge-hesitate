@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "/// Possible arguments to for --metadata-hash\nstatic set<string> const g_metadataHashArgs\n{\n\tg_strIPFS,\n\tg_strSwarm,\n\tg_strNone\n};\n",
+        "b_contents": "/// Possible arguments to for --yul-dialect\nstatic set<string> const g_yulDialectArgs\n{\n\tg_strEVM,\n\tg_streWasm\n};\n",
+        "base_contents": "",
+        "res_region": "/// Possible arguments to for --yul-dialect\nstatic set<string> const g_yulDialectArgs\n{\n\tg_strEVM,\n\tg_streWasm\n};\n\n/// Possible arguments to for --metadata-hash\nstatic set<string> const g_metadataHashArgs\n{\n\tg_strIPFS,\n\tg_strSwarm,\n\tg_strNone\n};\n",
+        "lookback": "static set<string> const g_yulDialectArgs",
+        "lookahead": "static void version()",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 238,
+        "end_line": 256,
+        "merge_gen_region": null,
+        "confidence": 0.8608061075210571,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tunique_ptr<SourceReferenceFormatter> formatter;\n\t\tif (m_args.count(g_argOldReporter))\n\t\t\tformatter = make_unique<SourceReferenceFormatter>(serr(false));\n\t\telse\n\t\t\tformatter = make_unique<SourceReferenceFormatterHuman>(serr(false), m_coloredOutput);\n",
+        "b_contents": "",
+        "base_contents": "\t\tunique_ptr<SourceReferenceFormatter> formatter;\n\t\tif (m_args.count(g_argNewReporter))\n\t\t\tformatter = make_unique<SourceReferenceFormatterHuman>(serr(false), m_coloredOutput);\n\t\telse\n\t\t\tformatter = make_unique<SourceReferenceFormatter>(serr(false));\n",
+        "res_region": "\t\tunique_ptr<SourceReferenceFormatter> formatter;\n\t\tif (m_args.count(g_argOldReporter))\n\t\t\tformatter = make_unique<SourceReferenceFormatter>(serr(false));\n\t\telse\n\t\t\tformatter = make_unique<SourceReferenceFormatterHuman>(serr(false), m_coloredOutput);\n",
+        "lookback": "\t\tif (m_args.count(g_argOldReporter))",
+        "lookahead": "\t\tfor (auto const& error: stack.errors())",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 1423,
+        "end_line": 1438,
+        "merge_gen_region": null,
+        "confidence": 0.604417622089386,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    expected_namespace_name = \"product-classloader-namespace\";",
+        "b_contents": "    expected_namespace_name = \"(vendor|product)-classloader-namespace\";",
+        "base_contents": "    expected_namespace_name = \"vendor-classloader-namespace\";",
+        "res_region": "    expected_namespace_name = \"product-classloader-namespace\";",
+        "lookback": "    expected_library_path = expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;",
+        "lookahead": "    expected_library_path = expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 381,
+        "end_line": 387,
+        "merge_gen_region": null,
+        "confidence": 0.7867578864097595,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n    expected_link_with_vndk_product_ns = true;",
+        "b_contents": "        default_public_libraries() + \":\" + llndk_libraries_product();\n    EXPECT_CALL(*mock,\n                mock_link_namespaces(Eq(IsBridged()),\n                                     _,\n                                     NsEq(\"system\"),\n                                     ::testing::StartsWith(expected_shared_libs_to_platform_ns)))\n        .WillOnce(Return(true));",
+        "base_contents": "        expected_shared_libs_to_platform_ns + \":\" + llndk_libraries_product();\n    EXPECT_CALL(*mock,\n                mock_link_namespaces(Eq(IsBridged()),\n                                     _,\n                                     NsEq(\"system\"),\n                                     ::testing::StartsWith(expected_shared_libs_to_platform_ns)))\n        .WillOnce(Return(true));",
+        "res_region": "        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n    expected_link_with_vndk_product_ns = true;",
+        "lookback": "    expected_link_with_vndk_product_ns = true;",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 392,
+        "end_line": 411,
+        "merge_gen_region": null,
+        "confidence": 0.8002249598503113,
+        "hesitated": true
+    }
+]

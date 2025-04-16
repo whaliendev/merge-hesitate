@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        const void * src = ext->img_src_mid[state];",
+        "b_contents": "        const void * src;\n        src = ext->img_src_left[state];",
+        "base_contents": "",
+        "res_region": "        const void * src = ext->img_src_mid[state];",
+        "lookback": "        if(lv_img_src_get_type(src) == LV_IMG_SRC_SYMBOL) {",
+        "lookahead": "        if(lv_img_src_get_type(src) == LV_IMG_SRC_SYMBOL) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 308,
+        "end_line": 314,
+        "merge_gen_region": null,
+        "confidence": 0.7714914679527283,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            return LV_DESIGN_RES_OK;",
+        "b_contents": "            return true;",
+        "base_contents": "            return;",
+        "res_region": "            return LV_DESIGN_RES_OK;",
+        "lookback": "        }",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 317,
+        "end_line": 323,
+        "merge_gen_region": null,
+        "confidence": 0.8298954367637634,
+        "hesitated": true
+    }
+]

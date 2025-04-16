@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        .apply_deleted_mask = settings.apply_deleted_mask,\n        .use_asynchronous_read_from_pool = settings.allow_asynchronous_read_from_io_pool_for_merge_tree\n            && (settings.max_streams_to_max_threads_ratio > 1 || settings.max_streams_for_merge_tree_reading > 1),\n        .enable_multiple_prewhere_read_steps = settings.enable_multiple_prewhere_read_steps,\n        .enable_writes_to_query_condition_cache = settings.use_query_condition_cache && settings.enable_writes_to_query_condition_cache,",
+        "b_contents": "        .apply_deleted_mask = settings[Setting::apply_deleted_mask],\n        .use_asynchronous_read_from_pool = settings[Setting::allow_asynchronous_read_from_io_pool_for_merge_tree]\n            && (settings[Setting::max_streams_to_max_threads_ratio] > 1 || settings[Setting::max_streams_for_merge_tree_reading] > 1),\n        .enable_multiple_prewhere_read_steps = settings[Setting::enable_multiple_prewhere_read_steps],\n        .force_short_circuit_execution = settings[Setting::query_plan_merge_filters]",
+        "base_contents": "        .apply_deleted_mask = settings.apply_deleted_mask,\n        .use_asynchronous_read_from_pool = settings.allow_asynchronous_read_from_io_pool_for_merge_tree\n            && (settings.max_streams_to_max_threads_ratio > 1 || settings.max_streams_for_merge_tree_reading > 1),\n        .enable_multiple_prewhere_read_steps = settings.enable_multiple_prewhere_read_steps,",
+        "res_region": "        .apply_deleted_mask = settings[Setting::apply_deleted_mask],\n        .use_asynchronous_read_from_pool = settings[Setting::allow_asynchronous_read_from_io_pool_for_merge_tree]\n            && (settings[Setting::max_streams_to_max_threads_ratio] > 1 || settings[Setting::max_streams_for_merge_tree_reading] > 1),\n        .enable_multiple_prewhere_read_steps = settings[Setting::enable_multiple_prewhere_read_steps],\n        .force_short_circuit_execution = settings[Setting::query_plan_merge_filters],\n        .enable_writes_to_query_condition_cache = settings[Setting::use_query_condition_cache] && settings[Setting::enable_writes_to_query_condition_cache]",
+        "lookback": "        .use_asynchronous_read_from_pool = settings[Setting::allow_asynchronous_read_from_io_pool_for_merge_tree]",
+        "lookahead": "    };",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 208,
+        "end_line": 225,
+        "merge_gen_region": "...",
+        "confidence": 0.9094281792640686,
+        "hesitated": false,
+        "resolved": false
+    }
+]

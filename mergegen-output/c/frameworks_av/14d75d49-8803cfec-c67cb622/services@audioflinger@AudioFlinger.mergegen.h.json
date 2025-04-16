@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier = sp<MediaLogNotifier>::make();\n",
+        "b_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n",
+        "base_contents": "    const sp<MediaLogNotifier> mMediaLogNotifier;\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n",
+        "res_region": "    const sp<MediaLogNotifier> mMediaLogNotifier = sp<MediaLogNotifier>::make();\n",
+        "lookback": "",
+        "lookahead": "    // Find io handle by session id.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 502,
+        "end_line": 526,
+        "merge_gen_region": " spMediaNotifier mLog",
+        "confidence": 0.8953608274459839,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    void broadcastParametersToRecordThreads_l(const String8& keyValuePairs) REQUIRES(mutex());\n    void forwardParametersToDownstreamPatches_l(\n                        audio_io_handle_t upStream, const String8& keyValuePairs,\n            const std::function<bool(const sp<IAfPlaybackThread>&)>& useThread = nullptr)\n            REQUIRES(mutex());\n",
+        "b_contents": "",
+        "base_contents": "    struct TeePatch {\n        sp<IAfPatchRecord> patchRecord;\n        sp<IAfPatchTrack> patchTrack;\n    };\n",
+        "res_region": "    void broadcastParametersToRecordThreads_l(const String8& keyValuePairs) REQUIRES(mutex());\n    void forwardParametersToDownstreamPatches_l(\n                        audio_io_handle_t upStream, const String8& keyValuePairs,\n            const std::function<bool(const sp<IAfPlaybackThread>&)>& useThread = nullptr)\n            REQUIRES(mutex());\n",
+        "lookback": "    void forwardParametersToDownstreamPatches_l(",
+        "lookahead": "    // for mAudioSessionRefs only",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 604,
+        "end_line": 618,
+        "merge_gen_region": null,
+        "confidence": 0.82915198802948,
+        "hesitated": true
+    }
+]

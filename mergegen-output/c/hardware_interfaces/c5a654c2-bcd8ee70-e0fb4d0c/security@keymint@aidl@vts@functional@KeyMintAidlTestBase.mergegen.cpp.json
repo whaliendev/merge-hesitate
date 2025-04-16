@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void check_crl_distribution_points_extension_not_present(X509* certificate) {\n    ASN1_OBJECT_Ptr crl_dp_oid(OBJ_txt2obj(kCrlDPOid, 1 /* dotted string format */));\n    ASSERT_TRUE(crl_dp_oid.get());\n\n    int location =\n            X509_get_ext_by_OBJ(certificate, crl_dp_oid.get(), -1 /* search from beginning */);\n    ASSERT_EQ(location, -1);\n}\n",
+        "b_contents": "",
+        "base_contents": "// Extract attestation record from cert. Returned object is still part of cert; don't free it\n// separately.\nASN1_OCTET_STRING* get_attestation_record(X509* certificate) {\n    ASN1_OBJECT_Ptr oid(OBJ_txt2obj(kAttestionRecordOid, 1 /* dotted string format */));\n    EXPECT_TRUE(!!oid.get());\n    if (!oid.get()) return nullptr;\n\n    int location = X509_get_ext_by_OBJ(certificate, oid.get(), -1 /* search from beginning */);\n    EXPECT_NE(-1, location) << \"Attestation extension not found in certificate\";\n    if (location == -1) return nullptr;\n\n    X509_EXTENSION* attest_rec_ext = X509_get_ext(certificate, location);\n    EXPECT_TRUE(!!attest_rec_ext)\n            << \"Found attestation extension but couldn't retrieve it?  Probably a BoringSSL bug.\";\n    if (!attest_rec_ext) return nullptr;\n\n    ASN1_OCTET_STRING* attest_rec = X509_EXTENSION_get_data(attest_rec_ext);\n    EXPECT_TRUE(!!attest_rec) << \"Attestation extension contained no data\";\n    return attest_rec;\n}\n",
+        "res_region": "void check_crl_distribution_points_extension_not_present(X509* certificate) {\n    ASN1_OBJECT_Ptr crl_dp_oid(OBJ_txt2obj(kCrlDPOid, 1 /* dotted string format */));\n    ASSERT_TRUE(crl_dp_oid.get());\n\n    int location =\n            X509_get_ext_by_OBJ(certificate, crl_dp_oid.get(), -1 /* search from beginning */);\n    ASSERT_EQ(location, -1);\n}\n",
+        "lookback": "    ASN1_OBJECT_Ptr crl_dp_oid(OBJ_txt2obj(kCrlDPOid, 1 /* dotted string format */));",
+        "lookahead": "void check_attestation_version(uint32_t attestation_version, int32_t aidl_version) {",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 110,
+        "end_line": 143,
+        "merge_gen_region": null,
+        "confidence": 0.665727436542511,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/basic_msgs/geometry.pb.h\"\n#include \"modules/common_msgs/basic_msgs/vehicle_signal.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/basic_msgs/geometry.pb.h\"\n#include \"modules/common_msgs/basic_msgs/vehicle_signal.pb.h\"",
+        "base_contents": "#include \"modules/canbus/proto/chassis.pb.h\"\n#include \"modules/common/proto/geometry.pb.h\"\n#include \"modules/common/proto/vehicle_signal.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/basic_msgs/geometry.pb.h\"\n#include \"modules/common_msgs/basic_msgs/vehicle_signal.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"",
+        "lookback": "#include \"modules/common_msgs/basic_msgs/vehicle_signal.pb.h\"",
+        "lookahead": "#include \"modules/dreamview/proto/simulation_world.pb.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 23,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.8582237958908081,
+        "hesitated": true
+    }
+]

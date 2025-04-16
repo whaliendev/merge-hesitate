@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    if (FlagManager::getInstance().misc1()) {\n        composerAIDL->setMinSchedulerPolicy(SCHED_FIFO, newPriority);\n    }",
+        "b_contents": "    composerAIDL->setMinSchedulerPolicy(SCHED_FIFO, newPriority);",
+        "base_contents": "",
+        "res_region": "    if (FlagManager::getInstance().misc1()) {\n        composerAIDL->setMinSchedulerPolicy(SCHED_FIFO, newPriority);\n    }",
+        "lookback": "        composerAIDL->setMinSchedulerPolicy(SCHED_FIFO, newPriority);",
+        "lookahead": "    sm->addService(String16(\"SurfaceFlingerAIDL\"), composerAIDL, false,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 152,
+        "end_line": 159,
+        "merge_gen_region": " (ManagergetInstancemisc()) compA->MinPolicySCHEDFIFO new);",
+        "confidence": 0.8969700932502747,
+        "hesitated": false,
+        "resolved": false
+    }
+]

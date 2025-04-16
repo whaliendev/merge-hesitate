@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "<<<<<<< HEAD\n * Configuration file for v8.0.0-dev\n=======\n * Configuration file for v7.8.1-dev\n>>>>>>> master",
+        "b_contents": " * Configuration file for v7.10.0-dev",
+        "base_contents": " * Configuration file for v7.8.1-dev",
+        "res_region": " * Configuration file for v8.0.0-dev",
+        "lookback": " */",
+        "lookahead": " */",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2,
+        "end_line": 12,
+        "merge_gen_region": null,
+        "confidence": 0.6429212689399719,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/*Tab (dependencies: lv_page, lv_btnm)*/\n#define LV_USE_TABVIEW      1\n#  if LV_USE_TABVIEW != 0\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TABVIEW_DEF_ANIM_TIME    300\n#endif\n\n/*Tileview (dependencies: lv_page) */\n#define LV_USE_TILEVIEW     1\n#if LV_USE_TILEVIEW\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TILEVIEW_DEF_ANIM_TIME   300\n#endif\n\n/*Window (dependencies: lv_cont, lv_btn, lv_label, lv_img, lv_page)*/\n#define LV_USE_WIN      1\n",
+        "base_contents": "\n/*Tab (dependencies: lv_page, lv_btnm)*/\n#define LV_USE_TABVIEW      1\n#  if LV_USE_TABVIEW != 0\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TABVIEW_DEF_ANIM_TIME    300\n#endif\n\n/*Tileview (dependencies: lv_page) */\n#define LV_USE_TILEVIEW     1\n#if LV_USE_TILEVIEW\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TILEVIEW_DEF_ANIM_TIME   300\n#endif\n\n/*Window (dependencies: lv_cont, lv_btn, lv_label, lv_img, lv_page)*/\n#define LV_USE_WIN      1\n",
+        "res_region": "<<<<<<< HEAD\n=======\n/*Tab (dependencies: lv_page, lv_btnm)*/\n#define LV_USE_TABVIEW      1\n#  if LV_USE_TABVIEW != 0\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TABVIEW_DEF_ANIM_TIME    300\n#endif\n\n/*Tileview (dependencies: lv_page) */\n#define LV_USE_TILEVIEW     1\n#if LV_USE_TILEVIEW\n/*Time of slide animation [ms] (0: no animation)*/\n#  define LV_TILEVIEW_DEF_ANIM_TIME   300\n#endif\n\n/*Window (dependencies: lv_cont, lv_btn, lv_label, lv_img, lv_page)*/\n#define LV_USE_WIN      1\n\n>>>>>>> master",
+        "lookback": "=======",
+        "lookahead": "/*==================",
+        "label": [
+            "unresolved",
+            "base_underutilized"
+        ],
+        "start_line": 697,
+        "end_line": 735,
+        "merge_gen_region": null,
+        "confidence": 0.754088819026947,
+        "hesitated": true
+    }
+]

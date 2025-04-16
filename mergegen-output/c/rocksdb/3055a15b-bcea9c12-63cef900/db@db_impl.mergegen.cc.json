@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "  new_db.SetVersionNumber();\n  new_db.SetComparatorName(user_comparator()->Name());",
+        "base_contents": "  new_db.SetComparatorName(user_comparator()->Name());",
+        "res_region": "  new_db.SetVersionNumber();",
+        "lookback": "  new_db.SetLogNumber(0);",
+        "lookahead": "  new_db.SetLogNumber(0);",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 351,
+        "end_line": 357,
+        "merge_gen_region": null,
+        "confidence": 0.7924272418022156,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  deletion_state.log_number = versions_->MinLogNumber();",
+        "b_contents": "  deletion_state.pending_manifest_file_number =\n      versions_->PendingManifestFileNumber();\n  deletion_state.log_number = versions_->LogNumber();",
+        "base_contents": "  deletion_state.log_number = versions_->LogNumber();",
+        "res_region": "  deletion_state.pending_manifest_file_number =\n      versions_->PendingManifestFileNumber();\n  deletion_state.log_number = versions_->MinLogNumber();",
+        "lookback": "      versions_->PendingManifestFileNumber();",
+        "lookahead": "  deletion_state.prev_log_number = versions_->PrevLogNumber();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 468,
+        "end_line": 476,
+        "merge_gen_region": null,
+        "confidence": 0.6993972063064575,
+        "hesitated": true
+    }
+]

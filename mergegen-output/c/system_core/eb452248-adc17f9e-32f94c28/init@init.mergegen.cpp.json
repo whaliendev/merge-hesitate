@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    constexpr int flags = EPOLLIN | EPOLLPRI;\n    auto handler = std::bind(HandleSignalFd, false);\n    if (auto result = epoll->RegisterHandler(signal_fd, handler, flags); !result.ok()) {",
+        "b_contents": "    if (auto result = epoll->RegisterHandler(signal_fd, HandleSignalFd); !result.ok()) {",
+        "base_contents": "    constexpr int flags = EPOLLIN | EPOLLPRI;\n    if (auto result = epoll->RegisterHandler(signal_fd, HandleSignalFd, flags); !result.ok()) {",
+        "res_region": "    constexpr int flags = EPOLLIN | EPOLLPRI;\n    auto handler = std::bind(HandleSignalFd, false);\n    if (auto result = epoll->RegisterHandler(signal_fd, handler, flags); !result.ok()) {",
+        "lookback": "    auto handler = std::bind(HandleSignalFd, false);",
+        "lookahead": "        LOG(FATAL) << result.error();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 666,
+        "end_line": 675,
+        "merge_gen_region": null,
+        "confidence": 0.7145947813987732,
+        "hesitated": true
+    }
+]

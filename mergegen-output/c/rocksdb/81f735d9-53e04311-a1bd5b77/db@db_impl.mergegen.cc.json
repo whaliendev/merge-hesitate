@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "      Log(options_.info_log,\n          \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n           delayed);",
+        "base_contents": "      Log(options_.info_log, \"delaying write...\\n\");",
+        "res_region": "      //Log(options_.info_log,\n      //    \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",\n      //     delayed);",
+        "lookback": "      //    \"delaying write %llu usecs for level0_slowdown_writes_trigger\\n\",",
+        "lookahead": "      mutex_.Lock();",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 1714,
+        "end_line": 1721,
+        "merge_gen_region": null,
+        "confidence": 0.43074893951416016,
+        "hesitated": true
+    }
+]

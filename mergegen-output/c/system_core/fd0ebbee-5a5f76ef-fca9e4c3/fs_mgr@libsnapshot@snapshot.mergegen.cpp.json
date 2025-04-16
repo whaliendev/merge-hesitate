@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "ISnapshotMergeStats* SnapshotManager::GetSnapshotMergeStatsInstance() {\n    return SnapshotMergeStats::GetInstance(*this);\n}\n\nbool SnapshotManager::GetMappedImageDeviceStringOrPath(const std::string& device_name,\n                                                       std::string* device_string_or_mapped_path) {\n    auto& dm = DeviceMapper::Instance();\n    // Try getting the device string if it is a device mapper device.\n    if (dm.GetState(device_name) != DmDeviceState::INVALID) {\n        return dm.GetDeviceString(device_name, device_string_or_mapped_path);\n    }\n\n    // Otherwise, get path from IImageManager.\n    if (!images_->GetMappedImageDevice(device_name, device_string_or_mapped_path)) {\n        return false;\n    }\n\n    LOG(WARNING) << \"Calling GetMappedImageDevice with local image manager; device \"\n                 << (device_string_or_mapped_path ? *device_string_or_mapped_path : \"(nullptr)\")\n                 << \"may not be available in first stage init! \";\n    return true;\n}\n",
+        "b_contents": "bool SnapshotManager::GetMappedImageDeviceStringOrPath(const std::string& device_name,\n                                                       std::string* device_string_or_mapped_path) {\n    auto& dm = DeviceMapper::Instance();\n    // Try getting the device string if it is a device mapper device.\n    if (dm.GetState(device_name) != DmDeviceState::INVALID) {\n        return dm.GetDeviceString(device_name, device_string_or_mapped_path);\n    }\n\n    // Otherwise, get path from IImageManager.\n    if (!images_->GetMappedImageDevice(device_name, device_string_or_mapped_path)) {\n        return false;\n    }\n\n    LOG(WARNING) << \"Calling GetMappedImageDevice with local image manager; device \"\n                 << (device_string_or_mapped_path ? *device_string_or_mapped_path : \"(nullptr)\")\n                 << \"may not be available in first stage init! \";\n    return true;\n}\n",
+        "base_contents": "",
+        "res_region": "ISnapshotMergeStats* SnapshotManager::GetSnapshotMergeStatsInstance() {\n    return SnapshotMergeStats::GetInstance(*this);\n}\n\nbool SnapshotManager::GetMappedImageDeviceStringOrPath(const std::string& device_name,\n                                                       std::string* device_string_or_mapped_path) {\n    auto& dm = DeviceMapper::Instance();\n    // Try getting the device string if it is a device mapper device.\n    if (dm.GetState(device_name) != DmDeviceState::INVALID) {\n        return dm.GetDeviceString(device_name, device_string_or_mapped_path);\n    }\n\n    // Otherwise, get path from IImageManager.\n    if (!images_->GetMappedImageDevice(device_name, device_string_or_mapped_path)) {\n        return false;\n    }\n\n    LOG(WARNING) << \"Calling GetMappedImageDevice with local image manager; device \"\n                 << (device_string_or_mapped_path ? *device_string_or_mapped_path : \"(nullptr)\")\n                 << \"may not be available in first stage init! \";\n    return true;\n}\n",
+        "lookback": "    return SnapshotMergeStats::GetInstance(*this);",
+        "lookahead": "}  // namespace snapshot",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2739,
+        "end_line": 2784,
+        "merge_gen_region": null,
+        "confidence": 0.8100169897079468,
+        "hesitated": true
+    }
+]

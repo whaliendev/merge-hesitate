@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    if(res == LV_FS_RES_OK) {\n        success = lvgl_load_font(&file, font);",
+        "b_contents": "    if(file) {\n        success = lvgl_load_font(file, font);\n    }",
+        "base_contents": "    if(res == LV_FS_RES_OK) {\n        success = lvgl_load_font(&file, font);\n    }",
+        "res_region": "    if(file) {\n        success = lvgl_load_font(file, font);\n    }",
+        "lookback": "        success = lvgl_load_font(file, font);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 95,
+        "end_line": 106,
+        "merge_gen_region": null,
+        "confidence": 0.6655884981155396,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        lv_fs_close(&file);\n    }",
+        "b_contents": "    lv_fs_close(file);",
+        "base_contents": "    lv_fs_close(&file);",
+        "res_region": "    lv_fs_close(file);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 119,
+        "end_line": 126,
+        "merge_gen_region": null,
+        "confidence": 0.7370338439941406,
+        "hesitated": true
+    }
+]

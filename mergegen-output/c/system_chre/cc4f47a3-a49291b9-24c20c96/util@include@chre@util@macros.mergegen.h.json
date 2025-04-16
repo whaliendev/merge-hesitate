@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#endif\n\n/**\n * Checks if a bitmask contains the specified value\n */\n#ifndef BITMASK_HAS_VALUE\n#define BITMASK_HAS_VALUE(mask, value) ((mask & value) == value)\n#endif\n\n/**\n * Min/max macros.\n */\n#ifndef MIN\n#define MIN(a, b) ((a) < (b) ? (a) : (b))\n#endif\n\n#ifndef MAX\n#define MAX(a, b) ((a) > (b) ? (a) : (b))\n#endif",
+        "b_contents": "#endif",
+        "base_contents": "",
+        "res_region": "#endif\n\n/**\n * Checks if a bitmask contains the specified value\n */\n#ifndef BITMASK_HAS_VALUE\n#define BITMASK_HAS_VALUE(mask, value) ((mask & value) == value)\n#endif\n\n/**\n * Min/max macros.\n */\n#ifndef MIN\n#define MIN(a, b) ((a) < (b) ? (a) : (b))\n#endif\n\n#ifndef MAX\n#define MAX(a, b) ((a) > (b) ? (a) : (b))\n#endif",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 45,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.811434268951416,
+        "hesitated": true
+    }
+]

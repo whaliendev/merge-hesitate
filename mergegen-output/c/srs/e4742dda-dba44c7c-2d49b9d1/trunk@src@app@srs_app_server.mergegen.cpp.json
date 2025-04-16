@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            srs_error(\"srs is already running!\");\n            return srs_error_new(ERROR_SYSTEM_PID_ALREADY_RUNNING, \"srs is already running\");",
+        "b_contents": "            ret = ERROR_SYSTEM_PID_ALREADY_RUNNING;\n            srs_error(\"srs is already running! ret=%#x\", ret);\n            ::close(fd);\n            return ret;",
+        "base_contents": "            ret = ERROR_SYSTEM_PID_ALREADY_RUNNING;\n            srs_error(\"srs is already running! ret=%#x\", ret);\n            return ret;",
+        "res_region": "            ::close(fd);\n            srs_error(\"srs is already running!\");\n            return srs_error_new(ERROR_SYSTEM_PID_ALREADY_RUNNING, \"srs is already running\");",
+        "lookback": "            srs_error(\"srs is already running!\");",
+        "lookahead": "        }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 655,
+        "end_line": 667,
+        "merge_gen_region": null,
+        "confidence": 0.6765325665473938,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tstruct sway_container *tmp = parent;\n\twhile (parent) {\n\t\ttmp = parent->parent;",
+        "b_contents": "\t// Insert the child before applying config so that the container coordinates\n\t// get updated\n\tcontainer_add_child(&root_container, output);\n\tapply_output_config(oc, output);\n\n\tload_swaybars();",
+        "base_contents": "\tapply_output_config(oc, output);\n\tcontainer_add_child(&root_container, output);\n\tload_swaybars();",
+        "res_region": "\tstruct sway_container *tmp = parent;\n\twhile (parent) {\n\t\ttmp = parent->parent;",
+        "lookback": "\twhile (parent) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 268,
+        "end_line": 283,
+        "merge_gen_region": null,
+        "confidence": 0.7009707689285278,
+        "hesitated": true
+    }
+]

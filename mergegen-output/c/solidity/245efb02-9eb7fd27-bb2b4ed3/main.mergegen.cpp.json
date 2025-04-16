@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tprinter.print(cout);\n\n\tbytes instructions;\n\tCompiler compiler;\n\ttry\n\t{\n\t\tcompiler.compileContract(*ast);\n\t\tinstructions = compiler.getAssembledBytecode();\n\t}\n\tcatch (CompilerError const& exception)\n\t{\n\t\tSourceReferenceFormatter::printExceptionInformation(cerr, exception, \"Compiler error\", *scanner);\n\t\treturn -1;\n\t}\n\n\tcout << \"EVM assembly:\" << endl;\n\tcompiler.streamAssembly(cout);\n\tcout << \"Opcodes:\" << endl;\n\tcout << eth::disassemble(instructions) << endl;\n\tcout << \"Binary: \" << toHex(instructions) << endl;\n",
+        "b_contents": "\tprinter.print(std::cout);\n\n\tFirstExpressionExtractor extractor(*ast);\n\n\tCompilerContext context;\n\tExpressionCompiler compiler(context);\n\tcompiler.compile(*extractor.getExpression());\n\tbytes instructions = compiler.getAssembledBytecode();\n\t// debug\n\tstd::cout << \"Bytecode for the first expression: \" << std::endl;\n\tstd::cout << eth::disassemble(instructions) << std::endl;\n",
+        "base_contents": "\tprinter.print(std::cout);",
+        "res_region": "\tprinter.print(cout);\n\n\tbytes instructions;\n\tCompiler compiler;\n\ttry\n\t{\n\t\tcompiler.compileContract(*ast);\n\t\tinstructions = compiler.getAssembledBytecode();\n\t}\n\tcatch (CompilerError const& exception)\n\t{\n\t\tSourceReferenceFormatter::printExceptionInformation(cerr, exception, \"Compiler error\", *scanner);\n\t\treturn -1;\n\t}\n\n\tcout << \"EVM assembly:\" << endl;\n\tcompiler.streamAssembly(cout);\n\tcout << \"Opcodes:\" << endl;\n\tcout << eth::disassemble(instructions) << endl;\n\tcout << \"Binary: \" << toHex(instructions) << endl;\n",
+        "lookback": "",
+        "lookahead": "\treturn 0;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 145,
+        "end_line": 182,
+        "merge_gen_region": null,
+        "confidence": 0.857434093952179,
+        "hesitated": true
+    }
+]

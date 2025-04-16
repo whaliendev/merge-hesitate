@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (builtin)\n\t\texit(run_builtin(builtin, argc, argv, the_repository));",
+        "b_contents": "\tif (builtin) {\n\t\tint ret = run_builtin(builtin, argc, argv);\n\t\tstrvec_clear(&args);\n\t\tfree(argv_copy);\n\t\texit(ret);\n\t}\n",
+        "base_contents": "\tif (builtin)\n\t\texit(run_builtin(builtin, argc, argv));",
+        "res_region": "\tif (builtin) {\n\t\tint ret = run_builtin(builtin, argc, argv, the_repository);\n\t\tstrvec_clear(&args);\n\t\tfree(argv_copy);\n\t\texit(ret);\n\t}\n",
+        "lookback": "\t\tint ret = run_builtin(builtin, argc, argv, the_repository);",
+        "lookahead": "\tstrvec_clear(&args);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 747,
+        "end_line": 761,
+        "merge_gen_region": null,
+        "confidence": 0.8204368948936462,
+        "hesitated": true
+    }
+]

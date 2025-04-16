@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,",
+        "b_contents": "        const std::string& clientPackageName,",
+        "base_contents": "        const String16& clientPackageName,",
+        "res_region": "        std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n        const std::string& clientPackageName,",
+        "lookback": "        const std::string& clientPackageName,",
+        "lookahead": "        bool systemNativeClient,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 51,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.4715065062046051,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                __FUNCTION__, TClientBase::mCameraIdStr.c_str(), strerror(-res), res);\n        return res;\n    }\n\n    // Verify ops permissions\n    res = TClientBase::startCameraOps();\n    if (res != OK) {\n        TClientBase::finishCameraOps();",
+        "b_contents": "                __FUNCTION__, TClientBase::mCameraIdStr.c_str(), strerror(-res), res);",
+        "base_contents": "                __FUNCTION__, TClientBase::mCameraIdStr.string(), strerror(-res), res);",
+        "res_region": "                __FUNCTION__, TClientBase::mCameraIdStr.c_str(), strerror(-res), res);\n        return res;\n    }\n\n    // Verify ops permissions\n    res = TClientBase::startCameraOps();\n    if (res != OK) {\n        TClientBase::finishCameraOps();",
+        "lookback": "        return res;",
+        "lookahead": "        return res;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 146,
+        "end_line": 159,
+        "merge_gen_region": null,
+        "confidence": 0.713961660861969,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    ALOGI(\"%s: Client object's dtor for Camera Id %s completed. Client was: %s (PID %d, UID %u)\",\n            __FUNCTION__, TClientBase::mCameraIdStr.c_str(),\n            TClientBase::mClientPackageName.c_str(),",
+        "b_contents": "    ALOGI(\"Closed Camera %s. Client was: %s (PID %d, UID %u)\",\n            TClientBase::mCameraIdStr.c_str(),\n            TClientBase::mClientPackageName.c_str(),",
+        "base_contents": "    ALOGI(\"Closed Camera %s. Client was: %s (PID %d, UID %u)\",\n            TClientBase::mCameraIdStr.string(),\n            String8(TClientBase::mClientPackageName).string(),",
+        "res_region": "    ALOGI(\"%s: Client object's dtor for Camera Id %s completed. Client was: %s (PID %d, UID %u)\",\n            __FUNCTION__, TClientBase::mCameraIdStr.c_str(),\n            TClientBase::mClientPackageName.c_str(),",
+        "lookback": "            __FUNCTION__, TClientBase::mCameraIdStr.c_str(),",
+        "lookahead": "            mInitialClientPid, TClientBase::mClientUid);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 197,
+        "end_line": 209,
+        "merge_gen_region": null,
+        "confidence": 0.7910292148590088,
+        "hesitated": true
+    }
+]

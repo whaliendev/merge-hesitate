@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "public:\n    // Remove this when Oboeservice is updated to obtain handle directly.\n    static inline std::atomic<AudioFlinger*> gAudioFlinger = nullptr;\n\nprivate:\n",
+        "base_contents": "    // Set kEnableExtendedChannels to true to enable greater than stereo output\n    // for the MixerThread and device sink.  Number of channels allowed is\n    // FCC_2 <= channels <= AudioMixer::MAX_NUM_CHANNELS.\n    static const bool kEnableExtendedChannels = true;\n\npublic:\n    // Remove this when Oboeservice is updated to obtain handle directly.\n    static inline std::atomic<AudioFlinger*> gAudioFlinger = nullptr;\n\n    // Returns true if channel mask is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkChannelMask(audio_channel_mask_t channelMask) {\n        switch (audio_channel_mask_get_representation(channelMask)) {\n        case AUDIO_CHANNEL_REPRESENTATION_POSITION: {\n            // Haptic channel mask is only applicable for channel position mask.\n            const uint32_t channelCount = audio_channel_count_from_out_mask(\n                    static_cast<audio_channel_mask_t>(channelMask & ~AUDIO_CHANNEL_HAPTIC_ALL));\n            const uint32_t maxChannelCount = kEnableExtendedChannels\n                    ? AudioMixer::MAX_NUM_CHANNELS : FCC_2;\n            if (channelCount < FCC_2 // mono is not supported at this time\n                    || channelCount > maxChannelCount) {\n                return false;\n            }\n            // check that channelMask is the \"canonical\" one we expect for the channelCount.\n            return audio_channel_position_mask_is_out_canonical(channelMask);\n            }\n        case AUDIO_CHANNEL_REPRESENTATION_INDEX:\n            if (kEnableExtendedChannels) {\n                const uint32_t channelCount = audio_channel_count_from_out_mask(channelMask);\n                if (channelCount >= FCC_2 // mono is not supported at this time\n                        && channelCount <= AudioMixer::MAX_NUM_CHANNELS) {\n                    return true;\n                }\n            }\n            return false;\n        default:\n            return false;\n        }\n    }\n\n    // Set kEnableExtendedPrecision to true to use extended precision in MixerThread\n    static const bool kEnableExtendedPrecision = true;\n\n    // Returns true if format is permitted for the PCM sink in the MixerThread\n    static inline bool isValidPcmSinkFormat(audio_format_t format) {\n        switch (format) {\n        case AUDIO_FORMAT_PCM_16_BIT:\n            return true;\n        case AUDIO_FORMAT_PCM_FLOAT:\n        case AUDIO_FORMAT_PCM_24_BIT_PACKED:\n        case AUDIO_FORMAT_PCM_32_BIT:\n        case AUDIO_FORMAT_PCM_8_24_BIT:\n            return kEnableExtendedPrecision;\n        default:\n            return false;\n        }\n    }\n\nprivate:\n",
+        "res_region": "",
+        "lookback": "    // AudioFlinger::setParameters() updates with mLock.",
+        "lookahead": "    // incremented by 2 when screen state changes, bit 0 == 1 means \"off\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 397,
+        "end_line": 465,
+        "merge_gen_region": " AudioFlingerset() withLock",
+        "confidence": 0.9289559721946716,
+        "hesitated": false,
+        "resolved": false
+    }
+]

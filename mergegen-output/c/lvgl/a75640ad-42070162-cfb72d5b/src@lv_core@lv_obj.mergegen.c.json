@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"../lv_misc/lv_gc.h\"\n#include \"../lv_misc/lv_math.h\"",
+        "base_contents": "#include \"../lv_misc/lv_gc.h\"",
+        "res_region": "#include \"../lv_misc/lv_gc.h\"\n#include \"../lv_misc/lv_math.h\"",
+        "lookback": "#include \"../lv_misc/lv_math.h\"",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 25,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.5721058249473572,
+        "hesitated": true
+    }
+]

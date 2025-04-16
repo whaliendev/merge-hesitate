@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        tls_ctx_t *_tls_ctx)",
+        "b_contents": "        boost::shared_ptr<semilattice_read_view_t<auth_semilattice_metadata_t> >\n            _auth_sl_view,\n        SSL_CTX *_tls_ctx)",
+        "base_contents": "        SSL_CTX *_tls_ctx)",
+        "res_region": "        boost::shared_ptr<semilattice_read_view_t<auth_semilattice_metadata_t> >\n            _auth_sl_view,\n        tls_ctx_t *_tls_ctx)",
+        "lookback": "            _auth_sl_view,",
+        "lookahead": "        THROWS_ONLY(address_in_use_exc_t, tcp_socket_exc_t) :",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 224,
+        "end_line": 232,
+        "merge_gen_region": null,
+        "confidence": 0.5509016513824463,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n            const std::string& clientPackageName,\n            const std::optional<std::string>& clientFeatureId,\n            const std::string& cameraDeviceId,",
+        "b_contents": "            const std::string& clientPackageName,\n            const std::optional<std::string>& clientFeatureId,\n            const std::string& cameraDeviceId,",
+        "base_contents": "            const String16& clientPackageName,\n            const std::optional<String16>& clientFeatureId,\n            const String8& cameraDeviceId,",
+        "res_region": "            std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n            const std::string& clientPackageName,\n            const std::optional<std::string>& clientFeatureId,\n            const std::string& cameraDeviceId,",
+        "lookback": "            const std::string& clientPackageName,",
+        "lookahead": "            int api1CameraId,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 108,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.5763100385665894,
+        "hesitated": true
+    }
+]

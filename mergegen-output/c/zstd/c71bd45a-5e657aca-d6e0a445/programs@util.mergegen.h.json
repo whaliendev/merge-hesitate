@@ -1,0 +1,55 @@
+[
+    {
+        "a_contents": "/*-*************************************\n*  Constants\n***************************************/\n#define LIST_SIZE_INCREASE   (8*1024)\n#define MAX_FILE_OF_FILE_NAMES_SIZE (1<<20)*50\n",
+        "b_contents": "",
+        "base_contents": "/*-*************************************\n*  Constants\n***************************************/\n#define LIST_SIZE_INCREASE   (8*1024)\n\n",
+        "res_region": "",
+        "lookback": "*  Compiler specifics",
+        "lookahead": "/*-****************************************",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 87,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.720292329788208,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\nU64 UTIL_getTotalFileSize(const char* const * fileNamesTable, unsigned nbFiles);",
+        "b_contents": "U64 UTIL_getTotalFileSize(const char* const * const fileNamesTable, unsigned nbFiles);\nint UTIL_getFileStat(const char* infilename, stat_t* statbuf);\nint UTIL_setFileStat(const char* filename, stat_t* statbuf);\nint UTIL_chmod(char const* filename, mode_t permissions);   /*< like chmod, but avoid changing permission of /dev/null */\nint UTIL_compareStr(const void *p1, const void *p2);\nconst char* UTIL_getFileExtension(const char* infilename);\n",
+        "base_contents": "\nU64 UTIL_getTotalFileSize(const char* const * const fileNamesTable, unsigned nbFiles);",
+        "res_region": "U64 UTIL_getTotalFileSize(const char* const * const fileNamesTable, unsigned nbFiles);\nint UTIL_getFileStat(const char* infilename, stat_t* statbuf);\nint UTIL_setFileStat(const char* filename, stat_t* statbuf);\nint UTIL_chmod(char const* filename, mode_t permissions);   /*< like chmod, but avoid changing permission of /dev/null */\nint UTIL_compareStr(const void *p1, const void *p2);\nconst char* UTIL_getFileExtension(const char* infilename);\n",
+        "lookback": "int UTIL_getFileStat(const char* infilename, stat_t* statbuf);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 149,
+        "end_line": 163,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8873800039291382,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/*\n * A modified version of realloc().\n * If UTIL_realloc() fails the original block is freed.\n*/\nUTIL_STATIC void* UTIL_realloc(void* ptr, size_t size)\n{\n    void* const newptr = realloc(ptr, size);\n    if (newptr) return newptr;\n    free(ptr);\n    return NULL;\n}",
+        "base_contents": "/*\n * A modified version of realloc().\n * If UTIL_realloc() fails the original block is freed.\n*/\nUTIL_STATIC void* UTIL_realloc(void *ptr, size_t size)\n{\n    void *newptr = realloc(ptr, size);\n    if (newptr) return newptr;\n    free(ptr);\n    return NULL;\n}",
+        "res_region": "",
+        "lookback": "/*-****************************************",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 165,
+        "end_line": 190,
+        "merge_gen_region": "",
+        "confidence": 0.9265663027763367,
+        "hesitated": false,
+        "resolved": true
+    }
+]

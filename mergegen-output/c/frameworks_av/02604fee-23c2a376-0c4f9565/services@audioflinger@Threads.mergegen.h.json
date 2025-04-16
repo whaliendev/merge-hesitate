@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    audio_stream_type_t streamType_l() const final REQUIRES(mutex()) {\n        return mStreamType;\n    }",
+        "b_contents": "    audio_stream_type_t streamType() const final EXCLUDES_ThreadBase_Mutex {\n        audio_utils::lock_guard l(mutex());\n        return mStreamType;\n    }",
+        "base_contents": "    audio_stream_type_t streamType() const final { return mStreamType; }",
+        "res_region": "    audio_stream_type_t streamType_l() const final REQUIRES(mutex()) {\n        return mStreamType;\n    }",
+        "lookback": "        return mStreamType;",
+        "lookahead": "    void checkSilentMode_l() final REQUIRES(mutex());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2332,
+        "end_line": 2343,
+        "merge_gen_region": "_streamtypetTypel const REQUI(()) audioutilsbaseH&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+        "confidence": 0.9038242697715759,
+        "hesitated": false,
+        "resolved": false
+    }
+]

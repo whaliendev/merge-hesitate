@@ -1,0 +1,105 @@
+[
+    {
+        "a_contents": "const std::string default_column_family_name(\"default\");\n",
+        "b_contents": "int DBImpl::SuperVersion::dummy = 0;\nvoid* const DBImpl::SuperVersion::kSVInUse = &DBImpl::SuperVersion::dummy;\nvoid* const DBImpl::SuperVersion::kSVObsolete = nullptr;\n",
+        "base_contents": "",
+        "res_region": "const std::string default_column_family_name(\"default\");\n",
+        "lookback": "",
+        "lookahead": "void DumpLeveldbBuildVersion(Logger * log);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 70,
+        "end_line": 79,
+        "merge_gen_region": null,
+        "confidence": 0.8651200532913208,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  mutex_.Unlock();\n\n  // Release SuperVersion reference kept in ThreadLocalPtr.\n  // This must be done outside of mutex_ since unref handler can lock mutex.\n  // It also needs to be done after FlushMemTable, which can trigger local_sv_\n  // access.\n  delete local_sv_;\n\n  mutex_.Lock();\n  if (super_version_ != nullptr) {\n    bool is_last_reference __attribute__((unused));\n    is_last_reference = super_version_->Unref();\n    assert(is_last_reference);\n    super_version_->Cleanup();\n    delete super_version_;\n  }",
+        "base_contents": "  if (super_version_ != nullptr) {\n    bool is_last_reference __attribute__((unused));\n    is_last_reference = super_version_->Unref();\n    assert(is_last_reference);\n    super_version_->Cleanup();\n    delete super_version_;\n  }",
+        "res_region": "",
+        "lookback": "  // Prevent new compactions from occuring.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 364,
+        "end_line": 390,
+        "merge_gen_region": null,
+        "confidence": 0.6391462683677673,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    InstallSuperVersion(cfd, deletion_state);\n    // Reset SuperVersions cached in thread local storage\n    if (options_.allow_thread_local) {\n      cfd->ResetThreadLocalSuperVersions();\n    }",
+        "b_contents": "    InstallSuperVersion(deletion_state);",
+        "base_contents": "    InstallSuperVersion(deletion_state);\n    // Reset SuperVersions cached in thread local storage\n    if (options_.allow_thread_local) {\n      ResetThreadLocalSuperVersions(&deletion_state);\n    }",
+        "res_region": "    InstallSuperVersion(cfd, deletion_state);",
+        "lookback": "    if (madeProgress) {",
+        "lookahead": "    if (madeProgress) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1299,
+        "end_line": 1313,
+        "merge_gen_region": null,
+        "confidence": 0.5776053667068481,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "DBImpl::SuperVersion* DBImpl::InstallSuperVersion(\n    SuperVersion* new_superversion) {\n  mutex_.AssertHeld();\n  new_superversion->Init(mem_, imm_.current(), versions_->current());\n  SuperVersion* old_superversion = super_version_;\n  super_version_ = new_superversion;\n  super_version_->db = this;\n  ++super_version_number_;\n  super_version_->version_number = super_version_number_;\n\n  if (old_superversion != nullptr && old_superversion->Unref()) {\n    old_superversion->Cleanup();\n    return old_superversion; // will let caller delete outside of mutex\n  }\n  return nullptr;\n}\n\nvoid DBImpl::ResetThreadLocalSuperVersions(DeletionState* deletion_state) {\n  mutex_.AssertHeld();\n  autovector<void*> sv_ptrs;\n  local_sv_->Scrape(&sv_ptrs, SuperVersion::kSVObsolete);\n  for (auto ptr : sv_ptrs) {\n    assert(ptr);\n    if (ptr == SuperVersion::kSVInUse) {\n      continue;\n    }\n    auto sv = static_cast<SuperVersion*>(ptr);\n    if (static_cast<SuperVersion*>(ptr)->Unref()) {\n      sv->Cleanup();\n      deletion_state->superversions_to_free.push_back(sv);\n    }\n  }\n}\n",
+        "base_contents": "DBImpl::SuperVersion* DBImpl::InstallSuperVersion(\n    SuperVersion* new_superversion) {\n  mutex_.AssertHeld();\n  new_superversion->Init(mem_, imm_.current(), versions_->current());\n  SuperVersion* old_superversion = super_version_;\n  super_version_ = new_superversion;\n  super_version_->db = this;\n  ++super_version_number_;\n  super_version_->version_number = super_version_number_;\n\n  if (old_superversion != nullptr && old_superversion->Unref()) {\n    old_superversion->Cleanup();\n    return old_superversion; // will let caller delete outside of mutex\n  }\n  return nullptr;\n}\n\nvoid DBImpl::ResetThreadLocalSuperVersions(DeletionState* deletion_state) {\n  mutex_.AssertHeld();\n  autovector<void*> sv_ptrs;\n  local_sv_->Scrape(&sv_ptrs);\n  for (auto ptr : sv_ptrs) {\n    assert(ptr);\n    auto sv = static_cast<SuperVersion*>(ptr);\n    if (static_cast<SuperVersion*>(ptr)->Unref()) {\n      sv->Cleanup();\n      deletion_state->superversions_to_free.push_back(sv);\n    }\n  }\n}\n",
+        "res_region": "",
+        "lookback": "                       ColumnFamilyHandle* column_family, const Slice& key,",
+        "lookahead": "Status DBImpl::GetImpl(const ReadOptions& options,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2929,
+        "end_line": 2997,
+        "merge_gen_region": null,
+        "confidence": 0.776028573513031,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    sv = cfd->GetAndResetThreadLocalSuperVersion();\n    if (!sv || sv->version_number != cfd->GetSuperVersionNumber()) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_UPDATES);",
+        "b_contents": "    void* ptr = local_sv_->Swap(SuperVersion::kSVInUse);\n    // Invariant:\n    // (1) Scrape (always) installs kSVObsolete in ThreadLocal storage\n    // (2) the Swap above (always) installs kSVInUse, ThreadLocal storage\n    // should only keep kSVInUse during a GetImpl.\n    assert(ptr != SuperVersion::kSVInUse);\n    sv = static_cast<SuperVersion*>(ptr);\n    if (sv == SuperVersion::kSVObsolete ||\n        sv->version_number != super_version_number_.load(\n          std::memory_order_relaxed)) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_ACQUIRES);",
+        "base_contents": "    sv = static_cast<SuperVersion*>(local_sv_->Swap(nullptr));\n    if (!sv || sv->version_number !=\n               super_version_number_.load(std::memory_order_relaxed)) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_UPDATES);",
+        "res_region": "    thread_local_sv = cfd->GetThreadLocalSuperVersion();\n    void* ptr = thread_local_sv->Swap(SuperVersion::kSVInUse);\n    // Invariant:\n    // (1) Scrape (always) installs kSVObsolete in ThreadLocal storage\n    // (2) the Swap above (always) installs kSVInUse, ThreadLocal storage\n    // should only keep kSVInUse during a GetImpl.\n    assert(ptr != SuperVersion::kSVInUse);\n    sv = static_cast<SuperVersion*>(ptr);\n    if (sv == SuperVersion::kSVObsolete ||\n        sv->version_number != cfd->GetSuperVersionNumber()) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_ACQUIRES);",
+        "lookback": "    void* ptr = thread_local_sv->Swap(SuperVersion::kSVInUse);",
+        "lookahead": "      SuperVersion* sv_to_delete = nullptr;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3027,
+        "end_line": 3048,
+        "merge_gen_region": "* =___->(VersionkInUse //variant: ()apealways install kVOolete inLocal storage () Swap () install kInUse Thread storage // only keepSV during aImpl assertptr Super::SV during Get. {.(. Get..2Re..2Re..2Re..Re..2dexdexdexdexdexdexdexdexdexdexdexdex7979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.8913074731826782,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    cfd->SetThreadLocalSuperVersion(sv);\n  } else {",
+        "b_contents": "    void* expected = SuperVersion::kSVInUse;\n    if (local_sv_->CompareAndSwap(static_cast<void*>(sv), expected)) {\n      // When we see kSVInUse in the ThreadLocal, we are sure ThreadLocal\n      // storage has not been altered and no Scrape has happend. The\n      // SuperVersion is still current.\n      unref_sv = false;\n    } else {\n      // ThreadLocal scrape happened in the process of this GetImpl call (after\n      // thread local Swap() at the beginning and before CompareAndSwap()).\n      // This means the SuperVersion it holds is obsolete.\n      assert(expected == SuperVersion::kSVObsolete);\n    }\n  }\n\n  if (unref_sv) {\n    // Release SuperVersion",
+        "base_contents": "    local_sv_->Reset(static_cast<void*>(sv));\n  } else {",
+        "res_region": "    void* expected = SuperVersion::kSVInUse;\n    if (thread_local_sv->CompareAndSwap(static_cast<void*>(sv), expected)) {\n      // When we see kSVInUse in the ThreadLocal, we are sure ThreadLocal\n      // storage has not been altered and no Scrape has happend. The\n      // SuperVersion is still current.\n      unref_sv = false;\n    } else {\n      // ThreadLocal scrape happened in the process of this GetImpl call (after\n      // thread local Swap() at the beginning and before CompareAndSwap()).\n      // This means the SuperVersion it holds is obsolete.\n      assert(expected == SuperVersion::kSVObsolete);\n    }\n  }\n\n  if (unref_sv) {\n    // Release SuperVersion",
+        "lookback": "    if (thread_local_sv->CompareAndSwap(static_cast<void*>(sv), expected)) {",
+        "lookahead": "    bool delete_sv = false;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3114,
+        "end_line": 3137,
+        "merge_gen_region": null,
+        "confidence": 0.8301360011100769,
+        "hesitated": true
+    }
+]

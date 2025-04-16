@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (sym < 70000 /* bullshit made up number */) {\n\t\tif (!isalnum(sym) && sym != ' ' && sym != XKB_KEY_Escape && sym != XKB_KEY_Tab) {\n\t\t\t// God fucking dammit\n\t\t\treturn EVENT_PASSTHROUGH;\n\t\t}\n\t}\n\n\t// Lowercase if necessary\n\tsym = tolower(sym);\n",
+        "b_contents": "",
+        "base_contents": "\tif (sym < 70000 /* bullshit made up number */) {\n\t\tif (!isalnum(sym) && sym != ' ' && sym != XKB_KEY_Escape && sym != XKB_KEY_Tab) {\n\t\t\t// God fucking dammit\n\t\t\treturn false;\n\t\t}\n\t}\n\n\t// Lowercase if necessary\n\tsym = tolower(sym);\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "\tint i;",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 300,
+        "end_line": 323,
+        "merge_gen_region": null,
+        "confidence": 0.8591107130050659,
+        "hesitated": true
+    }
+]

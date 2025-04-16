@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "using ::testing::AllOf;\n\nMATCHER_P(WithAction, action, \"InputEvent with specified action\") {\n    return arg.action == action;\n}\n\nMATCHER_P(WithSource, source, \"InputEvent with specified source\") {\n    return arg.source == source;\n}\n\nMATCHER_P(WithDisplayId, displayId, \"InputEvent with specified displayId\") {\n    return arg.displayId == displayId;\n}\n\nMATCHER_P2(WithCoords, x, y, \"MotionEvent with specified action\") {\n    return arg.pointerCoords[0].getX() == x && arg.pointerCoords[0].getY();\n}\n\nMATCHER_P(WithToolType, toolType, \"InputEvent with specified tool type\") {\n    const auto argToolType = arg.pointerProperties[0].toolType;\n    *result_listener << \"expected tool type \" << motionToolTypeToString(toolType) << \", but got \"\n                     << motionToolTypeToString(argToolType);\n    return argToolType == toolType;\n}\n",
+        "base_contents": "using ::testing::AllOf;\n\nMATCHER_P(WithAction, action, \"InputEvent with specified action\") {\n    return arg.action == action;\n}\n\nMATCHER_P(WithSource, source, \"InputEvent with specified source\") {\n    return arg.source == source;\n}\n\nMATCHER_P(WithDisplayId, displayId, \"InputEvent with specified displayId\") {\n    return arg.displayId == displayId;\n}\n\nMATCHER_P2(WithCoords, x, y, \"MotionEvent with specified action\") {\n    return arg.pointerCoords[0].getX() == x && arg.pointerCoords[0].getY();\n}\n",
+        "res_region": "",
+        "lookback": "static inline T min(T a, T b) {",
+        "lookahead": "template<typename T>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 101,
+        "end_line": 147,
+        "merge_gen_region": null,
+        "confidence": 0.7093271017074585,
+        "hesitated": true
+    }
+]

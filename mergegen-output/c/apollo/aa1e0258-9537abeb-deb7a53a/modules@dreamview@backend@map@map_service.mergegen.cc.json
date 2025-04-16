@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "double MapService::GetLaneHeading(const std::string &id_str, double s) {\n  auto *hdmap = HDMap();\n  CHECK(hdmap) << \"Failed to get hdmap\";\n\n  Id id;\n  id.set_id(id_str);\n  LaneInfoConstPtr lane_ptr = hdmap->GetLaneById(id);\n  if (lane_ptr != nullptr) {\n    return lane_ptr->Heading(s);\n  }\n  return 0.0;\n}\n",
+        "b_contents": "double MapService::GetLaneHeading(const std::string& id_str, double s) {\n  auto* hdmap = HDMap();\n  CHECK(hdmap) << \"Failed to get hdmap\";\n\n  Id id;\n  id.set_id(id_str);\n  LaneInfoConstPtr lane_ptr = hdmap->GetLaneById(id);\n  if (lane_ptr != nullptr) {\n    return lane_ptr->Heading(s);\n  }\n  return 0.0;\n}\n\n",
+        "base_contents": "",
+        "res_region": "double MapService::GetLaneHeading(const std::string &id_str, double s) {\n  auto *hdmap = HDMap();\n  CHECK(hdmap) << \"Failed to get hdmap\";\n\n  Id id;\n  id.set_id(id_str);\n  LaneInfoConstPtr lane_ptr = hdmap->GetLaneById(id);\n  if (lane_ptr != nullptr) {\n    return lane_ptr->Heading(s);\n  }\n  return 0.0;\n}\n",
+        "lookback": "  auto *hdmap = HDMap();",
+        "lookahead": "}  // namespace dreamview",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 576,
+        "end_line": 606,
+        "merge_gen_region": null,
+        "confidence": 0.7768252491950989,
+        "hesitated": true
+    }
+]

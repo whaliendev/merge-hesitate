@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  if (current_scenario_->scenario_type() == ScenarioConfig::SIDE_PASS &&\n      current_scenario_->IsTransferable(*current_scenario_, frame)) {\n    return ScenarioConfig::SIDE_PASS;\n  }\n\n  auto scenario = CreateScenario(ScenarioConfig::SIDE_PASS);\n  if (scenario->IsTransferable(*current_scenario_, frame)) {",
+        "b_contents": "  if (scenario::side_pass::SidePassScenario::IsTransferable(\n          frame, config_map_[ScenarioConfig::SIDE_PASS], *current_scenario_)) {",
+        "base_contents": "  if (scenario::side_pass::SidePassScenario::IsTransferable(\n      frame, config_map_[ScenarioConfig::SIDE_PASS], *current_scenario_)) {",
+        "res_region": "//<<<<<<< HEAD\n  if (current_scenario_->scenario_type() == ScenarioConfig::SIDE_PASS &&\n      current_scenario_->IsTransferable(*current_scenario_, frame)) {\n    return ScenarioConfig::SIDE_PASS;\n  }\n\n  auto scenario = CreateScenario(ScenarioConfig::SIDE_PASS);\n  if (scenario->IsTransferable(*current_scenario_, frame)) {\n//=======\n//  if (scenario::side_pass::SidePassScenario::IsTransferable(\n//          frame, config_map_[ScenarioConfig::SIDE_PASS], *current_scenario_)) {\n//>>>>>>> master",
+        "lookback": "  if (current_scenario_->scenario_type() == ScenarioConfig::SIDE_PASS &&",
+        "lookahead": "    return ScenarioConfig::SIDE_PASS;",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 360,
+        "end_line": 374,
+        "merge_gen_region": null,
+        "confidence": 0.833073079586029,
+        "hesitated": true
+    }
+]

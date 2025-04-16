@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\treturn sign_buffer(buffer, buffer, get_signing_key()) ? -1 : 0;",
+        "b_contents": "\tconst struct git_hash_algo *compat = the_repository->compat_hash_algo;\n\tstruct strbuf sig = STRBUF_INIT, compat_sig = STRBUF_INIT;\n\tstruct strbuf compat_buf = STRBUF_INIT;\n\tconst char *keyid = get_signing_key();\n\tint ret = -1;\n\n\tif (sign_buffer(buffer, &sig, keyid))\n\t\treturn -1;\n\n\tif (compat) {\n\t\tconst struct git_hash_algo *algo = the_repository->hash_algo;\n\n\t\tif (convert_object_file(&compat_buf, algo, compat,\n\t\t\t\t\tbuffer->buf, buffer->len, OBJ_TAG, 1))\n\t\t\tgoto out;\n\t\tif (sign_buffer(&compat_buf, &compat_sig, keyid))\n\t\t\tgoto out;\n\t\tadd_header_signature(&compat_buf, &sig, algo);\n\t\tstrbuf_addbuf(&compat_buf, &compat_sig);\n\t\thash_object_file(compat, compat_buf.buf, compat_buf.len,\n\t\t\t\t OBJ_TAG, compat_oid_buf);\n\t\t*compat_oid = compat_oid_buf;\n\t}\n\n\tif (compat_sig.len)\n\t\tadd_header_signature(buffer, &compat_sig, compat);\n\n\tstrbuf_addbuf(buffer, &sig);\n\tret = 0;\nout:\n\tstrbuf_release(&sig);\n\tstrbuf_release(&compat_sig);\n\tstrbuf_release(&compat_buf);\n\treturn ret;",
+        "base_contents": "\treturn sign_buffer(buffer, buffer, get_signing_key());",
+        "res_region": "\tconst struct git_hash_algo *compat = the_repository->compat_hash_algo;\n\tstruct strbuf sig = STRBUF_INIT, compat_sig = STRBUF_INIT;\n\tstruct strbuf compat_buf = STRBUF_INIT;\n\tconst char *keyid = get_signing_key();\n\tint ret = -1;\n\n\tif (sign_buffer(buffer, &sig, keyid))\n\t\treturn -1;\n\n\tif (compat) {\n\t\tconst struct git_hash_algo *algo = the_repository->hash_algo;\n\n\t\tif (convert_object_file(&compat_buf, algo, compat,\n\t\t\t\t\tbuffer->buf, buffer->len, OBJ_TAG, 1))\n\t\t\tgoto out;\n\t\tif (sign_buffer(&compat_buf, &compat_sig, keyid))\n\t\t\tgoto out;\n\t\tadd_header_signature(&compat_buf, &sig, algo);\n\t\tstrbuf_addbuf(&compat_buf, &compat_sig);\n\t\thash_object_file(compat, compat_buf.buf, compat_buf.len,\n\t\t\t\t OBJ_TAG, compat_oid_buf);\n\t\t*compat_oid = compat_oid_buf;\n\t}\n\n\tif (compat_sig.len)\n\t\tadd_header_signature(buffer, &compat_sig, compat);\n\n\tstrbuf_addbuf(buffer, &sig);\n\tret = 0;\nout:\n\tstrbuf_release(&sig);\n\tstrbuf_release(&compat_sig);\n\tstrbuf_release(&compat_buf);\n\treturn ret;",
+        "lookback": "\tstruct strbuf sig = STRBUF_INIT, compat_sig = STRBUF_INIT;",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 157,
+        "end_line": 196,
+        "merge_gen_region": " strbuf =BUFINIT compatsig STRBUFINIT const githashalgocompat the_->compathashalgo struct sig STR_,__ =BUFINIT struct strbuf_ =BUFINIT struct compatbuf STRBUFINIT const strbuf_ =BUFINIT struct compatbuf STRBUFINIT const charkey = *id getsigningkey int =1 ifsignbufferbufferbuffer &, key)) -; () const githashalgoalgo therepositoryhashalgo therepositoryhashalgo ifconvertobjectfilecompatbuf algo compat bufferbuf buffer->,->,_,,)) out addheadersignaturecompatbuf &,sig algo strbufadd(&_,compatsig hashobjectfilecompat compatbufbuf compatbuflen OBJTAG compatoidbuf *___; ifcompatsiglen addheadersignaturebuffer &,compatsig compat strbufadd(,,);_",
+        "confidence": 0.8949034214019775,
+        "hesitated": false,
+        "resolved": false
+    }
+]

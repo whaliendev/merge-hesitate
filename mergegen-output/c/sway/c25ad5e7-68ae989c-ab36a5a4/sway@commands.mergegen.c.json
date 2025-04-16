@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t{ \"output\", cmd_output },",
+        "b_contents": "\t{ \"include\", cmd_include },",
+        "base_contents": "",
+        "res_region": "\t{ \"include\", cmd_include },\n\t{ \"output\", cmd_output },",
+        "lookback": "\t{ \"output\", cmd_output },",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 97,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.8280462026596069,
+        "hesitated": true
+    }
+]

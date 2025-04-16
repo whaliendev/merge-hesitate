@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "      rate_limit(0.0),\n      max_background_compactions(1) {",
+        "b_contents": "      rate_limit(0.0), \n      CompactionFilter(NULL) {",
+        "base_contents": "      rate_limit(0.0) {",
+        "res_region": "      rate_limit(0.0), \n      CompactionFilter(NULL) {",
+        "lookback": "      CompactionFilter(NULL) {",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 50,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.830819308757782,
+        "hesitated": true
+    }
+]

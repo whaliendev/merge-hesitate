@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            datum_t rhs = args->arg(env, i)->as_datum();\n            if (!(pred)(env->env->reql_version, *lhs, *rhs)) {",
+        "b_contents": "            counted_t<const datum_t> rhs = args->arg(env, i)->as_datum();\n            if (!(pred)(env->env->reql_version(), *lhs, *rhs)) {",
+        "base_contents": "            counted_t<const datum_t> rhs = args->arg(env, i)->as_datum();\n            if (!(pred)(env->env->reql_version, *lhs, *rhs)) {",
+        "res_region": "            datum_t rhs = args->arg(env, i)->as_datum();\n            if (!(pred)(env->env->reql_version(), *lhs, *rhs)) {",
+        "lookback": "            if (!(pred)(env->env->reql_version(), *lhs, *rhs)) {",
+        "lookahead": "                return new_val_bool(static_cast<bool>(false ^ invert));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 69,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.800548791885376,
+        "hesitated": true
+    }
+]

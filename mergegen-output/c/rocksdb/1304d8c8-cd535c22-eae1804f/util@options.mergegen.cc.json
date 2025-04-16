@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      inplace_update_num_locks(10000),\n      inplace_callback(nullptr),\n      memtable_prefix_bloom_bits(0),\n      memtable_prefix_bloom_probes(6) {",
+        "b_contents": "      inplace_update_num_locks(10000),\n      max_successive_merges(0) {",
+        "base_contents": "      inplace_update_num_locks(10000) {",
+        "res_region": "      inplace_update_num_locks(10000),\n      inplace_callback(nullptr),\n      memtable_prefix_bloom_bits(0),\n      memtable_prefix_bloom_probes(6),\n      max_successive_merges(0) {",
+        "lookback": "      inplace_callback(nullptr),",
+        "lookahead": "  assert(memtable_factory.get() != nullptr);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 103,
+        "end_line": 113,
+        "merge_gen_region": null,
+        "confidence": 0.855995774269104,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    // TODO: easier config for bloom (maybe based on avg key/value size)\n    Log(log, \"              Options.memtable_prefix_bloom_bits: %d\",\n        memtable_prefix_bloom_bits);\n    Log(log, \"            Options.memtable_prefix_bloom_probes: %d\",\n        memtable_prefix_bloom_probes);",
+        "b_contents": "    Log(log, \"                   Options.max_successive_merges: %zd\",\n        max_successive_merges);",
+        "base_contents": "",
+        "res_region": "    // TODO: easier config for bloom (maybe based on avg key/value size)\n    Log(log, \"              Options.memtable_prefix_bloom_bits: %d\",\n        memtable_prefix_bloom_bits);\n    Log(log, \"            Options.memtable_prefix_bloom_probes: %d\",\n        memtable_prefix_bloom_probes);\n    Log(log, \"                   Options.max_successive_merges: %zd\",\n        max_successive_merges);",
+        "lookback": "    Log(log, \"              Options.memtable_prefix_bloom_bits: %d\",",
+        "lookahead": "}   // Options::Dump",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 304,
+        "end_line": 314,
+        "merge_gen_region": null,
+        "confidence": 0.6555597186088562,
+        "hesitated": true
+    }
+]

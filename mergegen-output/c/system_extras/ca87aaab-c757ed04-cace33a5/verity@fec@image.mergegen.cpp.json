@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#ifdef IMAGE_NO_SPARSE\nstatic uint64_t get_size(int fd)\n{\n    struct stat st;\n\n    if (fstat(fd, &st) == -1) {\n        FATAL(\"failed to fstat: %s\\n\", strerror(errno));\n    }\n\n    uint64_t size = 0;\n\n    if (S_ISBLK(st.st_mode)) {\n        if (ioctl(fd, BLKGETSIZE64, &size) == -1) {\n            FATAL(\"failed to ioctl(BLKGETSIZE64): %s\\n\", strerror(errno));\n        }\n    } else if (S_ISREG(st.st_mode)) {\n        size = st.st_size;\n    } else {\n        FATAL(\"unknown file mode: %d\\n\", (int)st.st_mode);\n    }\n\n    return size;\n}\n#endif\n",
+        "base_contents": "static uint64_t get_size(int fd)\n{\n    struct stat st;\n\n    if (fstat(fd, &st) == -1) {\n        FATAL(\"failed to fstat: %s\\n\", strerror(errno));\n    }\n\n    uint64_t size = 0;\n\n    if (S_ISBLK(st.st_mode)) {\n        if (ioctl(fd, BLKGETSIZE64, &size) == -1) {\n            FATAL(\"failed to ioctl(BLKGETSIZE64): %s\\n\", strerror(errno));\n        }\n    } else if (S_ISREG(st.st_mode)) {\n        size = st.st_size;\n    } else {\n        FATAL(\"unknown file mode: %d\\n\", (int)st.st_mode);\n    }\n\n    return size;\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "static void calculate_rounds(uint64_t size, image *ctx)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 66,
+        "end_line": 117,
+        "merge_gen_region": null,
+        "confidence": 0.7207292318344116,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#ifndef IMAGE_NO_SPARSE",
+        "base_contents": "static void mmap_image_load(const std::vector<int>& fds, image *ctx,\n        bool output_needed)\n{\n    if (fds.size() != 1) {\n        FATAL(\"multiple input files not supported with mmap\\n\");\n    }\n\n    int fd = fds.front();\n\n    calculate_rounds(get_size(fd), ctx);\n\n    /* check that we can memory map the file; on 32-bit platforms we are\n       limited to encoding at most 4 GiB files */\n    if (ctx->inp_size > SIZE_MAX) {\n        FATAL(\"cannot mmap %\" PRIu64 \" bytes\\n\", ctx->inp_size);\n    }\n\n    if (ctx->verbose) {\n        INFO(\"memory mapping '%s' (size %\" PRIu64 \")\\n\", ctx->fec_filename,\n            ctx->inp_size);\n    }\n\n    int flags = PROT_READ;\n\n    if (ctx->inplace) {\n        flags |= PROT_WRITE;\n    }\n\n    void *p = mmap(NULL, (size_t)ctx->inp_size, flags, MAP_SHARED, fd, 0);\n\n    if (p == MAP_FAILED) {\n        FATAL(\"failed to mmap '%s' (size %\" PRIu64 \"): %s\\n\",\n            ctx->fec_filename, ctx->inp_size, strerror(errno));\n    }\n\n    ctx->inp_fd = fd;\n    ctx->input = (uint8_t *)p;\n\n    if (ctx->inplace) {\n        ctx->output = ctx->input;\n    } else if (output_needed) {\n        if (ctx->verbose) {\n            INFO(\"allocating %\" PRIu64 \" bytes of memory\\n\", ctx->inp_size);\n        }\n\n        ctx->output = new uint8_t[ctx->inp_size];\n\n        if (!ctx->output) {\n                FATAL(\"failed to allocate memory\\n\");\n        }\n\n        memcpy(ctx->output, ctx->input, ctx->inp_size);\n    }\n\n    /* fd is closed in mmap_image_free */\n}\n\n#ifndef IMAGE_NO_SPARSE",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "static int process_chunk(void *priv, const void *data, int len)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 132,
+        "end_line": 194,
+        "merge_gen_region": null,
+        "confidence": 0.5017170310020447,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    assert(2 * sizeof(fec_header) <= FEC_BLOCKSIZE);\n\n    uint8_t header[FEC_BLOCKSIZE] = {0};",
+        "b_contents": "    assert(sizeof(fec_header) <= FEC_BLOCKSIZE);\n\n    uint8_t header[FEC_BLOCKSIZE];\n    uint8_t *p = header;\n\n    memset(p, 0, FEC_BLOCKSIZE);",
+        "base_contents": "    assert(sizeof(fec_header) <= FEC_BLOCKSIZE);\n\n    uint8_t header[FEC_BLOCKSIZE];\n    uint8_t *p = header;\n\n    if (ctx->mmap) {\n        p = (uint8_t *)&ctx->fec_mmap_addr[ctx->fec_size];\n    }\n\n    memset(p, 0, FEC_BLOCKSIZE);",
+        "res_region": "    assert(2 * sizeof(fec_header) <= FEC_BLOCKSIZE);\n\n    uint8_t header[FEC_BLOCKSIZE] = {0};",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 408,
+        "end_line": 430,
+        "merge_gen_region": null,
+        "confidence": 0.8294723629951477,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    assert(ctx->fec_filename);\n\n    int fd = TEMP_FAILURE_RETRY(open(ctx->fec_filename,\n                O_WRONLY | O_CREAT | O_TRUNC, 0666));",
+        "b_contents": "    assert(ctx->fec_filename);",
+        "base_contents": "    if (!ctx->mmap) {\n        assert(ctx->fec_filename);\n\n        int fd = TEMP_FAILURE_RETRY(open(ctx->fec_filename,\n                    O_WRONLY | O_CREAT | O_TRUNC, 0666));",
+        "res_region": "    assert(ctx->fec_filename);\n\n    int fd = TEMP_FAILURE_RETRY(open(ctx->fec_filename,\n                O_WRONLY | O_CREAT | O_TRUNC, 0666));\n",
+        "lookback": "",
+        "lookahead": "    if (fd < 0) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 447,
+        "end_line": 460,
+        "merge_gen_region": null,
+        "confidence": 0.41959625482559204,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (fd < 0) {\n        FATAL(\"failed to open file '%s': %s\\n\", ctx->fec_filename,\n            strerror(errno));\n    }",
+        "b_contents": "    int fd = TEMP_FAILURE_RETRY(open(ctx->fec_filename,\n                O_WRONLY | O_CREAT | O_TRUNC, 0666));",
+        "base_contents": "        if (fd < 0) {\n            FATAL(\"failed to open file '%s': %s\\n\", ctx->fec_filename,\n                strerror(errno));\n        }",
+        "res_region": "    if (fd < 0) {\n        FATAL(\"failed to open file '%s': %s\\n\", ctx->fec_filename,\n            strerror(errno));\n    }",
+        "lookback": "        FATAL(\"failed to open file '%s': %s\\n\", ctx->fec_filename,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 462,
+        "end_line": 475,
+        "merge_gen_region": null,
+        "confidence": 0.496079683303833,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size)) {\n        FATAL(\"failed to write to output: %s\\n\", strerror(errno));\n    }\n\n    if (ctx->padding > 0) {\n        uint8_t padding[FEC_BLOCKSIZE] = {0};\n\n        for (uint32_t i = 0; i < ctx->padding; i += FEC_BLOCKSIZE) {\n            if (!android::base::WriteFully(fd, padding, FEC_BLOCKSIZE)) {\n                FATAL(\"failed to write padding: %s\\n\", strerror(errno));\n            }\n        }\n    }",
+        "b_contents": "    if (fd < 0) {\n        FATAL(\"failed to open file '%s': %s\\n\", ctx->fec_filename,\n            strerror(errno));\n    }",
+        "base_contents": "        if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size) ||\n            !android::base::WriteFully(fd, header, sizeof(header))) {\n            FATAL(\"failed to write to output: %s\\n\", strerror(errno));\n        }",
+        "res_region": "    if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size)) {\n        FATAL(\"failed to write to output: %s\\n\", strerror(errno));\n    }\n\n    if (ctx->padding > 0) {\n        uint8_t padding[FEC_BLOCKSIZE] = {0};\n\n        for (uint32_t i = 0; i < ctx->padding; i += FEC_BLOCKSIZE) {\n            if (!android::base::WriteFully(fd, padding, FEC_BLOCKSIZE)) {\n                FATAL(\"failed to write padding: %s\\n\", strerror(errno));\n            }\n        }\n    }",
+        "lookback": "        FATAL(\"failed to write to output: %s\\n\", strerror(errno));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 477,
+        "end_line": 501,
+        "merge_gen_region": null,
+        "confidence": 0.8084786534309387,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (!android::base::WriteFully(fd, header, sizeof(header))) {\n        FATAL(\"failed to write to header: %s\\n\", strerror(errno));",
+        "b_contents": "    if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size) ||\n        !android::base::WriteFully(fd, header, sizeof(header))) {\n        FATAL(\"failed to write to output: %s\\n\", strerror(errno));",
+        "base_contents": "        close(fd);",
+        "res_region": "    if (!android::base::WriteFully(fd, header, sizeof(header))) {\n        FATAL(\"failed to write to header: %s\\n\", strerror(errno));",
+        "lookback": "        FATAL(\"failed to write to header: %s\\n\", strerror(errno));",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 503,
+        "end_line": 512,
+        "merge_gen_region": null,
+        "confidence": 0.8621652722358704,
+        "hesitated": true
+    }
+]

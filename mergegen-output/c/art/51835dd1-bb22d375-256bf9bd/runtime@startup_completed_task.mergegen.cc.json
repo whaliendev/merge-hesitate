@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // Request a checkpoint to make sure no threads are:\n  // - accessing the image space metadata section when we madvise it\n  // - accessing dex caches when we free them\n  runtime->GetThreadList()->RunCheckpoint(&closure);",
+        "b_contents": "    // Request a checkpoint to make sure no threads are:\n    // - accessing the image space metadata section when we madvise it\n    // - accessing dex caches when we free them\n    static struct EmptyClosure : Closure {\n      void Run([[maybe_unused]] Thread* thread) override {}\n    } closure;\n\n    runtime->GetThreadList()->RunCheckpoint(&closure);\n\n    // Now delete dex cache arrays from both images and startup linear alloc in\n    // a critical section. The critical section is to ensure there is no\n    // possibility the GC can temporarily see those arrays.\n    gc::ScopedGCCriticalSection sgcs(soa.Self(),\n                                     gc::kGcCauseDeletingDexCacheArrays,\n                                     gc::kCollectorTypeCriticalSection);\n    for (gc::space::ContinuousSpace* space : runtime->GetHeap()->GetContinuousSpaces()) {\n      if (space->IsImageSpace()) {\n        gc::space::ImageSpace* image_space = space->AsImageSpace();\n        if (image_space->GetImageHeader().IsAppImage()) {\n          image_space->ReleaseMetadata();\n        }\n      }\n    }",
+        "base_contents": "    // Request a checkpoint to make sure no threads are:\n    // - accessing the image space metadata section when we madvise it\n    // - accessing dex caches when we free them\n    static struct EmptyClosure : Closure {\n      void Run(Thread* thread ATTRIBUTE_UNUSED) override {}\n    } closure;\n\n    runtime->GetThreadList()->RunCheckpoint(&closure);\n\n    // Now delete dex cache arrays from both images and startup linear alloc in\n    // a critical section. The critical section is to ensure there is no\n    // possibility the GC can temporarily see those arrays.\n    gc::ScopedGCCriticalSection sgcs(soa.Self(),\n                                     gc::kGcCauseDeletingDexCacheArrays,\n                                     gc::kCollectorTypeCriticalSection);\n    for (gc::space::ContinuousSpace* space : runtime->GetHeap()->GetContinuousSpaces()) {\n      if (space->IsImageSpace()) {\n        gc::space::ImageSpace* image_space = space->AsImageSpace();\n        if (image_space->GetImageHeader().IsAppImage()) {\n          image_space->ReleaseMetadata();\n        }\n      }\n    }",
+        "res_region": "  // Request a checkpoint to make sure no threads are:\n  // - accessing the image space metadata section when we madvise it\n  // - accessing dex caches when we free them\n  runtime->GetThreadList()->RunCheckpoint(&closure);",
+        "lookback": "  // - accessing the image space metadata section when we madvise it",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 107,
+        "end_line": 160,
+        "merge_gen_region": null,
+        "confidence": 0.862908661365509,
+        "hesitated": true
+    }
+]

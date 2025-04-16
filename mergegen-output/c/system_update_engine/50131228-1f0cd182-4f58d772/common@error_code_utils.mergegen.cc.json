@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    case ErrorCode::kPayloadTimestampError:\n      return \"ErrorCode::kPayloadTimestampError\";\n    case ErrorCode::kUpdatedButNotActive:\n      return \"ErrorCode::kUpdatedButNotActive\";\n      // Don't add a default case to let the compiler warn about newly added\n      // error codes which should be added here.",
+        "b_contents": "    case ErrorCode::kUpdatedButNotActive:\n      return \"ErrorCode::kUpdatedButNotActive\";\n      // Don't add a default case to let the compiler warn about newly added\n      // error codes which should be added here.",
+        "base_contents": "    // Don't add a default case to let the compiler warn about newly added\n    // error codes which should be added here.",
+        "res_region": "    case ErrorCode::kPayloadTimestampError:\n      return \"ErrorCode::kPayloadTimestampError\";\n    case ErrorCode::kUpdatedButNotActive:\n      return \"ErrorCode::kUpdatedButNotActive\";\n      // Don't add a default case to let the compiler warn about newly added\n      // error codes which should be added here.",
+        "lookback": "      return \"ErrorCode::kPayloadTimestampError\";",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 146,
+        "end_line": 161,
+        "merge_gen_region": " Error::PayloadErrorError case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case case caseCodekB case case case case case case case case case case case case case case case case case case case case case case case case case case case case case casecase casecase casecase casecase casecasecasecasecasecasecasecasecasecasecaseBcasecaseBcaseBcasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecasecase",
+        "confidence": 0.9212333559989929,
+        "hesitated": false,
+        "resolved": false
+    }
+]

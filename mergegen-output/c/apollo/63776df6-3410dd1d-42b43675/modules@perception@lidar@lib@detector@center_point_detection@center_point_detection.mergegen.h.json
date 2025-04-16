@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  bool Init(const StageConfig& stage_config) override;\n   \n  bool Process(DataFrame* data_frame) override;\n   \n  bool IsEnabled() const override { return enable_;}\n\n  std::string Name() const override { return \"CenterPointDetection\"; }",
+        "b_contents": "  bool Init(const StageConfig& stage_config) override;\n\n  bool Process(DataFrame* data_frame) override;\n\n  bool IsEnabled() const override { return enable_; }\n\n  std::string Name() const override { return name_; }",
+        "base_contents": "  std::string Name() const override { return \"CenterPointDetection\"; }",
+        "res_region": "  bool Init(const StageConfig& stage_config) override;\n   \n  bool Process(DataFrame* data_frame) override;\n   \n  bool IsEnabled() const override { return enable_; }\n\n  std::string Name() const override { return name_; }",
+        "lookback": "   ",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 47,
+        "end_line": 65,
+        "merge_gen_region": "PausePauseboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolboolbool",
+        "confidence": 0.9250391125679016,
+        "hesitated": false,
+        "resolved": false
+    }
+]

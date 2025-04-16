@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"../lv_misc/lv_color.h\"",
+        "b_contents": "",
+        "base_contents": "#include \"../lv_core/lv_style.h\"",
+        "res_region": "",
+        "lookback": "/*********************",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 22,
+        "end_line": 27,
+        "merge_gen_region": null,
+        "confidence": 0.5141225457191467,
+        "hesitated": true
+    }
+]

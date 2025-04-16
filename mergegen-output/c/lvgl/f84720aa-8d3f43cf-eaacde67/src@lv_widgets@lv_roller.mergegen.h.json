@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "/*Testing of dependencies*/\n#if LV_USE_PAGE == 0\n#error \"lv_roller: lv_page is required. Enable it in lv_conf.h (LV_USE_PAGE 1)\"\n#endif\n",
+        "base_contents": "/*Testing of dependencies*/\n#if LV_USE_PAGE == 0\n#error \"lv_roller: lv_page is required. Enable it in lv_conf.h (LV_USE_PAGE 1) \"\n#endif\n",
+        "res_region": "",
+        "lookback": "#include \"lv_label.h\"",
+        "lookahead": "#include \"../lv_core/lv_obj.h\"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 19,
+        "end_line": 32,
+        "merge_gen_region": null,
+        "confidence": 0.7694952487945557,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/*Data of roller*/",
+        "base_contents": "\n\n/*Data of roller*/",
+        "res_region": "",
+        "lookback": "  lv_obj_t obj;",
+        "lookahead": "typedef struct {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 52,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.5048635005950928,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "/**\n * Get the open/close animation time.\n * @param roller pointer to a roller\n * @return open/close animation time [ms]\n */\nstatic inline uint16_t lv_roller_get_anim_time(const lv_obj_t * roller)\n{\n    return lv_page_get_anim_time(roller);\n}\n",
+        "base_contents": "/**\n * Get the open/close animation time.\n * @param roller pointer to a roller\n * @return open/close animation time [ms]\n */\nstatic inline uint16_t lv_roller_get_anim_time(const lv_obj_t * roller)\n{\n    return lv_page_get_anim_time(roller);\n}\n\n",
+        "res_region": "",
+        "lookback": " *      MACROS",
+        "lookahead": "/**********************",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 143,
+        "end_line": 167,
+        "merge_gen_region": null,
+        "confidence": 0.7262861728668213,
+        "hesitated": true
+    }
+]

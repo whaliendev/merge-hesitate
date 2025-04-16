@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "        datum_t arr = args->arg(env, 0)->as_datum();\n        datum_t new_el = args->arg(env, 1)->as_datum();\n        datum_array_builder_t out(env->env->limits());",
+        "b_contents": "        counted_t<const datum_t> arr = args->arg(env, 0)->as_datum();\n        counted_t<const datum_t> new_el = args->arg(env, 1)->as_datum();\n        datum_array_builder_t out(env->env->limits());",
+        "base_contents": "        counted_t<const datum_t> arr = args->arg(env, 0)->as_datum();\n        counted_t<const datum_t> new_el = args->arg(env, 1)->as_datum();\n        datum_array_builder_t out(env->env->limits);",
+        "res_region": "        datum_t arr = args->arg(env, 0)->as_datum();\n        datum_t new_el = args->arg(env, 1)->as_datum();\n        datum_array_builder_t out(env->env->limits());",
+        "lookback": "        datum_t new_el = args->arg(env, 1)->as_datum();",
+        "lookahead": "        out.reserve(arr->size() + 1);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.8054466843605042,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits());",
+        "b_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "base_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits);",
+        "res_region": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "lookback": "            el_set(counted_datum_less_t(env->env->reql_version()));",
+        "lookahead": "        for (size_t i = 0; i < arr->size(); ++i) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 309,
+        "end_line": 321,
+        "merge_gen_region": null,
+        "confidence": 0.8051294088363647,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        std::set<datum_t, counted_datum_less_t> el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits());",
+        "b_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t> el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "base_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t> el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits);",
+        "res_region": "        std::set<datum_t, counted_datum_less_t> el_set(\n            counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "lookback": "            counted_datum_less_t(env->env->reql_version()));",
+        "lookahead": "        for (size_t i = 0; i < arr1->size(); ++i) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 347,
+        "end_line": 356,
+        "merge_gen_region": null,
+        "confidence": 0.7931726574897766,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits());",
+        "b_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "base_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits);",
+        "res_region": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "lookback": "            el_set(counted_datum_less_t(env->env->reql_version()));",
+        "lookahead": "        for (size_t i = 0; i < arr1->size(); ++i) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 384,
+        "end_line": 396,
+        "merge_gen_region": null,
+        "confidence": 0.8007879853248596,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits());",
+        "b_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "base_contents": "        std::set<counted_t<const datum_t>, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version));\n        datum_array_builder_t out(env->env->limits);",
+        "res_region": "        std::set<datum_t, counted_datum_less_t>\n            el_set(counted_datum_less_t(env->env->reql_version()));\n        datum_array_builder_t out(env->env->limits());",
+        "lookback": "            el_set(counted_datum_less_t(env->env->reql_version()));",
+        "lookahead": "        for (size_t i = 0; i < arr2->size(); ++i) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 423,
+        "end_line": 435,
+        "merge_gen_region": null,
+        "confidence": 0.7974684238433838,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        datum_t new_el = args->arg(env, 2)->as_datum();\n        array->insert(env->env->reql_version, index, new_el);",
+        "b_contents": "        counted_t<const datum_t> new_el = args->arg(env, 2)->as_datum();\n        array->insert(env->env->reql_version(), index, new_el);",
+        "base_contents": "        counted_t<const datum_t> new_el = args->arg(env, 2)->as_datum();\n        array->insert(env->env->reql_version, index, new_el);",
+        "res_region": "        datum_t new_el = args->arg(env, 2)->as_datum();\n        array->insert(env->env->reql_version(), index, new_el);",
+        "lookback": "        array->insert(env->env->reql_version(), index, new_el);",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 494,
+        "end_line": 503,
+        "merge_gen_region": null,
+        "confidence": 0.6949958801269531,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        datum_t new_els = args->arg(env, 2)->as_datum();\n        array->splice(env->env->reql_version, index, new_els);",
+        "b_contents": "        counted_t<const datum_t> new_els = args->arg(env, 2)->as_datum();\n        array->splice(env->env->reql_version(), index, new_els);",
+        "base_contents": "        counted_t<const datum_t> new_els = args->arg(env, 2)->as_datum();\n        array->splice(env->env->reql_version, index, new_els);",
+        "res_region": "        datum_t new_els = args->arg(env, 2)->as_datum();\n        array->splice(env->env->reql_version(), index, new_els);",
+        "lookback": "        array->splice(env->env->reql_version(), index, new_els);",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 516,
+        "end_line": 525,
+        "merge_gen_region": null,
+        "confidence": 0.7066092491149902,
+        "hesitated": true
+    }
+]

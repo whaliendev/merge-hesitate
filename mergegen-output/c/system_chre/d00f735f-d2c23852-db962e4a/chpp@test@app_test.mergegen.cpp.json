@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "TEST_F(ChppAppTest, Timesync) {\n  constexpr uint64_t kMaxRtt = 2 * CHPP_NSEC_PER_MSEC;    // in ms\n  constexpr int64_t kMaxOffset = 1 * CHPP_NSEC_PER_MSEC;  // in ms",
+        "b_contents": "// Disabled because flaky (fixed in U).\n// TEST_F(AppTestBase, Timesync) {\n//   constexpr uint64_t kMaxRtt = 2 * CHPP_NSEC_PER_MSEC;    // in ms\n//   constexpr int64_t kMaxOffset = 1 * CHPP_NSEC_PER_MSEC;  // in ms",
+        "base_contents": "TEST_F(AppTestBase, Timesync) {\n  constexpr uint64_t kMaxRtt = 2 * CHPP_NSEC_PER_MSEC;    // in ms\n  constexpr int64_t kMaxOffset = 1 * CHPP_NSEC_PER_MSEC;  // in ms",
+        "res_region": "TEST_F(ChppAppTest, Timesync) {\n  constexpr uint64_t kMaxRtt = 2 * CHPP_NSEC_PER_MSEC;    // in ms\n  constexpr int64_t kMaxOffset = 1 * CHPP_NSEC_PER_MSEC;  // in ms",
+        "lookback": "  constexpr uint64_t kMaxRtt = 2 * CHPP_NSEC_PER_MSEC;    // in ms",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 143,
+        "end_line": 156,
+        "merge_gen_region": "outputoutputFBaseoutputGBaseoutputGBaseoutputGBaseoutputGBaseString;",
+        "confidence": 0.9283064603805542,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "      .rxMtu = static_cast<uint16_t>(rxBufferLen),",
+        "base_contents": "      .rxMtu = CHPP_PLATFORM_LINK_RX_MTU_BYTES,",
+        "res_region": "",
+        "lookback": "    }",
+        "lookahead": "      .windowSize = 1,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 66,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.674623966217041,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "      .timeoutInMs = timeoutInMs,",
+        "base_contents": "      .timeoutInMs = CHPP_PLATFORM_TRANSPORT_TIMEOUT_MS,",
+        "res_region": "",
+        "lookback": "  };",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 73,
+        "end_line": 78,
+        "merge_gen_region": null,
+        "confidence": 0.8781791925430298,
+        "hesitated": true
+    }
+]

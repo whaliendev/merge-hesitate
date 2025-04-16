@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "    else if(sign == LV_SIGNAL_SCROLL_BEGIN) {\n        dropdown->pr_opt_id = LV_DROPDOWN_PR_NONE;\n        lv_obj_invalidate(list);",
+        "b_contents": "    else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        /* Make possible to draw on the full width of the background to redraw the selected rectangle\n         * when the ddlist is scrolled in fix height mode.\n         * (The scrollable is scrolled then \"select rectangle\" is drawn on the bg too)*/\n        lv_style_int_t left = lv_obj_get_style_pad_left(ddlist, LV_DROPDOWN_PART_LIST);\n        lv_style_int_t right = lv_obj_get_style_pad_right(ddlist, LV_DROPDOWN_PART_LIST);\n        scrl->ext_draw_pad = LV_MATH_MAX3(scrl->ext_draw_pad, left, right);",
+        "base_contents": "    else  if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        /* Make possible to draw on the full width of the background to redraw the selected rectangle\n         * when the ddlist is scrolled in fix height mode.\n         * (The scrollable is scrolled then \"select rectangle\" is drawn on the bg too)*/\n        lv_style_int_t left = lv_obj_get_style_pad_left(ddlist, LV_DROPDOWN_PART_LIST);\n        lv_style_int_t right = lv_obj_get_style_pad_right(ddlist, LV_DROPDOWN_PART_LIST);\n        scrl->ext_draw_pad = LV_MATH_MAX3(scrl->ext_draw_pad, left, right);",
+        "res_region": "    else if(sign == LV_SIGNAL_SCROLL_BEGIN) {\n        dropdown->pr_opt_id = LV_DROPDOWN_PR_NONE;\n        lv_obj_invalidate(list);",
+        "lookback": "        dropdown->pr_opt_id = LV_DROPDOWN_PR_NONE;",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1021,
+        "end_line": 1041,
+        "merge_gen_region": null,
+        "confidence": 0.8580188155174255,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static void draw_box(lv_obj_t * dropdown_obj, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "b_contents": "/**\n * Get the style descriptor of a part of the object\n * @param page pointer the object\n * @param part the part from `lv_dropdown_part_t`. (LV_DROPDOWN_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_dropdown_get_style(lv_obj_t * ddlist, uint8_t part)\n{\n    LV_ASSERT_OBJ(ddlist, LV_OBJX_NAME);\n\n    lv_dropdown_ext_t * ext = lv_obj_get_ext_attr(ddlist);\n    lv_style_list_t * style_dsc_p;\n\n    switch(part) {\n        case LV_DROPDOWN_PART_MAIN:\n            style_dsc_p = &ddlist->style_list;\n            break;\n        case LV_DROPDOWN_PART_LIST:\n            style_dsc_p = &ext->style_page;\n            break;\n        case LV_DROPDOWN_PART_SCROLLBAR:\n            style_dsc_p = &ext->style_scrlbar;\n            break;\n        case LV_DROPDOWN_PART_SELECTED:\n            style_dsc_p = &ext->style_selected;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n\nstatic void draw_box(lv_obj_t * ddlist, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "base_contents": "\n/**\n * Get the style descriptor of a part of the object\n * @param page pointer the object\n * @param part the part from `lv_dropdown_part_t`. (LV_DROPDOWN_PART_...)\n * @return pointer to the style descriptor of the specified part\n */\nstatic lv_style_list_t * lv_dropdown_get_style(lv_obj_t * ddlist, uint8_t part)\n{\n    LV_ASSERT_OBJ(ddlist, LV_OBJX_NAME);\n\n    lv_dropdown_ext_t * ext = lv_obj_get_ext_attr(ddlist);\n    lv_style_list_t * style_dsc_p;\n\n    switch(part) {\n        case LV_DROPDOWN_PART_MAIN:\n            style_dsc_p = &ddlist->style_list;\n            break;\n        case LV_DROPDOWN_PART_LIST:\n            style_dsc_p = &ext->style_page;\n            break;\n        case LV_DROPDOWN_PART_SCROLLBAR:\n            style_dsc_p = &ext->style_scrlbar;\n            break;\n        case LV_DROPDOWN_PART_SELECTED:\n            style_dsc_p = &ext->style_selected;\n            break;\n        default:\n            style_dsc_p = NULL;\n    }\n\n    return style_dsc_p;\n}\n\nstatic void draw_box(lv_obj_t * ddlist, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "res_region": "static void draw_box(lv_obj_t * dropdown_obj, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1046,
+        "end_line": 1119,
+        "merge_gen_region": null,
+        "confidence": 0.658748209476471,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static void draw_box_label(lv_obj_t * dropdown_obj, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "b_contents": "static void draw_box_label(lv_obj_t * ddlist, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "base_contents": "\n\nstatic void draw_box_label(lv_obj_t * ddlist, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "res_region": "static void draw_box_label(lv_obj_t * dropdown_obj, const lv_area_t * clip_area, uint16_t id, lv_state_t state)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1153,
+        "end_line": 1161,
+        "merge_gen_region": null,
+        "confidence": 0.7683455348014832,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_obj_t * label = get_label(dropdown_obj);",
+        "b_contents": "    lv_dropdown_ext_t * ext          = lv_obj_get_ext_attr(ddlist);\n    lv_obj_t * label = get_label(ddlist);",
+        "base_contents": "    lv_obj_t * label = get_label(ddlist);",
+        "res_region": "    lv_dropdown_t * dropdown = (lv_dropdown_t *) dropdown_obj;\n    lv_obj_t * label = get_label(dropdown_obj);",
+        "lookback": "    lv_obj_t * label = get_label(dropdown_obj);",
+        "lookahead": "    if(label == NULL) return 0;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1259,
+        "end_line": 1266,
+        "merge_gen_region": null,
+        "confidence": 0.840785801410675,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    /*Do not allow scrolling in*/\n    lv_coord_t bottom_diff = dropdown->list->coords.y2 - lv_obj_get_style_pad_bottom(dropdown->list, LV_PART_MAIN) - (label->coords.y2 - line_y1);\n    if(bottom_diff > 0) line_y1 -= bottom_diff;\n\n    /*Scroll to the selected option*/\n    lv_obj_scroll_to_y(dropdown->list, line_y1, LV_ANIM_OFF);\n    lv_obj_invalidate(dropdown->list);\n}\n\nstatic lv_obj_t * get_label(const lv_obj_t * obj)",
+        "b_contents": "static lv_obj_t * get_label(const lv_obj_t * ddlist)",
+        "base_contents": "\n\nstatic lv_obj_t * get_label(const lv_obj_t * ddlist)",
+        "res_region": "    /*Do not allow scrolling in*/\n    lv_coord_t bottom_diff = dropdown->list->coords.y2 - lv_obj_get_style_pad_bottom(dropdown->list, LV_PART_MAIN) - (label->coords.y2 - line_y1);\n    if(bottom_diff > 0) line_y1 -= bottom_diff;\n\n    /*Scroll to the selected option*/\n    lv_obj_scroll_to_y(dropdown->list, line_y1, LV_ANIM_OFF);\n    lv_obj_invalidate(dropdown->list);\n}\n\nstatic lv_obj_t * get_label(const lv_obj_t * obj)",
+        "lookback": "    lv_coord_t bottom_diff = dropdown->list->coords.y2 - lv_obj_get_style_pad_bottom(dropdown->list, LV_PART_MAIN) - (label->coords.y2 - line_y1);",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1303,
+        "end_line": 1320,
+        "merge_gen_region": null,
+        "confidence": 0.8447999358177185,
+        "hesitated": true
+    }
+]

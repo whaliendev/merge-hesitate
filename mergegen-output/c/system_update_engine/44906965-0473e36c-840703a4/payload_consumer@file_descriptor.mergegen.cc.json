@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  if (IGNORE_EINTR(close(fd_)))\n    return false;",
+        "b_contents": "  return true;\n}\n\nbool EintrSafeFileDescriptor::Close() {\n  CHECK_GE(fd_, 0);\n  if (IGNORE_EINTR(close(fd_)))\n    return false;",
+        "base_contents": "  if (IGNORE_EINTR(close(fd_)))\n    return false;\n  Reset();\n  return true;\n}\n\nvoid EintrSafeFileDescriptor::Reset() {",
+        "res_region": "  return true;\n}\n\nbool EintrSafeFileDescriptor::Close() {\n  CHECK_GE(fd_, 0);\n  if (IGNORE_EINTR(close(fd_)))\n    return false;",
+        "lookback": "}",
+        "lookahead": "  fd_ = -1;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 127,
+        "end_line": 146,
+        "merge_gen_region": " true } ESafeFile::() {_(fd 0 ifIGNOREEINTRclosefd))) false onreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturn",
+        "confidence": 0.8855696320533752,
+        "hesitated": false,
+        "resolved": false
+    }
+]

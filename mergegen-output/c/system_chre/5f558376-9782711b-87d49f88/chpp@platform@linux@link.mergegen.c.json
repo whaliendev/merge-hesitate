@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "static void reset(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  deinit(context);\n  init(context, context->transportContext);\n}\n\nstatic struct ChppLinkConfiguration getConfig(void *linkContext) {\n  UNUSED_VAR(linkContext);\n  const struct ChppLinkConfiguration config = {\n      .txBufferLen = CHPP_LINUX_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_LINUX_LINK_RX_MTU_BYTES,\n  };\n  return config;\n}\n\nstatic uint8_t *getTxBuffer(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  return &context->buf[0];\n}\n\nconst struct ChppLinkApi gLinuxLinkApi = {\n    .init = &init,\n    .deinit = &deinit,\n    .send = &send,\n    .doWork = &doWork,\n    .reset = &reset,\n    .getConfig = &getConfig,\n    .getTxBuffer = &getTxBuffer,\n};\n\nconst struct ChppLinkApi *getLinuxLinkApi(void) {\n  return &gLinuxLinkApi;",
+        "b_contents": "static void reset(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  deinit(context);\n  init(context, context->transportContext);\n}\n\nstatic struct ChppLinkConfiguration getConfig(void *linkContext) {\n  UNUSED_VAR(linkContext);\n  const struct ChppLinkConfiguration config = {\n      .txBufferLen = CHPP_LINUX_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_LINUX_LINK_RX_MTU_BYTES,\n      .timeoutInMs = CHPP_LINUX_TRANSPORT_TIMEOUT_MS,\n  };\n  return config;\n}\n\nstatic uint8_t *getTxBuffer(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  return &context->buf[0];\n}\n\nconst struct ChppLinkApi gLinuxLinkApi = {\n    .init = &init,\n    .deinit = &deinit,\n    .send = &send,\n    .doWork = &doWork,\n    .reset = &reset,\n    .getConfig = &getConfig,\n    .getTxBuffer = &getTxBuffer,\n};\n\nconst struct ChppLinkApi *getLinuxLinkApi(void) {\n  return &gLinuxLinkApi;",
+        "base_contents": "void chppPlatformLinkReset(struct ChppPlatformLinkParameters *params) {\n  chppPlatformLinkDeinit(params);\n  chppPlatformLinkInit(params);",
+        "res_region": "static void reset(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  deinit(context);\n  init(context, context->transportContext);\n}\n\nstatic struct ChppLinkConfiguration getConfig(void *linkContext) {\n  UNUSED_VAR(linkContext);\n  const struct ChppLinkConfiguration config = {\n      .txBufferLen = CHPP_LINUX_LINK_TX_MTU_BYTES,\n      .rxBufferLen = CHPP_LINUX_LINK_RX_MTU_BYTES,\n  };\n  return config;\n}\n\nstatic uint8_t *getTxBuffer(void *linkContext) {\n  struct ChppLinuxLinkState *context =\n      (struct ChppLinuxLinkState *)(linkContext);\n  return &context->buf[0];\n}\n\nconst struct ChppLinkApi gLinuxLinkApi = {\n    .init = &init,\n    .deinit = &deinit,\n    .send = &send,\n    .doWork = &doWork,\n    .reset = &reset,\n    .getConfig = &getConfig,\n    .getTxBuffer = &getTxBuffer,\n};\n\nconst struct ChppLinkApi *getLinuxLinkApi(void) {\n  return &gLinuxLinkApi;\n}",
+        "lookback": "  struct ChppLinuxLinkState *context =",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 130,
+        "end_line": 205,
+        "merge_gen_region": null,
+        "confidence": 0.8446364998817444,
+        "hesitated": true
+    }
+]

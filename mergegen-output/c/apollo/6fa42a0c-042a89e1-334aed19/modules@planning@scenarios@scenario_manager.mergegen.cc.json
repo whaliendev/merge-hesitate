@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "          config_map_[scenario_type], &scenario_context_));\n      break;",
+        "b_contents": "          config_map_[scenario_type], &scenario_context_, injector_));\n      break;",
+        "base_contents": "          config_map_[scenario_type], &scenario_context_));\n    break;",
+        "res_region": "          config_map_[scenario_type], &scenario_context_, injector_));\n      break;",
+        "lookback": "      break;",
+        "lookahead": "    case ScenarioConfig::PARK_AND_GO:",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 86,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.8416773080825806,
+        "hesitated": true
+    }
+]

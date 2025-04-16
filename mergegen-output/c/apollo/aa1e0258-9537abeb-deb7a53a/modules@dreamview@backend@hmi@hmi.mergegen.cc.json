@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "bool HMI::UpdateScenarioSetToStatus(const std::string& scenario_set_id,\n                                    const std::string& scenario_set_name) {\n  return hmi_worker_->UpdateScenarioSetToStatus(scenario_set_id,\n                                                scenario_set_name);\n}\n\nbool HMI::UpdateDynamicModelToStatus(const std::string& dynamic_model_name) {\n  return hmi_worker_->UpdateDynamicModelToStatus(dynamic_model_name);\n}\n\nbool HMI::UpdateRecordToStatus() { return hmi_worker_->LoadRecords(); }\n\nbool HMI::UpdateVehicleToStatus() { return hmi_worker_->ReloadVehicles(); }\n\nbool HMI::UpdateCameraChannelToStatus(const std::string& channel_name) {\n  hmi_worker_->UpdateCameraSensorChannelToStatus(channel_name);\n  return true;\n}\n\nbool HMI::UpdatePointChannelToStatus(const std::string& channel_name) {\n  hmi_worker_->UpdatePointCloudChannelToStatus(channel_name);\n  return true;\n}",
+        "b_contents": "bool HMI::UpdateScenarioSetToStatus(const std::string& scenario_set_id, const std::string& scenario_set_name){\n  return hmi_worker_->UpdateScenarioSetToStatus(scenario_set_id, scenario_set_name);\n}\n\nbool HMI::UpdateDynamicModelToStatus(std::string& dynamic_model_name) {\n  return hmi_worker_->UpdateDynamicModelToStatus(dynamic_model_name);\n}\n\nbool HMI::UpdateRecordToStatus(const std::string& record_id,const std::string& record_status){\n  return hmi_worker_->UpdateRecordToStatus(record_id, record_status);\n}",
+        "base_contents": "",
+        "res_region": "bool HMI::UpdateScenarioSetToStatus(const std::string& scenario_set_id,\n                                    const std::string& scenario_set_name) {\n  return hmi_worker_->UpdateScenarioSetToStatus(scenario_set_id,\n                                                scenario_set_name);\n}\n\nbool HMI::UpdateDynamicModelToStatus(const std::string& dynamic_model_name) {\n  return hmi_worker_->UpdateDynamicModelToStatus(dynamic_model_name);\n}\n\nbool HMI::UpdateRecordToStatus() { return hmi_worker_->LoadRecords(); }\n\nbool HMI::UpdateVehicleToStatus() { return hmi_worker_->ReloadVehicles(); }\n\nbool HMI::UpdateCameraChannelToStatus(const std::string& channel_name) {\n  hmi_worker_->UpdateCameraSensorChannelToStatus(channel_name);\n  return true;\n}\n\nbool HMI::UpdatePointChannelToStatus(const std::string& channel_name) {\n  hmi_worker_->UpdatePointCloudChannelToStatus(channel_name);\n  return true;\n}",
+        "lookback": "                                    const std::string& scenario_set_name) {",
+        "lookahead": "}  // namespace dreamview",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 236,
+        "end_line": 273,
+        "merge_gen_region": null,
+        "confidence": 0.8367326259613037,
+        "hesitated": true
+    }
+]

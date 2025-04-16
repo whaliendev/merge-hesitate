@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        MDFHeader *header;\n        int __unUsEd;",
+        "b_contents": "        PDFHeader *header;\n//        int __unUsEd;",
+        "base_contents": "        PDFHeader *header;\n        int __unUsEd;",
+        "res_region": "        MDFHeader *header;",
+        "lookback": "        int fileNo;",
+        "lookahead": "        int fileNo;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 76,
+        "end_line": 85,
+        "merge_gen_region": null,
+        "confidence": 0.609086275100708,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    explicit HidlCamera3Device(\n        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,\n        bool legacyClient = false) :\n        Camera3Device(cameraServiceProxyWrapper, id, overrideForPerfClass, overrideToPortrait,\n                legacyClient) { }",
+        "b_contents": "   explicit HidlCamera3Device(const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,\n          bool legacyClient = false) : Camera3Device(id, overrideForPerfClass, overrideToPortrait,\n          legacyClient) { }",
+        "base_contents": "   explicit HidlCamera3Device(const String8& id, bool overrideForPerfClass, bool overrideToPortrait,\n          bool legacyClient = false) : Camera3Device(id, overrideForPerfClass, overrideToPortrait,\n          legacyClient) { }",
+        "res_region": "    explicit HidlCamera3Device(\n        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string& id, bool overrideForPerfClass, bool overrideToPortrait,\n        bool legacyClient = false) :\n        Camera3Device(cameraServiceProxyWrapper, id, overrideForPerfClass, overrideToPortrait,\n                legacyClient) { }",
+        "lookback": "        std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 48,
+        "merge_gen_region": null,
+        "confidence": 0.7988014817237854,
+        "hesitated": true
+    }
+]

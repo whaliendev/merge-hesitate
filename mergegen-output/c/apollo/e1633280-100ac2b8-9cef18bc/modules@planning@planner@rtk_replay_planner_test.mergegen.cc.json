@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n}  // namespace planning",
+        "b_contents": "\n}  // namespace control",
+        "base_contents": "}  // namespace control",
+        "res_region": "\n}  // namespace control",
+        "lookback": "}  // namespace control",
+        "lookahead": "}  // namespace apollo",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 66,
+        "end_line": 74,
+        "merge_gen_region": null,
+        "confidence": 0.44158777594566345,
+        "hesitated": true
+    }
+]

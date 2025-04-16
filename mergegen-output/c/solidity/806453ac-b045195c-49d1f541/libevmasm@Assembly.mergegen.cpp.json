@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "\t\t\t\tif (i != offsets.size() - 1)\n\t\t\t\t{\n\t\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::DUP2));\n\t\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::DUP2));\n\t\t\t\t}",
+        "b_contents": "\t\t\t\tret.bytecode.push_back(static_cast<uint8_t>(Instruction::DUP1));",
+        "base_contents": "\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::DUP1));",
+        "res_region": "\t\t\t\tif (i != offsets.size() - 1)\n\t\t\t\t{\n\t\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::DUP2));\n\t\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::DUP2));\n\t\t\t\t}",
+        "lookback": "\t\t\t\t{",
+        "lookahead": "\t\t\t\t// TODO: should we make use of the constant optimizer methods for pushing the offsets?",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 678,
+        "end_line": 688,
+        "merge_gen_region": " (&&ifiifififififififififififififififififif",
+        "confidence": 0.8930523991584778,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\t\t\t\tbytes offsetBytes = toCompactBigEndian(u256(offsets[i]));\n\t\t\t\tret.bytecode.push_back(uint8_t(pushInstruction(offsetBytes.size())));",
+        "b_contents": "\t\t\t\tbytes offsetBytes = toCompactBigEndian(u256(offset));\n\t\t\t\tret.bytecode.push_back(static_cast<uint8_t>(pushInstruction(static_cast<unsigned>(offsetBytes.size()))));",
+        "base_contents": "\t\t\t\tbytes offsetBytes = toCompactBigEndian(u256(offset));\n\t\t\t\tret.bytecode.push_back(uint8_t(pushInstruction(offsetBytes.size())));",
+        "res_region": "\t\t\t\tbytes offsetBytes = toCompactBigEndian(u256(offsets[i]));\n\t\t\t\tret.bytecode.push_back(static_cast<uint8_t>(pushInstruction(static_cast<unsigned>(offsetBytes.size()))));",
+        "lookback": "\t\t\t\tret.bytecode.push_back(static_cast<uint8_t>(pushInstruction(static_cast<unsigned>(offsetBytes.size()))));",
+        "lookahead": "\t\t\t\tret.bytecode += offsetBytes;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 690,
+        "end_line": 699,
+        "merge_gen_region": null,
+        "confidence": 0.8745602369308472,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::ADD));\n\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::MSTORE));",
+        "b_contents": "\t\t\t\tret.bytecode.push_back(static_cast<uint8_t>(Instruction::MSTORE));",
+        "base_contents": "\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::MSTORE));",
+        "res_region": "\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::ADD));\n\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::MSTORE));",
+        "lookback": "\t\t\t\tret.bytecode.push_back(uint8_t(Instruction::MSTORE));",
+        "lookahead": "\t\t\t}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 701,
+        "end_line": 708,
+        "merge_gen_region": null,
+        "confidence": 0.836709201335907,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\t\t\tret.bytecode.push_back(static_cast<uint8_t>(Instruction::POP));",
+        "base_contents": "\t\t\tret.bytecode.push_back(uint8_t(Instruction::POP));",
+        "res_region": "",
+        "lookback": "\t\t}",
+        "lookahead": "\t\t\tbreak;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 716,
+        "end_line": 721,
+        "merge_gen_region": null,
+        "confidence": 0.7179818153381348,
+        "hesitated": true
+    }
+]

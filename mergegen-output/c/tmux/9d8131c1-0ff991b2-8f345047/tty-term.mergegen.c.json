@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, 0, 0, 0, 0, 0, 0, 0, 0));",
+        "b_contents": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "base_contents": "\treturn (tparm((char *) tty_term_string(term, code), a));",
+        "res_region": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 770,
+        "end_line": 781,
+        "merge_gen_region": null,
+        "confidence": 0.592364490032196,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, b, 0, 0, 0, 0, 0, 0, 0));",
+        "b_contents": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a, b);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "base_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, b));",
+        "res_region": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a, b);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 787,
+        "end_line": 798,
+        "merge_gen_region": null,
+        "confidence": 0.5870119333267212,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, b, c, 0, 0, 0, 0, 0, 0));",
+        "b_contents": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a, b, c);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "base_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, b, c));",
+        "res_region": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, a, b, c);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 805,
+        "end_line": 816,
+        "merge_gen_region": null,
+        "confidence": 0.5955389142036438,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\treturn (tparm((char *) tty_term_string(term, code), (long)a, 0, 0, 0, 0, 0, 0, 0, 0));",
+        "b_contents": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, (long)a);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "base_contents": "\treturn (tparm((char *) tty_term_string(term, code), a));",
+        "res_region": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, (long)a);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 822,
+        "end_line": 833,
+        "merge_gen_region": null,
+        "confidence": 0.6675412654876709,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\treturn (tparm((char *) tty_term_string(term, code), (long)a, (long)b, 0, 0, 0, 0, 0, 0, 0));",
+        "b_contents": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, (long)a, (long)b);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "base_contents": "\treturn (tparm((char *) tty_term_string(term, code), a, b));",
+        "res_region": "\tconst char\t*x = tty_term_string(term, code), *s;\n\n\ts = tparm((char *)x, (long)a, (long)b);\n\tif (s == NULL)\n\t\tfatalx(\"could not expand %s\", tty_term_codes[code].name);\n\treturn (s);",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 840,
+        "end_line": 851,
+        "merge_gen_region": null,
+        "confidence": 0.754031240940094,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    return ReadFdExactly(fd, &result, sizeof(result)) ? result : -1;\n}\n",
+        "b_contents": "    ReadFully(fd, &result, sizeof(result));\n    return result;\n}\n",
+        "base_contents": "    ReadFully(fd, &result, sizeof(result));\n    return result;\n}\n\nstatic inline int32_t read_be_int32(borrowed_fd fd) {\n    return int32_t(be32toh(read_int32(fd)));\n}\n",
+        "res_region": "    return ReadFdExactly(fd, &result, sizeof(result)) ? result : -1;\n}\n",
+        "lookback": "}",
+        "lookahead": "static inline void append_int(borrowed_fd fd, std::vector<char>* bytes) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 43,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.636490523815155,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int32_t le_size = read_int32(fd);\n    if (le_size < 0) {\n        return;\n    }\n    int32_t size = int32_t(le32toh(le_size));",
+        "b_contents": "    int32_t le_size = read_int32(fd);\n    int32_t size = int32_t(le32toh(le_size));",
+        "base_contents": "    int32_t be_size = read_int32(fd);\n    int32_t size = int32_t(be32toh(be_size));",
+        "res_region": "    int32_t le_size = read_int32(fd);\n    if (le_size < 0) {\n        return;\n    }\n    int32_t size = int32_t(le32toh(le_size));",
+        "lookback": "    if (le_size < 0) {",
+        "lookahead": "    auto old_size = bytes->size();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 70,
+        "end_line": 82,
+        "merge_gen_region": null,
+        "confidence": 0.8091132044792175,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    bytes->resize(old_size + sizeof(le_size) + size);\n    memcpy(bytes->data() + old_size, &le_size, sizeof(le_size));\n    ReadFdExactly(fd, bytes->data() + old_size + sizeof(le_size), size);",
+        "b_contents": "    bytes->resize(old_size + sizeof(le_size) + size);\n    memcpy(bytes->data() + old_size, &le_size, sizeof(le_size));\n    ReadFully(fd, bytes->data() + old_size + sizeof(le_size), size);",
+        "base_contents": "    bytes->resize(old_size + sizeof(be_size) + size);\n    memcpy(bytes->data() + old_size, &be_size, sizeof(be_size));\n    ReadFully(fd, bytes->data() + old_size + sizeof(be_size), size);",
+        "res_region": "    bytes->resize(old_size + sizeof(le_size) + size);\n    memcpy(bytes->data() + old_size, &le_size, sizeof(le_size));\n    ReadFdExactly(fd, bytes->data() + old_size + sizeof(le_size), size);",
+        "lookback": "    memcpy(bytes->data() + old_size, &le_size, sizeof(le_size));",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 84,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.8140835762023926,
+        "hesitated": true
+    }
+]

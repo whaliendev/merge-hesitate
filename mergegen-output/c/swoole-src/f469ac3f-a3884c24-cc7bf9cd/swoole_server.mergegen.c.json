@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    swConnection *from_sock = swServer_connection_get(serv, req->info.from_fd);\n    if (from_sock)\n    {\n        add_assoc_long(zaddr, \"server_port\", swConnection_get_port(from_sock));\n    }\n\n    zval *callback = php_swoole_server_get_callback(serv, req->info.from_fd, SW_SERVER_CB_onPacket);\n    if (callback == NULL || ZVAL_IS_NULL(callback))\n    {\n        swoole_php_fatal_error(E_WARNING, \"onPacket callback is null.\");\n        return SW_OK;\n    }\n",
+        "base_contents": "    zval *callback = php_swoole_server_get_callback(serv, req->info.from_fd, SW_SERVER_CB_onPacket);\n    if (callback == NULL || ZVAL_IS_NULL(callback))\n    {\n        swoole_php_fatal_error(E_WARNING, \"onPacket callback is null.\");\n        return SW_OK;\n    }\n",
+        "res_region": "    swConnection *from_sock = swServer_connection_get(serv, req->info.from_fd);\n    if (from_sock)\n    {\n        add_assoc_long(zaddr, \"server_port\", swConnection_get_port(from_sock));\n    }\n\n    zval *callback = php_swoole_server_get_callback(serv, req->info.from_fd, SW_SERVER_CB_onPacket);\n    if (callback == NULL || ZVAL_IS_NULL(callback))\n    {\n        swoole_php_fatal_error(E_WARNING, \"onPacket callback is null.\");\n        return SW_OK;\n    }\n",
+        "lookback": "    if (from_sock)",
+        "lookahead": "    char address[INET6_ADDRSTRLEN];",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 688,
+        "end_line": 711,
+        "merge_gen_region": null,
+        "confidence": 0.32281142473220825,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    zval *callback = php_swoole_server_get_callback(serv, info->from_fd, SW_SERVER_CB_onConnect);\n    if (callback == NULL || ZVAL_IS_NULL(callback))\n    {\n        return;\n    }\n",
+        "base_contents": "    zval *callback = php_swoole_server_get_callback(serv, info->from_fd, SW_SERVER_CB_onConnect);\n    if (callback == NULL || ZVAL_IS_NULL(callback))\n    {\n        swoole_php_fatal_error(E_WARNING, \"onConnect callback is null.\");\n        return;\n    }\n",
+        "res_region": "",
+        "lookback": "    ZVAL_LONG(zfd, info->fd);",
+        "lookahead": "    SW_MAKE_STD_ZVAL(zfd);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1204,
+        "end_line": 1220,
+        "merge_gen_region": null,
+        "confidence": 0.7015110850334167,
+        "hesitated": true
+    }
+]

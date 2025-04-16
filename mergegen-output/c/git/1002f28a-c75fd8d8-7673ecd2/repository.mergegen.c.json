@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "void repo_set_ref_storage_format(struct repository *repo, unsigned int format)\n{\n\trepo->ref_storage_format = format;\n}\n",
+        "b_contents": "void repo_set_compat_hash_algo(struct repository *repo, int algo)\n{\n\tif (hash_algo_by_ptr(repo->hash_algo) == algo)\n\t\tBUG(\"hash_algo and compat_hash_algo match\");\n\trepo->compat_hash_algo = algo ? &hash_algos[algo] : NULL;\n\tif (repo->compat_hash_algo)\n\t\trepo_read_loose_object_map(repo);\n}\n",
+        "base_contents": "",
+        "res_region": "void repo_set_compat_hash_algo(struct repository *repo, int algo)\n{\n\tif (hash_algo_by_ptr(repo->hash_algo) == algo)\n\t\tBUG(\"hash_algo and compat_hash_algo match\");\n\trepo->compat_hash_algo = algo ? &hash_algos[algo] : NULL;\n\tif (repo->compat_hash_algo)\n\t\trepo_read_loose_object_map(repo);\n}\n\nvoid repo_set_ref_storage_format(struct repository *repo, unsigned int format)\n{\n\trepo->ref_storage_format = format;\n}\n",
+        "lookback": "{",
+        "lookahead": "/*",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 107,
+        "end_line": 124,
+        "merge_gen_region": "void_____void_voidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoidvoid",
+        "confidence": 0.8992533087730408,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\trepo_set_ref_storage_format(repo, format.ref_storage_format);",
+        "b_contents": "\trepo_set_compat_hash_algo(repo, format.compat_hash_algo);",
+        "base_contents": "",
+        "res_region": "\trepo_set_compat_hash_algo(repo, format.compat_hash_algo);\n\trepo_set_ref_storage_format(repo, format.ref_storage_format);",
+        "lookback": "\trepo_set_ref_storage_format(repo, format.ref_storage_format);",
+        "lookahead": "\trepo->repository_format_worktree_config = format.worktree_config;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 205,
+        "end_line": 210,
+        "merge_gen_region": null,
+        "confidence": 0.8581675291061401,
+        "hesitated": true
+    }
+]

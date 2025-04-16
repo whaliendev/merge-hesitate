@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    EventLoopManagerSingleton::get()\n        ->getHostCommsManager()\n        .resetBlameForNanoappHostWakeup();\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        CHRE_EVENT_HOST_ASLEEP, nullptr, nullptr);",
+        "b_contents": "    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        CHRE_EVENT_HOST_ASLEEP, nullptr, nullptr);",
+        "base_contents": "    EventLoopManagerSingleton::get()->getEventLoop()\n        .postEvent(CHRE_EVENT_HOST_ASLEEP, nullptr, nullptr);",
+        "res_region": "    EventLoopManagerSingleton::get()\n        ->getHostCommsManager()\n        .resetBlameForNanoappHostWakeup();\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(\n        CHRE_EVENT_HOST_ASLEEP, nullptr, nullptr);",
+        "lookback": "        ->getHostCommsManager()",
+        "lookahead": "  } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 67,
+        "end_line": 79,
+        "merge_gen_region": null,
+        "confidence": 0.8762418627738953,
+        "hesitated": true
+    }
+]

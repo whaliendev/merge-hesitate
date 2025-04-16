@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        return new_val(datum_t(std::move(res), env->env->limits()));",
+        "b_contents": "        return new_val(make_counted<const datum_t>(std::move(res), env->env->limits()));",
+        "base_contents": "        return new_val(make_counted<const datum_t>(std::move(res), env->env->limits));",
+        "res_region": "        return new_val(datum_t(std::move(res), env->env->limits()));",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 123,
+        "end_line": 129,
+        "merge_gen_region": "returnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturn>(returnreturnreturnreturnreturn\",return\",returnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturnreturn",
+        "confidence": 0.9010940790176392,
+        "hesitated": false,
+        "resolved": false
+    }
+]

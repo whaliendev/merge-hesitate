@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define ZSTD_HASHLOG3_MAX      17\n#define ZSTD_HASHLOG3_MIN      15\n#define ZSTD_SEARCHLOG_MAX    (ZSTD_CONTENTLOG_MAX-1)",
+        "b_contents": "#define ZSTD_SEARCHLOG_MAX    (ZSTD_WINDOWLOG_MAX-1)",
+        "base_contents": "#define ZSTD_SEARCHLOG_MAX    (ZSTD_CONTENTLOG_MAX-1)",
+        "res_region": "#define ZSTD_HASHLOG3_MAX      17\n#define ZSTD_HASHLOG3_MIN      15\n#define ZSTD_SEARCHLOG_MAX    (ZSTD_WINDOWLOG_MAX-1)",
+        "lookback": "#define ZSTD_HASHLOG3_MIN      15",
+        "lookahead": "#define ZSTD_SEARCHLOG_MIN      1",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 65,
+        "end_line": 73,
+        "merge_gen_region": null,
+        "confidence": 0.8323777318000793,
+        "hesitated": true
+    }
+]

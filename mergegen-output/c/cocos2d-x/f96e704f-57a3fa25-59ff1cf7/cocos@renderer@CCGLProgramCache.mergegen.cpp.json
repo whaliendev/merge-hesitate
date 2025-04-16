@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    kShaderType_CameraClear,\n#if CC_TARGET_PLATFORM == CC_PLATFORM_WP8 || defined(WP8_SHADER_COMPILER)\n    kShaderType_PositionColor_noMVP_GrayScale,\n#endif",
+        "b_contents": "    kShaderType_CameraClear,",
+        "base_contents": "",
+        "res_region": "    kShaderType_CameraClear,",
+        "lookback": "    kShaderType_MAX,",
+        "lookahead": "    kShaderType_MAX,",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 64,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.8516290783882141,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        case kShaderType_CameraClear:\n            p->initWithByteArrays(ccCameraClearVert, ccCameraClearFrag);\n            break;\n#if CC_TARGET_PLATFORM == CC_PLATFORM_WP8 || defined(WP8_SHADER_COMPILER)\n        case kShaderType_PositionColor_noMVP_GrayScale:\n            p->initWithByteArrays(ccPositionTextureColor_noMVP_vert, ccUIGrayScale_frag);\n            break;\n#endif",
+        "b_contents": "        case kShaderType_CameraClear:\n            p->initWithByteArrays(ccCameraClearVert, ccCameraClearFrag);\n            break;",
+        "base_contents": "",
+        "res_region": "        case kShaderType_CameraClear:\n            p->initWithByteArrays(ccCameraClearVert, ccCameraClearFrag);\n            break;",
+        "lookback": "            p->initWithByteArrays(ccCameraClearVert, ccCameraClearFrag);",
+        "lookahead": "        default:",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 502,
+        "end_line": 516,
+        "merge_gen_region": "outputTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrackTrack",
+        "confidence": 0.9365316033363342,
+        "hesitated": false,
+        "resolved": false
+    }
+]

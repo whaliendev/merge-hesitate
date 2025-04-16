@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (output_format & DIFF_FORMAT_PATCH) {\n\t\tif (separator) {\n\t\t\temit_diff_symbol(options, DIFF_SYMBOL_SEPARATOR, NULL, 0, 0);\n\t\t\tif (options->stat_sep)\n\t\t\t\t/* attach patch instead of inline */\n\t\t\t\temit_diff_symbol(options, DIFF_SYMBOL_STAT_SEP,\n\t\t\t\t\t\t NULL, 0, 0);\n\t\t}\n\n\t\tdiff_flush_patch_all_file_pairs(options);\n\t}\n\n\tif (output_format & DIFF_FORMAT_CALLBACK)\n\t\toptions->format_callback(q, options, options->format_callback_data);\n",
+        "b_contents": "\tfor (i = 0; i < q->nr; i++)\n\t\tdiff_free_filepair(q->queue[i]);",
+        "base_contents": "\tif (output_format & DIFF_FORMAT_PATCH) {\n\t\tif (separator) {\n\t\t\temit_diff_symbol(options, DIFF_SYMBOL_SEPARATOR, NULL, 0, 0);\n\t\t\tif (options->stat_sep)\n\t\t\t\t/* attach patch instead of inline */\n\t\t\t\temit_diff_symbol(options, DIFF_SYMBOL_STAT_SEP,\n\t\t\t\t\t\t NULL, 0, 0);\n\t\t}\n\n\t\tdiff_flush_patch_all_file_pairs(options);\n\t}\n\n\tif (output_format & DIFF_FORMAT_CALLBACK)\n\t\toptions->format_callback(q, options, options->format_callback_data);\n\n\tfor (i = 0; i < q->nr; i++)\n\t\tdiff_free_filepair(q->queue[i]);",
+        "res_region": "",
+        "lookback": "\tdiff_free_queue(q);",
+        "lookahead": "free_queue:",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 6731,
+        "end_line": 6768,
+        "merge_gen_region": null,
+        "confidence": 0.5952518582344055,
+        "hesitated": true
+    }
+]

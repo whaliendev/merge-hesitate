@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "               == btree_sindex_block_magic_t<cluster_version_t::v2_1>::value) {\n        return cluster_version_t::v2_1;\n    } else if (data->magic == btree_sindex_block_magic_t<\n                   cluster_version_t::raft_is_latest_disk>::value) {\n        return cluster_version_t::raft_is_latest_disk;",
+        "b_contents": "               == btree_sindex_block_magic_t<\n                   cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "base_contents": "               == btree_sindex_block_magic_t<cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "res_region": "               == btree_sindex_block_magic_t<\n                   cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "lookback": "                   cluster_version_t::v2_1_is_latest_disk>::value) {",
+        "lookahead": "    } else {",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 73,
+        "end_line": 86,
+        "merge_gen_region": null,
+        "confidence": 0.7862987518310547,
+        "hesitated": true
+    }
+]

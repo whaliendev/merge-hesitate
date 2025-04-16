@@ -1,0 +1,258 @@
+[
+    {
+        "a_contents": "#include \"rocksdb/cache.h\"",
+        "b_contents": "#include \"port/likely.h\"",
+        "base_contents": "",
+        "res_region": "#include \"rocksdb/cache.h\"\n#include \"port/likely.h\"",
+        "lookback": "#include \"port/likely.h\"",
+        "lookahead": "#include \"rocksdb/compaction_filter.h\"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 44,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.8431828618049622,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      default_cf_handle_(nullptr),",
+        "b_contents": "      super_version_(nullptr),\n      super_version_number_(0),\n      local_sv_(new ThreadLocalPtr(&SuperVersionUnrefHandle)),",
+        "base_contents": "      super_version_(nullptr),\n      super_version_number_(0),",
+        "res_region": "      default_cf_handle_(nullptr),",
+        "lookback": "      tmp_batch_(),",
+        "lookahead": "      tmp_batch_(),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 228,
+        "end_line": 237,
+        "merge_gen_region": null,
+        "confidence": 0.8228335380554199,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      refitting_level_(false) {\n",
+        "b_contents": "      refitting_level_(false),\n      opened_successfully_(false) {\n  mem_->Ref();",
+        "base_contents": "      refitting_level_(false) {\n  mem_->Ref();",
+        "res_region": "      refitting_level_(false),\n      opened_successfully_(false) {",
+        "lookback": "      opened_successfully_(false) {",
+        "lookahead": "  env_->GetAbsolutePath(dbname, &db_absolute_path_);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 254,
+        "end_line": 264,
+        "merge_gen_region": null,
+        "confidence": 0.673382580280304,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  if (flush_on_destroy_ && mem_->GetFirstSequenceNumber() != 0) {\n    FlushMemTable(FlushOptions());\n  }\n",
+        "base_contents": "  if (flush_on_destroy_ && mem_->GetFirstSequenceNumber() != 0) {\n    FlushMemTable(FlushOptions());\n  }",
+        "res_region": "",
+        "lookback": "  if (flush_on_destroy_) {",
+        "lookahead": "  mutex_.Lock();",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 299,
+        "end_line": 309,
+        "merge_gen_region": null,
+        "confidence": 0.7466608285903931,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  mutex_.Unlock();\n\n  // Release SuperVersion reference kept in ThreadLocalPtr.\n  // This must be done outside of mutex_ since unref handler can lock mutex.\n  // It also needs to be done after FlushMemTable, which can trigger local_sv_\n  // access.\n  delete local_sv_;\n\n  mutex_.Lock();\n  if (options_.allow_thread_local) {\n    // Clean up obsolete files due to SuperVersion release.\n    // (1) Need to delete to obsolete files before closing because RepairDB()\n    // scans all existing files in the file system and builds manifest file.\n    // Keeping obsolete files confuses the repair process.\n    // (2) Need to check if we Open()/Recover() the DB successfully before\n    // deleting because if VersionSet recover fails (may be due to corrupted\n    // manifest file), it is not able to identify live files correctly. As a\n    // result, all \"live\" files can get deleted by accident. However, corrupted\n    // manifest is recoverable by RepairDB().\n    if (opened_successfully_) {\n      DeletionState deletion_state;\n      FindObsoleteFiles(deletion_state, true);\n      // manifest number starting from 2\n      deletion_state.manifest_file_number = 1;\n      PurgeObsoleteFiles(deletion_state);\n    }\n  }\n\n  if (super_version_ != nullptr) {\n    bool is_last_reference __attribute__((unused));\n    is_last_reference = super_version_->Unref();\n    assert(is_last_reference);\n    super_version_->Cleanup();\n    delete super_version_;\n  }",
+        "base_contents": "  if (super_version_ != nullptr) {\n    bool is_last_reference __attribute__((unused));\n    is_last_reference = super_version_->Unref();\n    assert(is_last_reference);\n    super_version_->Cleanup();\n    delete super_version_;\n  }",
+        "res_region": "\n  if (options_.allow_thread_local) {\n    // Clean up obsolete files due to SuperVersion release.\n    // (1) Need to delete to obsolete files before closing because RepairDB()\n    // scans all existing files in the file system and builds manifest file.\n    // Keeping obsolete files confuses the repair process.\n    // (2) Need to check if we Open()/Recover() the DB successfully before\n    // deleting because if VersionSet recover fails (may be due to corrupted\n    // manifest file), it is not able to identify live files correctly. As a\n    // result, all \"live\" files can get deleted by accident. However, corrupted\n    // manifest is recoverable by RepairDB().\n    if (opened_successfully_) {\n      DeletionState deletion_state;\n      FindObsoleteFiles(deletion_state, true);\n      // manifest number starting from 2\n      deletion_state.manifest_file_number = 1;\n      PurgeObsoleteFiles(deletion_state);\n    }\n  }\n",
+        "lookback": "  if (options_.allow_thread_local) {",
+        "lookahead": "  mutex_.Unlock();",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 334,
+        "end_line": 379,
+        "merge_gen_region": null,
+        "confidence": 0.4343891143798828,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // versions need to be destroyed before table_cache since it can hold",
+        "b_contents": "  if (mem_ != nullptr) {\n    delete mem_->Unref();\n  }\n\n  autovector<MemTable*> to_delete;\n  imm_.current()->Unref(&to_delete);\n  for (MemTable* m: to_delete) {\n    delete m;\n  }\n  // versions need to be destroyed before table_cache since it can holds",
+        "base_contents": "  if (mem_ != nullptr) {\n    delete mem_->Unref();\n  }\n\n  imm_.current()->Unref(&to_delete);\n  for (MemTable* m: to_delete) {\n    delete m;\n  }\n  // versions need to be destroyed before table_cache since it can holds",
+        "res_region": "  // versions need to be destroyed before table_cache since it can hold",
+        "lookback": "  // references to table_cache.",
+        "lookahead": "  // references to table_cache.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 390,
+        "end_line": 413,
+        "merge_gen_region": null,
+        "confidence": 0.8696066737174988,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    InstallSuperVersion(cfd, deletion_state);",
+        "b_contents": "    InstallSuperVersion(deletion_state);\n    // Reset SuperVersions cached in thread local storage\n    if (options_.allow_thread_local) {\n      ResetThreadLocalSuperVersions(&deletion_state);\n    }",
+        "base_contents": "    InstallSuperVersion(deletion_state);",
+        "res_region": "    InstallSuperVersion(cfd, deletion_state);\n    // Reset SuperVersions cached in thread local storage\n    if (options_.allow_thread_local) {\n      cfd->ResetThreadLocalSuperVersions();\n    }",
+        "lookback": "    // Reset SuperVersions cached in thread local storage",
+        "lookahead": "    if (madeProgress) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1334,
+        "end_line": 1344,
+        "merge_gen_region": null,
+        "confidence": 0.8654374480247498,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// new SuperVersion() inside of the mutex. We do similar thing\n// for superversion_to_free\nvoid DBImpl::InstallSuperVersion(ColumnFamilyData* cfd,\n                                 DeletionState& deletion_state) {\n  mutex_.AssertHeld();",
+        "b_contents": "// new SuperVersion() inside of the mutex.\nvoid DBImpl::InstallSuperVersion(DeletionState& deletion_state) {\n  mutex_.AssertHeld();",
+        "base_contents": "// new SuperVersion() inside of the mutex. We do similar thing\n// for superversion_to_free\nvoid DBImpl::InstallSuperVersion(DeletionState& deletion_state) {",
+        "res_region": "// new SuperVersion() inside of the mutex. We do similar thing\n// for superversion_to_free\nvoid DBImpl::InstallSuperVersion(ColumnFamilyData* cfd,\n                                 DeletionState& deletion_state) {\n  mutex_.AssertHeld();",
+        "lookback": "// for superversion_to_free",
+        "lookahead": "  // if new_superversion == nullptr, it means somebody already used it",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2933,
+        "end_line": 2947,
+        "merge_gen_region": " DB::Super(Family*fd DeletState deletionstate {_.H",
+        "confidence": 0.8808518648147583,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "",
+        "b_contents": "DBImpl::SuperVersion* DBImpl::InstallSuperVersion(\n    SuperVersion* new_superversion) {\n  mutex_.AssertHeld();\n  new_superversion->Init(mem_, imm_.current(), versions_->current());\n  SuperVersion* old_superversion = super_version_;\n  super_version_ = new_superversion;\n  super_version_->db = this;\n  ++super_version_number_;\n  super_version_->version_number = super_version_number_;\n\n  if (old_superversion != nullptr && old_superversion->Unref()) {\n    old_superversion->Cleanup();\n    return old_superversion; // will let caller delete outside of mutex\n  }\n  return nullptr;\n}\n\nvoid DBImpl::ResetThreadLocalSuperVersions(DeletionState* deletion_state) {\n  mutex_.AssertHeld();\n  autovector<void*> sv_ptrs;\n  local_sv_->Scrape(&sv_ptrs);\n  for (auto ptr : sv_ptrs) {\n    assert(ptr);\n    auto sv = static_cast<SuperVersion*>(ptr);\n    if (static_cast<SuperVersion*>(ptr)->Unref()) {\n      sv->Cleanup();\n      deletion_state->superversions_to_free.push_back(sv);\n    }\n  }\n}\n",
+        "base_contents": "DBImpl::SuperVersion* DBImpl::InstallSuperVersion(\n    SuperVersion* new_superversion) {\n  mutex_.AssertHeld();\n  new_superversion->Init(mem_, imm_.current(), versions_->current());\n  SuperVersion* old_superversion = super_version_;\n  super_version_ = new_superversion;\n  ++super_version_number_;\n  if (old_superversion != nullptr && old_superversion->Unref()) {\n    old_superversion->Cleanup();\n    return old_superversion; // will let caller delete outside of mutex\n  }\n  return nullptr;\n}\n",
+        "res_region": "",
+        "lookback": "                       ColumnFamilyHandle* column_family, const Slice& key,",
+        "lookahead": "Status DBImpl::GetImpl(const ReadOptions& options,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2957,
+        "end_line": 3005,
+        "merge_gen_region": null,
+        "confidence": 0.7447898983955383,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "  // Acquire SuperVersion\n  SuperVersion* sv = nullptr;\n  if (LIKELY(options_.allow_thread_local)) {\n    // The SuperVersion is cached in thread local storage to avoid acquiring\n    // mutex when SuperVersion does not change since the last use. When a new\n    // SuperVersion is installed, the compaction or flush thread cleans up\n    // cached SuperVersion in all existing thread local storage. To avoid\n    // acquiring mutex for this operation, we use atomic Swap() on the thread\n    // local pointer to guarantee exclusive access. If the thread local pointer\n    // is being used while a new SuperVersion is installed, the cached\n    // SuperVersion can become stale. It will eventually get refreshed either\n    // on the next GetImpl() call or next SuperVersion installation.\n    sv = static_cast<SuperVersion*>(local_sv_->Swap(nullptr));\n    if (!sv || sv->version_number !=\n               super_version_number_.load(std::memory_order_relaxed)) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_UPDATES);\n      SuperVersion* sv_to_delete = nullptr;\n\n      if (sv && sv->Unref()) {\n        mutex_.Lock();\n        sv->Cleanup();\n        sv_to_delete = sv;\n      } else {\n        mutex_.Lock();\n      }\n      sv = super_version_->Ref();\n      mutex_.Unlock();\n\n      delete sv_to_delete;\n    }\n  } else {\n    mutex_.Lock();\n    sv = super_version_->Ref();\n    mutex_.Unlock();\n  }\n",
+        "base_contents": "  // This can be replaced by using atomics and spinlock instead of big mutex\n  mutex_.Lock();\n  SuperVersion* get_version = super_version_->Ref();\n  mutex_.Unlock();\n",
+        "res_region": "  // Acquire SuperVersion\n  SuperVersion* sv = nullptr;\n  if (LIKELY(options_.allow_thread_local)) {\n    // The SuperVersion is cached in thread local storage to avoid acquiring\n    // mutex when SuperVersion does not change since the last use. When a new\n    // SuperVersion is installed, the compaction or flush thread cleans up\n    // cached SuperVersion in all existing thread local storage. To avoid\n    // acquiring mutex for this operation, we use atomic Swap() on the thread\n    // local pointer to guarantee exclusive access. If the thread local pointer\n    // is being used while a new SuperVersion is installed, the cached\n    // SuperVersion can become stale. It will eventually get refreshed either\n    // on the next GetImpl() call or next SuperVersion installation.\n    sv = cfd->GetAndResetThreadLocalSuperVersion();\n    if (!sv || sv->version_number != cfd->GetSuperVersionNumber()) {\n      RecordTick(options_.statistics.get(), NUMBER_SUPERVERSION_UPDATES);\n      SuperVersion* sv_to_delete = nullptr;\n\n      if (sv && sv->Unref()) {\n        mutex_.Lock();\n        sv->Cleanup();\n        sv_to_delete = sv;\n      } else {\n        mutex_.Lock();\n      }\n      sv = cfd->GetSuperVersion()->Ref();\n      mutex_.Unlock();\n\n      delete sv_to_delete;\n    }\n  } else {\n    mutex_.Lock();\n    sv = cfd->GetSuperVersion()->Ref();\n    mutex_.Unlock();\n  }\n",
+        "lookback": "  SuperVersion* sv = nullptr;",
+        "lookahead": "  bool have_stat_update = false;",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 3027,
+        "end_line": 3071,
+        "merge_gen_region": null,
+        "confidence": 0.6948196291923523,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (get_version->mem->Get(lkey, value, &s, merge_context,\n                            *cfd->full_options())) {",
+        "b_contents": "  if (sv->mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "base_contents": "  if (get_version->mem->Get(lkey, value, &s, merge_context, options_)) {",
+        "res_region": "  if (sv->mem->Get(lkey, value, &s, merge_context, *cfd->full_options())) {",
+        "lookback": "    // Done",
+        "lookahead": "    // Done",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3084,
+        "end_line": 3091,
+        "merge_gen_region": null,
+        "confidence": 0.830145001411438,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  } else if (get_version->imm->Get(lkey, value, &s, merge_context,\n                                   *cfd->full_options())) {",
+        "b_contents": "  } else if (sv->imm->Get(lkey, value, &s, merge_context, options_)) {",
+        "base_contents": "  } else if (get_version->imm->Get(lkey, value, &s, merge_context, options_)) {",
+        "res_region": "  } else if (sv->imm->Get(lkey, value, &s, merge_context,\n                          *cfd->full_options())) {",
+        "lookback": "                          *cfd->full_options())) {",
+        "lookahead": "    // Done",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3094,
+        "end_line": 3101,
+        "merge_gen_region": null,
+        "confidence": 0.7323490977287292,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    get_version->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                              *cfd->full_options(), value_found);",
+        "b_contents": "    sv->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                     options_, value_found);",
+        "base_contents": "    get_version->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                              options_, value_found);",
+        "res_region": "    sv->current->Get(options, lkey, value, &s, &merge_context, &stats,\n                     *cfd->full_options(), value_found);",
+        "lookback": "                     *cfd->full_options(), value_found);",
+        "lookahead": "    have_stat_update = true;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 3109,
+        "end_line": 3118,
+        "merge_gen_region": null,
+        "confidence": 0.8343170881271362,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool delete_get_version = false;\n  if (!cfd->options()->disable_seek_compaction && have_stat_update) {",
+        "b_contents": "  if (!options_.disable_seek_compaction && have_stat_update) {",
+        "base_contents": "  bool delete_get_version = false;\n  if (!options_.disable_seek_compaction && have_stat_update) {",
+        "res_region": "  if (!cfd->options()->disable_seek_compaction && have_stat_update) {",
+        "lookback": "    mutex_.Lock();",
+        "lookahead": "    mutex_.Lock();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3127,
+        "end_line": 3135,
+        "merge_gen_region": null,
+        "confidence": 0.8261542320251465,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  handles->clear();\n  EnvOptions soptions(db_options);",
+        "b_contents": "",
+        "base_contents": "  EnvOptions soptions(options);",
+        "res_region": "  handles->clear();",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 4126,
+        "end_line": 4132,
+        "merge_gen_region": null,
+        "confidence": 0.32960954308509827,
+        "hesitated": true
+    }
+]

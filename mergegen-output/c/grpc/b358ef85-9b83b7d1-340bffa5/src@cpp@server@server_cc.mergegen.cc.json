@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  ops->FillOps(call);",
+        "b_contents": "  static const size_t MAX_OPS = 8;\n  size_t nops = 0;\n  grpc_op cops[MAX_OPS];\n  ops->FillOps(call->call(), cops, &nops);\n  auto result =\n      grpc_call_start_batch(call->call(), cops, nops, ops->cq_tag(), nullptr);\n  if (result != GRPC_CALL_OK) {\n    gpr_log(GPR_ERROR, \"Fatal: grpc_call_start_batch returned %d\", result);\n    grpc_call_log_batch(__FILE__, __LINE__, GPR_LOG_SEVERITY_ERROR,\n                        call->call(), cops, nops, ops);\n    abort();\n  }",
+        "base_contents": "  static const size_t MAX_OPS = 8;\n  size_t nops = 0;\n  grpc_op cops[MAX_OPS];\n  ops->FillOps(call->call(), cops, &nops);\n  // TODO(vjpai): Use ops->cq_tag once this case supports callbacks\n  auto result = grpc_call_start_batch(call->call(), cops, nops, ops, nullptr);\n  if (result != GRPC_CALL_OK) {\n    gpr_log(GPR_ERROR, \"Fatal: grpc_call_start_batch returned %d\", result);\n    grpc_call_log_batch(__FILE__, __LINE__, GPR_LOG_SEVERITY_ERROR,\n                        call->call(), cops, nops, ops);\n    abort();\n  }",
+        "res_region": "  ops->FillOps(call);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 736,
+        "end_line": 764,
+        "merge_gen_region": null,
+        "confidence": 0.8332412838935852,
+        "hesitated": true
+    }
+]

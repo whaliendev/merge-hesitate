@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    /** get Mesh Count */\n    ssize_t getMeshCount() const { return _meshes.size(); }\n    ",
+        "b_contents": "    /** get mesh count */\n    ssize_t getMeshCount() const { return _meshes.size(); }\n    ",
+        "base_contents": "",
+        "res_region": "    /** get mesh count */\n    ssize_t getMeshCount() const { return _meshes.size(); }\n    ",
+        "lookback": "    ssize_t getMeshCount() const { return _meshes.size(); }",
+        "lookahead": "    /**get skin*/",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 71,
+        "end_line": 80,
+        "merge_gen_region": null,
+        "confidence": 0.7397534847259521,
+        "hesitated": true
+    }
+]

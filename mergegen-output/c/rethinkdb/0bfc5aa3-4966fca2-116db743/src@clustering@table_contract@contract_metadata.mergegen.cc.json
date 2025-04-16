@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "RDB_IMPL_SERIALIZABLE_5_SINCE_v2_1(\n    contract_t, replicas, voters, temp_voters, primary, branch);",
+        "b_contents": "RDB_IMPL_SERIALIZABLE_4_SINCE_v1_16(\n    contract_t, replicas, voters, temp_voters, primary);",
+        "base_contents": "RDB_IMPL_SERIALIZABLE_5_SINCE_v1_16(\n    contract_t, replicas, voters, temp_voters, primary, branch);",
+        "res_region": "RDB_IMPL_SERIALIZABLE_4_SINCE_v2_1(\n    contract_t, replicas, voters, temp_voters, primary);",
+        "lookback": "    contract_t, replicas, voters, temp_voters, primary);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.6388017535209656,
+        "hesitated": true
+    },
+    {
+        "a_contents": "RDB_IMPL_SERIALIZABLE_6_SINCE_v2_1(",
+        "b_contents": "RDB_IMPL_SERIALIZABLE_7_SINCE_v1_16(",
+        "base_contents": "RDB_IMPL_SERIALIZABLE_6_SINCE_v1_16(",
+        "res_region": "RDB_IMPL_SERIALIZABLE_7_SINCE_v2_1(",
+        "lookback": "    table_raft_state_t::change_t::new_contracts_t,",
+        "lookahead": "    table_raft_state_t::change_t::new_contracts_t,",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 111,
+        "end_line": 117,
+        "merge_gen_region": null,
+        "confidence": 0.7784406542778015,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    remove_server_names, add_server_names);\nRDB_IMPL_SERIALIZABLE_2_SINCE_v2_1(",
+        "b_contents": "    register_current_branches, remove_server_names, add_server_names);\nRDB_IMPL_SERIALIZABLE_2_SINCE_v1_16(",
+        "base_contents": "    remove_server_names, add_server_names);\nRDB_IMPL_SERIALIZABLE_2_SINCE_v1_16(",
+        "res_region": "    register_current_branches, remove_server_names, add_server_names);\nRDB_IMPL_SERIALIZABLE_2_SINCE_v2_1(",
+        "lookback": "RDB_IMPL_SERIALIZABLE_2_SINCE_v2_1(",
+        "lookahead": "    table_raft_state_t::change_t::new_member_ids_t,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 120,
+        "end_line": 129,
+        "merge_gen_region": null,
+        "confidence": 0.7912131547927856,
+        "hesitated": true
+    },
+    {
+        "a_contents": "RDB_IMPL_SERIALIZABLE_5_SINCE_v2_1(\n    table_raft_state_t, config, contracts, branch_history, member_ids, server_names);",
+        "b_contents": "RDB_IMPL_SERIALIZABLE_6_SINCE_v1_16(\n    table_raft_state_t, config, contracts, branch_history, current_branches,\n    member_ids, server_names);",
+        "base_contents": "RDB_IMPL_SERIALIZABLE_5_SINCE_v1_16(\n    table_raft_state_t, config, contracts, branch_history, member_ids, server_names);",
+        "res_region": "RDB_IMPL_SERIALIZABLE_6_SINCE_v2_1(\n    table_raft_state_t, config, contracts, branch_history, current_branches,\n    member_ids, server_names);",
+        "lookback": "    table_raft_state_t, config, contracts, branch_history, current_branches,",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 134,
+        "end_line": 144,
+        "merge_gen_region": null,
+        "confidence": 0.8565672636032104,
+        "hesitated": true
+    }
+]

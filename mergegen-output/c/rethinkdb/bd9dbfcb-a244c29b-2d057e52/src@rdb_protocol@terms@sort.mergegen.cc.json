@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "                datum_t(std::move(to_sort), env->env->limits()),",
+        "b_contents": "                make_counted<const datum_t>(std::move(to_sort), env->env->limits()),",
+        "base_contents": "                make_counted<const datum_t>(std::move(to_sort), env->env->limits),",
+        "res_region": "                datum_t(std::move(to_sort), env->env->limits()),",
+        "lookback": "                backtrace());",
+        "lookahead": "                backtrace());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 193,
+        "end_line": 199,
+        "merge_gen_region": null,
+        "confidence": 0.8113908171653748,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            std::set<datum_t, counted_datum_less_t>\n                results(counted_datum_less_t(env->env->reql_version));",
+        "b_contents": "            std::set<counted_t<const datum_t>, counted_datum_less_t>\n                results(counted_datum_less_t(env->env->reql_version()));",
+        "base_contents": "            std::set<counted_t<const datum_t>, counted_datum_less_t>\n                results(counted_datum_less_t(env->env->reql_version));",
+        "res_region": "            std::set<datum_t, counted_datum_less_t>\n                results(counted_datum_less_t(env->env->reql_version()));",
+        "lookback": "                results(counted_datum_less_t(env->env->reql_version()));",
+        "lookahead": "            batchspec_t batchspec = batchspec_t::user(batch_type_t::TERMINAL, env->env);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 250,
+        "end_line": 259,
+        "merge_gen_region": null,
+        "confidence": 0.7322695255279541,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            return new_val(datum_t(std::move(toret),\n                                                       env->env->limits()));",
+        "b_contents": "            return new_val(make_counted<const datum_t>(std::move(toret),\n                                                       env->env->limits()));",
+        "base_contents": "            return new_val(make_counted<const datum_t>(std::move(toret),\n                                                       env->env->limits));",
+        "res_region": "            return new_val(datum_t(std::move(toret), env->env->limits()));",
+        "lookback": "        }",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 272,
+        "end_line": 281,
+        "merge_gen_region": " newvalreturnReplaceononreturnReplacereturnReplacereturnStringonononreturnStringonononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononononon",
+        "confidence": 0.8924603462219238,
+        "hesitated": false,
+        "resolved": false
+    }
+]

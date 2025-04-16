@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"update_engine/logging.h\"",
+        "b_contents": "",
+        "base_contents": "#include \"update_engine/sideload_logging_android.h\"",
+        "res_region": "#include \"update_engine/logging.h\"",
+        "lookback": "#include \"update_engine/update_attempter_android.h\"",
+        "lookahead": "#include \"update_engine/update_attempter_android.h\"",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 37,
+        "end_line": 42,
+        "merge_gen_region": null,
+        "confidence": 0.6527125835418701,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  chromeos_update_engine::SetupLogging(true /* stderr */, false /* file */);",
+        "b_contents": "  chromeos_update_engine::SetupLogging();",
+        "base_contents": "  chromeos_update_engine::SetupLogging();\n  chromeos_update_engine::SetupAndroidLogging(argv);",
+        "res_region": "  chromeos_update_engine::SetupLogging(true /* stderr */, false /* file */);",
+        "lookback": "  brillo::FlagHelper::Init(argc, argv, \"Update Engine Sideload\");",
+        "lookahead": "  brillo::FlagHelper::Init(argc, argv, \"Update Engine Sideload\");",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 191,
+        "end_line": 198,
+        "merge_gen_region": null,
+        "confidence": 0.43355870246887207,
+        "hesitated": true
+    }
+]

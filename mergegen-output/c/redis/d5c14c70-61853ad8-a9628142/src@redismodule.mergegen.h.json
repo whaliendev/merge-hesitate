@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "typedef void (*RedisModuleInfoFunc)(RedisModuleInfoCtx *ctx, int for_crash_report);",
+        "b_contents": "typedef void (*RedisModuleForkDoneHandler) (int exitcode, int bysignal, void *user_data);",
+        "base_contents": "",
+        "res_region": "typedef void (*RedisModuleForkDoneHandler) (int exitcode, int bysignal, void *user_data);\ntypedef void (*RedisModuleInfoFunc)(RedisModuleInfoCtx *ctx, int for_crash_report);",
+        "lookback": "typedef void (*RedisModuleInfoFunc)(RedisModuleInfoCtx *ctx, int for_crash_report);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 185,
+        "end_line": 190,
+        "merge_gen_region": null,
+        "confidence": 0.8389900922775269,
+        "hesitated": true
+    }
+]

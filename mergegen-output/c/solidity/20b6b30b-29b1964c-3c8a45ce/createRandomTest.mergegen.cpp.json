@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n\t\tauto vmObj = eth::VMFactory::create(eth::VMFactory::Interpreter);\n\t\tauto& vm = *vmObj;\n\t\ttest::FakeExtVM fev;",
+        "b_contents": "\t\tdev::test::FakeExtVM fev;",
+        "base_contents": "\t\teth::VM vm;\n\t\ttest::FakeExtVM fev;",
+        "res_region": "\t\tdev::test::FakeExtVM fev;",
+        "lookback": "\t\tfev.importEnv(o[\"env\"].get_obj());",
+        "lookahead": "\t\tfev.importEnv(o[\"env\"].get_obj());",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 131,
+        "end_line": 141,
+        "merge_gen_region": null,
+        "confidence": 0.8178084492683411,
+        "hesitated": true
+    }
+]

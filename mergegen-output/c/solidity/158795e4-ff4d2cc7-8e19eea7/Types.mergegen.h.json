@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tString, Contract, Struct, Function, OverloadedFunctions, Enum,",
+        "b_contents": "\t\tFixedBytes, Contract, Struct, Function, Enum,",
+        "base_contents": "\t\tString, Contract, Struct, Function, Enum,",
+        "res_region": "\t\tFixedBytes, Contract, Struct, Function, OverloadedFunctions, Enum,",
+        "lookback": "\t\tMapping, Void, TypeType, Modifier, Magic",
+        "lookahead": "\t\tMapping, Void, TypeType, Modifier, Magic",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 112,
+        "merge_gen_region": null,
+        "confidence": 0.7621614336967468,
+        "hesitated": true
+    }
+]

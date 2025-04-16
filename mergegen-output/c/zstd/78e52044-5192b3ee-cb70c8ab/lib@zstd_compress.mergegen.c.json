@@ -1,0 +1,122 @@
+[
+    {
+        "a_contents": "    dstCCtx->nextToUpdate= srcCCtx->nextToUpdate;\n    dstCCtx->nextToUpdate3 = srcCCtx->nextToUpdate3;\n    dstCCtx->nextSrc     = srcCCtx->nextSrc;\n    dstCCtx->base        = srcCCtx->base;\n    dstCCtx->dictBase    = srcCCtx->dictBase;\n    dstCCtx->dictLimit   = srcCCtx->dictLimit;\n    dstCCtx->lowLimit    = srcCCtx->lowLimit;\n    dstCCtx->loadedDictEnd = srcCCtx->loadedDictEnd;\n    dstCCtx->additionalParam = srcCCtx->additionalParam;",
+        "b_contents": "    dstCCtx->nextToUpdate = srcCCtx->nextToUpdate;\n    dstCCtx->nextToUpdate3= srcCCtx->nextToUpdate3;\n    dstCCtx->nextSrc      = srcCCtx->nextSrc;\n    dstCCtx->base         = srcCCtx->base;\n    dstCCtx->dictBase     = srcCCtx->dictBase;\n    dstCCtx->dictLimit    = srcCCtx->dictLimit;\n    dstCCtx->lowLimit     = srcCCtx->lowLimit;\n    dstCCtx->loadedDictEnd= srcCCtx->loadedDictEnd;",
+        "base_contents": "    dstCCtx->nextToUpdate= srcCCtx->nextToUpdate;\n    dstCCtx->nextToUpdate3 = srcCCtx->nextToUpdate3;\n    dstCCtx->nextSrc     = srcCCtx->nextSrc;\n    dstCCtx->base        = srcCCtx->base;\n    dstCCtx->dictBase    = srcCCtx->dictBase;\n    dstCCtx->dictLimit   = srcCCtx->dictLimit;\n    dstCCtx->lowLimit    = srcCCtx->lowLimit;\n    dstCCtx->loadedDictEnd = srcCCtx->loadedDictEnd;",
+        "res_region": "    dstCCtx->nextToUpdate = srcCCtx->nextToUpdate;\n    dstCCtx->nextToUpdate3= srcCCtx->nextToUpdate3;\n    dstCCtx->nextSrc      = srcCCtx->nextSrc;\n    dstCCtx->base         = srcCCtx->base;\n    dstCCtx->dictBase     = srcCCtx->dictBase;\n    dstCCtx->dictLimit    = srcCCtx->dictLimit;\n    dstCCtx->lowLimit     = srcCCtx->lowLimit;\n    dstCCtx->loadedDictEnd= srcCCtx->loadedDictEnd;",
+        "lookback": "    dstCCtx->nextToUpdate3= srcCCtx->nextToUpdate3;",
+        "lookahead": "",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 306,
+        "end_line": 334,
+        "merge_gen_region": null,
+        "confidence": 0.8514297604560852,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    /* CTable for Offset codes */\n    {   /* create Offset codes */\n        size_t i; for (i=0; i<nbSeq; i++) {\n            offCodeTable[i] = (BYTE)ZSTD_highbit(offsetTable[i]) + 1;\n            if (offsetTable[i]==0) offCodeTable[i]=0;;\n        }\n    }\n    max = MaxOff;\n    mostFrequent = FSE_countFast(count, &max, offCodeTable, nbSeq);\n    if ((mostFrequent == nbSeq) && (nbSeq > 2)) {\n        *op++ = offCodeTable[0];\n        FSE_buildCTable_rle(CTable_OffsetBits, (BYTE)max);\n        Offtype = FSE_ENCODING_RLE;\n    } else if ((zc->flagStaticTables) && (nbSeq < MAX_SEQ_FOR_STATIC_FSE)) {\n        Offtype = FSE_ENCODING_STATIC;\n    } else if ((nbSeq < MIN_SEQ_FOR_DYNAMIC_FSE) || (mostFrequent < (nbSeq >> (Offbits-1)))) {\n        FSE_buildCTable_raw(CTable_OffsetBits, Offbits);\n        Offtype = FSE_ENCODING_RAW;\n    } else {\n        size_t NCountSize;\n        size_t nbSeq_1 = nbSeq;\n        U32 tableLog = FSE_optimalTableLog(OffFSELog, nbSeq, max);\n        if (count[offCodeTable[nbSeq-1]]>1) { count[offCodeTable[nbSeq-1]]--; nbSeq_1--; }\n        FSE_normalizeCount(norm, tableLog, count, nbSeq_1, max);\n        NCountSize = FSE_writeNCount(op, oend-op, norm, max, tableLog);   /* overflow protected */\n        if (FSE_isError(NCountSize)) return ERROR(GENERIC);\n        op += NCountSize;\n        FSE_buildCTable(CTable_OffsetBits, norm, max, tableLog);\n        Offtype = FSE_ENCODING_DYNAMIC;\n    }",
+        "b_contents": "    /* CTable for Offsets */\n    {   U32 max = MaxOff;\n        size_t const mostFrequent = FSE_countFast(count, &max, ofCodeTable, nbSeq);\n        if ((mostFrequent == nbSeq) && (nbSeq > 2)) {\n            *op++ = ofCodeTable[0];\n            FSE_buildCTable_rle(CTable_OffsetBits, (BYTE)max);\n            Offtype = FSE_ENCODING_RLE;\n        } else if ((zc->flagStaticTables) && (nbSeq < MAX_SEQ_FOR_STATIC_FSE)) {\n            Offtype = FSE_ENCODING_STATIC;\n        } else if ((nbSeq < MIN_SEQ_FOR_DYNAMIC_FSE) || (mostFrequent < (nbSeq >> (Offbits-1)))) {\n            FSE_buildCTable_raw(CTable_OffsetBits, Offbits);\n            Offtype = FSE_ENCODING_RAW;\n        } else {\n            size_t nbSeq_1 = nbSeq;\n            const U32 tableLog = FSE_optimalTableLog(OffFSELog, nbSeq, max);\n            if (count[ofCodeTable[nbSeq-1]]>1) { count[ofCodeTable[nbSeq-1]]--; nbSeq_1--; }\n            FSE_normalizeCount(norm, tableLog, count, nbSeq_1, max);\n            { size_t const NCountSize = FSE_writeNCount(op, oend-op, norm, max, tableLog);   /* overflow protected */\n              if (FSE_isError(NCountSize)) return ERROR(GENERIC);\n              op += NCountSize; }\n            FSE_buildCTable(CTable_OffsetBits, norm, max, tableLog);\n            Offtype = FSE_ENCODING_DYNAMIC;\n    }   }",
+        "base_contents": "    /* CTable for Offset codes */\n    {   /* create Offset codes */\n        size_t i; for (i=0; i<nbSeq; i++) {\n            offCodeTable[i] = (BYTE)ZSTD_highbit(offsetTable[i]) + 1;\n            if (offsetTable[i]==0) offCodeTable[i]=0;\n        }\n    }\n    max = MaxOff;\n    mostFrequent = FSE_countFast(count, &max, offCodeTable, nbSeq);\n    if ((mostFrequent == nbSeq) && (nbSeq > 2)) {\n        *op++ = offCodeTable[0];\n        FSE_buildCTable_rle(CTable_OffsetBits, (BYTE)max);\n        Offtype = FSE_ENCODING_RLE;\n    } else if ((zc->flagStaticTables) && (nbSeq < MAX_SEQ_FOR_STATIC_FSE)) {\n        Offtype = FSE_ENCODING_STATIC;\n    } else if ((nbSeq < MIN_SEQ_FOR_DYNAMIC_FSE) || (mostFrequent < (nbSeq >> (Offbits-1)))) {\n        FSE_buildCTable_raw(CTable_OffsetBits, Offbits);\n        Offtype = FSE_ENCODING_RAW;\n    } else {\n        size_t NCountSize;\n        size_t nbSeq_1 = nbSeq;\n        U32 tableLog = FSE_optimalTableLog(OffFSELog, nbSeq, max);\n        if (count[offCodeTable[nbSeq-1]]>1) { count[offCodeTable[nbSeq-1]]--; nbSeq_1--; }\n        FSE_normalizeCount(norm, tableLog, count, nbSeq_1, max);\n        NCountSize = FSE_writeNCount(op, oend-op, norm, max, tableLog);   /* overflow protected */\n        if (FSE_isError(NCountSize)) return ERROR(GENERIC);\n        op += NCountSize;\n        FSE_buildCTable(CTable_OffsetBits, norm, max, tableLog);\n        Offtype = FSE_ENCODING_DYNAMIC;\n    }",
+        "res_region": "    /* CTable for Offsets */\n    {   U32 max = MaxOff;\n        size_t const mostFrequent = FSE_countFast(count, &max, ofCodeTable, nbSeq);\n        if ((mostFrequent == nbSeq) && (nbSeq > 2)) {\n            *op++ = ofCodeTable[0];\n            FSE_buildCTable_rle(CTable_OffsetBits, (BYTE)max);\n            Offtype = FSE_ENCODING_RLE;\n        } else if ((zc->flagStaticTables) && (nbSeq < MAX_SEQ_FOR_STATIC_FSE)) {\n            Offtype = FSE_ENCODING_STATIC;\n        } else if ((nbSeq < MIN_SEQ_FOR_DYNAMIC_FSE) || (mostFrequent < (nbSeq >> (Offbits-1)))) {\n            FSE_buildCTable_raw(CTable_OffsetBits, Offbits);\n            Offtype = FSE_ENCODING_RAW;\n        } else {\n            size_t nbSeq_1 = nbSeq;\n            const U32 tableLog = FSE_optimalTableLog(OffFSELog, nbSeq, max);\n            if (count[ofCodeTable[nbSeq-1]]>1) { count[ofCodeTable[nbSeq-1]]--; nbSeq_1--; }\n            FSE_normalizeCount(norm, tableLog, count, nbSeq_1, max);\n            { size_t const NCountSize = FSE_writeNCount(op, oend-op, norm, max, tableLog);   /* overflow protected */\n              if (FSE_isError(NCountSize)) return ERROR(GENERIC);\n              op += NCountSize; }\n            FSE_buildCTable(CTable_OffsetBits, norm, max, tableLog);\n            Offtype = FSE_ENCODING_DYNAMIC;\n    }   }",
+        "lookback": "    {   U32 max = MaxOff;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 753,
+        "end_line": 839,
+        "merge_gen_region": null,
+        "confidence": 0.5014949440956116,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    const U32 maxSearches = 1 << ctx->params.searchLog;\n    const U32 mls = ctx->params.searchLength;",
+        "b_contents": "    size_t offset_2=REPCODE_STARTVALUE, offset_1=REPCODE_STARTVALUE;\n    const U32 maxSearches = 1 << ctx->params.cParams.searchLog;\n    const U32 mls = ctx->params.cParams.searchLength;",
+        "base_contents": "    size_t offset_2=REPCODE_STARTVALUE, offset_1=REPCODE_STARTVALUE;\n    const U32 maxSearches = 1 << ctx->params.searchLog;\n    const U32 mls = ctx->params.searchLength;",
+        "res_region": "    const U32 maxSearches = 1 << ctx->params.cParams.searchLog;\n    const U32 mls = ctx->params.cParams.searchLength;",
+        "lookback": "    const U32 mls = ctx->params.cParams.searchLength;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1721,
+        "end_line": 1732,
+        "merge_gen_region": null,
+        "confidence": 0.738048791885376,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            for (int i=0; i<ZSTD_REP_NUM; i++)\n            if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {\n                size_t mlRep = ZSTD_count(ip+MINMATCH, ip+MINMATCH-rep[i], iend) + MINMATCH;\n                int gain2 = (int)(mlRep * 3);\n                int gain1 = (int)(matchLength*3 - ZSTD_highbit((U32)offset+1) + 1 + (offset<ZSTD_REP_NUM));",
+        "b_contents": "            if ((offset) && (MEM_read32(ip) == MEM_read32(ip - offset_1))) {\n                size_t const mlRep = ZSTD_count(ip+MINMATCH, ip+MINMATCH-offset_1, iend) + MINMATCH;\n                int const gain2 = (int)(mlRep * 3);\n                int const gain1 = (int)(matchLength*3 - ZSTD_highbit((U32)offset+1) + 1);",
+        "base_contents": "            if ((offset) && (MEM_read32(ip) == MEM_read32(ip - offset_1))) {\n                size_t mlRep = ZSTD_count(ip+MINMATCH, ip+MINMATCH-offset_1, iend) + MINMATCH;\n                int gain2 = (int)(mlRep * 3);\n                int gain1 = (int)(matchLength*3 - ZSTD_highbit((U32)offset+1) + 1);",
+        "res_region": "            for (int i=0; i<ZSTD_REP_NUM; i++)\n            if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {\n                size_t const mlRep = ZSTD_count(ip+MINMATCH, ip+MINMATCH-rep[i], iend) + MINMATCH;\n                int const gain2 = (int)(mlRep * 3);\n                int const gain1 = (int)(matchLength*3 - ZSTD_highbit((U32)offset+1) + 1 + (offset<ZSTD_REP_NUM));",
+        "lookback": "            if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {",
+        "lookahead": "                if ((mlRep >= MINMATCH) && (gain2 > gain1))",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1786,
+        "end_line": 1802,
+        "merge_gen_region": null,
+        "confidence": 0.8206980228424072,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                for (int i=0; i<ZSTD_REP_NUM; i++)\n                if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {\n                    size_t ml2 = ZSTD_count(ip+MINMATCH, ip+MINMATCH-rep[i], iend) + MINMATCH;\n                    int gain2 = (int)(ml2 * 4);\n                    int gain1 = (int)(matchLength*4 - ZSTD_highbit((U32)offset+1) + 1 + (offset<ZSTD_REP_NUM));",
+        "b_contents": "                if ((offset) && (MEM_read32(ip) == MEM_read32(ip - offset_1))) {\n                    size_t const ml2 = ZSTD_count(ip+MINMATCH, ip+MINMATCH-offset_1, iend) + MINMATCH;\n                    int const gain2 = (int)(ml2 * 4);\n                    int const gain1 = (int)(matchLength*4 - ZSTD_highbit((U32)offset+1) + 1);",
+        "base_contents": "                if ((offset) && (MEM_read32(ip) == MEM_read32(ip - offset_1))) {\n                    size_t ml2 = ZSTD_count(ip+MINMATCH, ip+MINMATCH-offset_1, iend) + MINMATCH;\n                    int gain2 = (int)(ml2 * 4);\n                    int gain1 = (int)(matchLength*4 - ZSTD_highbit((U32)offset+1) + 1);",
+        "res_region": "                for (int i=0; i<ZSTD_REP_NUM; i++)\n                if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {\n                    size_t const ml2 = ZSTD_count(ip+MINMATCH, ip+MINMATCH-rep[i], iend) + MINMATCH;\n                    int const gain2 = (int)(ml2 * 4);\n                    int const gain1 = (int)(matchLength*4 - ZSTD_highbit((U32)offset+1) + 1 + (offset<ZSTD_REP_NUM));",
+        "lookback": "                if (MEM_read32(ip) == MEM_read32(ip - rep[i])) {",
+        "lookahead": "                    if ((ml2 >= MINMATCH) && (gain2 > gain1))",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1818,
+        "end_line": 1834,
+        "merge_gen_region": null,
+        "confidence": 0.8344608545303345,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        {\n#if ZSTD_REP_NUM == 4\n            if (offset >= ZSTD_REP_NUM) {\n#if 1\n                rep[3] = rep[2];\n                rep[2] = rep[1];\n                rep[1] = rep[0];\n                rep[0] = offset - ZSTD_REP_MOVE;\n#else\n                if (kSlotNew < 3) rep[3] = rep[2];\n                if (kSlotNew < 2) rep[2] = rep[1];\n                if (kSlotNew < 1) rep[1] = rep[0];               \n                rep[kSlotNew] = offset - ZSTD_REP_MOVE;\n#endif\n            } else {\n                if (offset != 0) {\n                    size_t temp = rep[offset];\n                    if (offset > 2) rep[3] = rep[2];\n                    if (offset > 1) rep[2] = rep[1];\n                    if (offset > 0) rep[1] = rep[0];\n                    rep[0] = temp;\n                }\n\n                if (offset<=1 && start==anchor) offset = 1-offset;\n            }\n#else\n            if (offset >= ZSTD_REP_NUM) {\n                rep[1] = rep[0]; rep[0] = offset - ZSTD_REP_MOVE;\n            }\n#endif\n            size_t litLength = start - anchor;",
+        "b_contents": "        {   size_t const litLength = start - anchor;",
+        "base_contents": "        {\n            size_t litLength = start - anchor;",
+        "res_region": "        {\n#if ZSTD_REP_NUM == 4\n            if (offset >= ZSTD_REP_NUM) {\n#if 1\n                rep[3] = rep[2];\n                rep[2] = rep[1];\n                rep[1] = rep[0];\n                rep[0] = offset - ZSTD_REP_MOVE;\n#else\n                if (kSlotNew < 3) rep[3] = rep[2];\n                if (kSlotNew < 2) rep[2] = rep[1];\n                if (kSlotNew < 1) rep[1] = rep[0];               \n                rep[kSlotNew] = offset - ZSTD_REP_MOVE;\n#endif\n            } else {\n                if (offset != 0) {\n                    size_t temp = rep[offset];\n                    if (offset > 2) rep[3] = rep[2];\n                    if (offset > 1) rep[2] = rep[1];\n                    if (offset > 0) rep[1] = rep[0];\n                    rep[0] = temp;\n                }\n\n                if (offset<=1 && start==anchor) offset = 1-offset;\n            }\n#else\n            if (offset >= ZSTD_REP_NUM) {\n                rep[1] = rep[0]; rep[0] = offset - ZSTD_REP_MOVE;\n            }\n#endif\n            size_t const litLength = start - anchor;\n",
+        "lookback": "#if ZSTD_REP_NUM == 4",
+        "lookahead": "            ZSTD_storeSeq(seqStorePtr, litLength, anchor, offset, matchLength-MINMATCH);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1857,
+        "end_line": 1894,
+        "merge_gen_region": "ifoffset ZSTDREPNUM 4 {if rep3 =[]; rep2 =[] rep1 rep1 =[] rep0] offset -__; void;if; # ifkSlot < 3 rep3 =[]; rep2 =[] rep1; (Slot <)GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "confidence": 0.9063328504562378,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    const U32 maxSearches = 1 << ctx->params.searchLog;\n    const U32 mls = ctx->params.searchLength;",
+        "b_contents": "    size_t offset_2=REPCODE_STARTVALUE, offset_1=REPCODE_STARTVALUE;\n    const U32 maxSearches = 1 << ctx->params.cParams.searchLog;\n    const U32 mls = ctx->params.cParams.searchLength;",
+        "base_contents": "    size_t offset_2=REPCODE_STARTVALUE, offset_1=REPCODE_STARTVALUE;\n    const U32 maxSearches = 1 << ctx->params.searchLog;\n    const U32 mls = ctx->params.searchLength;",
+        "res_region": "    const U32 maxSearches = 1 << ctx->params.cParams.searchLog;\n    const U32 mls = ctx->params.cParams.searchLength;",
+        "lookback": "    const U32 mls = ctx->params.cParams.searchLength;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1953,
+        "end_line": 1964,
+        "merge_gen_region": null,
+        "confidence": 0.738048791885376,
+        "hesitated": true
+    }
+]

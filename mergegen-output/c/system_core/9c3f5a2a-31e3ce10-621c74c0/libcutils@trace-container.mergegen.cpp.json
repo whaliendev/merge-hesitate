@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        WRITE_MSG_IN_CONTAINER(\"H\", \"|\", \"|%d\", \"\", track_name, cookie);",
+        "b_contents": "        WRITE_MSG_IN_CONTAINER(\"H\", \"|\", \"|%d\", track_name, name, cookie);",
+        "base_contents": "        WRITE_MSG_IN_CONTAINER(\"U\", \"|\", \"|%d\", track_name, name, cookie);",
+        "res_region": "        WRITE_MSG_IN_CONTAINER(\"H\", \"|\", \"|%d\", \"\", track_name, cookie);",
+        "lookback": "        return;",
+        "lookahead": "        return;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 244,
+        "end_line": 250,
+        "merge_gen_region": null,
+        "confidence": 0.7985080480575562,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, \"\", track_name, cookie);",
+        "b_contents": "    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, track_name, name, cookie);",
+        "base_contents": "    WRITE_MSG(\"U|%d|\", \"|%\" PRId32, track_name, name, cookie);",
+        "res_region": "    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, \"\", track_name, cookie);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 256,
+        "end_line": 262,
+        "merge_gen_region": null,
+        "confidence": 0.7747423648834229,
+        "hesitated": true
+    }
+]

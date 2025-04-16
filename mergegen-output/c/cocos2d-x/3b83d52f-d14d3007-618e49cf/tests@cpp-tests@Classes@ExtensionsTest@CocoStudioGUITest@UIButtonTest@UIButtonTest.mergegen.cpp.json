@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        button->setPosition(Vector2(widgetSize.width / 2.0f, widgetSize.height / 2.0f));\n        button->setSize(Size(150, button->getContentSize().height * 1.5f));",
+        "b_contents": "        button->setPosition(Point(widgetSize.width / 2.0f, widgetSize.height / 2.0f));\n        button->setSize(Size(150, 70));",
+        "base_contents": "        button->setPosition(Point(widgetSize.width / 2.0f, widgetSize.height / 2.0f));\n        button->setSize(Size(150, button->getContentSize().height * 1.5f));",
+        "res_region": "        button->setPosition(Vector2(widgetSize.width / 2.0f, widgetSize.height / 2.0f));\n        button->setSize(Size(150, 70));",
+        "lookback": "        button->setSize(Size(150, 70));",
+        "lookahead": "        button->addTouchEventListener(this, toucheventselector(UIButtonTest_Scale9::touchEvent));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 110,
+        "end_line": 119,
+        "merge_gen_region": null,
+        "confidence": 0.8014140129089355,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    BitSet32 pointerIds;\n    bool isPilferingPointers = false;\n    // Time at which the first action down occurred on this window.\n    // NOTE: This is not initialized in case of HOVER entry/exit and DISPATCH_AS_OUTSIDE scenario.\n    std::optional<nsecs_t> firstDownTimeInTarget;",
+        "b_contents": "    BitSet32 pointerIds;",
+        "base_contents": "    BitSet32 pointerIds; // zero unless target flag FLAG_SPLIT is set",
+        "res_region": "    BitSet32 pointerIds;\n    bool isPilferingPointers = false;\n    // Time at which the first action down occurred on this window.\n    // NOTE: This is not initialized in case of HOVER entry/exit and DISPATCH_AS_OUTSIDE scenario.\n    std::optional<nsecs_t> firstDownTimeInTarget;",
+        "lookback": "    bool isPilferingPointers = false;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 31,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.61916184425354,
+        "hesitated": true
+    }
+]

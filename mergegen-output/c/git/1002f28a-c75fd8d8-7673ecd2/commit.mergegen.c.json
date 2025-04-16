@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"parse.h\"",
+        "b_contents": "#include \"object-file-convert.h\"",
+        "base_contents": "",
+        "res_region": "#include \"parse.h\"\n#include \"object-file-convert.h\"",
+        "lookback": "#include \"object-file-convert.h\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.7627081871032715,
+        "hesitated": true
+    }
+]

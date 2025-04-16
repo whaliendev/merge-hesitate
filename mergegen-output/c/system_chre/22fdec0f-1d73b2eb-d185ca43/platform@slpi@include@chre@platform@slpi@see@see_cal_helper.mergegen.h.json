@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  const sns_std_suid *getCalSuidFromSensorType(uint8_t sensorType) const;",
+        "b_contents": "  const sns_std_suid *getCalSuidFromSensorType(SensorType sensorType) const;",
+        "base_contents": "  const sns_std_suid& getCalSuidFromSensorType(SensorType sensorType) const;",
+        "res_region": "  const sns_std_suid *getCalSuidFromSensorType(uint8_t sensorType) const;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 108,
+        "end_line": 114,
+        "merge_gen_region": null,
+        "confidence": 0.7876790165901184,
+        "hesitated": true
+    }
+]

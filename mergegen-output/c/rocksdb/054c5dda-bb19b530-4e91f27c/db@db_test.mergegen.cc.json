@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "#include \"util/hash_linklist_rep.h\"",
+        "b_contents": "#include \"util/statistics.h\"",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "namespace rocksdb {",
+        "lookahead": "",
+        "label": [
+            "theirs",
+            "one_side_deletion"
+        ],
+        "start_line": 30,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.7698559165000916,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n\n  // Used to test InplaceUpdate\n\n  // If previous value is nullptr or delta is > than previous value,\n  //   sets newValue with delta\n  // If previous value is not empty,\n  //   updates previous value with 'b' string of previous value size - 1.\n  static UpdateStatus\n      updateInPlaceSmallerSize(char* prevValue, uint32_t* prevSize,\n                               Slice delta, std::string* newValue) {\n    if (prevValue == nullptr) {\n      *newValue = std::string(delta.size(), 'c');\n      return UpdateStatus::UPDATED;\n    } else {\n      *prevSize = *prevSize - 1;\n      std::string str_b = std::string(*prevSize, 'b');\n      memcpy(prevValue, str_b.c_str(), str_b.size());\n      return UpdateStatus::UPDATED_INPLACE;\n    }\n  }\n\n  static UpdateStatus\n      updateInPlaceSmallerVarintSize(char* prevValue, uint32_t* prevSize,\n                                     Slice delta, std::string* newValue) {\n    if (prevValue == nullptr) {\n      *newValue = std::string(delta.size(), 'c');\n      return UpdateStatus::UPDATED;\n    } else {\n      *prevSize = 1;\n      std::string str_b = std::string(*prevSize, 'b');\n      memcpy(prevValue, str_b.c_str(), str_b.size());\n      return UpdateStatus::UPDATED_INPLACE;\n    }\n  }\n\n  static UpdateStatus\n      updateInPlaceLargerSize(char* prevValue, uint32_t* prevSize,\n                              Slice delta, std::string* newValue) {\n    *newValue = std::string(delta.size(), 'c');\n    return UpdateStatus::UPDATED;\n  }\n\n  static UpdateStatus\n      updateInPlaceNoAction(char* prevValue, uint32_t* prevSize,\n                            Slice delta, std::string* newValue) {\n    return UpdateStatus::UPDATE_FAILED;\n  }\n\n  // Utility method to test InplaceUpdate\n  void validateNumberOfEntries(int numValues) {\n      Iterator* iter = dbfull()->TEST_NewInternalIterator();\n      iter->SeekToFirst();\n      ASSERT_EQ(iter->status().ok(), true);\n      int seq = numValues;\n      while (iter->Valid()) {\n        ParsedInternalKey ikey;\n        ikey.sequence = -1;\n        ASSERT_EQ(ParseInternalKey(iter->key(), &ikey), true);\n\n        // checks sequence number for updates\n        ASSERT_EQ(ikey.sequence, (unsigned)seq--);\n        iter->Next();\n      }\n      delete iter;\n      ASSERT_EQ(0, seq);\n  }",
+        "b_contents": "\n  void CopyFile(const std::string& source, const std::string& destination,\n                uint64_t size = 0) {\n    const EnvOptions soptions;\n    unique_ptr<SequentialFile> srcfile;\n    ASSERT_OK(env_->NewSequentialFile(source, &srcfile, soptions));\n    unique_ptr<WritableFile> destfile;\n    ASSERT_OK(env_->NewWritableFile(destination, &destfile, soptions));\n\n    if (size == 0) {\n      // default argument means copy everything\n      ASSERT_OK(env_->GetFileSize(source, &size));\n    }\n\n    char buffer[4096];\n    Slice slice;\n    while (size > 0) {\n      uint64_t one = std::min(uint64_t(sizeof(buffer)), size);\n      ASSERT_OK(srcfile->Read(one, &slice, buffer));\n      ASSERT_OK(destfile->Append(slice));\n      size -= slice.size();\n    }\n    ASSERT_OK(destfile->Close());\n  }\n",
+        "base_contents": "",
+        "res_region": "\n  // Used to test InplaceUpdate\n\n  // If previous value is nullptr or delta is > than previous value,\n  //   sets newValue with delta\n  // If previous value is not empty,\n  //   updates previous value with 'b' string of previous value size - 1.\n  static UpdateStatus\n      updateInPlaceSmallerSize(char* prevValue, uint32_t* prevSize,\n                               Slice delta, std::string* newValue) {\n    if (prevValue == nullptr) {\n      *newValue = std::string(delta.size(), 'c');\n      return UpdateStatus::UPDATED;\n    } else {\n      *prevSize = *prevSize - 1;\n      std::string str_b = std::string(*prevSize, 'b');\n      memcpy(prevValue, str_b.c_str(), str_b.size());\n      return UpdateStatus::UPDATED_INPLACE;\n    }\n  }\n\n  static UpdateStatus\n      updateInPlaceSmallerVarintSize(char* prevValue, uint32_t* prevSize,\n                                     Slice delta, std::string* newValue) {\n    if (prevValue == nullptr) {\n      *newValue = std::string(delta.size(), 'c');\n      return UpdateStatus::UPDATED;\n    } else {\n      *prevSize = 1;\n      std::string str_b = std::string(*prevSize, 'b');\n      memcpy(prevValue, str_b.c_str(), str_b.size());\n      return UpdateStatus::UPDATED_INPLACE;\n    }\n  }\n\n  static UpdateStatus\n      updateInPlaceLargerSize(char* prevValue, uint32_t* prevSize,\n                              Slice delta, std::string* newValue) {\n    *newValue = std::string(delta.size(), 'c');\n    return UpdateStatus::UPDATED;\n  }\n\n  static UpdateStatus\n      updateInPlaceNoAction(char* prevValue, uint32_t* prevSize,\n                            Slice delta, std::string* newValue) {\n    return UpdateStatus::UPDATE_FAILED;\n  }\n\n  // Utility method to test InplaceUpdate\n  void validateNumberOfEntries(int numValues) {\n      Iterator* iter = dbfull()->TEST_NewInternalIterator();\n      iter->SeekToFirst();\n      ASSERT_EQ(iter->status().ok(), true);\n      int seq = numValues;\n      while (iter->Valid()) {\n        ParsedInternalKey ikey;\n        ikey.sequence = -1;\n        ASSERT_EQ(ParseInternalKey(iter->key(), &ikey), true);\n\n        // checks sequence number for updates\n        ASSERT_EQ(ikey.sequence, (unsigned)seq--);\n        iter->Next();\n      }\n      delete iter;\n      ASSERT_EQ(0, seq);\n  }\n\n  void CopyFile(const std::string& source, const std::string& destination,\n                uint64_t size = 0) {\n    const EnvOptions soptions;\n    unique_ptr<SequentialFile> srcfile;\n    ASSERT_OK(env_->NewSequentialFile(source, &srcfile, soptions));\n    unique_ptr<WritableFile> destfile;\n    ASSERT_OK(env_->NewWritableFile(destination, &destfile, soptions));\n\n    if (size == 0) {\n      // default argument means copy everything\n      ASSERT_OK(env_->GetFileSize(source, &size));\n    }\n\n    char buffer[4096];\n    Slice slice;\n    while (size > 0) {\n      uint64_t one = std::min(uint64_t(sizeof(buffer)), size);\n      ASSERT_OK(srcfile->Read(one, &slice, buffer));\n      ASSERT_OK(destfile->Append(slice));\n      size -= slice.size();\n    }\n    ASSERT_OK(destfile->Close());\n  }\n",
+        "lookback": "  // Used to test InplaceUpdate",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 711,
+        "end_line": 806,
+        "merge_gen_region": " Used to InUpdate Used testplaceUpdate If value nullptr delta is than value // newValue delta If previous is empty // previous with // previous is empty // previous withb string previous size 1 staticStatus updatePlaceer(* prev,32_*Size Slice,::*) ifprevValue nullptr { *Value stdstringdeltasize ''); Update::UPD; else *prev =prev -;:: strb stdstring(*Size '');(Value strbcstr strbsize return Update::UPD_PLACE } staticStatus updatePlaceerintint(*Value uint_t prev, delta stdstring*) ifprevValue nullptr { *Value stdstringdeltasize ''); Update::UPD; else *prev = 1 stdstring strb stdstring(*Size ''); memcpyprevValue strbcstr strbsize return Update::::ATEDIN; } staticStatus updatePlaceSmallVarSizechar prev,32t prev, delta stdstring*) ifprevValue nullptr { *Value stdstringdeltasize ''); Update::::ATED } {prev = 1 stdstring strb stdstring(*Size ''); memcpyprev,_.cstr strbsize return Update::::ATEDIN; } staticStatus updatePlacearger(*Value uint_* prev",
+        "confidence": 0.9001035094261169,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "/*\nTEST(DBTest, GetFromImmutableLayer) {",
+        "b_contents": "static long TestGetTickerCount(const Options& options, Tickers ticker_type) {\n  return options.statistics->getTickerCount(ticker_type);\n}\n\nTEST(DBTest, Empty) {",
+        "base_contents": "TEST(DBTest, Empty) {",
+        "res_region": "static long TestGetTickerCount(const Options& options, Tickers ticker_type) {\n  return options.statistics->getTickerCount(ticker_type);\n}\n\nTEST(DBTest, Empty) {",
+        "lookback": "  return options.statistics->getTickerCount(ticker_type);",
+        "lookahead": "  do {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 819,
+        "end_line": 830,
+        "merge_gen_region": null,
+        "confidence": 0.8757462501525879,
+        "hesitated": true
+    }
+]

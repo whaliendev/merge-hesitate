@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#if !defined(__64BIT__) || defined(__MINGW32__)       /* No point defining Large file for 64 bit but MinGW requires it */\n#  if !defined(_FILE_OFFSET_BITS)   ",
+        "b_contents": "#if !defined(__64BIT__)                               /* No point defining Large file for 64 bit */\n#  if !defined(_FILE_OFFSET_BITS)",
+        "base_contents": "#if !defined(__64BIT__)                               /* No point defining Large file for 64 bit */\n#  if !defined(_FILE_OFFSET_BITS)   ",
+        "res_region": "#if !defined(__64BIT__) || defined(__MINGW32__)       /* No point defining Large file for 64 bit but MinGW requires it */\n#  if !defined(_FILE_OFFSET_BITS)   ",
+        "lookback": "#  if !defined(_FILE_OFFSET_BITS)   ",
+        "lookahead": "#    define _FILE_OFFSET_BITS 64                      /* turn off_t into a 64-bit type for ftello, fseeko */",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 53,
+        "end_line": 62,
+        "merge_gen_region": null,
+        "confidence": 0.861150324344635,
+        "hesitated": true
+    }
+]

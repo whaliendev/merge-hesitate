@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#include \"lv_math.h\"\n#include \"lv_types.h\"",
+        "b_contents": "",
+        "base_contents": "#include \"lv_math.h\"",
+        "res_region": "#include \"lv_math.h\"\n#include \"lv_types.h\"",
+        "lookback": "#include \"lv_types.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 16,
+        "end_line": 22,
+        "merge_gen_region": null,
+        "confidence": 0.65902179479599,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#define _LV_COLOR_ZERO_INITIALIZER LV_CONCAT(_LV_COLOR_ZERO_INITIALIZER, LV_COLOR_DEPTH)\n#define LV_COLOR_MAKE(r8, g8, b8) LV_CONCAT(LV_COLOR_MAKE, LV_COLOR_DEPTH)(r8, g8, b8)",
+        "b_contents": "#elif LV_COLOR_DEPTH == 16\n# define LV_COLOR_SET_R(c, v) LV_COLOR_SET_R16(c,v)\n#   define LV_COLOR_SET_G(c, v) LV_COLOR_SET_G16(c,v)\n# define LV_COLOR_SET_B(c, v) LV_COLOR_SET_B16(c,v)\n# define LV_COLOR_SET_A(c, v) LV_COLOR_SET_A16(c,v)\n\n# define LV_COLOR_GET_R(c) LV_COLOR_GET_R16(c)\n#   define LV_COLOR_GET_G(c) LV_COLOR_GET_G16(c)\n# define LV_COLOR_GET_B(c)   LV_COLOR_GET_B16(c)\n# define LV_COLOR_GET_A(c)   LV_COLOR_GET_A16(c)\n\n#elif LV_COLOR_DEPTH == 32\n# define LV_COLOR_SET_R(c, v) LV_COLOR_SET_R32(c,v)\n# define LV_COLOR_SET_G(c, v) LV_COLOR_SET_G32(c,v)\n# define LV_COLOR_SET_B(c, v) LV_COLOR_SET_B32(c,v)\n# define LV_COLOR_SET_A(c, v) LV_COLOR_SET_A32(c,v)\n\n# define LV_COLOR_GET_R(c) LV_COLOR_GET_R32(c)\n# define LV_COLOR_GET_G(c) LV_COLOR_GET_G32(c)\n# define LV_COLOR_GET_B(c) LV_COLOR_GET_B32(c)\n# define LV_COLOR_GET_A(c) LV_COLOR_GET_A32(c)\n#endif",
+        "base_contents": "#elif LV_COLOR_DEPTH == 16\n# define LV_COLOR_SET_R(c, v) LV_COLOR_SET_R16(c,v)\n# define LV_COLOR_SET_G(c, v) LV_COLOR_SET_G16(c,v)\n# define LV_COLOR_SET_B(c, v) LV_COLOR_SET_B16(c,v)\n# define LV_COLOR_SET_A(c, v) LV_COLOR_SET_A16(c,v)\n\n# define LV_COLOR_GET_R(c) LV_COLOR_GET_R16(c)\n# define LV_COLOR_GET_G(c) LV_COLOR_GET_G16(c)\n# define LV_COLOR_GET_B(c) LV_COLOR_GET_B16(c)\n# define LV_COLOR_GET_A(c) LV_COLOR_GET_A16(c)\n\n#elif LV_COLOR_DEPTH == 32\n# define LV_COLOR_SET_R(c, v) LV_COLOR_SET_R32(c,v)\n# define LV_COLOR_SET_G(c, v) LV_COLOR_SET_G32(c,v)\n# define LV_COLOR_SET_B(c, v) LV_COLOR_SET_B32(c,v)\n# define LV_COLOR_SET_A(c, v) LV_COLOR_SET_A32(c,v)\n\n# define LV_COLOR_GET_R(c) LV_COLOR_GET_R32(c)\n# define LV_COLOR_GET_G(c) LV_COLOR_GET_G32(c)\n# define LV_COLOR_GET_B(c) LV_COLOR_GET_B32(c)\n# define LV_COLOR_GET_A(c) LV_COLOR_GET_A32(c)\n#endif",
+        "res_region": "#define _LV_COLOR_ZERO_INITIALIZER LV_CONCAT(_LV_COLOR_ZERO_INITIALIZER, LV_COLOR_DEPTH)\n#define LV_COLOR_MAKE(r8, g8, b8) LV_CONCAT(LV_COLOR_MAKE, LV_COLOR_DEPTH)(r8, g8, b8)",
+        "lookback": "#define LV_COLOR_MAKE(r8, g8, b8) LV_CONCAT(LV_COLOR_MAKE, LV_COLOR_DEPTH)(r8, g8, b8)",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 222,
+        "end_line": 271,
+        "merge_gen_region": "define__(88&#####################&",
+        "confidence": 0.9064918756484985,
+        "hesitated": false,
+        "resolved": false
+    }
+]

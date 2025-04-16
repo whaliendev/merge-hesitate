@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#if  LV_USE_ANIMATION",
+        "b_contents": "\n#if  LV_USE_ANIMATION",
+        "base_contents": "",
+        "res_region": "\n#if  LV_USE_ANIMATION",
+        "lookback": "#if  LV_USE_ANIMATION",
+        "lookahead": "    style_init_reset(&edge_flash);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 650,
+        "end_line": 657,
+        "merge_gen_region": null,
+        "confidence": 0.7511460185050964,
+        "hesitated": true
+    }
+]

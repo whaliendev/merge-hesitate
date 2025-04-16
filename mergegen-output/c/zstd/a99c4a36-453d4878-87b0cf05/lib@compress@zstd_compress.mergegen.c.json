@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    DEBUGLOG(3, \"ZSTD_initCDict_internal, mode %u\", (U32)dictContentType);",
+        "b_contents": "    DEBUGLOG(3, \"ZSTD_initCDict_internal, mode %u\", (U32)dictMode);\n    assert(!ZSTD_checkCParams(cParams));",
+        "base_contents": "    DEBUGLOG(3, \"ZSTD_initCDict_internal, mode %u\", (U32)dictMode);",
+        "res_region": "    DEBUGLOG(3, \"ZSTD_initCDict_internal, dictContentType %u\", (U32)dictContentType);\n    assert(!ZSTD_checkCParams(cParams));",
+        "lookback": "    assert(!ZSTD_checkCParams(cParams));",
+        "lookahead": "    cdict->cParams = cParams;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2621,
+        "end_line": 2628,
+        "merge_gen_region": null,
+        "confidence": 0.6788563132286072,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    params.cParams = ZSTD_getCParamsFromCCtxParams(params, pledgedSrcSize, 0);\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dct_auto, zcs->cdict, params, pledgedSrcSize);",
+        "b_contents": "    params.cParams = ZSTD_getCParamsFromCCtxParams(&params, pledgedSrcSize, 0);\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dm_auto, zcs->cdict, params, pledgedSrcSize);",
+        "base_contents": "    params.cParams = ZSTD_getCParamsFromCCtxParams(params, pledgedSrcSize, 0);\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dm_auto, zcs->cdict, params, pledgedSrcSize);",
+        "res_region": "    params.cParams = ZSTD_getCParamsFromCCtxParams(&params, pledgedSrcSize, 0);\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dct_auto, zcs->cdict, params, pledgedSrcSize);",
+        "lookback": "    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dct_auto, zcs->cdict, params, pledgedSrcSize);",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2920,
+        "end_line": 2929,
+        "merge_gen_region": null,
+        "confidence": 0.6289893984794617,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    params.compressionLevel = ZSTD_CLEVEL_CUSTOM; /* enforce usage of cParams, instead of a dynamic derivation from cLevel (but does that happen ?) */\n    zcs->requestedParams = params;\n\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dct_auto, zcs->cdict, params, pledgedSrcSize);",
+        "b_contents": "    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dm_auto, zcs->cdict, params, pledgedSrcSize);",
+        "base_contents": "    params.compressionLevel = ZSTD_CLEVEL_CUSTOM; /* enforce usage of cParams, instead of a dynamic derivation from cLevel (but does that happen ?) */\n    zcs->requestedParams = params;\n\n    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dm_auto, zcs->cdict, params, pledgedSrcSize);",
+        "res_region": "    return ZSTD_resetCStream_internal(zcs, NULL, 0, ZSTD_dct_auto, zcs->cdict, params, pledgedSrcSize);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2965,
+        "end_line": 2977,
+        "merge_gen_region": null,
+        "confidence": 0.6684151887893677,
+        "hesitated": true
+    }
+]

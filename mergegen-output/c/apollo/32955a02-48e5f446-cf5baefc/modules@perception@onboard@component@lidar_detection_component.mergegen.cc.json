@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  lidar_detection_pipeline_.reset(new lidar::LidarObstacleDetection);",
+        "b_contents": "",
+        "base_contents": "  ",
+        "res_region": "\n  lidar_detection_pipeline_.reset(new lidar::LidarObstacleDetection);\n",
+        "lookback": "  lidar_detection_pipeline_.reset(new lidar::LidarObstacleDetection);",
+        "lookahead": "  ACHECK(lidar_detection_pipeline_->Init(lidardetection_config))",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 109,
+        "end_line": 115,
+        "merge_gen_region": null,
+        "confidence": 0.7826724052429199,
+        "hesitated": true
+    }
+]

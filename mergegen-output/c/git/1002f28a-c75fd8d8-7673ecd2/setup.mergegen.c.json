@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "\t} else if (!strcmp(ext, \"refstorage\")) {\n\t\tunsigned int format;\n\n\t\tif (!value)\n\t\t\treturn config_error_nonbool(var);\n\t\tformat = ref_storage_format_by_name(value);\n\t\tif (format == REF_STORAGE_FORMAT_UNKNOWN)\n\t\t\treturn error(_(\"invalid value for '%s': '%s'\"),\n\t\t\t\t     \"extensions.refstorage\", value);\n\t\tdata->ref_storage_format = format;\n\t\treturn EXTENSION_OK;",
+        "b_contents": "\t} else if (!strcmp(ext, \"compatobjectformat\")) {\n\t\tstruct string_list_item *item;\n\t\tint format;\n\n\t\tif (!value)\n\t\t\treturn config_error_nonbool(var);\n\t\tformat = hash_algo_by_name(value);\n\t\tif (format == GIT_HASH_UNKNOWN)\n\t\t\treturn error(_(\"invalid value for '%s': '%s'\"),\n\t\t\t\t     \"extensions.compatobjectformat\", value);\n\t\t/* For now only support compatObjectFormat being specified once. */\n\t\tfor_each_string_list_item(item, &data->v1_only_extensions) {\n\t\t\tif (!strcmp(item->string, \"compatobjectformat\"))\n\t\t\t\treturn error(_(\"'%s' already specified as '%s'\"),\n\t\t\t\t\t\"extensions.compatobjectformat\",\n\t\t\t\t\thash_algos[data->compat_hash_algo].name);\n\t\t}\n\t\tdata->compat_hash_algo = format;\n\t\treturn EXTENSION_OK;",
+        "base_contents": "",
+        "res_region": "\t} else if (!strcmp(ext, \"compatobjectformat\")) {\n\t\tstruct string_list_item *item;\n\t\tint format;\n\n\t\tif (!value)\n\t\t\treturn config_error_nonbool(var);\n\t\tformat = hash_algo_by_name(value);\n\t\tif (format == GIT_HASH_UNKNOWN)\n\t\t\treturn error(_(\"invalid value for '%s': '%s'\"),\n\t\t\t\t     \"extensions.compatobjectformat\", value);\n\t\t/* For now only support compatObjectFormat being specified once. */\n\t\tfor_each_string_list_item(item, &data->v1_only_extensions) {\n\t\t\tif (!strcmp(item->string, \"compatobjectformat\"))\n\t\t\t\treturn error(_(\"'%s' already specified as '%s'\"),\n\t\t\t\t\t\"extensions.compatobjectformat\",\n\t\t\t\t\thash_algos[data->compat_hash_algo].name);\n\t\t}\n\t\tdata->compat_hash_algo = format;\n\t\treturn EXTENSION_OK;\n\t} else if (!strcmp(ext, \"refstorage\")) {\n\t\tunsigned int format;\n\n\t\tif (!value)\n\t\t\treturn config_error_nonbool(var);\n\t\tformat = ref_storage_format_by_name(value);\n\t\tif (format == REF_STORAGE_FORMAT_UNKNOWN)\n\t\t\treturn error(_(\"invalid value for '%s': '%s'\"),\n\t\t\t\t     \"extensions.refstorage\", value);\n\t\tdata->ref_storage_format = format;\n\t\treturn EXTENSION_OK;",
+        "lookback": "\t\tstruct string_list_item *item;",
+        "lookahead": "\t}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 593,
+        "end_line": 626,
+        "merge_gen_region": " else (!(, \" } if } else (!(, \"storage { int; (!;>(>(outputoutputdex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex predex>(>(>(>(>(>(>(>(",
+        "confidence": 0.9441079497337341,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\t\t\trepo_set_ref_storage_format(the_repository,\n\t\t\t\t\t\t    repo_fmt.ref_storage_format);",
+        "b_contents": "\t\t\trepo_set_compat_hash_algo(the_repository,\n\t\t\t\t\t\t  repo_fmt.compat_hash_algo);",
+        "base_contents": "",
+        "res_region": "\t\t\trepo_set_compat_hash_algo(the_repository,\n\t\t\t\t\t\t  repo_fmt.compat_hash_algo);\n\t\t\trepo_set_ref_storage_format(the_repository,\n\t\t\t\t\t\t    repo_fmt.ref_storage_format);",
+        "lookback": "\t\t\t\t\t\t  repo_fmt.compat_hash_algo);",
+        "lookahead": "\t\t\tthe_repository->repository_format_worktree_config =",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 1628,
+        "end_line": 1635,
+        "merge_gen_region": null,
+        "confidence": 0.6263785362243652,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\trepo_set_ref_storage_format(the_repository,\n\t\t\t\t    fmt->ref_storage_format);",
+        "b_contents": "\trepo_set_compat_hash_algo(the_repository, fmt->compat_hash_algo);",
+        "base_contents": "",
+        "res_region": "\trepo_set_compat_hash_algo(the_repository, fmt->compat_hash_algo);\n\trepo_set_ref_storage_format(the_repository,\n\t\t\t\t    fmt->ref_storage_format);",
+        "lookback": "\trepo_set_ref_storage_format(the_repository,",
+        "lookahead": "\tthe_repository->repository_format_worktree_config =",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 1729,
+        "end_line": 1735,
+        "merge_gen_region": null,
+        "confidence": 0.7839633226394653,
+        "hesitated": true
+    }
+]

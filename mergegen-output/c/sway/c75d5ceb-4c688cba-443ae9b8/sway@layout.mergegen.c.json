@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\t\tgeometry.origin.x = container->gaps / 2;\n\t\t\t\tgeometry.origin.y = container->gaps / 2;\n\t\t\t\tgeometry.size.w = parent->width - container->gaps;\n\t\t\t\tgeometry.size.h = parent->height - container->gaps;\n\t\t\t\twlc_view_set_geometry(container->handle, &geometry);",
+        "b_contents": "\t\t\t\tgeometry.origin.x = 0;\n\t\t\t\tgeometry.origin.y = 0;\n\t\t\t\tgeometry.size.w = parent->width;\n\t\t\t\tgeometry.size.h = parent->height;\n\t\t\t\twlc_view_set_geometry(container->handle, 0, &geometry);",
+        "base_contents": "\t\t\t\tgeometry.origin.x = 0;\n\t\t\t\tgeometry.origin.y = 0;\n\t\t\t\tgeometry.size.w = parent->width;\n\t\t\t\tgeometry.size.h = parent->height;\n\t\t\t\twlc_view_set_geometry(container->handle, &geometry);",
+        "res_region": "\t\t\t\tgeometry.origin.x = container->gaps / 2;\n\t\t\t\tgeometry.origin.y = container->gaps / 2;\n\t\t\t\tgeometry.size.w = parent->width - container->gaps;\n\t\t\t\tgeometry.size.h = parent->height - container->gaps;\n\t\t\t\twlc_view_set_geometry(container->handle, 0, &geometry);",
+        "lookback": "\t\t\t\tgeometry.origin.y = container->gaps / 2;",
+        "lookahead": "\t\t\t\twlc_view_bring_to_front(container->handle);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 150,
+        "end_line": 168,
+        "merge_gen_region": null,
+        "confidence": 0.7890529632568359,
+        "hesitated": true
+    }
+]

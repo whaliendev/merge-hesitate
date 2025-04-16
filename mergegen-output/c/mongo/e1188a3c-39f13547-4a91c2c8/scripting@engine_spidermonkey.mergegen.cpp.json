@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "                log() << \"decode failed. probably invalid utf-8 string [\" << c << \"]\" << endl;",
+        "b_contents": "                tlog() << \"decode failed. probably invalid utf-8 string [\" << c << \"]\" << endl;",
+        "base_contents": "                cout << \"decode failed. probably invalid utf-8 string [\" << c << \"]\" << endl;",
+        "res_region": "                log() << \"decode failed. probably invalid utf-8 string [\" << c << \"]\" << endl;",
+        "lookback": "                jsval v;",
+        "lookahead": "                jsval v;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 505,
+        "end_line": 511,
+        "merge_gen_region": null,
+        "confidence": 0.7565006613731384,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    log() << \"\\t why: \" << toString( v ) << endl;",
+        "b_contents": "                    tlog() << \"\\t why: \" << toString( v ) << endl;",
+        "base_contents": "                    cout << \"\\t why: \" << toString( v ) << endl;",
+        "res_region": "                    log() << \"\\t why: \" << toString( v ) << endl;",
+        "lookback": "                throw InvalidUTF8Exception();",
+        "lookahead": "                throw InvalidUTF8Exception();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 514,
+        "end_line": 520,
+        "merge_gen_region": null,
+        "confidence": 0.46610069274902344,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            log() << \"toval: unknown type: \" << (int)(e.type()) << endl;",
+        "b_contents": "            log() << \"toval: unknown type: \" << (int) e.type() << endl;",
+        "base_contents": "            cout << \"toval: unknown type: \" << e.type() << endl;",
+        "res_region": "            log() << \"toval: unknown type: \" << (int) e.type() << endl;",
+        "lookback": "            uassert( 10218 ,  \"not done: toval\" , 0 );",
+        "lookahead": "            uassert( 10218 ,  \"not done: toval\" , 0 );",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 683,
+        "end_line": 689,
+        "merge_gen_region": null,
+        "confidence": 0.7546597719192505,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#if USE_CHROME_NETWORK_PROXY\n      cert_checker_(cert_checker),\n      chrome_proxy_resolver_(network_proxy_service_proxy) {\n#else",
+        "b_contents": "",
+        "base_contents": "#if USE_LIBCROS\n      cert_checker_(cert_checker),\n      chrome_proxy_resolver_(network_proxy_service_proxy) {\n#else",
+        "res_region": "      cert_checker_(cert_checker) {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 126,
+        "end_line": 137,
+        "merge_gen_region": null,
+        "confidence": 0.6373646259307861,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#endif  // USE_CHROME_NETWORK_PROXY",
+        "b_contents": "",
+        "base_contents": "#endif  // USE_LIBCROS",
+        "res_region": "      cert_checker_(cert_checker) {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 139,
+        "end_line": 144,
+        "merge_gen_region": null,
+        "confidence": 0.538675844669342,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (interactive)\n    download_fetcher->set_max_retry_count(kDownloadMaxRetryCountInteractive);\n  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         system_state_->boot_control(),\n                         system_state_->hardware(),\n                         system_state_,\n                         download_fetcher));  // passes ownership",
+        "b_contents": "  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         system_state_->boot_control(),\n                         system_state_->hardware(),\n                         system_state_,\n                         // passes ownership\n                         new MultiRangeHttpFetcher(download_fetcher),\n                         interactive));",
+        "base_contents": "  shared_ptr<DownloadAction> download_action(new DownloadAction(\n      prefs_,\n      system_state_->boot_control(),\n      system_state_->hardware(),\n      system_state_,\n      new MultiRangeHttpFetcher(download_fetcher)));  // passes ownership",
+        "res_region": "  if (interactive)\n    download_fetcher->set_max_retry_count(kDownloadMaxRetryCountInteractive);\n  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         system_state_->boot_control(),\n                         system_state_->hardware(),\n                         system_state_,\n                         download_fetcher,  // passes ownership\n                         interactive));",
+        "lookback": "    download_fetcher->set_max_retry_count(kDownloadMaxRetryCountInteractive);",
+        "lookahead": "  shared_ptr<OmahaRequestAction> download_finished_action(",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 629,
+        "end_line": 654,
+        "merge_gen_region": null,
+        "confidence": 0.6992107629776001,
+        "hesitated": true
+    }
+]

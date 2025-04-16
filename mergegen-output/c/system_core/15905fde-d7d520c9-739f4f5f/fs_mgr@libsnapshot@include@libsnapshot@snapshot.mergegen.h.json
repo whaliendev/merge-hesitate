@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    enum class SnapshotDriver {\n        DM_SNAPSHOT,\n        DM_USER,\n    };\n\n    // Add new public entries above this line.\n\n    // Helpers for failure injection.\n    using MergeConsistencyChecker =\n            std::function<MergeFailureCode(const std::string& name, const SnapshotStatus& status)>;\n\n    void set_merge_consistency_checker(MergeConsistencyChecker checker) {\n        merge_consistency_checker_ = checker;\n    }\n    MergeConsistencyChecker merge_consistency_checker() const { return merge_consistency_checker_; }\n",
+        "b_contents": "    // Add new public entries above this line.\n\n    // Helpers for failure injection.\n    using MergeConsistencyChecker =\n            std::function<MergeFailureCode(const std::string& name, const SnapshotStatus& status)>;\n\n    void set_merge_consistency_checker(MergeConsistencyChecker checker) {\n        merge_consistency_checker_ = checker;\n    }\n    MergeConsistencyChecker merge_consistency_checker() const { return merge_consistency_checker_; }\n",
+        "base_contents": "",
+        "res_region": "    enum class SnapshotDriver {\n        DM_SNAPSHOT,\n        DM_USER,\n    };\n\n    // Add new public entries above this line.\n\n    // Helpers for failure injection.\n    using MergeConsistencyChecker =\n            std::function<MergeFailureCode(const std::string& name, const SnapshotStatus& status)>;\n\n    void set_merge_consistency_checker(MergeConsistencyChecker checker) {\n        merge_consistency_checker_ = checker;\n    }\n    MergeConsistencyChecker merge_consistency_checker() const { return merge_consistency_checker_; }\n",
+        "lookback": "        DM_SNAPSHOT,",
+        "lookahead": "  private:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 393,
+        "end_line": 423,
+        "merge_gen_region": null,
+        "confidence": 0.8609679341316223,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::optional<bool> is_snapshot_userspace_;\n    MergeConsistencyChecker merge_consistency_checker_;",
+        "b_contents": "    MergeConsistencyChecker merge_consistency_checker_;",
+        "base_contents": "",
+        "res_region": "    std::optional<bool> is_snapshot_userspace_;\n    MergeConsistencyChecker merge_consistency_checker_;",
+        "lookback": "    MergeConsistencyChecker merge_consistency_checker_;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 839,
+        "end_line": 845,
+        "merge_gen_region": null,
+        "confidence": 0.8172135353088379,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "/* use the ranges below to determine whether a process is sdk sandbox */\n#define AID_SDK_SANDBOX_PROCESS_START 20000 /* start of uids allocated to sdk sandbox processes */\n#define AID_SDK_SANDBOX_PROCESS_END 29999   /* end of uids allocated to sdk sandbox processes */\n",
+        "b_contents": "/* use the ranges below to determine whether a process is supplemental */\n#define AID_SUPPLEMENTAL_PROCESS_START 20000 /* start of uids allocated to supplemental process */\n#define AID_SUPPLEMENTAL_PROCESS_END 29999   /* end of uids allocated to supplemental process */\n",
+        "base_contents": "",
+        "res_region": "/* use the ranges below to determine whether a process is sdk sandbox */\n#define AID_SDK_SANDBOX_PROCESS_START 20000 /* start of uids allocated to sdk sandbox processes */\n#define AID_SDK_SANDBOX_PROCESS_END 29999   /* end of uids allocated to sdk sandbox processes */\n",
+        "lookback": "#define AID_SDK_SANDBOX_PROCESS_START 20000 /* start of uids allocated to sdk sandbox processes */",
+        "lookahead": "/* use the ranges below to determine whether a process is isolated */",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 212,
+        "end_line": 223,
+        "merge_gen_region": "outputoutputTrackTrackTrack###",
+        "confidence": 0.883483350276947,
+        "hesitated": false,
+        "resolved": false
+    }
+]

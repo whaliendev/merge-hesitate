@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    binder::Status getSchedulingPolicy(gui::SchedulingPolicy* outPolicy) override;",
+        "b_contents": "    binder::Status getSchedulingPolicy(gui::SchedulingPolicy* outPolicy) override;\n\n    // Called in response to requestNextVsync.\n    const ResyncCallback resyncCallback;",
+        "base_contents": "\n    // Called in response to requestNextVsync.\n    const ResyncCallback resyncCallback;",
+        "res_region": "    binder::Status getSchedulingPolicy(gui::SchedulingPolicy* outPolicy) override;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 91,
+        "merge_gen_region": null,
+        "confidence": 0.3372061252593994,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "        } else if (!strcasecmp(argv[0],\"lua-time-limit\") && argc == 2) {\n            server.lua_time_limit = strtoll(argv[1],NULL,10);",
+        "b_contents": "        } else if (!strcasecmp(argv[0],\"slowlog-log-slower-than\") &&\n                   argc == 2)\n        {\n            server.slowlog_log_slower_than = strtoll(argv[1],NULL,10);\n        } else if (!strcasecmp(argv[0],\"slowlog-max-len\") && argc == 2) {\n            server.slowlog_max_len = strtoll(argv[1],NULL,10);",
+        "base_contents": "",
+        "res_region": "        } else if (!strcasecmp(argv[0],\"lua-time-limit\") && argc == 2) {\n            server.lua_time_limit = strtoll(argv[1],NULL,10);\n        } else if (!strcasecmp(argv[0],\"slowlog-log-slower-than\") &&\n                   argc == 2)\n        {\n            server.slowlog_log_slower_than = strtoll(argv[1],NULL,10);\n        } else if (!strcasecmp(argv[0],\"slowlog-max-len\") && argc == 2) {\n            server.slowlog_max_len = strtoll(argv[1],NULL,10);",
+        "lookback": "            server.lua_time_limit = strtoll(argv[1],NULL,10);",
+        "lookahead": "        } else {",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 298,
+        "end_line": 309,
+        "merge_gen_region": null,
+        "confidence": 0.8603473901748657,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } else if (!strcasecmp(c->argv[2]->ptr,\"lua-time-limit\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR || ll < 0) goto badfmt;\n        server.lua_time_limit = ll;",
+        "b_contents": "    } else if (!strcasecmp(c->argv[2]->ptr,\"slowlog-log-slower-than\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR) goto badfmt;\n        server.slowlog_log_slower_than = ll;\n    } else if (!strcasecmp(c->argv[2]->ptr,\"slowlog-max-len\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR || ll < 0) goto badfmt;\n        server.slowlog_max_len = (unsigned)ll;",
+        "base_contents": "",
+        "res_region": "    } else if (!strcasecmp(c->argv[2]->ptr,\"lua-time-limit\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR || ll < 0) goto badfmt;\n        server.lua_time_limit = ll;\n    } else if (!strcasecmp(c->argv[2]->ptr,\"slowlog-log-slower-than\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR) goto badfmt;\n        server.slowlog_log_slower_than = ll;\n    } else if (!strcasecmp(c->argv[2]->ptr,\"slowlog-max-len\")) {\n        if (getLongLongFromObject(o,&ll) == REDIS_ERR || ll < 0) goto badfmt;\n        server.slowlog_max_len = (unsigned)ll;",
+        "lookback": "        if (getLongLongFromObject(o,&ll) == REDIS_ERR || ll < 0) goto badfmt;",
+        "lookahead": "    } else {",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 480,
+        "end_line": 492,
+        "merge_gen_region": " (!String&&ififififififififififififififififififififififififififififififififififififififififififififString(tokentokentokentokentokentokentokentokentokentokentokenififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.9218878746032715,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if (stringmatch(pattern,\"lua-time-limit\",0)) {\n        addReplyBulkCString(c,\"lua-time-limit\");\n        addReplyBulkLongLong(c,server.lua_time_limit);\n        matches++;\n    }",
+        "b_contents": "    if (stringmatch(pattern,\"slowlog-log-slower-than\",0)) {\n        addReplyBulkCString(c,\"slowlog-log-slower-than\");\n        addReplyBulkLongLong(c,server.slowlog_log_slower_than);\n        matches++;\n    }\n    if (stringmatch(pattern,\"slowlog-max-len\",0)) {\n        addReplyBulkCString(c,\"slowlog-max-len\");\n        addReplyBulkLongLong(c,server.slowlog_max_len);\n        matches++;\n    }",
+        "base_contents": "",
+        "res_region": "    if (stringmatch(pattern,\"lua-time-limit\",0)) {\n        addReplyBulkCString(c,\"lua-time-limit\");\n        addReplyBulkLongLong(c,server.lua_time_limit);\n    if (stringmatch(pattern,\"slowlog-log-slower-than\",0)) {\n        addReplyBulkCString(c,\"slowlog-log-slower-than\");\n        addReplyBulkLongLong(c,server.slowlog_log_slower_than);\n        matches++;\n    }\n    if (stringmatch(pattern,\"slowlog-max-len\",0)) {\n        addReplyBulkCString(c,\"slowlog-max-len\");\n        addReplyBulkLongLong(c,server.slowlog_max_len);\n        matches++;\n    }",
+        "lookback": "        addReplyBulkCString(c,\"lua-time-limit\");",
+        "lookahead": "    setDeferredMultiBulkLength(c,replylen,matches*2);",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 664,
+        "end_line": 682,
+        "merge_gen_region": null,
+        "confidence": 0.7141427993774414,
+        "hesitated": true
+    }
+]

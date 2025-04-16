@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "     * mode and mode HeadTracking::ConnectionMode::FRAMEWORK_PROCESSED is assumed.\n     * This is set in the factory constructor and can be accessed without mutex.",
+        "b_contents": "     * mode and mode HeadTracking::ConnectionMode::FRAMEWORK_PROCESSED is assumed.",
+        "base_contents": "     * mode and mode HEADTRACKING_CONNECTION_FRAMEWORK_PROCESSED is assumed.",
+        "res_region": "     * mode and mode HeadTracking::ConnectionMode::FRAMEWORK_PROCESSED is assumed.\n     * This is set in the factory constructor and can be accessed without mutex.",
+        "lookback": "     * This is set in the factory constructor and can be accessed without mutex.",
+        "lookahead": "     */",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 526,
+        "end_line": 533,
+        "merge_gen_region": null,
+        "confidence": 0.8645599484443665,
+        "hesitated": true
+    }
+]

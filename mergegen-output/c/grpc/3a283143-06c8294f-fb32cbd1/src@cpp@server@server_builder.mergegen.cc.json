@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "std::unique_ptr<Server> ServerBuilder::BuildAndStart() {\n  ChannelArguments args;\n  for (const auto& option : options_) {\n    option->UpdateArguments(&args);\n    option->UpdatePlugins(&plugins_);",
+        "b_contents": "std::unique_ptr<grpc::Server> ServerBuilder::BuildAndStart() {\n  grpc::ChannelArguments args;\n  for (auto option = options_.begin(); option != options_.end(); ++option) {\n    (*option)->UpdateArguments(&args);\n    (*option)->UpdatePlugins(&plugins_);",
+        "base_contents": "std::unique_ptr<Server> ServerBuilder::BuildAndStart() {\n  ChannelArguments args;\n  for (auto option = options_.begin(); option != options_.end(); ++option) {\n    (*option)->UpdateArguments(&args);\n    (*option)->UpdatePlugins(&plugins_);",
+        "res_region": "std::unique_ptr<grpc::Server> ServerBuilder::BuildAndStart() {\n  grpc::ChannelArguments args;\n  for (const auto& option : options_) {\n    option->UpdateArguments(&args);\n    option->UpdatePlugins(&plugins_);",
+        "lookback": "  grpc::ChannelArguments args;",
+        "lookahead": "  }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 203,
+        "end_line": 221,
+        "merge_gen_region": null,
+        "confidence": 0.6958681344985962,
+        "hesitated": true
+    }
+]

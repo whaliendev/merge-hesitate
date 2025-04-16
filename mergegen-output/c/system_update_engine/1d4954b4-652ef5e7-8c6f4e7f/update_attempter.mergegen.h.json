@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  FRIEND_TEST(UpdateAttempterTest, UpdateAttemptFlagsCachedAtUpdateStart);\n  FRIEND_TEST(UpdateAttempterTest, UpdateDeferredByPolicyTest);\n  FRIEND_TEST(UpdateAttempterTest, UpdateIsNotRunningWhenUpdateAvailable);",
+        "b_contents": "  FRIEND_TEST(UpdateAttempterTest, UpdateDeferredByPolicyTest);\n  FRIEND_TEST(UpdateAttempterTest, UpdateIsNotRunningWhenUpdateAvailable);",
+        "base_contents": "",
+        "res_region": "  FRIEND_TEST(UpdateAttempterTest, UpdateAttemptFlagsCachedAtUpdateStart);\n  FRIEND_TEST(UpdateAttempterTest, UpdateDeferredByPolicyTest);\n  FRIEND_TEST(UpdateAttempterTest, UpdateIsNotRunningWhenUpdateAvailable);",
+        "lookback": "  FRIEND_TEST(UpdateAttempterTest, UpdateDeferredByPolicyTest);",
+        "lookahead": "  FRIEND_TEST(UpdateAttempterTest, UpdateTest);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 278,
+        "end_line": 286,
+        "merge_gen_region": "StringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringStringString",
+        "confidence": 0.8843159675598145,
+        "hesitated": false,
+        "resolved": false
+    }
+]

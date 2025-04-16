@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n  private:\n    using AlsaDeviceId = std::pair<int, int>;\n\n    static constexpr StreamPrimary::AlsaDeviceId kDefaultCardAndDeviceId{\n            primary::PrimaryMixer::kAlsaCard, primary::PrimaryMixer::kAlsaDevice};\n    static constexpr StreamPrimary::AlsaDeviceId kStubDeviceId{\n            primary::PrimaryMixer::kInvalidAlsaCard, primary::PrimaryMixer::kInvalidAlsaDevice};\n\n    static AlsaDeviceId getCardAndDeviceId(\n            const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices);\n    static bool useStubStream(bool isInput,\n                              const ::aidl::android::media::audio::common::AudioDevice& device);\n\n    bool isStubStreamOnWorker() const { return mCurrAlsaDeviceId == kStubDeviceId; }\n\n    DriverStubImpl mStubDriver;\n    mutable std::mutex mLock;\n    AlsaDeviceId mAlsaDeviceId GUARDED_BY(mLock) = kStubDeviceId;\n\n    // Used by the worker thread only.\n    AlsaDeviceId mCurrAlsaDeviceId = kStubDeviceId;",
+        "b_contents": "\n  private:\n    static std::pair<int, int> getCardAndDeviceId(\n            const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices);\n    const std::pair<int, int> mCardAndDeviceId;",
+        "base_contents": "",
+        "res_region": "\n  private:\n    using AlsaDeviceId = std::pair<int, int>;\n\n    static constexpr StreamPrimary::AlsaDeviceId kDefaultCardAndDeviceId{\n            primary::PrimaryMixer::kAlsaCard, primary::PrimaryMixer::kAlsaDevice};\n    static constexpr StreamPrimary::AlsaDeviceId kStubDeviceId{\n            primary::PrimaryMixer::kInvalidAlsaCard, primary::PrimaryMixer::kInvalidAlsaDevice};\n\n    static AlsaDeviceId getCardAndDeviceId(\n            const std::vector<::aidl::android::media::audio::common::AudioDevice>& devices);\n    static bool useStubStream(bool isInput,\n                              const ::aidl::android::media::audio::common::AudioDevice& device);\n\n    bool isStubStreamOnWorker() const { return mCurrAlsaDeviceId == kStubDeviceId; }\n\n    DriverStubImpl mStubDriver;\n    mutable std::mutex mLock;\n    AlsaDeviceId mAlsaDeviceId GUARDED_BY(mLock) = kStubDeviceId;\n\n    // Used by the worker thread only.\n    AlsaDeviceId mCurrAlsaDeviceId = kStubDeviceId;",
+        "lookback": "  private:",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 57,
+        "end_line": 87,
+        "merge_gen_region": ": usingsaId stdpairint int static Stream::saId kDefaultAndId primaryPrimary::AlCard primaryPrimary::AlDevice kDefaultAndId primaryPrimary::AlCard primaryPrimary::AlDevice static Stream::saId kDevice{::MixerksaCard primaryPrimary::MixerAlDevice static Stream::saIdStubId primaryPrimary::InvalidAlCard primaryPrimary::MixerInvalidsaDevice staticsaDevice getAndId const::::::::::::::::::::::outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.899064302444458,
+        "hesitated": false,
+        "resolved": false
+    }
+]

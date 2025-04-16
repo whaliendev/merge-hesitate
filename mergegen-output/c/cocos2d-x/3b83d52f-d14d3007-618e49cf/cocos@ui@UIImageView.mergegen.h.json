@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Vector2 &pt) override;\n",
+        "b_contents": "",
+        "base_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Point &pt) override;\n",
+        "res_region": "",
+        "lookback": "    virtual void ignoreContentAdaptWithSize(bool ignore) override;",
+        "lookahead": "    //override \"ignoreContentAdaptWithSize\" method of widget.",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 101,
+        "end_line": 110,
+        "merge_gen_region": null,
+        "confidence": 0.687563419342041,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // Pointer to the DownloadAction in the actions_ vector.\n  std::shared_ptr<DownloadAction> download_action_;\n",
+        "b_contents": "  // Whether there is an ongoing update. This implies that an update was started\n  // but not finished yet. This value will be true even if the update was\n  // suspended.\n  bool ongoing_update_{false};\n",
+        "base_contents": "  // Pointer to the DownloadAction in the actions_ vector.\n  std::shared_ptr<DownloadAction> download_action_;\n\n  // Whether there is an ongoing update. This implies that an update was started\n  // but not finished yet. This value will be true even if the update was\n  // suspended.\n  bool ongoing_update_{false};\n",
+        "res_region": "",
+        "lookback": "  InstallPlan install_plan_;",
+        "lookahead": "  // The InstallPlan used during the ongoing update.",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 177,
+        "end_line": 196,
+        "merge_gen_region": null,
+        "confidence": 0.6307117938995361,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tuint32_t output_global_name;",
+        "b_contents": "\tstruct zxdg_output_v1 *xdg_output;",
+        "base_contents": "",
+        "res_region": "\tuint32_t output_global_name;\n\tstruct zxdg_output_v1 *xdg_output;",
+        "lookback": "\tstruct zxdg_output_v1 *xdg_output;",
+        "lookahead": "\tstruct wl_surface *surface;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 53,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.8697487115859985,
+        "hesitated": true
+    }
+]

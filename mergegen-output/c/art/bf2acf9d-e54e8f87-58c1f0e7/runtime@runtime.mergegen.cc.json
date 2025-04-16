@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  startup_linear_alloc_.reset();\n  linear_alloc_arena_pool_.reset();",
+        "b_contents": "  linear_alloc_arena_pool_.reset();",
+        "base_contents": "  low_4gb_arena_pool_.reset();",
+        "res_region": "  startup_linear_alloc_.reset();\n  linear_alloc_arena_pool_.reset();",
+        "lookback": "  linear_alloc_arena_pool_.reset();",
+        "lookahead": "  arena_pool_.reset();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 528,
+        "end_line": 535,
+        "merge_gen_region": null,
+        "confidence": 0.7661393284797668,
+        "hesitated": true
+    }
+]

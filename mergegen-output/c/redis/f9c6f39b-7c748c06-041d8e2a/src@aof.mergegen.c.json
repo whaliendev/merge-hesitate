@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"bio.h\"\n",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "#include \"bio.h\"\n#include \"rio.h\"\n",
+        "lookback": "#include \"rio.h\"",
+        "lookahead": "#include <signal.h>",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 1,
+        "end_line": 7,
+        "merge_gen_region": null,
+        "confidence": 0.756748378276825,
+        "hesitated": true
+    }
+]

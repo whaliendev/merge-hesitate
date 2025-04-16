@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  // Enqueue and run a CleanupPreviousUpdateAction.\n  void ScheduleCleanupPreviousUpdate();\n\n  // Notify and clear |cleanup_previous_update_callbacks_|.\n  void NotifyCleanupPreviousUpdateCallbacksAndClear();\n\n  // Remove |callback| from |cleanup_previous_update_callbacks_|.\n  void RemoveCleanupPreviousUpdateCallback(\n      CleanupSuccessfulUpdateCallbackInterface* callback);\n",
+        "b_contents": "  // Enqueue and run a CleanupPreviousUpdateAction.\n  void ScheduleCleanupPreviousUpdate();\n",
+        "base_contents": "",
+        "res_region": "  // Enqueue and run a CleanupPreviousUpdateAction.\n  void ScheduleCleanupPreviousUpdate();\n\n  // Notify and clear |cleanup_previous_update_callbacks_|.\n  void NotifyCleanupPreviousUpdateCallbacksAndClear();\n\n  // Remove |callback| from |cleanup_previous_update_callbacks_|.\n  void RemoveCleanupPreviousUpdateCallback(\n      CleanupSuccessfulUpdateCallbackInterface* callback);\n",
+        "lookback": "  void ScheduleCleanupPreviousUpdate();",
+        "lookahead": "  DaemonStateInterface* daemon_state_;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 185,
+        "end_line": 201,
+        "merge_gen_region": "rand",
+        "confidence": 0.9290949702262878,
+        "hesitated": false,
+        "resolved": false
+    }
+]

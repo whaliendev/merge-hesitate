@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if (policy.empty()) {\n        // ext4enc:TODO why is this OK?\n        return 0;\n    }\n\n    KLOG_INFO(TAG, \"Setting policy on %s\\n\", dir);\n    int result = do_policy_set(dir, policy.c_str(), policy.size());",
+        "b_contents": "    if (policy.empty()) {\n        return 0;\n    }\n\n    KLOG_INFO(TAG, \"Setting policy %s\\n\", policy.c_str());\n    int result = do_policy_set(dir, policy.c_str(), policy.size());",
+        "base_contents": "    KLOG_INFO(TAG, \"Setting policy %s\\n\", policy.c_str());\n    int result = do_policy_set(dir, policy.c_str());",
+        "res_region": "    if (policy.empty()) {\n        // ext4enc:TODO why is this OK?\n        return 0;\n    }\n\n    KLOG_INFO(TAG, \"Setting policy on %s\\n\", dir);\n    int result = do_policy_set(dir, policy.c_str(), policy.size());",
+        "lookback": "        // ext4enc:TODO why is this OK?",
+        "lookahead": "    if (result) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 150,
+        "end_line": 168,
+        "merge_gen_region": null,
+        "confidence": 0.7227297425270081,
+        "hesitated": true
+    }
+]

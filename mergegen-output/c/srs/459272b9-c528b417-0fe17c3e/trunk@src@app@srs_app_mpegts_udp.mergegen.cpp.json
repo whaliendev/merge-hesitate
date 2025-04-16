@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if ((err = sdk->connect()) != srs_success) {\n        close();\n        return srs_error_wrap(err, \"connect %s failed, cto=%\" PRId64 \", sto=%\" PRId64, output.c_str(), cto, sto);",
+        "b_contents": "        srs_discovery_tc_url(req->tcUrl, \n            req->schema, req->host, req->vhost, req->app, req->stream, req->port,\n            req->param);\n    }\n\n    // connect host.\n    if ((ret = srs_socket_connect(req->host, ::atoi(req->port.c_str()), ST_UTIME_NO_TIMEOUT, &stfd)) != ERROR_SUCCESS) {\n        srs_error(\"mpegts: connect server %s:%s failed. ret=%d\", req->host.c_str(), req->port.c_str(), ret);\n        return ret;",
+        "base_contents": "        srs_discovery_tc_url(req->tcUrl, \n            req->schema, req->host, req->vhost, req->app, req->port,\n            req->param);\n    }\n\n    // connect host.\n    if ((ret = srs_socket_connect(req->host, ::atoi(req->port.c_str()), ST_UTIME_NO_TIMEOUT, &stfd)) != ERROR_SUCCESS) {\n        srs_error(\"mpegts: connect server %s:%s failed. ret=%d\", req->host.c_str(), req->port.c_str(), ret);\n        return ret;",
+        "res_region": "    if ((err = sdk->connect()) != srs_success) {\n        close();\n        return srs_error_wrap(err, \"connect %s failed, cto=%\" PRId64 \", sto=%\" PRId64, output.c_str(), cto, sto);",
+        "lookback": "        close();",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 623,
+        "end_line": 647,
+        "merge_gen_region": null,
+        "confidence": 0.8528954386711121,
+        "hesitated": true
+    }
+]

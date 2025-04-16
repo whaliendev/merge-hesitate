@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\n#include \"modules/planning/planning.h\"\n\n#include <algorithm>\n#include <vector>\n\n#include \"google/protobuf/repeated_field.h\"\n",
+        "base_contents": "#include \"modules/planning/planning.h\"",
+        "res_region": "\n#include \"modules/planning/planning.h\"\n\n#include <algorithm>\n#include <vector>\n\n#include \"google/protobuf/repeated_field.h\"\n",
+        "lookback": "#include \"modules/planning/planning.h\"",
+        "lookahead": "#include \"modules/common/adapters/adapter_manager.h\"",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 15,
+        "end_line": 27,
+        "merge_gen_region": null,
+        "confidence": 0.6789922714233398,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include \"modules/planning/planner/rtk_replay_planner.h\"\n#include \"modules/planning/planning.h\"",
+        "b_contents": "#include \"modules/planning/planner/em/em_planner.h\"\n#include \"modules/planning/planner/rtk/rtk_replay_planner.h\"\n#include \"modules/planning/reference_line/reference_line_provider.h\"\n#include \"modules/planning/trajectory_stitcher/trajectory_stitcher.h\"",
+        "base_contents": "#include \"modules/planning/planner_factory.h\"",
+        "res_region": "#include \"modules/planning/planner/em/em_planner.h\"\n#include \"modules/planning/planner/rtk/rtk_replay_planner.h\"\n#include \"modules/planning/reference_line/reference_line_provider.h\"\n#include \"modules/planning/trajectory_stitcher/trajectory_stitcher.h\"",
+        "lookback": "#include \"modules/planning/planner/rtk/rtk_replay_planner.h\"",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 43,
+        "merge_gen_region": null,
+        "confidence": 0.8752835988998413,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void Planning::RegisterPlanners() {\n  planner_factory_.Register(PlannerType::RTK_PLANNER, []() -> Planner * {\n    return new RTKReplayPlanner();\n  });",
+        "b_contents": "std::string Planning::Name() const { return \"planning\"; }\n\nvoid Planning::RegisterPlanners() {\n  planner_factory_.Register(\n      PlanningConfig::RTK, []() -> Planner* { return new RTKReplayPlanner(); });\n  planner_factory_.Register(PlanningConfig::EM,\n                            []() -> Planner* { return new EMPlanner(); });",
+        "base_contents": "Planning::Planning() {\n  ptr_planner_ = PlannerFactory::CreateInstance(PlannerType::RTK_PLANNER);",
+        "res_region": "std::string Planning::Name() const { return \"planning\"; }\n\nvoid Planning::RegisterPlanners() {\n  planner_factory_.Register(\n      PlanningConfig::RTK, []() -> Planner* { return new RTKReplayPlanner(); });\n  planner_factory_.Register(PlanningConfig::EM,\n                            []() -> Planner* { return new EMPlanner(); });",
+        "lookback": "",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 55,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.7409006953239441,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Planning::Planning() { RegisterPlanners(); }\n\nbool Planning::Plan(const common::vehicle_state::VehicleState &vehicle_state,\n                    const bool is_on_auto_mode, const double publish_time,\n                    std::vector<TrajectoryPoint> *planning_trajectory) {\n  double planning_cycle_time = 1.0 / FLAGS_planning_loop_rate;\n  double execution_start_time = publish_time;\n\n  ptr_planner_ = planner_factory_.CreateObject(PlannerType::RTK_PLANNER);\n  if (!ptr_planner_) {\n    AERROR << \"Failed to create RTK planner\";\n    return false;\n  }\n\n  if (is_on_auto_mode && !last_trajectory_.empty()) {\n    // if the auto-driving mode is on and we have the trajectory from last\n    // cycle, then\n    // find the planning starting point from the last planning result.\n    // this ensures the smoothness of planning output and\n    // therefore the smoothness of control execution.\n\n    auto matched_info =\n        ComputeStartingPointFromLastTrajectory(execution_start_time);\n    TrajectoryPoint matched_point = matched_info.first;\n    std::size_t matched_index = matched_info.second;\n\n    // Compute the position deviation between current vehicle\n    // position and target vehicle position.\n    // If the deviation exceeds a specific threshold,\n    // it will be unsafe to planning from the matched point.\n    double dx = matched_point.x() - vehicle_state.x();\n    double dy = matched_point.y() - vehicle_state.y();\n    double position_deviation = std::sqrt(dx * dx + dy * dy);\n\n    if (position_deviation < FLAGS_replanning_threshold) {\n      // planned trajectory from the matched point, the matched point has\n      // relative time 0.\n      bool planning_succeeded =\n          ptr_planner_->Plan(matched_point, planning_trajectory);\n\n      if (!planning_succeeded) {\n        last_trajectory_.clear();\n        return false;\n      }\n\n      // a segment of last trajectory to be attached to planned trajectory in\n      // case controller needs.\n      auto overhead_trajectory = GetOverheadTrajectory(\n          matched_index, (std::size_t)FLAGS_rtk_trajectory_backward);\n      planning_trajectory->insert(planning_trajectory->begin(),\n                                  overhead_trajectory.begin(),\n                                  overhead_trajectory.end());\n\n      // store the planned trajectory and header info for next planning cycle.\n      last_trajectory_ = *planning_trajectory;\n      last_header_time_ = execution_start_time;\n      return true;\n    }",
+        "b_contents": "Status Planning::InitFrame(const uint32_t sequence_num, const double time_stamp,\n                           const TrajectoryPoint& init_adc_point) {\n  frame_.reset(new Frame(sequence_num));\n  frame_->SetPlanningStartPoint(init_adc_point);\n\n  if (AdapterManager::GetRoutingResponse()->Empty()) {\n    AERROR << \"Routing is empty\";\n    return Status(ErrorCode::PLANNING_ERROR, \"routing is empty\");",
+        "base_contents": "bool Planning::Plan(const common::vehicle_state::VehicleState &vehicle_state,\n                    const bool is_on_auto_mode, const double publish_time,\n                    std::vector<TrajectoryPoint> *planning_trajectory) {\n  double planning_cycle_time = 1.0 / FLAGS_planning_loop_rate;\n  double execution_start_time = publish_time;\n\n  if (is_on_auto_mode && !last_trajectory_.empty()) {\n    // if the auto-driving mode is on and we have the trajectory from last\n    // cycle, then\n    // find the planning starting point from the last planning result.\n    // this ensures the smoothness of planning output and\n    // therefore the smoothness of control execution.\n\n    auto matched_info =\n        ComputeStartingPointFromLastTrajectory(execution_start_time);\n    TrajectoryPoint matched_point = matched_info.first;\n    std::size_t matched_index = matched_info.second;\n\n    // Compute the position deviation between current vehicle\n    // position and target vehicle position.\n    // If the deviation exceeds a specific threshold,\n    // it will be unsafe to planning from the matched point.\n    double dx = matched_point.x() - vehicle_state.x();\n    double dy = matched_point.y() - vehicle_state.y();\n    double position_deviation = std::sqrt(dx * dx + dy * dy);\n\n    if (position_deviation < FLAGS_replanning_threshold) {\n      // planned trajectory from the matched point, the matched point has\n      // relative time 0.\n      bool planning_succeeded =\n          ptr_planner_->Plan(matched_point, planning_trajectory);\n\n      if (!planning_succeeded) {\n        last_trajectory_.clear();\n        return false;\n      }\n\n      // a segment of last trajectory to be attached to planned trajectory in\n      // case controller needs.\n      auto overhead_trajectory = GetOverheadTrajectory(\n          matched_index, (std::size_t)FLAGS_rtk_trajectory_backward);\n      planning_trajectory->insert(planning_trajectory->begin(),\n                                  overhead_trajectory.begin(),\n                                  overhead_trajectory.end());\n\n      // store the planned trajectory and header info for next planning cycle.\n      last_trajectory_ = *planning_trajectory;\n      last_header_time_ = execution_start_time;\n      return true;\n    }",
+        "res_region": "Status Planning::InitFrame(const uint32_t sequence_num, const double time_stamp,\n                           const TrajectoryPoint& init_adc_point) {\n  frame_.reset(new Frame(sequence_num));\n  frame_->SetPlanningStartPoint(init_adc_point);\n\n  if (AdapterManager::GetRoutingResponse()->Empty()) {\n    AERROR << \"Routing is empty\";\n    return Status(ErrorCode::PLANNING_ERROR, \"routing is empty\");",
+        "lookback": "                           const TrajectoryPoint& init_adc_point) {",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 74,
+        "end_line": 193,
+        "merge_gen_region": null,
+        "confidence": 0.8594740033149719,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <coin/IpIpoptApplication.hpp>\n#include <coin/IpSolveStatistics.hpp>",
+        "base_contents": "#include <coin/IpIpoptApplication.hpp>\n#include <coin/IpSolveStatistics.hpp>\n",
+        "res_region": "",
+        "lookback": "#include <string>",
+        "lookahead": "#include <algorithm>",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 22,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.8666585087776184,
+        "hesitated": true
+    }
+]

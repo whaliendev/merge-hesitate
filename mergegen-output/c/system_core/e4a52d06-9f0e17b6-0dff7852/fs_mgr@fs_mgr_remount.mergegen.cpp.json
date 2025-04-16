@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    auto user_please_reboot_later = false;\n    auto setup_overlayfs = false;\n    auto just_disabled_verity = false;",
+        "b_contents": "    auto uses_overlayfs = fs_mgr_overlayfs_valid() != OverlayfsValidResult::kNotSupported;\n    auto just_disabled_verity = false;",
+        "base_contents": "    auto uses_overlayfs = fs_mgr_overlayfs_valid() != OverlayfsValidResult::kNotSupported;",
+        "res_region": "    auto user_please_reboot_later = false;\n    auto setup_overlayfs = false;\n    auto just_disabled_verity = false;",
+        "lookback": "    auto setup_overlayfs = false;",
+        "lookahead": "    for (auto it = partitions.begin(); it != partitions.end();) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 251,
+        "end_line": 260,
+        "merge_gen_region": null,
+        "confidence": 0.8659836053848267,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                }\n                if (!ret && fs_mgr_set_blk_ro(entry.blk_device, false)) {\n                    fec::io fh(entry.blk_device.c_str(), O_RDWR);\n                    ret = fh && fh.set_verity_status(false);\n                }\n                if (ret) {\n                    LOG(WARNING) << \"Disabling verity for \" << mount_point;\n                    just_disabled_verity = true;\n                    reboot_later = can_reboot;\n                    user_please_reboot_later = true;",
+        "b_contents": "                    if (ret) {\n                        LOG(WARNING) << \"Disabling verity for \" << mount_point;\n                        just_disabled_verity = true;\n                        reboot_later = can_reboot;\n                        if (reboot_later) {\n                            // w/o overlayfs available, also check for dedupe\n                            if (!uses_overlayfs) {\n                                ++it;\n                                continue;\n                            }\n                            reboot(false);\n                        }\n                    } else if (fs_mgr_set_blk_ro(entry.blk_device, false)) {\n                        fec::io fh(entry.blk_device.c_str(), O_RDWR);\n                        if (fh && fh.set_verity_status(false)) {\n                            LOG(WARNING) << \"Disabling verity for \" << mount_point;\n                            just_disabled_verity = true;\n                            reboot_later = can_reboot;\n                            if (reboot_later && !uses_overlayfs) {\n                                ++it;\n                                continue;\n                            }\n                        }\n                    }",
+        "base_contents": "                    if (ret) {\n                        LOG(WARNING) << \"Disable verity for \" << mount_point;\n                        reboot_later = can_reboot;\n                        if (reboot_later) {\n                            // w/o overlayfs available, also check for dedupe\n                            if (!uses_overlayfs) {\n                                ++it;\n                                continue;\n                            }\n                            reboot(false);\n                        }\n                    } else if (fs_mgr_set_blk_ro(entry.blk_device, false)) {\n                        fec::io fh(entry.blk_device.c_str(), O_RDWR);\n                        if (fh && fh.set_verity_status(false)) {\n                            LOG(WARNING) << \"Disable verity for \" << mount_point;\n                            reboot_later = can_reboot;\n                            if (reboot_later && !uses_overlayfs) {\n                                ++it;\n                                continue;\n                            }\n                        }\n                    }",
+        "res_region": "                }\n                if (!ret && fs_mgr_set_blk_ro(entry.blk_device, false)) {\n                    fec::io fh(entry.blk_device.c_str(), O_RDWR);\n                    ret = fh && fh.set_verity_status(false);\n                }\n                if (ret) {\n                    LOG(WARNING) << \"Disabling verity for \" << mount_point;\n                    just_disabled_verity = true;\n                    reboot_later = can_reboot;\n                    user_please_reboot_later = true;",
+        "lookback": "                if (!ret && fs_mgr_set_blk_ro(entry.blk_device, false)) {",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 273,
+        "end_line": 332,
+        "merge_gen_region": null,
+        "confidence": 0.6406060457229614,
+        "hesitated": true
+    }
+]

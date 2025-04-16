@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    } else if(sign == LV_SIGNAL_BASE_DIR_CHG) {\n        lv_label_align_t align = lv_label_get_align(ext->label);\n        switch(align) {\n            case LV_LABEL_ALIGN_LEFT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0); break;\n            case LV_LABEL_ALIGN_CENTER: lv_obj_align(ext->label, NULL, LV_ALIGN_CENTER, 0, 0); break;\n            case LV_LABEL_ALIGN_RIGHT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0); break;\n        }\n\n        lv_ddlist_refr_size(ddlist, 0);",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "    } else if(sign == LV_SIGNAL_BASE_DIR_CHG) {\n        lv_label_align_t align = lv_label_get_align(ext->label);\n        switch(align) {\n            case LV_LABEL_ALIGN_LEFT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0); break;\n            case LV_LABEL_ALIGN_CENTER: lv_obj_align(ext->label, NULL, LV_ALIGN_CENTER, 0, 0); break;\n            case LV_LABEL_ALIGN_RIGHT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0); break;\n        }\n\n        lv_ddlist_refr_size(ddlist, 0);",
+        "lookback": "        lv_label_align_t align = lv_label_get_align(ext->label);",
+        "lookahead": "    } else if(sign == LV_SIGNAL_CLEANUP) {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 676,
+        "end_line": 689,
+        "merge_gen_region": null,
+        "confidence": 0.8397102355957031,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    /*Save the current x coordinate because it should be kept after the refrsh*/\n    lv_coord_t x;\n    if(lv_obj_get_base_dir(ddlist) == LV_BIDI_DIR_RTL) x = lv_obj_get_x(ddlist) + lv_obj_get_width(ddlist);\n    else x = lv_obj_get_x(ddlist);\n",
+        "b_contents": "    lv_ddlist_ext_t * ext = lv_obj_get_ext_attr(ddlist);\n",
+        "base_contents": "",
+        "res_region": "<<<<<<< HEAD\n\n    /*Save the current x coordinate because it should be kept after the refrsh*/\n    lv_coord_t x;\n    if(lv_obj_get_base_dir(ddlist) == LV_BIDI_DIR_RTL) x = lv_obj_get_x(ddlist) + lv_obj_get_width(ddlist);\n    else x = lv_obj_get_x(ddlist);\n=======\n    lv_ddlist_ext_t * ext = lv_obj_get_ext_attr(ddlist);\n>>>>>>> dev-6.1\n",
+        "lookback": "",
+        "lookahead": "    /*Set the TIGHT fit horizontally the set the width to the content*/",
+        "label": [
+            "unresolved",
+            "one_side_deletion"
+        ],
+        "start_line": 1008,
+        "end_line": 1019,
+        "merge_gen_region": null,
+        "confidence": 0.8037011027336121,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    if(lv_obj_get_base_dir(ddlist) == LV_BIDI_DIR_RTL) lv_obj_set_x(ddlist, x - lv_obj_get_width(ddlist));\n    else lv_obj_set_x(ddlist, x);",
+        "b_contents": "\n    switch(lv_label_get_align(ext->label)) {\n        case LV_LABEL_ALIGN_LEFT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0); break;\n        case LV_LABEL_ALIGN_CENTER: lv_obj_align(ext->label, NULL, LV_ALIGN_CENTER, 0, 0); break;\n        case LV_LABEL_ALIGN_RIGHT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0); break;\n    }",
+        "base_contents": "",
+        "res_region": "\n<<<<<<< HEAD\n    if(lv_obj_get_base_dir(ddlist) == LV_BIDI_DIR_RTL) lv_obj_set_x(ddlist, x - lv_obj_get_width(ddlist));\n    else lv_obj_set_x(ddlist, x);\n=======\n    switch(lv_label_get_align(ext->label)) {\n        case LV_LABEL_ALIGN_LEFT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0); break;\n        case LV_LABEL_ALIGN_CENTER: lv_obj_align(ext->label, NULL, LV_ALIGN_CENTER, 0, 0); break;\n        case LV_LABEL_ALIGN_RIGHT: lv_obj_align(ext->label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0); break;\n    }\n>>>>>>> dev-6.1",
+        "lookback": "<<<<<<< HEAD",
+        "lookahead": "}",
+        "label": [
+            "unresolved",
+            "one_side_deletion"
+        ],
+        "start_line": 1025,
+        "end_line": 1037,
+        "merge_gen_region": null,
+        "confidence": 0.7807096242904663,
+        "hesitated": true
+    }
+]

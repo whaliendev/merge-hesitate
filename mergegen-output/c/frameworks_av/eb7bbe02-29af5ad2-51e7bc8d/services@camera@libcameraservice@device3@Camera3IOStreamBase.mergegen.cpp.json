@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    lines << fmt::sprintf(\"      Color Space: %d\\n\", camera_stream::color_space);\n    lines << fmt::sprintf(\"      Stream use case: %\" PRId64 \"\\n\", camera_stream::use_case);\n    lines << fmt::sprintf(\"      Timestamp base: %d\\n\", getTimestampBase());\n    lines << fmt::sprintf(\"      Frames produced: %d, last timestamp: %\" PRId64 \" ns\\n\",",
+        "b_contents": "    lines << fmt::sprintf(\"      Stream use case: %\" PRId64 \"\\n\", camera_stream::use_case);\n    lines << fmt::sprintf(\"      Timestamp base: %d\\n\", getTimestampBase());\n    lines << fmt::sprintf(\"      Frames produced: %d, last timestamp: %\" PRId64 \" ns\\n\",",
+        "base_contents": "    lines.appendFormat(\"      Stream use case: %\" PRId64 \"\\n\", camera_stream::use_case);\n    lines.appendFormat(\"      Timestamp base: %d\\n\", getTimestampBase());\n    lines.appendFormat(\"      Frames produced: %d, last timestamp: %\" PRId64 \" ns\\n\",",
+        "res_region": "    lines << fmt::sprintf(\"      Color Space: %d\\n\", camera_stream::color_space);\n    lines << fmt::sprintf(\"      Stream use case: %\" PRId64 \"\\n\", camera_stream::use_case);\n    lines << fmt::sprintf(\"      Timestamp base: %d\\n\", getTimestampBase());\n    lines << fmt::sprintf(\"      Frames produced: %d, last timestamp: %\" PRId64 \" ns\\n\",",
+        "lookback": "    lines << fmt::sprintf(\"      Stream use case: %\" PRId64 \"\\n\", camera_stream::use_case);",
+        "lookahead": "            mFrameCount, mLastTimestamp);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 111,
+        "merge_gen_region": null,
+        "confidence": 0.866017758846283,
+        "hesitated": true
+    }
+]

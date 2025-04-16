@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\tstruct wlr_texture *texture = NULL;\n\tstruct wlr_box box;\n\tbool intersects;\n\n\t// If this is the main surface of a view, render the saved_texture instead\n\t// if it exists. It exists when we are mid-transaction.\n\tif (data->view && data->view->saved_texture &&\n\t\t\tdata->view->surface == surface) {\n\t\ttexture = data->view->saved_texture;\n\t\tintersects = get_view_box(&data->root_geo, data->output, data->view,\n\t\t\t\tsx, sy, &box);\n\t} else {\n\t\tif (!wlr_surface_has_buffer(surface)) {\n\t\t\treturn;\n\t\t}\n\t\ttexture = surface->texture;\n\t\tintersects = get_surface_box(&data->root_geo, data->output, surface,\n\t\t\t\tsx, sy, &box);",
+        "b_contents": "\tstruct wlr_texture *texture = wlr_surface_get_texture(surface);\n\tif (texture == NULL) {\n\t\treturn;",
+        "base_contents": "\tif (!wlr_surface_has_buffer(surface)) {\n\t\treturn;",
+        "res_region": "\tstruct wlr_texture *texture = NULL;\n\tstruct wlr_box box;\n\tbool intersects;\n\n\t// If this is the main surface of a view, render the saved_texture instead\n\t// if it exists. It exists when we are mid-transaction.\n\tif (data->view && data->view->saved_texture &&\n\t\t\tdata->view->surface == surface) {\n\t\ttexture = data->view->saved_texture;\n\t\tintersects = get_view_box(&data->root_geo, data->output, data->view,\n\t\t\t\tsx, sy, &box);\n\t} else {\n\t\ttexture = wlr_surface_get_texture(surface);\n\t\tif (texture == NULL) {\n\t\t\treturn;\n\t\t}\n\t\tintersects = get_surface_box(&data->root_geo, data->output, surface,\n\t\t\t\tsx, sy, &box);",
+        "lookback": "\tstruct wlr_box box;",
+        "lookahead": "\t}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 275,
+        "end_line": 301,
+        "merge_gen_region": " wl_ * =; wlstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructstructoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9035916924476624,
+        "hesitated": false,
+        "resolved": false
+    }
+]

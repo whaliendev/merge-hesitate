@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"\n#include \"modules/planning/proto/task_config.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"\n#include \"modules/common_msgs/planning_msgs/task_config.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_internal.pb.h\"\n#include \"modules/planning/proto/task_config.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"\n#include \"modules/planning/proto/task_config.pb.h\"",
+        "lookback": "#include \"modules/planning/proto/task_config.pb.h\"",
+        "lookahead": "#include \"modules/planning/tasks/optimizers/speed_optimizer.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.8177754282951355,
+        "hesitated": true
+    }
+]

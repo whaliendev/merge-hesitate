@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    NameSet required_output_,\n    bool keep_left_read_in_order_,\n    bool use_new_analyzer_)\n    : join(std::move(join_))\n    , max_block_size(max_block_size_)\n    , max_streams(max_streams_)\n    , required_output(std::move(required_output_))\n    , keep_left_read_in_order(keep_left_read_in_order_)\n    , use_new_analyzer(use_new_analyzer_)",
+        "b_contents": "    bool keep_left_read_in_order_)\n    : join(std::move(join_))\n    , max_block_size(max_block_size_)\n    , min_block_size_bytes(min_block_size_bytes_)\n    , max_streams(max_streams_)\n    , keep_left_read_in_order(keep_left_read_in_order_)",
+        "base_contents": "    bool keep_left_read_in_order_)\n    : join(std::move(join_)), max_block_size(max_block_size_), max_streams(max_streams_), keep_left_read_in_order(keep_left_read_in_order_)",
+        "res_region": "    NameSet required_output_,\n    bool keep_left_read_in_order_,\n    bool use_new_analyzer_)\n    : join(std::move(join_))\n    , max_block_size(max_block_size_)\n    , max_streams(max_streams_)\n    , required_output(std::move(required_output_))\n    , keep_left_read_in_order(keep_left_read_in_order_)\n    , use_new_analyzer(use_new_analyzer_)",
+        "lookback": "    bool keep_left_read_in_order_,",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 100,
+        "merge_gen_region": null,
+        "confidence": 0.7664399147033691,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return joined_pipeline;",
+        "b_contents": "    auto pipeline = QueryPipelineBuilder::joinPipelinesRightLeft(\n        std::move(pipelines[0]),\n        std::move(pipelines[1]),\n        join,\n        *output_header,\n        max_block_size,\n        min_block_size_bytes,\n        max_streams,\n        keep_left_read_in_order,\n        &processors);\n\n    if (join->supportParallelJoin())\n    {\n        pipeline->addSimpleTransform([&](const Block & header)\n                                     { return std::make_shared<SimpleSquashingChunksTransform>(header, 0, min_block_size_bytes); });\n    }\n\n    return pipeline;",
+        "base_contents": "    return QueryPipelineBuilder::joinPipelinesRightLeft(\n        std::move(pipelines[0]),\n        std::move(pipelines[1]),\n        join,\n        *output_header,\n        max_block_size,\n        max_streams,\n        keep_left_read_in_order,\n        &processors);",
+        "res_region": "    if (join->supportParallelJoin())\n    {\n        pipeline->addSimpleTransform([&](const Block & header)\n                                     { return std::make_shared<SimpleSquashingChunksTransform>(header, 0, min_block_size_bytes); });\n    }\n\n    return pipeline;",
+        "lookback": "    {",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 148,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.7689213156700134,
+        "hesitated": true
+    }
+]

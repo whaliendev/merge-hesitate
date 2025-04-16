@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <memory>\n#include <utility>",
+        "b_contents": "#include <memory>",
+        "base_contents": "",
+        "res_region": "#include <memory>\n#include <utility>",
+        "lookback": "#include <utility>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 19,
+        "end_line": 25,
+        "merge_gen_region": null,
+        "confidence": 0.8539687991142273,
+        "hesitated": true
+    }
+]

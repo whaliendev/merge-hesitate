@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                                  install_plan,\n                                  &install_plan->payloads[0]);",
+        "b_contents": "                                  install_plan,\n                                  false /* is_interactive */);",
+        "base_contents": "                                  install_plan);",
+        "res_region": "                                  install_plan,\n                                  &install_plan->payloads[0],\n                                  false /* is_interactive */);",
+        "lookback": "                                  &install_plan->payloads[0],",
+        "lookahead": "  string public_key_path = GetBuildArtifactsPath(kUnittestPublicKeyPath);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 748,
+        "end_line": 756,
+        "merge_gen_region": null,
+        "confidence": 0.5147697329521179,
+        "hesitated": true
+    }
+]

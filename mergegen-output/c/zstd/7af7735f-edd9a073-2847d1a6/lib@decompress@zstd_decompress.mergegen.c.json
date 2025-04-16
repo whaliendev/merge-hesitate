@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "MEM_STATIC size_t ZSTD_limitCopy(void* dst, size_t dstCapacity, const void* src, size_t srcSize)\n{\n    size_t const length = MIN(dstCapacity, srcSize);\n    if (length > 0) {\n        memcpy(dst, src, length);\n    }\n    return length;\n}\n\nstatic int ZSTD_DCtx_isOverflow(ZSTD_DStream* zds, size_t const neededInBuffSize, size_t const neededOutBuffSize)\n{\n    return (zds->inBuffSize + zds->outBuffSize) >= (neededInBuffSize + neededOutBuffSize) * ZSTD_WORKSPACETOOLARGE_FACTOR;\n}\n\nstatic void ZSTD_DCtx_updateOversizedDuration(ZSTD_DStream* zds, size_t const neededInBuffSize, size_t const neededOutBuffSize)\n{\n    if (ZSTD_DCtx_isOverflow(zds, neededInBuffSize, neededOutBuffSize))\n        zds->oversizedDuration++;\n    else \n        zds->oversizedDuration = 0;\n}\n\nstatic int ZSTD_DCtx_isOversizedTooLong(ZSTD_DStream* zds)\n{\n    return zds->oversizedDuration >= ZSTD_WORKSPACETOOLARGE_MAXDURATION;\n}\n",
+        "base_contents": "MEM_STATIC size_t ZSTD_limitCopy(void* dst, size_t dstCapacity, const void* src, size_t srcSize)\n{\n    size_t const length = MIN(dstCapacity, srcSize);\n    if (length > 0) {\n        memcpy(dst, src, length);\n    }\n    return length;\n}\n\n",
+        "res_region": "\nstatic int ZSTD_DCtx_isOverflow(ZSTD_DStream* zds, size_t const neededInBuffSize, size_t const neededOutBuffSize)\n{\n    return (zds->inBuffSize + zds->outBuffSize) >= (neededInBuffSize + neededOutBuffSize) * ZSTD_WORKSPACETOOLARGE_FACTOR;\n}\n\nstatic void ZSTD_DCtx_updateOversizedDuration(ZSTD_DStream* zds, size_t const neededInBuffSize, size_t const neededOutBuffSize)\n{\n    if (ZSTD_DCtx_isOverflow(zds, neededInBuffSize, neededOutBuffSize))\n        zds->oversizedDuration++;\n    else \n        zds->oversizedDuration = 0;\n}\n\nstatic int ZSTD_DCtx_isOversizedTooLong(ZSTD_DStream* zds)\n{\n    return zds->oversizedDuration >= ZSTD_WORKSPACETOOLARGE_MAXDURATION;\n}\n",
+        "lookback": "static int ZSTD_DCtx_isOverflow(ZSTD_DStream* zds, size_t const neededInBuffSize, size_t const neededOutBuffSize)",
+        "lookahead": "size_t ZSTD_decompressStream(ZSTD_DStream* zds, ZSTD_outBuffer* output, ZSTD_inBuffer* input)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 1501,
+        "end_line": 1541,
+        "merge_gen_region": null,
+        "confidence": 0.6570838689804077,
+        "hesitated": true
+    }
+]

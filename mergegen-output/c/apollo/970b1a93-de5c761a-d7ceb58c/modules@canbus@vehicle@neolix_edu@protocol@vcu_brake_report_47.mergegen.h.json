@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  // config detail: {'bit': 32, 'description': 'the vcu brake was caused\n  // reason', 'enum': {0: 'VCU_EHB_NORMAL_BRAKE', 1:\n  // 'VCU_EHB_BACKUP_REMOTE_BRAKE', 2: 'VCU_EHB_EMERGENCY_BUTTON_BRAKE', 3:\n  // 'VCU_EHB_ULTR_BRAKE', 4: 'VCU_EHB_BUMPER_BRAKE'}, 'is_signed_var': False,\n  // 'len': 3, 'name': 'vcu_ehb_brake_state', 'offset': 0.0, 'order':\n  // 'motorola', 'physical_range':",
+        "b_contents": "  // config detail:\n  // {'bit': 32, 'description': 'the vcu brake was caused reason',\n  // 'enum': {0: 'VCU_EHB_NORMAL_BRAKE', 1: 'VCU_EHB_BACKUP_REMOTE_BRAKE',\n  // 2: 'VCU_EHB_EMERGENCY_BUTTON_BRAKE', 3: 'VCU_EHB_ULTR_BRAKE', 4:\n  // 'VCU_EHB_BUMPER_BRAKE'}, 'is_signed_var': False, 'len': 3, 'name':\n  // 'vcu_ehb_brake_state', 'offset': 0.0,\n  // 'order': 'motorola', 'physical_range':",
+        "base_contents": "  // config detail: {'bit': 32, 'description': 'the vcu brake was caused reason',\n  // 'enum': {0: 'VCU_EHB_NORMAL_BRAKE', 1: 'VCU_EHB_BACKUP_REMOTE_BRAKE',\n  // 2: 'VCU_EHB_EMERGENCY_BUTTON_BRAKE', 3: 'VCU_EHB_ULTR_BRAKE', 4:\n  // 'VCU_EHB_BUMPER_BRAKE'}, 'is_signed_var': False, 'len': 3, 'name':\n  // 'vcu_ehb_brake_state', 'offset': 0.0, 'order': 'motorola', 'physical_range':",
+        "res_region": "  // config detail:\n  // {'bit': 32, 'description': 'the vcu brake was caused reason',\n  // 'enum': {0: 'VCU_EHB_NORMAL_BRAKE', 1: 'VCU_EHB_BACKUP_REMOTE_BRAKE',\n  // 2: 'VCU_EHB_EMERGENCY_BUTTON_BRAKE', 3: 'VCU_EHB_ULTR_BRAKE', 4:\n  // 'VCU_EHB_BUMPER_BRAKE'}, 'is_signed_var': False, 'len': 3, 'name':\n  // 'vcu_ehb_brake_state', 'offset': 0.0,\n  // 'order': 'motorola', 'physical_range':",
+        "lookback": "  // {'bit': 32, 'description': 'the vcu brake was caused reason',",
+        "lookahead": "  // '[0|4]', 'physical_unit': '', 'precision': 1.0, 'type': 'enum'}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 107,
+        "end_line": 128,
+        "merge_gen_region": " {'':,outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9336630702018738,
+        "hesitated": false,
+        "resolved": false
+    }
+]

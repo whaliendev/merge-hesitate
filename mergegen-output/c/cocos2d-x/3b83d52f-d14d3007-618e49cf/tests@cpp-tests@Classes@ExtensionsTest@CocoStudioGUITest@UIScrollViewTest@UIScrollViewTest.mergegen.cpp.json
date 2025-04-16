@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(innerWidth / 2.0f, titleButton->getBottomInParent() - titleButton->getSize().height));",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(innerWidth / 2.0f, titleButton->getBottomInParent() - titleButton->getSize().height));",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(innerWidth / 2.0f, titleButton->getBottomInParent() - titleButton->getSize().height));",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(innerWidth / 2.0f, titleButton->getBottomInParent() - titleButton->getSize().height));",
+        "lookback": "        button_scale9->setPosition(Vector2(innerWidth / 2.0f, titleButton->getBottomInParent() - titleButton->getSize().height));",
+        "lookahead": "        scrollView->addChild(button_scale9);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 67,
+        "end_line": 76,
+        "merge_gen_region": null,
+        "confidence": 0.441625714302063,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(titleButton->getRightInParent() + titleButton->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(titleButton->getRightInParent() + titleButton->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(titleButton->getRightInParent() + titleButton->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(titleButton->getRightInParent() + titleButton->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(titleButton->getRightInParent() + titleButton->getSize().width / 2.0f,",
+        "lookahead": "                                       titleButton->getBottomInParent() - titleButton->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 153,
+        "end_line": 162,
+        "merge_gen_region": null,
+        "confidence": 0.5901024341583252,
+        "hesitated": true
+    }
+]

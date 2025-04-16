@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <Common/UniqueLock.h>",
+        "b_contents": "#include <Common/LockGuard.h>\n#include <Core/BackgroundSchedulePool.h>",
+        "base_contents": "#include <Common/LockGuard.h>",
+        "res_region": "#include <Common/UniqueLock.h>\n#include <Core/BackgroundSchedulePool.h>",
+        "lookback": "#include <Core/BackgroundSchedulePool.h>",
+        "lookahead": "#include <DataTypes/DataTypeDate.h>",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3,
+        "end_line": 10,
+        "merge_gen_region": null,
+        "confidence": 0.5792808532714844,
+        "hesitated": true
+    }
+]

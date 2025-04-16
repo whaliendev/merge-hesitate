@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n    virtual void setAnchorPoint(const Vector2 &pt) override;",
+        "b_contents": "",
+        "base_contents": "\n    virtual void setAnchorPoint(const Point &pt) override;",
+        "res_region": "",
+        "lookback": "    /**",
+        "lookahead": "    ",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 147,
+        "end_line": 154,
+        "merge_gen_region": null,
+        "confidence": 0.7179959416389465,
+        "hesitated": true
+    }
+]

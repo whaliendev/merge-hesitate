@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void lv_sqrt(uint32_t x, lv_sqrt_res_t * q);\n\n/**\n * Calculate the atan2 of a vector.\n * @param x\n * @param y\n * @return the angle in degree calculated from the given parameters in range of [0..360]\n */\nuint16_t lv_atan2(int x, int y);\n\n",
+        "b_contents": "/**\n * Calculate the integer square root of a number.\n * @param num\n * @return square root of 'num'\n */\nuint32_t lv_sqrt(uint32_t num);\n",
+        "base_contents": "",
+        "res_region": "void lv_sqrt(uint32_t x, lv_sqrt_res_t * q);\n\n/**\n * Calculate the atan2 of a vector.\n * @param x\n * @param y\n * @return the angle in degree calculated from the given parameters in range of [0..360]\n */\nuint16_t lv_atan2(int x, int y);\n\n",
+        "lookback": "",
+        "lookahead": "/**********************",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 62,
+        "end_line": 83,
+        "merge_gen_region": null,
+        "confidence": 0.8595507144927979,
+        "hesitated": true
+    }
+]

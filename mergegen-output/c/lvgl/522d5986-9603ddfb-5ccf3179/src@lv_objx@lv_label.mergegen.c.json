@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            const lv_style_t * style = lv_label_get_style(label);\n            label->ext_size = LV_MATH_MAX(label->ext_size, style->body.padding.left);\n            label->ext_size = LV_MATH_MAX(label->ext_size, style->body.padding.right);\n            label->ext_size = LV_MATH_MAX(label->ext_size, style->body.padding.top);\n            label->ext_size = LV_MATH_MAX(label->ext_size, style->body.padding.bottom);",
+        "b_contents": "            lv_style_t * style = lv_label_get_style(label);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.left);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.right);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.top);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.bottom);",
+        "base_contents": "            lv_style_t * style = lv_label_get_style(label);\n            label->ext_size    = LV_MATH_MAX(label->ext_size, style->body.padding.left);\n            label->ext_size    = LV_MATH_MAX(label->ext_size, style->body.padding.right);\n            label->ext_size    = LV_MATH_MAX(label->ext_size, style->body.padding.top);\n            label->ext_size    = LV_MATH_MAX(label->ext_size, style->body.padding.bottom);",
+        "res_region": "            const lv_style_t * style = lv_label_get_style(label);\n\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.left);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.right);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.top);\n            label->ext_draw_pad    = LV_MATH_MAX(label->ext_draw_pad, style->body.padding.bottom);",
+        "lookback": "",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 828,
+        "end_line": 846,
+        "merge_gen_region": null,
+        "confidence": 0.8405596613883972,
+        "hesitated": true
+    }
+]

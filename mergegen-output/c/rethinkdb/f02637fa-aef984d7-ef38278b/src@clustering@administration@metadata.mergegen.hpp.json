@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    auth_semilattice_metadata_t()\n        : m_users({\n            {\n                auth::username_t(\"admin\"),\n                versioned_t<boost::optional<auth::user_t>>(\n                    boost::make_optional(auth::user_t(auth::admin_t())))\n            }, {\n                auth::username_t(\"user\"),\n                versioned_t<boost::optional<auth::user_t>>(\n                    boost::make_optional(auth::user_t(\n                        auth::password_t(\"pencil\"),\n                        auth::permissions_t(true, true, true, true))))\n            }\n        }) {\n    }",
+        "b_contents": "    auth_semilattice_metadata_t()\n        : m_users({{\n            auth::username_t(\"admin\"),\n            versioned_t<boost::optional<auth::user_t>>(\n                boost::make_optional(auth::user_t(auth::admin_t())))}}) {\n    }",
+        "base_contents": "    auth_semilattice_metadata_t() { }",
+        "res_region": "    auth_semilattice_metadata_t()\n        : m_users({\n            {\n                auth::username_t(\"admin\"),\n                versioned_t<boost::optional<auth::user_t>>(\n                    boost::make_optional(auth::user_t(auth::admin_t())))\n            }, {\n                auth::username_t(\"user\"),\n                versioned_t<boost::optional<auth::user_t>>(\n                    boost::make_optional(auth::user_t(\n                        auth::password_t(\"pencil\"),\n                        auth::permissions_t(true, true, true, true))))\n            }\n        }) {\n    }",
+        "lookback": "        : m_users({",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 40,
+        "end_line": 65,
+        "merge_gen_region": ":::: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats: stats",
+        "confidence": 0.9054937362670898,
+        "hesitated": false,
+        "resolved": false
+    }
+]

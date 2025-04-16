@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "Camera3Device::Camera3Device(std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string &id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "b_contents": "Camera3Device::Camera3Device(const std::string &id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "base_contents": "Camera3Device::Camera3Device(const String8 &id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "res_region": "Camera3Device::Camera3Device(std::shared_ptr<CameraServiceProxyWrapper>& cameraServiceProxyWrapper,\n        const std::string &id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "lookback": "        const std::string &id, bool overrideForPerfClass, bool overrideToPortrait,",
+        "lookahead": "        bool legacyClient):",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 78,
+        "end_line": 85,
+        "merge_gen_region": null,
+        "confidence": 0.6886986494064331,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            mUseHalBufManager, mSupportCameraMute, mOverrideToPortrait,\n            mSupportZoomOverride);\n    res = mRequestThread->run((std::string(\"C3Dev-\") + mId + \"-ReqQueue\").c_str());",
+        "b_contents": "            mUseHalBufManager, mSupportCameraMute, mOverrideToPortrait);\n    res = mRequestThread->run((std::string(\"C3Dev-\") + mId + \"-ReqQueue\").c_str());",
+        "base_contents": "            mUseHalBufManager, mSupportCameraMute, mOverrideToPortrait);\n    res = mRequestThread->run(String8::format(\"C3Dev-%s-ReqQueue\", mId.string()).string());",
+        "res_region": "            mUseHalBufManager, mSupportCameraMute, mOverrideToPortrait,\n            mSupportZoomOverride);\n    res = mRequestThread->run((std::string(\"C3Dev-\") + mId + \"-ReqQueue\").c_str());",
+        "lookback": "            mSupportZoomOverride);",
+        "lookahead": "    if (res != OK) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 197,
+        "end_line": 207,
+        "merge_gen_region": null,
+        "confidence": 0.8118221163749695,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (SessionConfigurationUtils::supportsUltraHighResolutionCapture(mDeviceInfo)) {\n        mUHRCropAndMeteringRegionMappers[mId] =",
+        "b_contents": "    if (SessionConfigurationUtils::isUltraHighResolutionSensor(mDeviceInfo)) {\n        mUHRCropAndMeteringRegionMappers[mId] =",
+        "base_contents": "    if (SessionConfigurationUtils::isUltraHighResolutionSensor(mDeviceInfo)) {\n        mUHRCropAndMeteringRegionMappers[mId.c_str()] =",
+        "res_region": "    if (SessionConfigurationUtils::supportsUltraHighResolutionCapture(mDeviceInfo)) {\n        mUHRCropAndMeteringRegionMappers[mId] =",
+        "lookback": "        mUHRCropAndMeteringRegionMappers[mId] =",
+        "lookahead": "                UHRCropAndMeteringRegionMapper(mDeviceInfo, usePrecorrectArray);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 254,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.8171579837799072,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            \" mirrorMode %d, colorSpace %d, useReadoutTimestamp %d\",\n            mId.c_str(), mNextStreamId, width, height, format, dataSpace, rotation,\n            consumerUsage, isShared, physicalCameraId.c_str(), isMultiResolution,\n            dynamicRangeProfile, streamUseCase, timestampBase, mirrorMode, colorSpace,\n            useReadoutTimestamp);",
+        "b_contents": "            \" mirrorMode %d\",\n            mId.c_str(), mNextStreamId, width, height, format, dataSpace, rotation,\n            consumerUsage, isShared, physicalCameraId.c_str(), isMultiResolution,\n            dynamicRangeProfile, streamUseCase, timestampBase, mirrorMode);",
+        "base_contents": "            \" mirrorMode %d\",\n            mId.string(), mNextStreamId, width, height, format, dataSpace, rotation,\n            consumerUsage, isShared, physicalCameraId.string(), isMultiResolution,\n            dynamicRangeProfile, streamUseCase, timestampBase, mirrorMode);",
+        "res_region": "            \" mirrorMode %d, colorSpace %d, useReadoutTimestamp %d\",\n            mId.c_str(), mNextStreamId, width, height, format, dataSpace, rotation,\n            consumerUsage, isShared, physicalCameraId.c_str(), isMultiResolution,\n            dynamicRangeProfile, streamUseCase, timestampBase, mirrorMode, colorSpace,\n            useReadoutTimestamp);",
+        "lookback": "            mId.c_str(), mNextStreamId, width, height, format, dataSpace, rotation,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1087,
+        "end_line": 1103,
+        "merge_gen_region": null,
+        "confidence": 0.8152371644973755,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n        bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "b_contents": "        bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n        bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto,",
+        "base_contents": "        bool isFixedFps, const std::set<std::set<String8>>& physicalCameraIds,\n        bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto,",
+        "res_region": "        bool isFixedFps, const std::set<std::set<std::string>>& physicalCameraIds,\n        bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "lookback": "        bool isStillCapture, bool isZslCapture, bool rotateAndCropAuto, bool autoframingAuto,",
+        "lookahead": "        const std::set<std::string>& cameraIdsWithZoom,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2853,
+        "end_line": 2862,
+        "merge_gen_region": null,
+        "confidence": 0.7396620512008667,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool Camera3Device::supportsZoomOverride() {\n    Mutex::Autolock il(mInterfaceLock);\n    Mutex::Autolock l(mLock);\n\n    return mSupportZoomOverride;\n}\n\nstatus_t Camera3Device::setZoomOverride(int32_t zoomOverride) {\n    ATRACE_CALL();\n    Mutex::Autolock il(mInterfaceLock);\n    Mutex::Autolock l(mLock);\n\n    if (mRequestThread == nullptr || !mSupportZoomOverride) {\n        return INVALID_OPERATION;\n    }\n\n    return mRequestThread->setZoomOverride(zoomOverride);\n}\n\nstatus_t Camera3Device::injectCamera(const std::string& injectedCamId,",
+        "b_contents": "status_t Camera3Device::injectCamera(const std::string& injectedCamId,",
+        "base_contents": "status_t Camera3Device::injectCamera(const String8& injectedCamId,",
+        "res_region": "bool Camera3Device::supportsZoomOverride() {\n    Mutex::Autolock il(mInterfaceLock);\n    Mutex::Autolock l(mLock);\n\n    return mSupportZoomOverride;\n}\n\nstatus_t Camera3Device::setZoomOverride(int32_t zoomOverride) {\n    ATRACE_CALL();\n    Mutex::Autolock il(mInterfaceLock);\n    Mutex::Autolock l(mLock);\n\n    if (mRequestThread == nullptr || !mSupportZoomOverride) {\n        return INVALID_OPERATION;\n    }\n\n    return mRequestThread->setZoomOverride(zoomOverride);\n}\n\nstatus_t Camera3Device::injectCamera(const std::string& injectedCamId,",
+        "lookback": "    Mutex::Autolock il(mInterfaceLock);",
+        "lookahead": "                                     sp<CameraProviderManager> manager) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5485,
+        "end_line": 5510,
+        "merge_gen_region": null,
+        "confidence": 0.832916259765625,
+        "hesitated": true
+    }
+]

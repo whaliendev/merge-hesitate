@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <Core/Joins.h>",
+        "b_contents": "#include <Interpreters/ActionsDAG.h>",
+        "base_contents": "#include <Interpreters/ActionsDAG.h>\n#include <Interpreters/ExpressionActions.h>\n#include <Core/Joins.h>",
+        "res_region": "#include <Core/Joins.h>\n#include <Interpreters/ActionsDAG.h>",
+        "lookback": "#include <Interpreters/ActionsDAG.h>",
+        "lookahead": "",
+        "label": [
+            "concat",
+            "complex_conflict"
+        ],
+        "start_line": 5,
+        "end_line": 13,
+        "merge_gen_region": null,
+        "confidence": 0.6373821496963501,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "Status BinderUpdateEngineAndroidService::verifyPayloadApplicable(\n    const android::String16& metadata_filename, bool* return_value) {\n  const std::string payload_metadata{\n      android::String8{metadata_filename}.string()};\n  LOG(INFO) << \"Received a request of verifying payload metadata in \"\n            << payload_metadata << \".\";\n  brillo::ErrorPtr error;\n  *return_value =\n      service_delegate_->VerifyPayloadApplicable(payload_metadata, &error);\n  if (error != nullptr)\n    return ErrorPtrToStatus(error);\n  return Status::ok();\n}\n",
+        "b_contents": "Status BinderUpdateEngineAndroidService::verifyPayloadApplicable(\n    const android::String16& metadata_filename, bool* return_value) {\n  const std::string payload_metadata{\n      android::String8{metadata_filename}.string()};\n  LOG(INFO) << \"Received a request of verifying payload metadata in \"\n            << payload_metadata << \".\";\n\n  // FIXME: Do the actual verification work.\n  *return_value = true;\n  return Status::ok();\n}\n",
+        "base_contents": "",
+        "res_region": "Status BinderUpdateEngineAndroidService::verifyPayloadApplicable(\n    const android::String16& metadata_filename, bool* return_value) {\n  const std::string payload_metadata{\n      android::String8{metadata_filename}.string()};\n  LOG(INFO) << \"Received a request of verifying payload metadata in \"\n            << payload_metadata << \".\";\n  brillo::ErrorPtr error;\n  *return_value =\n      service_delegate_->VerifyPayloadApplicable(payload_metadata, &error);\n  if (error != nullptr)\n    return ErrorPtrToStatus(error);\n  return Status::ok();\n}\n",
+        "lookback": "    const android::String16& metadata_filename, bool* return_value) {",
+        "lookahead": "bool BinderUpdateEngineAndroidService::UnbindCallback(const IBinder* callback) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 141,
+        "end_line": 170,
+        "merge_gen_region": " BindUpdateAndroidServiceverifyApable const::16&_,**_)",
+        "confidence": 0.9254547953605652,
+        "hesitated": false,
+        "resolved": false
+    }
+]

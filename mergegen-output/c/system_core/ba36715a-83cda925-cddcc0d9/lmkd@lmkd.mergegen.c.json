@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);\n    pid_remove(pid);",
+        "b_contents": "    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);",
+        "base_contents": "    ALOGI(\n        \"Killing '%s' (%d), uid %d, adj %d\\n\"\n        \"   to free %ldkB because system is under %s memory pressure oom_adj %d\\n\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k,\n        level_name[level], min_score_adj);\n    pid_remove(pid);",
+        "res_region": "    ALOGI(\"Kill '%s' (%d), uid %d, oom_adj %d to free %ldkB\",\n        taskname, pid, uid, procp->oomadj, tasksize * page_k);",
+        "lookback": "        taskname, pid, uid, procp->oomadj, tasksize * page_k);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1071,
+        "end_line": 1085,
+        "merge_gen_region": null,
+        "confidence": 0.6802246570587158,
+        "hesitated": true
+    }
+]

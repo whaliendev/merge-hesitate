@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            audio_output_flags_t flags) REQUIRES(mutex()) = 0;\n    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "b_contents": "            audio_output_flags_t flags) = 0;\n    virtual audio_utils::mutex& mutex() const = 0;",
+        "base_contents": "            audio_output_flags_t flags) = 0;\n    virtual void lock() const = 0;\n    virtual void unlock() const = 0;",
+        "res_region": "            audio_output_flags_t flags) REQUIRES(mutex()) = 0;\n    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "lookback": "    virtual audio_utils::mutex& mutex() const",
+        "lookahead": "    virtual const DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*>&",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 84,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.8573473691940308,
+        "hesitated": true
+    }
+]

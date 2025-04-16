@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tint hash_algo;\n\tconst char *template_dir;\n\tchar *template_dir_dup = NULL;",
+        "b_contents": "",
+        "base_contents": "\tconst char *template_dir;\n\tchar *template_dir_dup = NULL;",
+        "res_region": "\tint hash_algo;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 960,
+        "end_line": 968,
+        "merge_gen_region": null,
+        "confidence": 0.510816752910614,
+        "hesitated": true
+    }
+]

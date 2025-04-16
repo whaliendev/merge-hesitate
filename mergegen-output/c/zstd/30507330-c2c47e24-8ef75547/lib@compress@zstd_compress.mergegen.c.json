@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if ((U32)(cParams.strategy) > (U32)ZSTD_btultra) cParams.strategy = ZSTD_btultra;",
+        "b_contents": "    if ((U32)(cParams.targetLength) < ZSTD_TARGETLENGTH_MIN)\n        cParams.targetLength = ZSTD_TARGETLENGTH_MIN;\n    CLAMP(cParams.strategy, ZSTD_fast, ZSTD_btultra);",
+        "base_contents": "    if ((U32)(cParams.targetLength) < ZSTD_TARGETLENGTH_MIN) cParams.targetLength = ZSTD_TARGETLENGTH_MIN;\n    if ((U32)(cParams.strategy) > (U32)ZSTD_btultra) cParams.strategy = ZSTD_btultra;",
+        "res_region": "    CLAMP(cParams.strategy, ZSTD_fast, ZSTD_btultra);",
+        "lookback": "    return cParams;",
+        "lookahead": "    return cParams;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 711,
+        "end_line": 720,
+        "merge_gen_region": null,
+        "confidence": 0.5374904274940491,
+        "hesitated": true
+    }
+]

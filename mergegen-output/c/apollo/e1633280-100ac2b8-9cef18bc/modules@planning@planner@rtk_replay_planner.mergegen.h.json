@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/planning/planner/planner.h\"\n",
+        "base_contents": "#include \"planner.h\"\n",
+        "res_region": "#include \"modules/planning/planner/planner.h\"\n",
+        "lookback": "",
+        "lookahead": "#include <string>",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 19,
+        "end_line": 26,
+        "merge_gen_region": null,
+        "confidence": 0.7741804718971252,
+        "hesitated": true
+    }
+]

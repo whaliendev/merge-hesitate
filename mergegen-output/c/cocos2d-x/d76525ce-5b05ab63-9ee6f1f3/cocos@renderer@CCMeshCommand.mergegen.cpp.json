@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    ",
+        "b_contents": "\n    \n    _glProgramState->apply(_mv);\n    ",
+        "base_contents": "",
+        "res_region": "    \n    if (_matrixPaletteSize && _matrixPalette)\n    {\n        _glProgramState->setUniformCallback(\"u_matrixPalette\", CC_CALLBACK_2(MeshCommand::MatrixPalleteCallBack, this));\n        \n    }\n    \n    _glProgramState->apply(_mv);\n    ",
+        "lookback": "    if (_matrixPaletteSize && _matrixPalette)",
+        "lookahead": "    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);",
+        "label": [
+            "newcode",
+            "style_related"
+        ],
+        "start_line": 156,
+        "end_line": 164,
+        "merge_gen_region": null,
+        "confidence": 0.6276260614395142,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _glProgramState->setUniformCallback(\"u_matrixPalette\", CC_CALLBACK_2(MeshCommand::MatrixPalleteCallBack, this));\n        ",
+        "b_contents": "        auto glProgram = _glProgramState->getGLProgram();\n        \n        auto uniform = glProgram->getUniform(\"u_matrixPalette\");\n        if (uniform)\n        {\n            glProgram->setUniformLocationWith4fv(uniform->location, (const float*)_matrixPalette, _matrixPaletteSize);\n        }",
+        "base_contents": "        auto glProgram = _glProgramState->getGLProgram();\n\n        auto uniform = glProgram->getUniform(\"u_matrixPalette\");\n        if (uniform)\n        {\n            glProgram->setUniformLocationWith4fv(uniform->location, (const float*)_matrixPalette, _matrixPaletteSize);\n        }",
+        "res_region": "",
+        "lookback": "    ",
+        "lookahead": "    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);",
+        "label": [
+            "deletion",
+            "base_underutilized"
+        ],
+        "start_line": 167,
+        "end_line": 186,
+        "merge_gen_region": null,
+        "confidence": 0.6927100419998169,
+        "hesitated": true
+    }
+]

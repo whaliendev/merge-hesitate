@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  bool PluginCallbackHMI(const std::string& function_name,\n                         const nlohmann::json& param_json);\n  nlohmann::json HMICallbackSimControl(const std::string& function_name,\n                                       const nlohmann::json& param_json);\n  bool PerceptionCameraCallback(const std::string& param_string);\n  bool PointCloudCallback(const std::string& param_string);",
+        "b_contents": "  bool PluginCallbackHMI(const std::string& function_name, const nlohmann::json &param_json);\n  nlohmann::json HMICallbackSimControl(const std::string& function_name,\n                             const nlohmann::json& param_json);\n",
+        "base_contents": "",
+        "res_region": "  bool PluginCallbackHMI(const std::string& function_name,\n                         const nlohmann::json& param_json);\n  nlohmann::json HMICallbackSimControl(const std::string& function_name,\n                                       const nlohmann::json& param_json);\n  bool PerceptionCameraCallback(const std::string& param_string);\n  bool PointCloudCallback(const std::string& param_string);",
+        "lookback": "                         const nlohmann::json& param_json);",
+        "lookahead": "  std::unique_ptr<cyber::Timer> exit_timer_;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 57,
+        "end_line": 71,
+        "merge_gen_region": " PluginHoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9382398128509521,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    case LV_TABVIEW_BTNS_POS_TOP:\n    case LV_TABVIEW_BTNS_POS_BOTTOM:\n        indic_size = lv_obj_get_width(ext->indic);\n        indic_pos  = indic_size * id + tabs_style->body.padding.inner * id + tabs_style->body.padding.left;\n        break;\n    case LV_TABVIEW_BTNS_POS_LEFT:\n    case LV_TABVIEW_BTNS_POS_RIGHT:\n        indic_size = lv_obj_get_height(ext->indic);\n        indic_pos  = tabs_style->body.padding.top + id * (indic_size + tabs_style->body.padding.inner);\n        break;",
+        "b_contents": "        case LV_TABVIEW_BTNS_POS_TOP:\n        case LV_TABVIEW_BTNS_POS_BOTTOM:\n            indic_size = lv_obj_get_width(ext->indic);\n            indic_pos  = indic_size * id + tabs_style->body.padding.inner * id + tabs_style->body.padding.left;\n            break;\n        case LV_TABVIEW_BTNS_POS_LEFT:\n        case LV_TABVIEW_BTNS_POS_RIGHT:\n            indic_size = lv_obj_get_height(ext->indic);\n            const lv_style_t * style_tabs = lv_tabview_get_style(tabview, LV_TABVIEW_STYLE_BTN_BG);\n            lv_coord_t max_h = lv_obj_get_height(ext->btns) - style_tabs->body.padding.top - style_tabs->body.padding.bottom;\n\n            if(ext->tab_cnt) indic_pos = (max_h * ext->tab_cur) / ext->tab_cnt;\n            else  indic_pos = 0;\n            break;",
+        "base_contents": "        case LV_TABVIEW_BTNS_POS_TOP:\n        case LV_TABVIEW_BTNS_POS_BOTTOM:\n            indic_size = lv_obj_get_width(ext->indic);\n            indic_pos  = indic_size * id + tabs_style->body.padding.inner * id + tabs_style->body.padding.left;\n            break;\n        case LV_TABVIEW_BTNS_POS_LEFT:\n        case LV_TABVIEW_BTNS_POS_RIGHT:\n            indic_size = lv_obj_get_height(ext->indic);\n            indic_pos  = tabs_style->body.padding.top + id * (indic_size + tabs_style->body.padding.inner);\n            break;",
+        "res_region": "    case LV_TABVIEW_BTNS_POS_TOP:\n    case LV_TABVIEW_BTNS_POS_BOTTOM:\n        indic_size = lv_obj_get_width(ext->indic);\n        indic_pos  = indic_size * id + tabs_style->body.padding.inner * id + tabs_style->body.padding.left;\n        break;\n    case LV_TABVIEW_BTNS_POS_LEFT:\n    case LV_TABVIEW_BTNS_POS_RIGHT:\n        indic_size = lv_obj_get_height(ext->indic);\n        indic_pos  = tabs_style->body.padding.top + id * (indic_size + tabs_style->body.padding.inner);\n        break;",
+        "lookback": "    case LV_TABVIEW_BTNS_POS_BOTTOM:",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 367,
+        "end_line": 404,
+        "merge_gen_region": null,
+        "confidence": 0.8296045064926147,
+        "hesitated": true
+    }
+]

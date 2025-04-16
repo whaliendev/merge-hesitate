@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "TEST(record_cmd, no_monitored_threads) {\n  TEST_REQUIRE_HW_COUNTER();\n  ScopedAppPackageName scoped_package_name(\"\");\n  TemporaryFile tmpfile;\n  ASSERT_FALSE(RecordCmd()->Run({\"-o\", tmpfile.path}));\n  ASSERT_FALSE(RecordCmd()->Run({\"-o\", tmpfile.path, \"\"}));\n}",
+        "b_contents": "TEST(record_cmd, no_monitored_threads) {\n  TemporaryFile tmpfile;\n  ASSERT_FALSE(RecordCmd()->Run({\"-o\", tmpfile.path}));\n}",
+        "base_contents": "TEST(record_cmd, no_monitored_threads) { ASSERT_FALSE(RecordCmd()->Run({\"\"})); }",
+        "res_region": "TEST(record_cmd, no_monitored_threads) {\n  TEST_REQUIRE_HW_COUNTER();\n  ScopedAppPackageName scoped_package_name(\"\");\n  TemporaryFile tmpfile;\n  ASSERT_FALSE(RecordCmd()->Run({\"-o\", tmpfile.path}));\n  ASSERT_FALSE(RecordCmd()->Run({\"-o\", tmpfile.path, \"\"}));\n}",
+        "lookback": "  TEST_REQUIRE_HW_COUNTER();",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 336,
+        "end_line": 351,
+        "merge_gen_region": null,
+        "confidence": 0.8477969765663147,
+        "hesitated": true
+    }
+]

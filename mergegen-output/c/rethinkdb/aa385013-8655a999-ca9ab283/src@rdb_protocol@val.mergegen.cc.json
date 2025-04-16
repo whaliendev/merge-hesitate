@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                                        table_name.c_str()), this);\n    uuid = id;",
+        "b_contents": "                                        display_name().c_str()), this);",
+        "base_contents": "                                        table_name.c_str()), this);",
+        "res_region": "                                        display_name().c_str()), this);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 36,
+        "end_line": 43,
+        "merge_gen_region": null,
+        "confidence": 0.5459408164024353,
+        "hesitated": true
+    }
+]

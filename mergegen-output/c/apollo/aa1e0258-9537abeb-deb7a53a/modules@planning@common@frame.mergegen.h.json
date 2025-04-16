@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning_config.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/pad_msg.pb.h\"\n#include \"modules/planning/proto/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/planning/proto/planning_internal.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/planning_msgs/pad_msg.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n#include \"modules/planning/proto/planning_config.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"",
+        "lookback": "#include \"modules/common_msgs/planning_msgs/planning.pb.h\"",
+        "lookahead": "#include \"modules/planning/reference_line/reference_line_provider.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 43,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.8718694448471069,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    bool getAllPropConfigsFromHardwareLocked() const EXCLUDES(mConfigLock);",
+        "b_contents": "    bool isConfigSupportedForCurrentVhalVersion(const aidlvhal::VehiclePropConfig& config) const;\n\n    bool getAllPropConfigsFromHardwareLocked() const EXCLUDES(mConfigLock);",
+        "base_contents": "    bool getAllPropConfigsFromHardwareLocked() const REQUIRES(mConfigInitLock);",
+        "res_region": "    bool isConfigSupportedForCurrentVhalVersion(const aidlvhal::VehiclePropConfig& config) const;\n\n    bool getAllPropConfigsFromHardwareLocked() const EXCLUDES(mConfigLock);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 201,
+        "end_line": 209,
+        "merge_gen_region": " isSupported( aidhal::Prop&) const",
+        "confidence": 0.8837469220161438,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        auto frameRateModes = createFrameRateModes(*policy, filterModes, ranges.render);\n        if (frameRateModes.empty()) {\n            ALOGW(\"No matching frame rate modes for %s range. policy: %s\", rangeName,\n                  policy->toString().c_str());\n            // TODO(b/292105422): Ideally DisplayManager should not send render ranges smaller than\n            // the min supported. See b/292047939.\n            //  For not we just ignore the render ranges.\n            frameRateModes = createFrameRateModes(*policy, filterModes, {});\n        }",
+        "b_contents": "        auto frameRateModes = createFrameRateModes(filterModes, ranges.render);\n        if (frameRateModes.empty()) {\n            ALOGW(\"No matching frame rate modes for %s range. policy: %s\", rangeName,\n                  policy->toString().c_str());\n            // TODO(b/292105422): Ideally DisplayManager should not send render ranges smaller than\n            // the min supported. See b/292047939.\n            //  For not we just ignore the render ranges.\n            frameRateModes = createFrameRateModes(filterModes, {});\n        }",
+        "base_contents": "        const auto frameRateModes = createFrameRateModes(filterModes, ranges.render);",
+        "res_region": "        auto frameRateModes = createFrameRateModes(*policy, filterModes, ranges.render);\n        if (frameRateModes.empty()) {\n            ALOGW(\"No matching frame rate modes for %s range. policy: %s\", rangeName,\n                  policy->toString().c_str());\n            // TODO(b/292105422): Ideally DisplayManager should not send render ranges smaller than\n            // the min supported. See b/292047939.\n            //  For not we just ignore the render ranges.\n            frameRateModes = createFrameRateModes(*policy, filterModes, {});\n        }",
+        "lookback": "        if (frameRateModes.empty()) {",
+        "lookahead": "        LOG_ALWAYS_FATAL_IF(frameRateModes.empty(),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1251,
+        "end_line": 1273,
+        "merge_gen_region": " (Rate =FrameRateModespolicy filter,.());ifframeModesempty",
+        "confidence": 0.9213644862174988,
+        "hesitated": false,
+        "resolved": false
+    }
+]

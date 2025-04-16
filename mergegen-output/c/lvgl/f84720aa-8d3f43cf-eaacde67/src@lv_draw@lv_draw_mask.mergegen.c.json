@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                    if(k >= 0 && k < len) lv_memset_00(&mask_buf[k], len - k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "b_contents": "                    if(k >= 0 && k < len) _lv_memset_00(&mask_buf[k], len - k);\n                    return LV_DRAW_MASK_RES_CHANGED;",
+        "base_contents": "                    if(k >= 0 && k < len) _lv_memset_00(&mask_buf[k], len - k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "res_region": "                    if(k >= 0 && k < len) lv_memset_00(&mask_buf[k], len - k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "lookback": "                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 452,
+        "end_line": 461,
+        "merge_gen_region": null,
+        "confidence": 0.8338114023208618,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    else if(k >= 0 && k < len) lv_memset_00(&mask_buf[0], k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "b_contents": "                    else if(k >= 0 && k < len) _lv_memset_00(&mask_buf[0], k);\n                    return LV_DRAW_MASK_RES_CHANGED;",
+        "base_contents": "                    else if(k >= 0 && k < len) _lv_memset_00(&mask_buf[0], k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "res_region": "                    else if(k >= 0 && k < len) lv_memset_00(&mask_buf[0], k);\n                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "lookback": "                    return  LV_DRAW_MASK_RES_CHANGED;",
+        "lookahead": "                }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 470,
+        "end_line": 479,
+        "merge_gen_region": null,
+        "confidence": 0.8304705619812012,
+        "hesitated": true
+    }
+]

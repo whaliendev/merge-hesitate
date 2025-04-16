@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    bool is_flush_pending = false;\n    // no need to refcount since we're under a mutex\n    for (auto cfd : *versions_->GetColumnFamilySet()) {\n      if (cfd->imm()->IsFlushPending()) {\n        is_flush_pending = true;\n      }\n    }\n    if (is_flush_pending) {\n      // memtable flush needed\n      // max_background_compactions should not be 0, because that means\n      // flush will never get executed\n      assert(options_.max_background_flushes != 0);\n      if (bg_flush_scheduled_ < options_.max_background_flushes) {\n        bg_flush_scheduled_++;\n        env_->Schedule(&DBImpl::BGWorkFlush, this, Env::Priority::HIGH);\n      }\n    }\n    bool is_compaction_needed = false;\n    // no need to refcount since we're under a mutex\n    for (auto cfd : *versions_->GetColumnFamilySet()) {\n      if (cfd->current()->NeedsCompaction()) {\n        is_compaction_needed = true;\n        break;\n      }",
+        "b_contents": "    bool is_flush_pending = imm_.IsFlushPending();\n    if (is_flush_pending) {\n      if (bg_flush_scheduled_ < options_.max_background_flushes) {\n        // memtable flush needed\n        bg_flush_scheduled_++;\n        env_->Schedule(&DBImpl::BGWorkFlush, this, Env::Priority::HIGH);\n      } else {\n        bg_schedule_needed_ = true;\n      }",
+        "base_contents": "    bool is_flush_pending = imm_.IsFlushPending();\n    if (is_flush_pending &&\n        (bg_flush_scheduled_ < options_.max_background_flushes)) {\n      // memtable flush needed\n      bg_flush_scheduled_++;\n      env_->Schedule(&DBImpl::BGWorkFlush, this, Env::Priority::HIGH);",
+        "res_region": "    bool is_flush_pending = false;\n    // no need to refcount since we're under a mutex\n    for (auto cfd : *versions_->GetColumnFamilySet()) {\n      if (cfd->imm()->IsFlushPending()) {\n        is_flush_pending = true;\n      }\n    }\n    if (is_flush_pending) {\n      // memtable flush needed\n      // max_background_compactions should not be 0, because that means\n      // flush will never get executed\n      assert(options_.max_background_flushes != 0);\n      if (bg_flush_scheduled_ < options_.max_background_flushes) {\n        bg_flush_scheduled_++;\n        env_->Schedule(&DBImpl::BGWorkFlush, this, Env::Priority::HIGH);\n      } else {\n        bg_schedule_needed_ = true;\n      }\n    }\n    bool is_compaction_needed = false;\n    // no need to refcount since we're under a mutex\n    for (auto cfd : *versions_->GetColumnFamilySet()) {\n      if (cfd->current()->NeedsCompaction()) {\n        is_compaction_needed = true;\n        break;\n      }",
+        "lookback": "    // no need to refcount since we're under a mutex",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1741,
+        "end_line": 1783,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8952256441116333,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if ((manual_compaction_ || is_compaction_needed) &&\n        bg_compaction_scheduled_ < options_.max_background_compactions &&",
+        "b_contents": "    if ((manual_compaction_ ||\n         versions_->current()->NeedsCompaction() ||\n         (is_flush_pending && (options_.max_background_flushes <= 0))) &&",
+        "base_contents": "    if ((manual_compaction_ ||\n         versions_->current()->NeedsCompaction() ||\n         (is_flush_pending && (options_.max_background_flushes <= 0))) &&\n        bg_compaction_scheduled_ < options_.max_background_compactions &&",
+        "res_region": "    if ((manual_compaction_ || is_compaction_needed) &&",
+        "lookback": "        (!bg_manual_only_ || manual_compaction_)) {",
+        "lookahead": "        (!bg_manual_only_ || manual_compaction_)) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1789,
+        "end_line": 1801,
+        "merge_gen_region": null,
+        "confidence": 0.6895012855529785,
+        "hesitated": true
+    }
+]

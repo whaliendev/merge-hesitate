@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/sensor_msgs/pointcloud.pb.h\"\n#include \"modules/common_msgs/localization_msgs/localization.pb.h\"\n",
+        "base_contents": "#include \"modules/drivers/proto/pointcloud.pb.h\"\n#include \"modules/localization/proto/localization.pb.h\"\n",
+        "res_region": "",
+        "lookback": " * @namespace apollo::dreamview",
+        "lookahead": "/**",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 40,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.7161518931388855,
+        "hesitated": true
+    }
+]

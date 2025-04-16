@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "  return (struct envoy_api_v2_core_HeaderValueOption**)_upb_array_resize_accessor(msg, UPB_SIZE(44, 80), len, UPB_TYPE_MESSAGE, arena);",
+        "b_contents": "  return (struct envoy_api_v2_core_HeaderValueOption**)_upb_array_resize_accessor(msg, UPB_SIZE(48, 88), len, UPB_SIZE(4, 8), UPB_TYPE_MESSAGE, arena);",
+        "base_contents": "  return (struct envoy_api_v2_core_HeaderValueOption**)_upb_array_resize_accessor(msg, UPB_SIZE(44, 80), len, UPB_SIZE(4, 8), UPB_TYPE_MESSAGE, arena);",
+        "res_region": "  return (struct envoy_api_v2_core_HeaderValueOption**)_upb_array_resize_accessor(msg, UPB_SIZE(48, 88), len, UPB_TYPE_MESSAGE, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 430,
+        "end_line": 436,
+        "merge_gen_region": null,
+        "confidence": 0.7451000213623047,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(48, 88), len, UPB_TYPE_STRING, arena);",
+        "b_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(52, 96), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "base_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(48, 88), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "res_region": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(52, 96), len, UPB_TYPE_STRING, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 452,
+        "end_line": 458,
+        "merge_gen_region": null,
+        "confidence": 0.6584165096282959,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return _upb_array_append_accessor(msg, UPB_SIZE(48, 88), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "b_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(52, 96), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "base_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(48, 88), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "res_region": "  return _upb_array_append_accessor(msg, UPB_SIZE(52, 96), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "lookback": "      arena);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 461,
+        "end_line": 470,
+        "merge_gen_region": null,
+        "confidence": 0.8159081339836121,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return (struct envoy_type_Int64Range**)_upb_array_resize_accessor(msg, UPB_SIZE(52, 96), len, UPB_TYPE_MESSAGE, arena);",
+        "b_contents": "  return (struct envoy_type_Int64Range**)_upb_array_resize_accessor(msg, UPB_SIZE(56, 104), len, UPB_SIZE(4, 8), UPB_TYPE_MESSAGE, arena);",
+        "base_contents": "  return (struct envoy_type_Int64Range**)_upb_array_resize_accessor(msg, UPB_SIZE(52, 96), len, UPB_SIZE(4, 8), UPB_TYPE_MESSAGE, arena);",
+        "res_region": "  return (struct envoy_type_Int64Range**)_upb_array_resize_accessor(msg, UPB_SIZE(56, 104), len, UPB_TYPE_MESSAGE, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 476,
+        "end_line": 482,
+        "merge_gen_region": null,
+        "confidence": 0.6158307790756226,
+        "hesitated": true
+    }
+]

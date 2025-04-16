@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  bool result = false;\n  // Fast path when the runtime boot classpath cheksums and boot classpath\n  // locations directly match.\n  if (oat_boot_class_path_checksums_view == runtime->GetBootClassPathChecksums() &&\n      isa_ == kRuntimeISA &&\n      oat_boot_class_path_view == android::base::Join(runtime->GetBootClassPathLocations(), \":\")) {\n    result = true;\n  } else {\n    result = gc::space::ImageSpace::VerifyBootClassPathChecksums(\n        oat_boot_class_path_checksums_view,\n        oat_boot_class_path_view,\n        ArrayRef<const std::string>(runtime->GetImageLocations()),\n        ArrayRef<const std::string>(runtime->GetBootClassPathLocations()),\n        ArrayRef<const std::string>(runtime->GetBootClassPath()),\n        ArrayRef<const int>(runtime->GetBootClassPathFds()),\n        isa_,\n        &error_msg);\n  }",
+        "b_contents": "  bool result = false;\n  // Fast path when the runtime boot classpath cheksums and boot classpath\n  // locations directly match.\n  if (oat_boot_class_path_checksums_view == runtime->GetBootClassPathChecksums() &&\n      isa_ == kRuntimeISA &&\n      oat_boot_class_path_view == android::base::Join(runtime->GetBootClassPathLocations(), \":\")) {\n    result = true;\n  } else {\n    result = gc::space::ImageSpace::VerifyBootClassPathChecksums(\n        oat_boot_class_path_checksums_view,\n        oat_boot_class_path_view,\n        runtime->GetImageLocation(),\n        ArrayRef<const std::string>(runtime->GetBootClassPathLocations()),\n        ArrayRef<const std::string>(runtime->GetBootClassPath()),\n        isa_,\n        &error_msg);\n  }",
+        "base_contents": "  bool result = gc::space::ImageSpace::VerifyBootClassPathChecksums(\n      oat_boot_class_path_checksums_view,\n      oat_boot_class_path_view,\n      runtime->GetImageLocation(),\n      ArrayRef<const std::string>(runtime->GetBootClassPathLocations()),\n      ArrayRef<const std::string>(runtime->GetBootClassPath()),\n      isa_,\n      &error_msg);",
+        "res_region": "  bool result = false;\n  // Fast path when the runtime boot classpath cheksums and boot classpath\n  // locations directly match.\n  if (oat_boot_class_path_checksums_view == runtime->GetBootClassPathChecksums() &&\n      isa_ == kRuntimeISA &&\n      oat_boot_class_path_view == android::base::Join(runtime->GetBootClassPathLocations(), \":\")) {\n    result = true;\n  } else {\n    result = gc::space::ImageSpace::VerifyBootClassPathChecksums(\n        oat_boot_class_path_checksums_view,\n        oat_boot_class_path_view,\n        ArrayRef<const std::string>(runtime->GetImageLocations()),\n        ArrayRef<const std::string>(runtime->GetBootClassPathLocations()),\n        ArrayRef<const std::string>(runtime->GetBootClassPath()),\n        ArrayRef<const int>(runtime->GetBootClassPathFds()),\n        isa_,\n        &error_msg);\n  }",
+        "lookback": "  // Fast path when the runtime boot classpath cheksums and boot classpath",
+        "lookahead": "  if (!result) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 648,
+        "end_line": 694,
+        "merge_gen_region": " Fast when runtime class chesum and bootpath result false // path the bootpathks bootpath locations match ifoatbootclasspathchecksum_ ==->BootPaths() isa ==Runtime &&atbootclasspath_ ==::::::(GetClassLocations \": { =; else result gcspaceImage::outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9165139198303223,
+        "hesitated": false,
+        "resolved": false
+    }
+]

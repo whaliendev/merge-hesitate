@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(20, 40), len, UPB_TYPE_STRING, arena);",
+        "b_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(28, 48), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "base_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(20, 40), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "res_region": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(28, 48), len, UPB_TYPE_STRING, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 355,
+        "end_line": 361,
+        "merge_gen_region": null,
+        "confidence": 0.671383798122406,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return _upb_array_append_accessor(msg, UPB_SIZE(20, 40), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "b_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(28, 48), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "base_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(20, 40), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "res_region": "  return _upb_array_append_accessor(msg, UPB_SIZE(28, 48), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "lookback": "      arena);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 364,
+        "end_line": 373,
+        "merge_gen_region": null,
+        "confidence": 0.8058562874794006,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(24, 48), len, UPB_TYPE_STRING, arena);",
+        "b_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(32, 56), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "base_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(24, 48), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "res_region": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(32, 56), len, UPB_TYPE_STRING, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 379,
+        "end_line": 385,
+        "merge_gen_region": null,
+        "confidence": 0.71120685338974,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return _upb_array_append_accessor(msg, UPB_SIZE(24, 48), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "b_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(32, 56), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "base_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(24, 48), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "res_region": "  return _upb_array_append_accessor(msg, UPB_SIZE(32, 56), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "lookback": "      arena);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 388,
+        "end_line": 397,
+        "merge_gen_region": null,
+        "confidence": 0.8177093863487244,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(28, 56), len, UPB_TYPE_STRING, arena);",
+        "b_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(36, 64), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "base_contents": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(28, 56), len, UPB_SIZE(8, 16), UPB_TYPE_STRING, arena);",
+        "res_region": "  return (upb_strview*)_upb_array_resize_accessor(msg, UPB_SIZE(36, 64), len, UPB_TYPE_STRING, arena);",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 403,
+        "end_line": 409,
+        "merge_gen_region": null,
+        "confidence": 0.7038182020187378,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return _upb_array_append_accessor(msg, UPB_SIZE(28, 56), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "b_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(36, 64), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "base_contents": "  return _upb_array_append_accessor(\n      msg, UPB_SIZE(28, 56), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val, arena);",
+        "res_region": "  return _upb_array_append_accessor(msg, UPB_SIZE(36, 64), UPB_SIZE(8, 16), UPB_TYPE_STRING, &val,\n      arena);",
+        "lookback": "      arena);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 412,
+        "end_line": 421,
+        "merge_gen_region": null,
+        "confidence": 0.8216065764427185,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n",
+        "b_contents": "    Mutex::Autolock _l(mLock);\n",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n\n    /* TODO: move all this work into an Init() function */\n    char val_str[PROPERTY_VALUE_MAX] = { 0 };\n    if (property_get(\"ro.audio.flinger_standbytime_ms\", val_str, NULL) >= 0) {\n        uint32_t int_val;\n        if (1 == sscanf(val_str, \"%u\", &int_val)) {\n            mStandbyTimeInNsecs = milliseconds(int_val);\n            ALOGI(\"Using %u mSec as standby time.\", int_val);\n        } else {\n            mStandbyTimeInNsecs = kDefaultStandbyTimeInNsecs;\n            ALOGI(\"Using default %u mSec as standby time.\",\n                    (uint32_t)(mStandbyTimeInNsecs / 1000000));\n        }\n    }\n",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n",
+        "lookback": "",
+        "lookahead": "    mMode = AUDIO_MODE_NORMAL;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 282,
+        "end_line": 305,
+        "merge_gen_region": null,
+        "confidence": 0.811863362789154,
+        "hesitated": true
+    }
+]

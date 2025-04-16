@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "const char* grpc_version_string(void) { return \"6.0.0-dev\"; }",
+        "b_contents": "const char* grpc_version_string(void) { return \"6.0.0\"; }",
+        "base_contents": "const char* grpc_version_string(void) { return \"6.0.0-pre2\"; }",
+        "res_region": "const char* grpc_version_string(void) { return \"6.0.0-dev\"; }",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 31,
+        "merge_gen_region": " database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database databasePARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAMPARAM database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database database",
+        "confidence": 0.9188918471336365,
+        "hesitated": false,
+        "resolved": false
+    }
+]

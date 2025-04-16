@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "static grpc_error* enable_loopback_fast_path(SOCKET sock) {\n  int status;\n  uint32_t param = 1;\n  DWORD ret;\n  status = WSAIoctl(sock, /*SIO_LOOPBACK_FAST_PATH==*/_WSAIOW(IOC_VENDOR, 16),\n                    &param, sizeof(param), NULL, 0, &ret, 0, 0);\n  if (status == SOCKET_ERROR) {\n    status = WSAGetLastError();\n  }\n  return status == 0 || status == WSAEOPNOTSUPP\n             ? GRPC_ERROR_NONE\n             : GRPC_WSA_ERROR(status, \"WSAIoctl(SIO_LOOPBACK_FAST_PATH)\");\n}\n\nstatic grpc_error* enable_socket_low_latency(SOCKET sock) {\n  int status;\n  BOOL param = TRUE;\n  status = ::setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,\n                        reinterpret_cast<char*>(&param), sizeof(param));\n  if (status == SOCKET_ERROR) {\n    status = WSAGetLastError();\n  }\n  return status == 0 ? GRPC_ERROR_NONE\n                     : GRPC_WSA_ERROR(status, \"setsockopt(TCP_NODELAY)\");\n}\n",
+        "b_contents": "",
+        "base_contents": "static grpc_error* enable_loopback_fast_path(SOCKET sock) {\n  int status;\n  uint32_t param = 1;\n  DWORD ret;\n  status = WSAIoctl(sock, /*SIO_LOOPBACK_FAST_PATH==*/_WSAIOW(IOC_VENDOR, 16),\n                    &param, sizeof(param), NULL, 0, &ret, 0, 0);\n  if (status == SOCKET_ERROR) {\n    status = WSAGetLastError();\n  }\n  return status == 0 || status == WSAEOPNOTSUPP\n             ? GRPC_ERROR_NONE\n             : GRPC_WSA_ERROR(status, \"WSAIoctl(SIO_LOOPBACK_FAST_PATH)\");\n}\n",
+        "res_region": "static grpc_error* enable_socket_low_latency(SOCKET sock) {\n  int status;\n  BOOL param = TRUE;\n  status = ::setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,\n                        reinterpret_cast<char*>(&param), sizeof(param));\n  if (status == SOCKET_ERROR) {\n    status = WSAGetLastError();\n  }\n  return status == 0 ? GRPC_ERROR_NONE\n                     : GRPC_WSA_ERROR(status, \"setsockopt(TCP_NODELAY)\");\n}\n",
+        "lookback": "  int status;",
+        "lookahead": "grpc_error* grpc_tcp_prepare_socket(SOCKET sock) {",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 76,
+        "end_line": 119,
+        "merge_gen_region": null,
+        "confidence": 0.8751194477081299,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  err = enable_loopback_fast_path(sock);\n  if (err != GRPC_ERROR_NONE) return err;\n  err = enable_socket_low_latency(sock);\n  if (err != GRPC_ERROR_NONE) return err;",
+        "b_contents": "",
+        "base_contents": "  err = enable_loopback_fast_path(sock);\n  if (err != GRPC_ERROR_NONE) return err;",
+        "res_region": "  err = enable_socket_low_latency(sock);\n  if (err != GRPC_ERROR_NONE) return err;",
+        "lookback": "  if (err != GRPC_ERROR_NONE) return err;",
+        "lookahead": "  return GRPC_ERROR_NONE;",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 126,
+        "end_line": 135,
+        "merge_gen_region": null,
+        "confidence": 0.6462149024009705,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    if ((traceFlags & LayerTracing::TRACE_INPUT) && needsInputInfo()) {\n        WindowInfo info;",
+        "b_contents": "    if (traceFlags & SurfaceTracing::TRACE_INPUT && needsInputInfo()) {\n        InputWindowInfo info;",
+        "base_contents": "    if (traceFlags & SurfaceTracing::TRACE_INPUT) {\n        InputWindowInfo info;",
+        "res_region": "    if ((traceFlags & LayerTracing::TRACE_INPUT) && needsInputInfo()) {\n        WindowInfo info;",
+        "lookback": "        WindowInfo info;",
+        "lookahead": "        if (useDrawing) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2161,
+        "end_line": 2170,
+        "merge_gen_region": null,
+        "confidence": 0.7728162407875061,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "b_contents": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputFeatures.test(InputWindowInfo::Feature::NO_INPUT_CHANNEL);",
+        "base_contents": "    return mDrawingState.inputInfo.token != nullptr;",
+        "res_region": "    return mDrawingState.inputInfo.token != nullptr ||\n            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "lookback": "            mDrawingState.inputInfo.inputConfig.test(WindowInfo::InputConfig::NO_INPUT_CHANNEL);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2454,
+        "end_line": 2462,
+        "merge_gen_region": "outputreturnreturnreturnreturnreturnoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9097306132316589,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                addReply(c, shared.czero);\n                return;",
+        "b_contents": "                busykeys++;\n                break;",
+        "base_contents": "                busykeys++;",
+        "res_region": "                addReply(c, shared.czero);\n                return;",
+        "lookback": "                return;",
+        "lookahead": "            }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 315,
+        "end_line": 323,
+        "merge_gen_region": null,
+        "confidence": 0.6960968375205994,
+        "hesitated": true
+    }
+]

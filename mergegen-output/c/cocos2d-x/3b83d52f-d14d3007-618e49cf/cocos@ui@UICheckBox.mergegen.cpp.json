@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "void CheckBox::setAnchorPoint(const Vector2 &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _backGroundBoxRenderer->setAnchorPoint(pt);\n    _backGroundSelectedBoxRenderer->setAnchorPoint(pt);\n    _backGroundBoxDisabledRenderer->setAnchorPoint(pt);\n    _frontCrossRenderer->setAnchorPoint(pt);\n    _frontCrossDisabledRenderer->setAnchorPoint(pt);\n}\n",
+        "b_contents": "",
+        "base_contents": "void CheckBox::setAnchorPoint(const Point &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _backGroundBoxRenderer->setAnchorPoint(pt);\n    _backGroundSelectedBoxRenderer->setAnchorPoint(pt);\n    _backGroundBoxDisabledRenderer->setAnchorPoint(pt);\n    _frontCrossRenderer->setAnchorPoint(pt);\n    _frontCrossDisabledRenderer->setAnchorPoint(pt);\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "void CheckBox::onSizeChanged()",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 399,
+        "end_line": 422,
+        "merge_gen_region": " Check::",
+        "confidence": 0.945309579372406,
+        "hesitated": false,
+        "resolved": false
+    }
+]

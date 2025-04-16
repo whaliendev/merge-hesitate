@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tdbpath = \"/home/dwight/db/\";\n\t\t\tcout << \"dev mode: expect db files in \" << dbpath << endl;",
+        "b_contents": "\t\t\tquicktest();\n\t\t\tcout << \"dev mode: expect db files in ~/db/\" << endl;\n\t\t\tdbpath = \"~/db/\";",
+        "base_contents": "\t\t\tcout << \"dev mode: expect db files in ~/db/\" << endl;\n\t\t\tdbpath = \"~/db/\";",
+        "res_region": "\t\t\tdbpath = \"/home/dwight/db/\";\n\t\t\tcout << \"dev mode: expect db files in \" << dbpath << endl;\n\t\t\tquicktest();",
+        "lookback": "\t\t\tcout << \"dev mode: expect db files in \" << dbpath << endl;",
+        "lookahead": "\t\t\tport++;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 345,
+        "end_line": 355,
+        "merge_gen_region": null,
+        "confidence": 0.8287047743797302,
+        "hesitated": true
+    }
+]

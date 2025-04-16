@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "\nclass CompletionQueue;",
+        "base_contents": "",
+        "res_region": "\nclass CompletionQueue;",
+        "lookback": "class CompletionQueue;",
+        "lookahead": "class ResourceQuota;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 39,
+        "end_line": 45,
+        "merge_gen_region": null,
+        "confidence": 0.47170567512512207,
+        "hesitated": true
+    }
+]

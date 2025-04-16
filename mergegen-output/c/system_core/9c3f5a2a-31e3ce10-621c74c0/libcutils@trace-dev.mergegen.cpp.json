@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void atrace_async_for_track_end_body(const char* track_name, int32_t cookie) {\n    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, \"\", track_name, cookie);",
+        "b_contents": "void atrace_async_for_track_end_body(const char* track_name, const char* name, int32_t cookie) {\n    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, track_name, name, cookie);",
+        "base_contents": "void atrace_async_for_track_end_body(const char* track_name, const char* name, int32_t cookie) {\n    WRITE_MSG(\"U|%d|\", \"|%\" PRId32, track_name, name, cookie);",
+        "res_region": "void atrace_async_for_track_end_body(const char* track_name, int32_t cookie) {\n    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, \"\", track_name, cookie);",
+        "lookback": "    WRITE_MSG(\"H|%d|\", \"|%\" PRId32, \"\", track_name, cookie);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 95,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.8490058183670044,
+        "hesitated": true
+    }
+]

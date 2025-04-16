@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    {\"client\",clientCommand,-2,0,NULL,0,0,0,0,0},\n    {\"eval\",evalCommand,-3,REDIS_CMD_DENYOOM,zunionInterGetKeys,0,0,0,0,0},\n    {\"evalsha\",evalShaCommand,-3,REDIS_CMD_DENYOOM,zunionInterGetKeys,0,0,0,0,0}",
+        "b_contents": "    {\"client\",clientCommand,-2,0,NULL,0,0,0,0,0},\n    {\"slowlog\",slowlogCommand,-2,0,NULL,0,0,0,0,0}",
+        "base_contents": "    {\"client\",clientCommand,-2,0,NULL,0,0,0,0,0}",
+        "res_region": "    {\"client\",clientCommand,-2,0,NULL,0,0,0,0,0},\n    {\"eval\",evalCommand,-3,REDIS_CMD_DENYOOM,zunionInterGetKeys,0,0,0,0,0},\n    {\"evalsha\",evalShaCommand,-3,REDIS_CMD_DENYOOM,zunionInterGetKeys,0,0,0,0,0},\n    {\"slowlog\",slowlogCommand,-2,0,NULL,0,0,0,0,0}",
+        "lookback": "    {\"eval\",evalCommand,-3,REDIS_CMD_DENYOOM,zunionInterGetKeys,0,0,0,0,0},",
+        "lookahead": "};",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 195,
+        "end_line": 204,
+        "merge_gen_region": null,
+        "confidence": 0.8361836671829224,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    scriptingInit();",
+        "b_contents": "    slowlogInit();",
+        "base_contents": "",
+        "res_region": "    scriptingInit();\n    slowlogInit();",
+        "lookback": "    slowlogInit();",
+        "lookahead": "    srand(time(NULL)^getpid());",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 971,
+        "end_line": 976,
+        "merge_gen_region": null,
+        "confidence": 0.6570177674293518,
+        "hesitated": true
+    }
+]

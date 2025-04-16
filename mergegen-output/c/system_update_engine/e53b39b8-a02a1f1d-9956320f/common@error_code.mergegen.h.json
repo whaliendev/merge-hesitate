@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  kPackageExcludedFromUpdate = 60,",
+        "b_contents": "  kNotEnoughSpace = 60,\n  kDeviceCorrupted = 61,",
+        "base_contents": "",
+        "res_region": "  kNotEnoughSpace = 60,\n  kDeviceCorrupted = 61,\n  kPackageExcludedFromUpdate = 62,",
+        "lookback": "  kDeviceCorrupted = 61,",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 85,
+        "end_line": 91,
+        "merge_gen_region": null,
+        "confidence": 0.7865323424339294,
+        "hesitated": true
+    }
+]

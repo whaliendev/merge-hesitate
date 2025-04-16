@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "        return new_val(datum_t(std::move(arr), env->env->limits()));",
+        "b_contents": "        return new_val(make_counted<const datum_t>(std::move(arr), env->env->limits()));",
+        "base_contents": "        return new_val(make_counted<const datum_t>(std::move(arr), env->env->limits));",
+        "res_region": "        return new_val(datum_t(std::move(arr), env->env->limits()));",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 218,
+        "end_line": 224,
+        "merge_gen_region": " newvalreturnreturnreturnreturnreturnreturnreturn\",returnreturnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",returnReplacereturnReplacereturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",",
+        "confidence": 0.8878011107444763,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        return new_val(datum_t(std::move(arr), env->env->limits()));",
+        "b_contents": "        return new_val(make_counted<const datum_t>(std::move(arr), env->env->limits()));",
+        "base_contents": "        return new_val(make_counted<const datum_t>(std::move(arr), env->env->limits));",
+        "res_region": "        return new_val(datum_t(std::move(arr), env->env->limits()));",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 256,
+        "end_line": 262,
+        "merge_gen_region": " newvalreturnreturnreturnreturnreturnreturnreturn\",returnreturnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",returnReplacereturnReplacereturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",returnreturn\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",return\",",
+        "confidence": 0.8878011107444763,
+        "hesitated": false,
+        "resolved": false
+    }
+]

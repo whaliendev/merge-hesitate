@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        const lv_style_t * style = lv_line_get_style(line);\n        if(line->ext_size < style->line.width) line->ext_size = style->line.width;",
+        "b_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_style_t * style = lv_line_get_style(line);\n        if(line->ext_draw_pad < style->line.width) line->ext_draw_pad = style->line.width;",
+        "base_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        lv_style_t * style = lv_line_get_style(line);\n        if(line->ext_size < style->line.width) line->ext_size = style->line.width;",
+        "res_region": "    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        const lv_style_t * style = lv_line_get_style(line);\n        if(line->ext_draw_pad < style->line.width) line->ext_draw_pad = style->line.width;",
+        "lookback": "        const lv_style_t * style = lv_line_get_style(line);",
+        "lookahead": "    }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 297,
+        "end_line": 309,
+        "merge_gen_region": " else(}} if} if} if}}}}",
+        "confidence": 0.8854358792304993,
+        "hesitated": false,
+        "resolved": false
+    }
+]

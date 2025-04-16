@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                        audio_output_flags_t flags,\n                        audio_attributes_t /*attributes*/) override {",
+        "b_contents": "                        audio_output_flags_t flags) override {",
+        "base_contents": "                        audio_output_flags_t /*flags*/) override {",
+        "res_region": "                        audio_output_flags_t flags,\n                        audio_attributes_t /*attributes*/) override {",
+        "lookback": "                        audio_attributes_t /*attributes*/) override {",
+        "lookahead": "        if (module >= mNextModuleHandle) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 44,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.7709298729896545,
+        "hesitated": true
+    }
+]

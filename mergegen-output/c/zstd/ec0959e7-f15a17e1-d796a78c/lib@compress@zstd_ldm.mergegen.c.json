@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        ZSTD_window_enforceMaxDist(&ldmState->window, chunkEnd, maxDist);\n        /* 3. Generate the sequences for the chunk, and get newLeftoverSize. */\n        newLeftoverSize = ZSTD_ldm_generateSequences_internal(\n            ldmState, sequences, params, chunkStart, chunkSize);\n        if (ZSTD_isError(newLeftoverSize))\n            return newLeftoverSize;\n        /* 4. We add the leftover literals from previous iterations to the first\n         *    newly generated sequence, or add the `newLeftoverSize` if none are\n         *    generated.\n         */\n        /* Prepend the leftover literals from the last call */\n        if (prevSize < sequences->size) {\n            sequences->seq[prevSize].litLength += (U32)leftoverSize;\n            leftoverSize = newLeftoverSize;\n        } else {\n            assert(newLeftoverSize == chunkSize);\n            leftoverSize += chunkSize;\n        }",
+        "b_contents": "        ZSTD_window_enforceMaxDist(&ldmState->window, chunkEnd, maxDist, NULL);\n        /* 3. Generate the sequences for the chunk, and get newLeftoverSize. */\n        newLeftoverSize = ZSTD_ldm_generateSequences_internal(\n            ldmState, sequences, params, chunkStart, chunkSize);\n        if (ZSTD_isError(newLeftoverSize))\n            return newLeftoverSize;\n        /* 4. We add the leftover literals from previous iterations to the first\n         *    newly generated sequence, or add the `newLeftoverSize` if none are\n         *    generated.\n         */\n        /* Prepend the leftover literals from the last call */\n        if (prevSize < sequences->size) {\n            sequences->seq[prevSize].litLength += (U32)leftoverSize;\n            leftoverSize = newLeftoverSize;\n        } else {\n            assert(newLeftoverSize == chunkSize);\n            leftoverSize += chunkSize;\n        }",
+        "base_contents": "        ZSTD_window_enforceMaxDist(&ldmState->window, chunkEnd, maxDist);\n        nbSeq += ZSTD_ldm_generateSequences_internal(\n            ldmState, sequences + nbSeq, params, chunkStart, chunkSize,\n            extDict);",
+        "res_region": "        ZSTD_window_enforceMaxDist(&ldmState->window, chunkEnd, maxDist, NULL);\n        /* 3. Generate the sequences for the chunk, and get newLeftoverSize. */\n        newLeftoverSize = ZSTD_ldm_generateSequences_internal(\n            ldmState, sequences, params, chunkStart, chunkSize);\n        if (ZSTD_isError(newLeftoverSize))\n            return newLeftoverSize;\n        /* 4. We add the leftover literals from previous iterations to the first\n         *    newly generated sequence, or add the `newLeftoverSize` if none are\n         *    generated.\n         */\n        /* Prepend the leftover literals from the last call */\n        if (prevSize < sequences->size) {\n            sequences->seq[prevSize].litLength += (U32)leftoverSize;\n            leftoverSize = newLeftoverSize;\n        } else {\n            assert(newLeftoverSize == chunkSize);\n            leftoverSize += chunkSize;\n        }",
+        "lookback": "        /* 3. Generate the sequences for the chunk, and get newLeftoverSize. */",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 516,
+        "end_line": 559,
+        "merge_gen_region": null,
+        "confidence": 0.8015553951263428,
+        "hesitated": true
+    }
+]

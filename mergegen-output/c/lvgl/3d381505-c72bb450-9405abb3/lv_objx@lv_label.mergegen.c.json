@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"misc/gfx/color.h\"\n#include \"misc/gfx/text.h\"\n#include \"misc/math/math_base.h\"",
+        "b_contents": "#include \"../misc/gfx/color.h\"\n#include \"../misc/math/math_base.h\"",
+        "base_contents": "#include \"misc/gfx/color.h\"\n#include \"misc/math/math_base.h\"",
+        "res_region": "#include \"misc/gfx/color.h\"\n#include \"misc/gfx/text.h\"\n#include \"misc/math/math_base.h\"",
+        "lookback": "#include \"misc/gfx/text.h\"",
+        "lookahead": "#include \"lv_label.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 11,
+        "end_line": 21,
+        "merge_gen_region": null,
+        "confidence": 0.8572438955307007,
+        "hesitated": true
+    }
+]

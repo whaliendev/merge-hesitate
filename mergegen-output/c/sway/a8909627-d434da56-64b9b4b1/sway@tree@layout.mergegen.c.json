@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\t\t\tif (child->type == C_VIEW) {\n\t\t\t\tview_set_position(child->sway_view, child_x, y);\n\t\t\t} else {\n\t\t\t\tchild->x = child_x;\n\t\t\t\tchild->y = y;\n\t\t\t}",
+        "b_contents": "\t\t\tview_configure(child->sway_view, child_x, y, child->width,\n\t\t\t\tchild->height);",
+        "base_contents": "\t\t\tview_set_position(child->sway_view, child_x, y);",
+        "res_region": "\n\t\t\tif (child->type == C_VIEW) {\n\t\t\t\tview_configure(child->sway_view, child_x, y, child->width,\n\t\t\t\t\tchild->height);\n\t\t\t} else {\n\t\t\t\tchild->x = child_x;\n\t\t\t\tchild->y = y;\n\t\t\t}",
+        "lookback": "\t\t\tif (child->type == C_VIEW) {",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 351,
+        "end_line": 363,
+        "merge_gen_region": null,
+        "confidence": 0.7829918265342712,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tif (child->type == C_VIEW) {\n\t\t\t\tview_set_position(child->sway_view, x, child_y);\n\t\t\t} else {\n\t\t\t\tchild->x = x;\n\t\t\t\tchild->y = child_y;\n\t\t\t}",
+        "b_contents": "\t\t\tview_configure(child->sway_view, x, child_y, child->width,\n\t\t\t\tchild->height);",
+        "base_contents": "\t\t\tview_set_position(child->sway_view, x, child_y);",
+        "res_region": "\t\t\tif (child->type == C_VIEW) {\n\t\t\t\tview_configure(child->sway_view, x, child_y, child->width,\n\t\t\t\t\tchild->height);\n\t\t\t} else {\n\t\t\t\tchild->x = x;\n\t\t\t\tchild->y = child_y;\n\t\t\t}",
+        "lookback": "\t\t\t\tview_configure(child->sway_view, x, child_y, child->width,",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 414,
+        "end_line": 426,
+        "merge_gen_region": null,
+        "confidence": 0.7018133401870728,
+        "hesitated": true
+    }
+]

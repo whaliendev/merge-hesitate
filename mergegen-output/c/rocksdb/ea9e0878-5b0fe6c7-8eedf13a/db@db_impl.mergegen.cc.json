@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "      delete_obsolete_files_last_run_(0),\n      delayed_writes_(0) {",
+        "b_contents": "      delete_obsolete_files_last_run_(0),\n      stall_level0_slowdown_(0),\n      stall_memtable_compaction_(0),\n      stall_level0_num_files_(0),\n      started_at_(options.env->NowMicros()) {",
+        "base_contents": "      delete_obsolete_files_last_run_(0) {",
+        "res_region": "      delete_obsolete_files_last_run_(0),\n      stall_level0_slowdown_(0),\n      stall_memtable_compaction_(0),\n      stall_level0_num_files_(0),\n      started_at_(options.env->NowMicros()),\n      delayed_writes_(0) {",
+        "lookback": "      stall_level0_slowdown_(0),",
+        "lookahead": "  mem_->Ref();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 163,
+        "end_line": 174,
+        "merge_gen_region": null,
+        "confidence": 0.7590863108634949,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      \"compacted to: %s %d MBytes/sec\", versions_->LevelSummary(&tmp),\n                                       MBpersec);",
+        "b_contents": "      \"compacted to: %s, %.1f MB/sec, level %d, files in(%d, %d) out(%d) \"\n      \"MB in(%.1f, %.1f) out(%.1f), amplify(%.1f)\\n\",\n      versions_->LevelSummary(&tmp),\n      (stats.bytes_readn + stats.bytes_readnp1 + stats.bytes_written) /\n          (double) stats.micros,\n      compact->compaction->level() + 1,\n      stats.files_in_leveln, stats.files_in_levelnp1, stats.files_out_levelnp1,\n      stats.bytes_readn / 1048576.0,\n      stats.bytes_readnp1 / 1048576.0,\n      stats.bytes_written / 1048576.0,\n      (stats.bytes_written + stats.bytes_readnp1) /\n          (double) stats.bytes_readn);\n",
+        "base_contents": "      \"compacted to: %s\", versions_->LevelSummary(&tmp));",
+        "res_region": "      \"compacted to: %s, %.1f MB/sec, level %d, files in(%d, %d) out(%d) \"\n      \"MB in(%.1f, %.1f) out(%.1f), amplify(%.1f)\\n\",\n      versions_->LevelSummary(&tmp),\n      (stats.bytes_readn + stats.bytes_readnp1 + stats.bytes_written) /\n          (double) stats.micros,\n      compact->compaction->level() + 1,\n      stats.files_in_leveln, stats.files_in_levelnp1, stats.files_out_levelnp1,\n      stats.bytes_readn / 1048576.0,\n      stats.bytes_readnp1 / 1048576.0,\n      stats.bytes_written / 1048576.0,\n      (stats.bytes_written + stats.bytes_readnp1) /\n          (double) stats.bytes_readn);\n",
+        "lookback": "      \"MB in(%.1f, %.1f) out(%.1f), amplify(%.1f)\\n\",",
+        "lookahead": "  return status;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1377,
+        "end_line": 1396,
+        "merge_gen_region": null,
+        "confidence": 0.8323113322257996,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      DelayLoggingAndReset();\n      Log(options_.info_log, \"wait for fewer level0 files...\\n\");",
+        "b_contents": "      Log(options_.info_log, \"waiting...\\n\");\n      uint64_t t1 = env_->NowMicros();",
+        "base_contents": "      Log(options_.info_log, \"waiting...\\n\");",
+        "res_region": "      DelayLoggingAndReset();\n      uint64_t t1 = env_->NowMicros();\n      Log(options_.info_log, \"wait for fewer level0 files...\\n\");",
+        "lookback": "      uint64_t t1 = env_->NowMicros();",
+        "lookahead": "      bg_cv_.Wait();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1714,
+        "end_line": 1722,
+        "merge_gen_region": null,
+        "confidence": 0.8509862422943115,
+        "hesitated": true
+    }
+]

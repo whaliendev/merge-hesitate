@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "SnapshotManager::SnapshotManager(IDeviceInfo* device)\n    : dm_(device->GetDeviceMapper()), device_(device), metadata_dir_(device_->GetMetadataDir()) {\n    merge_consistency_checker_ = android::snapshot::CheckMergeConsistency;",
+        "b_contents": "SnapshotManager::SnapshotManager(IDeviceInfo* device) : device_(device) {\n    metadata_dir_ = device_->GetMetadataDir();\n    merge_consistency_checker_ = android::snapshot::CheckMergeConsistency;",
+        "base_contents": "SnapshotManager::SnapshotManager(IDeviceInfo* device) : device_(device) {\n    metadata_dir_ = device_->GetMetadataDir();",
+        "res_region": "SnapshotManager::SnapshotManager(IDeviceInfo* device)\n    : dm_(device->GetDeviceMapper()), device_(device), metadata_dir_(device_->GetMetadataDir()) {\n    merge_consistency_checker_ = android::snapshot::CheckMergeConsistency;",
+        "lookback": "    : dm_(device->GetDeviceMapper()), device_(device), metadata_dir_(device_->GetMetadataDir()) {",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 119,
+        "end_line": 130,
+        "merge_gen_region": null,
+        "confidence": 0.7426188588142395,
+        "hesitated": true
+    }
+]

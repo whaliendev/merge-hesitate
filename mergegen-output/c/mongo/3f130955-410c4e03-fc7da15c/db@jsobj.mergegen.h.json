@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tfor( unsigned i = 0; i < vals.size(); ++i )",
+        "b_contents": "\t\tfor( unsigned int i = 0; i < vals.size(); ++i )",
+        "base_contents": "\t\tfor( int i = 0; i < vals.size(); ++i )",
+        "res_region": "\t\tfor( unsigned i = 0; i < vals.size(); ++i )",
+        "lookback": "\t\t\tarrBuilder.appendInt( numStr( i ).c_str(), vals[ i ] );",
+        "lookahead": "\t\t\tarrBuilder.appendInt( numStr( i ).c_str(), vals[ i ] );",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 490,
+        "end_line": 496,
+        "merge_gen_region": null,
+        "confidence": 0.5473207831382751,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    // codec",
+        "b_contents": "private:\n    // Whether context is ready, failed if try to write data when not ready.\n    // When PAT and PMT writen, the context is ready.\n    // @see https://github.com/ossrs/srs/issues/834\n    bool ready;\n// codec",
+        "base_contents": "// codec",
+        "res_region": "private:\n    // Whether context is ready, failed if try to write data when not ready.\n    // When PAT and PMT writen, the context is ready.\n    // @see https://github.com/ossrs/srs/issues/834\n    bool ready;\n// codec",
+        "lookback": "    // Whether context is ready, failed if try to write data when not ready.",
+        "lookahead": "private:",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 344,
+        "end_line": 355,
+        "merge_gen_region": "In",
+        "confidence": 0.8801020383834839,
+        "hesitated": false,
+        "resolved": false
+    }
+]

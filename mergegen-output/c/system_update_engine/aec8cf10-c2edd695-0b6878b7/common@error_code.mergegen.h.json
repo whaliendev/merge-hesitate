@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  kNonCriticalUpdateInOOBE = 49,\n  // kOmahaUpdateIgnoredOverCellular = 50,\n  kPayloadTimestampError = 51,",
+        "b_contents": "  // kNonCriticalUpdateInOOBE = 49,\n  // kOmahaUpdateIgnoredOverCellular = 50,\n  kPayloadTimestampError = 51,",
+        "base_contents": "",
+        "res_region": "  kNonCriticalUpdateInOOBE = 49,\n  // kOmahaUpdateIgnoredOverCellular = 50,\n  kPayloadTimestampError = 51,",
+        "lookback": "  // kOmahaUpdateIgnoredOverCellular = 50,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 74,
+        "end_line": 83,
+        "merge_gen_region": null,
+        "confidence": 0.8789460062980652,
+        "hesitated": true
+    }
+]

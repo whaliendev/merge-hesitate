@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    ress.dictBufferSize = FIO_createDictBuffer(&ress.dictBuffer, dictFileName, prefs, &ress.dictFileStat);   /* works with dictFileName==NULL */",
+        "base_contents": "    ress.dictBufferSize = FIO_createDictBuffer(&ress.dictBuffer, dictFileName, prefs);   /* works with dictFileName==NULL */",
+        "res_region": "",
+        "lookback": "    ress.writeCtx = AIO_WritePool_create(prefs, ZSTD_CStreamOutSize());",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1040,
+        "end_line": 1045,
+        "merge_gen_region": null,
+        "confidence": 0.4342747926712036,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        stat_t statbuf;\n        size_t dictBufferSize;\n\n        if (!mmapDict) {\n            dictBufferSize = FIO_createDictBuffer(&dictBuffer, dictFileName, prefs, &statbuf);\n        } else {\n            dictBufferSize = FIO_createDictBufferMMap(&dictBuffer, dictFileName, prefs, &statbuf);\n        }\n\n        CHECK( ZSTD_DCtx_reset(ress.dctx, ZSTD_reset_session_only) );\n        CHECK( ZSTD_DCtx_loadDictionary(ress.dctx, dictBuffer, dictBufferSize) );\n\n        if (!mmapDict) {\n            free(dictBuffer);\n        } else {\n            munmap(dictBuffer, dictBufferSize);\n        }",
+        "b_contents": "        stat_t statbuf;\n        size_t const dictBufferSize = FIO_createDictBuffer(&dictBuffer, dictFileName, prefs, &statbuf);\n        CHECK( ZSTD_DCtx_reset(ress.dctx, ZSTD_reset_session_only) );\n        CHECK( ZSTD_DCtx_loadDictionary(ress.dctx, dictBuffer, dictBufferSize) );\n        free(dictBuffer);",
+        "base_contents": "        size_t const dictBufferSize = FIO_createDictBuffer(&dictBuffer, dictFileName, prefs);\n        CHECK( ZSTD_initDStream_usingDict(ress.dctx, dictBuffer, dictBufferSize) );\n        free(dictBuffer);",
+        "res_region": "        stat_t statbuf;\n        size_t dictBufferSize;\n\n        if (!mmapDict) {\n            dictBufferSize = FIO_createDictBuffer(&dictBuffer, dictFileName, prefs, &statbuf);\n        } else {\n            dictBufferSize = FIO_createDictBufferMMap(&dictBuffer, dictFileName, prefs, &statbuf);\n        }\n\n        CHECK( ZSTD_DCtx_reset(ress.dctx, ZSTD_reset_session_only) );\n        CHECK( ZSTD_DCtx_loadDictionary(ress.dctx, dictBuffer, dictBufferSize) );\n\n        if (!mmapDict) {\n            free(dictBuffer);\n        } else {\n            munmap(dictBuffer, dictBufferSize);\n        }",
+        "lookback": "        size_t dictBufferSize;",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2140,
+        "end_line": 2168,
+        "merge_gen_region": "__82sizetsizesizesizesizesizesizesizesizesizesizesizesizesizesizesizesizeoutputoutputoutputoutputoutput>(sizeoutputoutputoutput>(outputoutputoutput>(outputoutput>(outputoutput>(outputoutput>(output>(outputoutput>(outputoutput>(output>(outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8877277970314026,
+        "hesitated": false,
+        "resolved": false
+    }
+]

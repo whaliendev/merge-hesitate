@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "CameraSessionStats::CameraSessionStats(const std::string& cameraId,\n        int facing, int newCameraState, const std::string& clientName,\n        int apiLevel, bool isNdk, int32_t latencyMs, int64_t logId) :",
+        "b_contents": "CameraSessionStats::CameraSessionStats(const std::string& cameraId,\n        int facing, int newCameraState, const std::string& clientName,\n        int apiLevel, bool isNdk, int32_t latencyMs) :",
+        "base_contents": "CameraSessionStats::CameraSessionStats(const String16& cameraId,\n        int facing, int newCameraState, const String16& clientName,\n        int apiLevel, bool isNdk, int32_t latencyMs) :",
+        "res_region": "CameraSessionStats::CameraSessionStats(const std::string& cameraId,\n        int facing, int newCameraState, const std::string& clientName,\n        int apiLevel, bool isNdk, int32_t latencyMs, int64_t logId) :",
+        "lookback": "        int facing, int newCameraState, const std::string& clientName,",
+        "lookahead": "                mCameraId(cameraId),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 285,
+        "end_line": 297,
+        "merge_gen_region": null,
+        "confidence": 0.7375168204307556,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int32_t sessionIdx;\n    if ((err = parcel->readInt32(&sessionIdx)) != OK) {\n        ALOGE(\"%s: Failed to read session index from parcel\", __FUNCTION__);\n        return err;\n    }\n\n    CameraExtensionSessionStats extStats{};\n    if ((err = extStats.readFromParcel(parcel)) != OK) {\n        ALOGE(\"%s: Failed to read extension session stats from parcel\", __FUNCTION__);\n        return err;\n    }\n\n    mCameraId = toStdString(id);",
+        "b_contents": "    mCameraId = toStdString(id);",
+        "base_contents": "    mCameraId = id;",
+        "res_region": "    int32_t sessionIdx;\n    if ((err = parcel->readInt32(&sessionIdx)) != OK) {\n        ALOGE(\"%s: Failed to read session index from parcel\", __FUNCTION__);\n        return err;\n    }\n\n    CameraExtensionSessionStats extStats{};\n    if ((err = extStats.readFromParcel(parcel)) != OK) {\n        ALOGE(\"%s: Failed to read extension session stats from parcel\", __FUNCTION__);\n        return err;\n    }\n\n    mCameraId = toStdString(id);",
+        "lookback": "    if ((err = parcel->readInt32(&sessionIdx)) != OK) {",
+        "lookahead": "    mFacing = facing;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 426,
+        "end_line": 444,
+        "merge_gen_region": "_ =outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8899370431900024,
+        "hesitated": false,
+        "resolved": false
+    }
+]

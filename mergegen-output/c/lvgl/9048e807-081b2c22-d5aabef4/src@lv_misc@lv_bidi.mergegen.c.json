@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if(dir == LV_BIDI_DIR_NEUTRAL)  dir = bracket_process(txt, i, *len, letter, base_dir);\n\n        if(txt[i] == '\\0' || txt[i] == '\\n' || txt[i] == '\\r') {",
+        "b_contents": "        if(i >= max_len || txt[i] == '\\0' || txt[i] == '\\n' || txt[i] == '\\r') {",
+        "base_contents": "        if(txt[i] == '\\0' || txt[i] == '\\n' || txt[i] == '\\r') {",
+        "res_region": "        if(dir == LV_BIDI_DIR_NEUTRAL)  dir = bracket_process(txt, i, *len, letter, base_dir);\n\n        if(i >= max_len || txt[i] == '\\0' || txt[i] == '\\n' || txt[i] == '\\r') {",
+        "lookback": "",
+        "lookahead": "            *len = i;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 228,
+        "end_line": 236,
+        "merge_gen_region": null,
+        "confidence": 0.8053349256515503,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\n    /** If you use FULL or RIGHT JOIN, then the columns from the \"left\" table must be materialized.\n      * Because if they are constants, then in the \"not joined\" rows, they may have different values\n      *  - default values, which can differ from the values of these constants.\n      */\n    if constexpr (join_features.right || join_features.full)\n    {\n        materializeBlockInplace(block);\n    }",
+        "b_contents": "    auto & source_block = block.getSourceBlock();\n    size_t existing_columns = source_block.columns();",
+        "base_contents": "    size_t existing_columns = block.columns();\n\n    /** If you use FULL or RIGHT JOIN, then the columns from the \"left\" table must be materialized.\n      * Because if they are constants, then in the \"not joined\" rows, they may have different values\n      *  - default values, which can differ from the values of these constants.\n      */\n    if constexpr (join_features.right || join_features.full)\n    {\n        materializeBlockInplace(block);\n    }",
+        "res_region": "\n    /** If you use FULL or RIGHT JOIN, then the columns from the \"left\" table must be materialized.\n      * Because if they are constants, then in the \"not joined\" rows, they may have different values\n      *  - default values, which can differ from the values of these constants.\n      */\n    if constexpr (join_features.right || join_features.full)\n    {\n        materializeBlockInplace(block);\n    }\n\n    auto & source_block = block.getSourceBlock();",
+        "lookback": "    /** If you use FULL or RIGHT JOIN, then the columns from the \"left\" table must be materialized.",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 82,
+        "end_line": 106,
+        "merge_gen_region": null,
+        "confidence": 0.6209271550178528,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    const auto & table_join = join.table_join;\n    std::set<size_t> block_columns_to_erase;\n    if (join.canRemoveColumnsFromLeftBlock())\n    {\n        std::unordered_set<String> left_output_columns;\n        for (const auto & out_column : table_join->getOutputColumns(JoinTableSide::Left))\n            left_output_columns.insert(out_column.name);\n        for (size_t i = 0; i < block.columns(); ++i)\n        {\n            if (!left_output_columns.contains(block.getByPosition(i).name))\n                block_columns_to_erase.insert(i);\n        }\n    }\n    size_t existing_columns = block.columns();\n",
+        "b_contents": "\n    if constexpr (join_features.need_filter)\n        block.filter(added_columns.filter);\n\n    block.filterBySelector();\n",
+        "base_contents": "",
+        "res_region": "\n    if constexpr (join_features.need_filter)\n        block.filter(added_columns.filter);\n\n    block.filterBySelector();\n\n    for (size_t i = 0; i < added_columns.size(); ++i)\n        source_block.insert(added_columns.moveColumn(i));\n\n    const auto & table_join = join.table_join;\n    std::set<size_t> block_columns_to_erase;\n    if (join.canRemoveColumnsFromLeftBlock())\n    {\n        std::unordered_set<String> left_output_columns;\n        for (const auto & out_column : table_join->getOutputColumns(JoinTableSide::Left))\n            left_output_columns.insert(out_column.name);\n        for (size_t i = 0; i < source_block.columns(); ++i)\n        {\n            if (!left_output_columns.contains(source_block.getByPosition(i).name))\n                block_columns_to_erase.insert(i);\n        }\n    }",
+        "lookback": "    if constexpr (join_features.need_filter)",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 140,
+        "end_line": 165,
+        "merge_gen_region": null,
+        "confidence": 0.846958339214325,
+        "hesitated": true
+    }
+]

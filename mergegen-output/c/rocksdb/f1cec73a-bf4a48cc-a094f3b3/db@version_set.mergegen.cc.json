@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    // Pre-sort level0 for Get()\n    if (vset_->options_->compaction_style == kCompactionStyleUniversal) {\n      std::sort(v->files_[0].begin(), v->files_[0].end(), NewestFirstBySeqNo);\n    } else {\n      std::sort(v->files_[0].begin(), v->files_[0].end(), NewestFirst);\n    }\n",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "    CheckConsistency(v);",
+        "lookahead": "    CheckConsistency(v);",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 1114,
+        "end_line": 1125,
+        "merge_gen_region": null,
+        "confidence": 0.8607305884361267,
+        "hesitated": true
+    }
+]

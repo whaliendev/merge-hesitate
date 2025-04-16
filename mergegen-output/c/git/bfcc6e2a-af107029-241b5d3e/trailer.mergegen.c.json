@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tCALLOC_ARRAY(item, 1);",
+        "b_contents": "\titem = xcalloc(1, sizeof(*item));",
+        "base_contents": "\titem = xcalloc(sizeof(*item), 1);",
+        "res_region": "\tCALLOC_ARRAY(item, 1);",
+        "lookback": "\tduplicate_conf(&item->conf, &default_conf_info);",
+        "lookahead": "\tduplicate_conf(&item->conf, &default_conf_info);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 447,
+        "end_line": 453,
+        "merge_gen_region": null,
+        "confidence": 0.7446205615997314,
+        "hesitated": true
+    }
+]

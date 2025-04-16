@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // Returns the minimum log number such that all\n  // log numbers less than or equal to it can be deleted\n  uint64_t MinLogNumber() const {\n    uint64_t min_log_num = std::numeric_limits<uint64_t>::max();\n    for (auto cfd : *column_family_set_) {\n      if (min_log_num > cfd->GetLogNumber()) {\n        min_log_num = cfd->GetLogNumber();\n      }\n    }\n    return min_log_num;\n  }",
+        "b_contents": "  int NumberLevels() const { return num_levels_; }\n\n  // Pick level and inputs for a new compaction.\n  // Returns nullptr if there is no compaction to be done.\n  // Otherwise returns a pointer to a heap-allocated object that\n  // describes the compaction.  Caller should delete the result.\n  Compaction* PickCompaction(LogBuffer* log_buffer);\n\n  // Return a compaction object for compacting the range [begin,end] in\n  // the specified level.  Returns nullptr if there is nothing in that\n  // level that overlaps the specified range.  Caller should delete\n  // the result.\n  //\n  // The returned Compaction might not include the whole requested range.\n  // In that case, compaction_end will be set to the next key that needs\n  // compacting. In case the compaction will compact the whole range,\n  // compaction_end will be set to nullptr.\n  // Client is responsible for compaction_end storage -- when called,\n  // *compaction_end should point to valid InternalKey!\n  Compaction* CompactRange(int input_level,\n                           int output_level,\n                           const InternalKey* begin,\n                           const InternalKey* end,\n                           InternalKey** compaction_end);",
+        "base_contents": "  int NumberLevels() const { return num_levels_; }\n\n  // Pick level and inputs for a new compaction.\n  // Returns nullptr if there is no compaction to be done.\n  // Otherwise returns a pointer to a heap-allocated object that\n  // describes the compaction.  Caller should delete the result.\n  Compaction* PickCompaction();\n\n  // Return a compaction object for compacting the range [begin,end] in\n  // the specified level.  Returns nullptr if there is nothing in that\n  // level that overlaps the specified range.  Caller should delete\n  // the result.\n  //\n  // The returned Compaction might not include the whole requested range.\n  // In that case, compaction_end will be set to the next key that needs\n  // compacting. In case the compaction will compact the whole range,\n  // compaction_end will be set to nullptr.\n  // Client is responsible for compaction_end storage -- when called,\n  // *compaction_end should point to valid InternalKey!\n  Compaction* CompactRange(int input_level,\n                           int output_level,\n                           const InternalKey* begin,\n                           const InternalKey* end,\n                           InternalKey** compaction_end);",
+        "res_region": "  // Returns the minimum log number such that all\n  // log numbers less than or equal to it can be deleted\n  uint64_t MinLogNumber() const {\n    uint64_t min_log_num = std::numeric_limits<uint64_t>::max();\n    for (auto cfd : *column_family_set_) {\n      if (min_log_num > cfd->GetLogNumber()) {\n        min_log_num = cfd->GetLogNumber();\n      }\n    }\n    return min_log_num;\n  }",
+        "lookback": "  // log numbers less than or equal to it can be deleted",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 362,
+        "end_line": 424,
+        "merge_gen_region": null,
+        "confidence": 0.7004161477088928,
+        "hesitated": true
+    }
+]

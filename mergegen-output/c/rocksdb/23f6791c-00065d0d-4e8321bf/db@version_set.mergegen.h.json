@@ -1,0 +1,105 @@
+[
+    {
+        "a_contents": "  friend struct ColumnFamilyData;",
+        "b_contents": "  friend class CompactionPicker;\n  friend class LevelCompactionPicker;\n  friend class UniversalCompactionPicker;",
+        "base_contents": "",
+        "res_region": "  friend struct ColumnFamilyData;\n  friend class CompactionPicker;\n  friend class LevelCompactionPicker;\n  friend class UniversalCompactionPicker;",
+        "lookback": "  friend class CompactionPicker;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 189,
+        "end_line": 196,
+        "merge_gen_region": null,
+        "confidence": 0.6604275703430176,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  Status LogAndApply(ColumnFamilyData* column_family_data,\n                     VersionEdit* edit,\n                     port::Mutex* mu,\n                     bool new_descriptor_log = false);\n\n  Status LogAndApply(VersionEdit* edit,\n                     port::Mutex* mu,\n                     bool new_descriptor_log = false) {\n    return LogAndApply(\n        column_family_data_.find(0)->second, edit, mu, new_descriptor_log);\n  }",
+        "b_contents": "  Status LogAndApply(VersionEdit* edit, port::Mutex* mu,\n                     bool new_descriptor_log = false);",
+        "base_contents": "  Status LogAndApply(VersionEdit* edit, port::Mutex* mu,\n      bool new_descriptor_log = false);",
+        "res_region": "  Status LogAndApply(ColumnFamilyData* column_family_data,\n                     VersionEdit* edit,\n                     port::Mutex* mu,\n                     bool new_descriptor_log = false);\n\n  Status LogAndApply(VersionEdit* edit,\n                     port::Mutex* mu,\n                     bool new_descriptor_log = false) {\n    return LogAndApply(\n        column_family_data_.find(0)->second, edit, mu, new_descriptor_log);\n  }",
+        "lookback": "                     VersionEdit* edit,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 313,
+        "end_line": 331,
+        "merge_gen_region": null,
+        "confidence": 0.8136365413665771,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // Return a human-readable short (single-line) summary of the data size\n  // of files per level.  Uses *scratch as backing store.\n  const char* LevelDataSizeSummary(LevelSummaryStorage* scratch) const;\n\n  // Return a human-readable short (single-line) summary of files\n  // in a specified level.  Uses *scratch as backing store.\n  const char* LevelFileSummary(Version* version,\n                               FileSummaryStorage* scratch,\n                               int level) const;\n",
+        "b_contents": "",
+        "base_contents": "  // Return a human-readable short (single-line) summary of the data size\n  // of files per level.  Uses *scratch as backing store.\n  const char* LevelDataSizeSummary(LevelSummaryStorage* scratch) const;\n\n  // Return a human-readable short (single-line) summary of files\n  // in a specified level.  Uses *scratch as backing store.\n  const char* LevelFileSummary(FileSummaryStorage* scratch, int level) const;\n",
+        "res_region": "",
+        "lookback": "  uint64_t ManifestFileSize() const { return manifest_file_size_; }",
+        "lookahead": "  // Return the size of the current manifest file",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 475,
+        "end_line": 496,
+        "merge_gen_region": null,
+        "confidence": 0.6625144481658936,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const uint64_t ManifestFileSize() { return manifest_file_size_; }\n\n  // For the specfied level, pick a compaction.\n  // Returns nullptr if there is no compaction to be done.\n  // If level is 0 and there is already a compaction on that level, this\n  // function will return nullptr.\n  Compaction* PickCompactionBySize(int level, double score);\n\n  // Pick files to compact in Universal mode\n  Compaction* PickCompactionUniversal(int level, double score);\n\n  // Pick Universal compaction to limit read amplification\n  Compaction* PickCompactionUniversalReadAmp(int level, double score,\n                unsigned int ratio, unsigned int num_files);\n\n  // Pick Universal compaction to limit space amplification.\n  Compaction* PickCompactionUniversalSizeAmp(int level, double score);\n\n  // Free up the files that were participated in a compaction\n  void ReleaseCompactionFiles(Compaction* c, Status status);",
+        "b_contents": "  uint64_t ManifestFileSize() const { return manifest_file_size_; }",
+        "base_contents": "  const uint64_t ManifestFileSize() { return current_->offset_manifest_file_; }\n\n  // For the specfied level, pick a compaction.\n  // Returns nullptr if there is no compaction to be done.\n  // If level is 0 and there is already a compaction on that level, this\n  // function will return nullptr.\n  Compaction* PickCompactionBySize(int level, double score);\n\n  // Pick files to compact in Universal mode\n  Compaction* PickCompactionUniversal(int level, double score);\n\n  // Pick Universal compaction to limit read amplification\n  Compaction* PickCompactionUniversalReadAmp(int level, double score,\n                unsigned int ratio, unsigned int num_files);\n\n  // Pick Universal compaction to limit space amplification.\n  Compaction* PickCompactionUniversalSizeAmp(int level, double score);\n\n  // Free up the files that were participated in a compaction\n  void ReleaseCompactionFiles(Compaction* c, Status status);",
+        "res_region": "  uint64_t ManifestFileSize() const { return manifest_file_size_; }",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 498,
+        "end_line": 542,
+        "merge_gen_region": null,
+        "confidence": 0.6187617182731628,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // size of manifest file\n  uint64_t manifest_file_size_;",
+        "b_contents": "  // Current size of manifest file\n  uint64_t manifest_file_size_;",
+        "base_contents": "  // Store the manifest file size when it is checked.\n  // Save us the cost of checking file size twice in LogAndApply\n  uint64_t last_observed_manifest_size_;",
+        "res_region": "  // Current size of manifest file\n  uint64_t manifest_file_size_;",
+        "lookback": "  uint64_t manifest_file_size_;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 618,
+        "end_line": 628,
+        "merge_gen_region": null,
+        "confidence": 0.5468611121177673,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// A Compaction encapsulates information about a compaction.\nclass Compaction {\n public:\n  ~Compaction();\n\n  // Return the level that is being compacted.  Inputs from \"level\"\n  // will be merged.\n  int level() const { return level_; }\n\n  // Outputs will go to this level\n  int output_level() const { return out_level_; }\n\n  // Return the object that holds the edits to the descriptor done\n  // by this compaction.\n  VersionEdit* edit() { return edit_; }\n\n  // \"which\" must be either 0 or 1\n  int num_input_files(int which) const { return inputs_[which].size(); }\n\n  // Return the ith input file at \"level()+which\" (\"which\" must be 0 or 1).\n  FileMetaData* input(int which, int i) const { return inputs_[which][i]; }\n\n  // Maximum size of files to build during this compaction.\n  uint64_t MaxOutputFileSize() const { return max_output_file_size_; }\n\n  // Whether compression will be enabled for compaction outputs\n  bool enable_compression() const { return enable_compression_; }\n\n  // Is this a trivial compaction that can be implemented by just\n  // moving a single input file to the next level (no merging or splitting)\n  bool IsTrivialMove() const;\n\n  // Add all inputs to this compaction as delete operations to *edit.\n  void AddInputDeletions(VersionEdit* edit);\n\n  // Returns true if the information we have available guarantees that\n  // the compaction is producing data in \"level+1\" for which no data exists\n  // in levels greater than \"level+1\".\n  bool IsBaseLevelForKey(const Slice& user_key);\n\n  // Returns true iff we should stop building the current output\n  // before processing \"internal_key\".\n  bool ShouldStopBefore(const Slice& internal_key);\n\n  // Release the input version for the compaction, once the compaction\n  // is successful.\n  void ReleaseInputs();\n\n  void Summary(char* output, int len);\n\n  // Return the score that was used to pick this compaction run.\n  double score() const { return score_; }\n\n  // Is this compaction creating a file in the bottom most level?\n  bool BottomMostLevel() { return bottommost_level_; }\n\n  // Does this compaction include all sst files?\n  bool IsFullCompaction() { return is_full_compaction_; }\n\n private:\n  friend class Version;\n  friend class VersionSet;\n\n  Compaction(int level,\n             int out_level,\n             uint64_t target_file_size,\n             uint64_t max_grandparent_overlap_bytes,\n             int number_levels,\n             Version* input_version,\n             bool seek_compaction = false,\n             bool enable_compression = true);\n\n  int level_;\n  int out_level_; // levels to which output files are stored\n  uint64_t max_output_file_size_;\n  uint64_t maxGrandParentOverlapBytes_;\n  Version* input_version_;\n  VersionEdit* edit_;\n  int number_levels_;\n\n  bool seek_compaction_;\n  bool enable_compression_;\n\n  // Each compaction reads inputs from \"level_\" and \"level_+1\"\n  std::vector<FileMetaData*> inputs_[2];      // The two sets of inputs\n\n  // State used to check for number of of overlapping grandparent files\n  // (parent == level_ + 1, grandparent == level_ + 2)\n  std::vector<FileMetaData*> grandparents_;\n  size_t grandparent_index_;  // Index in grandparent_starts_\n  bool seen_key_;             // Some output key has been seen\n  uint64_t overlapped_bytes_;  // Bytes of overlap between current output\n                              // and grandparent files\n  int base_index_;   // index of the file in files_[level_]\n  int parent_index_; // index of some file with same range in files_[level_+1]\n  double score_;     // score that was used to pick this compaction.\n\n  // Is this compaction creating a file in the bottom most level?\n  bool bottommost_level_;\n  // Does this compaction include all sst files?\n  bool is_full_compaction_;\n\n  // level_ptrs_ holds indices into input_version_->levels_: our state\n  // is that we are positioned at one of the file ranges for each\n  // higher level than the ones involved in this compaction (i.e. for\n  // all L >= level_ + 2).\n  std::vector<size_t> level_ptrs_;\n\n  // mark (or clear) all files that are being compacted\n  void MarkFilesBeingCompacted(bool);\n\n  // Initialize whether compaction producing files at the bottommost level\n  void SetupBottomMostLevel(bool isManual);\n\n  // In case of compaction error, reset the nextIndex that is used\n  // to pick up the next file to be compacted from files_by_size_\n  void ResetNextCompactionIndex();\n};\n",
+        "b_contents": "",
+        "base_contents": "// A Compaction encapsulates information about a compaction.\nclass Compaction {\n public:\n  ~Compaction();\n\n  // Return the level that is being compacted.  Inputs from \"level\"\n  // will be merged.\n  int level() const { return level_; }\n\n  // Outputs will go to this level\n  int output_level() const { return out_level_; }\n\n  // Return the object that holds the edits to the descriptor done\n  // by this compaction.\n  VersionEdit* edit() { return edit_; }\n\n  // \"which\" must be either 0 or 1\n  int num_input_files(int which) const { return inputs_[which].size(); }\n\n  // Return the ith input file at \"level()+which\" (\"which\" must be 0 or 1).\n  FileMetaData* input(int which, int i) const { return inputs_[which][i]; }\n\n  // Maximum size of files to build during this compaction.\n  uint64_t MaxOutputFileSize() const { return max_output_file_size_; }\n\n  // Whether compression will be enabled for compaction outputs\n  bool enable_compression() const { return enable_compression_; }\n\n  // Is this a trivial compaction that can be implemented by just\n  // moving a single input file to the next level (no merging or splitting)\n  bool IsTrivialMove() const;\n\n  // Add all inputs to this compaction as delete operations to *edit.\n  void AddInputDeletions(VersionEdit* edit);\n\n  // Returns true if the information we have available guarantees that\n  // the compaction is producing data in \"level+1\" for which no data exists\n  // in levels greater than \"level+1\".\n  bool IsBaseLevelForKey(const Slice& user_key);\n\n  // Returns true iff we should stop building the current output\n  // before processing \"internal_key\".\n  bool ShouldStopBefore(const Slice& internal_key);\n\n  // Release the input version for the compaction, once the compaction\n  // is successful.\n  void ReleaseInputs();\n\n  void Summary(char* output, int len);\n\n  // Return the score that was used to pick this compaction run.\n  double score() const { return score_; }\n\n  // Is this compaction creating a file in the bottom most level?\n  bool BottomMostLevel() { return bottommost_level_; }\n\n  // Does this compaction include all sst files?\n  bool IsFullCompaction() { return is_full_compaction_; }\n\n private:\n  friend class Version;\n  friend class VersionSet;\n\n  explicit Compaction(int level, int out_level, uint64_t target_file_size,\n    uint64_t max_grandparent_overlap_bytes, int number_levels,\n    bool seek_compaction = false, bool enable_compression = true);\n\n  int level_;\n  int out_level_; // levels to which output files are stored\n  uint64_t max_output_file_size_;\n  uint64_t maxGrandParentOverlapBytes_;\n  Version* input_version_;\n  VersionEdit* edit_;\n  int number_levels_;\n\n  bool seek_compaction_;\n  bool enable_compression_;\n\n  // Each compaction reads inputs from \"level_\" and \"level_+1\"\n  std::vector<FileMetaData*> inputs_[2];      // The two sets of inputs\n\n  // State used to check for number of of overlapping grandparent files\n  // (parent == level_ + 1, grandparent == level_ + 2)\n  std::vector<FileMetaData*> grandparents_;\n  size_t grandparent_index_;  // Index in grandparent_starts_\n  bool seen_key_;             // Some output key has been seen\n  uint64_t overlapped_bytes_;  // Bytes of overlap between current output\n                              // and grandparent files\n  int base_index_;   // index of the file in files_[level_]\n  int parent_index_; // index of some file with same range in files_[level_+1]\n  double score_;     // score that was used to pick this compaction.\n\n  // Is this compaction creating a file in the bottom most level?\n  bool bottommost_level_;\n  // Does this compaction include all sst files?\n  bool is_full_compaction_;\n\n  // level_ptrs_ holds indices into input_version_->levels_: our state\n  // is that we are positioned at one of the file ranges for each\n  // higher level than the ones involved in this compaction (i.e. for\n  // all L >= level_ + 2).\n  std::vector<size_t> level_ptrs_;\n\n  // mark (or clear) all files that are being compacted\n  void MarkFilesBeingCompacted(bool);\n\n  // Initialize whether compaction producing files at the bottommost level\n  void SetupBottomMostLevel(bool isManual);\n\n  // In case of compaction error, reset the nextIndex that is used\n  // to pick up the next file to be compacted from files_by_size_\n  void ResetNextCompactionIndex();\n};\n",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "}  // namespace rocksdb",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 647,
+        "end_line": 883,
+        "merge_gen_region": " Aactionulates about compaction classaction public ~action // the that beinged Inputs \"\" will merged int() { level const return_; //s go this int() int_() { outlevellevel } Return object holds ed to descriptor // done by compaction Version Version edit() return_; //whichwhich must either or int numinputfilesint) { inputswhichsize } // theth input atlevel()+\"which (\"\" be or 1 File*( which must 0 1 1 File file inputint which int) { inputswhichi } Return i input atlevel()+\"which (\"\" be or).MetaData inputint which int) { inputswhichi } Maximum of to during compaction uint_ MaxFileSize const return_____; // this trivial that be by // a input to to next ( merging split) IsTriMove const // all // compaction can implemented just moving single file the level next ( merging split) IsTriMove const // allForKeyconst&_); Returns iff should building current // processing \"_\". boolStop( Slice internalkey // processinginternalkey boolStop( Slice internalkey // the version the, the compaction successful voidInputs voidmarychar output int); Return score was to this run double() { score } Is compaction a in bottom level",
+        "confidence": 0.8822271227836609,
+        "hesitated": false,
+        "resolved": false
+    }
+]

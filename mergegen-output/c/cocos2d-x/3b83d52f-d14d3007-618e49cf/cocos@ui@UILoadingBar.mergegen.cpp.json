@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            _barRenderer->setPosition(Vector2(-_totalLength * 0.5f, 0.0f));",
+        "b_contents": "            _barRenderer->setPosition(Point(0.0f, _contentSize.height / 2.0f));",
+        "base_contents": "            _barRenderer->setPosition(Point(-_totalLength * 0.5f, 0.0f));",
+        "res_region": "            _barRenderer->setPosition(Vector2(0.0f, _contentSize.height / 2.0f));",
+        "lookback": "            break;",
+        "lookahead": "            break;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 336,
+        "end_line": 342,
+        "merge_gen_region": null,
+        "confidence": 0.6714051961898804,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            _barRenderer->setPosition(Vector2(_totalLength * 0.5f, 0.0f));",
+        "b_contents": "            _barRenderer->setPosition(Point(_totalLength, _contentSize.height / 2.0f));",
+        "base_contents": "            _barRenderer->setPosition(Point(_totalLength * 0.5f, 0.0f));",
+        "res_region": "            _barRenderer->setPosition(Vector2(_totalLength, _contentSize.height / 2.0f));",
+        "lookback": "            break;",
+        "lookahead": "            break;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 345,
+        "end_line": 351,
+        "merge_gen_region": null,
+        "confidence": 0.7894909381866455,
+        "hesitated": true
+    }
+]

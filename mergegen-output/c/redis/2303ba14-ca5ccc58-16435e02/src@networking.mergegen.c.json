@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "         * writes before the first ACK (to know the reason, grep for this\n         * flag in this file). */\n        events = aeGetFileEvents(server.el,slave->fd);\n        if (events & AE_WRITABLE &&\n            slave->replstate == SLAVE_STATE_ONLINE &&",
+        "b_contents": "         * writes before the first ACK. */\n        if (slave->replstate == SLAVE_STATE_ONLINE &&\n            !slave->repl_put_online_on_ack &&",
+        "base_contents": "         * writes before the first ACK. */\n        events = aeGetFileEvents(server.el,slave->fd);\n        if (events & AE_WRITABLE &&\n            slave->replstate == SLAVE_STATE_ONLINE &&",
+        "res_region": "         * writes before the first ACK (to know the reason, grep for this\n         * flag in this file). */\n        if (slave->replstate == SLAVE_STATE_ONLINE &&\n            !slave->repl_put_online_on_ack &&",
+        "lookback": "         * flag in this file). */",
+        "lookahead": "            clientHasPendingReplies(slave))",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2476,
+        "end_line": 2491,
+        "merge_gen_region": null,
+        "confidence": 0.8028256297111511,
+        "hesitated": true
+    }
+]

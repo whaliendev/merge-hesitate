@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "FstabEntry BuildGsiSystemFstabEntry() {\n    // .logical_partition_name is required to look up AVB Hashtree descriptors.\n    FstabEntry system = {.blk_device = \"system_gsi\",\n                         .mount_point = \"/system\",\n                         .fs_type = \"ext4\",\n                         .flags = MS_RDONLY,\n                         .fs_options = \"barrier=1\",\n                         // could add more keys separated by ':'.\n                         .avb_keys =\n                                 \"/avb/q-gsi.avbpubkey:/avb/q-developer-gsi.avbpubkey:\"\n                                 \"/avb/r-developer-gsi.avbpubkey:/avb/s-developer-gsi.avbpubkey\",\n                         .logical_partition_name = \"system\"};\n    system.fs_mgr_flags.wait = true;\n    system.fs_mgr_flags.logical = true;\n    system.fs_mgr_flags.first_stage_mount = true;\n    return system;\n}\n",
+        "base_contents": "FstabEntry BuildGsiSystemFstabEntry() {\n    // .logical_partition_name is required to look up AVB Hashtree descriptors.\n    FstabEntry system = {.blk_device = \"system_gsi\",\n                         .mount_point = \"/system\",\n                         .fs_type = \"ext4\",\n                         .flags = MS_RDONLY,\n                         .fs_options = \"barrier=1\",\n                         // could add more keys separated by ':'.\n                         .avb_keys =\n                                 \"/avb/q-gsi.avbpubkey:/avb/q-developer-gsi.avbpubkey:\"\n                                 \"/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey\",\n                         .logical_partition_name = \"system\"};\n    system.fs_mgr_flags.wait = true;\n    system.fs_mgr_flags.logical = true;\n    system.fs_mgr_flags.first_stage_mount = true;\n    return system;\n}\n",
+        "res_region": "",
+        "lookback": "    std::string base_device;",
+        "lookahead": "std::string GetVerityDeviceName(const FstabEntry& entry) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 923,
+        "end_line": 962,
+        "merge_gen_region": ":: GetityDevice( FEntry&)",
+        "confidence": 0.9306975603103638,
+        "hesitated": false,
+        "resolved": false
+    }
+]

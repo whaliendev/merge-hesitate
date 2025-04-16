@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "Status VersionSet::LogAndApply(\n    VersionEdit* edit,\n    port::Mutex* mu,\n    bool new_descriptor_log) {",
+        "b_contents": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu,\n                               bool new_descriptor_log) {",
+        "base_contents": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu,\n    bool new_descriptor_log) {",
+        "res_region": "Status VersionSet::LogAndApply(VersionEdit* edit, port::Mutex* mu,\n                               bool new_descriptor_log) {",
+        "lookback": "                               bool new_descriptor_log) {",
+        "lookahead": "  mu->AssertHeld();",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 1447,
+        "end_line": 1458,
+        "merge_gen_region": null,
+        "confidence": 0.7804441452026367,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (int level = 0; level < NumberLevels(); level++) {\n    const auto& files = current_->files_[level];",
+        "b_contents": "  for (int level = 0; level < current_->NumberLevels(); level++) {\n    const std::vector<FileMetaData*>& files = current_->files_[level];",
+        "base_contents": "  for (int level = 0; level < NumberLevels(); level++) {\n    const std::vector<FileMetaData*>& files = current_->files_[level];",
+        "res_region": "  for (int level = 0; level < current_->NumberLevels(); level++) {\n    const auto& files = current_->files_[level];",
+        "lookback": "    const auto& files = current_->files_[level];",
+        "lookahead": "    for (size_t i = 0; i < files.size(); i++) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1954,
+        "end_line": 1963,
+        "merge_gen_region": null,
+        "confidence": 0.6052535772323608,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status VersionSet::GetMetadataForFile(\n    uint64_t number,\n    int *filelevel,\n    FileMetaData **meta) {",
+        "b_contents": "Status VersionSet::GetMetadataForFile(uint64_t number, int* filelevel,\n                                      FileMetaData* meta) {",
+        "base_contents": "Status VersionSet::GetMetadataForFile(\n    uint64_t number,\n    int *filelevel,\n    FileMetaData *meta) {",
+        "res_region": "Status VersionSet::GetMetadataForFile(uint64_t number, int* filelevel,\n                                      FileMetaData** meta) {",
+        "lookback": "                                      FileMetaData** meta) {",
+        "lookahead": "  for (int level = 0; level < NumberLevels(); level++) {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 2901,
+        "end_line": 2914,
+        "merge_gen_region": null,
+        "confidence": 0.7303059697151184,
+        "hesitated": true
+    }
+]

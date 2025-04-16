@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        _target->setPosition(_startPosition + (_positionDelta * t));",
+        "b_contents": "        _target->setPosition(_startPosition + _positionDelta * t);",
+        "base_contents": "        _target->setPosition(ccpAdd( _startPosition, ccpMult(_positionDelta, t)));",
+        "res_region": "        _target->setPosition(_startPosition + _positionDelta * t);",
+        "lookback": "#endif // CC_ENABLE_STACKABLE_ACTIONS",
+        "lookahead": "#endif // CC_ENABLE_STACKABLE_ACTIONS",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1025,
+        "end_line": 1031,
+        "merge_gen_region": null,
+        "confidence": 0.5687207579612732,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        _target->setPosition(_startPosition + Point(x,y));",
+        "b_contents": "        _target->setPosition( _startPosition + Point(x,y));",
+        "base_contents": "        _target->setPosition(ccpAdd( _startPosition, Point(x,y)));",
+        "res_region": "        _target->setPosition( _startPosition + Point(x,y));",
+        "lookback": "#endif // !CC_ENABLE_STACKABLE_ACTIONS",
+        "lookahead": "#endif // !CC_ENABLE_STACKABLE_ACTIONS",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1441,
+        "end_line": 1447,
+        "merge_gen_region": null,
+        "confidence": 0.6083788275718689,
+        "hesitated": true
+    }
+]

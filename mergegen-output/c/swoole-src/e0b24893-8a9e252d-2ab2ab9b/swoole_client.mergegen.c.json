@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    zval *onConnect;\n    zval *onReceive;\n    zval *onClose;\n    zval *onError;\n    zval *onBufferFull;\n    zval *onBufferEmpty;\n#ifdef SW_USE_OPENSSL\n    zval *onSSLReady;\n#endif",
+        "b_contents": "",
+        "base_contents": "    zval *onConnect;\n    zval *onReceive;\n    zval *onClose;\n    zval *onError;\n    zval *onBufferFull;\n    zval *onBufferEmpty;\n#ifdef SW_USE_OPENSSL\n    zval *onSSLReady;\n#endif\n",
+        "res_region": "",
+        "lookback": "    zend_fcall_info_cache cache_onReceive;",
+        "lookahead": "    zend_fcall_info_cache cache_onConnect;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 24,
+        "end_line": 46,
+        "merge_gen_region": null,
+        "confidence": 0.3967280387878418,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    zval *callback = NULL;",
+        "b_contents": "",
+        "base_contents": "\n    zval *callback = NULL;",
+        "res_region": "",
+        "lookback": "    zval args[1];",
+        "lookahead": "    zval *retval = NULL;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 110,
+        "end_line": 116,
+        "merge_gen_region": null,
+        "confidence": 0.480582058429718,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // amount of work to recover recently logged updates.  Any changes to\n  // be made to the descriptor are added to *edit.\n  Status Recover(VersionEdit* edit,\n                 const std::vector<ColumnFamilyDescriptor>& column_families,\n                 MemTable* external_table = nullptr,\n                 bool error_if_log_file_exist = false);",
+        "b_contents": "  // amount of work to recover recently logged updates.\n  Status Recover(bool read_only = false, bool error_if_log_file_exist = false);",
+        "base_contents": "  // amount of work to recover recently logged updates.  Any changes to\n  // be made to the descriptor are added to *edit.\n  Status Recover(VersionEdit* edit, MemTable* external_table = nullptr,\n      bool error_if_log_file_exist = false);",
+        "res_region": "  // amount of work to recover recently logged updates.  Any changes to\n  // be made to the descriptor are added to *edit.\n  Status Recover(const std::vector<ColumnFamilyDescriptor>& column_families,\n                 bool read_only = false, bool error_if_log_file_exist = false);",
+        "lookback": "  // be made to the descriptor are added to *edit.",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 301,
+        "end_line": 316,
+        "merge_gen_region": null,
+        "confidence": 0.8278228044509888,
+        "hesitated": true
+    }
+]

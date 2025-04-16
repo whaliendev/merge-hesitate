@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        THROWS_NOTHING;",
+        "b_contents": "        THROWS_ONLY(interrupted_exc_t);\n\n    void perform_enqueued_write(\n            const write_queue_entry_t &serialized_write,\n            state_timestamp_t backfill_end_timestamp,\n            signal_t *interruptor)\n        THROWS_ONLY(interrupted_exc_t);\n",
+        "base_contents": "        THROWS_NOTHING;\n\n    void perform_enqueued_write(\n            const write_queue_entry_t &serialized_write,\n            state_timestamp_t backfill_end_timestamp,\n            signal_t *interruptor)\n        THROWS_ONLY(interrupted_exc_t);\n",
+        "res_region": "        THROWS_ONLY(interrupted_exc_t);\n",
+        "lookback": "",
+        "lookahead": "    void on_write_sync(",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 110,
+        "end_line": 130,
+        "merge_gen_region": null,
+        "confidence": 0.6317828297615051,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        THROWS_NOTHING;",
+        "b_contents": "        THROWS_ONLY(interrupted_exc_t);\n",
+        "base_contents": "        THROWS_NOTHING;\n",
+        "res_region": "        THROWS_ONLY(interrupted_exc_t);\n",
+        "lookback": "",
+        "lookahead": "    void on_read(",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 138,
+        "end_line": 146,
+        "merge_gen_region": null,
+        "confidence": 0.6115102171897888,
+        "hesitated": true
+    }
+]

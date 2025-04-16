@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  // Visit gc-roots in DexCachePair array in [pairs_begin, pairs_end) range.\n  template <typename Visitor>\n  static void VisitDexCachePairRoots(Visitor& visitor,\n                                     DexCachePair<Object>* pairs_begin,\n                                     DexCachePair<Object>* pairs_end)\n      REQUIRES_SHARED(Locks::mutator_lock_);\n",
+        "b_contents": "  // Visit gc-roots in DexCachePair array in [pairs_begin, pairs_end) range.\n  template <typename Visitor>\n  static void VisitDexCachePairRoots(Visitor& visitor,\n                                     DexCachePair<Object>* pairs_begin,\n                                     DexCachePair<Object>* pairs_end)\n      REQUIRES_SHARED(Locks::mutator_lock_);\n\n",
+        "base_contents": "",
+        "res_region": "  // Visit gc-roots in DexCachePair array in [pairs_begin, pairs_end) range.\n  template <typename Visitor>\n  static void VisitDexCachePairRoots(Visitor& visitor,\n                                     DexCachePair<Object>* pairs_begin,\n                                     DexCachePair<Object>* pairs_end)\n      REQUIRES_SHARED(Locks::mutator_lock_);\n",
+        "lookback": "  template <typename Visitor>",
+        "lookahead": "  void Initialize(const DexFile* dex_file, ObjPtr<ClassLoader> class_loader)",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 279,
+        "end_line": 297,
+        "merge_gen_region": null,
+        "confidence": 0.8070387244224548,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  template<typename T>\n  T* AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup = false)",
+        "b_contents": "  template<typename T, size_t kMaxCacheSize>\n  T* AllocArray(MemberOffset obj_offset, MemberOffset num_offset, size_t num, LinearAllocKind kind)",
+        "base_contents": "  template<typename T, size_t kMaxCacheSize>\n  T* AllocArray(MemberOffset obj_offset, MemberOffset num_offset, size_t num)",
+        "res_region": "  template<typename T>\n  T* AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup = false)",
+        "lookback": "  T* AllocArray(MemberOffset obj_offset, size_t num, LinearAllocKind kind, bool startup = false)",
+        "lookahead": "     REQUIRES_SHARED(Locks::mutator_lock_);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 548,
+        "end_line": 557,
+        "merge_gen_region": null,
+        "confidence": 0.8318794369697571,
+        "hesitated": true
+    }
+]

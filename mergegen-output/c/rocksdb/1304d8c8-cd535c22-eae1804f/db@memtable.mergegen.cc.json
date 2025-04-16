@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "      locks_(options.inplace_update_support\n             ? options.inplace_update_num_locks\n             : 0),\n      prefix_extractor_(options.prefix_extractor) {\n\n  if (prefix_extractor_ && options.memtable_prefix_bloom_bits > 0)  {\n    prefix_bloom_.reset(new DynamicBloom(options.memtable_prefix_bloom_bits,\n                                         options.memtable_prefix_bloom_probes));\n  }\n}",
+        "b_contents": "      locks_(options.inplace_update_support ? options.inplace_update_num_locks\n                                            : 0) {}",
+        "base_contents": "      locks_(options.inplace_update_support\n             ? options.inplace_update_num_locks\n             : 0) { }",
+        "res_region": "      locks_(options.inplace_update_support ? options.inplace_update_num_locks\n                                            : 0),\n      prefix_extractor_(options.prefix_extractor) {\n  if (prefix_extractor_ && options.memtable_prefix_bloom_bits > 0) {\n    prefix_bloom_.reset(new DynamicBloom(options.memtable_prefix_bloom_bits,\n                                         options.memtable_prefix_bloom_probes));\n  }\n}",
+        "lookback": "                                            : 0),",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 49,
+        "end_line": 67,
+        "merge_gen_region": null,
+        "confidence": 0.7720809578895569,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      iter_ = mem_.table_->GetPrefixIterator(*options.prefix);",
+        "b_contents": "      iter_.reset(table->GetPrefixIterator(*options.prefix));",
+        "base_contents": "      iter_ = table->GetPrefixIterator(*options.prefix);",
+        "res_region": "      iter_.reset(mem_.table_->GetPrefixIterator(*options.prefix));",
+        "lookback": "    } else if (options.prefix_seek) {",
+        "lookahead": "    } else if (options.prefix_seek) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 112,
+        "merge_gen_region": null,
+        "confidence": 0.6617977619171143,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      dynamic_prefix_seek_ = true;\n      iter_ = mem_.table_->GetDynamicPrefixIterator();",
+        "b_contents": "      iter_.reset(table->GetDynamicPrefixIterator());",
+        "base_contents": "      iter_ = table->GetDynamicPrefixIterator();",
+        "res_region": "      iter_.reset(mem_.table_->GetDynamicPrefixIterator());",
+        "lookback": "    } else {",
+        "lookahead": "    } else {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 114,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.7371596097946167,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      iter_ = mem_.table_->GetIterator();",
+        "b_contents": "      iter_.reset(table->GetIterator());",
+        "base_contents": "      iter_ = table->GetIterator();",
+        "res_region": "      iter_.reset(mem_.table_->GetIterator());",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 123,
+        "end_line": 129,
+        "merge_gen_region": null,
+        "confidence": 0.6158385872840881,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  const MemTable& mem_;\n  std::shared_ptr<MemTableRep::Iterator> iter_;\n  bool dynamic_prefix_seek_;\n  bool valid_;",
+        "b_contents": "  std::unique_ptr<MemTableRep::Iterator> iter_;\n  std::string tmp_;       // For passing to EncodeKey",
+        "base_contents": "  std::shared_ptr<MemTableRep::Iterator> iter_;\n  std::string tmp_;       // For passing to EncodeKey",
+        "res_region": "  const MemTable& mem_;\n  std::shared_ptr<MemTableRep::Iterator> iter_;\n  bool dynamic_prefix_seek_;\n  bool valid_;",
+        "lookback": "  std::shared_ptr<MemTableRep::Iterator> iter_;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 175,
+        "end_line": 186,
+        "merge_gen_region": null,
+        "confidence": 0.7819093465805054,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  StopWatchNano memtable_get_timer(options.env, false);\n  StartPerfTimer(&memtable_get_timer);\n\n  Slice mem_key = key.memtable_key();\n  Slice user_key = key.user_key();\n\n  std::shared_ptr<MemTableRep::Iterator> iter;\n  if (prefix_bloom_ &&\n      !prefix_bloom_->MayContain(prefix_extractor_->Transform(user_key))) {\n    // iter is null if prefix bloom says the key does not exist\n  } else {\n    iter = table_->GetIterator(user_key);\n    iter->Seek(user_key, mem_key.data());\n  }",
+        "b_contents": "  Slice memkey = key.memtable_key();\n  std::unique_ptr<MemTableRep::Iterator> iter(\n      table_->GetIterator(key.user_key()));\n  iter->Seek(memkey.data());",
+        "base_contents": "  Slice memkey = key.memtable_key();\n  std::shared_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(key.user_key()));\n  iter->Seek(memkey.data());",
+        "res_region": "  StopWatchNano memtable_get_timer(options.env, false);\n  StartPerfTimer(&memtable_get_timer);\n\n  Slice mem_key = key.memtable_key();\n  Slice user_key = key.user_key();\n\n  std::unique_ptr<MemTableRep::Iterator> iter;\n  if (prefix_bloom_ &&\n      !prefix_bloom_->MayContain(prefix_extractor_->Transform(user_key))) {\n    // iter is null if prefix bloom says the key does not exist\n  } else {\n    iter.reset(table_->GetIterator(user_key));\n    iter->Seek(user_key, mem_key.data());\n  }",
+        "lookback": "  StartPerfTimer(&memtable_get_timer);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 240,
+        "end_line": 265,
+        "merge_gen_region": null,
+        "confidence": 0.8520718216896057,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::shared_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(lkey.user_key()));\n  iter->Seek(key, mem_key.data());\n",
+        "b_contents": "  std::unique_ptr<MemTableRep::Iterator> iter(\n      table_->GetIterator(lkey.user_key()));\n  iter->Seek(memkey.data());",
+        "base_contents": "  std::shared_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(lkey.user_key()));\n  iter->Seek(memkey.data());",
+        "res_region": "  std::unique_ptr<MemTableRep::Iterator> iter(\n    table_->GetIterator(lkey.user_key()));\n  iter->Seek(key, mem_key.data());",
+        "lookback": "    table_->GetIterator(lkey.user_key()));",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 374,
+        "end_line": 387,
+        "merge_gen_region": null,
+        "confidence": 0.8598126173019409,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_fast_generic(ZSTD_CCtx* cctx,\n                                       const void* src, size_t srcSize,\n                                       const U32 mls)",
+        "b_contents": "\nFORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_fast_generic(ZSTD_CCtx* cctx,\n                               const void* src, size_t srcSize,\n                               const U32 mls)",
+        "base_contents": "\nFORCE_INLINE\nvoid ZSTD_compressBlock_fast_generic(ZSTD_CCtx* cctx,\n                               const void* src, size_t srcSize,\n                               const U32 mls)",
+        "res_region": "\nFORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_fast_generic(ZSTD_CCtx* cctx,\n                                       const void* src, size_t srcSize,\n                                       const U32 mls)",
+        "lookback": "FORCE_INLINE_TEMPLATE",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1734,
+        "end_line": 1751,
+        "merge_gen_region": null,
+        "confidence": 0.7263251543045044,
+        "hesitated": true
+    },
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_doubleFast_generic(ZSTD_CCtx* cctx,",
+        "b_contents": "FORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_doubleFast_generic(ZSTD_CCtx* cctx,",
+        "base_contents": "FORCE_INLINE\nvoid ZSTD_compressBlock_doubleFast_generic(ZSTD_CCtx* cctx,",
+        "res_region": "FORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_doubleFast_generic(ZSTD_CCtx* cctx,",
+        "lookback": "size_t ZSTD_compressBlock_doubleFast_generic(ZSTD_CCtx* cctx,",
+        "lookahead": "                                 const void* src, size_t srcSize,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1984,
+        "end_line": 1993,
+        "merge_gen_region": null,
+        "confidence": 0.6272218227386475,
+        "hesitated": true
+    },
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_lazy_generic(ZSTD_CCtx* ctx,\n                                       const void* src, size_t srcSize,\n                                       const U32 searchMethod, const U32 depth)",
+        "b_contents": "FORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_lazy_generic(ZSTD_CCtx* ctx,\n                                     const void* src, size_t srcSize,\n                                     const U32 searchMethod, const U32 depth)",
+        "base_contents": "FORCE_INLINE\nvoid ZSTD_compressBlock_lazy_generic(ZSTD_CCtx* ctx,\n                                     const void* src, size_t srcSize,\n                                     const U32 searchMethod, const U32 depth)",
+        "res_region": "FORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_lazy_generic(ZSTD_CCtx* ctx,\n                                       const void* src, size_t srcSize,\n                                       const U32 searchMethod, const U32 depth)",
+        "lookback": "size_t ZSTD_compressBlock_lazy_generic(ZSTD_CCtx* ctx,",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2659,
+        "end_line": 2674,
+        "merge_gen_region": null,
+        "confidence": 0.7065748572349548,
+        "hesitated": true
+    },
+    {
+        "a_contents": "FORCE_INLINE\nsize_t ZSTD_compressBlock_lazy_extDict_generic(ZSTD_CCtx* ctx,",
+        "b_contents": "FORCE_INLINE_TEMPLATE\nvoid ZSTD_compressBlock_lazy_extDict_generic(ZSTD_CCtx* ctx,",
+        "base_contents": "FORCE_INLINE\nvoid ZSTD_compressBlock_lazy_extDict_generic(ZSTD_CCtx* ctx,",
+        "res_region": "FORCE_INLINE_TEMPLATE\nsize_t ZSTD_compressBlock_lazy_extDict_generic(ZSTD_CCtx* ctx,",
+        "lookback": "size_t ZSTD_compressBlock_lazy_extDict_generic(ZSTD_CCtx* ctx,",
+        "lookahead": "                                     const void* src, size_t srcSize,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 2834,
+        "end_line": 2843,
+        "merge_gen_region": null,
+        "confidence": 0.5912847518920898,
+        "hesitated": true
+    }
+]

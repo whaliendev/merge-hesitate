@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "",
+        "lookback": "#endif // __cocos2dx_h__",
+        "lookahead": "#endif // __cocos2dx_h__",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 1624,
+        "end_line": 1630,
+        "merge_gen_region": null,
+        "confidence": 0.5893587470054626,
+        "hesitated": true
+    }
+]

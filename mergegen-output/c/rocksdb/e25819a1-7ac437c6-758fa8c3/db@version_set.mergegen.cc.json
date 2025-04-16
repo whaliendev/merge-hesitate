@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "      // cfd is nullptr if Version is dummy\n      num_levels_(cfd == nullptr ? 0 : cfd->NumberLevels()),",
+        "b_contents": "      num_levels_(vset->num_levels_),\n      finalized_(false),",
+        "base_contents": "      num_levels_(vset->num_levels_),",
+        "res_region": "      // cfd is nullptr if Version is dummy\n      num_levels_(cfd == nullptr ? 0 : cfd->NumberLevels()),\n      finalized_(false),",
+        "lookback": "      num_levels_(cfd == nullptr ? 0 : cfd->NumberLevels()),",
+        "lookahead": "      files_(new std::vector<FileMetaData*>[num_levels_]),",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 469,
+        "end_line": 477,
+        "merge_gen_region": null,
+        "confidence": 0.7521753311157227,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,56 @@
+[
+    {
+        "a_contents": "                pointerIds.markBit(entry.pointerProperties[0].id);\n                tempTouchState.addOrUpdateWindow(newTouchedWindowHandle, targetFlags, pointerIds,\n                                                 entry.eventTime);",
+        "b_contents": "                pointerIds.markBit(entry.pointerProperties[0].id);\n                tempTouchState.addOrUpdateWindow(newTouchedWindowHandle, targetFlags, pointerIds);",
+        "base_contents": "                if (isSplit) {\n                    pointerIds.markBit(entry.pointerProperties[0].id);\n                }\n                tempTouchState.addOrUpdateWindow(newTouchedWindowHandle, targetFlags, pointerIds);",
+        "res_region": "                pointerIds.markBit(entry.pointerProperties[0].id);\n                tempTouchState.addOrUpdateWindow(newTouchedWindowHandle, targetFlags, pointerIds,\n                                                 entry.eventTime);",
+        "lookback": "                tempTouchState.addOrUpdateWindow(newTouchedWindowHandle, targetFlags, pointerIds,",
+        "lookahead": "            }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2296,
+        "end_line": 2308,
+        "merge_gen_region": "Touch.OrUpdate(TchedHandle target,&newString&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+        "confidence": 0.9285954236984253,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "            int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            uint32_t pointerId = entry.pointerProperties[pointerIndex].id;\n\n            for (size_t i = 0; i < tempTouchState.windows.size();) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                touchedWindow.pointerIds.clearBit(pointerId);\n                if (touchedWindow.pointerIds.isEmpty()) {\n                    tempTouchState.windows.erase(tempTouchState.windows.begin() + i);\n                    continue;",
+        "b_contents": "            int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            uint32_t pointerId = entry.pointerProperties[pointerIndex].id;\n\n            for (size_t i = 0; i < tempTouchState.windows.size();) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                touchedWindow.pointerIds.clearBit(pointerId);\n                if (touchedWindow.pointerIds.isEmpty()) {\n                    tempTouchState.windows.erase(tempTouchState.windows.begin() + i);\n                    continue;\n                }\n                i += 1;\n            }\n        } else if (!isSplit && maskedAction == AMOTION_EVENT_ACTION_POINTER_DOWN) {\n            // If no split, we suppose all touched windows should receive pointer down.\n            const int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            for (size_t i = 0; i < tempTouchState.windows.size(); i++) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                // Ignore drag window for it should just track one pointer.\n                if (mDragState && mDragState->dragWindow == touchedWindow.windowHandle) {\n                    continue;",
+        "base_contents": "            if (isSplit) {\n                int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n                uint32_t pointerId = entry.pointerProperties[pointerIndex].id;\n\n                for (size_t i = 0; i < tempTouchState.windows.size();) {\n                    TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                    if (touchedWindow.targetFlags & InputTarget::FLAG_SPLIT) {\n                        touchedWindow.pointerIds.clearBit(pointerId);\n                        if (touchedWindow.pointerIds.isEmpty()) {\n                            tempTouchState.windows.erase(tempTouchState.windows.begin() + i);\n                            continue;\n                        }\n                    }\n                    i += 1;",
+        "res_region": "            int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            uint32_t pointerId = entry.pointerProperties[pointerIndex].id;\n\n            for (size_t i = 0; i < tempTouchState.windows.size();) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                touchedWindow.pointerIds.clearBit(pointerId);\n                if (touchedWindow.pointerIds.isEmpty()) {\n                    tempTouchState.windows.erase(tempTouchState.windows.begin() + i);\n                    continue;\n                }\n                i += 1;\n            }\n        } else if (!isSplit && maskedAction == AMOTION_EVENT_ACTION_POINTER_DOWN) {\n            // If no split, we suppose all touched windows should receive pointer down.\n            const int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            for (size_t i = 0; i < tempTouchState.windows.size(); i++) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                // Ignore drag window for it should just track one pointer.\n                if (mDragState && mDragState->dragWindow == touchedWindow.windowHandle) {\n                    continue;",
+        "lookback": "            uint32_t pointerId = entry.pointerProperties[pointerIndex].id;",
+        "lookahead": "                }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2484,
+        "end_line": 2530,
+        "merge_gen_region": "32tIduint>(>(uint>(uint>(uint>(uint>(uint>(uint>(uint>(uint>(uint>(uint>(uint>(output>(output>(output>(output>(output>(output>(output>(>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output",
+        "confidence": 0.8826130628585815,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "                i += 1;\n            }\n        } else if (!isSplit && maskedAction == AMOTION_EVENT_ACTION_POINTER_DOWN) {\n            // If no split, we suppose all touched windows should receive pointer down.\n            const int32_t pointerIndex = getMotionEventActionPointerIndex(action);\n            for (size_t i = 0; i < tempTouchState.windows.size(); i++) {\n                TouchedWindow& touchedWindow = tempTouchState.windows[i];\n                // Ignore drag window for it should just track one pointer.\n                if (mDragState && mDragState->dragWindow == touchedWindow.windowHandle) {\n                    continue;\n                }\n                touchedWindow.pointerIds.markBit(entry.pointerProperties[pointerIndex].id);",
+        "b_contents": "                touchedWindow.pointerIds.markBit(entry.pointerProperties[pointerIndex].id);",
+        "base_contents": "",
+        "res_region": "                }\n                touchedWindow.pointerIds.markBit(entry.pointerProperties[pointerIndex].id);",
+        "lookback": "                touchedWindow.pointerIds.markBit(entry.pointerProperties[pointerIndex].id);",
+        "lookahead": "            }",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 2532,
+        "end_line": 2548,
+        "merge_gen_region": " i 1 idex i i i i i i i i i i i i i i i i i idex idex idex ioutput i i i i i i i i i i i i i i ioutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8811940550804138,
+        "hesitated": false,
+        "resolved": false
+    }
+]

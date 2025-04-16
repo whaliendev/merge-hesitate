@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    const TrajectoryPoint &start_point,\n    std::vector<TrajectoryPoint> *ptr_discretized_trajectory) {",
+        "b_contents": "    const TrajectoryPoint& start_point,\n    std::vector<TrajectoryPoint>* ptr_discretized_trajectory) {",
+        "base_contents": "    const TrajectoryPoint& start_point,\n    std::vector<TrajectoryPoint>* ptr_discretized_trajectory) {\n",
+        "res_region": "    const TrajectoryPoint& start_point,\n    std::vector<TrajectoryPoint>* ptr_discretized_trajectory) {",
+        "lookback": "    std::vector<TrajectoryPoint>* ptr_discretized_trajectory) {",
+        "lookahead": "  if (complete_rtk_trajectory_.empty() || complete_rtk_trajectory_.size() < 2) {",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 35,
+        "end_line": 45,
+        "merge_gen_region": null,
+        "confidence": 0.7816588282585144,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto &last_point = ptr_discretized_trajectory->back();\n    last_point.set_relative_time(last_point.relative_time() +\n                                 FLAGS_trajectory_resolution);",
+        "b_contents": "    auto& last_point = ptr_discretized_trajectory->back();\n    last_point.set_relative_time(last_point.relative_time() +\n                                 FLAGS_trajectory_resolution);",
+        "base_contents": "    auto& last_point = ptr_discretized_trajectory->back();\n    last_point.set_relative_time(\n        last_point.relative_time() + FLAGS_trajectory_resolution);",
+        "res_region": "    auto& last_point = ptr_discretized_trajectory->back();\n    last_point.set_relative_time(last_point.relative_time() +\n                                 FLAGS_trajectory_resolution);",
+        "lookback": "    last_point.set_relative_time(last_point.relative_time() +",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 77,
+        "end_line": 89,
+        "merge_gen_region": null,
+        "confidence": 0.8713735938072205,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    double d_temp =\n        func_distance_square(trajectory[i], start_point.x(), start_point.y());",
+        "b_contents": "    double d_temp =\n        func_distance_square(trajectory[i], start_point.path_point().x(),\n                             start_point.path_point().y());",
+        "base_contents": "    double d_temp = func_distance_square(trajectory[i], start_point.x(),\n                                         start_point.y());",
+        "res_region": "    double d_temp =\n        func_distance_square(trajectory[i], start_point.path_point().x(),\n                             start_point.path_point().y());",
+        "lookback": "        func_distance_square(trajectory[i], start_point.path_point().x(),",
+        "lookahead": "    if (d_temp < d_min) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 159,
+        "end_line": 169,
+        "merge_gen_region": null,
+        "confidence": 0.5787525773048401,
+        "hesitated": true
+    }
+]

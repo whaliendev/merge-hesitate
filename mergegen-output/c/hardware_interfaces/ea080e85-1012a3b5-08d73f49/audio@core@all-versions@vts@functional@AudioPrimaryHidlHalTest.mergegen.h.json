@@ -1,0 +1,72 @@
+[
+    {
+        "a_contents": "    StreamWriter(IStreamOut* stream, size_t bufferSize, std::vector<uint8_t>&& data,\n                 std::function<void()> onDataStart, std::function<bool()> onDataWrap)\n        : mStream(stream),\n          mBufferSize(bufferSize),\n          mData(std::move(data)),\n          mOnDataStart(onDataStart),\n          mOnDataWrap(onDataWrap) {\n        ALOGI(\"StreamWriter data size: %d\", (int)mData.size());\n    }",
+        "b_contents": "    StreamWriter(IStreamOut* stream, size_t bufferSize, std::vector<uint8_t>&& data,\n                 std::function<void()> onDataWrap)\n        : mStream(stream),\n          mBufferSize(bufferSize),\n          mData(std::move(data)),\n          mOnDataWrap(onDataWrap) {\n        ALOGW(\"StreamWriter data size: %d\", (int)mData.size());\n    }",
+        "base_contents": "",
+        "res_region": "    StreamWriter(IStreamOut* stream, size_t bufferSize, std::vector<uint8_t>&& data,\n                 std::function<void()> onDataStart, std::function<bool()> onDataWrap)\n        : mStream(stream),\n          mBufferSize(bufferSize),\n          mData(std::move(data)),\n          mOnDataStart(onDataStart),\n          mOnDataWrap(onDataWrap) {\n        ALOGI(\"StreamWriter data size: %d\", (int)mData.size());\n    }",
+        "lookback": "                 std::function<void()> onDataStart, std::function<bool()> onDataWrap)",
+        "lookahead": "    ~StreamWriter() {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 939,
+        "end_line": 959,
+        "merge_gen_region": "::::<stdfunctionstd onstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(>(",
+        "confidence": 0.8802299499511719,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        if (mDataPosition == 0) mOnDataStart();\n        const size_t dataSize = std::min(mData.size() - mDataPosition, mDataMQ->availableToWrite());\n        bool success = mDataMQ->write(mData.data() + mDataPosition, dataSize);",
+        "b_contents": "        const size_t dataSize = std::min(mData.size() - mDataPosition, mDataMQ->availableToWrite());\n        bool success = mDataMQ->write(mData.data() + mDataPosition, dataSize);",
+        "base_contents": "        const size_t dataSize = std::min(mData.size(), mDataMQ->availableToWrite());\n        bool success = mDataMQ->write(mData.data(), dataSize);",
+        "res_region": "        if (mDataPosition == 0) mOnDataStart();\n        const size_t dataSize = std::min(mData.size() - mDataPosition, mDataMQ->availableToWrite());\n        bool success = mDataMQ->write(mData.data() + mDataPosition, dataSize);",
+        "lookback": "        const size_t dataSize = std::min(mData.size() - mDataPosition, mDataMQ->availableToWrite());",
+        "lookahead": "        ALOGE_IF(!success, \"data message queue write failed\");",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1025,
+        "end_line": 1035,
+        "merge_gen_region": null,
+        "confidence": 0.7000405192375183,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if (success && mDataPosition == 0) {\n            success = mOnDataWrap();\n        }",
+        "b_contents": "        if (success && mDataPosition == 0) mOnDataWrap();",
+        "base_contents": "",
+        "res_region": "        if (success && mDataPosition == 0) {\n            success = mOnDataWrap();\n        }",
+        "lookback": "            success = mOnDataWrap();",
+        "lookahead": "        return success;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1064,
+        "end_line": 1071,
+        "merge_gen_region": null,
+        "confidence": 0.862191379070282,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::function<void()> mOnDataStart = []() {};\n    std::function<bool()> mOnDataWrap = []() { return true; };\n    size_t mDataPosition = 0;",
+        "b_contents": "    std::function<void()> mOnDataWrap = []() {};\n    size_t mDataPosition = 0;",
+        "base_contents": "",
+        "res_region": "    std::function<void()> mOnDataStart = []() {};\n    std::function<bool()> mOnDataWrap = []() { return true; };\n    size_t mDataPosition = 0;",
+        "lookback": "    std::function<bool()> mOnDataWrap = []() { return true; };",
+        "lookahead": "    std::unique_ptr<CommandMQ> mCommandMQ;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1079,
+        "end_line": 1087,
+        "merge_gen_region": "::::stdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.8880004286766052,
+        "hesitated": false,
+        "resolved": false
+    }
+]

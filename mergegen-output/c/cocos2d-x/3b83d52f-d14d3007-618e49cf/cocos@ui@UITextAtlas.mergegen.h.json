@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Vector2 &pt) override;\n    \n    //override \"getContentSize\" method of widget.\n    virtual const Size& getContentSize() const override;",
+        "b_contents": "    //override \"getVirtualRendererSize\" method of widget.\n    virtual const Size& getVirtualRendererSize() const override;",
+        "base_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Point &pt) override;\n    \n    //override \"getContentSize\" method of widget.\n    virtual const Size& getContentSize() const override;",
+        "res_region": "    //override \"getVirtualRendererSize\" method of widget.\n    virtual const Size& getVirtualRendererSize() const override;",
+        "lookback": "    virtual const Size& getVirtualRendererSize() const override;",
+        "lookahead": "    ",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 80,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.740557074546814,
+        "hesitated": true
+    }
+]

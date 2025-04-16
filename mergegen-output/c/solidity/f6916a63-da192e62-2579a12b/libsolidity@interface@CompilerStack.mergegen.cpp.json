@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tModelChecker modelChecker(m_errorReporter, m_smtlib2Responses, m_readFile);",
+        "b_contents": "\t\t\tModelChecker modelChecker(m_errorReporter, m_smtlib2Responses, m_enabledSMTSolvers);",
+        "base_contents": "\t\t\tModelChecker modelChecker(m_errorReporter, m_smtlib2Responses);",
+        "res_region": "\t\t\tModelChecker modelChecker(m_errorReporter, m_smtlib2Responses, m_readFile, m_enabledSMTSolvers);",
+        "lookback": "\t\t\tfor (Source const* source: m_sourceOrder)",
+        "lookahead": "\t\t\tfor (Source const* source: m_sourceOrder)",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 394,
+        "end_line": 400,
+        "merge_gen_region": null,
+        "confidence": 0.526778519153595,
+        "hesitated": true
+    }
+]

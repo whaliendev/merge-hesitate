@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    WebSocketHandler *camera_ws, SimControlManager *sim_control_manager,\n    WebSocketHandler *plugin_ws, const MapService *map_service,\n    PerceptionCameraUpdater *perception_camera_updater,\n    PluginManager *plugin_manager, bool routing_from_file)",
+        "b_contents": "    WebSocketHandler *camera_ws,\n    SimControlManager *sim_control_manager,\n    WebSocketHandler *plugin_ws,\n    const MapService *map_service,\n    PerceptionCameraUpdater *perception_camera_updater,\n    PluginManager* plugin_manager,\n    bool routing_from_file)",
+        "base_contents": "    WebSocketHandler *camera_ws, SimControl *sim_control,\n    const MapService *map_service,\n    PerceptionCameraUpdater *perception_camera_updater, bool routing_from_file)",
+        "res_region": "    WebSocketHandler *camera_ws, SimControlManager *sim_control_manager,\n    WebSocketHandler *plugin_ws, const MapService *map_service,\n    PerceptionCameraUpdater *perception_camera_updater,\n    PluginManager *plugin_manager, bool routing_from_file)",
+        "lookback": "    WebSocketHandler *plugin_ws, const MapService *map_service,",
+        "lookahead": "    : sim_world_service_(map_service, routing_from_file),",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 52,
+        "end_line": 69,
+        "merge_gen_region": null,
+        "confidence": 0.7654808759689331,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n  camera_ws_->RegisterMessageHandler(\n      \"GetCameraChannel\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        std::vector<std::string> channels;\n        perception_camera_updater_->GetChannelMsg(&channels);\n        Json response({});\n        response[\"data\"][\"name\"] = \"GetCameraChannelListSuccess\";\n        for (unsigned int i = 0; i < channels.size(); i++) {\n          response[\"data\"][\"info\"][\"channel\"][i] = channels[i];\n        }\n        camera_ws_->SendData(conn, response.dump());\n      });\n  camera_ws_->RegisterMessageHandler(\n      \"ChangeCameraChannel\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        if (!perception_camera_updater_->IsEnabled()) {\n          return;\n        }\n        auto channel_info = json.find(\"data\");\n        Json response({});\n        if (channel_info == json.end()) {\n          AERROR << \"Cannot  retrieve channel info with unknown channel.\";\n          response[\"type\"] = \"ChangeCameraChannelFail\";\n          camera_ws_->SendData(conn, response.dump());\n          return;\n        }\n        std::string channel =\n            channel_info->dump().substr(1, channel_info->dump().length() - 2);\n        if (perception_camera_updater_->ChangeChannel(channel)) {\n          Json response({});\n          response[\"type\"] = \"ChangeCameraChannelSuccess\";\n          camera_ws_->SendData(conn, response.dump());\n        } else {\n          response[\"type\"] = \"ChangeCameraChannelFail\";\n          camera_ws_->SendData(conn, response.dump());\n        }\n      });\n  plugin_ws_->RegisterMessageHandler(\n      \"PluginRequest\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        if (!plugin_manager_->IsEnabled()) {\n          return;\n        }\n        auto iter = json.find(\"data\");\n        if (iter == json.end()) {\n          AERROR << \"Failed to get plugin msg!\";\n          return;\n        }\n        if (!plugin_manager_->SendMsgToPlugin(iter->dump())) {\n          AERROR << \"Failed to send msg to plugin\";\n        }\n      });",
+        "b_contents": "\n  plugin_ws_->RegisterMessageHandler(\n      \"PluginRequest\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        if(!plugin_manager_->IsEnabled()){\n          return;\n        }\n        auto iter = json.find(\"data\");\n        if(iter == json.end()){\n          AERROR<<\"Failed to get plugin msg!\";\n          return;\n        }\n        if(!plugin_manager_->SendMsgToPlugin(iter->dump())){\n           AERROR<<\"Failed to send msg to plugin\";\n        }\n      });",
+        "base_contents": "",
+        "res_region": "\n  camera_ws_->RegisterMessageHandler(\n      \"GetCameraChannel\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        std::vector<std::string> channels;\n        perception_camera_updater_->GetChannelMsg(&channels);\n        Json response({});\n        response[\"data\"][\"name\"] = \"GetCameraChannelListSuccess\";\n        for (unsigned int i = 0; i < channels.size(); i++) {\n          response[\"data\"][\"info\"][\"channel\"][i] = channels[i];\n        }\n        camera_ws_->SendData(conn, response.dump());\n      });\n  camera_ws_->RegisterMessageHandler(\n      \"ChangeCameraChannel\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        if (!perception_camera_updater_->IsEnabled()) {\n          return;\n        }\n        auto channel_info = json.find(\"data\");\n        Json response({});\n        if (channel_info == json.end()) {\n          AERROR << \"Cannot  retrieve channel info with unknown channel.\";\n          response[\"type\"] = \"ChangeCameraChannelFail\";\n          camera_ws_->SendData(conn, response.dump());\n          return;\n        }\n        std::string channel =\n            channel_info->dump().substr(1, channel_info->dump().length() - 2);\n        if (perception_camera_updater_->ChangeChannel(channel)) {\n          Json response({});\n          response[\"type\"] = \"ChangeCameraChannelSuccess\";\n          camera_ws_->SendData(conn, response.dump());\n        } else {\n          response[\"type\"] = \"ChangeCameraChannelFail\";\n          camera_ws_->SendData(conn, response.dump());\n        }\n      });\n  plugin_ws_->RegisterMessageHandler(\n      \"PluginRequest\",\n      [this](const Json &json, WebSocketHandler::Connection *conn) {\n        if (!plugin_manager_->IsEnabled()) {\n          return;\n        }\n        auto iter = json.find(\"data\");\n        if (iter == json.end()) {\n          AERROR << \"Failed to get plugin msg!\";\n          return;\n        }\n        if (!plugin_manager_->SendMsgToPlugin(iter->dump())) {\n          AERROR << \"Failed to send msg to plugin\";\n        }\n      });",
+        "lookback": "  camera_ws_->RegisterMessageHandler(",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 497,
+        "end_line": 569,
+        "merge_gen_region": null,
+        "confidence": 0.7282145619392395,
+        "hesitated": true
+    }
+]

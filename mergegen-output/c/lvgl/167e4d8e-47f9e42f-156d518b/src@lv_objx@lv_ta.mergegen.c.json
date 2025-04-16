@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        if(ext->cursor.hidden == 0) {\n            lv_disp_t * disp = lv_obj_get_disp(ta);",
+        "b_contents": "        if(ext->cursor.type != LV_CURSOR_NONE && (ext->cursor.type & LV_CURSOR_HIDDEN) == 0) {",
+        "base_contents": "        if(ext->cursor.type != LV_CURSOR_NONE && (ext->cursor.type & LV_CURSOR_HIDDEN) == 0) {\n            lv_disp_t * disp = lv_obj_get_disp(ta);",
+        "res_region": "        if(ext->cursor.hidden == 0) {",
+        "lookback": "            lv_area_t area_tmp;",
+        "lookahead": "            lv_area_t area_tmp;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1583,
+        "end_line": 1591,
+        "merge_gen_region": null,
+        "confidence": 0.7933065891265869,
+        "hesitated": true
+    }
+]

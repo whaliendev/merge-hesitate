@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    sp<gui::ISurfaceComposer> sf(ComposerServiceAIDL::getComposerService());",
+        "b_contents": "    sp<ISurfaceComposer> sf(ComposerService::getComposerService());\n    sp<gui::ISurfaceComposer> sf_aidl(ComposerServiceAIDL::getComposerService());",
+        "base_contents": "    sp<ISurfaceComposer> sf(ComposerService::getComposerService());",
+        "res_region": "    sp<gui::ISurfaceComposer> sf(ComposerServiceAIDL::getComposerService());",
+        "lookback": "    auto displayToken = SurfaceComposerClient::getInternalDisplayToken();",
+        "lookahead": "    auto displayToken = SurfaceComposerClient::getInternalDisplayToken();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 28,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.8599773645401001,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    binder::Status status = sf->getBootDisplayModeSupport(&bootModeSupport);\n    ASSERT_NO_FATAL_FAILURE(status.transactionError());",
+        "b_contents": "    binder::Status status = sf_aidl->getBootDisplayModeSupport(&bootModeSupport);\n    ASSERT_NO_FATAL_FAILURE(status.transactionError());",
+        "base_contents": "    ASSERT_NO_FATAL_FAILURE(sf->getBootDisplayModeSupport(&bootModeSupport));",
+        "res_region": "    binder::Status status = sf->getBootDisplayModeSupport(&bootModeSupport);\n    ASSERT_NO_FATAL_FAILURE(status.transactionError());",
+        "lookback": "    ASSERT_NO_FATAL_FAILURE(status.transactionError());",
+        "lookahead": "    if (bootModeSupport) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 38,
+        "end_line": 46,
+        "merge_gen_region": null,
+        "confidence": 0.8764534592628479,
+        "hesitated": true
+    }
+]

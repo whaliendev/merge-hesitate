@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (*child > 0) {\n\t\twlr_log(L_DEBUG, \"Child process created with pid %d\", *child);\n\t\tworkspace_record_pid(*child);",
+        "b_contents": "\tif (child > 0) {\n\t\twlr_log(WLR_DEBUG, \"Child process created with pid %d\", child);\n\t\t// TODO: add PID to active workspace",
+        "base_contents": "\tif (*child > 0) {\n\t\twlr_log(L_DEBUG, \"Child process created with pid %d\", *child);\n\t\t// TODO: add PID to active workspace",
+        "res_region": "\tif (child > 0) {\n\t\twlr_log(WLR_DEBUG, \"Child process created with pid %d\", child);\n\t\tworkspace_record_pid(child);",
+        "lookback": "\t\twlr_log(WLR_DEBUG, \"Child process created with pid %d\", child);",
+        "lookahead": "\t} else {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 74,
+        "end_line": 86,
+        "merge_gen_region": null,
+        "confidence": 0.8529056906700134,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        button->setNormalizedPosition(Vec2(0.5f, 0.5f));",
+        "b_contents": "        button->setNormalizedPosition(Vec2(0.5, 0.5));\n       ",
+        "base_contents": "        button->setNormalizedPosition(Vec2(0.5, 0.5));",
+        "res_region": "        button->setNormalizedPosition(Vec2(0.5f, 0.5f));\n       ",
+        "lookback": "       ",
+        "lookahead": "        button->setTitleText(\"PLAY GAME\");",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 635,
+        "end_line": 642,
+        "merge_gen_region": null,
+        "confidence": 0.8218371868133545,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button->setZoomScale(0.3f);",
+        "b_contents": "        CCLOG(\"content size should be greater than 0:  width = %f, height = %f\", button->getContentSize().width,\n              button->getContentSize().height);\n        button->setZoomScale(0.3);",
+        "base_contents": "        button->setZoomScale(0.3);",
+        "res_region": "        CCLOG(\"content size should be greater than 0:  width = %f, height = %f\", button->getContentSize().width,\n              button->getContentSize().height);\n        button->setZoomScale(0.3f);",
+        "lookback": "              button->getContentSize().height);",
+        "lookahead": "        button->setPressedActionEnabled(true);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 644,
+        "end_line": 652,
+        "merge_gen_region": null,
+        "confidence": 0.7582149505615234,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"lv_debug.h\"",
+        "b_contents": "#include \"lv_assert.h\"",
+        "base_contents": "",
+        "res_region": "#include \"lv_assert.h\"",
+        "lookback": "#include <string.h>",
+        "lookahead": "#include <string.h>",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 12,
+        "end_line": 17,
+        "merge_gen_region": null,
+        "confidence": 0.786024272441864,
+        "hesitated": true
+    }
+]

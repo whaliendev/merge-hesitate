@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    mMasterVolume = afThreadCallback->masterVolume_l();\n    mMasterMute = afThreadCallback->masterMute_l();\n\n    for (int i = AUDIO_STREAM_MIN; i < AUDIO_STREAM_FOR_POLICY_CNT; ++i) {\n        const audio_stream_type_t stream{static_cast<audio_stream_type_t>(i)};\n        mStreamTypes[stream].volume = 0.0f;\n        mStreamTypes[stream].mute = mAfThreadCallback->streamMute_l(stream);\n    }\n    // Audio patch and call assistant volume are always max\n    mStreamTypes[AUDIO_STREAM_PATCH].volume = 1.0f;\n    mStreamTypes[AUDIO_STREAM_PATCH].mute = false;\n    mStreamTypes[AUDIO_STREAM_CALL_ASSISTANT].volume = 1.0f;\n    mStreamTypes[AUDIO_STREAM_CALL_ASSISTANT].mute = false;\n",
+        "b_contents": "    mMasterVolume = afThreadCallback->masterVolume_l();\n    mMasterMute = afThreadCallback->masterMute_l();",
+        "base_contents": "    mMasterVolume = audioFlinger->masterVolume_l();\n    mMasterMute = audioFlinger->masterMute_l();",
+        "res_region": "    mMasterVolume = afThreadCallback->masterVolume_l();\n    mMasterMute = afThreadCallback->masterMute_l();\n\n    for (int i = AUDIO_STREAM_MIN; i < AUDIO_STREAM_FOR_POLICY_CNT; ++i) {\n        const audio_stream_type_t stream{static_cast<audio_stream_type_t>(i)};\n        mStreamTypes[stream].volume = 0.0f;\n        mStreamTypes[stream].mute = mAfThreadCallback->streamMute_l(stream);\n    }\n    // Audio patch and call assistant volume are always max\n    mStreamTypes[AUDIO_STREAM_PATCH].volume = 1.0f;\n    mStreamTypes[AUDIO_STREAM_PATCH].mute = false;\n    mStreamTypes[AUDIO_STREAM_CALL_ASSISTANT].volume = 1.0f;\n    mStreamTypes[AUDIO_STREAM_CALL_ASSISTANT].mute = false;\n",
+        "lookback": "    mMasterMute = afThreadCallback->masterMute_l();",
+        "lookahead": "    if (mAudioHwDev) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 10742,
+        "end_line": 10763,
+        "merge_gen_region": null,
+        "confidence": 0.8745185136795044,
+        "hesitated": true
+    }
+]

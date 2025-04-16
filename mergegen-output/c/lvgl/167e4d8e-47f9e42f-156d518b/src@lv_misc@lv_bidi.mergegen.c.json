@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "b_contents": "",
+        "base_contents": "    if (bidi_txt) *bidi_txt = buf;",
+        "res_region": "\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "lookback": "    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 192,
+        "end_line": 204,
+        "merge_gen_region": null,
+        "confidence": 0.8319666981697083,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "base_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    lv_bidi_process_paragraph(str_in, bidi_txt? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 206,
+        "end_line": 217,
+        "merge_gen_region": null,
+        "confidence": 0.7456796169281006,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "b_contents": "",
+        "base_contents": "    if (bidi_txt) *bidi_txt = buf;",
+        "res_region": "\n    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "lookback": "    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 245,
+        "end_line": 257,
+        "merge_gen_region": null,
+        "confidence": 0.8319666981697083,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_bidi_process_paragraph(str_in, bidi_txt ? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);\n",
+        "b_contents": "    uint16_t *pos_conv_buf = lv_mem_buf_get(pos_conv_len * sizeof(uint16_t));\n    if(pos_conv_buf == NULL) {\n        lv_mem_buf_release(buf);\n        return (uint16_t) -1;\n    }\n\n    if (bidi_txt) *bidi_txt = buf;",
+        "base_contents": "    uint16_t *pos_conv_buf = (uint16_t*) ((char*)buf + len);\n    lv_bidi_process_paragraph(str_in, bidi_txt ? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);",
+        "res_region": "    lv_bidi_process_paragraph(str_in, bidi_txt ? *bidi_txt: NULL, len, base_dir, pos_conv_buf, pos_conv_len);\n",
+        "lookback": "",
+        "lookahead": "    for (uint16_t i = 0; i < pos_conv_len; i++){",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 259,
+        "end_line": 273,
+        "merge_gen_region": null,
+        "confidence": 0.7523420453071594,
+        "hesitated": true
+    }
+]

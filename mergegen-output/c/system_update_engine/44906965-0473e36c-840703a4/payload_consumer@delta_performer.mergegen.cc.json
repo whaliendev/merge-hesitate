@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      case InstallOperation::PUFFDIFF:\n        // TODO(ahassani): Later add PerformPuffdiffOperation(op, error);\n        op_result = false;",
+        "b_contents": "      case InstallOperation::PUFFDIFF:\n        op_result = PerformPuffDiffOperation(op, error);\n        OP_DURATION_HISTOGRAM(\"PUFFDIFF\", op_start_time);",
+        "base_contents": "      case InstallOperation::IMGDIFF:\n        // TODO(deymo): Replace with PUFFIN operation.\n        op_result = false;",
+        "res_region": "      case InstallOperation::PUFFDIFF:\n        op_result = PerformPuffDiffOperation(op, error);\n        OP_DURATION_HISTOGRAM(\"PUFFDIFF\", op_start_time);",
+        "lookback": "        op_result = PerformPuffDiffOperation(op, error);",
+        "lookahead": "        break;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 784,
+        "end_line": 796,
+        "merge_gen_region": null,
+        "confidence": 0.459699422121048,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    TEST_AND_RETURN_FALSE(utils::PWriteAll(\n        target_fd_, zeros.data(), end_byte - begin_byte, begin_byte));",
+        "b_contents": "    TEST_AND_RETURN_FALSE(utils::PWriteAll(\n        target_fd_, zeros.data(), end_byte - begin_byte, begin_byte));\n  }\n  return true;\n}\n\nbool DeltaPerformer::CalculateAndValidateSourceHash(\n    const InstallOperation& operation, ErrorCode* error) {\n  const uint64_t kMaxBlocksToRead = 256;  // 1MB if block size is 4KB\n  auto total_blocks = utils::BlocksInExtents(operation.src_extents());\n  brillo::Blob buf(std::min(kMaxBlocksToRead, total_blocks) * block_size_);\n  DirectExtentReader reader;\n  TEST_AND_RETURN_FALSE(\n      reader.Init(source_fd_, operation.src_extents(), block_size_));\n  HashCalculator source_hasher;\n  while (total_blocks > 0) {\n    auto read_blocks = std::min(total_blocks, kMaxBlocksToRead);\n    TEST_AND_RETURN_FALSE(reader.Read(buf.data(), read_blocks * block_size_));\n    TEST_AND_RETURN_FALSE(\n        source_hasher.Update(buf.data(), read_blocks * block_size_));\n    total_blocks -= read_blocks;",
+        "base_contents": "    TEST_AND_RETURN_FALSE(\n        utils::PWriteAll(target_fd_, zeros.data(), end_byte - begin_byte, begin_byte));",
+        "res_region": "    TEST_AND_RETURN_FALSE(utils::PWriteAll(\n        target_fd_, zeros.data(), end_byte - begin_byte, begin_byte));\n  }\n  return true;\n}\n\nbool DeltaPerformer::CalculateAndValidateSourceHash(\n    const InstallOperation& operation, ErrorCode* error) {\n  const uint64_t kMaxBlocksToRead = 256;  // 1MB if block size is 4KB\n  auto total_blocks = utils::BlocksInExtents(operation.src_extents());\n  brillo::Blob buf(std::min(kMaxBlocksToRead, total_blocks) * block_size_);\n  DirectExtentReader reader;\n  TEST_AND_RETURN_FALSE(\n      reader.Init(source_fd_, operation.src_extents(), block_size_));\n  HashCalculator source_hasher;\n  while (total_blocks > 0) {\n    auto read_blocks = std::min(total_blocks, kMaxBlocksToRead);\n    TEST_AND_RETURN_FALSE(reader.Read(buf.data(), read_blocks * block_size_));\n    TEST_AND_RETURN_FALSE(\n        source_hasher.Update(buf.data(), read_blocks * block_size_));\n    total_blocks -= read_blocks;",
+        "lookback": "        target_fd_, zeros.data(), end_byte - begin_byte, begin_byte));",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 1204,
+        "end_line": 1232,
+        "merge_gen_region": null,
+        "confidence": 0.5362568497657776,
+        "hesitated": true
+    }
+]

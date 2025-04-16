@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"gtest/gtest_prod.h\"\n#include \"modules/common_msgs/planning_msgs/planning_internal.pb.h\"\n#include \"modules/common_msgs/routing_msgs/routing.pb.h\"",
+        "base_contents": "#include \"gtest/gtest_prod.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/common/vehicle_state/vehicle_state_provider.h\"",
+        "lookahead": "#include \"modules/common/math/quaternion.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 34,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.7922537922859192,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/planning/proto/planning_semantic_map_config.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planning_internal.pb.h\"\n#include \"modules/planning/proto/planning_semantic_map_config.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/planning/tasks/task_factory.h\"",
+        "lookahead": "#include \"modules/planning/reference_line/reference_line_provider.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 53,
+        "end_line": 59,
+        "merge_gen_region": null,
+        "confidence": 0.6609861254692078,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "bool OnLanePlanning::JudgeCarInDeadEndJunction(\n    std::vector<JunctionInfoConstPtr>* junctions,\n    const Vec2d& car_position,\n    JunctionInfoConstPtr* target_junction) {\n  // warning: the car only be the one junction\n  size_t junction_num = junctions->size();\n  if (junction_num <= 0) {\n    return false;\n  }\n  for (size_t i = 0; i < junction_num; ++i) {\n    if (junctions->at(i)->junction().type() ==\n        apollo::hdmap::Junction::DEAD_END) {\n      Polygon2d polygon = junctions->at(i)->polygon();\n      // judge dead end point in the select junction\n      if (polygon.IsPointIn(car_position)) {\n        *target_junction = junctions->at(i);\n        return true;\n      } else {\n        return false;\n      }\n    } else {\n      return false;\n    }\n  }\n  return true;\n}\n\nbool OnLanePlanning::DeadEndHandle(\n  const PointENU& dead_end_point,\n  const VehicleState& vehicle_state) {\n  const hdmap::HDMap* base_map_ptr = hdmap::HDMapUtil::BaseMapPtr();\n  std::vector<JunctionInfoConstPtr> junctions;\n  JunctionInfoConstPtr junction;\n  if (base_map_ptr->GetJunctions(dead_end_point, 1.0, &junctions) != 0) {\n    ADEBUG << \"Fail to get junctions from base_map.\";\n    return false;\n  }\n  if (junctions.size() <= 0) {\n    ADEBUG << \"No junction from map\";\n    return false;\n  }\n  Vec2d car_position;\n  car_position.set_x(vehicle_state.x());\n  car_position.set_y(vehicle_state.y());\n  if (!JudgeCarInDeadEndJunction(&junctions, car_position, &junction)) {\n    ADEBUG << \"Target Dead End not found\";\n    return false;\n  }\n  return true;\n}\n",
+        "base_contents": "bool OnLanePlanning::JudgeCarInDeadEndJunction(\n    std::vector<JunctionInfoConstPtr>* junctions,\n    const Vec2d& car_position,\n    JunctionInfoConstPtr* target_junction) {\n  // warning: the car only be the one junction\n  size_t junction_num = junctions->size();\n  if (junction_num <= 0) {\n    return false;\n  }\n  for (size_t i = 0; i < junction_num; ++i) {\n    if (junctions->at(i)->junction().type() == DEAD_END) {\n      Polygon2d polygon = junctions->at(i)->polygon();\n      // judge dead end point in the select junction\n      if (polygon.IsPointIn(car_position)) {\n        *target_junction = junctions->at(i);\n        return true;\n      } else {\n        return false;\n      }\n    } else {\n      return false;\n    }\n  }\n  return true;\n}\n\nbool OnLanePlanning::DeadEndHandle(\n  const PointENU& dead_end_point,\n  const VehicleState& vehicle_state) {\n  const hdmap::HDMap* base_map_ptr = hdmap::HDMapUtil::BaseMapPtr();\n  std::vector<JunctionInfoConstPtr> junctions;\n  JunctionInfoConstPtr junction;\n  if (base_map_ptr->GetJunctions(dead_end_point, 1.0, &junctions) != 0) {\n    ADEBUG << \"Fail to get junctions from base_map.\";\n    return false;\n  }\n  if (junctions.size() <= 0) {\n    ADEBUG << \"No junction from map\";\n    return false;\n  }\n  Vec2d car_position;\n  car_position.set_x(vehicle_state.x());\n  car_position.set_y(vehicle_state.y());\n  if (!JudgeCarInDeadEndJunction(&junctions, car_position, &junction)) {\n    ADEBUG << \"Target Dead End not found\";\n    return false;\n  }\n  return true;\n}\n",
+        "res_region": "",
+        "lookback": "                             ADCTrajectory* const ptr_trajectory_pb) {",
+        "lookahead": "void OnLanePlanning::RunOnce(const LocalView& local_view,",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 261,
+        "end_line": 365,
+        "merge_gen_region": null,
+        "confidence": 0.5883615016937256,
+        "hesitated": true
+    }
+]

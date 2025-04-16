@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <paths.h>\n#include <stdlib.h>",
+        "base_contents": "#include <paths.h>",
+        "res_region": "#include <paths.h>\n#include <stdlib.h>",
+        "lookback": "#include <stdlib.h>",
+        "lookahead": "#include <string.h>",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 23,
+        "end_line": 29,
+        "merge_gen_region": null,
+        "confidence": 0.4635116457939148,
+        "hesitated": true
+    }
+]

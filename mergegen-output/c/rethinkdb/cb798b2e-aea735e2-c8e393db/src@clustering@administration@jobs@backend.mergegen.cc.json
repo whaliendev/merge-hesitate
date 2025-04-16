@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    cluster_semilattice_metadata_t metadata = semilattice_view->get();\n    for (auto const &job_report : job_reports) {\n        ql::datum_t row;\n        if (job_report.second.to_datum(identifier_format, server_config_client,\n                table_meta_client, metadata, &row)) {\n            rows_out->push_back(row);\n        }",
+        "b_contents": "    rows_out->reserve(job_reports.size());\n    for (auto &&job_report : job_reports) {\n        rows_out->push_back(std::move(job_report.second));",
+        "base_contents": "    cluster_semilattice_metadata_t metadata = semilattice_view->get();\n    for (auto const &job_report : job_reports) {\n        ql::datum_t row;\n        if (job_report.second.to_datum(\n                identifier_format, server_config_client, metadata, &row)) {\n            rows_out->push_back(row);\n        }",
+        "res_region": "    rows_out->reserve(job_reports.size());\n    for (auto &&job_report : job_reports) {\n        rows_out->push_back(std::move(job_report.second));",
+        "lookback": "    for (auto &&job_report : job_reports) {",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 130,
+        "end_line": 150,
+        "merge_gen_region": null,
+        "confidence": 0.6431146264076233,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::string job_report_type;\n    uuid_u job_report_id;\n    if (convert_job_type_and_id_from_datum(\n            primary_key, &job_report_type, &job_report_id)) {\n        std::map<uuid_u, job_report_t> job_reports;\n        get_all_job_reports(&ct_interruptor, &job_reports);\n\n        std::map<uuid_u, job_report_t>::const_iterator iterator =\n            job_reports.find(job_report_id);\n        if (iterator != job_reports.end() && iterator->second.type == job_report_type) {\n            cluster_semilattice_metadata_t metadata = semilattice_view->get();\n            ql::datum_t row;\n            if (iterator->second.to_datum(identifier_format, server_config_client,\n                    table_meta_client, metadata, &row)) {\n                *row_out = std::move(row);\n            }",
+        "b_contents": "    std::string job_type;\n    uuid_u job_id;\n    if (convert_job_type_and_id_from_datum(primary_key, &job_type, &job_id)) {\n        std::map<uuid_u, ql::datum_t> job_reports;\n        get_all_job_reports(\n            &ct_interruptor,\n            &job_reports);\n\n        auto const iterator = job_reports.find(job_id);\n        if (iterator != job_reports.end() &&\n            iterator->second.get_field(\"type\").as_str().to_std() == job_type) {\n            *row_out = std::move(iterator->second);",
+        "base_contents": "    std::string job_report_type;\n    uuid_u job_report_id;\n    if (convert_job_type_and_id_from_datum(\n            primary_key, &job_report_type, &job_report_id)) {\n        std::map<uuid_u, job_report_t> job_reports;\n        get_all_job_reports(&ct_interruptor, &job_reports);\n\n        std::map<uuid_u, job_report_t>::const_iterator iterator =\n            job_reports.find(job_report_id);\n        if (iterator != job_reports.end() && iterator->second.type == job_report_type) {\n            cluster_semilattice_metadata_t metadata = semilattice_view->get();\n            ql::datum_t row;\n            if (iterator->second.to_datum(\n                   identifier_format, server_config_client, metadata, &row)) {\n                *row_out = std::move(row);\n            }",
+        "res_region": "    std::string job_type;\n    uuid_u job_id;\n    if (convert_job_type_and_id_from_datum(primary_key, &job_type, &job_id)) {\n        std::map<uuid_u, ql::datum_t> job_reports;\n        get_all_job_reports(\n            &ct_interruptor,\n            &job_reports);\n\n        auto const iterator = job_reports.find(job_id);\n        if (iterator != job_reports.end() &&\n            iterator->second.get_field(\"type\").as_str().to_std() == job_type) {\n            *row_out = std::move(iterator->second);",
+        "lookback": "    uuid_u job_id;",
+        "lookahead": "        }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 165,
+        "end_line": 212,
+        "merge_gen_region": null,
+        "confidence": 0.787599503993988,
+        "hesitated": true
+    }
+]

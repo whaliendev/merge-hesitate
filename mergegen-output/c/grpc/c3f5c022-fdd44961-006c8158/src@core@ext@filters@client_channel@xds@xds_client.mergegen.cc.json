@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      ClusterNamesForRequest(), EdsServiceNamesForRequest(), &lds_update,\n      &rds_update, &cds_update_map, &eds_update_map, &version, &nonce,\n      &type_url);",
+        "b_contents": "      xds_client->xds_routing_enabled_, ads_calld->ClusterNamesForRequest(),\n      ads_calld->EdsServiceNamesForRequest(), &lds_update, &rds_update,\n      &cds_update_map, &eds_update_map, &version, &nonce, &type_url);",
+        "base_contents": "      ads_calld->ClusterNamesForRequest(),\n      ads_calld->EdsServiceNamesForRequest(), &lds_update, &rds_update,\n      &cds_update_map, &eds_update_map, &version, &nonce, &type_url);",
+        "res_region": "      xds_client()->xds_routing_enabled_, ClusterNamesForRequest(),\n      EdsServiceNamesForRequest(), &lds_update, &rds_update, &cds_update_map,\n      &eds_update_map, &version, &nonce, &type_url);",
+        "lookback": "      EdsServiceNamesForRequest(), &lds_update, &rds_update, &cds_update_map,",
+        "lookahead": "  grpc_slice_unref_internal(response_slice);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1241,
+        "end_line": 1253,
+        "merge_gen_region": null,
+        "confidence": 0.7231130003929138,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      work_serializer_(std::move(work_serializer)),",
+        "b_contents": "      xds_routing_enabled_(GetXdsRoutingEnabled(channel_args)),\n      combiner_(GRPC_COMBINER_REF(combiner, \"xds_client\")),",
+        "base_contents": "      combiner_(GRPC_COMBINER_REF(combiner, \"xds_client\")),",
+        "res_region": "      xds_routing_enabled_(GetXdsRoutingEnabled(channel_args)),\n      work_serializer_(std::move(work_serializer)),",
+        "lookback": "      work_serializer_(std::move(work_serializer)),",
+        "lookahead": "      interested_parties_(interested_parties),",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1816,
+        "end_line": 1823,
+        "merge_gen_region": null,
+        "confidence": 0.711600124835968,
+        "hesitated": true
+    }
+]

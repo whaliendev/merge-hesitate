@@ -1,0 +1,72 @@
+[
+    {
+        "a_contents": "        !EventLoopManagerSingleton::get()\n             ->getSettingManager()\n             .getSettingEnabled(Setting::LOCATION)) {",
+        "b_contents": "        (EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n             Setting::LOCATION) == SettingState::DISABLED)) {",
+        "base_contents": "        (getSettingState(Setting::LOCATION) == SettingState::DISABLED)) {",
+        "res_region": "        !EventLoopManagerSingleton::get()\n             ->getSettingManager()\n             .getSettingEnabled(Setting::LOCATION)) {",
+        "lookback": "             ->getSettingManager()",
+        "lookahead": "      freeReportEventCallback(reportEventType, data);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 267,
+        "end_line": 276,
+        "merge_gen_region": null,
+        "confidence": 0.8597118854522705,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool enabled =\n      EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::LOCATION);",
+        "b_contents": "  SettingState locationSetting =\n      EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n          Setting::LOCATION);",
+        "base_contents": "  SettingState locationSetting = getSettingState(Setting::LOCATION);",
+        "res_region": "  bool enabled =\n      EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(\n          Setting::LOCATION);",
+        "lookback": "      EventLoopManagerSingleton::get()->getSettingManager().getSettingEnabled(",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 306,
+        "end_line": 316,
+        "merge_gen_region": "File&EventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput&",
+        "confidence": 0.8915971517562866,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    if (enable && !EventLoopManagerSingleton::get()\n                       ->getSettingManager()\n                       .getSettingEnabled(Setting::LOCATION)) {",
+        "b_contents": "    if (enable &&\n        EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n            Setting::LOCATION) == SettingState::DISABLED) {",
+        "base_contents": "    if (enable &&\n        getSettingState(Setting::LOCATION) == SettingState::DISABLED) {",
+        "res_region": "    if (enable && !EventLoopManagerSingleton::get()\n                       ->getSettingManager()\n                       .getSettingEnabled(Setting::LOCATION)) {",
+        "lookback": "                       ->getSettingManager()",
+        "lookahead": "      // Treat as success but post async failure per API.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 398,
+        "end_line": 409,
+        "merge_gen_region": "->Setting->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->",
+        "confidence": 0.8918901681900024,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "      if (!EventLoopManagerSingleton::get()\n               ->getSettingManager()\n               .getSettingEnabled(Setting::LOCATION)) {",
+        "b_contents": "      if (EventLoopManagerSingleton::get()->getSettingManager().getSettingState(\n              Setting::LOCATION) == SettingState::DISABLED) {",
+        "base_contents": "      if (getSettingState(Setting::LOCATION) == SettingState::DISABLED) {",
+        "res_region": "      if (!EventLoopManagerSingleton::get()\n               ->getSettingManager()\n               .getSettingEnabled(Setting::LOCATION)) {",
+        "lookback": "               ->getSettingManager()",
+        "lookahead": "        postAsyncResultEventFatal(",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 714,
+        "end_line": 723,
+        "merge_gen_region": null,
+        "confidence": 0.8631391525268555,
+        "hesitated": true
+    }
+]

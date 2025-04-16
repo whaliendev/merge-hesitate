@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#error \"lv_switch: lv_slider is required. Enable it in lv_conf.h (LV_USE_SLIDER  1)\"",
+        "b_contents": "#error \"lv_sw: lv_slider is required. Enable it in lv_conf.h (LV_USE_SLIDER 1)\"",
+        "base_contents": "#error \"lv_sw: lv_slider is required. Enable it in lv_conf.h (LV_USE_SLIDER  1)\"",
+        "res_region": "#error \"lv_switch: lv_slider is required. Enable it in lv_conf.h (LV_USE_SLIDER  1)\"",
+        "lookback": "#endif",
+        "lookahead": "#endif",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 21,
+        "end_line": 27,
+        "merge_gen_region": null,
+        "confidence": 0.6043941974639893,
+        "hesitated": true
+    },
+    {
+        "a_contents": "lv_obj_t * lv_switch_create(lv_obj_t * parent, const lv_obj_t * copy);",
+        "b_contents": "lv_obj_t * lv_switch_create(lv_obj_t * par, const lv_obj_t * copy);\n\n/*=====================\n * Setter functions\n *====================*/\n\n/**\n * Turn ON the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n */\nvoid lv_switch_on(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Turn OFF the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n */\nvoid lv_switch_off(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Toggle the position of the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n * @return resulting state of the switch.\n */\nbool lv_switch_toggle(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Set the animation time of the switch\n * @param sw pointer to a switch object\n * @param anim_time animation time\n * @return style pointer to a style\n */\nstatic inline void lv_switch_set_anim_time(lv_obj_t * sw, uint16_t anim_time)\n{\n    lv_bar_set_anim_time(sw, anim_time);\n}\n\n/*=====================\n * Getter functions\n *====================*/\n\n/**\n * Get the state of a switch\n * @param sw pointer to a switch object\n * @return false: OFF; true: ON\n */\nstatic inline bool lv_switch_get_state(const lv_obj_t * sw)\n{\n    return lv_bar_get_value(sw) == 1 ? true : false;\n}\n\n/**\n * Get the animation time of the switch\n * @param sw pointer to a switch object\n * @return style pointer to a style\n */\nstatic inline uint16_t lv_switch_get_anim_time(const lv_obj_t * sw)\n{\n    return lv_bar_get_anim_time(sw);\n}",
+        "base_contents": "lv_obj_t * lv_switch_create(lv_obj_t * par, const lv_obj_t * copy);\n\n/*=====================\n * Setter functions\n *====================*/\n\n/**\n * Turn ON the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n */\nvoid lv_switch_on(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Turn OFF the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n */\nvoid lv_switch_off(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Toggle the position of the switch\n * @param sw pointer to a switch object\n * @param anim LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately\n * @return resulting state of the switch.\n */\nbool lv_switch_toggle(lv_obj_t * sw, lv_anim_enable_t anim);\n\n/**\n * Set the animation time of the switch\n * @param sw pointer to a  switch object\n * @param anim_time animation time\n * @return style pointer to a style\n */\nstatic inline void lv_switch_set_anim_time(lv_obj_t * sw, uint16_t anim_time)\n{\n    lv_bar_set_anim_time(sw, anim_time);\n}\n\n/*=====================\n * Getter functions\n *====================*/\n\n/**\n * Get the state of a switch\n * @param sw pointer to a switch object\n * @return false: OFF; true: ON\n */\nstatic inline bool lv_switch_get_state(const lv_obj_t * sw)\n{\n    return lv_bar_get_value(sw) == 1 ? true : false;\n}\n\n/**\n * Get the animation time of the switch\n * @param sw pointer to a  switch object\n * @return style pointer to a style\n */\nstatic inline uint16_t lv_switch_get_anim_time(const lv_obj_t * sw)\n{\n    return lv_bar_get_anim_time(sw);\n}",
+        "res_region": "lv_obj_t * lv_switch_create(lv_obj_t * parent, const lv_obj_t * copy);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 58,
+        "end_line": 186,
+        "merge_gen_region": null,
+        "confidence": 0.5679952502250671,
+        "hesitated": true
+    }
+]

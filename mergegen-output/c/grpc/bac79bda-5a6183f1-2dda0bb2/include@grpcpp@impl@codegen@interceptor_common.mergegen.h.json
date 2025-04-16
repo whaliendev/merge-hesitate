@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "  void SetSendMessage(ByteBuffer* buf, bool* fail_send_message) {\n    send_message_ = buf;\n    fail_send_message_ = fail_send_message;\n  }",
+        "b_contents": "  void SetSendMessage(ByteBuffer* buf, const void* msg) {\n    send_message_ = buf;\n    orig_send_message_ = msg;\n  }",
+        "base_contents": "  void SetSendMessage(ByteBuffer* buf) { send_message_ = buf; }",
+        "res_region": "  void SetSendMessage(ByteBuffer* buf, const void* msg,\n                      bool* fail_send_message) {\n    send_message_ = buf;\n    orig_send_message_ = msg;\n    fail_send_message_ = fail_send_message;\n  }",
+        "lookback": "                      bool* fail_send_message) {",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 127,
+        "end_line": 139,
+        "merge_gen_region": null,
+        "confidence": 0.814143717288971,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool* fail_send_message_ = nullptr;",
+        "b_contents": "  const void* orig_send_message_ = nullptr;",
+        "base_contents": "",
+        "res_region": "  bool* fail_send_message_ = nullptr;\n  const void* orig_send_message_ = nullptr;",
+        "lookback": "  const void* orig_send_message_ = nullptr;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 358,
+        "end_line": 363,
+        "merge_gen_region": null,
+        "confidence": 0.8702942728996277,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool GetSendMessageStatus() override {\n    GPR_CODEGEN_ASSERT(\n        false &&\n        \"It is illegal to call GetSendMessageStatus on a method which \"\n        \"has a Cancel notification\");\n    return false;\n  }\n",
+        "b_contents": "  const void* GetSendMessage() override {\n    GPR_CODEGEN_ASSERT(\n        false &&\n        \"It is illegal to call GetOriginalSendMessage on a method which \"\n        \"has a Cancel notification\");\n    return nullptr;\n  }\n",
+        "base_contents": "",
+        "res_region": "  bool GetSendMessageStatus() override {\n    GPR_CODEGEN_ASSERT(\n        false &&\n        \"It is illegal to call GetSendMessageStatus on a method which \"\n        \"has a Cancel notification\");\n    return false;\n  }\n\n  const void* GetSendMessage() override {\n    GPR_CODEGEN_ASSERT(\n        false &&\n        \"It is illegal to call GetOriginalSendMessage on a method which \"\n        \"has a Cancel notification\");\n    return nullptr;\n  }\n",
+        "lookback": "    GPR_CODEGEN_ASSERT(",
+        "lookahead": "  std::multimap<grpc::string, grpc::string>* GetSendInitialMetadata() override {",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 416,
+        "end_line": 435,
+        "merge_gen_region": " GetStatus override GPRCODEbool*SendMessage override GPRCODEbool*SendMessageZero*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
+        "confidence": 0.9277838468551636,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    PlatformBleBase::flushCallback,\n    PlatformBleBase::handleBtSnoopLog,",
+        "b_contents": "",
+        "base_contents": "    PlatformBleBase::handleBtSnoopLog,",
+        "res_region": "    PlatformBleBase::flushCallback,\n    PlatformBleBase::handleBtSnoopLog,",
+        "lookback": "    PlatformBleBase::handleBtSnoopLog,",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 32,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.7947011590003967,
+        "hesitated": true
+    },
+    {
+        "a_contents": "bool PlatformBle::flushAsync() {\n  if (mBleApi != nullptr) {\n    prePalApiCall(PalType::BLE);\n    return mBleApi->flush();\n  } else {\n    return false;\n  }\n}\n\nvoid PlatformBleBase::flushCallback(uint8_t errorCode) {\n  EventLoopManagerSingleton::get()->getBleRequestManager().handleFlushComplete(\n      errorCode);\n}\n\nvoid PlatformBleBase::handleBtSnoopLog(bool isTxToBtController,\n                                       const uint8_t *buffer, size_t size) {\n  BtSnoopDirection direction =\n      isTxToBtController ? BtSnoopDirection::OUTGOING_TO_ARBITER\n                         : BtSnoopDirection::INCOMING_FROM_BT_CONTROLLER;\n  chrePlatformBtSnoopLog(direction, buffer, size);\n}\n",
+        "b_contents": "",
+        "base_contents": "void PlatformBleBase::handleBtSnoopLog(bool isTxToBtController,\n                                       const uint8_t *buffer, size_t size) {\n  BtSnoopDirection direction =\n      isTxToBtController ? BtSnoopDirection::OUTGOING_TO_ARBITER\n                         : BtSnoopDirection::INCOMING_FROM_BT_CONTROLLER;\n  chrePlatformBtSnoopLog(direction, buffer, size);\n}\n",
+        "res_region": "bool PlatformBle::flushAsync() {\n  if (mBleApi != nullptr) {\n    prePalApiCall(PalType::BLE);\n    return mBleApi->flush();\n  } else {\n    return false;\n  }\n}\n\nvoid PlatformBleBase::flushCallback(uint8_t errorCode) {\n  EventLoopManagerSingleton::get()->getBleRequestManager().handleFlushComplete(\n      errorCode);\n}\n\nvoid PlatformBleBase::handleBtSnoopLog(bool isTxToBtController,\n                                       const uint8_t *buffer, size_t size) {\n  BtSnoopDirection direction =\n      isTxToBtController ? BtSnoopDirection::OUTGOING_TO_ARBITER\n                         : BtSnoopDirection::INCOMING_FROM_BT_CONTROLLER;\n  chrePlatformBtSnoopLog(direction, buffer, size);\n}\n",
+        "lookback": "  if (mBleApi != nullptr) {",
+        "lookahead": "}  // namespace chre",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 149,
+        "end_line": 182,
+        "merge_gen_region": null,
+        "confidence": 0.7440717220306396,
+        "hesitated": true
+    }
+]

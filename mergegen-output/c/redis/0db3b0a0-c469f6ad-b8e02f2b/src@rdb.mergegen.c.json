@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            size_t private_dirty = zmalloc_get_private_dirty(-1);\n\n            if (private_dirty) {\n                serverLog(LL_NOTICE,\n                    \"RDB: %zu MB of memory used by copy-on-write\",\n                    private_dirty/(1024*1024));\n            }\n\n            server.child_info_data.cow_size = private_dirty;\n            sendChildInfo(CHILD_INFO_TYPE_RDB);",
+        "b_contents": "            sendChildCOWInfo(CHILD_INFO_TYPE_RDB, \"RDB\");\n\n            /* If we are returning OK, at least one slave was served\n             * with the RDB file as expected, so we need to send a report\n             * to the parent via the pipe. The format of the message is:\n             *\n             * <len> <slave[0].id> <slave[0].error> ...\n             *\n             * len, slave IDs, and slave errors, are all uint64_t integers,\n             * so basically the reply is composed of 64 bits for the len field\n             * plus 2 additional 64 bit integers for each entry, for a total\n             * of 'len' entries.\n             *\n             * The 'id' represents the slave's client ID, so that the master\n             * can match the report with a specific slave, and 'error' is\n             * set to 0 if the replication process terminated with a success\n             * or the error code if an error occurred. */\n            void *msg = zmalloc(sizeof(uint64_t)*(1+2*numfds));\n            uint64_t *len = msg;\n            uint64_t *ids = len+1;\n            int j, msglen;\n\n            *len = numfds;\n            for (j = 0; j < numfds; j++) {\n                *ids++ = clientids[j];\n                *ids++ = slave_sockets.io.fdset.state[j];\n            }\n\n            /* Write the message to the parent. If we have no good slaves or\n             * we are unable to transfer the message to the parent, we exit\n             * with an error so that the parent will abort the replication\n             * process with all the childre that were waiting. */\n            msglen = sizeof(uint64_t)*(1+2*numfds);\n            if (*len == 0 ||\n                write(server.rdb_pipe_write_result_to_parent,msg,msglen)\n                != msglen)\n            {\n                retval = C_ERR;\n            }\n            zfree(msg);",
+        "base_contents": "            size_t private_dirty = zmalloc_get_private_dirty(-1);\n\n            if (private_dirty) {\n                serverLog(LL_NOTICE,\n                    \"RDB: %zu MB of memory used by copy-on-write\",\n                    private_dirty/(1024*1024));\n            }\n\n            server.child_info_data.cow_size = private_dirty;\n            sendChildInfo(CHILD_INFO_TYPE_RDB);\n\n            /* If we are returning OK, at least one slave was served\n             * with the RDB file as expected, so we need to send a report\n             * to the parent via the pipe. The format of the message is:\n             *\n             * <len> <slave[0].id> <slave[0].error> ...\n             *\n             * len, slave IDs, and slave errors, are all uint64_t integers,\n             * so basically the reply is composed of 64 bits for the len field\n             * plus 2 additional 64 bit integers for each entry, for a total\n             * of 'len' entries.\n             *\n             * The 'id' represents the slave's client ID, so that the master\n             * can match the report with a specific slave, and 'error' is\n             * set to 0 if the replication process terminated with a success\n             * or the error code if an error occurred. */\n            void *msg = zmalloc(sizeof(uint64_t)*(1+2*numfds));\n            uint64_t *len = msg;\n            uint64_t *ids = len+1;\n            int j, msglen;\n\n            *len = numfds;\n            for (j = 0; j < numfds; j++) {\n                *ids++ = clientids[j];\n                *ids++ = slave_sockets.io.fdset.state[j];\n            }\n\n            /* Write the message to the parent. If we have no good slaves or\n             * we are unable to transfer the message to the parent, we exit\n             * with an error so that the parent will abort the replication\n             * process with all the childre that were waiting. */\n            msglen = sizeof(uint64_t)*(1+2*numfds);\n            if (*len == 0 ||\n                write(server.rdb_pipe_write_result_to_parent,msg,msglen)\n                != msglen)\n            {\n                retval = C_ERR;\n            }\n            zfree(msg);",
+        "res_region": "            sendChildCOWInfo(CHILD_INFO_TYPE_RDB, \"RDB\");\n        }\n",
+        "lookback": "        }",
+        "lookahead": "        rioFreeFd(&rdb);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2388,
+        "end_line": 2490,
+        "merge_gen_region": null,
+        "confidence": 0.2873474061489105,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            close(server.rdb_pipe_write); /* close write in parent so that it can detect the close on the child. */\n            if (aeCreateFileEvent(server.el, server.rdb_pipe_read, AE_READABLE, rdbPipeReadHandler,NULL) == AE_ERR) {\n                serverPanic(\"Unrecoverable error creating server.rdb_pipe_read file event.\");\n            }\n            updateDictResizePolicy();",
+        "b_contents": "",
+        "base_contents": "            updateDictResizePolicy();",
+        "res_region": "            close(server.rdb_pipe_write); /* close write in parent so that it can detect the close on the child. */\n            if (aeCreateFileEvent(server.el, server.rdb_pipe_read, AE_READABLE, rdbPipeReadHandler,NULL) == AE_ERR) {\n                serverPanic(\"Unrecoverable error creating server.rdb_pipe_read file event.\");\n            }",
+        "lookback": "            if (aeCreateFileEvent(server.el, server.rdb_pipe_read, AE_READABLE, rdbPipeReadHandler,NULL) == AE_ERR) {",
+        "lookahead": "        }",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 2524,
+        "end_line": 2533,
+        "merge_gen_region": null,
+        "confidence": 0.7439526915550232,
+        "hesitated": true
+    }
+]

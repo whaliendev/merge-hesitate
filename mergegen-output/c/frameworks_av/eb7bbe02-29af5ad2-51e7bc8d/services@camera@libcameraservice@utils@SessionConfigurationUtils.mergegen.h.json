@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    const std::string &logicalCameraId, const CameraMetadata &deviceInfo,\n    bool isCompositeJpegRDisabled, metadataGetter getMetadata,\n    const std::vector<std::string> &physicalCameraIds,",
+        "b_contents": "    const std::string &logicalCameraId, const CameraMetadata &deviceInfo,\n    metadataGetter getMetadata, const std::vector<std::string> &physicalCameraIds,",
+        "base_contents": "    const String8 &logicalCameraId, const CameraMetadata &deviceInfo,\n    metadataGetter getMetadata, const std::vector<std::string> &physicalCameraIds,",
+        "res_region": "    const std::string &logicalCameraId, const CameraMetadata &deviceInfo,\n    bool isCompositeJpegRDisabled, metadataGetter getMetadata,\n    const std::vector<std::string> &physicalCameraIds,",
+        "lookback": "    bool isCompositeJpegRDisabled, metadataGetter getMetadata,",
+        "lookahead": "    aidl::android::hardware::camera::device::StreamConfiguration &streamConfiguration,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 142,
+        "end_line": 152,
+        "merge_gen_region": null,
+        "confidence": 0.7143601775169373,
+        "hesitated": true
+    }
+]

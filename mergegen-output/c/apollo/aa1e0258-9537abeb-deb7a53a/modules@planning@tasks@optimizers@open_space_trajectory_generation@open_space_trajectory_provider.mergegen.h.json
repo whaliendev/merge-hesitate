@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/basic_msgs/pnc_point.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n",
+        "b_contents": "#include \"modules/common_msgs/basic_msgs/pnc_point.pb.h\"",
+        "base_contents": "#include \"modules/common/proto/pnc_point.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/basic_msgs/pnc_point.pb.h\"\n#include \"modules/common_msgs/planning_msgs/planning.pb.h\"\n",
+        "lookback": "#include \"modules/common_msgs/planning_msgs/planning.pb.h\"",
+        "lookahead": "#include \"modules/common/status/status.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.8625897765159607,
+        "hesitated": true
+    }
+]

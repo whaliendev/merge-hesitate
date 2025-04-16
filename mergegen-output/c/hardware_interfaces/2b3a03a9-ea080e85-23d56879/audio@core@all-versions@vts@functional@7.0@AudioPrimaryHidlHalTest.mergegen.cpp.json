@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    const bool isNewDeviceLaunchingOnTPlus = property_get_int32(\"ro.vendor.api_level\", 0) >= 33;\n    // See test instantiation, only offload MP3 mix ports are used.",
+        "b_contents": "    const bool isNewDeviceLaunchingOnTPlus = property_get_int32(\"ro.vendor.api_level\", 0) >= 33;",
+        "base_contents": "",
+        "res_region": "    const bool isNewDeviceLaunchingOnTPlus = property_get_int32(\"ro.vendor.api_level\", 0) >= 33;\n    // See test instantiation, only offload MP3 mix ports are used.",
+        "lookback": "    // See test instantiation, only offload MP3 mix ports are used.",
+        "lookahead": "    if (std::find_if(flags.begin(), flags.end(), [](const auto& flag) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 939,
+        "end_line": 945,
+        "merge_gen_region": null,
+        "confidence": 0.7882952094078064,
+        "hesitated": true
+    }
+]

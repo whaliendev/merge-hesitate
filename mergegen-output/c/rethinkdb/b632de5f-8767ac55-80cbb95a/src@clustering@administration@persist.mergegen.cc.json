@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "               == auth_metadata_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return superblock_version_t::post_1_16;",
+        "b_contents": "               == auth_metadata_magic_t<cluster_version_t::v2_0>::value) {\n        return cluster_version_t::v2_0;\n    } else if (sb->magic\n               == auth_metadata_magic_t<cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "base_contents": "               == auth_metadata_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return cluster_version_t::v2_0_is_latest_disk;",
+        "res_region": "               == auth_metadata_magic_t<cluster_version_t::v2_0>::value) {\n        return superblock_version_t::post_1_16;\n    } else if (sb->magic\n               == auth_metadata_magic_t<cluster_version_t::v2_1_is_latest_disk>::value) {\n        return superblock_version_t::post_1_16;",
+        "lookback": "        return superblock_version_t::post_1_16;",
+        "lookahead": "    } else {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 110,
+        "end_line": 122,
+        "merge_gen_region": null,
+        "confidence": 0.7764814496040344,
+        "hesitated": true
+    },
+    {
+        "a_contents": "superblock_version_t\ncluster_superblock_version(const cluster_metadata_superblock_t *sb) {\n    if (sb->magic == v1_13_metadata_magic) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_14>::value) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_15>::value) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_16>::value) {\n        return superblock_version_t::post_1_16;\n    } else if (\n        sb->magic\n        == cluster_metadata_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return superblock_version_t::post_1_16;",
+        "b_contents": "\ncluster_version_t cluster_superblock_version(const cluster_metadata_superblock_t *sb) {\n    if (sb->magic\n        == cluster_metadata_magic_t<cluster_version_t::v1_13>::value) {\n        return cluster_version_t::v1_13;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_14>::value) {\n        return cluster_version_t::v1_14;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_15>::value) {\n        return cluster_version_t::v1_15;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_16>::value) {\n        return cluster_version_t::v1_16;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v2_0>::value) {\n        return cluster_version_t::v2_0;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v2_1_is_latest_disk>::value) {\n        return cluster_version_t::v2_1_is_latest_disk;",
+        "base_contents": "\ncluster_version_t cluster_superblock_version(const cluster_metadata_superblock_t *sb) {\n    if (sb->magic\n        == cluster_metadata_magic_t<cluster_version_t::v1_13>::value) {\n        return cluster_version_t::v1_13;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_14>::value) {\n        return cluster_version_t::v1_14;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_15>::value) {\n        return cluster_version_t::v1_15;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v1_16>::value) {\n        return cluster_version_t::v1_16;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v2_0_is_latest_disk>::value) {\n        return cluster_version_t::v2_0_is_latest_disk;",
+        "res_region": "<<<<<<< HEAD\nsuperblock_version_t\ncluster_superblock_version(const cluster_metadata_superblock_t *sb) {\n    if (sb->magic == v1_13_metadata_magic) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_14>::value) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_15>::value) {\n        return superblock_version_t::pre_1_16;\n    } else if (sb->magic == cluster_metadata_magic_t<cluster_version_t::v1_16>::value) {\n        return superblock_version_t::post_1_16;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<cluster_version_t::v2_0>::value) {\n        return superblock_version_t::post_1_16;\n    } else if (sb->magic\n               == cluster_metadata_magic_t<\n                   cluster_version_t::v2_1_is_latest_disk>::value) {\n        return superblock_version_t::post_1_16;",
+        "lookback": "superblock_version_t",
+        "lookahead": "    } else {",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 168,
+        "end_line": 222,
+        "merge_gen_region": null,
+        "confidence": 0.8493669629096985,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                return deserialize<cluster_version_t::LATEST_DISK>(s, &old_metadata);",
+        "b_contents": "                switch (v) {\n                    case cluster_version_t::v1_13:\n                        return deserialize<cluster_version_t::v1_13>(s, &old_metadata);\n                    case cluster_version_t::v1_13_2:\n                        return deserialize<cluster_version_t::v1_13_2>(s, &old_metadata);\n                    case cluster_version_t::v1_14:\n                        return deserialize<cluster_version_t::v1_14>(s, &old_metadata);\n                    case cluster_version_t::v1_15:\n                        return deserialize<cluster_version_t::v1_15>(s, &old_metadata);\n                    case cluster_version_t::v1_16:\n                    case cluster_version_t::v2_0:\n                    case cluster_version_t::v2_1_is_latest:\n                    default:\n                        unreachable();\n                }",
+        "base_contents": "                switch (v) {\n                    case cluster_version_t::v1_13:\n                        return deserialize<cluster_version_t::v1_13>(s, &old_metadata);\n                    case cluster_version_t::v1_13_2:\n                        return deserialize<cluster_version_t::v1_13_2>(s, &old_metadata);\n                    case cluster_version_t::v1_14:\n                        return deserialize<cluster_version_t::v1_14>(s, &old_metadata);\n                    case cluster_version_t::v1_15:\n                        return deserialize<cluster_version_t::v1_15>(s, &old_metadata);\n                    case cluster_version_t::v1_16:\n                    case cluster_version_t::v2_0_is_latest:\n                    default:\n                        unreachable();\n                }",
+        "res_region": "                return deserialize<cluster_version_t::LATEST_DISK>(s, &old_metadata);",
+        "lookback": "            });",
+        "lookahead": "            });",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 249,
+        "end_line": 282,
+        "merge_gen_region": null,
+        "confidence": 0.7918825149536133,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                return deserialize<cluster_version_t::v2_0_is_latest>(s, out);",
+        "b_contents": "                switch (v) {\n                    case cluster_version_t::v2_1_is_latest:\n                        return deserialize<cluster_version_t::v2_1_is_latest>(s, out);\n                    case cluster_version_t::v2_0:\n                        return deserialize<cluster_version_t::v2_0>(s, out);\n                    case cluster_version_t::v1_16:\n                        return deserialize<cluster_version_t::v1_16>(s, out);\n                    case cluster_version_t::v1_13:\n                    case cluster_version_t::v1_13_2:\n                    case cluster_version_t::v1_14:\n                    case cluster_version_t::v1_15:\n                    default:\n                        unreachable();\n                }",
+        "base_contents": "                switch (v) {\n                    case cluster_version_t::v2_0_is_latest:\n                        return deserialize<cluster_version_t::v2_0_is_latest>(s, out);\n                    case cluster_version_t::v1_16:\n                        return deserialize<cluster_version_t::v1_16>(s, out);\n                    case cluster_version_t::v1_13:\n                    case cluster_version_t::v1_13_2:\n                    case cluster_version_t::v1_14:\n                    case cluster_version_t::v1_15:\n                    default:\n                        unreachable();\n                }",
+        "res_region": "                return deserialize<cluster_version_t::v2_0_is_latest>(s, out);",
+        "lookback": "            });",
+        "lookahead": "            });",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 296,
+        "end_line": 326,
+        "merge_gen_region": null,
+        "confidence": 0.49688857793807983,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                return deserialize<cluster_version_t::LATEST_DISK>(s, &old_metadata);",
+        "b_contents": "                switch (v) {\n                    case cluster_version_t::v1_13:\n                        return deserialize<cluster_version_t::v1_13>(s, &old_metadata);\n                    case cluster_version_t::v1_13_2:\n                        return deserialize<cluster_version_t::v1_13_2>(s, &old_metadata);\n                    case cluster_version_t::v1_14:\n                        return deserialize<cluster_version_t::v1_14>(s, &old_metadata);\n                    case cluster_version_t::v1_15:\n                        return deserialize<cluster_version_t::v1_15>(s, &old_metadata);\n                    case cluster_version_t::v1_16:\n                    case cluster_version_t::v2_0:\n                    case cluster_version_t::v2_1_is_latest:\n                    default:\n                        unreachable();\n                }",
+        "base_contents": "                switch (v) {\n                    case cluster_version_t::v1_13:\n                        return deserialize<cluster_version_t::v1_13>(s, &old_metadata);\n                    case cluster_version_t::v1_13_2:\n                        return deserialize<cluster_version_t::v1_13_2>(s, &old_metadata);\n                    case cluster_version_t::v1_14:\n                        return deserialize<cluster_version_t::v1_14>(s, &old_metadata);\n                    case cluster_version_t::v1_15:\n                        return deserialize<cluster_version_t::v1_15>(s, &old_metadata);\n                    case cluster_version_t::v1_16:\n                    case cluster_version_t::v2_0_is_latest:\n                    default:\n                        unreachable();\n                }",
+        "res_region": "                return deserialize<cluster_version_t::LATEST_DISK>(s, &old_metadata);",
+        "lookback": "            });",
+        "lookahead": "            });",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 536,
+        "end_line": 569,
+        "merge_gen_region": null,
+        "confidence": 0.7918825149536133,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                return deserialize<cluster_version_t::v2_0_is_latest>(s, &metadata);",
+        "b_contents": "                switch (v) {\n                    case cluster_version_t::v2_1_is_latest:\n                        return deserialize<cluster_version_t::v2_1_is_latest>(\n                            s, &metadata);\n                    case cluster_version_t::v2_0:\n                        return deserialize<cluster_version_t::v2_0>(\n                            s, &metadata);\n                    case cluster_version_t::v1_16:\n                        return deserialize<cluster_version_t::v1_16>(s, &metadata);\n                    case cluster_version_t::v1_13:\n                    case cluster_version_t::v1_13_2:\n                    case cluster_version_t::v1_14:\n                    case cluster_version_t::v1_15:\n                    default:\n                        unreachable();\n                }",
+        "base_contents": "                switch (v) {\n                    case cluster_version_t::v2_0_is_latest:\n                        return deserialize<cluster_version_t::v2_0_is_latest>(\n                            s, &metadata);\n                    case cluster_version_t::v1_16:\n                        return deserialize<cluster_version_t::v1_16>(s, &metadata);\n                    case cluster_version_t::v1_13:\n                    case cluster_version_t::v1_13_2:\n                    case cluster_version_t::v1_14:\n                    case cluster_version_t::v1_15:\n                    default:\n                        unreachable();\n                }",
+        "res_region": "                return deserialize<cluster_version_t::v2_0_is_latest>(s, &metadata);",
+        "lookback": "            });",
+        "lookahead": "            });",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 584,
+        "end_line": 617,
+        "merge_gen_region": null,
+        "confidence": 0.5006024241447449,
+        "hesitated": true
+    }
+]

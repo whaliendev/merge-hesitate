@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  virtual bool Plan(\n      const apollo::common::TrajectoryPoint &start_point,\n      std::vector<apollo::common::TrajectoryPoint> *discretized_trajectory) = 0;",
+        "b_contents": "  virtual bool MakePlan(\n      const apollo::common::TrajectoryPoint& start_point,\n      std::vector<apollo::common::TrajectoryPoint>* discretized_trajectory) = 0;",
+        "base_contents": "  virtual bool Plan(\n      const apollo::common::TrajectoryPoint& start_point,\n      std::vector<apollo::common::TrajectoryPoint>* discretized_trajectory) = 0;",
+        "res_region": "  virtual bool MakePlan(\n      const apollo::common::TrajectoryPoint& start_point,\n      std::vector<apollo::common::TrajectoryPoint>* discretized_trajectory) = 0;",
+        "lookback": "      const apollo::common::TrajectoryPoint& start_point,",
+        "lookahead": "};",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 55,
+        "end_line": 67,
+        "merge_gen_region": null,
+        "confidence": 0.6896703839302063,
+        "hesitated": true
+    }
+]

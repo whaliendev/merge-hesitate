@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/dreamview/proto/camera_update.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/sensor_image.pb.h\"\n#include \"modules/common_msgs/localization_msgs/localization.pb.h\"\n#include \"modules/common_msgs/localization_msgs/pose.pb.h\"",
+        "base_contents": "#include \"modules/dreamview/proto/camera_update.pb.h\"\n#include \"modules/drivers/proto/sensor_image.pb.h\"\n#include \"modules/localization/proto/localization.pb.h\"\n#include \"modules/localization/proto/pose.pb.h\"",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "#include \"modules/transform/buffer.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 35,
+        "end_line": 46,
+        "merge_gen_region": null,
+        "confidence": 0.8256849050521851,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/transform_msgs/transform.pb.h\"",
+        "base_contents": "#include \"modules/transform/proto/transform.pb.h\"",
+        "res_region": "",
+        "lookback": "namespace apollo {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 48,
+        "end_line": 53,
+        "merge_gen_region": null,
+        "confidence": 0.5299400687217712,
+        "hesitated": true
+    }
+]

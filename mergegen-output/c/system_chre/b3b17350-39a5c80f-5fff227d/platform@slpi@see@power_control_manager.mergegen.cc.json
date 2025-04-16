@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    if (!awake) {\n      EventLoopManagerSingleton::get()\n          ->getHostCommsManager()\n          .resetBlameForNanoappHostWakeup();\n    }\n\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(",
+        "b_contents": "    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(",
+        "base_contents": "    EventLoopManagerSingleton::get()->getEventLoop().postEvent(",
+        "res_region": "    if (!awake) {\n      EventLoopManagerSingleton::get()\n          ->getHostCommsManager()\n          .resetBlameForNanoappHostWakeup();\n    }\n\n    EventLoopManagerSingleton::get()->getEventLoop().postEventOrDie(",
+        "lookback": "      EventLoopManagerSingleton::get()",
+        "lookahead": "        mHostIsAwake ? CHRE_EVENT_HOST_AWAKE : CHRE_EVENT_HOST_ASLEEP,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 45,
+        "end_line": 57,
+        "merge_gen_region": "EventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEventEvent",
+        "confidence": 0.8899582624435425,
+        "hesitated": false,
+        "resolved": false
+    }
+]

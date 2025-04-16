@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tCALLOC_ARRAY(util, 1);",
+        "b_contents": "\t\t\tutil = xcalloc(1, sizeof(*util));",
+        "base_contents": "\t\t\tutil = xcalloc(sizeof(*util), 1);",
+        "res_region": "\t\t\tCALLOC_ARRAY(util, 1);",
+        "lookback": "\t\t\tif (get_oid(p, &util->oid)) {",
+        "lookahead": "\t\t\tif (get_oid(p, &util->oid)) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.7437004446983337,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#include \"../lv_misc/lv_debug.h\"",
+        "b_contents": "#include \"../lv_misc/lv_assert.h\"\n#include \"../lv_draw/lv_draw.h\"",
+        "base_contents": "#include \"../lv_misc/lv_debug.h\"\n#include \"../lv_draw/lv_draw.h\"",
+        "res_region": "#include \"../lv_misc/lv_assert.h\"\n#include \"../lv_draw/lv_draw.h\"",
+        "lookback": "#include \"../lv_draw/lv_draw.h\"",
+        "lookahead": "#include \"../lv_misc/lv_types.h\"",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 10,
+        "end_line": 18,
+        "merge_gen_region": null,
+        "confidence": 0.8324061632156372,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if(_lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {\n            uint8_t * tmp = lv_mem_realloc(LV_GC_ROOT(_lv_font_decompr_buf), buf_size);\n            LV_ASSERT_MEM(tmp);\n            if(tmp == NULL) return NULL;\n            LV_GC_ROOT(_lv_font_decompr_buf) = tmp;",
+        "b_contents": "        if(lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {\n            LV_GC_ROOT(_lv_font_decompr_buf) = lv_mem_realloc(LV_GC_ROOT(_lv_font_decompr_buf), buf_size);\n            LV_ASSERT_MALLOC(LV_GC_ROOT(_lv_font_decompr_buf));\n            if(LV_GC_ROOT(_lv_font_decompr_buf) == NULL) return NULL;",
+        "base_contents": "        if(_lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {\n            LV_GC_ROOT(_lv_font_decompr_buf) = lv_mem_realloc(LV_GC_ROOT(_lv_font_decompr_buf), buf_size);\n            LV_ASSERT_MEM(LV_GC_ROOT(_lv_font_decompr_buf));\n            if(LV_GC_ROOT(_lv_font_decompr_buf) == NULL) return NULL;",
+        "res_region": "<<<<<<< HEAD\n        if(_lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {\n            uint8_t * tmp = lv_mem_realloc(LV_GC_ROOT(_lv_font_decompr_buf), buf_size);\n            LV_ASSERT_MEM(tmp);\n            if(tmp == NULL) return NULL;\n            LV_GC_ROOT(_lv_font_decompr_buf) = tmp;\n=======\n        if(lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {\n            LV_GC_ROOT(_lv_font_decompr_buf) = lv_mem_realloc(LV_GC_ROOT(_lv_font_decompr_buf), buf_size);\n            LV_ASSERT_MALLOC(LV_GC_ROOT(_lv_font_decompr_buf));\n            if(LV_GC_ROOT(_lv_font_decompr_buf) == NULL) return NULL;\n>>>>>>> dev-v8",
+        "lookback": "        if(_lv_mem_get_size(LV_GC_ROOT(_lv_font_decompr_buf)) < buf_size) {",
+        "lookahead": "        }",
+        "label": [
+            "unresolved",
+            "complex_conflict"
+        ],
+        "start_line": 122,
+        "end_line": 138,
+        "merge_gen_region": "___(,__,,__); } { (_____(,___); } {_____(,__); } {____(\"_(,__); } {___(\"__(,_); } {___(\"\",); } {___(\"\",); }; } {__(\"\",); }; } {__(\"\",); }; } {___(\"\",); }; } {___(\"\",); }; }",
+        "confidence": 0.8950761556625366,
+        "hesitated": false,
+        "resolved": false
+    }
+]

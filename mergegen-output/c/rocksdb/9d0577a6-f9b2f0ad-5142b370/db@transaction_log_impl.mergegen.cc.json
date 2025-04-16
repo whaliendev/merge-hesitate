@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    const std::string& dir, const DBOptions* options,\n    const EnvOptions& soptions, const SequenceNumber seq,\n    std::unique_ptr<VectorLogPtr> files, DBImpl const* const dbimpl)\n    : dir_(dir),\n      options_(options),\n      soptions_(soptions),\n      startingSequenceNumber_(seq),\n      files_(std::move(files)),\n      started_(false),\n      isValid_(false),\n      currentFileIndex_(0),\n      currentBatchSeq_(0),\n      currentLastSeq_(0),\n      dbimpl_(dbimpl) {",
+        "b_contents": "    const std::string& dir, const Options* options,\n    const TransactionLogIterator::ReadOptions& read_options,\n    const EnvOptions& soptions, const SequenceNumber seq,\n    std::unique_ptr<VectorLogPtr> files, DBImpl const* const dbimpl)\n    : dir_(dir),\n      options_(options),\n      read_options_(read_options),\n      soptions_(soptions),\n      startingSequenceNumber_(seq),\n      files_(std::move(files)),\n      started_(false),\n      isValid_(false),\n      currentFileIndex_(0),\n      currentBatchSeq_(0),\n      currentLastSeq_(0),\n      dbimpl_(dbimpl) {",
+        "base_contents": "                           const std::string& dir,\n                           const Options* options,\n                           const EnvOptions& soptions,\n                           const SequenceNumber seq,\n                           std::unique_ptr<VectorLogPtr> files,\n                           DBImpl const * const dbimpl) :\n    dir_(dir),\n    options_(options),\n    soptions_(soptions),\n    startingSequenceNumber_(seq),\n    files_(std::move(files)),\n    started_(false),\n    isValid_(false),\n    currentFileIndex_(0),\n    currentBatchSeq_(0),\n    currentLastSeq_(0),\n    dbimpl_(dbimpl) {",
+        "res_region": "    const std::string& dir, const DBOptions* options,\n    const TransactionLogIterator::ReadOptions& read_options,\n    const EnvOptions& soptions, const SequenceNumber seq,\n    std::unique_ptr<VectorLogPtr> files, DBImpl const* const dbimpl)\n    : dir_(dir),\n      options_(options),\n      read_options_(read_options),\n      soptions_(soptions),\n      startingSequenceNumber_(seq),\n      files_(std::move(files)),\n      started_(false),\n      isValid_(false),\n      currentFileIndex_(0),\n      currentBatchSeq_(0),\n      currentLastSeq_(0),\n      dbimpl_(dbimpl) {",
+        "lookback": "    const TransactionLogIterator::ReadOptions& read_options,",
+        "lookahead": "  assert(files_ != nullptr);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 11,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.7600818276405334,
+        "hesitated": true
+    }
+]

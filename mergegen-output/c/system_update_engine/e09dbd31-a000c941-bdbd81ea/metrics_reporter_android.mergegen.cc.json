@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n  android::util::stats_write(\n      android::util::UPDATE_ENGINE_SUCCESSFUL_UPDATE_REPORTED,\n      static_cast<int32_t>(attempt_count),\n      GetStatsdEnumValue(static_cast<int32_t>(payload_type)),\n      static_cast<int32_t>(payload_size_mib),\n      static_cast<int32_t>(total_bytes_downloaded),\n      static_cast<int32_t>(download_overhead_percentage),\n      static_cast<int32_t>(total_duration.InMinutes()),\n      static_cast<int32_t>(reboot_count));",
+        "b_contents": "\n  android::util::stats_write(\n      android::util::UPDATE_ENGINE_SUCCESSFUL_UPDATE_REPORTED,\n      attempt_count,\n      GetStatsdEnumValue(static_cast<int32_t>(payload_type)),\n      payload_size_mib,\n      total_bytes_downloaded,\n      download_overhead_percentage,\n      total_duration.InMinutes(),\n      reboot_count);",
+        "base_contents": "",
+        "res_region": "\n  android::util::stats_write(\n      android::util::UPDATE_ENGINE_SUCCESSFUL_UPDATE_REPORTED,\n      static_cast<int32_t>(attempt_count),\n      GetStatsdEnumValue(static_cast<int32_t>(payload_type)),\n      static_cast<int32_t>(payload_size_mib),\n      static_cast<int32_t>(total_bytes_downloaded),\n      static_cast<int32_t>(download_overhead_percentage),\n      static_cast<int32_t>(total_duration.InMinutes()),\n      static_cast<int32_t>(reboot_count));",
+        "lookback": "  android::util::stats_write(",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 175,
+        "end_line": 198,
+        "merge_gen_region": "::utilstatswrite androidutilstatswrite androidutilUPDATEENGINESUCCESS____;",
+        "confidence": 0.9321491718292236,
+        "hesitated": false,
+        "resolved": false
+    }
+]

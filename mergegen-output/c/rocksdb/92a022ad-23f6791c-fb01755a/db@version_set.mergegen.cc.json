@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  // TODO this only works for default column family now\n  Version* version = column_family_data_.find(0)->second->current;\n  if (c->input_version_ != version) {",
+        "b_contents": "  if (c->input_version() != current_) {",
+        "base_contents": "  if (c->input_version_ != current_) {",
+        "res_region": "  // TODO this only works for default column family now\n  Version* version = column_family_data_.find(0)->second->current;\n  if (c->input_version() != version) {",
+        "lookback": "  Version* version = column_family_data_.find(0)->second->current;",
+        "lookahead": "    Log(options_->info_log, \"VerifyCompactionFileConsistency version mismatch\");",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2113,
+        "end_line": 2121,
+        "merge_gen_region": null,
+        "confidence": 0.8682098388671875,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/localization_msgs/localization.pb.h\"\n#include \"modules/common_msgs/task_manager_msgs/task_manager.pb.h\"\n#include \"modules/task_manager/proto/task_manager_config.pb.h\"",
+        "base_contents": "#include \"modules/localization/proto/localization.pb.h\"\n#include \"modules/task_manager/proto/task_manager.pb.h\"\n#include \"modules/task_manager/proto/task_manager_config.pb.h\"",
+        "res_region": "",
+        "lookback": "namespace apollo {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 28,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.6756278276443481,
+        "hesitated": true
+    }
+]

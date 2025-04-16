@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "     * resynchronization from the list of slaves, inform them with",
+        "b_contents": "     * resynchorinization from the list of slaves, inform them with",
+        "base_contents": "     * resynchorinization from the list of salves, inform them with",
+        "res_region": "     * resynchronization from the list of slaves, inform them with",
+        "lookback": "     * an error about what happened, close the connection ASAP. */",
+        "lookahead": "     * an error about what happened, close the connection ASAP. */",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 587,
+        "end_line": 593,
+        "merge_gen_region": null,
+        "confidence": 0.6131274700164795,
+        "hesitated": true
+    }
+]

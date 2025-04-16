@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"port/port.h\"",
+        "b_contents": "#include \"port/port.h\"\n\n#include \"port/port.h\"",
+        "base_contents": "",
+        "res_region": "#include \"port/port.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 8,
+        "end_line": 15,
+        "merge_gen_region": null,
+        "confidence": 0.45133256912231445,
+        "hesitated": true
+    }
+]

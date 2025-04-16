@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "        if(ext->scrl == NULL) return LV_RES_OK;\n        const lv_style_t * style_scrl = lv_page_get_style(page, LV_PAGE_STYLE_SCRL);",
+        "base_contents": "        const lv_style_t * style_scrl = lv_page_get_style(page, LV_PAGE_STYLE_SCRL);",
+        "res_region": "        if(ext->scrl == NULL) return LV_RES_OK;\n",
+        "lookback": "",
+        "lookahead": "        lv_fit_t fit_left        = lv_page_get_scrl_fit_left(page);",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 768,
+        "end_line": 774,
+        "merge_gen_region": null,
+        "confidence": 0.5473824739456177,
+        "hesitated": true
+    }
+]

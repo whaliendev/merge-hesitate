@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "#include \"modules/dreamview/backend/plugins/plugin_manager.h\"\n#include \"modules/dreamview/backend/sim_control_manager/sim_control_manager.h\"",
+        "b_contents": "#include \"modules/dreamview/backend/sim_control_manager/sim_control_manager.h\"",
+        "base_contents": "#include \"modules/dreamview/backend/sim_control/sim_control.h\"",
+        "res_region": "#include \"modules/dreamview/backend/plugins/plugin_manager.h\"\n#include \"modules/dreamview/backend/sim_control_manager/sim_control_manager.h\"",
+        "lookback": "#include \"modules/dreamview/backend/sim_control_manager/sim_control_manager.h\"",
+        "lookahead": "#include \"modules/dreamview/backend/simulation_world/simulation_world_service.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 39,
+        "end_line": 46,
+        "merge_gen_region": "",
+        "confidence": 0.8851014971733093,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "                         PluginManager *plugin_manager,",
+        "b_contents": "                         PluginManager* plugin_manager,",
+        "base_contents": "",
+        "res_region": "                         PluginManager *plugin_manager,",
+        "lookback": "                         bool routing_from_file = false);",
+        "lookahead": "                         bool routing_from_file = false);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 80,
+        "end_line": 85,
+        "merge_gen_region": null,
+        "confidence": 0.5932252407073975,
+        "hesitated": true
+    }
+]

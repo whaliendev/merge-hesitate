@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "int64_t HardwareAndroid::GetBuildTimestamp() const {\n  return GetIntProperty<int64_t>(kPropBuildDateUTC, 0);\n}\n",
+        "b_contents": "bool HardwareAndroid::GetFirstActiveOmahaPingSent() const {\n  LOG(WARNING) << \"STUB: Assuming first active omaha was never set.\";\n  return false;\n}\n\nvoid HardwareAndroid::SetFirstActiveOmahaPingSent() {\n  LOG(WARNING) << \"STUB: Assuming first active omaha is never set.\";\n  return;\n}\n",
+        "base_contents": "",
+        "res_region": "int64_t HardwareAndroid::GetBuildTimestamp() const {\n  return GetIntProperty<int64_t>(kPropBuildDateUTC, 0);\n}\n\nbool HardwareAndroid::GetFirstActiveOmahaPingSent() const {\n  LOG(WARNING) << \"STUB: Assuming first active omaha was never set.\";\n  return false;\n}\n\nvoid HardwareAndroid::SetFirstActiveOmahaPingSent() {\n  LOG(WARNING) << \"STUB: Assuming first active omaha is never set.\";\n  return;\n}\n",
+        "lookback": "  return GetIntProperty<int64_t>(kPropBuildDateUTC, 0);",
+        "lookahead": "}  // namespace chromeos_update_engine",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 198,
+        "end_line": 215,
+        "merge_gen_region": null,
+        "confidence": 0.6489250063896179,
+        "hesitated": true
+    }
+]

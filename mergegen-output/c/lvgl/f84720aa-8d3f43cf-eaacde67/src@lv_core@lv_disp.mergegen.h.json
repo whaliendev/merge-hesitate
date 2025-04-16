@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": " * Assign a screen to a display.\n * @param disp pointer to a display where to assign the screen\n * @param scr pointer to a screen object to assign\n */\nvoid lv_disp_assign_screen(lv_disp_t * disp, lv_obj_t * scr);\n\n/**",
+        "base_contents": " * Assign a screen to a display.\n * @param disp pointer to a display where to assign the screen\n * @param scr pointer to a screen object to assign\n */\nvoid lv_disp_assign_screen(lv_disp_t * disp, lv_obj_t * scr);\n\n\n/**",
+        "res_region": "",
+        "lookback": " * @param disp pointer to a display",
+        "lookahead": " * Set the background color of a display",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 81,
+        "end_line": 99,
+        "merge_gen_region": null,
+        "confidence": 0.6989320516586304,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  explicit MlfTracker(const PluginConfig& plugin_config);\n",
+        "b_contents": "  MlfTracker(const PluginConfig& plugin_config);\n",
+        "base_contents": "",
+        "res_region": "  explicit MlfTracker(const PluginConfig& plugin_config);\n",
+        "lookback": "",
+        "lookahead": "  ~MlfTracker() {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 40,
+        "end_line": 47,
+        "merge_gen_region": null,
+        "confidence": 0.7947975993156433,
+        "hesitated": true
+    }
+]

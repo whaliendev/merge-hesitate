@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#if defined(__linux__) || (PLATFORM_POSIX_VERSION >= 200112L)  /* opendir, readdir require POSIX.1-2001 */\n#  include <dirent.h>       /* opendir, readdir */\n#  include <string.h>       /* strerror, memcpy */\n#endif /* #ifdef _WIN32 */\n\n\n/*-****************************************\n*  Internal Macros\n******************************************/\n\n/* CONTROL is like an assert(), but is never disabled.\n * Since it's always active, it can trigger side effects.\n */\n#define CONTROL(c)  {         \\\n    if (!(c)) {               \\\n        UTIL_DISPLAYLEVEL(1, \"Error : %s, %i : %s\",  \\\n                          __FILE__, __LINE__, #c);   \\\n        exit(1);              \\\n}   }\n\n\n/*\n * A modified version of realloc().\n * If UTIL_realloc() fails the original block is freed.\n */\nUTIL_STATIC void* UTIL_realloc(void *ptr, size_t size)\n{\n    void *newptr = realloc(ptr, size);\n    if (newptr) return newptr;\n    free(ptr);\n    return NULL;\n}\n\n\n/*-****************************************\n*  Console log\n******************************************/\nint g_utilDisplayLevel;\n\n\n/*-****************************************\n*  Public API\n******************************************/\n",
+        "b_contents": "#if defined(_MSC_VER)\n    #define chmod _chmod\n#endif\n\n\n/*-*************************************\n*  Constants\n***************************************/\n#define LIST_SIZE_INCREASE   (8*1024)\n\n\n/*-*************************************\n*  Functions\n***************************************/\n",
+        "base_contents": "",
+        "res_region": "#if defined(__linux__) || (PLATFORM_POSIX_VERSION >= 200112L)  /* opendir, readdir require POSIX.1-2001 */\n#  include <dirent.h>       /* opendir, readdir */\n#  include <string.h>       /* strerror, memcpy */\n#endif /* #ifdef _WIN32 */\n\n\n/*-****************************************\n*  Internal Macros\n******************************************/\n\n/* CONTROL is like an assert(), but is never disabled.\n * Since it's always active, it can trigger side effects.\n */\n#define CONTROL(c)  {         \\\n    if (!(c)) {               \\\n        UTIL_DISPLAYLEVEL(1, \"Error : %s, %i : %s\",  \\\n                          __FILE__, __LINE__, #c);   \\\n        exit(1);              \\\n}   }\n\n/*\n * A modified version of realloc().\n * If UTIL_realloc() fails the original block is freed.\n */\nUTIL_STATIC void* UTIL_realloc(void *ptr, size_t size)\n{\n    void *newptr = realloc(ptr, size);\n    if (newptr) return newptr;\n    free(ptr);\n    return NULL;\n}\n\n#if defined(_MSC_VER)\n    #define chmod _chmod\n#endif\n\n\n/*-****************************************\n*  Console log\n******************************************/\nint g_utilDisplayLevel;\n\n\n/*-*************************************\n*  Constants\n***************************************/\n#define LIST_SIZE_INCREASE   (8*1024)\n#define MAX_FILE_OF_FILE_NAMES_SIZE (1<<20)*50\n\n\n/*-*************************************\n*  Functions\n***************************************/\n",
+        "lookback": "#  include <dirent.h>       /* opendir, readdir */",
+        "lookahead": "int UTIL_fileExist(const char* filename)",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 26,
+        "end_line": 88,
+        "merge_gen_region": "if(____) ||PLATFORMPOSIXVERSION 112) oir,add require.-2001 # <.> oir reir reir # <.> strerror memcpy # /*ifdefWIN */ /***************************************** Internal **********************************/ CONTROL like assert but(), is disabled * it's active it trigger can side. # CONTROLc { ifc { U_LEVEL1 \" :s % :s \\ ____,LINE #); exit1); } /* A version realloc * U_() the block freed */TILSTATIC* U_(voidptr sizet) voidnew =(,); (ptr return new;(,); (ptr return new;(); NULL }- * log******** int_Display;- * API********",
+        "confidence": 0.898465633392334,
+        "hesitated": false,
+        "resolved": false
+    }
+]

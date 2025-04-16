@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append] \"\n\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"\n\t   \"[--[no-]progress] <split options>\"),",
+        "b_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append|--split] [--reachable|--stdin-packs|--stdin-commits] [--changed-paths] [--[no-]progress] <split options>\"),",
+        "base_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append|--split] [--reachable|--stdin-packs|--stdin-commits] [--[no-]progress] <split options>\"),",
+        "res_region": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append] \"\n\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"\n\t   \"[--changed-paths] [--[no-]progress] <split options>\"),",
+        "lookback": "\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"",
+        "lookahead": "\tNULL",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 11,
+        "end_line": 19,
+        "merge_gen_region": null,
+        "confidence": 0.7230682373046875,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append] \"\n\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"\n\t   \"[--[no-]progress] <split options>\"),",
+        "b_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append|--split] [--reachable|--stdin-packs|--stdin-commits] [--changed-paths] [--[no-]progress] <split options>\"),",
+        "base_contents": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append|--split] [--reachable|--stdin-packs|--stdin-commits] [--[no-]progress] <split options>\"),",
+        "res_region": "\tN_(\"git commit-graph write [--object-dir <objdir>] [--append] \"\n\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"\n\t   \"[--changed-paths] [--[no-]progress] <split options>\"),",
+        "lookback": "\t   \"[--split[=<strategy>]] [--reachable|--stdin-packs|--stdin-commits] \"",
+        "lookahead": "\tNULL",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 29,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.7230682373046875,
+        "hesitated": true
+    }
+]

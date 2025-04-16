@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "/*Testing of dependencies*/\n#if LV_USE_CONT == 0\n#error \"lv_btn: lv_cont is required. Enable it in lv_conf.h (LV_USE_CONT 1)\"\n#endif\n\n#include \"lv_cont.h\"",
+        "base_contents": "/*Testing of dependencies*/\n#if LV_USE_CONT == 0\n#error \"lv_btn: lv_cont is required. Enable it in lv_conf.h (LV_USE_CONT  1) \"\n#endif\n\n#include \"lv_cont.h\"",
+        "res_region": "#include \"../lv_core/lv_obj.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 19,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.8459346890449524,
+        "hesitated": true
+    }
+]

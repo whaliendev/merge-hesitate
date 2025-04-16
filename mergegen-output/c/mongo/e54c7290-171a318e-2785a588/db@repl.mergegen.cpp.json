@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    void createOplog() {\n        dblock lk;\n\n        const char * ns = \"local.oplog.$main\";\n        Client::Context ctx(ns);\n        \n        if ( nsdetails( ns ) ) {\n            DBDirectClient c;\n            BSONObj lastOp = c.findOne( ns, Query().sort( BSON( \"$natural\" << -1 ) ) );\n            if ( !lastOp.isEmpty() ) {\n                OpTime::setLast( lastOp[ \"ts\" ].date() );\n            }\n            return;\n        }\n        \n        /* create an oplog collection, if it doesn't yet exist. */\n        BSONObjBuilder b;\n        double sz;\n        if ( cmdLine.oplogSize != 0 )\n            sz = (double)cmdLine.oplogSize;\n        else {\n\t\t\t/* not specified. pick a default size */\n            sz = 50.0 * 1000 * 1000;\n            if ( sizeof(int *) >= 8 ) {\n#if defined(__APPLE__)\n\t\t\t\t// typically these are desktops (dev machines), so keep it smallish\n\t\t\t\tsz = (256-64) * 1000 * 1000;\n#else\n                sz = 990.0 * 1000 * 1000;\n                boost::intmax_t free = freeSpace(); //-1 if call not supported.\n                double fivePct = free * 0.05;\n                if ( fivePct > sz )\n                    sz = fivePct;\n#endif\n            }\n        }\n\n        log() << \"******\\n\";\n        log() << \"creating replication oplog of size: \" << (int)( sz / ( 1024 * 1024 ) ) << \"MB (use --oplogSize to change)\\n\";\n        log() << \"******\" << endl;\n\n        b.append(\"size\", sz);\n        b.appendBool(\"capped\", 1);\n        b.appendBool(\"autoIndexId\", false);\n\n        string err;\n        BSONObj o = b.done();\n        userCreateNS(ns, o, err, false);\n        logOp( \"n\", \"dummy\", BSONObj() );\n    }\n    \n    bool startReplSets();",
+        "b_contents": "",
+        "base_contents": "    void createOplog() {\n        dblock lk;\n\n        const char * ns = \"local.oplog.$main\";\n        Client::Context ctx(ns);\n        \n        if ( nsdetails( ns ) ) {\n            DBDirectClient c;\n            BSONObj lastOp = c.findOne( ns, Query().sort( BSON( \"$natural\" << -1 ) ) );\n            if ( !lastOp.isEmpty() ) {\n                OpTime::setLast( lastOp[ \"ts\" ].date() );\n            }\n            return;\n        }\n        \n        /* create an oplog collection, if it doesn't yet exist. */\n        BSONObjBuilder b;\n        double sz;\n        if ( cmdLine.oplogSize != 0 )\n            sz = (double)cmdLine.oplogSize;\n        else {\n\t\t\t/* not specified. pick a default size */\n            sz = 50.0 * 1000 * 1000;\n            if ( sizeof(int *) >= 8 ) {\n#if defined(__APPLE__)\n\t\t\t\t// typically these are desktops (dev machines), so keep it smallish\n\t\t\t\tsz = (256-64) * 1000 * 1000;\n#else\n                sz = 990.0 * 1000 * 1000;\n                boost::intmax_t free = freeSpace(); //-1 if call not supported.\n                double fivePct = free * 0.05;\n                if ( fivePct > sz )\n                    sz = fivePct;\n#endif\n            }\n        }\n\n        log() << \"******\\n\";\n        log() << \"creating replication oplog of size: \" << (int)( sz / ( 1024 * 1024 ) ) << \"MB (use --oplogSize to change)\\n\";\n        log() << \"******\" << endl;\n\n        b.append(\"size\", sz);\n        b.appendBool(\"capped\", 1);\n        b.appendBool(\"autoIndexId\", false);\n\n        string err;\n        BSONObj o = b.done();\n        userCreateNS(ns, o, err, false);\n        logOp( \"n\", \"dummy\", BSONObj() );\n    }\n    ",
+        "res_region": "    bool startReplSets();",
+        "lookback": "    void startReplication() {",
+        "lookahead": "    void startReplication() {",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 1710,
+        "end_line": 1816,
+        "merge_gen_region": null,
+        "confidence": 0.4847376048564911,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \nbool Layout::hitTest(const Vector2 &pt)\n{\n    Vector2 nsp = convertToNodeSpace(pt);\n    Rect bb = Rect(0.0f, 0.0f, _size.width, _size.height);\n    if (nsp.x >= bb.origin.x && nsp.x <= bb.origin.x + bb.size.width && nsp.y >= bb.origin.y && nsp.y <= bb.origin.y + bb.size.height)\n    {\n        return true;\n    }\n    return false;\n}\n    \nvoid Layout::visit(Renderer *renderer, const Matrix &parentTransform, bool parentTransformUpdated)",
+        "b_contents": "\nvoid Layout::visit(Renderer *renderer, const kmMat4 &parentTransform, bool parentTransformUpdated)",
+        "base_contents": "    \nbool Layout::hitTest(const Point &pt)\n{\n    Point nsp = convertToNodeSpace(pt);\n    Rect bb = Rect(0.0f, 0.0f, _size.width, _size.height);\n    if (nsp.x >= bb.origin.x && nsp.x <= bb.origin.x + bb.size.width && nsp.y >= bb.origin.y && nsp.y <= bb.origin.y + bb.size.height)\n    {\n        return true;\n    }\n    return false;\n}\n    \nvoid Layout::visit(Renderer *renderer, const kmMat4 &parentTransform, bool parentTransformUpdated)",
+        "res_region": "\nvoid Layout::visit(Renderer *renderer, const Matrix &parentTransform, bool parentTransformUpdated)",
+        "lookback": "void Layout::visit(Renderer *renderer, const Matrix &parentTransform, bool parentTransformUpdated)",
+        "lookahead": "{",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 701,
+        "end_line": 732,
+        "merge_gen_region": null,
+        "confidence": 0.8248056769371033,
+        "hesitated": true
+    }
+]

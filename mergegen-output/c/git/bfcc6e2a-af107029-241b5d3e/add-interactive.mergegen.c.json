@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\tCALLOC_ARRAY(entry, 1);",
+        "b_contents": "\t\t\tentry = xcalloc(1, sizeof(*entry));",
+        "base_contents": "\t\t\tentry = xcalloc(sizeof(*entry), 1);",
+        "res_region": "\t\t\tCALLOC_ARRAY(entry, 1);",
+        "lookback": "\t\t\thashmap_entry_init(&entry->ent, hash);",
+        "lookahead": "\t\t\thashmap_entry_init(&entry->ent, hash);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 478,
+        "end_line": 484,
+        "merge_gen_region": null,
+        "confidence": 0.823969304561615,
+        "hesitated": true
+    }
+]

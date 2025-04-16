@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  if (is_product_treblelized()) {\n    expected_namespace_prefix = \"product-clns\";\n    expected_library_path =\n        expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_permitted_path =\n        expected_permitted_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_shared_libs_to_platform_ns =\n        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n    if (android::base::GetProperty(\"ro.product.vndk.version\", \"\") != \"\") {\n      expected_link_with_vndk_product_ns = true;\n    }\n  }\n",
+        "b_contents": "  expected_namespace_prefix = \"product-clns\";\n  expected_library_path = expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n  expected_permitted_path =\n      expected_permitted_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n  expected_shared_libs_to_platform_ns =\n      append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n  expected_link_with_vndk_product_ns = true;\n",
+        "base_contents": "  if (is_product_vndk_version_defined()) {\n    expected_namespace_prefix = \"product-clns\";\n    expected_library_path = expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_permitted_path =\n        expected_permitted_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_shared_libs_to_platform_ns =\n        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n    expected_link_with_vndk_product_ns = true;\n  }",
+        "res_region": "  if (is_product_treblelized()) {\n    expected_namespace_prefix = \"product-clns\";\n    expected_library_path =\n        expected_library_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_permitted_path =\n        expected_permitted_path + \":/product/\" LIB_DIR \":/system/product/\" LIB_DIR;\n    expected_shared_libs_to_platform_ns =\n        append_extended_libraries(default_public_libraries() + \":\" + llndk_libraries_product());\n    if (android::base::GetProperty(\"ro.product.vndk.version\", \"\") != \"\") {\n      expected_link_with_vndk_product_ns = true;\n    }\n  }\n",
+        "lookback": "    expected_namespace_prefix = \"product-clns\";",
+        "lookahead": "  SetExpectations();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 382,
+        "end_line": 415,
+        "merge_gen_region": null,
+        "confidence": 0.8578067421913147,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    bool Matcher::matches(const BSONObj& jsobj , MatchDetails * details ) const {",
+        "b_contents": "    bool Matcher::matches(const BSONObj& jsobj , MatchDetails * details ) {\n\n        LOG(5) << \"Matcher::matches() \" << jsobj.toString() << endl;\n",
+        "base_contents": "    bool Matcher::matches(const BSONObj& jsobj , MatchDetails * details ) {",
+        "res_region": "    bool Matcher::matches(const BSONObj& jsobj , MatchDetails * details ) const {\n        LOG(5) << \"Matcher::matches() \" << jsobj.toString() << endl;\n",
+        "lookback": "        LOG(5) << \"Matcher::matches() \" << jsobj.toString() << endl;",
+        "lookahead": "        /* assuming there is usually only one thing to match.  if more this",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 819,
+        "end_line": 828,
+        "merge_gen_region": "((boolbool&&bool&&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&&bool&&bool&bool&bool&bool&bool&bool&&bool&&bool&&bool&booloutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8940107226371765,
+        "hesitated": false,
+        "resolved": false
+    }
+]

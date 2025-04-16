@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.16.0-dev\"",
+        "b_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.15.0-pre1\"",
+        "base_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.15.0-dev\"",
+        "res_region": "#define GRPC_OBJC_VERSION_STRING @\"1.16.0-dev\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 30,
+        "merge_gen_region": "define___(&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&2",
+        "confidence": 0.9087432622909546,
+        "hesitated": false,
+        "resolved": false
+    }
+]

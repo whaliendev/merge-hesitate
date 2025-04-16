@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            NotifyAll _notify; // for getlasterror fsync:true acknowledgements",
+        "b_contents": "            size_t _bytes;\n            NotifyAll _notify; // for getlasterror fsync:true acknowledgements",
+        "base_contents": "            NotifyAll _notify;",
+        "res_region": "            size_t _bytes;\n            NotifyAll _notify; // for getlasterror fsync:true acknowledgements",
+        "lookback": "            NotifyAll _notify; // for getlasterror fsync:true acknowledgements",
+        "lookahead": "        };",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 156,
+        "end_line": 163,
+        "merge_gen_region": null,
+        "confidence": 0.7659386396408081,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <fcntl.h>",
+        "b_contents": "#include <errno.h>\n#include <fcntl.h>",
+        "base_contents": "#include <errno.h>",
+        "res_region": "#include <fcntl.h>",
+        "lookback": "#include <stdint.h>",
+        "lookahead": "#include <stdint.h>",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 18,
+        "end_line": 25,
+        "merge_gen_region": null,
+        "confidence": 0.8538970947265625,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "\toidclr(&oid, the_repository->hash_algo);",
+        "b_contents": "\toidclr(&oid);\n\tflags |= GOPID_FIND_HEADER;",
+        "base_contents": "\toidclr(&oid);",
+        "res_region": "\toidclr(&oid, the_repository->hash_algo);\n\tflags |= GOPID_FIND_HEADER;",
+        "lookback": "\tflags |= GOPID_FIND_HEADER;",
+        "lookahead": "\twhile (!feof(stdin)) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 224,
+        "end_line": 231,
+        "merge_gen_region": null,
+        "confidence": 0.8476125597953796,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t/*\n\t * We rely on `the_hash_algo` to compute patch IDs. This is dubious as\n\t * it means that the hash algorithm now depends on the object hash of\n\t * the repository, even though git-patch-id(1) clearly defines that\n\t * patch IDs always use SHA1.\n\t *\n\t * NEEDSWORK: This hack should be removed in favor of converting\n\t * the code that computes patch IDs to always use SHA1.\n\t */\n\tif (!the_hash_algo)\n\t\trepo_set_hash_algo(the_repository, GIT_HASH_SHA1);\n\n\tgenerate_id_list(opts ? opts > 1 : config.stable,\n\t\t\t opts ? opts == 3 : config.verbatim);",
+        "b_contents": "\tif (opts ? opts > 1 : config.stable)\n\t\tflags |= GOPID_STABLE;\n\tif (opts ? opts == 3 : config.verbatim)\n\t\tflags |= GOPID_VERBATIM;\n\tgenerate_id_list(flags);\n",
+        "base_contents": "\tgenerate_id_list(opts ? opts > 1 : config.stable,\n\t\t\t opts ? opts == 3 : config.verbatim);",
+        "res_region": "\t/*\n\t * We rely on `the_hash_algo` to compute patch IDs. This is dubious as\n\t * it means that the hash algorithm now depends on the object hash of\n\t * the repository, even though git-patch-id(1) clearly defines that\n\t * patch IDs always use SHA1.\n\t *\n\t * NEEDSWORK: This hack should be removed in favor of converting\n\t * the code that computes patch IDs to always use SHA1.\n\t */\n\tif (!the_hash_algo)\n\t\trepo_set_hash_algo(the_repository, GIT_HASH_SHA1);\n\n\tif (opts ? opts > 1 : config.stable)\n\t\tflags |= GOPID_STABLE;\n\tif (opts ? opts == 3 : config.verbatim)\n\t\tflags |= GOPID_VERBATIM;\n\tgenerate_id_list(flags);\n",
+        "lookback": "\t * We rely on `the_hash_algo` to compute patch IDs. This is dubious as",
+        "lookahead": "\treturn 0;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 293,
+        "end_line": 318,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9070727825164795,
+        "hesitated": false,
+        "resolved": false
+    }
+]

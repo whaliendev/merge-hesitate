@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "#include <list>\n#include <sstream>",
+        "b_contents": "",
+        "base_contents": "#include <list>",
+        "res_region": "#include <list>\n#include <sstream>",
+        "lookback": "#include <sstream>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 16,
+        "end_line": 22,
+        "merge_gen_region": null,
+        "confidence": 0.7674586772918701,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    std::stringstream url_ss;\n    ",
+        "b_contents": "",
+        "base_contents": "    char url_sz[128];\n    ",
+        "res_region": "    std::stringstream url_ss;\n",
+        "lookback": "",
+        "lookahead": "    std::vector<std::string> ip_ports = _srs_config->get_listens();",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 266,
+        "end_line": 274,
+        "merge_gen_region": null,
+        "confidence": 0.6798751950263977,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    port = (port == 0) ? 1935 : port;\n    if (_vhost == DEF_VHOST) {\n        url_ss << \"rtmp://127.0.0.1:\" << port\n                << \"/\" << _appname\n                << \"/\" <<  _streamname;\n    } else {\n        if (_appname.find(\"?\") == std::string::npos) {\n            url_ss << \"rtmp://127.0.0.1:\" << port\n                    << \"/\" << _appname << \"?vhost=\" << _vhost\n                    << \"/\" <<  _streamname;\n        } else {\n            url_ss << \"rtmp://127.0.0.1:\" << port\n                    << \"/\" << _appname << \"&vhost=\" << _vhost\n                    << \"/\" <<  _streamname;\n        }",
+        "b_contents": "    port = (port == 0) ? SRS_CONSTS_RTMP_DEFAULT_PORT : port;\n\n    std::stringstream ss;\n    ss << \"rtmp://\" << SRS_CONSTS_LOCALHOST;\n    ss << \":\" << port;\n    ss << \"/\" << _appname;\n    if (_vhost != DEF_VHOST) {\n        ss << \"?vhost=\" << _vhost;",
+        "base_contents": "    port = (port == 0) ? 1935 : port;\n    if (_vhost == DEF_VHOST) {\n        sprintf(url_sz, \"rtmp://127.0.0.1:%d/%s/%s\", port,\n            _appname.c_str(), _streamname.c_str());\n    } else {\n        sprintf(url_sz, \"rtmp://127.0.0.1:%d/%s?vhost=%s/%s\", port,\n            _appname.c_str(), _vhost.c_str(), _streamname.c_str());",
+        "res_region": "\n    port = (port == 0) ? SRS_CONSTS_RTMP_DEFAULT_PORT : port;\n\n    std::stringstream ss;\n    ss << \"rtmp://\" << SRS_CONSTS_LOCALHOST;\n    ss << \":\" << port;\n    ss << \"/\" << _appname;\n    if (_vhost != DEF_VHOST) {\n        ss << \"?vhost=\" << _vhost;",
+        "lookback": "    port = (port == 0) ? SRS_CONSTS_RTMP_DEFAULT_PORT : port;",
+        "lookahead": "    }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 285,
+        "end_line": 318,
+        "merge_gen_region": null,
+        "confidence": 0.7417561411857605,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    _url = url_ss.str();",
+        "b_contents": "    ss << \"/\" << _streamname;\n\n    _url = ss.str();",
+        "base_contents": "    \n    _url = url_sz;",
+        "res_region": "    ss << \"/\" << _streamname;\n\n    _url = ss.str();",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 320,
+        "end_line": 330,
+        "merge_gen_region": null,
+        "confidence": 0.7287932634353638,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    srs_trace(\"rtmp client construct url:%s\", url_ss.str().c_str());",
+        "b_contents": "    srs_trace(\"rtmp client construct url:%s\", _url.c_str());",
+        "base_contents": "    srs_trace(\"rtmp client construct url:%s\", url_sz);",
+        "res_region": "    srs_trace(\"rtmp client construct url:%s\", url_ss.str().c_str());",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 337,
+        "end_line": 343,
+        "merge_gen_region": null,
+        "confidence": 0.5824650526046753,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ColumnFamilyData* cfd, const autovector<MemTable*>& mems, VersionSet* vset,\n    port::Mutex* mu, Logger* info_log, uint64_t file_number,\n    std::set<uint64_t>& pending_outputs, autovector<MemTable*>* to_delete,\n    Directory* db_directory) {",
+        "b_contents": "    const autovector<MemTable*>& mems, VersionSet* vset, port::Mutex* mu,\n    Logger* info_log, uint64_t file_number, std::set<uint64_t>& pending_outputs,\n    autovector<MemTable*>* to_delete, Directory* db_directory,\n    LogBuffer* log_buffer) {",
+        "base_contents": "    const autovector<MemTable*>& mems, VersionSet* vset,\n    port::Mutex* mu, Logger* info_log, uint64_t file_number,\n    std::set<uint64_t>& pending_outputs, autovector<MemTable*>* to_delete,\n    Directory* db_directory) {",
+        "res_region": "    ColumnFamilyData* cfd, const autovector<MemTable*>& mems, VersionSet* vset,\n    port::Mutex* mu, Logger* info_log, uint64_t file_number,\n    std::set<uint64_t>& pending_outputs, autovector<MemTable*>* to_delete,\n    Directory* db_directory, LogBuffer* log_buffer) {",
+        "lookback": "    port::Mutex* mu, Logger* info_log, uint64_t file_number,",
+        "lookahead": "  mu->AssertHeld();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 145,
+        "end_line": 160,
+        "merge_gen_region": null,
+        "confidence": 0.8279757499694824,
+        "hesitated": true
+    }
+]

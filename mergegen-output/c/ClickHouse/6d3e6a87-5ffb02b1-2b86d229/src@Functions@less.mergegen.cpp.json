@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionLess>(params));",
+        "b_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionLess>(check_decimal_overflow, allow_not_comparable_types));",
+        "base_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionLess>(check_decimal_overflow));",
+        "res_region": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionLess>(params));",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 22,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.8390651941299438,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionEquals>(params));",
+        "b_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionEquals>(check_decimal_overflow, allow_not_comparable_types));",
+        "base_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionEquals>(check_decimal_overflow));",
+        "res_region": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionEquals>(params));",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 37,
+        "end_line": 43,
+        "merge_gen_region": null,
+        "confidence": 0.8490085005760193,
+        "hesitated": true
+    }
+]

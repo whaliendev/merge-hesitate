@@ -1,0 +1,56 @@
+[
+    {
+        "a_contents": "            stress_backfill_throttler_t backfill_throttler(cfg);",
+        "b_contents": "            backfill_throttler_t backfill_throttler;\n            backfill_debug_all(\"begin backfill store1 -> store2\");",
+        "base_contents": "            backfill_throttler_t backfill_throttler;",
+        "res_region": "            stress_backfill_throttler_t backfill_throttler(cfg);\n            backfill_debug_all(\"begin backfill store1 -> store2\");",
+        "lookback": "            backfill_debug_all(\"begin backfill store1 -> store2\");",
+        "lookahead": "            backfill_progress_tracker_t backfill_progress_tracker;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 257,
+        "end_line": 264,
+        "merge_gen_region": "sliceslicebackDoDoDoDoDoDoDoDoDoDoDoback___________________________________________________________________________________________________________________________________________________________",
+        "confidence": 0.8981294631958008,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        stress_backfill_throttler_t backfill_throttler(cfg);",
+        "b_contents": "        backfill_throttler_t backfill_throttler;\n        backfill_debug_all(\"begin backfill store2 -> store1\");",
+        "base_contents": "        backfill_throttler_t backfill_throttler;",
+        "res_region": "        stress_backfill_throttler_t backfill_throttler(cfg);\n        backfill_debug_all(\"begin backfill store2 -> store1\");",
+        "lookback": "        backfill_debug_all(\"begin backfill store2 -> store1\");",
+        "lookahead": "        backfill_progress_tracker_t backfill_progress_tracker;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 333,
+        "end_line": 340,
+        "merge_gen_region": "slicebackDoDoDoDoDoDoDoDoDoDoback___________________________________________________________________________________________________________________________________________________________",
+        "confidence": 0.8933618664741516,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        stress_backfill_throttler_t backfill_throttler(cfg);",
+        "b_contents": "        backfill_throttler_t backfill_throttler;\n        backfill_debug_all(\"begin backfill store1 -> store3\");",
+        "base_contents": "        backfill_throttler_t backfill_throttler;",
+        "res_region": "        stress_backfill_throttler_t backfill_throttler(cfg);\n        backfill_debug_all(\"begin backfill store1 -> store3\");",
+        "lookback": "        backfill_debug_all(\"begin backfill store1 -> store3\");",
+        "lookahead": "        backfill_progress_tracker_t backfill_progress_tracker;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 383,
+        "end_line": 390,
+        "merge_gen_region": "sliceDoDoDoDoDoDoDoDoback___________________________________________________________________________________________________________________________________________________________",
+        "confidence": 0.8961343765258789,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\tint fd;\n\tFILE *fp;",
+        "b_contents": "\tstruct strbuf buf = STRBUF_INIT;\n\tFILE *fp = fopen_or_warn(path, \"r\");",
+        "base_contents": "\tFILE *fp = fopen_or_warn(path, \"r\");",
+        "res_region": "\tstruct strbuf buf = STRBUF_INIT;\n\tint fd;\n\tFILE *fp;",
+        "lookback": "\tint fd;",
+        "lookahead": "\tstruct attr_stack *res;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 711,
+        "end_line": 719,
+        "merge_gen_region": null,
+        "confidence": 0.7829655408859253,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t}\n\tfp = xfdopen(fd, \"r\");\n\n\tCALLOC_ARRAY(res, 1);\n\twhile (fgets(buf, sizeof(buf), fp)) {\n\t\tchar *bufp = buf;\n\t\tif (!lineno)\n\t\t\tskip_utf8_bom(&bufp, strlen(bufp));\n\t\thandle_attr_line(res, bufp, path, ++lineno, flags);",
+        "b_contents": "\n\tfd = fileno(fp);\n\tif (fstat(fd, &st)) {\n\t\twarning_errno(_(\"cannot fstat gitattributes file '%s'\"), path);\n\t\tfclose(fp);\n\t\treturn NULL;",
+        "base_contents": "\tres = xcalloc(1, sizeof(*res));\n\twhile (fgets(buf, sizeof(buf), fp)) {\n\t\tchar *bufp = buf;\n\t\tif (!lineno)\n\t\t\tskip_utf8_bom(&bufp, strlen(bufp));\n\t\thandle_attr_line(res, bufp, path, ++lineno, macro_ok);",
+        "res_region": "\t}\n\tfp = xfdopen(fd, \"r\");\n\tif (fstat(fd, &st)) {\n\t\twarning_errno(_(\"cannot fstat gitattributes file '%s'\"), path);\n\t\tfclose(fp);\n\t\treturn NULL;",
+        "lookback": "\tfp = xfdopen(fd, \"r\");",
+        "lookahead": "\t}",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 733,
+        "end_line": 757,
+        "merge_gen_region": null,
+        "confidence": 0.8096901178359985,
+        "hesitated": true
+    }
+]

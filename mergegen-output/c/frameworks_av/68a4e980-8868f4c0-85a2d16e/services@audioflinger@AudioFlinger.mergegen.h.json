@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    uint32_t sampleRate(audio_io_handle_t ioHandle) const final;\n    audio_format_t format(audio_io_handle_t output) const final;\n    size_t frameCount(audio_io_handle_t ioHandle) const final;\n    size_t frameCountHAL(audio_io_handle_t ioHandle) const final;\n    uint32_t latency(audio_io_handle_t output) const final;",
+        "b_contents": "// include AudioFlinger component interfaces\n#include \"IAfPatchPanel.h\"  // this should be listed before other IAf* interfaces.\n#include \"IAfEffect.h\"\n#include \"IAfThread.h\"\n#include \"IAfTrack.h\"",
+        "base_contents": "// include AudioFlinger component interfaces\n#include \"IAfEffect.h\"\n#include \"IAfThread.h\"\n#include \"IAfTrack.h\"",
+        "res_region": "    uint32_t sampleRate(audio_io_handle_t ioHandle) const final;\n    audio_format_t format(audio_io_handle_t output) const final;\n    size_t frameCount(audio_io_handle_t ioHandle) const final;\n    size_t frameCountHAL(audio_io_handle_t ioHandle) const final;\n    uint32_t latency(audio_io_handle_t output) const final;",
+        "lookback": "    audio_format_t format(audio_io_handle_t output) const final;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 73,
+        "end_line": 90,
+        "merge_gen_region": null,
+        "confidence": 0.5960697531700134,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    /* const */ sp<IAfPatchPanel> mPatchPanel;\n",
+        "b_contents": "    // protected by mLock\n    const sp<IAfPatchPanel> mPatchPanel = IAfPatchPanel::create(this);\n\npublic:\n    // TODO(b/288339104) access by getter.",
+        "base_contents": "    // protected by mLock\n    PatchPanel mPatchPanel;\npublic:\n    // TODO(b/288339104) access by getter.",
+        "res_region": "    /* const */ sp<IAfPatchPanel> mPatchPanel;\n",
+        "lookback": "",
+        "lookahead": "    sp<EffectsFactoryHalInterface> mEffectsFactoryHal;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 684,
+        "end_line": 698,
+        "merge_gen_region": " const spIAPatch>Patch>Patch;>Patch;>Patch; initTrayregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregreg",
+        "confidence": 0.9121992588043213,
+        "hesitated": false,
+        "resolved": false
+    }
+]

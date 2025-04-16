@@ -1,0 +1,123 @@
+[
+    {
+        "a_contents": "#include <set>",
+        "b_contents": "#include <regex>",
+        "base_contents": "",
+        "res_region": "#include <set>",
+        "lookback": "#include <sstream>",
+        "lookahead": "#include <sstream>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 44,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.7220255136489868,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include \"android-base/result.h\"\n#include \"android-base/scopeguard.h\"",
+        "b_contents": "#include \"android-base/result.h\"",
+        "base_contents": "",
+        "res_region": "#include \"android-base/result.h\"\n#include \"android-base/scopeguard.h\"",
+        "lookback": "#include \"android-base/scopeguard.h\"",
+        "lookahead": "#include \"android-base/stringprintf.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 65,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.4733637571334839,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include \"odrefresh/odrefresh.h\"\n#include \"palette/palette.h\"\n#include \"palette/palette_types.h\"",
+        "b_contents": "#include \"palette/palette.h\"\n#include \"palette/palette_types.h\"",
+        "base_contents": "",
+        "res_region": "#include \"odrefresh/odrefresh.h\"\n#include \"palette/palette.h\"\n#include \"palette/palette_types.h\"",
+        "lookback": "#include \"palette/palette.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 95,
+        "end_line": 103,
+        "merge_gen_region": null,
+        "confidence": 0.8741759061813354,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// Maximum execution time for odrefresh from start to end.\nconstexpr time_t kMaximumExecutionSeconds = 300;",
+        "b_contents": "using ::android::base::Result;\n\nstatic void UsageErrorV(const char* fmt, va_list ap) {\n  std::string error;\n  android::base::StringAppendV(&error, fmt, ap);\n  if (isatty(fileno(stderr))) {\n    std::cerr << error << std::endl;\n  } else {\n    LOG(ERROR) << error;\n  }\n}",
+        "base_contents": "static void UsageErrorV(const char* fmt, va_list ap) {\n  std::string error;\n  android::base::StringAppendV(&error, fmt, ap);\n  if (isatty(fileno(stderr))) {\n    std::cerr << error << std::endl;\n  } else {\n    LOG(ERROR) << error;\n  }\n}",
+        "res_region": "// Maximum execution time for odrefresh from start to end.\nconstexpr time_t kMaximumExecutionSeconds = 300;",
+        "lookback": "constexpr time_t kMaximumExecutionSeconds = 300;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 118,
+        "end_line": 143,
+        "merge_gen_region": null,
+        "confidence": 0.8205656409263611,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// Gets the `ApexInfo` associated with the currently active ART APEX.\nstd::optional<apex::ApexInfo> GetArtApexInfo(const std::vector<apex::ApexInfo>& info_list) {\n  auto it = std::find_if(info_list.begin(), info_list.end(), [](const apex::ApexInfo& info) {\n    return info.getModuleName() == \"com.android.art\";\n  });\n  return it != info_list.end() ? std::make_optional(*it) : std::nullopt;\n}",
+        "b_contents": "Result<int> ParseSecurityPatchStr(const std::string& security_patch_str) {\n  std::regex security_patch_regex(R\"re((\\d{4})-(\\d{2})-(\\d{2}))re\");\n  std::smatch m;\n  if (!std::regex_match(security_patch_str, m, security_patch_regex)) {\n    return Errorf(\"Invalid security patch string \\\"{}\\\"\", security_patch_str);\n  }\n  int year = 0, month = 0, day = 0;\n  if (!android::base::ParseInt(m[1], &year) || !android::base::ParseInt(m[2], &month) ||\n      !android::base::ParseInt(m[3], &day)) {\n    // This should never happen because the string already matches the regex.\n    return Errorf(\"Unknown error when parsing security patch string \\\"{}\\\"\", security_patch_str);\n  }\n  return year * 10000 + month * 100 + day;\n}\n\nbool ShouldDisablePartialCompilation(const std::string& security_patch_str) {\n  Result<int> security_patch_value = ParseSecurityPatchStr(security_patch_str);\n  if (!security_patch_value.ok()) {\n    LOG(ERROR) << security_patch_value.error();\n    return false;\n  }\n  return security_patch_value.value() < ParseSecurityPatchStr(\"2022-03-05\").value();\n}\n\n}  // namespace",
+        "base_contents": "}  // namespace",
+        "res_region": "// Gets the `ApexInfo` associated with the currently active ART APEX.\nstd::optional<apex::ApexInfo> GetArtApexInfo(const std::vector<apex::ApexInfo>& info_list) {\n  auto it = std::find_if(info_list.begin(), info_list.end(), [](const apex::ApexInfo& info) {\n    return info.getModuleName() == \"com.android.art\";\n  });\n  return it != info_list.end() ? std::make_optional(*it) : std::nullopt;\n}",
+        "lookback": "std::optional<apex::ApexInfo> GetArtApexInfo(const std::vector<apex::ApexInfo>& info_list) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 215,
+        "end_line": 251,
+        "merge_gen_region": null,
+        "confidence": 0.8234798312187195,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (!config_.GetStagingDir().empty()) {\n    staging_dir = config_.GetStagingDir().c_str();\n  } else {",
+        "b_contents": "  WARN_UNUSED ExitCode Compile(OdrMetrics& metrics, bool force_compile) const {\n    const char* staging_dir = nullptr;\n    metrics.SetStage(OdrMetrics::Stage::kPreparation);\n    // Clean-up existing files.\n    if ((force_compile || !config_.GetPartialCompilation()) && !CleanApexdataDirectory()) {\n      metrics.SetStatus(OdrMetrics::Status::kIoError);\n      return ExitCode::kCleanupFailed;\n    }\n",
+        "base_contents": "  WARN_UNUSED ExitCode Compile(OdrMetrics& metrics, bool force_compile) const {\n    const char* staging_dir = nullptr;\n    metrics.SetStage(OdrMetrics::Stage::kPreparation);\n    // Clean-up existing files.\n    if (force_compile && !CleanApexdataDirectory()) {\n      metrics.SetStatus(OdrMetrics::Status::kIoError);\n      return ExitCode::kCleanupFailed;\n    }\n",
+        "res_region": "  if (!config_.GetStagingDir().empty()) {\n    staging_dir = config_.GetStagingDir().c_str();\n  } else {",
+        "lookback": "    staging_dir = config_.GetStagingDir().c_str();",
+        "lookahead": "    // Create staging area and assign label for generating compilation artifacts.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1693,
+        "end_line": 1717,
+        "merge_gen_region": " (!_.StDircstr(); (!_.StDirempty {agingdir configGetaging()._(); else",
+        "confidence": 0.90238356590271,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "  if (full_compilation_failed) {\n    if (!config_.GetDryRun() && !RemoveDirectory(staging_dir)) {\n      return ExitCode::kCleanupFailed;",
+        "b_contents": "  static int InitializeTargetConfig(int argc, const char** argv, OdrConfig* config) {\n    config->SetApexInfoListFile(\"/apex/apex-info-list.xml\");\n    config->SetArtBinDir(GetArtBinDir());\n    config->SetDex2oatBootclasspath(GetEnvironmentVariableOrDie(\"DEX2OATBOOTCLASSPATH\"));\n    config->SetSystemServerClasspath(GetEnvironmentVariableOrDie(\"SYSTEMSERVERCLASSPATH\"));\n    config->SetIsa(kRuntimeISA);\n\n    const std::string zygote = android::base::GetProperty(\"ro.zygote\", {});\n    ZygoteKind zygote_kind;\n    if (!ParseZygoteKind(zygote.c_str(), &zygote_kind)) {\n      LOG(FATAL) << \"Unknown zygote: \" << QuotePath(zygote);\n    }\n    config->SetZygoteKind(zygote_kind);\n\n    const std::string updatable_packages =\n        android::base::GetProperty(\"dalvik.vm.dex2oat-updatable-bcp-packages-file\", {});\n    config->SetUpdatableBcpPackagesFile(updatable_packages);\n\n    if (ShouldDisablePartialCompilation(\n            android::base::GetProperty(\"ro.build.version.security_patch\", /*default_value=*/\"\"))) {\n      config->SetPartialCompilation(false);\n    }\n\n    int n = 1;\n    for (; n < argc - 1; ++n) {\n      if (!InitializeCommonConfig(argv[n], config)) {\n        UsageError(\"Unrecognized argument: '%s'\", argv[n]);\n      }",
+        "base_contents": "  static int InitializeTargetConfig(int argc, const char** argv, OdrConfig* config) {\n    config->SetApexInfoListFile(\"/apex/apex-info-list.xml\");\n    config->SetArtBinDir(GetArtBinDir());\n    config->SetDex2oatBootclasspath(GetEnvironmentVariableOrDie(\"DEX2OATBOOTCLASSPATH\"));\n    config->SetSystemServerClasspath(GetEnvironmentVariableOrDie(\"SYSTEMSERVERCLASSPATH\"));\n    config->SetIsa(kRuntimeISA);\n\n    const std::string zygote = android::base::GetProperty(\"ro.zygote\", {});\n    ZygoteKind zygote_kind;\n    if (!ParseZygoteKind(zygote.c_str(), &zygote_kind)) {\n      LOG(FATAL) << \"Unknown zygote: \" << QuotePath(zygote);\n    }\n    config->SetZygoteKind(zygote_kind);\n\n    const std::string updatable_packages =\n        android::base::GetProperty(\"dalvik.vm.dex2oat-updatable-bcp-packages-file\", {});\n    config->SetUpdatableBcpPackagesFile(updatable_packages);\n\n    int n = 1;\n    for (; n < argc - 1; ++n) {\n      if (!InitializeCommonConfig(argv[n], config)) {\n        UsageError(\"Unrecognized argument: '%s'\", argv[n]);\n      }",
+        "res_region": "  if (full_compilation_failed) {\n    if (!config_.GetDryRun() && !RemoveDirectory(staging_dir)) {\n      return ExitCode::kCleanupFailed;",
+        "lookback": "    if (!config_.GetDryRun() && !RemoveDirectory(staging_dir)) {",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1790,
+        "end_line": 1847,
+        "merge_gen_region": " (!_.DifconfigGetoutputoutputoutput>(outputoutput>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(outputoutput>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(output>(",
+        "confidence": 0.9174575805664062,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "namespace grpc_impl {\n\nclass Channel;\n}\n",
+        "b_contents": "namespace grpc_impl {\n\nclass ServerBuilder;\n}",
+        "base_contents": "",
+        "res_region": "namespace grpc_impl {\n\nclass Channel;\nclass ServerBuilder;\n} // namespace grpc_impl",
+        "lookback": "",
+        "lookahead": "namespace grpc {",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 43,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.6261938214302063,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "class CompletionQueue;\nclass ServerCredentials;",
+        "b_contents": "",
+        "base_contents": "class ServerCredentials;",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "}  // namespace grpc_impl",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 44,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.501842200756073,
+        "hesitated": true
+    }
+]

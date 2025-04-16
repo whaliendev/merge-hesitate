@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "        LOG(INFO) << \"Disabling updates over cellular networks as there's no \"\n                     \"device policy loaded yet.\";\n        return false;",
+        "b_contents": "        // Device policy fails to be loaded (possibly due to guest account). We\n        // do not check the local user setting here, which should be checked by\n        // |OmahaRequestAction| during checking for update.\n        LOG(INFO) << \"Allowing updates over cellular as device policy \"\n                     \"fails to be loaded.\";\n        return true;",
+        "base_contents": "        LOG(INFO) << \"Disabling updates over cellular as device policy \"\n                     \"fails to be loaded.\";\n        return false;",
+        "res_region": "        LOG(INFO) << \"Disabling updates over cellular networks as there's no \"\n                     \"device policy loaded yet.\";\n        return false;",
+        "lookback": "                     \"device policy loaded yet.\";",
+        "lookahead": "      }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 67,
+        "end_line": 82,
+        "merge_gen_region": null,
+        "confidence": 0.8223056197166443,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        return true;\n      } else {\n        // There's no update setting in the device policy, using the local user\n        // setting.\n        PrefsInterface* prefs = system_state_->prefs();\n\n        if (!prefs || !prefs->Exists(kPrefsUpdateOverCellularPermission)) {\n          LOG(INFO) << \"Disabling updates over cellular connection as there's \"\n                       \"no device policy setting nor user preference present.\";\n          return false;\n        }",
+        "b_contents": "        return true;\n      }",
+        "base_contents": "      }",
+        "res_region": "        return true;\n      } else {\n        // There's no update setting in the device policy, using the local user\n        // setting.\n        PrefsInterface* prefs = system_state_->prefs();\n\n        if (!prefs || !prefs->Exists(kPrefsUpdateOverCellularPermission)) {\n          LOG(INFO) << \"Disabling updates over cellular connection as there's \"\n                       \"no device policy setting nor user preference present.\";\n          return false;\n        }",
+        "lookback": "      } else {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 95,
+        "end_line": 112,
+        "merge_gen_region": null,
+        "confidence": 0.8603066802024841,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        bool stored_value;\n        if (!prefs->GetBoolean(kPrefsUpdateOverCellularPermission,\n                               &stored_value)) {\n          return false;\n        }\n\n        if (!stored_value) {\n          LOG(INFO) << \"Disabling updates over cellular connection per user \"\n                       \"setting.\";\n          return false;\n        }\n        LOG(INFO) << \"Allowing updates over cellular per user setting.\";\n        return true;\n      }",
+        "b_contents": "      // If there's no update setting in the device policy, we do not check\n      // the local user setting here, which should be checked by\n      // |OmahaRequestAction| during checking for update.\n      LOG(INFO) << \"Allowing updates over cellular as device policy does \"\n                   \"not include update setting.\";\n      return true;",
+        "base_contents": "      // If there's no update setting in the device policy, we do not check\n      // the local user setting here, which should be checked by\n      // |OmahaRequestAction| during checking for update.\n      return true;",
+        "res_region": "        bool stored_value;\n        if (!prefs->GetBoolean(kPrefsUpdateOverCellularPermission,\n                               &stored_value)) {\n          return false;\n        }\n\n        if (!stored_value) {\n          LOG(INFO) << \"Disabling updates over cellular connection per user \"\n                       \"setting.\";\n          return false;\n        }\n        LOG(INFO) << \"Allowing updates over cellular per user setting.\";\n        return true;\n      }",
+        "lookback": "        if (!prefs->GetBoolean(kPrefsUpdateOverCellularPermission,",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 114,
+        "end_line": 141,
+        "merge_gen_region": " (!->BooleankUpdateCellular,storedvalue { false } (!bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&",
+        "confidence": 0.9010874629020691,
+        "hesitated": false,
+        "resolved": false
+    }
+]

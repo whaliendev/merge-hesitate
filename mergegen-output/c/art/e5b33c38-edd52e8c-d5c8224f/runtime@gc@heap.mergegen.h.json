@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "  static ALWAYS_INLINE bool AllocatorMayHaveConcurrentGC(AllocatorType allocator_type) {\n    if (kUseUserfaultfd || kUseReadBarrier) {\n      // May have the TLAB allocator but is always concurrent. TODO: clean this up.\n      return true;\n    }\n    return\n        allocator_type != kAllocatorTypeTLAB &&\n        allocator_type != kAllocatorTypeBumpPointer;\n  }",
+        "base_contents": "  static ALWAYS_INLINE bool AllocatorMayHaveConcurrentGC(AllocatorType allocator_type) {\n    if (kUseReadBarrier) {\n      // Read barrier may have the TLAB allocator but is always concurrent. TODO: clean this up.\n      return true;\n    }\n    return\n        allocator_type != kAllocatorTypeTLAB &&\n        allocator_type != kAllocatorTypeBumpPointer;\n  }",
+        "res_region": "",
+        "lookback": "    return",
+        "lookahead": "  static bool IsMovingGc(CollectorType collector_type) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1036,
+        "end_line": 1057,
+        "merge_gen_region": "",
+        "confidence": 0.9526587724685669,
+        "hesitated": false,
+        "resolved": true
+    }
+]

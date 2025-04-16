@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/perception/lidar/lib/pointcloud_preprocessor/pointcloud_preprocessor.h\"\n#include \"modules/perception/lidar/lib/tracker/multi_lidar_fusion/mlf_engine.h\"",
+        "b_contents": "#include \"modules/perception/lidar/lib/pointcloud_preprocessor/pointcloud_preprocessor.h\" ",
+        "base_contents": "#include \"modules/perception/lidar/lib/pointcloud_preprocessor/pointcloud_preprocessor.h\"",
+        "res_region": "#include \"modules/perception/lidar/lib/pointcloud_preprocessor/pointcloud_preprocessor.h\"\n#include \"modules/perception/lidar/lib/tracker/multi_lidar_fusion/mlf_engine.h\"",
+        "lookback": "#include \"modules/perception/lidar/lib/tracker/multi_lidar_fusion/mlf_engine.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 31,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.6973204016685486,
+        "hesitated": true
+    }
+]

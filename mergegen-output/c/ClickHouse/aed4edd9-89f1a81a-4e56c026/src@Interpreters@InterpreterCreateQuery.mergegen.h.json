@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    void convertMergeTreeTableIfPossible(ASTCreateQuery & create, DatabasePtr database, bool to_replicated);\n",
+        "b_contents": "    void throwIfTooManyEntities(ASTCreateQuery & create, StoragePtr storage) const;\n",
+        "base_contents": "",
+        "res_region": "    void convertMergeTreeTableIfPossible(ASTCreateQuery & create, DatabasePtr database, bool to_replicated);\n    void throwIfTooManyEntities(ASTCreateQuery & create, StoragePtr storage) const;\n",
+        "lookback": "    void throwIfTooManyEntities(ASTCreateQuery & create, StoragePtr storage) const;",
+        "lookahead": "    ASTPtr query_ptr;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 124,
+        "end_line": 131,
+        "merge_gen_region": null,
+        "confidence": 0.8278887271881104,
+        "hesitated": true
+    }
+]

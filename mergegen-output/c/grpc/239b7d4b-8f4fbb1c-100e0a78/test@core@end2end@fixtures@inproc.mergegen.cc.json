@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <grpc/support/useful.h>\n",
+        "base_contents": "#include <grpc/support/useful.h>",
+        "res_region": "",
+        "lookback": "#include \"src/core/ext/filters/client_channel/client_channel.h\"",
+        "lookahead": "#include \"src/core/ext/filters/client_channel/client_channel.h\"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 26,
+        "end_line": 32,
+        "merge_gen_region": null,
+        "confidence": 0.3983927071094513,
+        "hesitated": true
+    }
+]

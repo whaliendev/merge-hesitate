@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n  /**\n   * Callback used to inform CHRE of a completed flush event.\n   *\n   * @param errorCode An error code from enum chreError, with CHRE_ERROR_NONE\n   *        indicating a successful response.\n   *\n   * @see chrePalBleApi.flush\n   *\n   * @since v1.9\n   */\n  void (*flushCallback)(uint8_t errorCode);\n\n  /**\n   * Sends a BT snoop log to the CHRE daemon.\n   *\n   * @param isTxToBtController True if the direction of the BT snoop log is Tx\n   * to BT controller. False then RX from BT controller is assumed.\n   * @param buffer a byte buffer containing the encoded log message.\n   * @param size size of the bt log message buffer.\n   */\n  void (*handleBtSnoopLog)(bool isTxToBtController, const uint8_t *buffer,\n                           size_t size);",
+        "b_contents": "",
+        "base_contents": "\n  /**\n   * Sends a BT snoop log to the CHRE daemon.\n   *\n   * @param isTxToBtController True if the direction of the BT snoop log is Tx\n   * to BT controller. False then RX from BT controller is assumed.\n   * @param buffer a byte buffer containing the encoded log message.\n   * @param size size of the bt log message buffer.\n   */\n  void (*handleBtSnoopLog)(bool isTxToBtController, const uint8_t *buffer,\n                           size_t size);",
+        "res_region": "\n  /**\n   * Callback used to inform CHRE of a completed flush event.\n   *\n   * @param errorCode An error code from enum chreError, with CHRE_ERROR_NONE\n   *        indicating a successful response.\n   *\n   * @see chrePalBleApi.flush\n   *\n   * @since v1.9\n   */\n  void (*flushCallback)(uint8_t errorCode);\n\n  /**\n   * Sends a BT snoop log to the CHRE daemon.\n   *\n   * @param isTxToBtController True if the direction of the BT snoop log is Tx\n   * to BT controller. False then RX from BT controller is assumed.\n   * @param buffer a byte buffer containing the encoded log message.\n   * @param size size of the bt log message buffer.\n   */\n  void (*handleBtSnoopLog)(bool isTxToBtController, const uint8_t *buffer,\n                           size_t size);",
+        "lookback": "  /**",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 128,
+        "end_line": 165,
+        "merge_gen_region": null,
+        "confidence": 0.6996562480926514,
+        "hesitated": true
+    }
+]

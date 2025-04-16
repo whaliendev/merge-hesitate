@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        timeout_ms = std::min(n->Update(true), timeout_ms);",
+        "b_contents": "        timeout_ms = std::min(n->Update(), timeout_ms);",
+        "base_contents": "        auto t = n->Update();\n        timeout_ms = std::min(t, timeout_ms);",
+        "res_region": "        timeout_ms = std::min(n->Update(true), timeout_ms);",
+        "lookback": "    }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 108,
+        "end_line": 115,
+        "merge_gen_region": null,
+        "confidence": 0.837860643863678,
+        "hesitated": true
+    }
+]

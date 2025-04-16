@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        else\n        {\n            if (reader_settings.enable_writes_to_query_condition_cache && prewhere_info)\n            {\n                auto data_part = task->getInfo().data_part;\n                auto query_condition_cache = data_part->storage.getContext()->getQueryConditionCache();\n                query_condition_cache->write(data_part, prewhere_info->prewhere_column_name, res.read_mark_ranges);\n            }\n\n            return {Chunk(), res.num_read_rows, res.num_read_bytes, false};\n        }",
+        "b_contents": "\n        return {Chunk(), res.num_read_rows, res.num_read_bytes, false};",
+        "base_contents": "        else\n        {\n            return {Chunk(), res.num_read_rows, res.num_read_bytes, false};\n        }",
+        "res_region": "        if (reader_settings.enable_writes_to_query_condition_cache && prewhere_info)\n        {\n            auto data_part = task->getInfo().data_part;\n            auto query_condition_cache = data_part->storage.getContext()->getQueryConditionCache();\n            query_condition_cache->write(data_part, prewhere_info->prewhere_column_name, res.read_mark_ranges);\n        }\n\n        return {Chunk(), res.num_read_rows, res.num_read_bytes, false};",
+        "lookback": "        {",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 217,
+        "end_line": 237,
+        "merge_gen_region": null,
+        "confidence": 0.7208878993988037,
+        "hesitated": true
+    }
+]

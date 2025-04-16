@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"modules/perception/inference/paddlepaddle/paddle_net.h\"\n#include \"modules/perception/inference/tensorrt/rt_net.h\"\n",
+        "b_contents": "#if GPU_PLATFORM == NVIDIA\n  #include \"modules/perception/inference/tensorrt/rt_net.h\"\n  #define RTNET RTNet(proto_file, weight_file, outputs, inputs)\n  #define RTNET8 RTNet(proto_file, weight_file, outputs, inputs, model_root)\n#elif GPU_PLATFORM == AMD\n  #include \"modules/perception/inference/migraphx/mi_net.h\"\n  #define RTNET MINet(proto_file, weight_file, outputs, inputs)\n  // TODO(B1tway) Add quantization int8 support for RTNetInt8.\n  // RTNetInt8 on MIGraphX currently works with fp32.\n  #define RTNET8 RTNET\n#endif",
+        "base_contents": "#include \"modules/perception/inference/tensorrt/rt_net.h\"\n",
+        "res_region": "#include \"modules/perception/inference/paddlepaddle/paddle_net.h\"\n#if GPU_PLATFORM == NVIDIA\n  #include \"modules/perception/inference/tensorrt/rt_net.h\"\n  #define RTNET RTNet(proto_file, weight_file, outputs, inputs)\n  #define RTNET8 RTNet(proto_file, weight_file, outputs, inputs, model_root)\n#elif GPU_PLATFORM == AMD\n  #include \"modules/perception/inference/migraphx/mi_net.h\"\n  #define RTNET MINet(proto_file, weight_file, outputs, inputs)\n  // TODO(B1tway) Add quantization int8 support for RTNetInt8.\n  // RTNetInt8 on MIGraphX currently works with fp32.\n  #define RTNET8 RTNET\n#endif",
+        "lookback": "#if GPU_PLATFORM == NVIDIA",
+        "lookahead": "namespace apollo {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 21,
+        "end_line": 40,
+        "merge_gen_region": "# \"/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.914271891117096,
+        "hesitated": false,
+        "resolved": false
+    }
+]

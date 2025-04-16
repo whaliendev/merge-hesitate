@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if (php_swoole_array_get_value(vht, \"tls_host_name\", v) || php_swoole_array_get_value(vht, \"ssl_host_name\", v))",
+        "b_contents": "    if (php_swoole_array_get_value(vht, \"ssl_host_name\", v))",
+        "base_contents": "    if (php_swoole_array_get_value(vht, \"tls_host_name\", v))",
+        "res_region": "    if (php_swoole_array_get_value(vht, \"ssl_host_name\", v))",
+        "lookback": "    {",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 497,
+        "end_line": 503,
+        "merge_gen_region": null,
+        "confidence": 0.8419914245605469,
+        "hesitated": true
+    }
+]

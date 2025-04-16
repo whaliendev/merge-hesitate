@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Vector2 &pt) override;",
+        "b_contents": "",
+        "base_contents": "    //override \"setAnchorPoint\" method of widget.\n    virtual void setAnchorPoint(const Point &pt) override;",
+        "res_region": "",
+        "lookback": "    void addEventListenerCheckBox(Ref* target,SEL_SelectedStateEvent selector);",
+        "lookahead": "    //add a call back function would called when checkbox is selected or unselected.",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 166,
+        "end_line": 173,
+        "merge_gen_region": null,
+        "confidence": 0.7034725546836853,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  public:\n    // This value is used for all AudioPatches and reported by all streams.\n    static constexpr int32_t kLatencyMs = 10;\n\n  private:\n    ndk::ScopedAStatus setModuleDebug(\n            const ::aidl::android::hardware::audio::core::ModuleDebug& in_debug) override;\n    ndk::ScopedAStatus connectExternalDevice(\n            const ::aidl::android::media::audio::common::AudioPort& in_templateIdAndAdditionalData,\n            ::aidl::android::media::audio::common::AudioPort* _aidl_return) override;\n    ndk::ScopedAStatus disconnectExternalDevice(int32_t in_portId) override;",
+        "b_contents": "    ndk::ScopedAStatus setModuleDebug(\n            const ::aidl::android::hardware::audio::core::ModuleDebug& in_debug) override;\n    ndk::ScopedAStatus connectExternalDevice(\n            const ::aidl::android::media::audio::common::AudioPort& in_templateIdAndAdditionalData,\n            ::aidl::android::media::audio::common::AudioPort* _aidl_return) override;\n    ndk::ScopedAStatus disconnectExternalDevice(int32_t in_portId) override;",
+        "base_contents": "",
+        "res_region": "  public:\n    // This value is used for all AudioPatches and reported by all streams.\n    static constexpr int32_t kLatencyMs = 10;\n\n  private:\n    ndk::ScopedAStatus setModuleDebug(\n            const ::aidl::android::hardware::audio::core::ModuleDebug& in_debug) override;\n    ndk::ScopedAStatus connectExternalDevice(\n            const ::aidl::android::media::audio::common::AudioPort& in_templateIdAndAdditionalData,\n            ::aidl::android::media::audio::common::AudioPort* _aidl_return) override;\n    ndk::ScopedAStatus disconnectExternalDevice(int32_t in_portId) override;",
+        "lookback": "    // This value is used for all AudioPatches and reported by all streams.",
+        "lookahead": "    ndk::ScopedAStatus getAudioPatches(std::vector<AudioPatch>* _aidl_return) override;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 30,
+        "end_line": 50,
+        "merge_gen_region": " This is for Audioches reported all.: This is for Audioches reported all. constexpr int_ kMs 10 private n::A setDebug constaid::::::::::& indebug override n::A connectDevice( ::landroidmediaaudiocommonAudio&_templateAndData ::landroidmediaaudiocommonAudio*aid_) override n::A connectDevice( ::landroidmediaaudiocommonAudio&_IdAndData ::landroidmediaaudiocoreModule& indebug constdk:: file&_) const const::&&&) const::&&) const::&&) const",
+        "confidence": 0.9569911360740662,
+        "hesitated": false,
+        "resolved": false
+    }
+]

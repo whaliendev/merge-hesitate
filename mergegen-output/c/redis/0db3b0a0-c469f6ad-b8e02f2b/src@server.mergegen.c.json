@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "        checkChildrenDone();",
+        "b_contents": "        int statloc;\n        pid_t pid;\n\n        if ((pid = wait3(&statloc,WNOHANG,NULL)) != 0) {\n            int exitcode = WEXITSTATUS(statloc);\n            int bysignal = 0;\n\n            if (WIFSIGNALED(statloc)) bysignal = WTERMSIG(statloc);\n\n            /* sigKillChildHandler catches the signal and calls exit(), but we\n             * must make sure not to flag lastbgsave_status, etc incorrectly.\n             * We could directly terminate the child process via SIGUSR1\n             * without handling it, but in this case Valgrind will log an\n             * annoying error. */\n            if (exitcode == SERVER_CHILD_NOERROR_RETVAL) {\n                bysignal = SIGUSR1;\n                exitcode = 1;\n            }\n\n            if (pid == -1) {\n                serverLog(LL_WARNING,\"wait3() returned an error: %s. \"\n                    \"rdb_child_pid = %d, aof_child_pid = %d, module_child_pid = %d\",\n                    strerror(errno),\n                    (int) server.rdb_child_pid,\n                    (int) server.aof_child_pid,\n                    (int) server.module_child_pid);\n            } else if (pid == server.rdb_child_pid) {\n                backgroundSaveDoneHandler(exitcode,bysignal);\n                if (!bysignal && exitcode == 0) receiveChildInfo();\n            } else if (pid == server.aof_child_pid) {\n                backgroundRewriteDoneHandler(exitcode,bysignal);\n                if (!bysignal && exitcode == 0) receiveChildInfo();\n            } else if (pid == server.module_child_pid) {\n                ModuleForkDoneHandler(exitcode,bysignal);\n                if (!bysignal && exitcode == 0) receiveChildInfo();\n            } else {\n                if (!ldbRemoveChild(pid)) {\n                    serverLog(LL_WARNING,\n                        \"Warning, detected child with unmatched pid: %ld\",\n                        (long)pid);\n                }\n            }\n            updateDictResizePolicy();\n            closeChildInfoPipe();\n        }",
+        "base_contents": "        int statloc;\n        pid_t pid;\n\n        if ((pid = wait3(&statloc,WNOHANG,NULL)) != 0) {\n            int exitcode = WEXITSTATUS(statloc);\n            int bysignal = 0;\n\n            if (WIFSIGNALED(statloc)) bysignal = WTERMSIG(statloc);\n\n            if (pid == -1) {\n                serverLog(LL_WARNING,\"wait3() returned an error: %s. \"\n                    \"rdb_child_pid = %d, aof_child_pid = %d\",\n                    strerror(errno),\n                    (int) server.rdb_child_pid,\n                    (int) server.aof_child_pid);\n            } else if (pid == server.rdb_child_pid) {\n                backgroundSaveDoneHandler(exitcode,bysignal);\n                if (!bysignal && exitcode == 0) receiveChildInfo();\n            } else if (pid == server.aof_child_pid) {\n                backgroundRewriteDoneHandler(exitcode,bysignal);\n                if (!bysignal && exitcode == 0) receiveChildInfo();\n            } else {\n                if (!ldbRemoveChild(pid)) {\n                    serverLog(LL_WARNING,\n                        \"Warning, detected child with unmatched pid: %ld\",\n                        (long)pid);\n                }\n            }\n            updateDictResizePolicy();\n            closeChildInfoPipe();\n        }",
+        "res_region": "        checkChildrenDone();",
+        "lookback": "    } else {",
+        "lookahead": "    } else {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1947,
+        "end_line": 2027,
+        "merge_gen_region": null,
+        "confidence": 0.5780032277107239,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            server.port ? server.port : server.tls_port,\n            (intmax_t)uptime,\n            (intmax_t)(uptime/(3600*24)),",
+        "b_contents": "            server.port,\n            (int64_t)uptime,\n            (int64_t)(uptime/(3600*24)),",
+        "base_contents": "            server.port,\n            (intmax_t)uptime,\n            (intmax_t)(uptime/(3600*24)),",
+        "res_region": "            server.port ? server.port : server.tls_port,\n            (int64_t)uptime,\n            (int64_t)(uptime/(3600*24)),",
+        "lookback": "            (int64_t)uptime,",
+        "lookahead": "            server.hz,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 4051,
+        "end_line": 4063,
+        "merge_gen_region": null,
+        "confidence": 0.6108508110046387,
+        "hesitated": true
+    }
+]

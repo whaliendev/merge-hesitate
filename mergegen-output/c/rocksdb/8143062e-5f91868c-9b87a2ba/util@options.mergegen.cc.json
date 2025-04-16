@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      no_block_cache(false),\n      table_cache_numshardbits(4),\n      max_background_compactions(1),\n      max_log_file_size(0),",
+        "b_contents": "",
+        "base_contents": "      no_block_cache(false),\n      table_cache_numshardbits(4),\n      max_log_file_size(0),",
+        "res_region": "      delete_obsolete_files_period_micros(0),\n      max_background_compactions(1),",
+        "lookback": "      max_background_compactions(1),",
+        "lookahead": "      max_log_file_size(0),",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 46,
+        "end_line": 56,
+        "merge_gen_region": null,
+        "confidence": 0.7207133173942566,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Log(log,\"     Options.max_log_file_size: %d\", max_log_file_size);\n    Log(log,\" Options.db_stats_log_interval: %d\", ",
+        "b_contents": "    Log(log,\"     Options.max_log_file_size: %ld\", max_log_file_size);\n    Log(log,\" Options.db_stats_log_interval: %d\",",
+        "base_contents": "    Log(log,\"     Options.max_log_file_size: %d\", max_log_file_size);\n    Log(log,\" Options.db_stats_log_interval: %d\",",
+        "res_region": "    Log(log,\"     Options.max_log_file_size: %ld\", max_log_file_size);\n    Log(log,\" Options.db_stats_log_interval: %d\",",
+        "lookback": "    Log(log,\" Options.db_stats_log_interval: %d\",",
+        "lookahead": "        db_stats_log_interval);",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 98,
+        "end_line": 107,
+        "merge_gen_region": null,
+        "confidence": 0.8307176232337952,
+        "hesitated": true
+    }
+]

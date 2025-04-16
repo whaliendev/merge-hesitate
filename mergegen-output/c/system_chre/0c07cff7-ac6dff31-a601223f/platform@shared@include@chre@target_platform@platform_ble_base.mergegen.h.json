@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  static void flushCallback(uint8_t errorCode);\n  static void handleBtSnoopLog(bool isTxToBtController, const uint8_t *buffer,\n                               size_t size);",
+        "b_contents": "",
+        "base_contents": "  static void handleBtSnoopLog(bool isTxToBtController, const uint8_t *buffer,\n                               size_t size);",
+        "res_region": "  static void flushCallback(uint8_t errorCode);\n  static void handleBtSnoopLog(bool isTxToBtController, const uint8_t *buffer,\n                               size_t size);",
+        "lookback": "  static void handleBtSnoopLog(bool isTxToBtController, const uint8_t *buffer,",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 42,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.4841279089450836,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\twlr_output_layout_remove(root_container.sway_root->output_layout,\n\t\t\twlr_output);\n\t\tcontainer_destroy(output);",
+        "b_contents": "\t\tcontainer_output_destroy(output);\n\t\twlr_output_layout_remove(output_layout, wlr_output);",
+        "base_contents": "\t\twlr_output_layout_remove(root_container.sway_root->output_layout,\n\t\t\twlr_output);\n\t\tcontainer_output_destroy(output);",
+        "res_region": "\t\tcontainer_destroy(output);\n\t\twlr_output_layout_remove(root_container.sway_root->output_layout,\n\t\t\twlr_output);",
+        "lookback": "\t\twlr_output_layout_remove(root_container.sway_root->output_layout,",
+        "lookahead": "\t\treturn;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 130,
+        "end_line": 141,
+        "merge_gen_region": null,
+        "confidence": 0.7355409264564514,
+        "hesitated": true
+    }
+]

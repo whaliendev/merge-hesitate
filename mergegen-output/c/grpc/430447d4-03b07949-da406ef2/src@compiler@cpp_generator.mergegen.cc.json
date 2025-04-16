@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "    printer->Print(vars, \"class CompletionQueue;\\n\");\n    printer->Print(vars, \"class ServerCompletionQueue;\\n\");",
+        "base_contents": "    printer->Print(vars, \"class CompletionQueue;\\n\");\n    printer->Print(vars, \"class Channel;\\n\");\n    printer->Print(vars, \"class ServerCompletionQueue;\\n\");",
+        "res_region": "",
+        "lookback": "    printer->Print(vars, \"}  // namespace grpc\\n\\n\");",
+        "lookahead": "    printer->Print(vars, \"class ServerContext;\\n\");",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 165,
+        "end_line": 173,
+        "merge_gen_region": null,
+        "confidence": 0.842766523361206,
+        "hesitated": true
+    }
+]

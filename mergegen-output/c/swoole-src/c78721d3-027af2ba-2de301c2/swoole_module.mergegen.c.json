@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    SwooleG.module_input_buffer = swString_new(8192);\n    if (SwooleG.module_input_buffer == NULL)\n    {\n        swoole_php_fatal_error(E_ERROR, \"swString_new(8192) failed.\");\n    }\n    SwooleG.module_output_buffer = swString_new(8192);\n    if (SwooleG.module_output_buffer == NULL)",
+        "b_contents": "    SwooleG.module_stack = swString_new(8192);\n    if (SwooleG.module_stack == NULL)",
+        "base_contents": "    SwooleG.call_php_func_args = swString_new(8192);\n    if (SwooleG.call_php_func_args == NULL)\n    {\n        swoole_php_fatal_error(E_ERROR, \"swString_new(8192) failed.\");\n    }\n    SwooleG.module_return_value = swString_new(8192);\n    if (SwooleG.module_return_value == NULL)",
+        "res_region": "    SwooleG.module_stack = swString_new(8192);\n    if (SwooleG.module_stack == NULL)",
+        "lookback": "    if (SwooleG.module_stack == NULL)",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 78,
+        "end_line": 97,
+        "merge_gen_region": null,
+        "confidence": 0.7541478872299194,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void *params = SwooleG.module_input_buffer->str;",
+        "b_contents": "    void *params = SwooleG.module_stack->str;",
+        "base_contents": "    void *params = SwooleG.call_php_func_args->str;",
+        "res_region": "    void *params = SwooleG.module_stack->str;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 205,
+        "end_line": 211,
+        "merge_gen_region": null,
+        "confidence": 0.7168980836868286,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    swString *buffer = SwooleG.module_output_buffer;",
+        "b_contents": "\n    swString *buffer = SwooleG.module_stack;",
+        "base_contents": "    swVal *val_c = NULL;",
+        "res_region": "\n    swString *buffer = SwooleG.module_stack;",
+        "lookback": "    swString *buffer = SwooleG.module_stack;",
+        "lookahead": "    switch(Z_TYPE_P(retval))",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 259,
+        "end_line": 267,
+        "merge_gen_region": null,
+        "confidence": 0.8614303469657898,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    else",
+        "b_contents": "\n    php_coro_context *context = (php_coro_context *) emalloc(sizeof(php_coro_context));\n\n    memcpy(ev.buf, domain_name, l_domain_name);\n    ((char *) ev.buf)[l_domain_name] = 0;\n    ev.flags = family;\n    ev.type = SW_AIO_GETHOSTBYNAME;\n    ev.object = context;\n    ev.handler = swAio_handler_gethostbyname;\n    ev.callback = coro_dns_onResolveCompleted;\n\n    php_swoole_check_aio();\n\n    if (swAio_dispatch(&ev) < 0)",
+        "base_contents": "\n    php_context *context = (php_context *) emalloc(sizeof(php_context));\n\n    memcpy(ev.buf, domain_name, l_domain_name);\n    ((char *) ev.buf)[l_domain_name] = 0;\n    ev.flags = family;\n    ev.type = SW_AIO_GETHOSTBYNAME;\n    ev.object = context;\n    ev.handler = swAio_handler_gethostbyname;\n    ev.callback = coro_dns_onResolveCompleted;\n\n    php_swoole_check_aio();\n\n    if (swAio_dispatch(&ev) < 0)",
+        "res_region": "\n    php_coro_context *context = (php_coro_context *) emalloc(sizeof(php_coro_context));\n\n    memcpy(ev.buf, domain_name, l_domain_name);\n    ((char *) ev.buf)[l_domain_name] = 0;\n    ev.flags = family;\n    ev.type = SW_AIO_GETHOSTBYNAME;\n    ev.object = context;\n    ev.handler = swAio_handler_gethostbyname;\n    ev.callback = coro_dns_onResolveCompleted;\n\n    php_swoole_check_aio();\n\n    if (swAio_dispatch(&ev) < 0)",
+        "lookback": "    php_coro_context *context = (php_coro_context *) emalloc(sizeof(php_coro_context));",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 1170,
+        "end_line": 1202,
+        "merge_gen_region": null,
+        "confidence": 0.7481861710548401,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n    PHPCoroutine::yield_m(return_value, context);",
+        "base_contents": "\n    sw_coro_save(return_value, context);\n    sw_coro_yield();",
+        "res_region": "\n    PHPCoroutine::yield_m(return_value, context);",
+        "lookback": "    PHPCoroutine::yield_m(return_value, context);",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 1206,
+        "end_line": 1214,
+        "merge_gen_region": null,
+        "confidence": 0.37779462337493896,
+        "hesitated": true
+    }
+]

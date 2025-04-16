@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "/// Extension to support delayed defaults. AddingDefaultsProcessor uses it to replace missing values with column defaults.\nclass ChunkMissingValues : public ChunkInfoCloneable<ChunkMissingValues>\n{\npublic:\n    ChunkMissingValues(const ChunkMissingValues & other) = default;\n\n    using RowsBitMask = std::vector<bool>; /// a bit per row for a column\n\n    const RowsBitMask & getDefaultsBitmask(size_t column_idx) const;\n    void setBit(size_t column_idx, size_t row_idx);\n    bool empty() const { return rows_mask_by_column_id.empty(); }\n    size_t size() const { return rows_mask_by_column_id.size(); }\n    void clear() { rows_mask_by_column_id.clear(); }\n\nprivate:\n    using RowsMaskByColumnId = std::unordered_map<size_t, RowsBitMask>;\n\n    /// If rows_mask_by_column_id[column_id][row_id] is true related value in Block should be replaced with column default.\n    /// It could contain less columns and rows then related block.\n    RowsMaskByColumnId rows_mask_by_column_id;\n};\n\n\nclass IMergeTreeDataPart;\n\n/// The query condition cache needs to know the mark ranges of which part the chunk data comes from.\nclass MarkRangesInfo : public ChunkInfoCloneable<MarkRangesInfo>\n{\npublic:\n    MarkRangesInfo(std::shared_ptr<const IMergeTreeDataPart> data_part_, MarkRanges mark_ranges_)\n        : data_part(data_part_)\n        , mark_ranges(std::move(mark_ranges_))\n    {}\n\n    std::shared_ptr<const IMergeTreeDataPart> getDataPart() const { return data_part; }\n    const MarkRanges & getMarkRanges() const { return mark_ranges; }\nprivate:\n    std::shared_ptr<const IMergeTreeDataPart> data_part;\n    MarkRanges mark_ranges;\n};\n",
+        "b_contents": "",
+        "base_contents": "/// Extension to support delayed defaults. AddingDefaultsProcessor uses it to replace missing values with column defaults.\nclass ChunkMissingValues : public ChunkInfoCloneable<ChunkMissingValues>\n{\npublic:\n    ChunkMissingValues(const ChunkMissingValues & other) = default;\n\n    using RowsBitMask = std::vector<bool>; /// a bit per row for a column\n\n    const RowsBitMask & getDefaultsBitmask(size_t column_idx) const;\n    void setBit(size_t column_idx, size_t row_idx);\n    bool empty() const { return rows_mask_by_column_id.empty(); }\n    size_t size() const { return rows_mask_by_column_id.size(); }\n    void clear() { rows_mask_by_column_id.clear(); }\n\nprivate:\n    using RowsMaskByColumnId = std::unordered_map<size_t, RowsBitMask>;\n\n    /// If rows_mask_by_column_id[column_id][row_id] is true related value in Block should be replaced with column default.\n    /// It could contain less columns and rows then related block.\n    RowsMaskByColumnId rows_mask_by_column_id;\n};\n",
+        "res_region": "class IMergeTreeDataPart;\n\n/// The query condition cache needs to know the mark ranges of which part the chunk data comes from.\nclass MarkRangesInfo : public ChunkInfoCloneable<MarkRangesInfo>\n{\npublic:\n    MarkRangesInfo(std::shared_ptr<const IMergeTreeDataPart> data_part_, MarkRanges mark_ranges_)\n        : data_part(data_part_)\n        , mark_ranges(std::move(mark_ranges_))\n    {}\n\n    std::shared_ptr<const IMergeTreeDataPart> getDataPart() const { return data_part; }\n    const MarkRanges & getMarkRanges() const { return mark_ranges; }\nprivate:\n    std::shared_ptr<const IMergeTreeDataPart> data_part;\n    MarkRanges mark_ranges;\n};\n",
+        "lookback": "",
+        "lookahead": "/// Converts all columns to full serialization in chunk.",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 156,
+        "end_line": 222,
+        "merge_gen_region": null,
+        "confidence": 0.5591914057731628,
+        "hesitated": true
+    }
+]

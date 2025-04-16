@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "CompilationOptions CompilationOptions::CompileAll(const OnDeviceRefresh& odr) {\n  CompilationOptions options;\n  for (InstructionSet isa : odr.Config().GetBootClasspathIsas()) {\n    options.boot_images_to_generate_for_isas.emplace_back(\n        isa, BootImages{.primary_boot_image = true, .boot_image_mainline_extension = true});\n  }\n  options.system_server_jars_to_compile = odr.AllSystemServerJars();\n  return options;\n}\n\nint BootImages::Count() const {\n  int count = 0;\n  if (primary_boot_image) {\n    count++;\n  }\n  if (boot_image_mainline_extension) {\n    count++;\n  }\n  return count;\n}\n\nOdrMetrics::BcpCompilationType BootImages::GetTypeForMetrics() const {\n  if (primary_boot_image && boot_image_mainline_extension) {\n    return OdrMetrics::BcpCompilationType::kPrimaryAndMainline;\n  }\n  if (boot_image_mainline_extension) {\n    return OdrMetrics::BcpCompilationType::kMainline;\n  }\n  LOG(FATAL) << \"Unexpected BCP compilation type\";\n  UNREACHABLE();\n}\n\nint CompilationOptions::CompilationUnitCount() const {\n  int count = 0;\n  for (const auto& [isa, boot_images] : boot_images_to_generate_for_isas) {\n    count += boot_images.Count();\n  }\n  count += system_server_jars_to_compile.size();\n  return count;\n}\n",
+        "b_contents": "CompilationOptions CompilationOptions::CompileAll(const OnDeviceRefresh& odr) {\n  CompilationOptions options;\n  for (InstructionSet isa : odr.Config().GetBootClasspathIsas()) {\n    options.boot_images_to_generate_for_isas.emplace_back(\n        isa, BootImages{.primary_boot_image = true, .boot_image_mainline_extension = true});\n  }\n  options.system_server_jars_to_compile = odr.AllSystemServerJars();\n  return options;\n}\n\nint BootImages::Count() const {\n  int count = 0;\n  if (primary_boot_image) {\n    count++;\n  }\n  if (boot_image_mainline_extension) {\n    count++;\n  }\n  return count;\n}\n\nint CompilationOptions::CompilationUnitCount() const {\n  int count = 0;\n  for (const auto& [isa, boot_images] : boot_images_to_generate_for_isas) {\n    count += boot_images.Count();\n  }\n  count += system_server_jars_to_compile.size();\n  return count;\n}\n",
+        "base_contents": "",
+        "res_region": "CompilationOptions CompilationOptions::CompileAll(const OnDeviceRefresh& odr) {\n  CompilationOptions options;\n  for (InstructionSet isa : odr.Config().GetBootClasspathIsas()) {\n    options.boot_images_to_generate_for_isas.emplace_back(\n        isa, BootImages{.primary_boot_image = true, .boot_image_mainline_extension = true});\n  }\n  options.system_server_jars_to_compile = odr.AllSystemServerJars();\n  return options;\n}\n\nint BootImages::Count() const {\n  int count = 0;\n  if (primary_boot_image) {\n    count++;\n  }\n  if (boot_image_mainline_extension) {\n    count++;\n  }\n  return count;\n}\n\nOdrMetrics::BcpCompilationType BootImages::GetTypeForMetrics() const {\n  if (primary_boot_image && boot_image_mainline_extension) {\n    return OdrMetrics::BcpCompilationType::kPrimaryAndMainline;\n  }\n  if (boot_image_mainline_extension) {\n    return OdrMetrics::BcpCompilationType::kMainline;\n  }\n  LOG(FATAL) << \"Unexpected BCP compilation type\";\n  UNREACHABLE();\n}\n\nint CompilationOptions::CompilationUnitCount() const {\n  int count = 0;\n  for (const auto& [isa, boot_images] : boot_images_to_generate_for_isas) {\n    count += boot_images.Count();\n  }\n  count += system_server_jars_to_compile.size();\n  return count;\n}\n",
+        "lookback": "  CompilationOptions options;",
+        "lookahead": "OnDeviceRefresh::OnDeviceRefresh(const OdrConfig& config)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 617,
+        "end_line": 691,
+        "merge_gen_region": null,
+        "confidence": 0.39171820878982544,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  for (InstructionSet isa : config_.GetBootClasspathIsas()) {\n    BootImages boot_images_to_generate = CheckBootClasspathArtifactsAreUpToDate(\n        metrics, isa, system_result, data_result, &checked_artifacts);\n    if (boot_images_to_generate.Count() > 0) {\n      compilation_options->boot_images_to_generate_for_isas.emplace_back(isa,\n                                                                         boot_images_to_generate);",
+        "b_contents": "  for (const InstructionSet isa : config_.GetBootClasspathIsas()) {\n    if (!CheckBootClasspathArtifactsAreUpToDate(\n            metrics, isa, system_result, data_result, &checked_artifacts)) {\n      compilation_options->boot_images_to_generate_for_isas.emplace_back(\n          isa, BootImages{.primary_boot_image = true, .boot_image_mainline_extension = true});",
+        "base_contents": "  for (const InstructionSet isa : config_.GetBootClasspathIsas()) {\n    if (!CheckBootClasspathArtifactsAreUpToDate(\n            metrics, isa, system_result, data_result, &checked_artifacts)) {\n      compilation_options->compile_boot_classpath_for_isas.push_back(isa);",
+        "res_region": "  for (InstructionSet isa : config_.GetBootClasspathIsas()) {\n    BootImages boot_images_to_generate = CheckBootClasspathArtifactsAreUpToDate(\n        metrics, isa, system_result, data_result, &checked_artifacts);\n    if (boot_images_to_generate.Count() > 0) {\n      compilation_options->boot_images_to_generate_for_isas.emplace_back(isa,\n                                                                         boot_images_to_generate);",
+        "lookback": "    BootImages boot_images_to_generate = CheckBootClasspathArtifactsAreUpToDate(",
+        "lookahead": "      // system_server artifacts are invalid without valid boot classpath artifacts.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1625,
+        "end_line": 1643,
+        "merge_gen_region": null,
+        "confidence": 0.872694194316864,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (result.IsOk() && boot_images.boot_image_mainline_extension) {\n    CompilationResult mainline_result =\n        RunDex2oatForBootClasspath(staging_dir,\n                                   \"mainline\",\n                                   isa,\n                                   GetMainlineBcpJars(),\n                                   boot_classpath_jars_,\n                                   GetBestBootImages(isa, /*include_mainline_extension=*/false),\n                                   GetBootImageMainlineExtensionPath(/*on_system=*/false, isa));\n    result.Merge(mainline_result);\n\n    if (mainline_result.IsOk()) {\n      on_dex2oat_success();\n    }\n  }\n\n  if (!result.IsOk() && boot_images.boot_image_mainline_extension) {\n    LOG(ERROR) << \"Compilation of mainline BCP failed: \" << result.error_msg;\n  }\n",
+        "b_contents": "  if (result.IsOk() && boot_images.boot_image_mainline_extension && gEnableMainlineExtension) {\n    CompilationResult mainline_result =\n        RunDex2oatForBootClasspath(staging_dir,\n                                   \"mainline\",\n                                   isa,\n                                   GetMainlineBcpJars(),\n                                   boot_classpath_jars_,\n                                   GetBestBootImages(isa, /*include_mainline_extension=*/false),\n                                   GetBootImageMainlineExtensionPath(/*on_system=*/false, isa));\n    result.Merge(mainline_result);\n\n    if (mainline_result.IsOk()) {\n      on_dex2oat_success();\n    }\n  }\n\n  if (!result.IsOk() && boot_images.boot_image_mainline_extension && gEnableMainlineExtension) {\n    LOG(ERROR) << \"Compilation of mainline BCP failed: \" << result.error_msg;\n  }\n",
+        "base_contents": "",
+        "res_region": "  if (result.IsOk() && boot_images.boot_image_mainline_extension) {\n    CompilationResult mainline_result =\n        RunDex2oatForBootClasspath(staging_dir,\n                                   \"mainline\",\n                                   isa,\n                                   GetMainlineBcpJars(),\n                                   boot_classpath_jars_,\n                                   GetBestBootImages(isa, /*include_mainline_extension=*/false),\n                                   GetBootImageMainlineExtensionPath(/*on_system=*/false, isa));\n    result.Merge(mainline_result);\n\n    if (mainline_result.IsOk()) {\n      on_dex2oat_success();\n    }\n  }\n\n  if (!result.IsOk() && boot_images.boot_image_mainline_extension) {\n    LOG(ERROR) << \"Compilation of mainline BCP failed: \" << result.error_msg;\n  }\n",
+        "lookback": "    CompilationResult mainline_result =",
+        "lookahead": "  return result;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1922,
+        "end_line": 1965,
+        "merge_gen_region": null,
+        "confidence": 0.6405355930328369,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    GetBestBootImages(isa, /*include_mainline_extension=*/true),",
+        "b_contents": "                    GetBestBootImages(isa, /*include_mainline_extension=*/gEnableMainlineExtension),",
+        "base_contents": "                    GetBestBootImages(isa),",
+        "res_region": "                    GetBestBootImages(isa, /*include_mainline_extension=*/true),",
+        "lookback": "                    OdrArtifacts::ForSystemServer(output_path),",
+        "lookahead": "                    OdrArtifacts::ForSystemServer(output_path),",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2019,
+        "end_line": 2025,
+        "merge_gen_region": null,
+        "confidence": 0.7872546911239624,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,240 @@
+[
+    {
+        "a_contents": "    swString_clear(SwooleG.module_input_buffer);\n    SwooleG.module_input_buffer->length = 0;",
+        "b_contents": "    swString_clear(SwooleG.module_stack);\n    SwooleG.module_stack->length = 0;",
+        "base_contents": "    swString_clear(SwooleG.call_php_func_args);\n    SwooleG.call_php_func_args->length = 0;\n    SwooleG.call_php_func_argc = 0;",
+        "res_region": "    swString_clear(SwooleG.module_stack);\n    SwooleG.module_stack->length = 0;",
+        "lookback": "    SwooleG.module_stack->length = 0;",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 73,
+        "end_line": 83,
+        "merge_gen_region": null,
+        "confidence": 0.7200886011123657,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "base_contents": "    if (SwooleG.call_php_func_args->size < sizeof(swVal) + sizeof(long))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 88,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.6910110116004944,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "base_contents": "    if (SwooleG.call_php_func_args->size < sizeof(swVal) + sizeof(uint8_t))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 110,
+        "end_line": 118,
+        "merge_gen_region": null,
+        "confidence": 0.6636207103729248,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "base_contents": "    if (SwooleG.call_php_func_args->size < sizeof(swVal) + sizeof(double))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 132,
+        "end_line": 140,
+        "merge_gen_region": null,
+        "confidence": 0.6715279817581177,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    int size = sizeof(swVal) + length + 1;\n    if (buffer->size < size)",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    int size = sizeof(swVal) + length + 1;\n    if (buffer->size < size)",
+        "base_contents": "    if (SwooleG.call_php_func_args->size < sizeof(swVal) + length)",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    int size = sizeof(swVal) + length + 1;\n    if (buffer->size < size)",
+        "lookback": "    int size = sizeof(swVal) + length + 1;",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 154,
+        "end_line": 164,
+        "merge_gen_region": null,
+        "confidence": 0.8188027739524841,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    assert(buffer->length >= buffer->offset);",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "base_contents": "    assert(args->length >= args->offset);",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "lookback": "    assert(buffer->length >= buffer->offset);",
+        "lookahead": "    long lval;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 176,
+        "end_line": 184,
+        "merge_gen_region": null,
+        "confidence": 0.8129240274429321,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    assert(buffer->length >= buffer->offset);",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "base_contents": "    assert(args->length >= args->offset);",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "lookback": "    assert(buffer->length >= buffer->offset);",
+        "lookahead": "    uint8_t bval;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 195,
+        "end_line": 203,
+        "merge_gen_region": null,
+        "confidence": 0.824853241443634,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    assert(buffer->length >= buffer->offset);",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "base_contents": "    assert(args->length >= args->offset);",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);",
+        "lookback": "    assert(buffer->length >= buffer->offset);",
+        "lookahead": "    double dval;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 214,
+        "end_line": 222,
+        "merge_gen_region": null,
+        "confidence": 0.8300375938415527,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_input_buffer;\n    assert(buffer->length >= buffer->offset);\n    swVal *v = (swVal*) (buffer->str + buffer->offset);",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);\n    swVal *v = (swVal*) (buffer->str + buffer->offset);",
+        "base_contents": "    assert(args->length >= args->offset);\n    swVal *v = (swVal*) (args->str + args->offset);",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    assert(buffer->length >= buffer->offset);\n    swVal *v = (swVal*) (buffer->str + buffer->offset);",
+        "lookback": "    assert(buffer->length >= buffer->offset);",
+        "lookahead": "    assert(v->type == SW_VAL_STRING);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 233,
+        "end_line": 244,
+        "merge_gen_region": null,
+        "confidence": 0.8471717834472656,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_output_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "base_contents": "    if (SwooleG.module_return_value->size < sizeof(swVal) + sizeof(long))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(long))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 253,
+        "end_line": 261,
+        "merge_gen_region": null,
+        "confidence": 0.7179840207099915,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_output_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "base_contents": "    if (SwooleG.module_return_value->size < sizeof(swVal) + sizeof(uint8_t))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(uint8_t))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 272,
+        "end_line": 280,
+        "merge_gen_region": null,
+        "confidence": 0.6790435314178467,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_output_buffer;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "base_contents": "    if (SwooleG.module_return_value->size < sizeof(swVal) + sizeof(double))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "lookback": "    if (buffer->size < sizeof(swVal) + sizeof(double))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 291,
+        "end_line": 299,
+        "merge_gen_region": null,
+        "confidence": 0.6958708763122559,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    swString *buffer = SwooleG.module_output_buffer;\n    if (buffer->size < (sizeof(swVal) + len + 1))",
+        "b_contents": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < (sizeof(swVal) + len + 1))",
+        "base_contents": "    if (SwooleG.module_return_value->size < (sizeof(swVal) + len + 1))",
+        "res_region": "    swString *buffer = SwooleG.module_stack;\n    if (buffer->size < (sizeof(swVal) + len + 1))",
+        "lookback": "    if (buffer->size < (sizeof(swVal) + len + 1))",
+        "lookahead": "    {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 310,
+        "end_line": 318,
+        "merge_gen_region": null,
+        "confidence": 0.8036657571792603,
+        "hesitated": true
+    },
+    {
+        "a_contents": "static sw_inline long swReturnValue_get_long(long lval)\n{\n    swString *buffer = SwooleG.module_output_buffer;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_LONG);\n    return *(long *) val->value;\n}\n\nstatic sw_inline uint8_t swReturnValue_get_bool(uint8_t bval)\n{\n    swString *buffer = SwooleG.module_output_buffer;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_BOOL);\n    return *(uint8_t *) val->value;\n}\n\nstatic sw_inline double swReturnValue_get_double(double dval)\n{\n    swString *buffer = SwooleG.module_output_buffer;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_DOUBLE);\n    return *(double *) val->value;\n}\n\nstatic sw_inline char* swReturnValue_get_string(int *len)\n{\n    swString *buffer = SwooleG.module_output_buffer;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_STRING);\n    *len = val->length;\n    return val->value;\n}\n",
+        "b_contents": "static sw_inline long swReturnValue_get_long(long lval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_LONG);\n    return *(long *) val->value;\n}\n\nstatic sw_inline uint8_t swReturnValue_get_bool(uint8_t bval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_BOOL);\n    return *(uint8_t *) val->value;\n}\n\nstatic sw_inline double swReturnValue_get_double(double dval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_DOUBLE);\n    return *(double *) val->value;\n}\n\nstatic sw_inline char* swReturnValue_get_string(int *len)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_STRING);\n    *len = val->length;\n    return val->value;\n}\n",
+        "base_contents": "",
+        "res_region": "static sw_inline long swReturnValue_get_long(long lval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_LONG);\n    return *(long *) val->value;\n}\n\nstatic sw_inline uint8_t swReturnValue_get_bool(uint8_t bval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_BOOL);\n    return *(uint8_t *) val->value;\n}\n\nstatic sw_inline double swReturnValue_get_double(double dval)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_DOUBLE);\n    return *(double *) val->value;\n}\n\nstatic sw_inline char* swReturnValue_get_string(int *len)\n{\n    swString *buffer = SwooleG.module_stack;\n    swVal *val = (swVal *) buffer->str;\n    assert(val->type == SW_VAL_STRING);\n    *len = val->length;\n    return val->value;\n}\n",
+        "lookback": "{",
+        "lookahead": "#ifdef __cplusplus",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 327,
+        "end_line": 396,
+        "merge_gen_region": null,
+        "confidence": 0.6557818651199341,
+        "hesitated": true
+    }
+]

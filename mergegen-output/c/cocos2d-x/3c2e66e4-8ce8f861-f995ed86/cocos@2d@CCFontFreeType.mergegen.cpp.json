@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include FT_BBOX_H\n#include \"edtaa3func.h\"\n#include \"CCFontAtlas.h\"",
+        "b_contents": "\n#include FT_BBOX_H\n#include \"edtaa3func.h\"\n",
+        "base_contents": "",
+        "res_region": "#include FT_BBOX_H\n#include \"edtaa3func.h\"\n#include \"CCFontAtlas.h\"",
+        "lookback": "#include \"edtaa3func.h\"",
+        "lookahead": "#include \"base/CCDirector.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 26,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.7554678320884705,
+        "hesitated": true
+    },
+    {
+        "a_contents": ", _encoding(FT_ENCODING_UNICODE)\n, _usedGlyphs(GlyphCollection::ASCII)",
+        "b_contents": ", _encoding(FT_ENCODING_UNICODE)",
+        "base_contents": "",
+        "res_region": ", _encoding(FT_ENCODING_UNICODE)\n, _usedGlyphs(GlyphCollection::ASCII)",
+        "lookback": ", _usedGlyphs(GlyphCollection::ASCII)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 113,
+        "end_line": 119,
+        "merge_gen_region": null,
+        "confidence": 0.703259289264679,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    {\n        int foundIndex = -1;\n        for (int charmapIndex = 0; charmapIndex < face->num_charmaps; charmapIndex++)\n        {\n            if (face->charmaps[charmapIndex]->encoding != FT_ENCODING_NONE)\n            {\n                foundIndex = charmapIndex;\n                break;\n            }\n        }\n\n        if (foundIndex == -1)\n        {\n            return false;\n        }\n\n        _encoding = face->charmaps[foundIndex]->encoding;\n        if (FT_Select_Charmap(face, _encoding))\n        {\n            return false;\n        }\n    }",
+        "b_contents": "    {\n        int foundIndex = -1;\n        for (int charmapIndex = 0; charmapIndex < face->num_charmaps; charmapIndex++)\n        {\n            if (face->charmaps[charmapIndex]->encoding != FT_ENCODING_NONE)\n            {\n                foundIndex = charmapIndex;\n                break;\n            }\n        }\n        \n        if (foundIndex == -1)\n        {\n            return false;\n        }\n        \n        _encoding = face->charmaps[foundIndex]->encoding;\n        if (FT_Select_Charmap(face, _encoding))\n        {\n            return false;\n        }\n        \n        if (_encoding != FT_ENCODING_GB2312) {\n            CCLOG(\"Unsupported encoding:%d\", _encoding);\n        }\n    }",
+        "base_contents": "        return false;",
+        "res_region": "    {\n        int foundIndex = -1;\n        for (int charmapIndex = 0; charmapIndex < face->num_charmaps; charmapIndex++)\n        {\n            if (face->charmaps[charmapIndex]->encoding != FT_ENCODING_NONE)\n            {\n                foundIndex = charmapIndex;\n                break;\n            }\n        }\n\n        if (foundIndex == -1)\n        {\n            return false;\n        }\n\n        _encoding = face->charmaps[foundIndex]->encoding;\n        if (FT_Select_Charmap(face, _encoding))\n        {\n            return false;\n        }\n    }",
+        "lookback": "        int foundIndex = -1;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 159,
+        "end_line": 211,
+        "merge_gen_region": null,
+        "confidence": 0.8666834235191345,
+        "hesitated": true
+    }
+]

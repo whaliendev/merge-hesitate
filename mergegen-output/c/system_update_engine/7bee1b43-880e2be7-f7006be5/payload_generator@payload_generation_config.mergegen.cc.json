@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "      return minor >= kBrotliBsdiffMinorPayloadVersion;\n\n    case InstallOperation::PUFFDIFF:",
+        "base_contents": "    case InstallOperation::PUFFDIFF:",
+        "res_region": "      return minor >= kBrotliBsdiffMinorPayloadVersion;\n\n    case InstallOperation::PUFFDIFF:",
+        "lookback": "",
+        "lookahead": "      return minor >= kPuffdiffMinorPayloadVersion;",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 169,
+        "end_line": 176,
+        "merge_gen_region": null,
+        "confidence": 0.6301440596580505,
+        "hesitated": true
+    }
+]

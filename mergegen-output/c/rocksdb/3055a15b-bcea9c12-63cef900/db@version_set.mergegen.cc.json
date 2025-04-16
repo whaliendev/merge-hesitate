@@ -1,0 +1,105 @@
+[
+    {
+        "a_contents": "#define __STDC_FORMAT_MACROS\n\n#include <inttypes.h>",
+        "b_contents": "#include <inttypes.h>",
+        "base_contents": "",
+        "res_region": "#include <inttypes.h>",
+        "lookback": "#include <algorithm>",
+        "lookahead": "#include <algorithm>",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 12,
+        "end_line": 19,
+        "merge_gen_region": null,
+        "confidence": 0.5588713884353638,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    manifest_file_number_ = NewFileNumber(); // Change manifest file no.\n  }\n\n  if (new_descriptor_log) {\n    new_manifest_filename = DescriptorFileName(dbname_, manifest_file_number_);\n    edit->SetNextFile(next_file_number_);\n    // if we're writing out new snapshot make sure to persist max column\n    // family\n    if (column_family_set_->GetMaxColumnFamily() > 0) {\n      edit->SetMaxColumnFamily(column_family_set_->GetMaxColumnFamily());\n    }",
+        "b_contents": "  } else {\n    pending_manifest_file_number_ = manifest_file_number_;",
+        "base_contents": "    manifest_file_number_ = NewFileNumber(); // Change manifest file no.\n  }\n\n  if (new_descriptor_log) {\n    new_manifest_filename = DescriptorFileName(dbname_, manifest_file_number_);\n    edit->SetNextFile(next_file_number_);",
+        "res_region": "  } else {\n    pending_manifest_file_number_ = manifest_file_number_;\n  }\n\n  if (new_descriptor_log) {\n    // if we're writing out new snapshot make sure to persist max column family\n    if (column_family_set_->GetMaxColumnFamily() > 0) {\n      edit->SetMaxColumnFamily(column_family_set_->GetMaxColumnFamily());\n    }",
+        "lookback": "    pending_manifest_file_number_ = manifest_file_number_;",
+        "lookahead": "  }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1566,
+        "end_line": 1588,
+        "merge_gen_region": null,
+        "confidence": 0.8621339201927185,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if (edit->is_column_family_add_) {\n      // no group commit on column family add\n      assert(batch_edits.size() == 1);\n      assert(options != nullptr);\n      CreateColumnFamily(*options, edit);\n    } else if (edit->is_column_family_drop_) {\n      assert(batch_edits.size() == 1);\n      column_family_data->SetDropped();\n      if (column_family_data->Unref()) {\n        delete column_family_data;\n      }\n    } else {\n      uint64_t max_log_number_in_batch  = 0;\n      for (auto& e : batch_edits) {\n        if (e->has_log_number_) {\n          max_log_number_in_batch =\n              std::max(max_log_number_in_batch, e->log_number_);\n        }\n      }\n      if (max_log_number_in_batch != 0) {\n        assert(column_family_data->GetLogNumber() < max_log_number_in_batch);\n        column_family_data->SetLogNumber(max_log_number_in_batch);\n      }\n      AppendVersion(column_family_data, v);",
+        "b_contents": "    manifest_file_number_ = pending_manifest_file_number_;\n    manifest_file_size_ = new_manifest_file_size;\n    AppendVersion(v);\n    if (max_log_number_in_batch != 0) {\n      assert(log_number_ < max_log_number_in_batch);\n      log_number_ = max_log_number_in_batch;",
+        "base_contents": "    manifest_file_size_ = new_manifest_file_size;\n    AppendVersion(v);\n    if (max_log_number_in_batch != 0) {\n      assert(log_number_ < max_log_number_in_batch);\n      log_number_ = max_log_number_in_batch;",
+        "res_region": "    if (edit->is_column_family_add_) {\n      // no group commit on column family add\n      assert(batch_edits.size() == 1);\n      assert(options != nullptr);\n      CreateColumnFamily(*options, edit);\n    } else if (edit->is_column_family_drop_) {\n      assert(batch_edits.size() == 1);\n      column_family_data->SetDropped();\n      if (column_family_data->Unref()) {\n        delete column_family_data;\n      }\n    } else {\n      uint64_t max_log_number_in_batch  = 0;\n      for (auto& e : batch_edits) {\n        if (e->has_log_number_) {\n          max_log_number_in_batch =\n              std::max(max_log_number_in_batch, e->log_number_);\n        }\n      }\n      if (max_log_number_in_batch != 0) {\n        assert(column_family_data->GetLogNumber() < max_log_number_in_batch);\n        column_family_data->SetLogNumber(max_log_number_in_batch);\n      }\n      AppendVersion(column_family_data, v);\n    }\n\n    manifest_file_number_ = pending_manifest_file_number_;\n    manifest_file_size_ = new_manifest_file_size;",
+        "lookback": "      // no group commit on column family add",
+        "lookahead": "    prev_log_number_ = edit->prev_log_number_;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1701,
+        "end_line": 1739,
+        "merge_gen_region": "______(,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,,__,__,,__,,__,__,__,__,__,__// group on family// group on family",
+        "confidence": 0.9230822920799255,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\n    manifest_file_size_ = new_manifest_file_size;\n    prev_log_number_ = edit->prev_log_number_;",
+        "b_contents": "    prev_log_number_ = edit->prev_log_number_;",
+        "base_contents": "    prev_log_number_ = edit->prev_log_number_;\n",
+        "res_region": "    prev_log_number_ = edit->prev_log_number_;",
+        "lookback": "  } else {",
+        "lookahead": "  } else {",
+        "label": [
+            "theirs",
+            "base_underutilized"
+        ],
+        "start_line": 1741,
+        "end_line": 1750,
+        "merge_gen_region": null,
+        "confidence": 0.7978005409240723,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      if (cfd != nullptr) {\n        if (edit.has_log_number_) {\n          if (cfd->GetLogNumber() > edit.log_number_) {\n            s = Status::Corruption(\n                \"Log Numbers in MANIFEST are not always increasing\");\n          }\n          cfd->SetLogNumber(edit.log_number_);\n          have_log_number = true;\n        }\n        if (edit.has_comparator_ &&\n            edit.comparator_ != cfd->user_comparator()->Name()) {\n          s = Status::InvalidArgument(\n              cfd->user_comparator()->Name(),\n              \"does not match existing comparator \" + edit.comparator_);\n          break;",
+        "b_contents": "      if (edit.has_version_number_) {\n        have_version_number = true;\n      }\n\n      // Only a flush's edit or a new snapshot can write log number during\n      // LogAndApply. Since memtables are flushed and inserted into\n      // manifest_writers_ queue in order, the log number in MANIFEST file\n      // should be monotonically increasing.\n      if (edit.has_log_number_) {\n        if (have_log_number && log_number >= edit.log_number_) {\n          log_number_decrease = true;\n        } else {\n          log_number = edit.log_number_;\n          have_log_number = true;",
+        "base_contents": "      // Only a flush's edit or a new snapshot can write log number during\n      // LogAndApply. Since memtables are flushed and inserted into\n      // manifest_writers_ queue in order, the log number in MANIFEST file\n      // should be monotonically increasing.\n      if (edit.has_log_number_) {\n        if (have_log_number && log_number > edit.log_number_) {\n          s = Status::Corruption(\"log number decreases\");\n          break;",
+        "res_region": "      if (cfd != nullptr) {\n        if (edit.has_log_number_) {\n          if (cfd->GetLogNumber() > edit.log_number_) {\n            log_number_decrease = true;\n          } else {\n            cfd->SetLogNumber(edit.log_number_);\n            have_log_number = true;\n          }\n        }\n        if (edit.has_comparator_ &&\n            edit.comparator_ != cfd->user_comparator()->Name()) {\n          s = Status::InvalidArgument(\n              cfd->user_comparator()->Name(),\n              \"does not match existing comparator \" + edit.comparator_);\n          break;\n        }\n      }\n\n      if (edit.has_version_number_) {\n        have_version_number = true;",
+        "lookback": "        if (edit.has_log_number_) {",
+        "lookahead": "      }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1975,
+        "end_line": 2015,
+        "merge_gen_region": null,
+        "confidence": 0.7309436202049255,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  // WARNING: This method doesn't hold a mutex!!",
+        "b_contents": "  // Save metadata\n  VersionEdit edit;\n  edit.SetVersionNumber();\n  edit.SetComparatorName(icmp_.user_comparator()->Name());",
+        "base_contents": "  // Save metadata\n  VersionEdit edit;\n  edit.SetComparatorName(icmp_.user_comparator()->Name());",
+        "res_region": "  // WARNING: This method doesn't hold a mutex!!\n\n  bool first_record = false;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2473,
+        "end_line": 2484,
+        "merge_gen_region": null,
+        "confidence": 0.5286955237388611,
+        "hesitated": true
+    }
+]

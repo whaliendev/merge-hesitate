@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "                                  datum_t(std::move(genkeys),\n                                                        env->env->limits()));\n            stats = stats->merge(std::move(d).to_datum(), pure_merge,\n                                env->env->limits(), &conditions);",
+        "b_contents": "                                  make_counted<datum_t>(std::move(genkeys),\n                                                        env->env->limits()));\n            stats = stats->merge(std::move(d).to_counted(), pure_merge,\n                                 env->env->limits(), &conditions);",
+        "base_contents": "                                  make_counted<datum_t>(std::move(genkeys),\n                                                        env->env->limits));\n            stats = stats->merge(std::move(d).to_counted(), pure_merge,\n                                env->env->limits, &conditions);",
+        "res_region": "                                  datum_t(std::move(genkeys),\n                                                        env->env->limits()));\n            stats = stats->merge(std::move(d).to_datum(), pure_merge,\n                                env->env->limits(), &conditions);",
+        "lookback": "                                                        env->env->limits()));",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 168,
+        "end_line": 183,
+        "merge_gen_region": null,
+        "confidence": 0.8224827647209167,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                              keys_skipped + generated_keys.size(),\n                              generated_keys.size()).c_str(), env->env->limits());",
+        "b_contents": "                                      keys_skipped + generated_keys.size(),\n                                      generated_keys.size()).c_str(), env->env->limits());",
+        "base_contents": "                              keys_skipped + generated_keys.size(),\n                              generated_keys.size()).c_str(), env->env->limits);",
+        "res_region": "                                      keys_skipped + generated_keys.size(),\n                                      generated_keys.size()).c_str(), env->env->limits());",
+        "lookback": "                                      generated_keys.size()).c_str(), env->env->limits());",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 190,
+        "end_line": 199,
+        "merge_gen_region": null,
+        "confidence": 0.7763792276382446,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            stats = stats->merge(replace_stats, stats_merge, env->env->limits(), &conditions);",
+        "b_contents": "            stats = stats->merge(replace_stats, stats_merge, env->env->limits(),\n                                 &conditions);",
+        "base_contents": "            stats = stats->merge(replace_stats, stats_merge, env->env->limits, &conditions);",
+        "res_region": "            stats = stats->merge(replace_stats, stats_merge, env->env->limits(),\n                                 &conditions);",
+        "lookback": "                                 &conditions);",
+        "lookahead": "        } else {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 256,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.80483078956604,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_datum());",
+        "b_contents": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_counted());",
+        "base_contents": "        obj.add_warnings(conditions, env->env->limits);\n        return new_val(std::move(obj).to_counted());",
+        "res_region": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_datum());",
+        "lookback": "        return new_val(std::move(obj).to_datum());",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 290,
+        "end_line": 299,
+        "merge_gen_region": null,
+        "confidence": 0.7548364400863647,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                        stats = stats->merge(d, stats_merge, env->env->limits(), &conditions);",
+        "b_contents": "                        stats = stats->merge(d, stats_merge, env->env->limits(),\n                                             &conditions);",
+        "base_contents": "                        stats = stats->merge(d, stats_merge, env->env->limits, &conditions);",
+        "res_region": "                        stats = stats->merge(d, stats_merge, env->env->limits(),\n                                             &conditions);",
+        "lookback": "                                             &conditions);",
+        "lookahead": "                    } else {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 329,
+        "end_line": 336,
+        "merge_gen_region": null,
+        "confidence": 0.8002994656562805,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                            stats = stats->merge(d->get(i), stats_merge, env->env->limits(), &conditions);",
+        "b_contents": "                            stats = stats->merge(d->get(i), stats_merge, env->env->limits(),\n                                                 &conditions);",
+        "base_contents": "                            stats = stats->merge(d->get(i), stats_merge, env->env->limits, &conditions);",
+        "res_region": "                            stats = stats->merge(d->get(i), stats_merge, env->env->limits(),\n                                                 &conditions);",
+        "lookback": "                                                 &conditions);",
+        "lookahead": "                        }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 339,
+        "end_line": 346,
+        "merge_gen_region": null,
+        "confidence": 0.7694131135940552,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_datum());",
+        "b_contents": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_counted());",
+        "base_contents": "        obj.add_warnings(conditions, env->env->limits);\n        return new_val(std::move(obj).to_counted());",
+        "res_region": "        obj.add_warnings(conditions, env->env->limits());\n        return new_val(std::move(obj).to_datum());",
+        "lookback": "        return new_val(std::move(obj).to_datum());",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 358,
+        "end_line": 367,
+        "merge_gen_region": null,
+        "confidence": 0.7548364400863647,
+        "hesitated": true
+    }
+]

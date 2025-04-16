@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#if LV_USE_PAGE == 0\n#error \"lv_ta: lv_page is required. Enable it in lv_conf.h (LV_USE_PAGE 1)\"\n#endif\n",
+        "base_contents": "#if LV_USE_PAGE == 0\n#error \"lv_ta: lv_page is required. Enable it in lv_conf.h (LV_USE_PAGE  1) \"\n#endif\n",
+        "res_region": "",
+        "lookback": "#error \"lv_ta: lv_label is required. Enable it in lv_conf.h (LV_USE_LABEL 1)\"",
+        "lookahead": "#if LV_USE_LABEL == 0",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 20,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.8087107539176941,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    virtual const CameraMetadata& infoPhysical(const std::string& physicalId) const = 0;\n\n    virtual bool isCompositeJpegRDisabled() const { return false; };",
+        "b_contents": "    virtual const CameraMetadata& infoPhysical(const std::string& physicalId) const = 0;",
+        "base_contents": "    virtual const CameraMetadata& infoPhysical(const String8& physicalId) const = 0;",
+        "res_region": "    virtual const CameraMetadata& infoPhysical(const std::string& physicalId) const = 0;\n\n    virtual bool isCompositeJpegRDisabled() const { return false; };",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 113,
+        "end_line": 121,
+        "merge_gen_region": null,
+        "confidence": 0.5225211381912231,
+        "hesitated": true
+    }
+]

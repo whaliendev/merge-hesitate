@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    std::string pin;\n    EXPECT_TRUE(p2p_iface_\n                        ->connect(kTestMacAddr, WpsProvisionMethod::PBC, kTestConnectPin, true,\n                                  false, kTestConnectGoIntent, &pin)\n                        .isOk());",
+        "b_contents": "  std::string pin;\n  EXPECT_TRUE(p2p_iface_\n                  ->connect(kTestMacAddr, WpsProvisionMethod::PBC,\n                            kTestConnectPin, true, false, kTestConnectGoIntent,\n                            &pin)\n                  .isOk());",
+        "base_contents": "    /*\n     * Auto-join is not enabled before R. After enabling auto-join,\n     * this should always succeed.\n     */\n    std::string pin;\n    EXPECT_TRUE(p2p_iface_\n                    ->connect(kTestMacAddr, WpsProvisionMethod::PBC,\n                              kTestConnectPin, false, false,\n                              kTestConnectGoIntent, &pin)\n                    .isOk());",
+        "res_region": "    std::string pin;\n    EXPECT_TRUE(p2p_iface_\n                        ->connect(kTestMacAddr, WpsProvisionMethod::PBC, kTestConnectPin, true,\n                                  false, kTestConnectGoIntent, &pin)\n                        .isOk());",
+        "lookback": "    EXPECT_TRUE(p2p_iface_",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 538,
+        "end_line": 562,
+        "merge_gen_region": null,
+        "confidence": 0.8639726638793945,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                        ->connect(kTestMacAddr, WpsProvisionMethod::PBC, kTestConnectPin, true,\n                                  false, kTestConnectGoIntent, &pin)\n                        .isOk());",
+        "b_contents": "                    ->connect(kTestMacAddr, WpsProvisionMethod::PBC,\n                              kTestConnectPin, true, false,\n                              kTestConnectGoIntent, &pin)\n                    .isOk());",
+        "base_contents": "                    ->connect(kTestMacAddr, WpsProvisionMethod::PBC,\n                              kTestConnectPin, false, false,\n                              kTestConnectGoIntent, &pin)\n                    .isOk());",
+        "res_region": "                        ->connect(kTestMacAddr, WpsProvisionMethod::PBC, kTestConnectPin, true,\n                                  false, kTestConnectGoIntent, &pin)\n                        .isOk());",
+        "lookback": "                                  false, kTestConnectGoIntent, &pin)",
+        "lookahead": "    EXPECT_TRUE(p2p_iface_->cancelConnect().isOk());",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 571,
+        "end_line": 585,
+        "merge_gen_region": null,
+        "confidence": 0.8516868352890015,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    static bool AddTidToCgroup(int tid, int fd, const char* controller_name);\n    CacheUseResult UseCachedFd(ResourceCacheType cache_type, int id) const;",
+        "b_contents": "    static bool IsAppDependentPath(const std::string& path);\n    static bool AddTidToCgroup(int tid, int fd, const char* controller_name);\n\n    bool IsFdValid() const { return fd_ > FDS_INACCESSIBLE; }",
+        "base_contents": "    static bool IsAppDependentPath(const std::string& path);\n    static bool AddTidToCgroup(int tid, int fd);\n\n    bool IsFdValid() const { return fd_ > FDS_INACCESSIBLE; }",
+        "res_region": "    static bool AddTidToCgroup(int tid, int fd, const char* controller_name);\n    CacheUseResult UseCachedFd(ResourceCacheType cache_type, int id) const;",
+        "lookback": "    CacheUseResult UseCachedFd(ResourceCacheType cache_type, int id) const;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 141,
+        "end_line": 154,
+        "merge_gen_region": null,
+        "confidence": 0.5116435885429382,
+        "hesitated": true
+    }
+]

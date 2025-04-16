@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    static FunctionPtr create(ContextPtr context) { return std::make_shared<FunctionComparison>(ComparisonParams(context)); }",
+        "b_contents": "    static FunctionPtr create(ContextPtr context) { return std::make_shared<FunctionComparison>(decimalCheckComparisonOverflow(context), context->getSettingsRef()[Setting::allow_not_comparable_types_in_comparison_functions]); }",
+        "base_contents": "    static FunctionPtr create(ContextPtr context) { return std::make_shared<FunctionComparison>(decimalCheckComparisonOverflow(context)); }",
+        "res_region": "\n    static FunctionPtr create(ContextPtr context) { return std::make_shared<FunctionComparison>(ComparisonParams(context)); }",
+        "lookback": "    static FunctionPtr create(ContextPtr context) { return std::make_shared<FunctionComparison>(ComparisonParams(context)); }",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 662,
+        "end_line": 668,
+        "merge_gen_region": null,
+        "confidence": 0.8505892157554626,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    explicit FunctionComparison(ComparisonParams params_) : params(std::move(params_)) {}",
+        "b_contents": "    explicit FunctionComparison(bool check_decimal_overflow_, bool allow_not_comparable_types_)\n        : check_decimal_overflow(check_decimal_overflow_), allow_not_comparable_types(allow_not_comparable_types_) {}",
+        "base_contents": "    explicit FunctionComparison(bool check_decimal_overflow_)\n        : check_decimal_overflow(check_decimal_overflow_) {}",
+        "res_region": "    explicit FunctionComparison(ComparisonParams params_) : params(std::move(params_)) {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 670,
+        "end_line": 678,
+        "merge_gen_region": null,
+        "confidence": 0.7084652185440063,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    const ComparisonParams params;",
+        "b_contents": "    bool check_decimal_overflow = true;\n    bool allow_not_comparable_types = false;",
+        "base_contents": "    bool check_decimal_overflow = true;",
+        "res_region": "    const ComparisonParams params;",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 681,
+        "end_line": 688,
+        "merge_gen_region": null,
+        "confidence": 0.5496969223022461,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            auto func = std::make_shared<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionComparison<Op, Name>>(params));",
+        "b_contents": "            auto func = std::make_shared<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionComparison<Op, Name>>(check_decimal_overflow, allow_not_comparable_types));",
+        "base_contents": "            auto func = std::make_shared<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionComparison<Op, Name>>(check_decimal_overflow));",
+        "res_region": "            auto func = std::make_shared<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionComparison<Op, Name>>(params));",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1235,
+        "end_line": 1241,
+        "merge_gen_region": null,
+        "confidence": 0.8210923671722412,
+        "hesitated": true
+    }
+]

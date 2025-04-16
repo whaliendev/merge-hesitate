@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define CHPP_LINUX_LINK_TX_MTU_BYTES 1280\n#define CHPP_LINUX_LINK_RX_MTU_BYTES 1280",
+        "b_contents": "#define CHPP_LINUX_LINK_TX_MTU_BYTES 1280\n#define CHPP_LINUX_LINK_RX_MTU_BYTES 1280\n#define CHPP_LINUX_TRANSPORT_TIMEOUT_MS 1000",
+        "base_contents": "#define CHPP_PLATFORM_LINK_TX_MTU_BYTES 1280\n#define CHPP_PLATFORM_LINK_RX_MTU_BYTES 1280\n\n#define CHPP_PLATFORM_TRANSPORT_TIMEOUT_MS 1000",
+        "res_region": "#define CHPP_LINUX_LINK_TX_MTU_BYTES 1280\n#define CHPP_LINUX_LINK_RX_MTU_BYTES 1280",
+        "lookback": "#define CHPP_LINUX_LINK_RX_MTU_BYTES 1280",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 30,
+        "end_line": 42,
+        "merge_gen_region": null,
+        "confidence": 0.8759427666664124,
+        "hesitated": true
+    }
+]

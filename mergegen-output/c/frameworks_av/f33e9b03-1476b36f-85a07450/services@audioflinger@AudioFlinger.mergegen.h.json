@@ -1,0 +1,192 @@
+[
+    {
+        "a_contents": "    audio_utils::mutex& clientMutex() const final\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_ClientMutex) {\n        return mClientMutex;\n    }\n    void removeClient_l(pid_t pid) REQUIRES(clientMutex()) final;\n    void removeNotificationClient(pid_t pid) final EXCLUDES_AudioFlinger_Mutex;",
+        "b_contents": "    audio_utils::mutex& clientMutex() const final { return mClientMutex; }\n    void removeClient_l(pid_t pid) final;\n    void removeNotificationClient(pid_t pid) final;",
+        "base_contents": "    Mutex& clientMutex() const final { return mClientLock; }\n    void removeClient_l(pid_t pid) final;\n    void removeNotificationClient(pid_t pid) final;",
+        "res_region": "    audio_utils::mutex& clientMutex() const final\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_ClientMutex) {\n        return mClientMutex;\n    }\n    void removeClient_l(pid_t pid) REQUIRES(clientMutex()) final;\n    void removeNotificationClient(pid_t pid) final EXCLUDES_AudioFlinger_Mutex;",
+        "lookback": "            RETURN_CAPABILITY(audio_utils::AudioFlinger_ClientMutex) {",
+        "lookahead": "    status_t moveAuxEffectToIo(",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 264,
+        "end_line": 279,
+        "merge_gen_region": "_::&Mutex const RETURNCAPABILITYaudioutilsAudio_:: { mMutex } remove_(&&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const&1 const& const&) const",
+        "confidence": 0.9422757625579834,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    audio_utils::mutex& mutex() const final\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex)\n            EXCLUDES_BELOW_AudioFlinger_Mutex { return mMutex; }\n    sp<IAfThreadBase> checkOutputThread_l(audio_io_handle_t ioHandle) const final\n            REQUIRES(mutex());",
+        "b_contents": "    audio_utils::mutex& mutex() const final { return mMutex; }\n    sp<IAfThreadBase> checkOutputThread_l(audio_io_handle_t ioHandle) const final\n            REQUIRES(mutex());",
+        "base_contents": "    Mutex& mutex() const final { return mLock; }\n    sp<IAfThreadBase> checkOutputThread_l(audio_io_handle_t ioHandle) const final REQUIRES(mLock);",
+        "res_region": "    audio_utils::mutex& mutex() const final\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex)\n            EXCLUDES_BELOW_AudioFlinger_Mutex { return mMutex; }\n    sp<IAfThreadBase> checkOutputThread_l(audio_io_handle_t ioHandle) const final\n            REQUIRES(mutex());",
+        "lookback": "            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex)",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 305,
+        "end_line": 318,
+        "merge_gen_region": "__::&() final_(_::FlingerMutex EXDESBE_FlingerMutex returnMutex }<fBase check check check&&audio96969696969696969696audio9696969696BBaudioutilsregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregregreg",
+        "confidence": 0.9609564542770386,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    IAfPlaybackThread* primaryPlaybackThread_l() const final  REQUIRES(mutex());\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final\n            REQUIRES(mutex());\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final  REQUIRES(mutex());\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final REQUIRES(mutex());",
+        "b_contents": "    IAfPlaybackThread* primaryPlaybackThread_l() const final;\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final;\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final;\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final;",
+        "base_contents": "    IAfPlaybackThread* primaryPlaybackThread_l() const final;\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final;\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final;\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final;\n    void lock() const final ACQUIRE(mLock) { mLock.lock(); }\n    void unlock() const final RELEASE(mLock) { mLock.unlock(); }",
+        "res_region": "    IAfPlaybackThread* primaryPlaybackThread_l() const final  REQUIRES(mutex());\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final\n            REQUIRES(mutex());\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final  REQUIRES(mutex());\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final REQUIRES(mutex());",
+        "lookback": "    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final",
+        "lookahead": "    sp<IAfThreadBase> openInput_l(audio_module_handle_t module,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 327,
+        "end_line": 345,
+        "merge_gen_region": null,
+        "confidence": 0.8544603586196899,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    float masterVolume_l() const final REQUIRES(mutex());\n    bool masterMute_l() const final REQUIRES(mutex());\n    float getMasterBalance_l() const REQUIRES(mutex());\n    // no range check, AudioFlinger::mutex() held\n    bool streamMute_l(audio_stream_type_t stream) const final REQUIRES(mutex()) {\n        return mStreamTypes[stream].mute;\n    }",
+        "b_contents": "    float masterVolume_l() const final;\n    bool masterMute_l() const final;\n    float getMasterBalance_l() const;\n    // no range check, AudioFlinger::mutex() held\n    bool streamMute_l(audio_stream_type_t stream) const final { return mStreamTypes[stream].mute; }",
+        "base_contents": "    float masterVolume_l() const final;\n    bool masterMute_l() const final;\n    float getMasterBalance_l() const;\n    // no range check, AudioFlinger::mLock held\n    bool streamMute_l(audio_stream_type_t stream) const final { return mStreamTypes[stream].mute; }",
+        "res_region": "    float masterVolume_l() const final REQUIRES(mutex());\n    bool masterMute_l() const final REQUIRES(mutex());\n    float getMasterBalance_l() const REQUIRES(mutex());\n    // no range check, AudioFlinger::mutex() held\n    bool streamMute_l(audio_stream_type_t stream) const final REQUIRES(mutex()) {\n        return mStreamTypes[stream].mute;\n    }",
+        "lookback": "    bool masterMute_l() const final REQUIRES(mutex());",
+        "lookahead": "    audio_mode_t getMode() const final { return mMode; }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 376,
+        "end_line": 396,
+        "merge_gen_region": " master_() finalRESboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolBboolB&&boolB&boolB&boolB&boolB&boolB&bool&&bool&bool&bool&bool&bool&bool&bool&bool&bool&bool&boolALPHAoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput&boolB::&boolB::&bool&bool&bool&bool&bool",
+        "confidence": 0.9128774404525757,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "                // must be locked after mutex() and ThreadBase::mutex() if both must be locked\n                // avoids acquiring AudioFlinger::mutex() from inside thread loop.\n\n    mutable audio_utils::mutex mClientMutex;",
+        "b_contents": "                // must be locked after mutex() and ThreadBase::mutex() if both must be locked\n                // avoids acquiring AudioFlinger::mutex() from inside thread loop.",
+        "base_contents": "                // must be locked after mLock and ThreadBase::mLock if both must be locked\n                // avoids acquiring AudioFlinger::mLock from inside thread loop.",
+        "res_region": "                // must be locked after mutex() and ThreadBase::mutex() if both must be locked\n                // avoids acquiring AudioFlinger::mutex() from inside thread loop.\n\n    mutable audio_utils::mutex mClientMutex;",
+        "lookback": "                // avoids acquiring AudioFlinger::mutex() from inside thread loop.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 655,
+        "end_line": 666,
+        "merge_gen_region": null,
+        "confidence": 0.6800744533538818,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    DefaultKeyedVector<pid_t, wp<Client>> mClients GUARDED_BY(clientMutex());   // see ~Client()",
+        "b_contents": "    mutable audio_utils::mutex mClientMutex;",
+        "base_contents": "    mutable Mutex mClientLock;",
+        "res_region": "    DefaultKeyedVector<pid_t, wp<Client>> mClients GUARDED_BY(clientMutex());   // see ~Client()",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 668,
+        "end_line": 674,
+        "merge_gen_region": null,
+        "confidence": 0.5971684455871582,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::mutex& hardwareMutex() const { return mHardwareMutex; }",
+        "b_contents": "                // protected by mClientMutex\n                DefaultKeyedVector< pid_t, wp<Client> >     mClients;   // see ~Client()",
+        "base_contents": "                // protected by mClientLock\n                DefaultKeyedVector< pid_t, wp<Client> >     mClients;   // see ~Client()",
+        "res_region": "",
+        "lookback": "",
+        "lookahead": "    audio_utils::mutex& hardwareMutex() const { return mHardwareMutex; }",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 676,
+        "end_line": 684,
+        "merge_gen_region": null,
+        "confidence": 0.6727110743522644,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    mutable audio_utils::mutex mHardwareMutex;\n    // NOTE: If both mMutex and mHardwareMutex mutexes must be held,\n    // always take mMutex before mHardwareMutex",
+        "b_contents": "    audio_utils::mutex& hardwareMutex() const { return mHardwareMutex; }\n\n    mutable audio_utils::mutex mHardwareMutex;\n    // NOTE: If both mMutex and mHardwareMutex mutexes must be held,\n    // always take mMutex before mHardwareMutex",
+        "base_contents": "                mutable     Mutex                   mHardwareLock;\n                // NOTE: If both mLock and mHardwareLock mutexes must be held,\n                // always take mLock before mHardwareLock",
+        "res_region": "    audio_utils::mutex& hardwareMutex() const { return mHardwareMutex; }\n\n    mutable audio_utils::mutex mHardwareMutex;\n    // NOTE: If both mMutex and mHardwareMutex mutexes must be held,\n    // always take mMutex before mHardwareMutex",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 686,
+        "end_line": 700,
+        "merge_gen_region": null,
+        "confidence": 0.8260253667831421,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    float mMasterVolume GUARDED_BY(mutex()) = 1.f;\n    bool mMasterMute GUARDED_BY(mutex()) = false;\n    float mMasterBalance GUARDED_BY(mutex()) = 0.f;",
+        "b_contents": "    DefaultKeyedVector<audio_io_handle_t, sp<IAfPlaybackThread>> mPlaybackThreads;\n                stream_type_t                       mStreamTypes[AUDIO_STREAM_CNT];\n\n                // member variables below are protected by mutex()\n    float mMasterVolume = 1.f;\n    bool mMasterMute = false;\n    float mMasterBalance = 0.f;\n                // end of variables protected by mutex()",
+        "base_contents": "    DefaultKeyedVector<audio_io_handle_t, sp<IAfPlaybackThread>> mPlaybackThreads;\n                stream_type_t                       mStreamTypes[AUDIO_STREAM_CNT];\n\n                // member variables below are protected by mLock\n    float mMasterVolume = 1.f;\n    bool mMasterMute = false;\n    float mMasterBalance = 0.f;\n                // end of variables protected by mLock",
+        "res_region": "    float mMasterVolume GUARDED_BY(mutex()) = 1.f;\n    bool mMasterMute GUARDED_BY(mutex()) = false;\n    float mMasterBalance GUARDED_BY(mutex()) = 0.f;",
+        "lookback": "    bool mMasterMute GUARDED_BY(mutex()) = false;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 743,
+        "end_line": 765,
+        "merge_gen_region": null,
+        "confidence": 0.6181623935699463,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    DefaultKeyedVector<pid_t, sp<NotificationClient>> mNotificationClients\n            GUARDED_BY(clientMutex());",
+        "b_contents": "                // protected by clientMutex()\n                DefaultKeyedVector< pid_t, sp<NotificationClient> >    mNotificationClients;",
+        "base_contents": "                // protected by mClientLock\n                DefaultKeyedVector< pid_t, sp<NotificationClient> >    mNotificationClients;",
+        "res_region": "    DefaultKeyedVector<pid_t, sp<NotificationClient>> mNotificationClients\n            GUARDED_BY(clientMutex());",
+        "lookback": "            GUARDED_BY(clientMutex());",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 769,
+        "end_line": 778,
+        "merge_gen_region": null,
+        "confidence": 0.5740209817886353,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Vector<AudioSessionRef*> mAudioSessionRefs GUARDED_BY(mutex());",
+        "b_contents": "                // protected by mutex()\n                Vector<AudioSessionRef*> mAudioSessionRefs;",
+        "base_contents": "                // protected by mLock\n                Vector<AudioSessionRef*> mAudioSessionRefs;",
+        "res_region": "    Vector<AudioSessionRef*> mAudioSessionRefs GUARDED_BY(mutex());",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 786,
+        "end_line": 794,
+        "merge_gen_region": null,
+        "confidence": 0.8317509889602661,
+        "hesitated": true
+    }
+]

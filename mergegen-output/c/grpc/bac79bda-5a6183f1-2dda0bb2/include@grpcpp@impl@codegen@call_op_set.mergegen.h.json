@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    interceptor_methods->SetSendMessage(&send_buf_, &failed_send_);",
+        "b_contents": "    interceptor_methods->SetSendMessage(&send_buf_, msg_);",
+        "base_contents": "    interceptor_methods->SetSendMessage(&send_buf_);",
+        "res_region": "    interceptor_methods->SetSendMessage(&send_buf_, msg_, &failed_send_);",
+        "lookback": "  }",
+        "lookahead": "  }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 346,
+        "end_line": 352,
+        "merge_gen_region": null,
+        "confidence": 0.6720733046531677,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    interceptor_methods->SetSendMessage(nullptr, &failed_send_);",
+        "b_contents": "    interceptor_methods->SetSendMessage(nullptr, nullptr);",
+        "base_contents": "    interceptor_methods->SetSendMessage(nullptr);",
+        "res_region": "    interceptor_methods->SetSendMessage(nullptr, nullptr, &failed_send_);",
+        "lookback": "  }",
+        "lookahead": "  }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 364,
+        "end_line": 370,
+        "merge_gen_region": null,
+        "confidence": 0.7191363573074341,
+        "hesitated": true
+    }
+]

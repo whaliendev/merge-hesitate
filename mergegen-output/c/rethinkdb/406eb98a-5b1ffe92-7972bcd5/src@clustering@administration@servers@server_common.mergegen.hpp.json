@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "#include \"clustering/administration/servers/name_client.hpp\"\n#include \"rdb_protocol/artificial_table/caching_cfeed_backend.hpp\"",
+        "b_contents": "#include \"clustering/administration/servers/config_client.hpp\"\n#include \"rdb_protocol/artificial_table/backend.hpp\"",
+        "base_contents": "#include \"clustering/administration/servers/name_client.hpp\"\n#include \"rdb_protocol/artificial_table/backend.hpp\"",
+        "res_region": "#include \"clustering/administration/servers/config_client.hpp\"\n#include \"rdb_protocol/artificial_table/caching_cfeed_backend.hpp\"",
+        "lookback": "#include \"rdb_protocol/artificial_table/caching_cfeed_backend.hpp\"",
+        "lookahead": "#include \"rdb_protocol/datum.hpp\"",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 12,
+        "end_line": 21,
+        "merge_gen_region": null,
+        "confidence": 0.834991455078125,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            server_name_client_t *_name_client);",
+        "b_contents": "            server_config_client_t *_server_config_client) :\n        servers_sl_view(_servers_sl_view),\n        server_config_client(_server_config_client) {\n        servers_sl_view->assert_thread();\n        server_config_client->assert_thread();\n    }",
+        "base_contents": "            server_name_client_t *_name_client) :\n        servers_sl_view(_servers_sl_view),\n        name_client(_name_client) {\n        servers_sl_view->assert_thread();\n        name_client->assert_thread();\n    }",
+        "res_region": "            server_config_client_t *_server_config_client);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 35,
+        "end_line": 51,
+        "merge_gen_region": "",
+        "confidence": 0.9259113669395447,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    server_name_client_t *name_client;\n\n    semilattice_read_view_t<servers_semilattice_metadata_t>::subscription_t subs;",
+        "b_contents": "    server_config_client_t *server_config_client;",
+        "base_contents": "    server_name_client_t *name_client;",
+        "res_region": "    server_config_client_t *server_config_client;\n\n    semilattice_read_view_t<servers_semilattice_metadata_t>::subscription_t subs;",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 86,
+        "end_line": 94,
+        "merge_gen_region": null,
+        "confidence": 0.6063638925552368,
+        "hesitated": true
+    }
+]

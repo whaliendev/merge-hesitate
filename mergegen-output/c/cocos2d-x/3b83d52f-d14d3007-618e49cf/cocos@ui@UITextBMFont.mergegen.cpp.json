@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void TextBMFont::setAnchorPoint(const Vector2 &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _labelBMFontRenderer->setAnchorPoint(pt);\n}\n",
+        "b_contents": "",
+        "base_contents": "void TextBMFont::setAnchorPoint(const Point &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _labelBMFontRenderer->setAnchorPoint(pt);\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "void TextBMFont::onSizeChanged()",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 110,
+        "end_line": 125,
+        "merge_gen_region": null,
+        "confidence": 0.6341399550437927,
+        "hesitated": true
+    }
+]

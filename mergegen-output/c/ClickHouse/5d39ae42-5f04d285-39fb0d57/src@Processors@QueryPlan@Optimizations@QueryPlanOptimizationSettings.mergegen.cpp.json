@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\n    use_query_condition_cache = from[Setting::use_query_condition_cache] && from[Setting::allow_experimental_analyzer];",
+        "b_contents": "    is_explain = false;",
+        "base_contents": "",
+        "res_region": "    use_query_condition_cache = from[Setting::use_query_condition_cache] && from[Setting::allow_experimental_analyzer];\n    is_explain = false;",
+        "lookback": "    is_explain = false;",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 78,
+        "end_line": 84,
+        "merge_gen_region": null,
+        "confidence": 0.6555199027061462,
+        "hesitated": true
+    }
+]

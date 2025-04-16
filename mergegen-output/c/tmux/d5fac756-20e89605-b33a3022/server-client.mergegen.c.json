@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#ifdef __CYGWIN__\n\tc->fd = open(c->ttyname, O_RDWR|O_NOCTTY);\n#endif\n\n\t if (c->flags & CLIENT_CONTROL)",
+        "b_contents": "\tif (c->flags & CLIENT_CONTROL)",
+        "base_contents": "\t if (c->flags & CLIENT_CONTROL)",
+        "res_region": "#ifdef __CYGWIN__\n\tc->fd = open(c->ttyname, O_RDWR|O_NOCTTY);\n#endif\n\n\tif (c->flags & CLIENT_CONTROL)",
+        "lookback": "\tc->fd = open(c->ttyname, O_RDWR|O_NOCTTY);",
+        "lookahead": "\t\tcontrol_start(c);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 2243,
+        "end_line": 2253,
+        "merge_gen_region": null,
+        "confidence": 0.8651633858680725,
+        "hesitated": true
+    }
+]

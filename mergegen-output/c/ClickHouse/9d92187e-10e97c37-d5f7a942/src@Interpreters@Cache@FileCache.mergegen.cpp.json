@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                    actual_settings[FileCacheSetting::max_size], new_settings[FileCacheSetting::max_size],\n                    actual_settings[FileCacheSetting::max_elements], new_settings[FileCacheSetting::max_elements]);",
+        "b_contents": "                    actual_settings[FileCacheSetting::max_size].value, new_settings[FileCacheSetting::max_size].value,\n                    actual_settings[FileCacheSetting::max_elements].value, new_settings[FileCacheSetting::max_elements].value);\n\n            chassert(main_priority->getSizeApprox() <= new_settings[FileCacheSetting::max_size]);\n            chassert(main_priority->getElementsCountApprox() <= new_settings[FileCacheSetting::max_elements]);\n\n            actual_settings[FileCacheSetting::max_size] = new_settings[FileCacheSetting::max_size];\n            actual_settings[FileCacheSetting::max_elements] = new_settings[FileCacheSetting::max_elements];",
+        "base_contents": "                    actual_settings[FileCacheSetting::max_size], new_settings[FileCacheSetting::max_size],\n                    actual_settings[FileCacheSetting::max_elements], new_settings[FileCacheSetting::max_elements]);\n\n            chassert(main_priority->getSizeApprox() <= new_settings[FileCacheSetting::max_size]);\n            chassert(main_priority->getElementsCountApprox() <= new_settings[FileCacheSetting::max_elements]);\n\n            actual_settings[FileCacheSetting::max_size] = new_settings[FileCacheSetting::max_size];\n            actual_settings[FileCacheSetting::max_elements] = new_settings[FileCacheSetting::max_elements];",
+        "res_region": "                    actual_settings[FileCacheSetting::max_size].value, new_settings[FileCacheSetting::max_size].value,\n                    actual_settings[FileCacheSetting::max_elements].value, new_settings[FileCacheSetting::max_elements].value);",
+        "lookback": "                    actual_settings[FileCacheSetting::max_elements].value, new_settings[FileCacheSetting::max_elements].value);",
+        "lookahead": "        }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1804,
+        "end_line": 1825,
+        "merge_gen_region": null,
+        "confidence": 0.6208034753799438,
+        "hesitated": true
+    }
+]

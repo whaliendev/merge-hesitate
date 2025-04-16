@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    unsigned optLogGuess = FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue, 1);\n    unsigned optLog = optLogGuess;",
+        "b_contents": "    unsigned optLog = FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue, 1);\n    assert(srcSize > 1); /* Not supported, RLE should be used instead */",
+        "base_contents": "    unsigned optLog = FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue, 1);",
+        "res_region": "    unsigned optLogGuess = FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue, 1);\n    unsigned optLog = optLogGuess;\n    assert(srcSize > 1); /* Not supported, RLE should be used instead */",
+        "lookback": "    unsigned optLog = optLogGuess;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1257,
+        "end_line": 1265,
+        "merge_gen_region": null,
+        "confidence": 0.8521694540977478,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        for (huffLog = optLogGuess; huffLog >= minTableLog; huffLog--) {",
+        "b_contents": "        for (huffLog = HUF_minTableLog(symbolCardinality); huffLog <= maxTableLog; huffLog++) {",
+        "base_contents": "        for (huffLog = HUF_minTableLog(srcSize, symbolCardinality); huffLog <= maxTableLog; huffLog++) {",
+        "res_region": "        for (huffLog = optLogGuess; huffLog >= minTableLog; huffLog--) {",
+        "lookback": "            maxBits = HUF_buildCTable_wksp(table, count,",
+        "lookahead": "            maxBits = HUF_buildCTable_wksp(table, count,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1278,
+        "end_line": 1284,
+        "merge_gen_region": null,
+        "confidence": 0.6822311878204346,
+        "hesitated": true
+    }
+]

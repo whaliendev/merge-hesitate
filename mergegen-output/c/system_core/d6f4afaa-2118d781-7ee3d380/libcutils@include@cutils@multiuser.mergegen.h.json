@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "extern uid_t multiuser_get_sdk_sandbox_uid(userid_t user_id, appid_t app_id);",
+        "b_contents": "extern uid_t multiuser_get_supplemental_uid(userid_t user_id, appid_t app_id);",
+        "base_contents": "",
+        "res_region": "extern uid_t multiuser_get_sdk_sandbox_uid(userid_t user_id, appid_t app_id);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.3458617031574249,
+        "hesitated": true
+    }
+]

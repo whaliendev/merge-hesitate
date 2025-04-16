@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "    for (const auto& log : logs) {\n      s = RecoverLogFile(log, edit, &max_sequence, external_table);",
+        "b_contents": "    for (size_t i = 0; s.ok() && i < logs.size(); i++) {",
+        "base_contents": "    for (size_t i = 0; i < logs.size(); i++) {\n      s = RecoverLogFile(logs[i], edit, &max_sequence, external_table);",
+        "res_region": "    for (const auto& log : logs) {",
+        "lookback": "      // The previous incarnation may not have written any MANIFEST",
+        "lookahead": "      // The previous incarnation may not have written any MANIFEST",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 965,
+        "end_line": 973,
+        "merge_gen_region": null,
+        "confidence": 0.532589852809906,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      versions_->MarkFileNumberUsed(log);",
+        "b_contents": "      versions_->MarkFileNumberUsed(logs[i]);\n      s = RecoverLogFile(logs[i], &max_sequence, read_only);",
+        "base_contents": "      versions_->MarkFileNumberUsed(logs[i]);",
+        "res_region": "      versions_->MarkFileNumberUsed(log);\n      s = RecoverLogFile(log, &max_sequence, read_only);",
+        "lookback": "      s = RecoverLogFile(log, &max_sequence, read_only);",
+        "lookahead": "    }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 977,
+        "end_line": 984,
+        "merge_gen_region": null,
+        "confidence": 0.6457131505012512,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  impl->mutex_.Lock();  // DBImpl::Recover() requires lock being held\n  VersionEdit edit;\n  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "b_contents": "  impl->mutex_.Lock();\n  s = impl->Recover(); // Handles create_if_missing, error_if_exists",
+        "base_contents": "  impl->mutex_.Lock();\n  VersionEdit edit;\n  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "res_region": "  impl->mutex_.Lock();\n  s = impl->Recover(); // Handles create_if_missing, error_if_exists",
+        "lookback": "  s = impl->Recover(); // Handles create_if_missing, error_if_exists",
+        "lookahead": "  if (s.ok()) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 3895,
+        "end_line": 3906,
+        "merge_gen_region": null,
+        "confidence": 0.8192079067230225,
+        "hesitated": true
+    }
+]

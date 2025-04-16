@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    case ErrorCode::kPayloadTimestampError:",
+        "b_contents": "    case ErrorCode::kOmahaUpdateIgnoredOverCellular:",
+        "base_contents": "",
+        "res_region": "    case ErrorCode::kOmahaUpdateIgnoredOverCellular:\n    case ErrorCode::kPayloadTimestampError:",
+        "lookback": "    case ErrorCode::kPayloadTimestampError:",
+        "lookahead": "    case ErrorCode::kUpdatedButNotActive:",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 220,
+        "end_line": 225,
+        "merge_gen_region": " Error::PayloadError:; Error::Error; Error::Error; ErrorError::; ErrorError::; ErrorError; Error; ErrorError; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error =; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error; Error;",
+        "confidence": 0.9040585160255432,
+        "hesitated": false,
+        "resolved": false
+    }
+]

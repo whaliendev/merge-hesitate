@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "android_dataspace GetNativeDataspace(VkColorSpaceKHR colorspace,\n                                     PixelFormat pixelFormat) {",
+        "b_contents": "android_dataspace GetNativeDataspace(VkColorSpaceKHR colorspace,\n                                     android::PixelFormat pixelFormat) {",
+        "base_contents": "android_dataspace GetNativeDataspace(VkColorSpaceKHR colorspace) {",
+        "res_region": "android_dataspace GetNativeDataspace(VkColorSpaceKHR colorspace,\n                                     PixelFormat pixelFormat) {",
+        "lookback": "                                     PixelFormat pixelFormat) {",
+        "lookahead": "    switch (colorspace) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 534,
+        "end_line": 542,
+        "merge_gen_region": null,
+        "confidence": 0.8172931671142578,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            if (pixelFormat == PixelFormat::RGBA_FP16) {\n                return static_cast<android_dataspace>(\n                    HAL_DATASPACE_STANDARD_BT2020 |\n                    HAL_DATASPACE_TRANSFER_LINEAR |\n                    HAL_DATASPACE_RANGE_EXTENDED);\n            } else {\n                return HAL_DATASPACE_BT2020_LINEAR;\n            }",
+        "b_contents": "            if (pixelFormat == HAL_PIXEL_FORMAT_RGBA_FP16) {\n                return static_cast<android_dataspace>(\n                    HAL_DATASPACE_STANDARD_BT2020 |\n                    HAL_DATASPACE_TRANSFER_LINEAR |\n                    HAL_DATASPACE_RANGE_EXTENDED);\n            } else {\n                return HAL_DATASPACE_BT2020_LINEAR;\n            }",
+        "base_contents": "            return HAL_DATASPACE_BT2020_LINEAR;",
+        "res_region": "            if (pixelFormat == PixelFormat::RGBA_FP16) {\n                return static_cast<android_dataspace>(\n                    HAL_DATASPACE_STANDARD_BT2020 |\n                    HAL_DATASPACE_TRANSFER_LINEAR |\n                    HAL_DATASPACE_RANGE_EXTENDED);\n            } else {\n                return HAL_DATASPACE_BT2020_LINEAR;\n            }",
+        "lookback": "                return static_cast<android_dataspace>(",
+        "lookahead": "        case VK_COLOR_SPACE_HDR10_ST2084_EXT:",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 561,
+        "end_line": 581,
+        "merge_gen_region": "ifififififififififififififififififififififififififififififififififififififif",
+        "confidence": 0.9495198130607605,
+        "hesitated": false,
+        "resolved": false
+    }
+]

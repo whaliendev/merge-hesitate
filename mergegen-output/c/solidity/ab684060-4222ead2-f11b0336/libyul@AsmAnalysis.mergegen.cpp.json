@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\t\terrorForVM(\"only available for Istanbul-compatible\");\n\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())\n\t\terrorForVM(\"only available for Istanbul-compatible\");",
+        "b_contents": "\t\terrorForVM(1561_error, \"only available for Istanbul-compatible\");",
+        "base_contents": "\t\terrorForVM(\"only available for Istanbul-compatible\");",
+        "res_region": "\t\terrorForVM(1561_error, \"only available for Istanbul-compatible\");\n\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())\n\t\terrorForVM(7721_error, \"only available for Istanbul-compatible\");",
+        "lookback": "\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())",
+        "lookahead": "\telse if (_instr == evmasm::Instruction::PC)",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 593,
+        "end_line": 601,
+        "merge_gen_region": null,
+        "confidence": 0.5821951627731323,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t}",
+        "b_contents": "\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())\n\t\terrorForVM(3672_error, \"only available for Istanbul-compatible\");",
+        "base_contents": "\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())\n\t\terrorForVM(\"only available for Istanbul-compatible\");",
+        "res_region": "\telse if (_instr == evmasm::Instruction::SELFBALANCE && !m_evmVersion.hasSelfBalance())\n\t\terrorForVM(3672_error, \"only available for Istanbul-compatible\");",
+        "lookback": "\t\terrorForVM(3672_error, \"only available for Istanbul-compatible\");",
+        "lookahead": "\telse if (",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 611,
+        "end_line": 619,
+        "merge_gen_region": null,
+        "confidence": 0.32363033294677734,
+        "hesitated": true
+    }
+]

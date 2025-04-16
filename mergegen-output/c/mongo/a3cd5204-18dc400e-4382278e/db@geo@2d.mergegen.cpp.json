@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "        //// Distance not used ////\n\n        GeoPoint( const KeyNode& node )\n            : _key( node.key ) , _loc( node.recordLoc ) , _o( node.recordLoc.obj() ) , _exactDistance( -1 ), _exactWithin( false ) {",
+        "b_contents": "        GeoPoint( const GeoKeyNode& node , double distance )\n            : _key( node.key.toBson() ) , _loc( node.recordLoc ) , _o( node.recordLoc.obj() ) , _distance( distance ) {",
+        "base_contents": "        GeoPoint( const KeyNode& node , double distance )\n            : _key( node.key ) , _loc( node.recordLoc ) , _o( node.recordLoc.obj() ) , _distance( distance ) {",
+        "res_region": "        //// Distance not used ////\n\n        GeoPoint( const GeoKeyNode& node )\n            : _key( node.key.toBson() ) , _loc( node.recordLoc ) , _o( node.recordLoc.obj() ) , _exactDistance( -1 ), _exactWithin( false ) {",
+        "lookback": "",
+        "lookahead": "        }",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 972,
+        "end_line": 983,
+        "merge_gen_region": null,
+        "confidence": 0.8396115899085999,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            if ( ! checkDistance( node , d ) ) {",
+        "b_contents": "            if ( ! checkDistance( GeoHash( node.key._firstElement() ) , d ) ) {",
+        "base_contents": "            if ( ! checkDistance( GeoHash( node.key.firstElement() ) , d ) ) {",
+        "res_region": "            if ( ! checkDistance( node , d ) ) {",
+        "lookback": "                GEODEBUG( \"\\t\\t\\t\\t bad distance : \" << node.recordLoc.obj()  << \"\\t\" << d );",
+        "lookahead": "                GEODEBUG( \"\\t\\t\\t\\t bad distance : \" << node.recordLoc.obj()  << \"\\t\" << d );",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1039,
+        "end_line": 1045,
+        "merge_gen_region": null,
+        "confidence": 0.7867344617843628,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                    bool good = _matcher->matchesWithSingleKeyIndex( node.key , node.recordLoc , &details );",
+        "b_contents": "                    bool good = _matcher->matches( node.key.toBson() , node.recordLoc , &details );",
+        "base_contents": "                    bool good = _matcher->matches( node.key , node.recordLoc , &details );",
+        "res_region": "                    bool good = _matcher->matchesWithSingleKeyIndex( node.key.toBson() , node.recordLoc , &details );",
+        "lookback": "                    if ( details.loadedObject )",
+        "lookahead": "                    if ( details.loadedObject )",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1059,
+        "end_line": 1065,
+        "merge_gen_region": null,
+        "confidence": 0.866590142250061,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        virtual void addSpecific( const KeyNode& node , double d, bool newDoc ) = 0;\n        virtual bool checkDistance( const KeyNode& node , double& d ) = 0;",
+        "b_contents": "        virtual void addSpecific( const GeoKeyNode& node , double d, bool newDoc ) = 0;\n        virtual bool checkDistance( const GeoHash& node , double& d ) = 0;",
+        "base_contents": "        virtual void addSpecific( const KeyNode& node , double d, bool newDoc ) = 0;\n        virtual bool checkDistance( const GeoHash& node , double& d ) = 0;",
+        "res_region": "        virtual void addSpecific( const GeoKeyNode& node , double d, bool newDoc ) = 0;\n        virtual bool checkDistance( const GeoKeyNode& node , double& d ) = 0;",
+        "lookback": "        virtual bool checkDistance( const GeoKeyNode& node , double& d ) = 0;",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1091,
+        "end_line": 1100,
+        "merge_gen_region": null,
+        "confidence": 0.6765265464782715,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        double exactDistances( const KeyNode& node ) {",
+        "b_contents": "        virtual void addSpecific( const GeoKeyNode& node , double d, bool newDoc ) {\n            GEODEBUG( \"\\t\\t\" << GeoHash( node.key.firstElement() ) << \"\\t\" << node.recordLoc.obj() << \"\\t\" << d );\n            _points.insert( GeoPoint( node.key.toBson() , node.recordLoc , d ) );\n            if ( _points.size() > _max ) {\n                _points.erase( --_points.end() );",
+        "base_contents": "        virtual void addSpecific( const KeyNode& node , double d, bool newDoc ) {\n            GEODEBUG( \"\\t\\t\" << GeoHash( node.key.firstElement() ) << \"\\t\" << node.recordLoc.obj() << \"\\t\" << d );\n            _points.insert( GeoPoint( node.key , node.recordLoc , d ) );\n            if ( _points.size() > _max ) {\n                _points.erase( --_points.end() );",
+        "res_region": "        double exactDistances( const GeoKeyNode& node ) {",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1165,
+        "end_line": 1179,
+        "merge_gen_region": null,
+        "confidence": 0.5733132362365723,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        bool inErrorBounds( double approxD ) const {\n            return approxD >= _maxDistance - _distError && approxD <= _maxDistance + _distError;\n        }\n\n        virtual void addSpecific( const KeyNode& node , double d, bool newDoc ) {\n\n            GEODEBUG( \"\\t\\t\" << GeoHash( node.key.firstElement() ) << \"\\t\" << node.recordLoc.obj() << \"\\t\" << d );\n\n            double maxDistance = exactDistances( node );\n            if( maxDistance >= 0 ){\n\n            \t// Recalculate the current furthest point.\n            \tint numToErase = _points.size() - _max;\n\t\t\t\twhile( numToErase-- > 0 ){\n\t\t\t\t\t_points.erase( --_points.end() );\n\t\t\t\t}\n\n\t\t\t\t_farthest = boost::next( _points.end(), -1 )->_exactDistance;\n\n            }\n        }\n",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "        bool inErrorBounds( double approxD ) const {\n            return approxD >= _maxDistance - _distError && approxD <= _maxDistance + _distError;\n        }\n\n        virtual void addSpecific( const GeoKeyNode& node , double d, bool newDoc ) {\n\n            GEODEBUG( \"\\t\\t\" << GeoHash( node.key.firstElement() ) << \"\\t\" << node.recordLoc.obj() << \"\\t\" << d );\n\n            double maxDistance = exactDistances( node );\n            if( maxDistance >= 0 ){\n\n            \t// Recalculate the current furthest point.\n            \tint numToErase = _points.size() - _max;\n\t\t\t\twhile( numToErase-- > 0 ){\n\t\t\t\t\t_points.erase( --_points.end() );\n\t\t\t\t}\n\n\t\t\t\t_farthest = boost::next( _points.end(), -1 )->_exactDistance;\n\n            }\n        }\n",
+        "lookback": "            return approxD >= _maxDistance - _distError && approxD <= _maxDistance + _distError;",
+        "lookahead": "        unsigned _max;",
+        "label": [
+            "newcode",
+            "base_underutilized"
+        ],
+        "start_line": 1236,
+        "end_line": 1262,
+        "merge_gen_region": null,
+        "confidence": 0.8523414134979248,
+        "hesitated": true
+    }
+]

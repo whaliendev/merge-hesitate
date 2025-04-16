@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tbool isValid() const { return source || start != -1 || end != -1; }\n\n\tbool hasText() const\n\t{\n\t\treturn source\n\t\t\t&& 0 <= start\n\t\t\t&& start <= end\n\t\t\t&& end <= int(source->source().length());\n\t}",
+        "b_contents": "\tbool isValid() const { return source || start != -1 || end != -1; }\n\n\tbool hasText() const\n\t{\n\t\treturn\n\t\t\tsource &&\n\t\t\t0 <= start &&\n\t\t\tstart <= end &&\n\t\t\tend <= int(source->source().length());\n\t}",
+        "base_contents": "\tbool isEmpty() const { return start == -1 && end == -1; }",
+        "res_region": "\tbool isValid() const { return source || start != -1 || end != -1; }\n\n\tbool hasText() const\n\t{\n\t\treturn\n\t\t\tsource &&\n\t\t\t0 <= start &&\n\t\t\tstart <= end &&\n\t\t\tend <= int(source->source().length());\n\t}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 70,
+        "end_line": 93,
+        "merge_gen_region": null,
+        "confidence": 0.8455973267555237,
+        "hesitated": true
+    }
+]

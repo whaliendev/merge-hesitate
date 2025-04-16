@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "/**\n * Get the align attribute\n * @param btnm pointer to a btnmatrix object\n * @return LV_LABEL_ALIGN_LEFT, LV_LABEL_ALIGN_RIGHT or LV_LABEL_ALIGN_CENTER\n */\nlv_label_align_t lv_btnmatrix_get_align(const lv_obj_t * btnm);",
+        "base_contents": "/**\n * Get the align attribute\n * @param  btnm pointer to a btnmatrix object\n * @return LV_LABEL_ALIGN_LEFT, LV_LABEL_ALIGN_RIGHT or LV_LABEL_ALIGN_CENTER\n */\nlv_label_align_t lv_btnmatrix_get_align(const lv_obj_t * btnm);",
+        "res_region": "",
+        "lookback": "/**********************",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 237,
+        "end_line": 252,
+        "merge_gen_region": null,
+        "confidence": 0.8360234498977661,
+        "hesitated": true
+    }
+]

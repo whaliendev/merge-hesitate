@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nDECLARE_double(message_latency_threshold);",
+        "b_contents": "\nDECLARE_bool(enable_lane_change_urgency_checking);",
+        "base_contents": "",
+        "res_region": "\nDECLARE_double(message_latency_threshold);\nDECLARE_bool(enable_lane_change_urgency_checking);",
+        "lookback": "DECLARE_double(message_latency_threshold);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 268,
+        "end_line": 275,
+        "merge_gen_region": null,
+        "confidence": 0.82905113697052,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,139 @@
+[
+    {
+        "a_contents": "#include \"artd.h\"\n\n#include <stdlib.h>",
+        "b_contents": "#include \"artd.h\"\n",
+        "base_contents": "",
+        "res_region": "#include \"artd.h\"\n\n#include <stdlib.h>",
+        "lookback": "",
+        "lookahead": "#include <unistd.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 16,
+        "end_line": 24,
+        "merge_gen_region": null,
+        "confidence": 0.7580733299255371,
+        "hesitated": true
+    },
+    {
+        "a_contents": "using ::aidl::com::android::server::art::ArtifactsPath;\nusing ::aidl::com::android::server::art::GetOptimizationStatusResult;",
+        "b_contents": "",
+        "base_contents": "using ::aidl::com::android::server::art::BnArtd;",
+        "res_region": "using ::aidl::com::android::server::art::ArtifactsPath;\nusing ::aidl::com::android::server::art::GetOptimizationStatusResult;",
+        "lookback": "using ::aidl::com::android::server::art::GetOptimizationStatusResult;",
+        "lookahead": "using ::android::base::Error;",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 52,
+        "end_line": 58,
+        "merge_gen_region": null,
+        "confidence": 0.41893675923347473,
+        "hesitated": true
+    },
+    {
+        "a_contents": "constexpr const char* kServiceName = \"artd\";",
+        "b_contents": "constexpr const char* kServiceName = \"artd\";\n\n}  // namespace",
+        "base_contents": "}  // namespace",
+        "res_region": "constexpr const char* kServiceName = \"artd\";\n",
+        "lookback": "",
+        "lookahead": "constexpr const char* kPhenotypeFlagPrefix = \"persist.device_config.runtime_native_boot.\";",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 65,
+        "end_line": 73,
+        "merge_gen_region": null,
+        "confidence": 0.47561120986938477,
+        "hesitated": true
+    },
+    {
+        "a_contents": "constexpr const char* kPhenotypeFlagPrefix = \"persist.device_config.runtime_native_boot.\";\nconstexpr const char* kDalvikVmFlagPrefix = \"dalvik.vm.\";\n\nResult<std::vector<std::string>> GetBootClassPath() {\n  const char* env_value = getenv(\"BOOTCLASSPATH\");\n  if (env_value == nullptr || strlen(env_value) == 0) {\n    return Errorf(\"Failed to get environment variable 'BOOTCLASSPATH'\");\n  }\n  return Split(env_value, \":\");\n}",
+        "b_contents": "ScopedAStatus Artd::isAlive(bool* _aidl_return) {\n  *_aidl_return = true;\n  return ScopedAStatus::ok();\n}",
+        "base_contents": "class Artd : public BnArtd {\n  constexpr static const char* kServiceName = \"artd\";",
+        "res_region": "constexpr const char* kPhenotypeFlagPrefix = \"persist.device_config.runtime_native_boot.\";\nconstexpr const char* kDalvikVmFlagPrefix = \"dalvik.vm.\";\n\nResult<std::vector<std::string>> GetBootClassPath() {\n  const char* env_value = getenv(\"BOOTCLASSPATH\");\n  if (env_value == nullptr || strlen(env_value) == 0) {\n    return Errorf(\"Failed to get environment variable 'BOOTCLASSPATH'\");\n  }\n  return Split(env_value, \":\");\n}",
+        "lookback": "constexpr const char* kDalvikVmFlagPrefix = \"dalvik.vm.\";",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 75,
+        "end_line": 94,
+        "merge_gen_region": " const*DviVmPrefix \"alkvmconstexpr char kheypePrefix \".______.\"; const*DviVmPrefix \"alkvm Resultstdvectorstdstring GetBootPath { char envvalue getenvBOOTCLASS\"); (_ == ||(_) 0) returnfFailed getIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdIdId",
+        "confidence": 0.9043841361999512,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "Result<std::vector<std::string>> GetBootImageLocations(bool deny_art_apex_data_files) {\n  std::string error_msg;\n  std::string android_root = GetAndroidRootSafe(&error_msg);\n  if (!error_msg.empty()) {\n    return Errorf(\"Failed to get ANDROID_ROOT: {}\", error_msg);",
+        "b_contents": "Result<void> Artd::Start() {\n  ScopedAStatus status = ScopedAStatus::fromStatus(\n      AServiceManager_registerLazyService(this->asBinder().get(), kServiceName));\n  if (!status.isOk()) {\n    return Error() << status.getDescription();",
+        "base_contents": " public:\n  ScopedAStatus isAlive(bool* _aidl_return) override {\n    *_aidl_return = true;\n    return ScopedAStatus::ok();",
+        "res_region": "Result<std::vector<std::string>> GetBootImageLocations(bool deny_art_apex_data_files) {\n  std::string error_msg;\n  std::string android_root = GetAndroidRootSafe(&error_msg);\n  if (!error_msg.empty()) {\n    return Errorf(\"Failed to get ANDROID_ROOT: {}\", error_msg);",
+        "lookback": "  std::string error_msg;",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 96,
+        "end_line": 113,
+        "merge_gen_region": null,
+        "confidence": 0.7753376960754395,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  std::string location_str = GetDefaultBootImageLocation(android_root, deny_art_apex_data_files);\n  return Split(location_str, \":\");\n}\n\nbool UseJitZygote() {\n  bool profile_boot_class_path_phenotype =\n      GetBoolProperty(std::string(kPhenotypeFlagPrefix) + \"profilebootclasspath\",\n                      /*default_value=*/false);\n\n  bool profile_boot_class_path =\n      GetBoolProperty(std::string(kDalvikVmFlagPrefix) + \"profilebootclasspath\",\n                      /*default_value=*/profile_boot_class_path_phenotype);\n\n  return profile_boot_class_path;\n}\n\nbool DenyArtApexDataFiles() {\n  return !GetBoolProperty(\"odsign.verification.success\", /*default_value=*/false);\n}\n\n}  // namespace\n\nScopedAStatus Artd::isAlive(bool* _aidl_return) {\n  *_aidl_return = true;\n  return ScopedAStatus::ok();\n}\n\nScopedAStatus Artd::deleteArtifacts(const ArtifactsPath& in_artifactsPath, int64_t* _aidl_return) {\n  (void)in_artifactsPath;\n  (void)_aidl_return;\n  return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);\n}\n\nScopedAStatus Artd::getOptimizationStatus(const std::string& in_dexFile,\n                                          const std::string& in_instructionSet,\n                                          const std::string& in_classLoaderContext,\n                                          GetOptimizationStatusResult* _aidl_return) {\n  Result<OatFileAssistant::RuntimeOptions> runtime_options = GetRuntimeOptions();\n  if (!runtime_options.ok()) {\n    return ScopedAStatus::fromExceptionCodeWithMessage(\n        EX_ILLEGAL_STATE,\n        (\"Failed to get runtime options: \" + runtime_options.error().message()).c_str());\n  }\n\n  std::string error_msg;\n  if (!OatFileAssistant::GetOptimizationStatus(\n          in_dexFile.c_str(),\n          in_instructionSet.c_str(),\n          in_classLoaderContext.c_str(),\n          std::make_unique<OatFileAssistant::RuntimeOptions>(std::move(*runtime_options)),\n          &_aidl_return->compilerFilter,\n          &_aidl_return->compilationReason,\n          &_aidl_return->locationDebugString,\n          &error_msg)) {\n    return ScopedAStatus::fromExceptionCodeWithMessage(\n        EX_ILLEGAL_STATE, (\"Failed to get optimization status: \" + error_msg).c_str());\n  }",
+        "b_contents": "  ABinderProcess_startThreadPool();",
+        "base_contents": "  Result<void> Start() {\n    LOG(INFO) << \"Starting artd\";\n\n    ScopedAStatus status = ScopedAStatus::fromStatus(\n        AServiceManager_registerLazyService(this->asBinder().get(), kServiceName));\n    if (!status.isOk()) {\n      return Error() << status.getDescription();\n    }",
+        "res_region": "  std::string location_str = GetDefaultBootImageLocation(android_root, deny_art_apex_data_files);\n  return Split(location_str, \":\");\n}\n\nbool UseJitZygote() {\n  bool profile_boot_class_path_phenotype =\n      GetBoolProperty(std::string(kPhenotypeFlagPrefix) + \"profilebootclasspath\",\n                      /*default_value=*/false);\n\n  bool profile_boot_class_path =\n      GetBoolProperty(std::string(kDalvikVmFlagPrefix) + \"profilebootclasspath\",\n                      /*default_value=*/profile_boot_class_path_phenotype);\n\n  return profile_boot_class_path;\n}\n\nbool DenyArtApexDataFiles() {\n  return !GetBoolProperty(\"odsign.verification.success\", /*default_value=*/false);\n}\n\n}  // namespace\n\nScopedAStatus Artd::isAlive(bool* _aidl_return) {\n  *_aidl_return = true;\n  return ScopedAStatus::ok();\n}\n\nScopedAStatus Artd::deleteArtifacts(const ArtifactsPath& in_artifactsPath, int64_t* _aidl_return) {\n  (void)in_artifactsPath;\n  (void)_aidl_return;\n  return ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);\n}\n\nScopedAStatus Artd::getOptimizationStatus(const std::string& in_dexFile,\n                                          const std::string& in_instructionSet,\n                                          const std::string& in_classLoaderContext,\n                                          GetOptimizationStatusResult* _aidl_return) {\n  Result<OatFileAssistant::RuntimeOptions> runtime_options = GetRuntimeOptions();\n  if (!runtime_options.ok()) {\n    return ScopedAStatus::fromExceptionCodeWithMessage(\n        EX_ILLEGAL_STATE,\n        (\"Failed to get runtime options: \" + runtime_options.error().message()).c_str());\n  }\n\n  std::string error_msg;\n  if (!OatFileAssistant::GetOptimizationStatus(\n          in_dexFile.c_str(),\n          in_instructionSet.c_str(),\n          in_classLoaderContext.c_str(),\n          std::make_unique<OatFileAssistant::RuntimeOptions>(std::move(*runtime_options)),\n          &_aidl_return->compilerFilter,\n          &_aidl_return->compilationReason,\n          &_aidl_return->locationDebugString,\n          &error_msg)) {\n    return ScopedAStatus::fromExceptionCodeWithMessage(\n        EX_ILLEGAL_STATE, (\"Failed to get optimization status: \" + error_msg).c_str());\n  }\n",
+        "lookback": "  return Split(location_str, \":\");",
+        "lookahead": "  return ScopedAStatus::ok();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 116,
+        "end_line": 185,
+        "merge_gen_region": null,
+        "confidence": 0.7036195397377014,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  return ScopedAStatus::ok();\n}\n\nResult<void> Artd::Start() {\n  ScopedAStatus status = ScopedAStatus::fromStatus(\n      AServiceManager_registerLazyService(this->asBinder().get(), kServiceName));\n  if (!status.isOk()) {\n    return Error() << status.getDescription();\n  }",
+        "b_contents": "  return {};\n}",
+        "base_contents": "    ABinderProcess_startThreadPool();\n\n    return {};\n  }\n};",
+        "res_region": "  return ScopedAStatus::ok();\n}\n\nResult<void> Artd::Start() {\n  ScopedAStatus status = ScopedAStatus::fromStatus(\n      AServiceManager_registerLazyService(this->asBinder().get(), kServiceName));\n  if (!status.isOk()) {\n    return Error() << status.getDescription();\n  }\n",
+        "lookback": "}",
+        "lookahead": "  ABinderProcess_startThreadPool();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 187,
+        "end_line": 206,
+        "merge_gen_region": null,
+        "confidence": 0.8325064182281494,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  ABinderProcess_startThreadPool();\n\n  return {};\n}\n\nResult<OatFileAssistant::RuntimeOptions> Artd::GetRuntimeOptions() {\n  // We don't cache this system property because it can change.\n  bool use_jit_zygote = UseJitZygote();\n\n  if (!HasRuntimeOptionsCache()) {\n    OR_RETURN(BuildRuntimeOptionsCache());\n  }\n\n  return OatFileAssistant::RuntimeOptions{\n      .image_locations = cached_boot_image_locations_,\n      .boot_class_path = cached_boot_class_path_,\n      .boot_class_path_locations = cached_boot_class_path_,\n      .use_jit_zygote = use_jit_zygote,\n      .deny_art_apex_data_files = cached_deny_art_apex_data_files_,\n      .apex_versions = cached_apex_versions_,\n  };\n}\n\nResult<void> Artd::BuildRuntimeOptionsCache() {\n  // This system property can only be set by odsign on boot, so it won't change.\n  bool deny_art_apex_data_files = DenyArtApexDataFiles();\n\n  std::vector<std::string> image_locations =\n      OR_RETURN(GetBootImageLocations(deny_art_apex_data_files));\n  std::vector<std::string> boot_class_path = OR_RETURN(GetBootClassPath());\n  std::string apex_versions =\n      Runtime::GetApexVersions(ArrayRef<const std::string>(boot_class_path));\n\n  cached_boot_image_locations_ = std::move(image_locations);\n  cached_boot_class_path_ = std::move(boot_class_path);\n  cached_apex_versions_ = std::move(apex_versions);\n  cached_deny_art_apex_data_files_ = deny_art_apex_data_files;\n\n  return {};\n}\n\nbool Artd::HasRuntimeOptionsCache() const { return !cached_boot_image_locations_.empty(); }\n\n}  // namespace artd\n}  // namespace art",
+        "b_contents": "}  // namespace artd\n}  // namespace art",
+        "base_contents": "}  // namespace artd\n}  // namespace art\n\nint main(const int argc __attribute__((unused)), char* argv[]) {\n  setenv(\"ANDROID_LOG_TAGS\", \"*:v\", 1);\n  android::base::InitLogging(argv);\n\n  art::artd::Artd artd;\n\n  if (auto ret = artd.Start(); !ret.ok()) {\n    LOG(ERROR) << \"Unable to start artd: \" << ret.error();\n    exit(1);\n  }\n\n  ABinderProcess_joinThreadPool();\n\n  LOG(INFO) << \"artd shutting down\";\n\n  return 0;\n}",
+        "res_region": "  ABinderProcess_startThreadPool();\n\n  return {};\n}\n\nResult<OatFileAssistant::RuntimeOptions> Artd::GetRuntimeOptions() {\n  // We don't cache this system property because it can change.\n  bool use_jit_zygote = UseJitZygote();\n\n  if (!HasRuntimeOptionsCache()) {\n    OR_RETURN(BuildRuntimeOptionsCache());\n  }\n\n  return OatFileAssistant::RuntimeOptions{\n      .image_locations = cached_boot_image_locations_,\n      .boot_class_path = cached_boot_class_path_,\n      .boot_class_path_locations = cached_boot_class_path_,\n      .use_jit_zygote = use_jit_zygote,\n      .deny_art_apex_data_files = cached_deny_art_apex_data_files_,\n      .apex_versions = cached_apex_versions_,\n  };\n}\n\nResult<void> Artd::BuildRuntimeOptionsCache() {\n  // This system property can only be set by odsign on boot, so it won't change.\n  bool deny_art_apex_data_files = DenyArtApexDataFiles();\n\n  std::vector<std::string> image_locations =\n      OR_RETURN(GetBootImageLocations(deny_art_apex_data_files));\n  std::vector<std::string> boot_class_path = OR_RETURN(GetBootClassPath());\n  std::string apex_versions =\n      Runtime::GetApexVersions(ArrayRef<const std::string>(boot_class_path));\n\n  cached_boot_image_locations_ = std::move(image_locations);\n  cached_boot_class_path_ = std::move(boot_class_path);\n  cached_apex_versions_ = std::move(apex_versions);\n  cached_deny_art_apex_data_files_ = deny_art_apex_data_files;\n\n  return {};\n}\n\nbool Artd::HasRuntimeOptionsCache() const { return !cached_boot_image_locations_.empty(); }\n\n}  // namespace artd\n}  // namespace art",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 208,
+        "end_line": 278,
+        "merge_gen_region": null,
+        "confidence": 0.8217778205871582,
+        "hesitated": true
+    }
+]

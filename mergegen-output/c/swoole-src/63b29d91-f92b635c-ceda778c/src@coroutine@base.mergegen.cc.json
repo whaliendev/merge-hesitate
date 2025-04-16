@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "    Coroutine::call_stack_size--;\n#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif",
+        "b_contents": "    call_stack_size--;",
+        "base_contents": "    Coroutine::call_stack_size--;",
+        "res_region": "    call_stack_size--;\n#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif",
+        "lookback": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION",
+        "lookahead": "    ctx.SwapOut();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 51,
+        "end_line": 60,
+        "merge_gen_region": null,
+        "confidence": 0.7494273781776428,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif\n    Coroutine::call_stack[Coroutine::call_stack_size++] = this;",
+        "b_contents": "    call_stack[call_stack_size++] = this;",
+        "base_contents": "    Coroutine::call_stack[Coroutine::call_stack_size++] = this;",
+        "res_region": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif\n    Coroutine::call_stack[call_stack_size++] = this;",
+        "lookback": "    mark_schedule();",
+        "lookahead": "    ctx.SwapIn();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 71,
+        "end_line": 80,
+        "merge_gen_region": null,
+        "confidence": 0.6827009916305542,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    Coroutine::call_stack_size--;\n#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif",
+        "b_contents": "    call_stack_size--;",
+        "base_contents": "    Coroutine::call_stack_size--;",
+        "res_region": "    call_stack_size--;\n#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif",
+        "lookback": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION",
+        "lookahead": "    ctx.SwapOut();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 91,
+        "end_line": 100,
+        "merge_gen_region": null,
+        "confidence": 0.7494273781776428,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif\n    Coroutine::call_stack[Coroutine::call_stack_size++] = this;",
+        "b_contents": "    call_stack[call_stack_size++] = this;",
+        "base_contents": "    Coroutine::call_stack[Coroutine::call_stack_size++] = this;",
+        "res_region": "#ifdef SW_CORO_DEATH_LOOP_PROTECTION\n    mark_schedule();\n#endif\n    Coroutine::call_stack[call_stack_size++] = this;",
+        "lookback": "    mark_schedule();",
+        "lookahead": "    ctx.SwapIn();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 107,
+        "end_line": 116,
+        "merge_gen_region": null,
+        "confidence": 0.6827009916305542,
+        "hesitated": true
+    }
+]

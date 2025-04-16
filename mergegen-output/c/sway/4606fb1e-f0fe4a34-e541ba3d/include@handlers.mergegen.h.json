@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\nswayc_t *container_under_pointer(void);",
+        "b_contents": "extern uint32_t keys_pressed[32];\n//set focus to current pointer location and return focused container\nswayc_t *focus_pointer(void);",
+        "base_contents": "\n//set focus to current pointer location and return focused container\nswayc_t *focus_pointer(void);",
+        "res_region": "extern uint32_t keys_pressed[32];\n\n//set focus to current pointer location and return focused container\nswayc_t *container_under_pointer(void);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 7,
+        "end_line": 18,
+        "merge_gen_region": null,
+        "confidence": 0.5641895532608032,
+        "hesitated": true
+    }
+]

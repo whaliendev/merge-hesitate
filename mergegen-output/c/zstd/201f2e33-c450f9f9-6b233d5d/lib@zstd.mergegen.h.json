@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "ZSTD_DEPRECATED(\"This function will likely be removed in the next minor release. It is misleading and has very limited utility.\")",
+        "b_contents": "ZSTD_DEPRECATED(\"will be deprecated soon\")",
+        "base_contents": "",
+        "res_region": "ZSTD_DEPRECATED(\"This function will likely be removed in the next minor release. It is misleading and has very limited utility.\")",
+        "lookback": "ZSTDLIB_STATIC_API size_t ZSTD_copyCCtx(ZSTD_CCtx* cctx, const ZSTD_CCtx* preparedCCtx, unsigned long long pledgedSrcSize); /**<  note: if pledgedSrcSize is not known, use ZSTD_CONTENTSIZE_UNKNOWN */",
+        "lookahead": "ZSTDLIB_STATIC_API size_t ZSTD_copyCCtx(ZSTD_CCtx* cctx, const ZSTD_CCtx* preparedCCtx, unsigned long long pledgedSrcSize); /**<  note: if pledgedSrcSize is not known, use ZSTD_CONTENTSIZE_UNKNOWN */",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2439,
+        "end_line": 2444,
+        "merge_gen_region": null,
+        "confidence": 0.8326459527015686,
+        "hesitated": true
+    },
+    {
+        "a_contents": "ZSTD_DEPRECATED(\"This function will likely be removed in the next minor release. It is misleading and has very limited utility.\")",
+        "b_contents": "ZSTD_DEPRECATED(\"will be deprecated soon\")",
+        "base_contents": "",
+        "res_region": "ZSTD_DEPRECATED(\"This function will likely be removed in the next minor release. It is misleading and has very limited utility.\")",
+        "lookback": "ZSTDLIB_STATIC_API void   ZSTD_copyDCtx(ZSTD_DCtx* dctx, const ZSTD_DCtx* preparedDCtx);",
+        "lookahead": "ZSTDLIB_STATIC_API void   ZSTD_copyDCtx(ZSTD_DCtx* dctx, const ZSTD_DCtx* preparedDCtx);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2560,
+        "end_line": 2565,
+        "merge_gen_region": null,
+        "confidence": 0.8292616009712219,
+        "hesitated": true
+    }
+]

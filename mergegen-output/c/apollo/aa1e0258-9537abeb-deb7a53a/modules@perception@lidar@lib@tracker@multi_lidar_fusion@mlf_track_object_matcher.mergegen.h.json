@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  explicit MlfTrackObjectMatcher(const PluginConfig& plugin_config);\n",
+        "b_contents": "  MlfTrackObjectMatcher(const PluginConfig& plugin_config);\n",
+        "base_contents": "",
+        "res_region": "  explicit MlfTrackObjectMatcher(const PluginConfig& plugin_config);\n",
+        "lookback": "",
+        "lookahead": "  ~MlfTrackObjectMatcher() = default;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 42,
+        "end_line": 49,
+        "merge_gen_region": null,
+        "confidence": 0.7936994433403015,
+        "hesitated": true
+    }
+]

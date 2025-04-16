@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include <wchar.h>",
+        "b_contents": "#include <vis.h>",
+        "base_contents": "#include <vis.h>\n#include <wchar.h>",
+        "res_region": "#include <wchar.h>",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.5686863660812378,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#ifdef HAVE_UTF8PROC\n\tswitch (utf8proc_mbtowc(&wc, ud->data, ud->size)) {\n#else\n\tswitch (mbtowc(&wc, ud->data, ud->size)) {\n#endif\n\tcase -1:\n\t\tlog_debug(\"UTF-8 %.*s, mbtowc() %d\", (int)ud->size, ud->data,\n\t\t    errno);\n\t\tmbtowc(NULL, NULL, MB_CUR_MAX);\n\t\treturn (UTF8_ERROR);\n\tcase 0:",
+        "b_contents": "\tif (utf8_towc(ud, &wc) != UTF8_DONE)",
+        "base_contents": "\tswitch (mbtowc(&wc, ud->data, ud->size)) {\n\tcase -1:\n\t\tlog_debug(\"UTF-8 %.*s, mbtowc() %d\", (int)ud->size, ud->data,\n\t\t    errno);\n\t\tmbtowc(NULL, NULL, MB_CUR_MAX);\n\t\treturn (UTF8_ERROR);\n\tcase 0:",
+        "res_region": "\tif (utf8_towc(ud, &wc) != UTF8_DONE)",
+        "lookback": "\t\treturn (UTF8_ERROR);",
+        "lookahead": "\t\treturn (UTF8_ERROR);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 412,
+        "end_line": 434,
+        "merge_gen_region": null,
+        "confidence": 0.5862101316452026,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tlog_debug(\"UTF-8 %.*s is %05X\", (int)ud->size, ud->data, (u_int)wc);\n#ifdef HAVE_UTF8PROC\n\t*width = utf8proc_wcwidth(wc);\n\tlog_debug(\"utf8proc_wcwidth(%05X) returned %d\", (u_int)wc, *width);\n#else",
+        "b_contents": "",
+        "base_contents": "\tlog_debug(\"UTF-8 %.*s is %05X\", (int)ud->size, ud->data, (u_int)wc);",
+        "res_region": "",
+        "lookback": "\tlog_debug(\"wcwidth(%05X) returned %d\", (u_int)wc, *width);",
+        "lookahead": "\t*width = wcwidth(wc);",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 440,
+        "end_line": 450,
+        "merge_gen_region": null,
+        "confidence": 0.7523926496505737,
+        "hesitated": true
+    }
+]

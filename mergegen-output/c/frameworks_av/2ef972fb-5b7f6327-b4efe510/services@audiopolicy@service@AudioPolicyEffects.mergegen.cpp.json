@@ -1,0 +1,173 @@
+[
+    {
+        "a_contents": "/* static */\nstd::shared_ptr<const effect_param_t> AudioPolicyEffects::loadEffectParameter(cnode* root)",
+        "b_contents": "/* static */\neffect_param_t *AudioPolicyEffects::loadEffectParameter(cnode *root)",
+        "base_contents": "effect_param_t *AudioPolicyEffects::loadEffectParameter(cnode *root)",
+        "res_region": "/* static */\nstd::shared_ptr<const effect_param_t> AudioPolicyEffects::loadEffectParameter(cnode* root)",
+        "lookback": "std::shared_ptr<const effect_param_t> AudioPolicyEffects::loadEffectParameter(cnode* root)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 625,
+        "end_line": 633,
+        "merge_gen_region": null,
+        "confidence": 0.705277144908905,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/* static */\nvoid AudioPolicyEffects::loadEffectParameters(\n        cnode* root, std::vector<std::shared_ptr<const effect_param_t>>& params)",
+        "b_contents": "/* static */\nvoid AudioPolicyEffects::loadEffectParameters(cnode *root, Vector <effect_param_t *>& params)",
+        "base_contents": "void AudioPolicyEffects::loadEffectParameters(cnode *root, Vector <effect_param_t *>& params)",
+        "res_region": "/* static */\nvoid AudioPolicyEffects::loadEffectParameters(\n        cnode* root, std::vector<std::shared_ptr<const effect_param_t>>& params)",
+        "lookback": "void AudioPolicyEffects::loadEffectParameters(",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 708,
+        "end_line": 717,
+        "merge_gen_region": null,
+        "confidence": 0.6729139685630798,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/* static */\nstd::shared_ptr<AudioPolicyEffects::EffectDescVector> AudioPolicyEffects::loadEffectConfig(\n        cnode* root, const EffectDescVector& effects)",
+        "b_contents": "/* static */\nAudioPolicyEffects::EffectDescVector *AudioPolicyEffects::loadEffectConfig(\n                                                            cnode *root,\n                                                            const Vector <EffectDesc *>& effects)",
+        "base_contents": "\nAudioPolicyEffects::EffectDescVector *AudioPolicyEffects::loadEffectConfig(\n                                                            cnode *root,\n                                                            const Vector <EffectDesc *>& effects)",
+        "res_region": "/* static */\nstd::shared_ptr<AudioPolicyEffects::EffectDescVector> AudioPolicyEffects::loadEffectConfig(\n        cnode* root, const EffectDescVector& effects)",
+        "lookback": "std::shared_ptr<AudioPolicyEffects::EffectDescVector> AudioPolicyEffects::loadEffectConfig(",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 730,
+        "end_line": 744,
+        "merge_gen_region": null,
+        "confidence": 0.753758430480957,
+        "hesitated": true
+    },
+    {
+        "a_contents": "status_t AudioPolicyEffects::loadInputEffectConfigurations_l(cnode* root,\n        const EffectDescVector& effects)",
+        "b_contents": "status_t AudioPolicyEffects::loadInputEffectConfigurations_l(cnode* root,\n                                                           const Vector <EffectDesc *>& effects)",
+        "base_contents": "status_t AudioPolicyEffects::loadInputEffectConfigurations(cnode *root,\n                                                           const Vector <EffectDesc *>& effects)",
+        "res_region": "status_t AudioPolicyEffects::loadInputEffectConfigurations_l(cnode* root,\n        const EffectDescVector& effects)",
+        "lookback": "        const EffectDescVector& effects)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 780,
+        "end_line": 789,
+        "merge_gen_region": null,
+        "confidence": 0.6461588740348816,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        ALOGV(\"%s() loading input source %s\", __func__, node->name);\n        auto desc = loadEffectConfig(node, effects);",
+        "b_contents": "        ALOGV(\"%s() loading input source %s\", __func__, node->name);\n        EffectDescVector *desc = loadEffectConfig(node, effects);",
+        "base_contents": "        ALOGV(\"loadInputSources() loading input source %s\", node->name);\n        EffectDescVector *desc = loadEffectConfig(node, effects);",
+        "res_region": "        ALOGV(\"%s() loading input source %s\", __func__, node->name);\n        auto desc = loadEffectConfig(node, effects);",
+        "lookback": "        auto desc = loadEffectConfig(node, effects);",
+        "lookahead": "        if (desc == NULL) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 803,
+        "end_line": 812,
+        "merge_gen_region": null,
+        "confidence": 0.7732686996459961,
+        "hesitated": true
+    },
+    {
+        "a_contents": "status_t AudioPolicyEffects::loadStreamEffectConfigurations_l(cnode* root,\n        const EffectDescVector& effects)",
+        "b_contents": "status_t AudioPolicyEffects::loadStreamEffectConfigurations_l(cnode* root,\n                                                            const Vector <EffectDesc *>& effects)",
+        "base_contents": "status_t AudioPolicyEffects::loadStreamEffectConfigurations(cnode *root,\n                                                            const Vector <EffectDesc *>& effects)",
+        "res_region": "status_t AudioPolicyEffects::loadStreamEffectConfigurations_l(cnode* root,\n        const EffectDescVector& effects)",
+        "lookback": "        const EffectDescVector& effects)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 823,
+        "end_line": 832,
+        "merge_gen_region": null,
+        "confidence": 0.6456501483917236,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        ALOGV(\"%s() loading output stream %s\", __func__, node->name);\n        std::shared_ptr<EffectDescVector> desc = loadEffectConfig(node, effects);",
+        "b_contents": "        ALOGV(\"%s() loading output stream %s\", __func__, node->name);\n        EffectDescVector *desc = loadEffectConfig(node, effects);",
+        "base_contents": "        ALOGV(\"loadStreamEffectConfigurations() loading output stream %s\", node->name);\n        EffectDescVector *desc = loadEffectConfig(node, effects);",
+        "res_region": "        ALOGV(\"%s() loading output stream %s\", __func__, node->name);\n        std::shared_ptr<EffectDescVector> desc = loadEffectConfig(node, effects);",
+        "lookback": "        std::shared_ptr<EffectDescVector> desc = loadEffectConfig(node, effects);",
+        "lookahead": "        if (desc == NULL) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 846,
+        "end_line": 855,
+        "merge_gen_region": null,
+        "confidence": 0.7612124085426331,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/* static */\nstd::shared_ptr<AudioPolicyEffects::EffectDesc> AudioPolicyEffects::loadEffect(cnode* root)",
+        "b_contents": "/* static */\nAudioPolicyEffects::EffectDesc *AudioPolicyEffects::loadEffect(cnode *root)",
+        "base_contents": "AudioPolicyEffects::EffectDesc *AudioPolicyEffects::loadEffect(cnode *root)",
+        "res_region": "/* static */\nstd::shared_ptr<AudioPolicyEffects::EffectDesc> AudioPolicyEffects::loadEffect(cnode* root)",
+        "lookback": "std::shared_ptr<AudioPolicyEffects::EffectDesc> AudioPolicyEffects::loadEffect(cnode* root)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 866,
+        "end_line": 874,
+        "merge_gen_region": null,
+        "confidence": 0.7643470764160156,
+        "hesitated": true
+    },
+    {
+        "a_contents": "/* static */\nandroid::AudioPolicyEffects::EffectDescVector AudioPolicyEffects::loadEffects(cnode *root)",
+        "b_contents": "/* static */\nstatus_t AudioPolicyEffects::loadEffects(cnode *root, Vector <EffectDesc *>& effects)",
+        "base_contents": "status_t AudioPolicyEffects::loadEffects(cnode *root, Vector <EffectDesc *>& effects)",
+        "res_region": "/* static */\nandroid::AudioPolicyEffects::EffectDescVector AudioPolicyEffects::loadEffects(cnode *root)",
+        "lookback": "android::AudioPolicyEffects::EffectDescVector AudioPolicyEffects::loadEffects(cnode *root)",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 888,
+        "end_line": 896,
+        "merge_gen_region": "BBandroidAudioGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+        "confidence": 0.8971227407455444,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    const EffectDescVector effects = loadEffects(root);",
+        "b_contents": "    Vector <EffectDesc *> effects;\n    loadEffects(root, effects);\n\n    // requires mMutex\n    loadInputEffectConfigurations_l(root, effects);\n    loadStreamEffectConfigurations_l(root, effects);\n\n    for (size_t i = 0; i < effects.size(); i++) {\n        delete effects[i];\n    }",
+        "base_contents": "    Vector <EffectDesc *> effects;\n    loadEffects(root, effects);\n    loadInputEffectConfigurations(root, effects);\n    loadStreamEffectConfigurations(root, effects);\n\n    for (size_t i = 0; i < effects.size(); i++) {\n        delete effects[i];\n    }",
+        "res_region": "    const EffectDescVector effects = loadEffects(root);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 978,
+        "end_line": 1000,
+        "merge_gen_region": null,
+        "confidence": 0.7334743142127991,
+        "hesitated": true
+    }
+]

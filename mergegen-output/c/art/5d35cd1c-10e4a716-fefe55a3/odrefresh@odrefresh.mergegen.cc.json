@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "void AddDex2OatInstructionSet(/*inout*/ CmdlineBuilder& args,\n                              InstructionSet isa,\n                              const OdrSystemProperties& system_properties) {",
+        "b_contents": "void AddDex2OatInstructionSet(/*inout*/ CmdlineBuilder& args, InstructionSet isa) {",
+        "base_contents": "void AddDex2OatInstructionSet(/*inout*/ std::vector<std::string>& args, InstructionSet isa) {",
+        "res_region": "void AddDex2OatInstructionSet(/*inout*/ CmdlineBuilder& args,\n                              InstructionSet isa,\n                              const OdrSystemProperties& system_properties) {",
+        "lookback": "                              InstructionSet isa,",
+        "lookahead": "  const char* isa_str = GetInstructionSetString(isa);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 428,
+        "end_line": 436,
+        "merge_gen_region": null,
+        "confidence": 0.7603167295455933,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  args.Add(\"--instruction-set=%s\", isa_str);\n  std::string features_prop = ART_FORMAT(\"dalvik.vm.isa.{}.features\", isa_str);\n  args.AddIfNonEmpty(\"--instruction-set-features=%s\", system_properties.GetOrEmpty(features_prop));\n  std::string variant_prop = ART_FORMAT(\"dalvik.vm.isa.{}.variant\", isa_str);\n  args.AddIfNonEmpty(\"--instruction-set-variant=%s\", system_properties.GetOrEmpty(variant_prop));",
+        "b_contents": "  args.Add(\"--instruction-set=%s\", isa_str);",
+        "base_contents": "  args.emplace_back(StringPrintf(\"--instruction-set=%s\", isa_str));",
+        "res_region": "  args.Add(\"--instruction-set=%s\", isa_str);\n  std::string features_prop = ART_FORMAT(\"dalvik.vm.isa.{}.features\", isa_str);\n  args.AddIfNonEmpty(\"--instruction-set-features=%s\", system_properties.GetOrEmpty(features_prop));\n  std::string variant_prop = ART_FORMAT(\"dalvik.vm.isa.{}.variant\", isa_str);\n  args.AddIfNonEmpty(\"--instruction-set-variant=%s\", system_properties.GetOrEmpty(variant_prop));",
+        "lookback": "  std::string features_prop = ART_FORMAT(\"dalvik.vm.isa.{}.features\", isa_str);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 438,
+        "end_line": 448,
+        "merge_gen_region": null,
+        "confidence": 0.8451275825500488,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  AddDex2OatInstructionSet(args, isa, config_.GetSystemProperties());\n  Result<void> result = AddDex2OatConcurrencyArguments(\n      args, config_.GetCompilationOsMode(), config_.GetSystemProperties());",
+        "b_contents": "  AddDex2OatInstructionSet(args, isa);\n  Result<void> result = AddDex2OatConcurrencyArguments(\n      args, config_.GetCompilationOsMode(), config_.GetSystemProperties());",
+        "base_contents": "  AddDex2OatInstructionSet(args, isa);\n  Result<void> result = AddDex2OatConcurrencyArguments(args, config_.GetCompilationOsMode());",
+        "res_region": "  AddDex2OatInstructionSet(args, isa, config_.GetSystemProperties());\n  Result<void> result = AddDex2OatConcurrencyArguments(\n      args, config_.GetCompilationOsMode(), config_.GetSystemProperties());",
+        "lookback": "  Result<void> result = AddDex2OatConcurrencyArguments(",
+        "lookahead": "  if (!result.ok()) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1659,
+        "end_line": 1670,
+        "merge_gen_region": null,
+        "confidence": 0.8363774418830872,
+        "hesitated": true
+    }
+]

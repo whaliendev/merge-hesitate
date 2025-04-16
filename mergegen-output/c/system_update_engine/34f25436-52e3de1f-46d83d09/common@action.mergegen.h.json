@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// An action that does nothing and completes with kSuccess immediately.\nclass NoOpAction : public AbstractAction {\n public:\n  ~NoOpAction() override {}\n  void PerformAction() override {\n    processor_->ActionComplete(this, ErrorCode::kSuccess);\n  }\n  static std::string StaticType() { return \"NoOpAction\"; }\n  std::string Type() const override { return StaticType(); }\n};\n",
+        "b_contents": "// An action that does nothing and completes with kSuccess immediately.\nclass NoOpAction : public AbstractAction {\n public:\n  ~NoOpAction() override {}\n  void PerformAction() override {\n    processor_->ActionComplete(this, ErrorCode::kSuccess);\n  }\n  std::string Type() const override { return \"NoOpAction\"; }\n};\n",
+        "base_contents": "",
+        "res_region": "// An action that does nothing and completes with kSuccess immediately.\nclass NoOpAction : public AbstractAction {\n public:\n  ~NoOpAction() override {}\n  void PerformAction() override {\n    processor_->ActionComplete(this, ErrorCode::kSuccess);\n  }\n  static std::string StaticType() { return \"NoOpAction\"; }\n  std::string Type() const override { return StaticType(); }\n};\n",
+        "lookback": "class NoOpAction : public AbstractAction {",
+        "lookahead": "};  // namespace chromeos_update_engine",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 224,
+        "end_line": 248,
+        "merge_gen_region": null,
+        "confidence": 0.8474749326705933,
+        "hesitated": true
+    }
+]

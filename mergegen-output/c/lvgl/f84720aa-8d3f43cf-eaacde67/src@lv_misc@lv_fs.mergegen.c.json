@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "    if(drv == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): unknown driver letter\", path);\n        return NULL;",
+        "b_contents": "    if(file_p->drv == NULL) {\n        return LV_FS_RES_NOT_EX;",
+        "base_contents": "    if(file_p->drv == NULL) {\n        file_p->file_d = NULL;\n        return LV_FS_RES_NOT_EX;",
+        "res_region": "    if(drv == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): unknown driver letter\", path);\n        return NULL;",
+        "lookback": "        LV_LOG_WARN(\"Can't open file (%s): unknown driver letter\", path);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 92,
+        "end_line": 103,
+        "merge_gen_region": null,
+        "confidence": 0.744015634059906,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if(drv->ready_cb) {\n        if(drv->ready_cb(drv) == false) {\n            LV_LOG_WARN(\"Can't open file (%s): driver not ready\", path);\n            return NULL;",
+        "b_contents": "    if(file_p->drv->ready_cb != NULL) {\n        if(file_p->drv->ready_cb(file_p->drv) == false) {\n            file_p->drv = NULL;\n            return LV_FS_RES_HW_ERR;",
+        "base_contents": "    if(file_p->drv->ready_cb != NULL) {\n        if(file_p->drv->ready_cb(file_p->drv) == false) {\n            file_p->drv    = NULL;\n            file_p->file_d = NULL;\n            return LV_FS_RES_HW_ERR;",
+        "res_region": "    if(drv->ready_cb) {\n        if(drv->ready_cb(drv) == false) {\n            LV_LOG_WARN(\"Can't open file (%s): driver not ready\", path);\n            return NULL;",
+        "lookback": "        if(drv->ready_cb(drv) == false) {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 122,
+        "merge_gen_region": null,
+        "confidence": 0.6824445128440857,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if(drv->open_cb == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): open function not exists\", path);\n        return NULL;",
+        "b_contents": "    if(file_p->drv->open_cb == NULL) {\n        file_p->drv = NULL;\n        return LV_FS_RES_NOT_IMP;\n    }\n\n    const char * real_path = lv_fs_get_real_path(path);\n\n    if(file_p->drv->file_size == 0) {  /*Is file_d zero size?*/\n        /*Pass file_d's address to open_cb, so the implementor can allocate memory byself*/\n        return file_p->drv->open_cb(file_p->drv, &file_p->file_d, real_path, mode);\n    }\n\n    file_p->file_d = lv_mem_alloc(file_p->drv->file_size);\n    LV_ASSERT_MEM(file_p->file_d);\n    if(file_p->file_d == NULL) {\n        file_p->drv = NULL;\n        return LV_FS_RES_OUT_OF_MEM; /* Out of memory */",
+        "base_contents": "    file_p->file_d = lv_mem_alloc(file_p->drv->file_size);\n    LV_ASSERT_MEM(file_p->file_d);\n    if(file_p->file_d == NULL) {\n        file_p->drv = NULL;\n        return LV_FS_RES_OUT_OF_MEM; /* Out of memory */",
+        "res_region": "    if(drv->open_cb == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): open function not exists\", path);\n        return NULL;\n    }\n",
+        "lookback": "        LV_LOG_WARN(\"Can't open file (%s): open function not exists\", path);",
+        "lookahead": "    lv_fs_file_t * file_p = lv_mem_alloc(sizeof(lv_fs_file_t));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 126,
+        "end_line": 154,
+        "merge_gen_region": null,
+        "confidence": 0.5359882116317749,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_fs_file_t * file_p = lv_mem_alloc(sizeof(lv_fs_file_t));\n    if(file_p == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): out of memory\", path);\n        return NULL;\n    }\n\n    file_p->drv = drv;\n    file_p->file_d = NULL;\n\n    const char * real_path = lv_fs_get_real_path(path);\n    file_p->file_d = drv->open_cb(drv, real_path, mode);",
+        "b_contents": "    lv_fs_res_t res = file_p->drv->open_cb(file_p->drv, file_p->file_d, real_path, mode);",
+        "base_contents": "    if(file_p->drv->open_cb == NULL) {\n        return LV_FS_RES_NOT_IMP;\n    }\n\n    const char * real_path = lv_fs_get_real_path(path);\n    lv_fs_res_t res        = file_p->drv->open_cb(file_p->drv, file_p->file_d, real_path, mode);",
+        "res_region": "    lv_fs_file_t * file_p = lv_mem_alloc(sizeof(lv_fs_file_t));\n    if(file_p == NULL) {\n        LV_LOG_WARN(\"Can't open file (%s): out of memory\", path);\n        return NULL;\n    }\n\n    file_p->drv = drv;\n    file_p->file_d = NULL;\n\n    const char * real_path = lv_fs_get_real_path(path);\n    file_p->file_d = drv->open_cb(drv, real_path, mode);",
+        "lookback": "    if(file_p == NULL) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 157,
+        "end_line": 178,
+        "merge_gen_region": null,
+        "confidence": 0.7380720973014832,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    lv_mem_free(file_p); /*Clean up*/",
+        "b_contents": "    lv_mem_free(file_p->file_d); /*Clean up*/\n    file_p->file_d = NULL;\n    file_p->drv    = NULL;",
+        "base_contents": "    lv_mem_free(file_p->file_d); /*Clean up*/\n    file_p->file_d = NULL;\n    file_p->drv    = NULL;\n    file_p->file_d = NULL;",
+        "res_region": "    lv_mem_free(file_p); /*Clean up*/",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 205,
+        "end_line": 216,
+        "merge_gen_region": null,
+        "confidence": 0.3365730047225952,
+        "hesitated": true
+    }
+]

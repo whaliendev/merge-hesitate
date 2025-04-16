@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    case InstallOperation::PUFFDIFF:\n      return \"PUFFDIFF\";",
+        "b_contents": "    case InstallOperation::PUFFDIFF:\n      return \"PUFFDIFF\";\n    case InstallOperation::BROTLI_BSDIFF:\n      return \"BROTLI_BSDIFF\";",
+        "base_contents": "    case InstallOperation::IMGDIFF:\n      return \"IMGDIFF\";",
+        "res_region": "    case InstallOperation::PUFFDIFF:\n      return \"PUFFDIFF\";\n    case InstallOperation::BROTLI_BSDIFF:\n      return \"BROTLI_BSDIFF\";",
+        "lookback": "      return \"PUFFDIFF\";",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 54,
+        "end_line": 65,
+        "merge_gen_region": null,
+        "confidence": 0.7697001099586487,
+        "hesitated": true
+    }
+]

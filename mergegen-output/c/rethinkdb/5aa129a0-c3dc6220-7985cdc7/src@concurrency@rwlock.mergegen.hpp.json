@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    rwlock_acq_t(rwlock_t *lock, access_t access, signal_t *interruptor);",
+        "b_contents": "    void reset() { rwlock_in_line_t::reset(); }",
+        "base_contents": "",
+        "res_region": "    rwlock_acq_t(rwlock_t *lock, access_t access, signal_t *interruptor);",
+        "lookback": "    ~rwlock_acq_t();",
+        "lookahead": "    ~rwlock_acq_t();",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 70,
+        "end_line": 75,
+        "merge_gen_region": null,
+        "confidence": 0.6307545900344849,
+        "hesitated": true
+    }
+]

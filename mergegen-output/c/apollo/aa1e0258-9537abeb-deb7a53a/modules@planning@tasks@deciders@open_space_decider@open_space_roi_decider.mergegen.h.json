@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/config_msgs/vehicle_config.pb.h\"",
+        "base_contents": "#include \"modules/common/configs/proto/vehicle_config.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/common/math/vec2d.h\"",
+        "lookahead": "#include \"modules/common/configs/vehicle_config_helper.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 34,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.6062514781951904,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/map_msgs/map_id.pb.h\"",
+        "base_contents": "#include \"modules/map/proto/map_id.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/planning/common/indexed_queue.h\"",
+        "lookahead": "#include \"modules/planning/common/frame.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 46,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.6078518629074097,
+        "hesitated": true
+    }
+]

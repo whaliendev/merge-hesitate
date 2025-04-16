@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tOPT_CALLBACK(0, \"where\", &where, N_(\"action\"),",
+        "b_contents": "\t\tOPT_CALLBACK(0, \"where\", NULL, N_(\"placement\"),",
+        "base_contents": "\t\tOPT_CALLBACK(0, \"where\", NULL, N_(\"action\"),",
+        "res_region": "\t\tOPT_CALLBACK(0, \"where\", &where, N_(\"placement\"),",
+        "lookback": "\t\t\t     N_(\"where to place the new trailer\"), option_parse_where),",
+        "lookahead": "\t\t\t     N_(\"where to place the new trailer\"), option_parse_where),",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 102,
+        "end_line": 108,
+        "merge_gen_region": null,
+        "confidence": 0.43726277351379395,
+        "hesitated": true
+    }
+]

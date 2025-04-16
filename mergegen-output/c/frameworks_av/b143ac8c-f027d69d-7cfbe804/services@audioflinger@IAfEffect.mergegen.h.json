@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "class Client;\nclass DeviceEffectManagerCallback;\n",
+        "b_contents": "class DeviceEffectManagerCallback;",
+        "base_contents": "",
+        "res_region": "class Client;\nclass DeviceEffectManagerCallback;\n",
+        "lookback": "class DeviceEffectManagerCallback;",
+        "lookahead": "class IAfDeviceEffectProxy;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 31,
+        "end_line": 38,
+        "merge_gen_region": null,
+        "confidence": 0.8120802044868469,
+        "hesitated": true
+    }
+]

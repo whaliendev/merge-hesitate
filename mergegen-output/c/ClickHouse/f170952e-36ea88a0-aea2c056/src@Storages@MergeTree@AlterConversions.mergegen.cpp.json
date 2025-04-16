@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    chassert(command.type == MutationCommand::Type::UPDATE);\n    chassert(command.ast);\n\n    MutationCommand res;\n    res.type = command.type;\n    res.ast = command.ast->clone();\n\n    if (command.predicate)\n        res.predicate = command.predicate->clone();\n\n    if (command.partition)\n        res.partition = command.partition->clone();\n\n    res.column_to_update_expression = std::move(available_columns);\n\n    auto & alter_ast = assert_cast<ASTAlterCommand &>(*res.ast);\n    auto new_assignments = std::make_shared<ASTExpressionList>();\n\n    for (const auto & child : alter_ast.update_assignments->children)\n    {\n        const auto & assignment = assert_cast<const ASTAssignment &>(*child);\n        if (res.column_to_update_expression.contains(assignment.column_name))\n            new_assignments->children.push_back(child->clone());\n    }\n\n    alter_ast.update_assignments = alter_ast.children.emplace_back(std::move(new_assignments)).get();\n    return res;\n}\n\nbool AlterConversions::isSupportedDataMutation(MutationCommand::Type type)\n{\n    using enum MutationCommand::Type;\n    return type == READ_COLUMN || type == UPDATE || type == DELETE;",
+        "b_contents": "    /// Currently there are no such mutations. See setting 'apply_mutations_on_fly'.\n    return false;",
+        "base_contents": "    /// Currently there is no such mutations. See setting 'apply_mutations_on_fly'.\n    return false;",
+        "res_region": "    chassert(command.type == MutationCommand::Type::UPDATE);\n    chassert(command.ast);\n\n    MutationCommand res;\n    res.type = command.type;\n    res.ast = command.ast->clone();\n\n    if (command.predicate)\n        res.predicate = command.predicate->clone();\n\n    if (command.partition)\n        res.partition = command.partition->clone();\n\n    res.column_to_update_expression = std::move(available_columns);\n\n    auto & alter_ast = assert_cast<ASTAlterCommand &>(*res.ast);\n    auto new_assignments = std::make_shared<ASTExpressionList>();\n\n    for (const auto & child : alter_ast.update_assignments->children)\n    {\n        const auto & assignment = assert_cast<const ASTAssignment &>(*child);\n        if (res.column_to_update_expression.contains(assignment.column_name))\n            new_assignments->children.push_back(child->clone());\n    }\n\n    alter_ast.update_assignments = alter_ast.children.emplace_back(std::move(new_assignments)).get();\n    return res;\n}\n\nbool AlterConversions::isSupportedDataMutation(MutationCommand::Type type)\n{\n    using enum MutationCommand::Type;\n    return type == READ_COLUMN || type == UPDATE || type == DELETE;",
+        "lookback": "    chassert(command.ast);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 37,
+        "end_line": 77,
+        "merge_gen_region": null,
+        "confidence": 0.8228074312210083,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "inline bool DBClientWithCommands::isOk(const BSONObj& o) { \n\treturn o.getIntField(\"ok\") == 1;\n}\n\ninline bool DBClientWithCommands::runCommand(const char *dbname, BSONObj cmd, BSONObj &info) { \n\tstring ns = string(dbname) + \".$cmd\";\n    info = findOne(ns.c_str(), cmd);\n\treturn isOk(info);\n}\n\n/* note - we build a bson obj here -- for something that is super common like getlasterror you \n          should have that object prebuilt as that would be faster.\n*/\nbool DBClientWithCommands::simpleCommand(const char *dbname, BSONObj *info, const char *command) { \n\tBSONObj o;\n\tif( info == 0 )\n\t\tinfo = &o;\n\tBSONObjBuilder b;\n\tb.appendInt(command, 1);\n\treturn runCommand(dbname, b.done(), *info);\n}\n\nBSONObj ismastercmdobj = fromjson(\"{ismaster:1}\");",
+        "b_contents": "BSONObj ismastercmdobj = fromjson(\"{\\\"ismaster\\\":1}\");",
+        "base_contents": "BSONObj ismastercmdobj = fromjson(\"{ismaster:1}\");",
+        "res_region": "inline bool DBClientWithCommands::isOk(const BSONObj& o) { \n\treturn o.getIntField(\"ok\") == 1;\n}\n\ninline bool DBClientWithCommands::runCommand(const char *dbname, BSONObj cmd, BSONObj &info) { \n\tstring ns = string(dbname) + \".$cmd\";\n    info = findOne(ns.c_str(), cmd);\n\treturn isOk(info);\n}\n\n/* note - we build a bson obj here -- for something that is super common like getlasterror you \n          should have that object prebuilt as that would be faster.\n*/\nbool DBClientWithCommands::simpleCommand(const char *dbname, BSONObj *info, const char *command) { \n\tBSONObj o;\n\tif( info == 0 )\n\t\tinfo = &o;\n\tBSONObjBuilder b;\n\tb.appendInt(command, 1);\n\treturn runCommand(dbname, b.done(), *info);\n}\n\nBSONObj ismastercmdobj = fromjson(\"{\\\"ismaster\\\":1}\");",
+        "lookback": "\treturn o.getIntField(\"ok\") == 1;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 29,
+        "end_line": 57,
+        "merge_gen_region": null,
+        "confidence": 0.8314784169197083,
+        "hesitated": true
+    }
+]

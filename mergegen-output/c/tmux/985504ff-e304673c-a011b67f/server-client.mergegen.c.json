@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\t\t/*\n\t\t * Begin a drag by setting the flag to a non-zero value that\n\t\t * corresponds to the mouse button in use.\n\t\t */\n\t\tc->tty.mouse_drag_flag = MOUSE_BUTTONS(b) + 1;",
+        "b_contents": "\t\t/* Begin a drag by setting the flag to nonzero, where the value\n\t\t   corresponds to the mouse button doing the dragging. */\n\t\tc->tty.mouse_drag_flag = MOUSE_BUTTONS(b) + 1;",
+        "base_contents": "\t\tc->tty.mouse_drag_flag = 1;",
+        "res_region": "\t\t/*\n\t\t * Begin a drag by setting the flag to a non-zero value that\n\t\t * corresponds to the mouse button in use.\n\t\t */\n\t\tc->tty.mouse_drag_flag = MOUSE_BUTTONS(b) + 1;",
+        "lookback": "\t\t * Begin a drag by setting the flag to a non-zero value that",
+        "lookahead": "\t\tbreak;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 459,
+        "end_line": 471,
+        "merge_gen_region": "/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8915740251541138,
+        "hesitated": false,
+        "resolved": false
+    }
+]

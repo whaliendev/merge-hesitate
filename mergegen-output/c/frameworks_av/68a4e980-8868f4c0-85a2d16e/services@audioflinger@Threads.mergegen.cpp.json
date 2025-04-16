@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            if (mAfThreadCallback->mutex().tryLock() == NO_ERROR) {\n                std::vector<SoftwarePatch> swPatches;",
+        "b_contents": "            if (mAudioFlinger->mLock.tryLock() == NO_ERROR) {\n                std::vector<SoftwarePatch> swPatches;",
+        "base_contents": "            if (mAudioFlinger->mLock.tryLock() == NO_ERROR) {\n                std::vector<AudioFlinger::PatchPanel::SoftwarePatch> swPatches;",
+        "res_region": "            if (mAfThreadCallback->mutex().tryLock() == NO_ERROR) {\n                std::vector<SoftwarePatch> swPatches;",
+        "lookback": "                std::vector<SoftwarePatch> swPatches;",
+        "lookahead": "                double latencyMs = 0.; // not required; initialized for clang-tidy",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3957,
+        "end_line": 3966,
+        "merge_gen_region": null,
+        "confidence": 0.8479332327842712,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                if (mAfThreadCallback->getPatchPanel()->getDownstreamSoftwarePatches(\n                                id(), &swPatches) == OK",
+        "b_contents": "                if (mAudioFlinger->mPatchPanel->getDownstreamSoftwarePatches(\n                                id(), &swPatches) == OK",
+        "base_contents": "                if (mAudioFlinger->mPatchPanel.getDownstreamSoftwarePatches(id(), &swPatches) == OK",
+        "res_region": "                if (mAfThreadCallback->getPatchPanel()->getDownstreamSoftwarePatches(\n                                id(), &swPatches) == OK",
+        "lookback": "                                id(), &swPatches) == OK",
+        "lookahead": "                        && swPatches.size() > 0) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3970,
+        "end_line": 3978,
+        "merge_gen_region": null,
+        "confidence": 0.8667317032814026,
+        "hesitated": true
+    }
+]

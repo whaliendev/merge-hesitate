@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "      const std::shared_ptr<apollo::v2x::IntersectionTrafficLightData>\n      v2x_msg);\n  bool CreateDir();",
+        "b_contents": "      const std::shared_ptr<apollo::v2x::IntersectionTrafficLightData> v2x_msg);\n  \n  bool CreateDir();",
+        "base_contents": "      const std::shared_ptr<apollo::v2x::IntersectionTrafficLightData> v2x_msg);",
+        "res_region": "      const std::shared_ptr<apollo::v2x::IntersectionTrafficLightData>\n      v2x_msg);\n  bool CreateDir();",
+        "lookback": "      v2x_msg);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 69,
+        "end_line": 79,
+        "merge_gen_region": null,
+        "confidence": 0.7016968727111816,
+        "hesitated": true
+    }
+]

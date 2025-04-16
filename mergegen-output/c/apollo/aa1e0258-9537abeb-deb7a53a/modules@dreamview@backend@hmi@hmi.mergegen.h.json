@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "  using DvCallback = std::function<nlohmann::json(\n      const std::string &function_name, const nlohmann::json &param_json)>;",
+        "b_contents": "  using DvCallback = std::function<nlohmann::json(const std::string &function_name,\n                                        const nlohmann::json &param_json)>;",
+        "base_contents": "",
+        "res_region": "  using DvCallback = std::function<nlohmann::json(\n      const std::string &function_name, const nlohmann::json &param_json)>;",
+        "lookback": "      const std::string &function_name, const nlohmann::json &param_json)>;",
+        "lookahead": "  HMI(WebSocketHandler *websocket, MapService *map_service);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 35,
+        "end_line": 42,
+        "merge_gen_region": null,
+        "confidence": 0.8012654781341553,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  bool UpdateScenarioSetToStatus(const std::string &scenario_set_id,\n                                 const std::string &scenario_set_name);\n  bool UpdateDynamicModelToStatus(const std::string &dynamic_model_name);\n  bool UpdateRecordToStatus();\n  bool UpdateVehicleToStatus();\n  bool UpdateCameraChannelToStatus(const std::string& channel_name);\n  bool UpdatePointChannelToStatus(const std::string& channel_name);",
+        "b_contents": "  bool UpdateScenarioSetToStatus(const std::string& scenario_set_id, const std::string& scenario_set_name);\n  bool UpdateDynamicModelToStatus(std::string& dynamic_model_name);\n  bool UpdateRecordToStatus(const std::string &record_id,\n                            const std::string &record_status);",
+        "base_contents": "",
+        "res_region": "  bool UpdateScenarioSetToStatus(const std::string &scenario_set_id,\n                                 const std::string &scenario_set_name);\n  bool UpdateDynamicModelToStatus(const std::string &dynamic_model_name);\n  bool UpdateRecordToStatus();\n  bool UpdateVehicleToStatus();\n  bool UpdateCameraChannelToStatus(const std::string& channel_name);\n  bool UpdatePointChannelToStatus(const std::string& channel_name);",
+        "lookback": "                                 const std::string &scenario_set_name);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 46,
+        "end_line": 60,
+        "merge_gen_region": null,
+        "confidence": 0.6607254147529602,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/map_msgs/map_id.pb.h\"\n",
+        "b_contents": "",
+        "base_contents": "#include \"modules/map/proto/map_id.pb.h\"\n",
+        "res_region": "#include \"modules/common_msgs/map_msgs/map_id.pb.h\"\n",
+        "lookback": "",
+        "lookahead": "#include \"cyber/common/log.h\"",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 24,
+        "end_line": 31,
+        "merge_gen_region": null,
+        "confidence": 0.6549389958381653,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include \"modules/common/configs/config_gflags.h\"",
+        "b_contents": "#include \"modules/common_msgs/map_msgs/map_id.pb.h\"\n#include \"modules/common/configs/config_gflags.h\"",
+        "base_contents": "",
+        "res_region": "#include \"modules/common/configs/config_gflags.h\"",
+        "lookback": "#include \"modules/common/util/point_factory.h\"",
+        "lookahead": "#include \"modules/common/util/point_factory.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 33,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.8181712031364441,
+        "hesitated": true
+    }
+]

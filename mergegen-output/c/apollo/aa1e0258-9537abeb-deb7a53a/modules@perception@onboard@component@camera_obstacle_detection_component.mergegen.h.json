@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/perception_msgs/perception_camera.pb.h\"\n#include \"modules/common_msgs/perception_msgs/perception_obstacle.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/sensor_image.pb.h\"\n#include \"modules/perception/camera/app/proto/perception.pb.h\"\n#include \"modules/perception/onboard/proto/fusion_camera_detection_component.pb.h\"\n#include \"modules/perception/pipeline/proto/pipeline_config.pb.h\"\n#include \"modules/perception/proto/motion_service.pb.h\"\n",
+        "b_contents": "",
+        "base_contents": "#include \"modules/drivers/proto/sensor_image.pb.h\"\n#include \"modules/perception/camera/app/proto/perception.pb.h\"\n#include \"modules/perception/onboard/proto/fusion_camera_detection_component.pb.h\"\n#include \"modules/perception/proto/motion_service.pb.h\"\n#include \"modules/perception/proto/perception_camera.pb.h\"\n#include \"modules/perception/proto/perception_obstacle.pb.h\"\n",
+        "res_region": "#include \"modules/common_msgs/perception_msgs/perception_camera.pb.h\"\n#include \"modules/common_msgs/perception_msgs/perception_obstacle.pb.h\"\n#include \"modules/common_msgs/sensor_msgs/sensor_image.pb.h\"\n#include \"modules/perception/camera/app/proto/perception.pb.h\"\n#include \"modules/perception/onboard/proto/fusion_camera_detection_component.pb.h\"\n#include \"modules/perception/pipeline/proto/pipeline_config.pb.h\"\n#include \"modules/perception/proto/motion_service.pb.h\"\n",
+        "lookback": "#include \"modules/common_msgs/perception_msgs/perception_obstacle.pb.h\"",
+        "lookahead": "#include \"cyber/component/component.h\"",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 22,
+        "end_line": 40,
+        "merge_gen_region": null,
+        "confidence": 0.7316680550575256,
+        "hesitated": true
+    },
+    {
+        "a_contents": "#include \"modules/perception/pipeline/data_frame.h\"",
+        "b_contents": "#include \"modules/perception/pipeline/data_frame.h\"\n#include \"modules/perception/pipeline/proto/pipeline_config.pb.h\"\n#include \"modules/perception/proto/motion_service.pb.h\"",
+        "base_contents": "",
+        "res_region": "#include \"modules/perception/pipeline/data_frame.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 59,
+        "end_line": 66,
+        "merge_gen_region": null,
+        "confidence": 0.7976990342140198,
+        "hesitated": true
+    }
+]

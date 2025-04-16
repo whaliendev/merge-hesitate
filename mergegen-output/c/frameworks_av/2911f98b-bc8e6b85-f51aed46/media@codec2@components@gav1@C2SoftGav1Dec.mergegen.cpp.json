@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#if LIBYUV_VERSION < 1871\n  if (buffer->bitdepth > 10) {\n    ALOGE(\"bitdepth %d is not supported\", buffer->bitdepth);\n    mSignalledError = true;\n    work->workletsProcessed = 1u;\n    work->result = C2_CORRUPTED;\n    return false;\n  }\n#endif\n",
+        "b_contents": "  if (buffer->bitdepth > 10) {\n    ALOGE(\"bitdepth %d is not supported\", buffer->bitdepth);\n    mSignalledError = true;\n    work->workletsProcessed = 1u;\n    work->result = C2_CORRUPTED;\n    return false;\n  }\n",
+        "base_contents": "",
+        "res_region": "#if LIBYUV_VERSION < 1871\n  if (buffer->bitdepth > 10) {\n    ALOGE(\"bitdepth %d is not supported\", buffer->bitdepth);\n    mSignalledError = true;\n    work->workletsProcessed = 1u;\n    work->result = C2_CORRUPTED;\n    return false;\n  }\n#endif\n",
+        "lookback": "  if (buffer->bitdepth > 10) {",
+        "lookahead": "  const int width = buffer->displayed_width[0];",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 796,
+        "end_line": 817,
+        "merge_gen_region": " (->depth 10 {# LIB_dexdexdexdexdexdexdexdexdexdexdexReqdexdexdexdexdexReqdexdexdexReqdexdexReqdexdexReqdexdexReqdexReqdexdexReqdexReqdexdexReqdexdexReqdexdexReqdexdexReqdexReqdexdexReqdexdexReqdexdexReqdexdexReqdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdexdex797979",
+        "confidence": 0.9284238815307617,
+        "hesitated": false,
+        "resolved": false
+    }
+]

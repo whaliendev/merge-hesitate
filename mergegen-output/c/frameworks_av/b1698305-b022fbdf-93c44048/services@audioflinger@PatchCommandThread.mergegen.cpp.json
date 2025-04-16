@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "bool PatchCommandThread::threadLoop()",
+        "b_contents": "bool PatchCommandThread::threadLoop()\nNO_THREAD_SAFETY_ANALYSIS  // bug in clang compiler.",
+        "base_contents": "bool AudioFlinger::PatchCommandThread::threadLoop()\nNO_THREAD_SAFETY_ANALYSIS  // bug in clang compiler.",
+        "res_region": "bool PatchCommandThread::threadLoop()",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 60,
+        "end_line": 68,
+        "merge_gen_region": null,
+        "confidence": 0.7846949100494385,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void PatchCommandThread::sendCommand(const sp<Command>& command) {\n    audio_utils::lock_guard _l(mutex());",
+        "b_contents": "void PatchCommandThread::sendCommand(const sp<Command>& command) {\n    std::lock_guard _l(mLock);",
+        "base_contents": "void AudioFlinger::PatchCommandThread::sendCommand(const sp<Command>& command) {\n    std::lock_guard _l(mLock);",
+        "res_region": "void PatchCommandThread::sendCommand(const sp<Command>& command) {\n    audio_utils::lock_guard _l(mutex());",
+        "lookback": "    audio_utils::lock_guard _l(mutex());",
+        "lookahead": "    mCommands.emplace_back(command);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 130,
+        "end_line": 139,
+        "merge_gen_region": null,
+        "confidence": 0.8692250847816467,
+        "hesitated": true
+    }
+]

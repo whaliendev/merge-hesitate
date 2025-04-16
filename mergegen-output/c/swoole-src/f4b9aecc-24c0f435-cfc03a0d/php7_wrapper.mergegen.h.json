@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "static sw_inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n#if PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION == 3\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL TSRMLS_CC) == FAILURE)",
+        "b_contents": "\nstatic inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n#if PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION == 3\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL TSRMLS_CC) == FAILURE)\n#else\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, (int) PHP_QUERY_RFC1738 TSRMLS_CC) == FAILURE)\n#endif\n    {\n        if (formstr->c)\n        {\n            smart_str_free(formstr);\n        }\n        return NULL;\n    }\n    if (!formstr->c)\n    {\n        return NULL;\n    }\n    smart_str_0(formstr);\n    *length = formstr->len;\n    return formstr->c;\n}\n",
+        "base_contents": "",
+        "res_region": "static sw_inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n#if PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION == 3\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL TSRMLS_CC) == FAILURE)",
+        "lookback": "{",
+        "lookahead": "#else",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 144,
+        "end_line": 175,
+        "merge_gen_region": null,
+        "confidence": 0.7835188508033752,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\nstatic sw_inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, (int) PHP_QUERY_RFC1738) == FAILURE)\n    {\n        if (formstr->s)\n        {\n            smart_str_free(formstr);\n        }\n        return NULL;\n    }\n    if (!formstr->s)\n    {\n        return NULL;\n    }\n    smart_str_0(formstr);\n    *length = formstr->s->len;\n    return formstr->s->val;\n}\n#endif /* PHP Version */",
+        "b_contents": "\nstatic inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, (int) PHP_QUERY_RFC1738) == FAILURE)\n    {\n        if (formstr->s)\n        {\n            smart_str_free(formstr);\n        }\n        return NULL;\n    }\n    if (!formstr->s)\n    {\n        return NULL;\n    }\n    smart_str_0(formstr);\n    *length = formstr->s->len;\n    return formstr->s->val;\n}\n\n#endif",
+        "base_contents": "#endif",
+        "res_region": "\nstatic sw_inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)\n{\n    if (php_url_encode_hash_ex(HASH_OF(data), formstr, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, (int) PHP_QUERY_RFC1738) == FAILURE)\n    {\n        if (formstr->s)\n        {\n            smart_str_free(formstr);\n        }\n        return NULL;\n    }\n    if (!formstr->s)\n    {\n        return NULL;\n    }\n    smart_str_0(formstr);\n    *length = formstr->s->len;\n    return formstr->s->val;\n}\n#endif /* PHP Version */",
+        "lookback": "static sw_inline char* sw_http_build_query(zval *data, zend_size_t *length, smart_str *formstr TSRMLS_DC)",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 417,
+        "end_line": 462,
+        "merge_gen_region": null,
+        "confidence": 0.8713818192481995,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\texit(client_main(osdep_event_init(), argc, argv, flags));",
+        "b_contents": "\texit(client_main(event_init(), argc, argv, flags, feat));",
+        "base_contents": "\texit(client_main(event_init(), argc, argv, flags));",
+        "res_region": "\texit(client_main(event_init(), argc, argv, flags, feat));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 400,
+        "end_line": 406,
+        "merge_gen_region": null,
+        "confidence": 0.5151623487472534,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "void  Sprite3D::addSubMeshState(SubMeshState* subMeshState)\n{\n    _meshes.pushBack(subMeshState->getSubMesh()->getMesh());\n    _subMeshStates.pushBack(subMeshState);\n}\nvoid Sprite3D::genMaterials(const std::string& keyprefix, const std::vector<std::string>& texpaths)\n{\n    _subMeshStates.clear();\n    \n    char str[20];\n    auto cache = Director::getInstance()->getTextureCache();\n    int index = 0;\n    for (auto& it : texpaths) {\n        auto tex = cache->addImage(it);\n        auto subMeshState = SubMeshState::create();\n        subMeshState->setTexture(tex);\n        _subMeshStates.pushBack(subMeshState);\n\n//        //add to cache\n//        sprintf(str, \"submesh%d\", index);\n//        std::string submeshkey = keyprefix + std::string(str);\n//        Sprite3DMaterialCache::getInstance()->addSprite3DMaterial(submeshkey, tex);\n        index++;\n    }\n}\n",
+        "base_contents": "\nvoid Sprite3D::genMaterials(const std::string& keyprefix, const std::vector<std::string>& texpaths)\n{\n    _subMeshStates.clear();\n    \n    char str[20];\n    auto cache = Director::getInstance()->getTextureCache();\n    int index = 0;\n    for (auto& it : texpaths) {\n        auto tex = cache->addImage(it);\n        auto subMeshState = SubMeshState::create();\n        subMeshState->setTexture(tex);\n        _subMeshStates.pushBack(subMeshState);\n\n//        //add to cache\n//        sprintf(str, \"submesh%d\", index);\n//        std::string submeshkey = keyprefix + std::string(str);\n//        Sprite3DMaterialCache::getInstance()->addSprite3DMaterial(submeshkey, tex);\n        index++;\n    }\n}\n",
+        "res_region": "\nvoid  Sprite3D::addSubMeshState(SubMeshState* subMeshState)\n{\n    _meshes.pushBack(subMeshState->getSubMesh()->getMesh());\n    _subMeshStates.pushBack(subMeshState);\n}\n",
+        "lookback": "void  Sprite3D::addSubMeshState(SubMeshState* subMeshState)",
+        "lookahead": "void Sprite3D::setTexture(const std::string& texFile)",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 394,
+        "end_line": 446,
+        "merge_gen_region": "",
+        "confidence": 0.9305576682090759,
+        "hesitated": false,
+        "resolved": false
+    }
+]

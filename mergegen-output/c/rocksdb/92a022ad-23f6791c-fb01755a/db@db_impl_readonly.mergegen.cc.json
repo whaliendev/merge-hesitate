@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  VersionEdit edit;\n  DBOptions db_options(options);\n  ColumnFamilyOptions cf_options(options);\n  std::vector<ColumnFamilyDescriptor> column_families;\n  column_families.push_back(\n      ColumnFamilyDescriptor(default_column_family_name, cf_options));\n  Status s = impl->Recover(&edit, column_families, impl->GetMemTable(),\n                           error_if_log_file_exist);",
+        "b_contents": "  Status s = impl->Recover(true /* read only */, error_if_log_file_exist);",
+        "base_contents": "  VersionEdit edit;\n  Status s = impl->Recover(&edit, impl->GetMemTable(),\n                           error_if_log_file_exist);",
+        "res_region": "  DBOptions db_options(options);\n  ColumnFamilyOptions cf_options(options);\n  std::vector<ColumnFamilyDescriptor> column_families;\n  column_families.push_back(\n      ColumnFamilyDescriptor(default_column_family_name, cf_options));\n  Status s = impl->Recover(column_families, true /* read only */, error_if_log_file_exist);",
+        "lookback": "  ColumnFamilyOptions cf_options(options);",
+        "lookahead": "  impl->mutex_.Unlock();",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 87,
+        "end_line": 102,
+        "merge_gen_region": null,
+        "confidence": 0.78348308801651,
+        "hesitated": true
+    }
+]

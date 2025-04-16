@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "sds modulesCollectInfo(sds info, sds section, int for_crash_report, int sections);",
+        "b_contents": "void ModuleForkDoneHandler(int exitcode, int bysignal);\nint TerminateModuleForkChild(int child_pid, int wait);\nssize_t rdbSaveModulesAux(rio *rdb, int when);\nint moduleAllDatatypesHandleErrors();",
+        "base_contents": "",
+        "res_region": "void ModuleForkDoneHandler(int exitcode, int bysignal);\nint TerminateModuleForkChild(int child_pid, int wait);\nssize_t rdbSaveModulesAux(rio *rdb, int when);\nint moduleAllDatatypesHandleErrors();\nsds modulesCollectInfo(sds info, sds section, int for_crash_report, int sections);",
+        "lookback": "int TerminateModuleForkChild(int child_pid, int wait);",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 1553,
+        "end_line": 1561,
+        "merge_gen_region": null,
+        "confidence": 0.850016176700592,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        ClientCursor cc;\n        cc.c = creal;\n        cc.ns = ns;\n        cc.noTimeout();\n        cc.setDoingDeletes( true );",
+        "b_contents": "        auto_ptr<ClientCursor> cc;\n        cc.reset( new ClientCursor() );\n        cc->c = creal;\n        cc->ns = ns;\n        cc->liveForever();\n        cc->setDoingDeletes( true );",
+        "base_contents": "        ClientCursor cc;\n        cc.c = creal;\n        cc.ns = ns;\n        cc.liveForever();\n        cc.setDoingDeletes( true );",
+        "res_region": "        auto_ptr<ClientCursor> cc;\n        cc.reset( new ClientCursor() );\n        cc->c = creal;\n        cc->ns = ns;\n        cc->noTimeout();\n        cc->setDoingDeletes( true );",
+        "lookback": "        cc.reset( new ClientCursor() );",
+        "lookahead": "        do {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 141,
+        "end_line": 160,
+        "merge_gen_region": null,
+        "confidence": 0.7772248387336731,
+        "hesitated": true
+    }
+]

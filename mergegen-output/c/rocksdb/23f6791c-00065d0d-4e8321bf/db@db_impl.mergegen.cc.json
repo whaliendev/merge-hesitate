@@ -1,0 +1,89 @@
+[
+    {
+        "a_contents": "Status DBImpl::Recover(\n    VersionEdit* edit,\n    const std::vector<ColumnFamilyDescriptor>& column_families,\n    MemTable* external_table, bool error_if_log_file_exist) {",
+        "b_contents": "Status DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n                       bool error_if_log_file_exist) {",
+        "base_contents": "Status DBImpl::Recover(VersionEdit* edit, MemTable* external_table,\n    bool error_if_log_file_exist) {",
+        "res_region": "Status DBImpl::Recover(\n    VersionEdit* edit,\n    const std::vector<ColumnFamilyDescriptor>& column_families,\n    MemTable* external_table, bool error_if_log_file_exist) {",
+        "lookback": "    VersionEdit* edit,",
+        "lookahead": "  mutex_.AssertHeld();",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 867,
+        "end_line": 878,
+        "merge_gen_region": " alignment editcoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8855426907539368,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "void DBImpl::CompactRange(const ColumnFamilyHandle& column_family,\n                          const Slice* begin, const Slice* end,\n                          bool reduce_level, int target_level) {",
+        "b_contents": "void DBImpl::CompactRange(const Slice* begin,\n                          const Slice* end,\n                          bool reduce_level,\n                          int target_level) {\n  FlushMemTable(FlushOptions());",
+        "base_contents": "void DBImpl::CompactRange(const Slice* begin, const Slice* end,\n                          bool reduce_level, int target_level) {",
+        "res_region": "void DBImpl::CompactRange(const ColumnFamilyHandle& column_family,\n                          const Slice* begin, const Slice* end,\n                          bool reduce_level, int target_level) {\n  FlushMemTable(FlushOptions());",
+        "lookback": "                          const Slice* begin, const Slice* end,",
+        "lookahead": "  int max_level_with_files = 1;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1306,
+        "end_line": 1319,
+        "merge_gen_region": null,
+        "confidence": 0.6672492027282715,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status DB::Put(const WriteOptions& opt, const ColumnFamilyHandle& column_family,\n               const Slice& key, const Slice& value) {\n  WriteBatch batch;\n  batch.Put(column_family.id, key, value);",
+        "b_contents": "Status DB::Put(const WriteOptions& opt, const Slice& key, const Slice& value) {\n  // Pre-allocate size of write batch conservatively.\n  // 8 bytes are taken by header, 4 bytes for count, 1 byte for type,\n  // and we allocate 11 extra bytes for key length, as well as value length.\n  WriteBatch batch(key.size() + value.size() + 24);\n  batch.Put(key, value);",
+        "base_contents": "Status DB::Put(const WriteOptions& opt, const Slice& key, const Slice& value) {\n  WriteBatch batch;\n  batch.Put(key, value);",
+        "res_region": "Status DB::Put(const WriteOptions& opt, const ColumnFamilyHandle& column_family,\n               const Slice& key, const Slice& value) {\n  // Pre-allocate size of write batch conservatively.\n  // 8 bytes are taken by header, 4 bytes for count, 1 byte for type,\n  // and we allocate 11 extra bytes for key length, as well as value length.\n  WriteBatch batch(key.size() + value.size() + 24);\n  batch.Put(column_family.id, key, value);",
+        "lookback": "               const Slice& key, const Slice& value) {",
+        "lookahead": "  return Write(opt, &batch);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3875,
+        "end_line": 3891,
+        "merge_gen_region": null,
+        "confidence": 0.7560039758682251,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  VersionEdit edit(impl->NumberLevels());\n  // Handles create_if_missing, error_if_exists\n  s = impl->Recover(&edit, column_families);",
+        "b_contents": "  VersionEdit edit;\n  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "base_contents": "  VersionEdit edit(impl->NumberLevels());\n  s = impl->Recover(&edit); // Handles create_if_missing, error_if_exists",
+        "res_region": "  VersionEdit edit;\n  // Handles create_if_missing, error_if_exists\n  s = impl->Recover(&edit, column_families);",
+        "lookback": "  // Handles create_if_missing, error_if_exists",
+        "lookahead": "  if (s.ok()) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 3969,
+        "end_line": 3979,
+        "merge_gen_region": null,
+        "confidence": 0.6545864343643188,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  if (s.ok() && options.compaction_style == kCompactionStyleUniversal) {\n    int num_files;",
+        "b_contents": "  if (s.ok() && impl->options_.compaction_style == kCompactionStyleUniversal) {\n    Version* current = impl->versions_->current();",
+        "base_contents": "  if (options.compaction_style == kCompactionStyleUniversal) {\n    int num_files;",
+        "res_region": "  if (s.ok() && impl->options_.compaction_style == kCompactionStyleUniversal) {\n    Version* current = impl->versions_->current();",
+        "lookback": "    Version* current = impl->versions_->current();",
+        "lookahead": "    for (int i = 1; i < impl->NumberLevels(); i++) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 4012,
+        "end_line": 4021,
+        "merge_gen_region": " (.() optionsok &&optionscompactionstyle ==CompactionUn)",
+        "confidence": 0.8950128555297852,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        std::string fontFilePath = jsonPath.append(fontName);\n\t\tif (FileUtils::getInstance()->isFileExist(fontFilePath))\n\t\t{\n\t\t\tlabel->setFontName(fontFilePath);\n\t\t}\n\t\telse{\n\t\t\tlabel->setFontName(fontName);\n\t\t}\n\t\t",
+        "b_contents": "        std::string file_extension = \u201c\u201d;\n        size_t pos = fontName.find_last_of('.');\n        if (pos != std::string::npos)\n        {\n            file_extension = fontName.substr(pos, fontName.length());\n            std::transform(file_extension.begin(),file_extension.end(), file_extension.begin(), (int(*)(int))toupper);\n        }\n        if(file_extension.compare(\".TTF\") == 0)\n        {\n            std::string fontFilePath = jsonPath.append(fontName);\n            label->setFontName(fontFilePath);\n        }\n        else\n        {\n            label->setFontName(fontName);\n        }\n        ",
+        "base_contents": "        std::string fontFilePath = jsonPath.append(fontName);\n        label->setFontName(fontFilePath);",
+        "res_region": "        \n        std::string fontFilePath = jsonPath.append(fontName);\n\t\tif (FileUtils::getInstance()->isFileExist(fontFilePath))\n\t\t{\n\t\t\tlabel->setFontName(fontFilePath);\n\t\t}\n\t\telse{\n\t\t\tlabel->setFontName(fontName);\n\t\t}",
+        "lookback": "        std::string fontFilePath = jsonPath.append(fontName);",
+        "lookahead": "        ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 104,
+        "end_line": 135,
+        "merge_gen_region": "stdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstd",
+        "confidence": 0.8853873610496521,
+        "hesitated": false,
+        "resolved": false
+    }
+]

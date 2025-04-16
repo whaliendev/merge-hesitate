@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "    XdsApi::RdsUpdate local_rds_update;\n    grpc_error* error = RouteConfigParse(client, tracer, symtab, route_config,\n                                         &local_rds_update);",
+        "b_contents": "    XdsApi::RdsUpdate& rds_update =\n        (*rds_update_map)[std::move(route_config_name)];\n    grpc_error* error =\n        RouteConfigParse(client, tracer, route_config, &rds_update);",
+        "base_contents": "    XdsApi::RdsUpdate local_rds_update;\n    grpc_error* error =\n        RouteConfigParse(client, tracer, route_config, &local_rds_update);",
+        "res_region": "    XdsApi::RdsUpdate& rds_update =\n        (*rds_update_map)[std::move(route_config_name)];\n    grpc_error* error =\n        RouteConfigParse(client, tracer, symtab, route_config, &rds_update);",
+        "lookback": "        (*rds_update_map)[std::move(route_config_name)];",
+        "lookahead": "    if (error != GRPC_ERROR_NONE) return error;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1282,
+        "end_line": 1295,
+        "merge_gen_region": null,
+        "confidence": 0.8792409896850586,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        LdsResponseParse(client_, tracer_, symtab_.ptr(), response,\n                         expected_server_name, &result.lds_update, arena.ptr());",
+        "b_contents": "        LdsResponseParse(client_, tracer_, response, expected_listener_names,\n                         &result.lds_update_map, arena.ptr());",
+        "base_contents": "        LdsResponseParse(client_, tracer_, response, expected_server_name,\n                         &result.lds_update, arena.ptr());",
+        "res_region": "        LdsResponseParse(client_, tracer_, symtab_.ptr(), response,\n                         expected_listener_names, &result.lds_update_map,\n                         arena.ptr());",
+        "lookback": "                         expected_listener_names, &result.lds_update_map,",
+        "lookahead": "  } else if (IsRds(result.type_url)) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1634,
+        "end_line": 1643,
+        "merge_gen_region": null,
+        "confidence": 0.7931501269340515,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    result.parse_error = RdsResponseParse(\n        client_, tracer_, symtab_.ptr(), response,\n        expected_route_configuration_names, &result.rds_update, arena.ptr());",
+        "b_contents": "    result.parse_error = RdsResponseParse(client_, tracer_, response,\n                                          expected_route_configuration_names,\n                                          &result.rds_update_map, arena.ptr());",
+        "base_contents": "    result.parse_error = RdsResponseParse(client_, tracer_, response,\n                                          expected_route_configuration_names,\n                                          &result.rds_update, arena.ptr());",
+        "res_region": "    result.parse_error =\n        RdsResponseParse(client_, tracer_, symtab_.ptr(), response,\n                         expected_route_configuration_names,\n                         &result.rds_update_map, arena.ptr());",
+        "lookback": "        RdsResponseParse(client_, tracer_, symtab_.ptr(), response,",
+        "lookahead": "  } else if (IsCds(result.type_url)) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1645,
+        "end_line": 1657,
+        "merge_gen_region": "dsParseclient79RRRRRRRR",
+        "confidence": 0.8983655571937561,
+        "hesitated": false,
+        "resolved": false
+    }
+]

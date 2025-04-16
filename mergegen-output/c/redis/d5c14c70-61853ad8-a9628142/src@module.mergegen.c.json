@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    RedisModuleInfoFunc info_cb;     /* callback for module to add INFO fields. */",
+        "b_contents": "    int options;    /* Module options and capabilities. */",
+        "base_contents": "",
+        "res_region": "    int options;    /* Module options and capabilities. */\n    RedisModuleInfoFunc info_cb;     /* callback for module to add INFO fields. */",
+        "lookback": "    RedisModuleInfoFunc info_cb;     /* callback for module to add INFO fields. */",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 66,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.8492617011070251,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    REGISTER_API(RegisterInfoFunc);\n    REGISTER_API(InfoAddSection);\n    REGISTER_API(InfoBeginDictField);\n    REGISTER_API(InfoEndDictField);\n    REGISTER_API(InfoAddFieldString);\n    REGISTER_API(InfoAddFieldCString);\n    REGISTER_API(InfoAddFieldDouble);\n    REGISTER_API(InfoAddFieldLongLong);\n    REGISTER_API(InfoAddFieldULongLong);",
+        "b_contents": "    REGISTER_API(Fork);\n    REGISTER_API(ExitFromChild);\n    REGISTER_API(KillForkChild);",
+        "base_contents": "",
+        "res_region": "    REGISTER_API(Fork);\n    REGISTER_API(ExitFromChild);\n    REGISTER_API(KillForkChild);\n    REGISTER_API(RegisterInfoFunc);\n    REGISTER_API(InfoAddSection);\n    REGISTER_API(InfoBeginDictField);\n    REGISTER_API(InfoEndDictField);\n    REGISTER_API(InfoAddFieldString);\n    REGISTER_API(InfoAddFieldCString);\n    REGISTER_API(InfoAddFieldDouble);\n    REGISTER_API(InfoAddFieldLongLong);\n    REGISTER_API(InfoAddFieldULongLong);",
+        "lookback": "    REGISTER_API(ExitFromChild);",
+        "lookahead": "}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 5964,
+        "end_line": 5979,
+        "merge_gen_region": "REGISTERREGISTERREGISTERREGISTERREGISTERREGISTERREGISTERREGISTERREGISTER",
+        "confidence": 0.9312580823898315,
+        "hesitated": false,
+        "resolved": false
+    }
+]

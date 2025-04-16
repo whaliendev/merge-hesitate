@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"../lv_core/lv_style.h\"",
+        "b_contents": "#include \"lv_draw_blend.h\"",
+        "base_contents": "",
+        "res_region": "#include \"lv_draw_blend.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 17,
+        "end_line": 22,
+        "merge_gen_region": null,
+        "confidence": 0.7346651554107666,
+        "hesitated": true
+    }
+]

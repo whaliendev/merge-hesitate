@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    meta->smallest.DecodeFrom(iter->key());",
+        "b_contents": "    Slice key = iter->key();\n    meta->smallest.DecodeFrom(key);\n    meta->smallest_seqno = GetInternalKeySeqno(key);\n    meta->largest_seqno = meta->smallest_seqno;",
+        "base_contents": "    Slice key = iter->key();\n    meta->smallest.DecodeFrom(key);",
+        "res_region": "    Slice key = iter->key();\n    meta->smallest.DecodeFrom(key);\n    meta->smallest_seqno = GetInternalKeySeqno(key);\n    meta->largest_seqno = meta->smallest_seqno;",
+        "lookback": "    meta->smallest.DecodeFrom(key);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 51,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.6851779818534851,
+        "hesitated": true
+    }
+]

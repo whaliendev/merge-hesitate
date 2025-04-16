@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    animationdata->_totalTime = 3;\n    \n//    animationdata->_translationKeys[boneName].push_back(Animation3DData::Vec3Key(keytime1[0], Vec3(0.0f, 0.0f, 0.0f)));\n//    animationdata->_translationKeys[boneName].push_back(Animation3DData::Vec3Key(keytime1[1], Vec3(0.0f, 20.0f, 0.0f)));\n//    animationdata->_translationKeys[boneName].push_back(Animation3DData::Vec3Key(keytime1[2], Vec3(20.0f, 0.0f, 0.0f)));\n//    animationdata->_translationKeys[boneName].push_back(Animation3DData::Vec3Key(keytime1[3], Vec3(0.0f, 0.0f, 20.0f)));\n    \n    CCLOG(\"translation:////////////////\");\n    //animationdata->_translationKeys.erase(animationdata->_translationKeys.begin(), animationdata->_translationKeys.end());\n    for (auto itr: animationdata->_translationKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        \n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    CCLOG(\"rotation:////////////////\");\n    //animationdata->_rotationKeys.erase(animationdata->_rotationKeys.begin(), animationdata->_rotationKeys.end());\n    for (auto itr: animationdata->_rotationKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    CCLOG(\"scale:////////////////\");\n    for (auto itr: animationdata->_scaleKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    ",
+        "b_contents": "",
+        "base_contents": "    animationdata->_totalTime = 3;\n    \n    CCLOG(\"translation:////////////////\");\n    //animationdata->_translationKeys.erase(animationdata->_translationKeys.begin(), animationdata->_translationKeys.end());\n    for (auto itr: animationdata->_translationKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        \n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    CCLOG(\"rotation:////////////////\");\n    //animationdata->_rotationKeys.erase(animationdata->_rotationKeys.begin(), animationdata->_rotationKeys.end());\n    for (auto itr: animationdata->_rotationKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    CCLOG(\"scale:////////////////\");\n    for (auto itr: animationdata->_scaleKeys)\n    {\n        CCLOG(\"%s\", itr.first.c_str());\n        auto& keys = itr.second;\n        if (keys.size())\n        {\n            float maxtime = keys[keys.size() - 1]._time;\n            for (auto it : keys) {\n                it._time /= maxtime;\n            }\n        }\n    }\n    ",
+        "res_region": "",
+        "lookback": "}",
+        "lookahead": "    return true;",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 343,
+        "end_line": 441,
+        "merge_gen_region": null,
+        "confidence": 0.6607344746589661,
+        "hesitated": true
+    }
+]

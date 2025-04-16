@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <unistd.h>",
+        "b_contents": "#include <vis.h>",
+        "base_contents": "#include <unistd.h>\n#include <vis.h>",
+        "res_region": "#include <unistd.h>",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 23,
+        "end_line": 30,
+        "merge_gen_region": null,
+        "confidence": 0.7944212555885315,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    std::string threadName = fmt::sprintf(\"Offline-%s-FrameProc\", mCameraIdStr.c_str());\n    res = mFrameProcessor->run(threadName.c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "b_contents": "    std::string threadName = fmt::sprintf(\"Offline-%s-FrameProc\", mCameraIdStr.c_str());\n    mFrameProcessor->run(threadName.c_str());",
+        "base_contents": "    threadName = String8::format(\"Offline-%s-FrameProc\", mCameraIdStr.string());\n    mFrameProcessor->run(threadName.string());",
+        "res_region": "    std::string threadName = fmt::sprintf(\"Offline-%s-FrameProc\", mCameraIdStr.c_str());\n    res = mFrameProcessor->run(threadName.c_str());\n    if (res != OK) {\n        ALOGE(\"%s: Unable to start frame processor thread: %s (%d)\",\n                __FUNCTION__, strerror(-res), res);\n        return res;\n    }",
+        "lookback": "    res = mFrameProcessor->run(threadName.c_str());",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 50,
+        "end_line": 64,
+        "merge_gen_region": " =Frame->(Namecstrresresresresstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdresresresresresstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdstdresresresresresresresresresresresresresresresresresresresresstdstdstdstd",
+        "confidence": 0.8907760977745056,
+        "hesitated": false,
+        "resolved": false
+    }
+]

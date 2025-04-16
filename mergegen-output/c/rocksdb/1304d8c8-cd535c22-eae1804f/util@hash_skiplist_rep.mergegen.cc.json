@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                                 Arena* arena, const SliceTransform* transform,\n                                 size_t bucket_size, int32_t skiplist_height,\n                                 int32_t skiplist_branching_factor)\n  : bucket_size_(bucket_size),\n    skiplist_height_(skiplist_height),\n    skiplist_branching_factor_(skiplist_branching_factor),\n    transform_(transform),\n    compare_(compare),\n    arena_(arena),\n    empty_iterator_(std::make_shared<EmptyIterator>()) {\n",
+        "b_contents": "                                 Arena* arena, const SliceTransform* transform,\n                                 size_t bucket_size)\n    : bucket_size_(bucket_size),\n      transform_(transform),\n      compare_(compare),\n      arena_(arena) {",
+        "base_contents": "    Arena* arena, const SliceTransform* transform, size_t bucket_size)\n  : bucket_size_(bucket_size),\n    transform_(transform),\n    compare_(compare),\n    arena_(arena),\n    empty_iterator_(std::make_shared<EmptyIterator>()) {\n",
+        "res_region": "                                 Arena* arena, const SliceTransform* transform,\n                                 size_t bucket_size, int32_t skiplist_height,\n                                 int32_t skiplist_branching_factor)\n    : bucket_size_(bucket_size),\n      skiplist_height_(skiplist_height),\n      skiplist_branching_factor_(skiplist_branching_factor),\n      transform_(transform),\n      compare_(compare),\n      arena_(arena) {",
+        "lookback": "                                 size_t bucket_size, int32_t skiplist_height,",
+        "lookahead": "  buckets_ = new port::AtomicPointer[bucket_size];",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 219,
+        "end_line": 246,
+        "merge_gen_region": null,
+        "confidence": 0.8342077732086182,
+        "hesitated": true
+    },
+    {
+        "a_contents": "std::shared_ptr<MemTableRep> HashSkipListRepFactory::CreateMemTableRep(\n    MemTableRep::KeyComparator& compare, Arena* arena) {\n  return std::make_shared<HashSkipListRep>(compare, arena, transform_,\n                                           bucket_count_, skiplist_height_,\n                                           skiplist_branching_factor_);",
+        "b_contents": "MemTableRep* HashSkipListRepFactory::CreateMemTableRep(\n    MemTableRep::KeyComparator& compare, Arena* arena) {\n  return new HashSkipListRep(compare, arena, transform_, bucket_count_);",
+        "base_contents": "std::shared_ptr<MemTableRep>\nHashSkipListRepFactory::CreateMemTableRep(MemTableRep::KeyComparator &compare,\n                                          Arena *arena) {\n  return std::make_shared<HashSkipListRep>(compare, arena, transform_,\n      bucket_count_);",
+        "res_region": "MemTableRep* HashSkipListRepFactory::CreateMemTableRep(\n    MemTableRep::KeyComparator& compare, Arena* arena) {\n  return new HashSkipListRep(compare, arena, transform_, bucket_count_,\n                             skiplist_height_, skiplist_branching_factor_);",
+        "lookback": "    MemTableRep::KeyComparator& compare, Arena* arena) {",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 323,
+        "end_line": 339,
+        "merge_gen_region": null,
+        "confidence": 0.689925491809845,
+        "hesitated": true
+    }
+]

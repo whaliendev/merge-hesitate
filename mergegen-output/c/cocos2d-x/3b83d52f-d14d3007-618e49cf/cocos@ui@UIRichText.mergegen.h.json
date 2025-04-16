@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    virtual void setAnchorPoint(const Vector2 &pt);\n    virtual const Size& getContentSize() const;",
+        "b_contents": "    virtual void setAnchorPoint(const Point &pt);\n    virtual const Size& getVirtualRendererSize() const override;",
+        "base_contents": "    virtual void setAnchorPoint(const Point &pt);\n    virtual const Size& getContentSize() const;",
+        "res_region": "    virtual void setAnchorPoint(const Vector2 &pt);\n    virtual const Size& getVirtualRendererSize() const override;",
+        "lookback": "    virtual const Size& getVirtualRendererSize() const override;",
+        "lookahead": "    void formatText();",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 115,
+        "merge_gen_region": null,
+        "confidence": 0.6460988521575928,
+        "hesitated": true
+    }
+]

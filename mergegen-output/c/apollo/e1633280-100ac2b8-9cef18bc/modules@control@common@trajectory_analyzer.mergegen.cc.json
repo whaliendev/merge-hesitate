@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "double PointDistanceSquare(const TrajectoryPoint &point, const double x,\n                           const double y) {\n  const double dx = point.x() - x;\n  const double dy = point.y() - y;",
+        "b_contents": "double PointDistanceSquare(const TrajectoryPoint& point, const double x,\n                           const double y) {\n  const double dx = point.path_point().x() - x;\n  const double dy = point.path_point().y() - y;",
+        "base_contents": "double PointDistanceSquare(const TrajectoryPoint& point,\n                           const double x, const double y) {\n  const double dx = point.x() - x;\n  const double dy = point.y() - y;",
+        "res_region": "double PointDistanceSquare(const TrajectoryPoint& point, const double x,\n                           const double y) {\n  const double dx = point.path_point().x() - x;\n  const double dy = point.path_point().y() - y;",
+        "lookback": "                           const double y) {",
+        "lookahead": "  return dx * dx + dy * dy;",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 35,
+        "end_line": 50,
+        "merge_gen_region": null,
+        "confidence": 0.7123591899871826,
+        "hesitated": true
+    },
+    {
+        "a_contents": "PathPoint TrajectoryPointToPathPoint(const TrajectoryPoint &point) {\n  PathPoint result;\n  if (point.has_x()) result.set_x(point.x());\n  if (point.has_y()) result.set_y(point.y());\n  if (point.has_z()) result.set_z(point.z());\n  if (point.has_theta()) result.set_theta(point.theta());\n  if (point.has_kappa()) result.set_kappa(point.kappa());\n  if (point.has_s()) result.set_s(point.s());\n  return result;",
+        "b_contents": "PathPoint TrajectoryPointToPathPoint(const TrajectoryPoint& point) {\n  if (point.has_path_point()) {\n    return point.path_point();\n  } else {\n    return PathPoint();\n  }",
+        "base_contents": "PathPoint TrajectoryPointToPathPoint(const TrajectoryPoint& point) {\n  PathPoint result;\n  if (point.has_x())\n    result.set_x(point.x());\n  if (point.has_y())\n    result.set_y(point.y());\n  if (point.has_z())\n    result.set_z(point.z());\n  if (point.has_theta())\n    result.set_theta(point.theta());\n  if (point.has_kappa())\n    result.set_kappa(point.kappa());\n  if (point.has_s())\n    result.set_s(point.s());\n  return result;",
+        "res_region": "PathPoint TrajectoryPointToPathPoint(const TrajectoryPoint& point) {\n  if (point.has_path_point()) {\n    return point.path_point();\n  } else {\n    return PathPoint();\n  }",
+        "lookback": "  if (point.has_path_point()) {",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 54,
+        "end_line": 87,
+        "merge_gen_region": null,
+        "confidence": 0.7157730460166931,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  int num_points = planning_published_trajectory->adc_trajectory_point_size();\n  trajectory_points_.reserve(num_points);\n\n  for (const auto &published_trajectory_point :\n       planning_published_trajectory->adc_trajectory_point()) {\n    TrajectoryPoint point;\n    point.set_s(published_trajectory_point.accumulated_s());\n    point.set_x(published_trajectory_point.x());\n    point.set_y(published_trajectory_point.y());\n    point.set_theta(published_trajectory_point.theta());\n    point.set_kappa(published_trajectory_point.curvature());\n    point.set_v(published_trajectory_point.speed());\n    point.set_a(published_trajectory_point.acceleration_s());\n    point.set_relative_time(published_trajectory_point.relative_time());\n\n    trajectory_points_.push_back(std::move(point));",
+        "b_contents": "  for (int i = 0; i < planning_published_trajectory->trajectory_point_size();\n       ++i) {\n    trajectory_points_.push_back(\n        planning_published_trajectory->trajectory_point(i));",
+        "base_contents": "  int num_points = planning_published_trajectory->adc_trajectory_point_size();\n  trajectory_points_.reserve(num_points);\n\n  for (const auto& published_trajectory_point:\n       planning_published_trajectory->adc_trajectory_point()) {\n    TrajectoryPoint point;\n    point.set_s(published_trajectory_point.accumulated_s());\n    point.set_x(published_trajectory_point.x());\n    point.set_y(published_trajectory_point.y());\n    point.set_theta(published_trajectory_point.theta());\n    point.set_kappa(published_trajectory_point.curvature());\n    point.set_v(published_trajectory_point.speed());\n    point.set_a(published_trajectory_point.acceleration_s());\n    point.set_relative_time(published_trajectory_point.relative_time());\n\n    trajectory_points_.push_back(std::move(point));",
+        "res_region": "  for (int i = 0; i < planning_published_trajectory->trajectory_point_size();\n       ++i) {\n    trajectory_points_.push_back(\n        planning_published_trajectory->trajectory_point(i));",
+        "lookback": "       ++i) {",
+        "lookahead": "  }",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 97,
+        "end_line": 136,
+        "merge_gen_region": null,
+        "confidence": 0.553444504737854,
+        "hesitated": true
+    }
+]

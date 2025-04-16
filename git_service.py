@@ -600,9 +600,9 @@ def process_conflict_blocks(
         return []
 
     # --- Step 2: Compute Opcodes ---
-    print(
-        f"Starting V3 (Opcode) analysis for {len(conflict_block_models)} blocks in {merged_file}"
-    )
+    # print(
+    #     f"Starting V3 (Opcode) analysis for {len(conflict_block_models)} blocks in {merged_file}"
+    # )
     # Use autojunk=False for potentially better accuracy with noisy data, though may be slower.
     matcher = difflib.SequenceMatcher(None, conflict_lines, truth_lines, autojunk=False)
     opcodes = matcher.get_opcodes()
@@ -633,7 +633,7 @@ def process_conflict_blocks(
             # But might be relevant if we need to track inserted content
             pass
 
-    print(f"  Generated line mapping with {len(conflict_to_truth_map)} entries")
+    # print(f"  Generated line mapping with {len(conflict_to_truth_map)} entries")
 
     # --- Step 4: Map Boundaries using Index Maps ---
     for cb in conflict_block_models:
@@ -657,9 +657,9 @@ def process_conflict_blocks(
             else:
                 resolved_start = 0  # Fallback
         else:
-            print(
-                f"  Warning: Start marker at {s_orig} not found in mapping, using fallback position 0"
-            )
+            # print(
+            #     f"  Warning: Start marker at {s_orig} not found in mapping, using fallback position 0"
+            # )
             resolved_start = 0
 
         # Find resolved_end based on what happened to the end marker line
@@ -768,23 +768,23 @@ def process_conflict_blocks(
                 is_empty_resolution = True
                 resolved_start = conflict_to_truth_map[s_orig][1]
                 resolved_end = resolved_start
-                print(
-                    f"  Detected empty resolution for block {cb.index}: both markers deleted at truth position {resolved_start}"
-                )
+                # print(
+                #     f"  Detected empty resolution for block {cb.index}: both markers deleted at truth position {resolved_start}"
+                # )
 
         # Sanity check and correction
         if resolved_end < resolved_start:
-            print(
-                f"  Block {cb.index} (V3 Opcode): Detected completely deleted block (end={resolved_end} < start={resolved_start})."
-            )
+            # print(
+            #     f"  Block {cb.index} (V3 Opcode): Detected completely deleted block (end={resolved_end} < start={resolved_start})."
+            # )
             cb.labels.append("OPCODE_MAP_NEGATIVE_RANGE")
 
         cb.resolved_start_line = resolved_start  # Store 0-based index
         cb.resolved_end_line = resolved_end  # Store 0-based index
 
-        print(
-            f"  Block {cb.index} (V3 Opcode): Orig Markers [{s_orig+1}, {e_orig+1}] -> Resolved Range [{resolved_start+1}-{resolved_end}] (0-based: [{resolved_start}, {resolved_end}])"
-        )
+        # print(
+        #     f"  Block {cb.index} (V3 Opcode): Orig Markers [{s_orig+1}, {e_orig+1}] -> Resolved Range [{resolved_start+1}-{resolved_end}] (0-based: [{resolved_start}, {resolved_end}])"
+        # )
 
     # --- Step 5: Finalize Merged Content & Apply Judgers ---
     conflict_blocks_final: List[ConflictBlock] = []
@@ -842,9 +842,9 @@ def process_conflict_blocks(
         # Combine any opcode mapping labels with judger labels
         final_labels = cb_model.labels + current_judger_labels
 
-        print(
-            f"    Block {cb_model.index} (V3 Opcode): Final resolved range [{judger_start_line}, {judger_end_line}] Lines: {len(cb_model.merged)}"
-        )
+        # print(
+        #     f"    Block {cb_model.index} (V3 Opcode): Final resolved range [{judger_start_line}, {judger_end_line}] Lines: {len(cb_model.merged)}"
+        # )
 
         conflict_blocks_final.append(
             ConflictBlock(
@@ -861,7 +861,7 @@ def process_conflict_blocks(
             )
         )
 
-    print(
-        f"Finished V3 (Opcode) processing {len(conflict_blocks_final)} blocks for {merged_file}"
-    )
+    # print(
+    #     f"Finished V3 (Opcode) processing {len(conflict_blocks_final)} blocks for {merged_file}"
+    # )
     return conflict_blocks_final

@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\tu_int\t\t\t ax, bx, newsize = *size;\n\tconst struct grid_line\t*gl;\n\tconst char\t\t*d;\n\tsize_t\t\t\t bufsize = 1024, dlen;\n\n\twhile (bufsize < newsize)\n\t\tbufsize *= 2;\n\tbuf = xrealloc(buf, bufsize);",
+        "b_contents": "\tu_int\t\t\t ax, bx, newsize = *size;\n\tconst struct grid_line\t*gl;\n\tconst char\t\t*d;\n\tsize_t\t\t\t bufsize = 1024, dlen;",
+        "base_contents": "\tu_int\t\t\tax, bx, newsize;\n\tstruct grid_cell\tgc;",
+        "res_region": "\tu_int\t\t\t ax, bx, newsize = *size;\n\tconst struct grid_line\t*gl;\n\tconst char\t\t*d;\n\tsize_t\t\t\t bufsize = 1024, dlen;\n\n\twhile (bufsize < newsize)\n\t\tbufsize *= 2;\n\tbuf = xrealloc(buf, bufsize);",
+        "lookback": "\tconst struct grid_line\t*gl;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2469,
+        "end_line": 2486,
+        "merge_gen_region": null,
+        "confidence": 0.8751070499420166,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tgl = grid_peek_line(gd, py);",
+        "b_contents": "\twhile (bufsize < newsize)\n\t\tbufsize *= 2;\n\tbuf = xrealloc(buf, bufsize);\n\n\tgl = grid_peek_line(gd, py);",
+        "base_contents": "",
+        "res_region": "\n\tgl = grid_peek_line(gd, py);",
+        "lookback": "\tgl = grid_peek_line(gd, py);",
+        "lookahead": "\tbx = *size - 1;",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2488,
+        "end_line": 2497,
+        "merge_gen_region": null,
+        "confidence": 0.7167470455169678,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\td = cells[ccell].d;\n\t\t\tdlen = cells[ccell].dlen;\n\t\t\tif (dlen == 1) {\n\t\t\t\tif (str[pos] != *d) {",
+        "b_contents": "\t\t\td = cells[ccell].d;\n\t\t\tdlen = cells[ccell].dlen;\n\t\t\tif (dlen == 1) {\n\t\t\t\tif (str[pos] != *d) {\n\t\t\t\t\tmatch = 0;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tpos++;\n\t\t\t} else {\n\t\t\t\tif (dlen > len - pos)\n\t\t\t\t\tdlen = len - pos;\n\t\t\t\tif (memcmp(str + pos, d, dlen) != 0) {",
+        "base_contents": "\n\t\t\tcelldata = cells[ccell];\n\t\t\twhile (*celldata != '\\0' && *cstr != '\\0') {\n\t\t\t\tif (*celldata++ != *cstr++) {",
+        "res_region": "\t\t\td = cells[ccell].d;\n\t\t\tdlen = cells[ccell].dlen;\n\t\t\tif (dlen == 1) {\n\t\t\t\tif (str[pos] != *d) {\n\t\t\t\t\tmatch = 0;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tpos++;\n\t\t\t} else {\n\t\t\t\tif (dlen > len - pos)\n\t\t\t\t\tdlen = len - pos;\n\t\t\t\tif (memcmp(str + pos, d, dlen) != 0) {",
+        "lookback": "\t\t\tdlen = cells[ccell].dlen;",
+        "lookahead": "\t\t\t\t\tmatch = 0;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 2564,
+        "end_line": 2587,
+        "merge_gen_region": null,
+        "confidence": 0.7453697323799133,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t\tpos++;\n\t\t\t} else {\n\t\t\t\tif (dlen > len - pos)\n\t\t\t\t\tdlen = len - pos;\n\t\t\t\tif (memcmp(str + pos, d, dlen) != 0) {\n\t\t\t\t\tmatch = 0;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tpos += dlen;",
+        "b_contents": "\t\t\t\tpos += dlen;",
+        "base_contents": "",
+        "res_region": "\t\t\t\t\tmatch = 0;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t\tpos += dlen;",
+        "lookback": "\t\t\t\t\tbreak;",
+        "lookahead": "\t\t\t}",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 2591,
+        "end_line": 2604,
+        "merge_gen_region": null,
+        "confidence": 0.7598744630813599,
+        "hesitated": true
+    }
+]

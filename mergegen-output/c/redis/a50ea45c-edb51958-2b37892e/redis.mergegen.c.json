@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        de = dictFind(zs->dict,c->argv[2]);\n        if (!de) {\n            addReply(c,shared.nullbulk);\n            return;",
+        "b_contents": "    x = zsl->header;\n    for (i = zsl->level-1; i >= 0; i--) {\n        while (x->forward[i] &&\n            (x->forward[i]->score < *score ||\n                (x->forward[i]->score == *score &&\n                compareStringObjects(x->forward[i]->obj,c->argv[2]) < 0))) {\n            if (i > 0) {\n                rank += x->span[i-1];\n            } else {\n                rank++;\n            }\n            x = x->forward[i];",
+        "base_contents": "    x = zsl->header;\n    for (i = zsl->level-1; i >= 0; i--) {\n        while (x->forward[i] &&\n            (x->forward[i]->score < *score ||\n                (x->forward[i]->score == *score &&\n                compareStringObjects(x->forward[i]->obj,c->argv[2]) < 0))) {\n            rank += x->span[i];\n            x = x->forward[i];",
+        "res_region": "        de = dictFind(zs->dict,c->argv[2]);\n        if (!de) {\n            addReply(c,shared.nullbulk);\n            return;",
+        "lookback": "        if (!de) {",
+        "lookahead": "        }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 5535,
+        "end_line": 5562,
+        "merge_gen_region": null,
+        "confidence": 0.6232455968856812,
+        "hesitated": true
+    }
+]

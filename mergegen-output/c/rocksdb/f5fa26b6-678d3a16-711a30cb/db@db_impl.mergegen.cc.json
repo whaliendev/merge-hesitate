@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "      // We may write a single key (e.g.: for Put/Delete or successful merge).\n      // Or we may instead have to write a sequence/list of keys.\n      // We have to write a sequence iff we have an unsuccessful merge\n      bool has_merge_list = current_entry_is_merging && !merge.IsSuccess();\n      const std::deque<std::string>* keys = nullptr;\n      const std::deque<std::string>* values = nullptr;\n      std::deque<std::string>::const_reverse_iterator key_iter;\n      std::deque<std::string>::const_reverse_iterator value_iter;\n      if (has_merge_list) {\n        keys = &merge.keys();\n        values = &merge.values();\n        key_iter = keys->rbegin();    // The back (*rbegin()) is the first key\n        value_iter = values->rbegin();\n\n        key = Slice(*key_iter);\n        value = Slice(*value_iter);",
+        "b_contents": "\n      char* kptr = (char*)key.data();\n      std::string kstr;\n\n      // Zeroing out the sequence number leads to better compression.\n      // If this is the bottommost level (no files in lower levels)\n      // and the earliest snapshot is larger than this seqno\n      // then we can squash the seqno to zero.\n      // Universal mode depends on the sequence number to determine\n      // time-order of files that is needed for compactions.\n      if (options_.compaction_style == kCompactionStyleLevel &&\n          bottommost_level && ikey.sequence < earliest_snapshot &&\n         ikey.type != kTypeMerge) {\n        assert(ikey.type != kTypeDeletion);\n        // make a copy because updating in place would cause problems\n        // with the priority queue that is managing the input key iterator\n        kstr.assign(key.data(), key.size());\n        kptr = (char *)kstr.c_str();\n        UpdateInternalKey(kptr, key.size(), (uint64_t)0, ikey.type);",
+        "base_contents": "\n      char* kptr = (char*)key.data();\n      std::string kstr;\n\n      // Zeroing out the sequence number leads to better compression.\n      // If this is the bottommost level (no files in lower levels)\n      // and the earliest snapshot is larger than this seqno\n      // then we can squash the seqno to zero.\n      if (bottommost_level && ikey.sequence < earliest_snapshot &&\n         ikey.type != kTypeMerge) {\n        assert(ikey.type != kTypeDeletion);\n        // make a copy because updating in place would cause problems\n        // with the priority queue that is managing the input key iterator\n        kstr.assign(key.data(), key.size());\n        kptr = (char *)kstr.c_str();\n        UpdateInternalKey(kptr, key.size(), (uint64_t)0, ikey.type);",
+        "res_region": "      // We may write a single key (e.g.: for Put/Delete or successful merge).\n      // Or we may instead have to write a sequence/list of keys.\n      // We have to write a sequence iff we have an unsuccessful merge\n      bool has_merge_list = current_entry_is_merging && !merge.IsSuccess();\n      const std::deque<std::string>* keys = nullptr;\n      const std::deque<std::string>* values = nullptr;\n      std::deque<std::string>::const_reverse_iterator key_iter;\n      std::deque<std::string>::const_reverse_iterator value_iter;\n      if (has_merge_list) {\n        keys = &merge.keys();\n        values = &merge.values();\n        key_iter = keys->rbegin();    // The back (*rbegin()) is the first key\n        value_iter = values->rbegin();\n\n        key = Slice(*key_iter);\n        value = Slice(*value_iter);",
+        "lookback": "      // Or we may instead have to write a sequence/list of keys.",
+        "lookahead": "      }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1932,
+        "end_line": 1986,
+        "merge_gen_region": null,
+        "confidence": 0.8792136907577515,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "      }\n      SequenceNumber seqno = GetInternalKeySeqno(newkey);\n      if (compact->builder->NumEntries() == 0) {\n        compact->current_output()->smallest.DecodeFrom(newkey);\n        compact->current_output()->smallest_seqno = seqno;\n      } else {\n        compact->current_output()->smallest_seqno =\n          std::min(compact->current_output()->smallest_seqno, seqno);\n      }\n      compact->current_output()->largest.DecodeFrom(newkey);\n      compact->builder->Add(newkey, value);\n      compact->current_output()->largest_seqno =\n        std::max(compact->current_output()->largest_seqno, seqno);",
+        "base_contents": "      }\n      if (compact->builder->NumEntries() == 0) {\n        compact->current_output()->smallest.DecodeFrom(newkey);\n      }\n      compact->current_output()->largest.DecodeFrom(newkey);\n      compact->builder->Add(newkey, value);",
+        "res_region": "",
+        "lookback": "        // If we have a list of entries, move to next element",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 2034,
+        "end_line": 2056,
+        "merge_gen_region": null,
+        "confidence": 0.5051152110099792,
+        "hesitated": true
+    }
+]

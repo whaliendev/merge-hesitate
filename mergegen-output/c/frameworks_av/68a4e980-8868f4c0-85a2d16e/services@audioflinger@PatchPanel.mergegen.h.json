@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include \"IAfPatchPanel.h\"\n\n#include <map>  // avoid transitive dependency\n#include <set>  // avoid transitive dependency\n\nnamespace android {\n\nclass PatchPanel : public IAfPatchPanel {\npublic:\n    explicit PatchPanel(const sp<IAfPatchPanelCallback>& afPatchPanelCallback)\n        : mAfPatchPanelCallback(afPatchPanelCallback) {}",
+        "b_contents": "public: // TODO(b/288339104) extract out of AudioFlinger class\n// PatchPanel is concealed within AudioFlinger, their lifetimes are the same.\nclass PatchPanel : public IAfPatchPanel {\npublic:\n    explicit PatchPanel(AudioFlinger* audioFlinger) : mAudioFlinger(*audioFlinger) {}",
+        "base_contents": "public: // TODO(b/288339104) extract out of AudioFlinger class\n// PatchPanel is concealed within AudioFlinger, their lifetimes are the same.\nclass PatchPanel {\npublic:\n    class SoftwarePatch {\n      public:\n        SoftwarePatch(const PatchPanel &patchPanel, audio_patch_handle_t patchHandle,\n                audio_io_handle_t playbackThreadHandle, audio_io_handle_t recordThreadHandle)\n                : mPatchPanel(patchPanel), mPatchHandle(patchHandle),\n                  mPlaybackThreadHandle(playbackThreadHandle),\n                  mRecordThreadHandle(recordThreadHandle) {}\n        SoftwarePatch(const SoftwarePatch&) = default;\n\n        // Must be called under AudioFlinger::mLock\n        status_t getLatencyMs_l(double *latencyMs) const;\n        audio_patch_handle_t getPatchHandle() const { return mPatchHandle; };\n        audio_io_handle_t getPlaybackThreadHandle() const { return mPlaybackThreadHandle; };\n        audio_io_handle_t getRecordThreadHandle() const { return mRecordThreadHandle; };\n      private:\n        const PatchPanel &mPatchPanel;\n        const audio_patch_handle_t mPatchHandle;\n        const audio_io_handle_t mPlaybackThreadHandle;\n        const audio_io_handle_t mRecordThreadHandle;\n    };\n\n    explicit PatchPanel(AudioFlinger* audioFlinger) : mAudioFlinger(*audioFlinger) {}",
+        "res_region": "#include \"IAfPatchPanel.h\"\n\n#include <map>  // avoid transitive dependency\n#include <set>  // avoid transitive dependency\n\nnamespace android {\n\nclass PatchPanel : public IAfPatchPanel {\npublic:\n    explicit PatchPanel(const sp<IAfPatchPanelCallback>& afPatchPanelCallback)\n        : mAfPatchPanelCallback(afPatchPanelCallback) {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 64,
+        "merge_gen_region": null,
+        "confidence": 0.7045789957046509,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                            struct audio_patch* patch) final;\n    void notifyStreamClosed(audio_io_handle_t stream) final;",
+        "b_contents": "                            struct audio_patch* patch) final;\n    void notifyStreamClosed(audio_io_handle_t stream) final;\n\n    void dump(int fd) const final;",
+        "base_contents": "                            struct audio_patch *patch);\n    void notifyStreamClosed(audio_io_handle_t stream);\n\n    void dump(int fd) const;\n\n    template<typename ThreadType, typename TrackType>\n    class Endpoint final {\n    public:\n        Endpoint() = default;\n        Endpoint(const Endpoint&) = delete;\n        Endpoint& operator=(const Endpoint& other) noexcept {\n            mThread = other.mThread;\n            mCloseThread = other.mCloseThread;\n            mHandle = other.mHandle;\n            mTrack = other.mTrack;\n            return *this;\n        }\n        Endpoint(Endpoint&& other) noexcept { swap(other); }\n        Endpoint& operator=(Endpoint&& other) noexcept {\n            swap(other);\n            return *this;\n        }\n        ~Endpoint() {\n            ALOGE_IF(mHandle != AUDIO_PATCH_HANDLE_NONE,\n                    \"A non empty Patch Endpoint leaked, handle %d\", mHandle);\n        }\n\n        status_t checkTrack(TrackType *trackOrNull) const {\n            if (trackOrNull == nullptr) return NO_MEMORY;\n            return trackOrNull->initCheck();\n        }\n        audio_patch_handle_t handle() const { return mHandle; }\n        sp<ThreadType> thread() const { return mThread; }\n        sp<TrackType> track() const { return mTrack; }\n        sp<const ThreadType> const_thread() const { return mThread; }\n        sp<const TrackType> const_track() const { return mTrack; }\n\n        void closeConnections(PatchPanel *panel) {\n            if (mHandle != AUDIO_PATCH_HANDLE_NONE) {\n                panel->releaseAudioPatch(mHandle);\n                mHandle = AUDIO_PATCH_HANDLE_NONE;\n            }\n            if (mThread != 0) {\n                if (mTrack != 0) {\n                    mThread->deletePatchTrack(mTrack);\n                }\n                if (mCloseThread) {\n                    panel->mAudioFlinger.closeThreadInternal_l(mThread);\n                }\n            }\n        }\n        audio_patch_handle_t* handlePtr() { return &mHandle; }\n        void setThread(const sp<ThreadType>& thread, bool closeThread = true) {\n            mThread = thread;\n            mCloseThread = closeThread;\n        }\n        template <typename T>\n        void setTrackAndPeer(const sp<TrackType>& track, const sp<T> &peer, bool holdReference) {\n            mTrack = track;\n            mThread->addPatchTrack(mTrack);\n            mTrack->setPeerProxy(peer, holdReference);\n            mClearPeerProxy = holdReference;\n        }\n        void clearTrackPeer() { if (mClearPeerProxy && mTrack) mTrack->clearPeerProxy(); }\n        void stopTrack() { if (mTrack) mTrack->stop(); }\n\n        void swap(Endpoint &other) noexcept {\n            using std::swap;\n            swap(mThread, other.mThread);\n            swap(mCloseThread, other.mCloseThread);\n            swap(mClearPeerProxy, other.mClearPeerProxy);\n            swap(mHandle, other.mHandle);\n            swap(mTrack, other.mTrack);\n        }\n\n        friend void swap(Endpoint &a, Endpoint &b) noexcept {\n            a.swap(b);\n        }\n\n    private:\n        sp<ThreadType> mThread;\n        bool mCloseThread = true;\n        bool mClearPeerProxy = true;\n        audio_patch_handle_t mHandle = AUDIO_PATCH_HANDLE_NONE;\n        sp<TrackType> mTrack;\n    };\n\n    class Patch final {\n    public:\n        Patch(const struct audio_patch &patch, bool endpointPatch) :\n            mAudioPatch(patch), mIsEndpointPatch(endpointPatch) {}\n        Patch() = default;\n        ~Patch();\n        Patch(const Patch& other) noexcept {\n            mAudioPatch = other.mAudioPatch;\n            mHalHandle = other.mHalHandle;\n            mPlayback = other.mPlayback;\n            mRecord = other.mRecord;\n            mThread = other.mThread;\n            mIsEndpointPatch = other.mIsEndpointPatch;\n        }\n        Patch(Patch&& other) noexcept { swap(other); }\n        Patch& operator=(Patch&& other) noexcept {\n            swap(other);\n            return *this;\n        }\n\n        void swap(Patch &other) noexcept {\n            using std::swap;\n            swap(mAudioPatch, other.mAudioPatch);\n            swap(mHalHandle, other.mHalHandle);\n            swap(mPlayback, other.mPlayback);\n            swap(mRecord, other.mRecord);\n            swap(mThread, other.mThread);\n            swap(mIsEndpointPatch, other.mIsEndpointPatch);\n        }\n\n        friend void swap(Patch &a, Patch &b) noexcept {\n            a.swap(b);\n        }\n\n        status_t createConnections(PatchPanel *panel);\n        void clearConnections(PatchPanel *panel);\n        bool isSoftware() const {\n            return mRecord.handle() != AUDIO_PATCH_HANDLE_NONE ||\n                    mPlayback.handle() != AUDIO_PATCH_HANDLE_NONE; }\n\n        void setThread(const sp<IAfThreadBase>& thread) { mThread = thread; }\n        wp<IAfThreadBase> thread() const { return mThread; }",
+        "res_region": "                            struct audio_patch* patch) final;\n    void notifyStreamClosed(audio_io_handle_t stream) final;\n\n    void dump(int fd) const final;",
+        "lookback": "    void notifyStreamClosed(audio_io_handle_t stream) final;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 92,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.4022810459136963,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void dump(int fd) const final;\n\n    // Call with AudioFlinger mLock held\n    const std::map<audio_patch_handle_t, Patch>& patches_l() const final { return mPatches; }",
+        "b_contents": "    // Call with AudioFlinger mLock held\n    const std::map<audio_patch_handle_t, Patch>& patches_l() const final { return mPatches; }",
+        "base_contents": "        // returns the latency of the patch (from record to playback).\n        status_t getLatencyMs(double *latencyMs) const;\n\n        String8 dump(audio_patch_handle_t myHandle) const;",
+        "res_region": "\n    // Call with AudioFlinger mLock held\n    const std::map<audio_patch_handle_t, Patch>& patches_l() const final { return mPatches; }",
+        "lookback": "    // Call with AudioFlinger mLock held",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 232,
+        "end_line": 245,
+        "merge_gen_region": null,
+        "confidence": 0.7074408531188965,
+        "hesitated": true
+    }
+]

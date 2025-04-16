@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "  InstallPlan::Payload payload;\n  install_plan.source_slot =\n      config.is_delta ? 0 : BootControlInterface::kInvalidSlot;\n  install_plan.target_slot = 1;\n  payload.type =\n      config.is_delta ? InstallPayloadType::kDelta : InstallPayloadType::kFull;\n\n  for (size_t i = 0; i < config.target.partitions.size(); i++) {\n    const string& part_name = config.target.partitions[i].name;\n    const string& target_path = config.target.partitions[i].path;\n    fake_boot_control.SetPartitionDevice(\n        part_name, install_plan.target_slot, target_path);\n\n    string source_path;\n    if (config.is_delta) {\n      TEST_AND_RETURN_FALSE(config.target.partitions.size() ==\n                            config.source.partitions.size());\n      source_path = config.source.partitions[i].path;\n      fake_boot_control.SetPartitionDevice(\n          part_name, install_plan.source_slot, source_path);\n    }\n\n    LOG(INFO) << \"Install partition:\"\n              << \" source: \" << source_path << \" target: \" << target_path;",
+        "b_contents": "  install_plan.source_slot =\n      config.is_delta ? 0 : BootControlInterface::kInvalidSlot;\n  install_plan.target_slot = 1;\n  install_plan.payload_type =\n      config.is_delta ? InstallPayloadType::kDelta : InstallPayloadType::kFull;\n\n  for (size_t i = 0; i < config.target.partitions.size(); i++) {\n    const string& part_name = config.target.partitions[i].name;\n    const string& target_path = config.target.partitions[i].path;\n    fake_boot_control.SetPartitionDevice(\n        part_name, install_plan.target_slot, target_path);\n\n    string source_path;\n    if (config.is_delta) {\n      TEST_AND_RETURN_FALSE(config.target.partitions.size() ==\n                            config.source.partitions.size());\n      source_path = config.source.partitions[i].path;\n      fake_boot_control.SetPartitionDevice(\n          part_name, install_plan.source_slot, source_path);\n    }\n\n    LOG(INFO) << \"Install partition:\"\n              << \" source: \" << source_path << \" target: \" << target_path;",
+        "base_contents": "  LOG(INFO) << \"Setting up preferences under: \" << prefs_dir;\n  LOG_IF(ERROR, !prefs.Init(base::FilePath(prefs_dir)))\n      << \"Failed to initialize preferences.\";\n  // Get original checksums\n  LOG(INFO) << \"Calculating original checksums\";\n  ImageConfig old_image;\n  old_image.partitions.emplace_back(kLegacyPartitionNameRoot);\n  old_image.partitions.back().path = old_rootfs;\n  old_image.partitions.emplace_back(kLegacyPartitionNameKernel);\n  old_image.partitions.back().path = old_kernel;\n  CHECK(old_image.LoadImageSize());\n  for (const auto& old_part : old_image.partitions) {\n    PartitionInfo part_info;\n    CHECK(diff_utils::InitializePartitionInfo(old_part, &part_info));\n    InstallPlan::Partition part;\n    part.name = old_part.name;\n    part.source_hash.assign(part_info.hash().begin(),\n                            part_info.hash().end());\n    part.source_path = old_part.path;\n    // Apply the delta in-place to the old_part.\n    part.target_path = old_part.path;\n    install_plan.partitions.push_back(part);",
+        "res_region": "  InstallPlan::Payload payload;\n  install_plan.source_slot =\n      config.is_delta ? 0 : BootControlInterface::kInvalidSlot;\n  install_plan.target_slot = 1;\n  payload.type =\n      config.is_delta ? InstallPayloadType::kDelta : InstallPayloadType::kFull;\n\n  for (size_t i = 0; i < config.target.partitions.size(); i++) {\n    const string& part_name = config.target.partitions[i].name;\n    const string& target_path = config.target.partitions[i].path;\n    fake_boot_control.SetPartitionDevice(\n        part_name, install_plan.target_slot, target_path);\n\n    string source_path;\n    if (config.is_delta) {\n      TEST_AND_RETURN_FALSE(config.target.partitions.size() ==\n                            config.source.partitions.size());\n      source_path = config.source.partitions[i].path;\n      fake_boot_control.SetPartitionDevice(\n          part_name, install_plan.source_slot, source_path);\n    }\n\n    LOG(INFO) << \"Install partition:\"\n              << \" source: \" << source_path << \" target: \" << target_path;",
+        "lookback": "  install_plan.source_slot =",
+        "lookahead": "  }",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 196,
+        "end_line": 268,
+        "merge_gen_region": null,
+        "confidence": 0.8107336759567261,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  DeltaPerformer performer(&prefs,\n                           &fake_boot_control,\n                           &fake_hardware,\n                           nullptr,\n                           &install_plan,\n                           &payload);\n",
+        "b_contents": "  DeltaPerformer performer(&prefs,\n                           &fake_boot_control,\n                           &fake_hardware,\n                           nullptr,\n                           &install_plan,\n                           true);  // is_interactive\n",
+        "base_contents": "  DeltaPerformer performer(&prefs, nullptr, nullptr, nullptr, &install_plan);",
+        "res_region": "  DeltaPerformer performer(&prefs,\n                           &fake_boot_control,\n                           &fake_hardware,\n                           nullptr,\n                           &install_plan,\n                           &payload,\n                           true);  // is_interactive\n",
+        "lookback": "                           &fake_boot_control,",
+        "lookahead": "  brillo::Blob buf(1024 * 1024);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 271,
+        "end_line": 289,
+        "merge_gen_region": null,
+        "confidence": 0.655636191368103,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  DEFINE_int64(max_timestamp,\n               0,\n               \"The maximum timestamp of the OS allowed to apply this \"\n               \"payload.\");",
+        "b_contents": "",
+        "base_contents": "  DEFINE_string(zlib_fingerprint, \"\",\n                \"The fingerprint of zlib in the source image in hash string \"\n                \"format, used to check imgdiff compatibility.\");",
+        "res_region": "  DEFINE_int64(max_timestamp,\n               0,\n               \"The maximum timestamp of the OS allowed to apply this \"\n               \"payload.\");",
+        "lookback": "               0,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 397,
+        "end_line": 407,
+        "merge_gen_region": null,
+        "confidence": 0.465738445520401,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  payload_config.max_timestamp = FLAGS_max_timestamp;\n\n  LOG(INFO) << \"Generating \" << (payload_config.is_delta ? \"delta\" : \"full\")\n            << \" update\";",
+        "b_contents": "  LOG(INFO) << \"Generating \" << (payload_config.is_delta ? \"delta\" : \"full\")\n            << \" update\";",
+        "base_contents": "  if (!FLAGS_zlib_fingerprint.empty()) {\n    if (utils::IsZlibCompatible(FLAGS_zlib_fingerprint)) {\n      payload_config.version.imgdiff_allowed = true;\n    } else {\n      LOG(INFO) << \"IMGDIFF operation disabled due to fingerprint mismatch.\";\n    }\n  }\n\n  if (payload_config.is_delta) {\n    LOG(INFO) << \"Generating delta update\";\n  } else {\n    LOG(INFO) << \"Generating full update\";\n  }",
+        "res_region": "  payload_config.max_timestamp = FLAGS_max_timestamp;\n\n  LOG(INFO) << \"Generating \" << (payload_config.is_delta ? \"delta\" : \"full\")\n            << \" update\";",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 649,
+        "end_line": 671,
+        "merge_gen_region": "__() <<Gener \"payloadconfig._ =_;payloadconfig._ =payloadconfig._ =payloadconfig._ =payloadconfig._ =payloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfigpayloadconfig",
+        "confidence": 0.8894637227058411,
+        "hesitated": false,
+        "resolved": false
+    }
+]

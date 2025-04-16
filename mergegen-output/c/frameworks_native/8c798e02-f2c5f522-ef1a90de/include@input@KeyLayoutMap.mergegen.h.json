@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include <utils/KeyedVector.h>",
+        "base_contents": "#include <utils/KeyedVector.h>\n#include <utils/RefBase.h>",
+        "res_region": "",
+        "lookback": "#include <set>",
+        "lookahead": "#include <utils/Tokenizer.h>",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 22,
+        "end_line": 28,
+        "merge_gen_region": null,
+        "confidence": 0.692199170589447,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    static base::Result<std::shared_ptr<KeyLayoutMap>> load(const std::string& filename,\n                                                            const char* contents = nullptr);",
+        "b_contents": "    static base::Result<std::shared_ptr<KeyLayoutMap>> load(const std::string& filename);",
+        "base_contents": "    static base::Result<std::shared_ptr<KeyLayoutMap>> load(const std::string& filename);\n    static base::Result<std::shared_ptr<KeyLayoutMap>> load(Tokenizer* tokenizer);",
+        "res_region": "    static base::Result<std::shared_ptr<KeyLayoutMap>> load(const std::string& filename,\n                                                            const char* contents = nullptr);",
+        "lookback": "                                                            const char* contents = nullptr);",
+        "lookahead": "    static base::Result<std::shared_ptr<KeyLayoutMap>> loadContents(const std::string& filename,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 73,
+        "end_line": 81,
+        "merge_gen_region": null,
+        "confidence": 0.5084660053253174,
+        "hesitated": true
+    }
+]

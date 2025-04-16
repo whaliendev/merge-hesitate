@@ -1,0 +1,90 @@
+[
+    {
+        "a_contents": "        unsigned u, fileNamesNb;\n        unsigned const nbFilenames = (unsigned)filenames->tableSize;\n        for (u=0, fileNamesNb=0; u<nbFilenames; u++) {\n            if (UTIL_isLink(filenames->fileNames[u])\n#ifndef _MSC_VER\n                && !UTIL_isFIFO(filenames->fileNames[u])\n#endif /* _MSC_VER */",
+        "b_contents": "        unsigned u;\n        for (u=0, fileNamesNb=0; u<filenameIdx; u++) {\n            if ( UTIL_isLink(filenameTable[u])\n             && !UTIL_isFIFO(filenameTable[u])",
+        "base_contents": "        unsigned u;\n        for (u=0, fileNamesNb=0; u<filenameIdx; u++) {\n            if (UTIL_isLink(filenameTable[u])\n#ifndef _MSC_VER\n                && !UTIL_isFIFO(filenameTable[u])\n#endif /* _MSC_VER */",
+        "res_region": "        unsigned u, fileNamesNb;\n        unsigned const nbFilenames = (unsigned)filenames->tableSize;\n        for (u=0, fileNamesNb=0; u<nbFilenames; u++) {\n            if ( UTIL_isLink(filenames->fileNames[u])\n             && !UTIL_isFIFO(filenames->fileNames[u])",
+        "lookback": "        unsigned const nbFilenames = (unsigned)filenames->tableSize;",
+        "lookahead": "            ) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1004,
+        "end_line": 1024,
+        "merge_gen_region": null,
+        "confidence": 0.7289372682571411,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                filenames->fileNames[fileNamesNb++] = filenames->fileNames[u];\n        }   }\n        if (fileNamesNb == 0 && nbFilenames > 0)  /* all names are eliminated */\n            CLEAN_RETURN(1);\n        filenames->tableSize = fileNamesNb;\n    }   /* if (!followLinks) */\n\n    /* read names from a file */\n    if (file_of_names->tableSize) {\n        size_t const nbFileLists = file_of_names->tableSize;\n        size_t flNb;\n        for (flNb=0; flNb < nbFileLists; flNb++) {\n            FileNamesTable* const fnt = UTIL_createFileNamesTable_fromFileName(file_of_names->fileNames[flNb]);\n            if (fnt==NULL) {\n                DISPLAYLEVEL(1, \"zstd: error reading %s \\n\", file_of_names->fileNames[flNb]);\n                CLEAN_RETURN(1);\n            }\n            filenames = UTIL_mergeFileNamesTable(filenames, fnt);\n        }",
+        "b_contents": "                filenameTable[fileNamesNb++] = filenameTable[u];\n        }   }\n        if (fileNamesNb == 0 && filenameIdx > 0)\n            CLEAN_RETURN(1);\n        filenameIdx = fileNamesNb;",
+        "base_contents": "                filenameTable[fileNamesNb++] = filenameTable[u];\n            }\n        }\n        if (fileNamesNb == 0 && filenameIdx > 0)\n            CLEAN_RETURN(1);\n        filenameIdx = fileNamesNb;",
+        "res_region": "                filenames->fileNames[fileNamesNb++] = filenames->fileNames[u];\n        }   }\n        if (fileNamesNb == 0 && nbFilenames > 0)  /* all names are eliminated */\n            CLEAN_RETURN(1);\n        filenames->tableSize = fileNamesNb;\n    }   /* if (!followLinks) */\n\n    /* read names from a file */\n    if (file_of_names->tableSize) {\n        size_t const nbFileLists = file_of_names->tableSize;\n        size_t flNb;\n        for (flNb=0; flNb < nbFileLists; flNb++) {\n            FileNamesTable* const fnt = UTIL_createFileNamesTable_fromFileName(file_of_names->fileNames[flNb]);\n            if (fnt==NULL) {\n                DISPLAYLEVEL(1, \"zstd: error reading %s \\n\", file_of_names->fileNames[flNb]);\n                CLEAN_RETURN(1);\n            }\n            filenames = UTIL_mergeFileNamesTable(filenames, fnt);\n        }",
+        "lookback": "        }   }",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1028,
+        "end_line": 1061,
+        "merge_gen_region": "String->NamesfileNboutput0String */outputoutputoutput0output */outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0outputoutput0outputoutput0outputoutput0outputoutput0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0output0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0outputoutput0output0output0output0",
+        "confidence": 0.8830644488334656,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        UTIL_expandFNT(&filenames, followLinks);\n    }",
+        "b_contents": "        extendedFileList = UTIL_createFileList(filenameTable, filenameIdx, &fileNamesBuf, &fileNamesNb, followLinks);\n        if (extendedFileList) {\n            unsigned u;\n            for (u=0; u<fileNamesNb; u++) DISPLAYLEVEL(4, \"%u %s\\n\", u, extendedFileList[u]);\n            free((void*)filenameTable);\n            filenameTable = extendedFileList;\n            filenameIdx = fileNamesNb;\n    }   }",
+        "base_contents": "        extendedFileList = UTIL_createFileList(filenameTable, filenameIdx, &fileNamesBuf, &fileNamesNb, followLinks);\n        if (extendedFileList) {\n            unsigned u;\n            for (u=0; u<fileNamesNb; u++) DISPLAYLEVEL(4, \"%u %s\\n\", u, extendedFileList[u]);\n            free((void*)filenameTable);\n            filenameTable = extendedFileList;\n            filenameIdx = fileNamesNb;\n        }\n    }",
+        "res_region": "        UTIL_expandFNT(&filenames, followLinks);\n    }",
+        "lookback": "    }",
+        "lookahead": "#else",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1065,
+        "end_line": 1087,
+        "merge_gen_region": null,
+        "confidence": 0.7501073479652405,
+        "hesitated": true
+    },
+    {
+        "a_contents": "                        BMK_benchFilesAdvanced(&filenames->fileNames[i], 1, dictFileName, c, &compressionParams, g_displayLevel, &benchParams);\n                }   }",
+        "b_contents": "                        BMK_benchFilesAdvanced(&filenameTable[i], 1, dictFileName, c, &compressionParams, g_displayLevel, &benchParams);\n                }   }",
+        "base_contents": "                        BMK_benchFilesAdvanced(&filenameTable[i], 1, dictFileName, c, &compressionParams, g_displayLevel, &benchParams);\n                    }\n                }",
+        "res_region": "                        BMK_benchFilesAdvanced(&filenames->fileNames[i], 1, dictFileName, c, &compressionParams, g_displayLevel, &benchParams);\n                }   }",
+        "lookback": "                }   }",
+        "lookahead": "            } else {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1132,
+        "end_line": 1142,
+        "merge_gen_region": "mm}}}",
+        "confidence": 0.9231092929840088,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "                    BMK_benchFilesAdvanced(filenames->fileNames, (unsigned)filenames->tableSize, dictFileName, cLevel, &compressionParams, g_displayLevel, &benchParams);\n            }   }",
+        "b_contents": "                    BMK_benchFilesAdvanced(filenameTable, filenameIdx, dictFileName, cLevel, &compressionParams, g_displayLevel, &benchParams);\n            }   }",
+        "base_contents": "                    BMK_benchFilesAdvanced(filenameTable, filenameIdx, dictFileName, cLevel, &compressionParams, g_displayLevel, &benchParams);\n                }\n            }",
+        "res_region": "                    BMK_benchFilesAdvanced(filenames->fileNames, (unsigned)filenames->tableSize, dictFileName, cLevel, &compressionParams, g_displayLevel, &benchParams);\n            }   }",
+        "lookback": "            }   }",
+        "lookahead": "        } else {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 1145,
+        "end_line": 1155,
+        "merge_gen_region": "String}}}",
+        "confidence": 0.9116119146347046,
+        "hesitated": false,
+        "resolved": false
+    }
+]

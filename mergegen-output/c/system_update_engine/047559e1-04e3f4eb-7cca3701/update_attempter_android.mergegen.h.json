@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"update_engine/daemon_state_interface.h\"\n#include \"update_engine/network_selector_interface.h\"",
+        "b_contents": "#include \"update_engine/network_selector_interface.h\"",
+        "base_contents": "",
+        "res_region": "#include \"update_engine/daemon_state_interface.h\"\n#include \"update_engine/network_selector_interface.h\"",
+        "lookback": "#include \"update_engine/network_selector_interface.h\"",
+        "lookahead": "#include \"update_engine/payload_consumer/download_action.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 33,
+        "end_line": 39,
+        "merge_gen_region": null,
+        "confidence": 0.8025335669517517,
+        "hesitated": true
+    }
+]

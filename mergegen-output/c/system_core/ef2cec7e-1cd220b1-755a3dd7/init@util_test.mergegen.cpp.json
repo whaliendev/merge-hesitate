@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    // lrwxr-xr-x 1 root shell 6 2009-01-01 09:00 /system/bin/ps -> toybox\n    auto file_contents = ReadFile(\"/system/bin/ps\");",
+        "b_contents": "    // lrwxrwxrwx 1 root shell 6 2020-06-26 09:55 /system/bin/ps -> toybox\n    auto file_contents = ReadFile(\"/system/bin/ps\");\n",
+        "base_contents": "    // lrw------- 1 root root 23 2008-12-31 19:00 default.prop -> system/etc/prop.default\n    auto file_contents = ReadFile(\"/default.prop\");",
+        "res_region": "    // lrwxr-xr-x 1 root shell 6 2009-01-01 09:00 /system/bin/ps -> toybox\n    auto file_contents = ReadFile(\"/system/bin/ps\");",
+        "lookback": "    auto file_contents = ReadFile(\"/system/bin/ps\");",
+        "lookahead": "    EXPECT_EQ(ELOOP, errno);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 63,
+        "end_line": 73,
+        "merge_gen_region": " lrrxrx root 6------ 0900 //binps",
+        "confidence": 0.8971747159957886,
+        "hesitated": false,
+        "resolved": false
+    }
+]

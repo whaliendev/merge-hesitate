@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#pragma once\n\n#include \"IAfPatchPanel.h\"\n\n#include <utils/RefBase.h>  // avoid transitive dependency\n#include <utils/Thread.h>  // avoid transitive dependency\n\n#include <deque>\n#include <mutex>  // avoid transitive dependency\n\nnamespace android {",
+        "b_contents": "#pragma once\n\nnamespace android {",
+        "base_contents": "#ifndef INCLUDING_FROM_AUDIOFLINGER_H\n    #error This header file should only be included from AudioFlinger.h\n#endif",
+        "res_region": "#pragma once\n\n#include \"IAfPatchPanel.h\"\n\n#include <utils/RefBase.h>  // avoid transitive dependency\n#include <utils/Thread.h>  // avoid transitive dependency\n\n#include <deque>\n#include <mutex>  // avoid transitive dependency\n\nnamespace android {",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 17,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.8720923066139221,
+        "hesitated": true
+    }
+]

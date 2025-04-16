@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    auto in_argument_type = functions[0]->getArgumentTypes()[0];\n    if (canBeSafelyCast(result_type, in_argument_type))",
+        "b_contents": "    auto in_argument_type = getArgumentTypeOfMonotonicFunction(*functions[0]);\n    if (canBeSafelyCasted(result_type, in_argument_type))",
+        "base_contents": "    auto in_argument_type = functions[0]->getArgumentTypes()[0];\n    if (canBeSafelyCasted(result_type, in_argument_type))",
+        "res_region": "    auto in_argument_type = getArgumentTypeOfMonotonicFunction(*functions[0]);\n    if (canBeSafelyCast(result_type, in_argument_type))",
+        "lookback": "    if (canBeSafelyCast(result_type, in_argument_type))",
+        "lookahead": "    {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 981,
+        "end_line": 990,
+        "merge_gen_region": null,
+        "confidence": 0.8553271293640137,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        auto argument_type = func->getArgumentTypes()[0];\n        if (!canBeSafelyCast(result_type, argument_type))",
+        "b_contents": "        auto argument_type = getArgumentTypeOfMonotonicFunction(*func);\n        if (!canBeSafelyCasted(result_type, argument_type))",
+        "base_contents": "        auto argument_type = func->getArgumentTypes()[0];\n        if (!canBeSafelyCasted(result_type, argument_type))",
+        "res_region": "        auto argument_type = getArgumentTypeOfMonotonicFunction(*func);\n        if (!canBeSafelyCast(result_type, argument_type))",
+        "lookback": "        if (!canBeSafelyCast(result_type, argument_type))",
+        "lookahead": "            return false;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1018,
+        "end_line": 1027,
+        "merge_gen_region": null,
+        "confidence": 0.8682761788368225,
+        "hesitated": true
+    }
+]

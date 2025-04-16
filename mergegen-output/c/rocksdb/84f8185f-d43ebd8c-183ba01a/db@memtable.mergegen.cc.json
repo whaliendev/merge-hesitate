@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            memcpy(p, value.data(), new_size);\n            assert(\n              (p + new_size) - entry ==\n              (unsigned) (VarintLength(key_length) +\n                          key_length +\n                          VarintLength(new_size) +\n                          new_size)\n            );\n            // no need to update bloom, as user key does not change.\n            return;",
+        "b_contents": "            memcpy(p, value.data(), value.size());\n            assert((unsigned)((p + value.size()) - entry) ==\n                   (unsigned)(VarintLength(key_length) + key_length +\n                              VarintLength(value.size()) + value.size()));\n            return true;",
+        "base_contents": "            memcpy(p, value.data(), value.size());\n            assert(\n              (p + value.size()) - entry ==\n              (unsigned) (VarintLength(key_length) +\n                          key_length +\n                          VarintLength(value.size()) +\n                          value.size())\n            );\n            return true;",
+        "res_region": "            memcpy(p, value.data(), value.size());\n            assert((unsigned)((p + value.size()) - entry) ==\n                   (unsigned)(VarintLength(key_length) + key_length +\n                              VarintLength(value.size()) + value.size()));\n            return;",
+        "lookback": "            assert((unsigned)((p + value.size()) - entry) ==",
+        "lookahead": "          }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 365,
+        "end_line": 392,
+        "merge_gen_region": null,
+        "confidence": 0.8034036755561829,
+        "hesitated": true
+    }
+]

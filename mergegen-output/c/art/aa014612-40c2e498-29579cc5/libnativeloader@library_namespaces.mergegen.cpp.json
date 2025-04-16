@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "    } else if (apk_origin == APK_ORIGIN_PRODUCT && is_product_treblelized()) {",
+        "b_contents": "    } else if (apk_origin == APK_ORIGIN_PRODUCT) {",
+        "base_contents": "    } else if (apk_origin == APK_ORIGIN_PRODUCT && is_product_vndk_version_defined()) {",
+        "res_region": "    } else if (apk_origin == APK_ORIGIN_PRODUCT && is_product_treblelized()) {",
+        "lookback": "      unbundled_app_origin = APK_ORIGIN_PRODUCT;",
+        "lookahead": "      unbundled_app_origin = APK_ORIGIN_PRODUCT;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 257,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.8021944165229797,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    auto target_ns = system_ns;\n    if (is_product_treblelized()) {\n      target_ns = NativeLoaderNamespace::GetExportedNamespace(kProductNamespaceName, is_bridged);\n    }",
+        "b_contents": "    auto target_ns = NativeLoaderNamespace::GetExportedNamespace(kProductNamespaceName, is_bridged);",
+        "base_contents": "    auto target_ns = system_ns;\n    if (is_product_vndk_version_defined()) {\n      // If ro.product.vndk.version is defined, product namespace provides the product libraries.\n      target_ns = NativeLoaderNamespace::GetExportedNamespace(kProductNamespaceName, is_bridged);\n    }",
+        "res_region": "    auto target_ns = system_ns;\n    if (is_product_treblelized()) {\n      target_ns = NativeLoaderNamespace::GetExportedNamespace(kProductNamespaceName, is_bridged);\n    }",
+        "lookback": "    if (is_product_treblelized()) {",
+        "lookahead": "    if (target_ns.ok()) {",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 413,
+        "end_line": 426,
+        "merge_gen_region": " targetnsningningningautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoautoauto",
+        "confidence": 0.9103085398674011,
+        "hesitated": false,
+        "resolved": false
+    }
+]

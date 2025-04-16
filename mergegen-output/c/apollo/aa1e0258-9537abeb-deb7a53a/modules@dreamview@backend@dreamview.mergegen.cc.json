@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "namespace {\nstd::map<std::string, int> plugin_function_map = {\n    {\"UpdateScenarioSetToStatus\", 0},\n    {\"UpdateRecordToStatus\", 1},\n    {\"UpdateDynamicModelToStatus\", 2},\n    {\"UpdateVehicleToStatus\", 3}};\nstd::map<std::string, int> hmi_function_map = {\n    {\"SimControlRestart\", 0},  {\"MapServiceReloadMap\", 1},\n    {\"LoadDynamicModels\", 2},  {\"ChangeDynamicModel\", 3},\n    {\"DeleteDynamicModel\", 4}, {\"AddDynamicModel\", 5},\n};\n}  // namespace",
+        "b_contents": "namespace {\nstd::map<std::string, int> plugin_function_map = {{\"UpdateScenarioSetToStatus\", 0},{\"UpdateRecordToStatus\",1},\n{\"UpdateDynamicModelToStatus\", 2}};\nstd::map<std::string, int> hmi_function_map = {\n    {\"SimControlRestart\", 0},\n    {\"MapServiceReloadMap\", 1},\n    {\"LoadDynamicModels\", 2},\n    {\"ChangeDynamicModel\", 3},\n    {\"DeleteDynamicModel\", 4},\n    {\"AddDynamicModel\",5},\n};\n}",
+        "base_contents": "",
+        "res_region": "namespace {\nstd::map<std::string, int> plugin_function_map = {\n    {\"UpdateScenarioSetToStatus\", 0},\n    {\"UpdateRecordToStatus\", 1},\n    {\"UpdateDynamicModelToStatus\", 2},\n    {\"UpdateVehicleToStatus\", 3}};\nstd::map<std::string, int> hmi_function_map = {\n    {\"SimControlRestart\", 0},  {\"MapServiceReloadMap\", 1},\n    {\"LoadDynamicModels\", 2},  {\"ChangeDynamicModel\", 3},\n    {\"DeleteDynamicModel\", 4}, {\"AddDynamicModel\", 5},\n};\n}  // namespace",
+        "lookback": "std::map<std::string, int> plugin_function_map = {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 24,
+        "end_line": 51,
+        "merge_gen_region": null,
+        "confidence": 0.8205319046974182,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      websocket_.get(), map_ws_.get(), camera_ws_.get(),\n      sim_control_manager_.get(), plugin_ws_.get(), map_service_.get(),\n      perception_camera_updater_.get(), plugin_manager_.get(),",
+        "b_contents": "      websocket_.get(), map_ws_.get(), camera_ws_.get(),\n      sim_control_manager_.get(),\n      plugin_ws_.get(), map_service_.get(), perception_camera_updater_.get(),\n      plugin_manager_.get(),",
+        "base_contents": "      websocket_.get(), map_ws_.get(), camera_ws_.get(), sim_control_.get(),\n      map_service_.get(), perception_camera_updater_.get(),",
+        "res_region": "      websocket_.get(), map_ws_.get(), camera_ws_.get(),\n      sim_control_manager_.get(), plugin_ws_.get(), map_service_.get(),\n      perception_camera_updater_.get(), plugin_manager_.get(),",
+        "lookback": "      sim_control_manager_.get(), plugin_ws_.get(), map_service_.get(),",
+        "lookahead": "      FLAGS_routing_from_file));",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 117,
+        "end_line": 129,
+        "merge_gen_region": null,
+        "confidence": 0.7932987213134766,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  server_->addWebSocketHandler(\"/plugin\", *plugin_ws_);",
+        "b_contents": "  server_->addWebSocketHandler(\"/plugin\",*plugin_ws_);",
+        "base_contents": "",
+        "res_region": "  server_->addWebSocketHandler(\"/plugin\", *plugin_ws_);",
+        "lookback": "  server_->addHandler(\"/image\", *image_);",
+        "lookahead": "  server_->addHandler(\"/image\", *image_);",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 138,
+        "end_line": 143,
+        "merge_gen_region": null,
+        "confidence": 0.606468915939331,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  point_cloud_updater_->Start([this](const std::string& param_string) -> bool {\n    return PointCloudCallback(param_string);\n  });\n  hmi_->Start([this](const std::string& function_name,\n                     const nlohmann::json& param_json) -> nlohmann::json {\n    nlohmann::json ret = HMICallbackSimControl(function_name, param_json);\n    ADEBUG << \"ret: \" << ret.dump();\n    return ret;\n  });\n  perception_camera_updater_->Start(\n      [this](const std::string& param_string) -> bool {\n        return PerceptionCameraCallback(param_string);\n      });\n  plugin_manager_->Start([this](const std::string& function_name,\n                                const nlohmann::json& param_json) -> bool {\n    return PluginCallbackHMI(function_name, param_json);\n  });",
+        "b_contents": "  point_cloud_updater_->Start();\n  hmi_->Start([this](const std::string& function_name,\n                     const nlohmann::json& param_json) -> nlohmann::json {\n    nlohmann::json ret = HMICallbackSimControl(function_name, param_json);\n    ADEBUG << \"ret: \" << ret.dump();\n    return ret;\n  });\n  perception_camera_updater_->Start();\n  plugin_manager_->Start([this](const std::string& function_name,\n                            const nlohmann::json& param_json) -> bool {\n    return PluginCallbackHMI(function_name, param_json);\n  });",
+        "base_contents": "  point_cloud_updater_->Start();\n  hmi_->Start();\n  perception_camera_updater_->Start();",
+        "res_region": "  point_cloud_updater_->Start([this](const std::string& param_string) -> bool {\n    return PointCloudCallback(param_string);\n  });\n  hmi_->Start([this](const std::string& function_name,\n                     const nlohmann::json& param_json) -> nlohmann::json {\n    nlohmann::json ret = HMICallbackSimControl(function_name, param_json);\n    ADEBUG << \"ret: \" << ret.dump();\n    return ret;\n  });\n  perception_camera_updater_->Start(\n      [this](const std::string& param_string) -> bool {\n        return PerceptionCameraCallback(param_string);\n      });\n  plugin_manager_->Start([this](const std::string& function_name,\n                                const nlohmann::json& param_json) -> bool {\n    return PluginCallbackHMI(function_name, param_json);\n  });",
+        "lookback": "    return PointCloudCallback(param_string);",
+        "lookahead": "#if WITH_TELEOP == 1",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 155,
+        "end_line": 190,
+        "merge_gen_region": null,
+        "confidence": 0.8783019185066223,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  plugin_manager_->Stop();",
+        "b_contents": "  plugin_manager_->Stop();\n}\n\nnlohmann::json Dreamview::HMICallbackSimControl(const std::string& function_name,\n                                  const nlohmann::json& param_json) {\n  nlohmann::json callback_res = {};\n  callback_res[\"result\"] = false;\n  if (hmi_function_map.find(function_name) == hmi_function_map.end()) {\n    AERROR << \"Donnot support this callback\";\n    return callback_res;\n  }\n  std::string dynamic_model_name;\n  switch(hmi_function_map[function_name]) {\n    case 0: {\n      // \u89e3\u6790\u7ed3\u679c\n      if (param_json.contains(\"x\") &&\n          param_json.contains(\"y\")) {\n        const double x = param_json[\"x\"];\n        const double y = param_json[\"y\"];\n        sim_control_manager_->Restart(x, y);\n        callback_res[\"result\"] = true;\n      }\n    } break;\n    case 1:{\n      map_service_->ReloadMap(true);\n      callback_res[\"result\"]= true;\n      break;\n    }\n    case 2:{\n      // loadDynamicModels\n      if(sim_control_manager_->IsEnabled()){\n        nlohmann::json load_res = sim_control_manager_->LoadDynamicModels();\n        callback_res[\"loaded_dynamic_models\"] =\n            load_res[\"loaded_dynamic_models\"];\n        callback_res[\"result\"] = true;\n      } else {\n        AERROR << \"Sim control is not enabled!\";\n      }\n      break;\n    }\n    case 3:{\n      // \u89e3\u6790\u7ed3\u679c\n      if (param_json.contains(\"dynamic_model_name\") &&\n          sim_control_manager_->IsEnabled()) {\n        dynamic_model_name = param_json[\"dynamic_model_name\"];\n        callback_res[\"result\"] =\n            sim_control_manager_->ChangeDynamicModel(dynamic_model_name);\n      } else {\n        AERROR << \"Sim control is not enabled or missing dynamic model name \"\n                  \"param!\";\n      }\n      break;\n    }\n    case 4:{\n      // \u89e3\u6790\u7ed3\u679c\n      if (param_json.contains(\"dynamic_model_name\")&&sim_control_manager_->IsEnabled()) {\n        dynamic_model_name = param_json[\"dynamic_model_name\"];\n        callback_res[\"result\"]=sim_control_manager_->DeleteDynamicModel(dynamic_model_name);\n      }else{\n        AERROR<<\"Sim control is not enabled or missing dynamic model name param!\";\n      }\n     break;\n    }\n    case 5:\n    {\n      // addDynamicModel\n      if (param_json.contains(\"dynamic_model_name\") && sim_control_manager_->IsEnabled())\n      {\n        dynamic_model_name = param_json[\"dynamic_model_name\"];\n        callback_res[\"result\"] = sim_control_manager_->AddDynamicModel(dynamic_model_name);\n      }\n      else\n      {\n        AERROR << \"Sim control is not enabled or missing dynamic model name param!\";\n      }\n      break;\n    }\n    default:\n      break;\n  }\n  return callback_res;\n}\n\nbool Dreamview::PluginCallbackHMI(const std::string& function_name,\n                                  const nlohmann::json& param_json) {\n  bool callback_res;\n  if (plugin_function_map.find(function_name) == plugin_function_map.end()) {\n    AERROR << \"Donnot support this callback\";\n    return false;\n  }\n  switch(plugin_function_map[function_name]) {\n    case 0: {\n      // \u89e3\u6790\u7ed3\u679c\n      if (param_json.contains(\"scenario_set_id\") &&\n          param_json.contains(\"scenario_set_name\")) {\n        const std::string scenario_set_id = param_json[\"scenario_set_id\"];\n        const std::string scenario_set_name = param_json[\"scenario_set_name\"];\n        if (!scenario_set_id.empty() && !scenario_set_name.empty()) {\n          callback_res = hmi_->UpdateScenarioSetToStatus(scenario_set_id,\n                                                         scenario_set_name);\n        }\n      }\n    } break;\n    case 1:{\n      if(param_json.contains(\"record_id\")&&param_json.contains(\"status\")){\n        const std::string record_id = param_json[\"record_id\"];\n        const std::string record_status = param_json[\"status\"];\n        if(!record_id.empty()&&record_status.empty()){\n          callback_res = hmi_->UpdateRecordToStatus(record_id,record_status);\n        }\n      }\n    } break;\n    case 2: {\n      if (param_json.contains(\"dynamic_model_name\")) {\n        std::string dynamic_model_name = param_json[\"dynamic_model_name\"];\n        if (!dynamic_model_name.empty()) {\n          callback_res = hmi_->UpdateDynamicModelToStatus(dynamic_model_name);\n        }\n      }\n    }\n    default:\n      break;\n  }\n  return callback_res;",
+        "base_contents": "",
+        "res_region": "  plugin_manager_->Stop();",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 203,
+        "end_line": 331,
+        "merge_gen_region": null,
+        "confidence": 0.6200119256973267,
+        "hesitated": true
+    }
+]

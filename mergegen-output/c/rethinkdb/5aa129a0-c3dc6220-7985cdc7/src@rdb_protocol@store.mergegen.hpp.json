@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    /* End of `store_view_t` interface */\n\n    std::map<std::string, std::pair<sindex_config_t, sindex_status_t> > sindex_list(\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_create(\n            const std::string &name,\n            const sindex_config_t &config,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_rename_multi(\n            const std::map<std::string, std::string> &name_changes,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_drop(\n            const std::string &id,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    scoped_ptr_t<new_mutex_in_line_t> get_in_line_for_sindex_queue(\n            buf_lock_t *sindex_block);",
+        "b_contents": "    new_mutex_in_line_t get_in_line_for_sindex_queue(buf_lock_t *sindex_block);",
+        "base_contents": "    scoped_ptr_t<new_mutex_in_line_t> get_in_line_for_sindex_queue(\n            buf_lock_t *sindex_block);",
+        "res_region": "    /* End of `store_view_t` interface */\n\n    std::map<std::string, std::pair<sindex_config_t, sindex_status_t> > sindex_list(\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_create(\n            const std::string &name,\n            const sindex_config_t &config,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_rename_multi(\n            const std::map<std::string, std::string> &name_changes,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    void sindex_drop(\n            const std::string &id,\n            signal_t *interruptor)\n            THROWS_ONLY(interrupted_exc_t);\n\n    new_mutex_in_line_t get_in_line_for_sindex_queue(buf_lock_t *sindex_block);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 170,
+        "end_line": 200,
+        "merge_gen_region": " End `_viewt interface stdmapstdstring stdpair F__/* ofstoreviewt",
+        "confidence": 0.9234611988067627,
+        "hesitated": false,
+        "resolved": false
+    }
+]

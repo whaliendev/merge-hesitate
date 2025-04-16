@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\t\toutput = vm->go(fev, fev.simpleTrace<FakeExtVM>()).toVector();\n\t\t}\n\t\tcatch (OutOfGas const&)\n\t\t{\n\t\t\toutOfGas = true;",
+        "b_contents": "\t\t\toutput = vm.go(fev, fev.simpleTrace()).toVector();",
+        "base_contents": "\t\t\toutput = vm.go(fev, fev.simpleTrace<FakeExtVM>()).toVector();",
+        "res_region": "\t\t\toutput = vm->go(fev, fev.simpleTrace()).toVector();\n\t\t}\n\t\tcatch (OutOfGas const&)\n\t\t{\n\t\t\toutOfGas = true;",
+        "lookback": "\t\t}",
+        "lookahead": "\t\t}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 563,
+        "end_line": 573,
+        "merge_gen_region": null,
+        "confidence": 0.4647364318370819,
+        "hesitated": true
+    }
+]

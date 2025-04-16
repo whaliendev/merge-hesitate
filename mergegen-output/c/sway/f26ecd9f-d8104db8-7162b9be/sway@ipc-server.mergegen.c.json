@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "void ipc_event_workspace(swayc_t *old, swayc_t *new, const char *change) {\n\twlr_log(L_DEBUG, \"Sending workspace::%s event\", change);\n\tjson_object *obj = json_object_new_object();\n\tjson_object_object_add(obj, \"change\", json_object_new_string(change));\n\tif (strcmp(\"focus\", change) == 0) {\n\t\tif (old) {\n\t\t\tjson_object_object_add(obj, \"old\",\n\t\t\t\t\tipc_json_describe_container_recursive(old));\n\t\t} else {\n\t\t\tjson_object_object_add(obj, \"old\", NULL);\n\t\t}\n\t}\n\n\tif (new) {\n\t\tjson_object_object_add(obj, \"current\",\n\t\t\t\tipc_json_describe_container_recursive(new));\n\t} else {\n\t\tjson_object_object_add(obj, \"current\", NULL);\n\t}\n\n\tconst char *json_string = json_object_to_json_string(obj);\n\tipc_send_event(json_string, IPC_EVENT_WORKSPACE);\n\tjson_object_put(obj);\n}\n\nvoid ipc_event_window(swayc_t *window, const char *change) {",
+        "b_contents": "void ipc_event_window(struct sway_container *window, const char *change) {",
+        "base_contents": "void ipc_event_window(swayc_t *window, const char *change) {",
+        "res_region": "void ipc_event_workspace(struct sway_container *old,\n\t\tstruct sway_container *new, const char *change) {\n\twlr_log(L_DEBUG, \"Sending workspace::%s event\", change);\n\tjson_object *obj = json_object_new_object();\n\tjson_object_object_add(obj, \"change\", json_object_new_string(change));\n\tif (strcmp(\"focus\", change) == 0) {\n\t\tif (old) {\n\t\t\tjson_object_object_add(obj, \"old\",\n\t\t\t\t\tipc_json_describe_container_recursive(old));\n\t\t} else {\n\t\t\tjson_object_object_add(obj, \"old\", NULL);\n\t\t}\n\t}\n\n\tif (new) {\n\t\tjson_object_object_add(obj, \"current\",\n\t\t\t\tipc_json_describe_container_recursive(new));\n\t} else {\n\t\tjson_object_object_add(obj, \"current\", NULL);\n\t}\n\n\tconst char *json_string = json_object_to_json_string(obj);\n\tipc_send_event(json_string, IPC_EVENT_WORKSPACE);\n\tjson_object_put(obj);\n}\n\nvoid ipc_event_window(struct sway_container *window, const char *change) {",
+        "lookback": "\t\tstruct sway_container *new, const char *change) {",
+        "lookahead": "\twlr_log(L_DEBUG, \"Sending window::%s event\", change);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 259,
+        "end_line": 290,
+        "merge_gen_region": " s_ *_(); jsonobjectobjectobj jsonobjectnewobject();____(,CDCD { {____CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDobj \"CD); const *_ =__(CDCDobj void__(_); void____( charCDCD const *__( charCDCD const void__( charCDCD const void__( charCDCD const void__( charslice::s\",);_ *_ *, charchange { ipceventworkspaceswct *,way_ *, charchange {rlogLDEBUG \" workspace% event change",
+        "confidence": 0.8918344378471375,
+        "hesitated": false,
+        "resolved": false
+    }
+]

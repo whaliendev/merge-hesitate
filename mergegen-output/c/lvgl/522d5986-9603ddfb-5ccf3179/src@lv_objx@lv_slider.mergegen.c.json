@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        const lv_style_t * style      = lv_slider_get_style(slider, LV_SLIDER_STYLE_BG);\n        const lv_style_t * knob_style = lv_slider_get_style(slider, LV_SLIDER_STYLE_KNOB);",
+        "b_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_style_t * style      = lv_slider_get_style(slider, LV_SLIDER_STYLE_BG);\n        lv_style_t * knob_style = lv_slider_get_style(slider, LV_SLIDER_STYLE_KNOB);",
+        "base_contents": "    } else if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        lv_style_t * style      = lv_slider_get_style(slider, LV_SLIDER_STYLE_BG);\n        lv_style_t * knob_style = lv_slider_get_style(slider, LV_SLIDER_STYLE_KNOB);",
+        "res_region": "    } else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        const lv_style_t * style      = lv_slider_get_style(slider, LV_SLIDER_STYLE_BG);\n        const lv_style_t * knob_style = lv_slider_get_style(slider, LV_SLIDER_STYLE_KNOB);\n",
+        "lookback": "        const lv_style_t * style      = lv_slider_get_style(slider, LV_SLIDER_STYLE_BG);",
+        "lookahead": "        lv_coord_t shadow_w     = knob_style->body.shadow.width;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 537,
+        "end_line": 549,
+        "merge_gen_region": null,
+        "confidence": 0.8416246175765991,
+        "hesitated": true
+    }
+]

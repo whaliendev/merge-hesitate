@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  auto localization_adapter = AdapterManager::GetLocalization();\n  if (localization_adapter->Empty()) {\n    AINFO << \"No localization message.\";\n  } else {\n    const ::apollo::localization::LocalizationEstimate& localization =\n        localization_adapter->GetLatestObserved();\n    ADEBUG << \"Received localization message [\"\n           << localization.ShortDebugString()\n           << \"].\";\n    ContainerManager::instance()->mutable_container(\"Pose\")->Insert(localization);\n  }\n  ContainerManager::instance()->mutable_container(\"Obstacles\")->Insert(perception_obstacles);",
+        "b_contents": "  PredictionObstacles prediction_obstacles;\n  // TODO fulfill prediction_obstacles\n  AdapterManager::FillPredictionHeader(Name(),\n                                       prediction_obstacles.mutable_header());\n  AdapterManager::PublishPrediction(prediction_obstacles);\n\n  ADEBUG << prediction_obstacles.ShortDebugString();",
+        "base_contents": "  PredictionObstacles prediction_obstacles;\n  AdapterManager::FillPredictionHeader(Name(),\n                                       prediction_obstacles.mutable_header());\n  AdapterManager::PublishPrediction(prediction_obstacles);\n\n  ADEBUG << prediction_obstacles.ShortDebugString();",
+        "res_region": "  auto localization_adapter = AdapterManager::GetLocalization();\n  if (localization_adapter->Empty()) {\n    AINFO << \"No localization message.\";\n  } else {\n    const ::apollo::localization::LocalizationEstimate& localization =\n        localization_adapter->GetLatestObserved();\n    ADEBUG << \"Received localization message [\"\n           << localization.ShortDebugString()\n           << \"].\";\n    ContainerManager::instance()->mutable_container(\"Pose\")->Insert(localization);\n  }\n  ContainerManager::instance()->mutable_container(\"Obstacles\")->Insert(perception_obstacles);",
+        "lookback": "  if (localization_adapter->Empty()) {",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 53,
+        "end_line": 81,
+        "merge_gen_region": null,
+        "confidence": 0.8571555614471436,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "                return OBJECT_TO_JSVAL( js_NewDateObjectMsec( _context , (jsdouble) e.date() ) );\n                ",
+        "b_contents": "                return OBJECT_TO_JSVAL( js_NewDateObjectMsec( _context , e.date() ) );\n\n            case MinKey:\n                return OBJECT_TO_JSVAL( JS_NewObject( _context , &minkey_class , 0 , 0 ) );\n\n            case MaxKey:\n                return OBJECT_TO_JSVAL( JS_NewObject( _context , &maxkey_class , 0 , 0 ) );\n\n            case Timestamp: {\n                JSObject * o = JS_NewObject( _context , &timestamp_class , 0 , 0 );\n                setProperty( o , \"t\" , toval( (double)(e.timestampTime()) ) );\n                setProperty( o , \"i\" , toval( (double)(e.timestampInc()) ) );\n                return OBJECT_TO_JSVAL( o );\n            }\n\n    ",
+        "base_contents": "                return OBJECT_TO_JSVAL( js_NewDateObjectMsec( _context , e.date() ) );\n                ",
+        "res_region": "                return OBJECT_TO_JSVAL( js_NewDateObjectMsec( _context , (jsdouble) e.date() ) );\n                \n            case MinKey:\n                return OBJECT_TO_JSVAL( JS_NewObject( _context , &minkey_class , 0 , 0 ) );\n\n            case MaxKey:\n                return OBJECT_TO_JSVAL( JS_NewObject( _context , &maxkey_class , 0 , 0 ) );\n\n            case Timestamp: {\n                JSObject * o = JS_NewObject( _context , &timestamp_class , 0 , 0 );\n                setProperty( o , \"t\" , toval( (double)(e.timestampTime()) ) );\n                setProperty( o , \"i\" , toval( (double)(e.timestampInc()) ) );\n                return OBJECT_TO_JSVAL( o );\n            }\n",
+        "lookback": "                ",
+        "lookahead": "            default:",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 309,
+        "end_line": 332,
+        "merge_gen_region": null,
+        "confidence": 0.7774554491043091,
+        "hesitated": true
+    }
+]

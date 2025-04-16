@@ -1,0 +1,224 @@
+[
+    {
+        "a_contents": "            // no risk of deadlock because AudioFlinger::mutex() is held\n            audio_utils::lock_guard _dl(thread->mutex());",
+        "b_contents": "            // no risk of deadlock because AudioFlinger::mutex() is held\n            Mutex::Autolock _dl(thread->mutex());",
+        "base_contents": "            // no risk of deadlock because AudioFlinger::mLock is held\n            Mutex::Autolock _dl(thread->mutex());",
+        "res_region": "            // no risk of deadlock because AudioFlinger::mutex() is held\n            audio_utils::lock_guard _dl(thread->mutex());",
+        "lookback": "            audio_utils::lock_guard _dl(thread->mutex());",
+        "lookahead": "            // Connect secondary outputs. Failure on a secondary output must not imped the primary",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1095,
+        "end_line": 1104,
+        "merge_gen_region": null,
+        "confidence": 0.7518810033798218,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(hardwareMutex());",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());",
+        "base_contents": "    Mutex::Autolock _l(mLock);",
+        "res_region": "    audio_utils::lock_guard _l(hardwareMutex());",
+        "lookback": "    *support = false;",
+        "lookahead": "    *support = false;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1587,
+        "end_line": 1593,
+        "merge_gen_region": null,
+        "confidence": 0.7795443534851074,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    audio_utils::lock_guard lock(hardwareMutex());\n    AudioHwDevice* module = loadHwModule_ll(name);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    audio_utils::lock_guard lock(hardwareMutex());\n    AudioHwDevice* module = loadHwModule_l(name);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    AutoMutex lock(mHardwareLock);\n    AudioHwDevice* module = loadHwModule_l(name);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    audio_utils::lock_guard lock(hardwareMutex());\n    AudioHwDevice* module = loadHwModule_ll(name);",
+        "lookback": "    audio_utils::lock_guard lock(hardwareMutex());",
+        "lookahead": "    return module != nullptr ? module->handle() : AUDIO_MODULE_HANDLE_NONE;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2480,
+        "end_line": 2492,
+        "merge_gen_region": null,
+        "confidence": 0.8648878931999207,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// loadHwModule_l() must be called with AudioFlinger::mutex()\n// and AudioFlinger::hardwareMutex() held\nAudioHwDevice* AudioFlinger::loadHwModule_ll(const char *name)",
+        "b_contents": "// loadHwModule_l() must be called with AudioFlinger::mutex()\n// and AudioFlinger::hardwareMutex() held\nAudioHwDevice* AudioFlinger::loadHwModule_l(const char *name)",
+        "base_contents": "// loadHwModule_l() must be called with AudioFlinger::mLock and AudioFlinger::mHardwareLock held\nAudioHwDevice* AudioFlinger::loadHwModule_l(const char *name)",
+        "res_region": "// loadHwModule_l() must be called with AudioFlinger::mutex()\n// and AudioFlinger::hardwareMutex() held\nAudioHwDevice* AudioFlinger::loadHwModule_ll(const char *name)",
+        "lookback": "// and AudioFlinger::hardwareMutex() held",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2496,
+        "end_line": 2507,
+        "merge_gen_region": null,
+        "confidence": 0.6113344430923462,
+        "hesitated": true
+    },
+    {
+        "a_contents": "std::vector< sp<IAfEffectModule> > AudioFlinger::purgeOrphanEffectChains_l()\n{\n    ALOGV(\"purging stale effects from orphan chains\");\n    std::vector< sp<IAfEffectModule> > removedEffects;\n    for (size_t index = 0; index < mOrphanEffectChains.size(); index++) {\n        sp<IAfEffectChain> chain = mOrphanEffectChains.valueAt(index);\n        audio_session_t session = mOrphanEffectChains.keyAt(index);\n        if (session == AUDIO_SESSION_OUTPUT_MIX || session == AUDIO_SESSION_DEVICE\n                || session == AUDIO_SESSION_OUTPUT_STAGE) {\n            continue;\n        }\n        size_t numSessionRefs = mAudioSessionRefs.size();\n        bool found = false;\n        for (size_t k = 0; k < numSessionRefs; k++) {\n            AudioSessionRef *ref = mAudioSessionRefs.itemAt(k);\n            if (ref->mSessionid == session) {\n                ALOGV(\" session %d still exists for %d with %d refs\", session, ref->mPid,\n                        ref->mCnt);\n                found = true;\n                break;\n            }\n        }\n        if (!found) {\n            for (size_t i = 0; i < chain->numberOfEffects(); i++) {\n                sp<IAfEffectModule> effect = chain->getEffectModule(i);\n                removedEffects.push_back(effect);\n            }\n        }\n    }\n    for (auto& effect : removedEffects) {\n        effect->unPin();\n        updateOrphanEffectChains_l(effect);\n    }\n    return removedEffects;\n}\n\n// dumpToThreadLog_l() must be called with AudioFlinger::mutex() held",
+        "b_contents": "// dumpToThreadLog_l() must be called with AudioFlinger::mutex() held",
+        "base_contents": "// dumpToThreadLog_l() must be called with AudioFlinger::mLock held",
+        "res_region": "std::vector< sp<IAfEffectModule> > AudioFlinger::purgeOrphanEffectChains_l()\n{\n    ALOGV(\"purging stale effects from orphan chains\");\n    std::vector< sp<IAfEffectModule> > removedEffects;\n    for (size_t index = 0; index < mOrphanEffectChains.size(); index++) {\n        sp<IAfEffectChain> chain = mOrphanEffectChains.valueAt(index);\n        audio_session_t session = mOrphanEffectChains.keyAt(index);\n        if (session == AUDIO_SESSION_OUTPUT_MIX || session == AUDIO_SESSION_DEVICE\n                || session == AUDIO_SESSION_OUTPUT_STAGE) {\n            continue;\n        }\n        size_t numSessionRefs = mAudioSessionRefs.size();\n        bool found = false;\n        for (size_t k = 0; k < numSessionRefs; k++) {\n            AudioSessionRef *ref = mAudioSessionRefs.itemAt(k);\n            if (ref->mSessionid == session) {\n                ALOGV(\" session %d still exists for %d with %d refs\", session, ref->mPid,\n                        ref->mCnt);\n                found = true;\n                break;\n            }\n        }\n        if (!found) {\n            for (size_t i = 0; i < chain->numberOfEffects(); i++) {\n                sp<IAfEffectModule> effect = chain->getEffectModule(i);\n                removedEffects.push_back(effect);\n            }\n        }\n    }\n    for (auto& effect : removedEffects) {\n        effect->unPin();\n        updateOrphanEffectChains_l(effect);\n    }\n    return removedEffects;\n}\n\n// dumpToThreadLog_l() must be called with AudioFlinger::mutex() held",
+        "lookback": "{",
+        "lookahead": "void AudioFlinger::dumpToThreadLog_l(const sp<IAfThreadBase> &thread)",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 3579,
+        "end_line": 3621,
+        "merge_gen_region": "::<<<fModule >::OrphanChain_() ALOGVpging effects orphan\");::<<<fEffect> removed; (__ index 0; <OrphanChain.();++) spIAEffect> =OrphanChain.value();___ session mEffectChainChain.Atindex ifsession AUDIOSESSIONOUTPUTMIX session AUDIOSESSIONDEVICE session AUDIOSESSIONOUTPUTSTAGE { continue } sizetSession =AudioRefssize bool =; found false forsizet =; <Session;++) AudioRefref mSession.Atk ifrefmid session {(\" % still for % withd\",,->Pid refm); =;; } iffound { (__ i =; <->Effects();++) spIAEffect> =Effects i(; } removed;",
+        "confidence": 0.8915613293647766,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    ALOGV(\"%s() session %d, srcIo %d, dstIo %d\", __func__, sessionId, srcIo, dstIo);\n    audio_utils::lock_guard _l(mutex());\n    if (srcIo == dstIo) {\n        ALOGW(\"%s() same dst and src outputs %d\", __func__, dstIo);",
+        "b_contents": "    ALOGV(\"%s() session %d, srcOutput %d, dstOutput %d\",\n            __func__, sessionId, srcOutput, dstOutput);\n    audio_utils::lock_guard _l(mutex());\n    if (srcOutput == dstOutput) {\n        ALOGW(\"%s() same dst and src outputs %d\", __func__, dstOutput);",
+        "base_contents": "    ALOGV(\"%s() session %d, srcOutput %d, dstOutput %d\",\n            __func__, sessionId, srcOutput, dstOutput);\n    Mutex::Autolock _l(mLock);\n    if (srcOutput == dstOutput) {\n        ALOGW(\"%s() same dst and src outputs %d\", __func__, dstOutput);",
+        "res_region": "    ALOGV(\"%s() session %d, srcIo %d, dstIo %d\", __func__, sessionId, srcIo, dstIo);\n    audio_utils::lock_guard _l(mutex());\n    if (srcIo == dstIo) {\n        ALOGW(\"%s() same dst and src outputs %d\", __func__, dstIo);",
+        "lookback": "    audio_utils::lock_guard _l(mutex());",
+        "lookahead": "        return NO_ERROR;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4363,
+        "end_line": 4380,
+        "merge_gen_region": null,
+        "confidence": 0.8731123208999634,
+        "hesitated": true
+    },
+    {
+        "a_contents": "// moveEffectChain_ll must be called with the AudioFlinger::mutex()\n// and both srcThread and dstThread mutex()s held\nstatus_t AudioFlinger::moveEffectChain_ll(audio_session_t sessionId,",
+        "b_contents": "// moveEffectChain_l must be called with both srcThread and dstThread mutex()s held\nstatus_t AudioFlinger::moveEffectChain_l(audio_session_t sessionId,",
+        "base_contents": "// moveEffectChain_l must be called with both srcThread and dstThread mLocks held\nstatus_t AudioFlinger::moveEffectChain_l(audio_session_t sessionId,",
+        "res_region": "// moveEffectChain_ll must be called with the AudioFlinger::mutex()\n// and both srcThread and dstThread mutex()s held\nstatus_t AudioFlinger::moveEffectChain_ll(audio_session_t sessionId,",
+        "lookback": "// and both srcThread and dstThread mutex()s held",
+        "lookahead": "        IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread)",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4433,
+        "end_line": 4443,
+        "merge_gen_region": null,
+        "confidence": 0.6946682333946228,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return updateOrphanEffectChains_l(effect);\n}\n\nbool AudioFlinger::updateOrphanEffectChains_l(const sp<IAfEffectModule>& effect)\n{",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());",
+        "base_contents": "    Mutex::Autolock _l(mLock);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return updateOrphanEffectChains_l(effect);\n}\n\nbool AudioFlinger::updateOrphanEffectChains_l(const sp<IAfEffectModule>& effect)\n{",
+        "lookback": "    return updateOrphanEffectChains_l(effect);",
+        "lookahead": "    audio_session_t session = effect->sessionId();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4707,
+        "end_line": 4718,
+        "merge_gen_region": null,
+        "confidence": 0.8648107647895813,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPorts_l(num_ports, ports);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPorts(num_ports, ports);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->listAudioPorts(num_ports, ports);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPorts_l(num_ports, ports);",
+        "lookback": "    return mPatchPanel->listAudioPorts_l(num_ports, ports);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4740,
+        "end_line": 4749,
+        "merge_gen_region": null,
+        "confidence": 0.7800969481468201,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->getAudioPort_l(port);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->getAudioPort(port);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->getAudioPort(port);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->getAudioPort_l(port);",
+        "lookback": "    return mPatchPanel->getAudioPort_l(port);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4759,
+        "end_line": 4768,
+        "merge_gen_region": null,
+        "confidence": 0.7746812701225281,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->createAudioPatch_l(patch, handle);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->createAudioPatch(patch, handle);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->createAudioPatch(patch, handle);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->createAudioPatch_l(patch, handle);",
+        "lookback": "    return mPatchPanel->createAudioPatch_l(patch, handle);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4780,
+        "end_line": 4789,
+        "merge_gen_region": null,
+        "confidence": 0.8494009375572205,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->releaseAudioPatch_l(handle);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->releaseAudioPatch(handle);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->releaseAudioPatch(handle);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->releaseAudioPatch_l(handle);",
+        "lookback": "    return mPatchPanel->releaseAudioPatch_l(handle);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4795,
+        "end_line": 4804,
+        "merge_gen_region": null,
+        "confidence": 0.853381335735321,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPatches_l(num_patches, patches);",
+        "b_contents": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPatches(num_patches, patches);",
+        "base_contents": "    Mutex::Autolock _l(mLock);\n    return mPatchPanel->listAudioPatches(num_patches, patches);",
+        "res_region": "    audio_utils::lock_guard _l(mutex());\n    return mPatchPanel->listAudioPatches_l(num_patches, patches);",
+        "lookback": "    return mPatchPanel->listAudioPatches_l(num_patches, patches);",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 4811,
+        "end_line": 4820,
+        "merge_gen_region": null,
+        "confidence": 0.755411684513092,
+        "hesitated": true
+    }
+]

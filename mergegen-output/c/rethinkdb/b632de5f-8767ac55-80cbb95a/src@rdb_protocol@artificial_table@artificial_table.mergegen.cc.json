@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ql::env_t *env,\n    counted_t<ql::datum_stream_t> maybe_src,\n    const ql::datum_t &,\n    bool include_states,\n    ql::changefeed::keyspec_t::spec_t &&spec,\n    const ql::protob_t<const Backtrace> &bt,\n    UNUSED const std::string &table_name) {\n",
+        "b_contents": "        ql::env_t *env,\n        const ql::datum_t &,\n        bool include_states,\n        ql::changefeed::keyspec_t::spec_t &&spec,\n        ql::backtrace_id_t bt,\n        UNUSED const std::string &table_name) {",
+        "base_contents": "        ql::env_t *env,\n        const ql::datum_t &,\n        bool include_states,\n        ql::changefeed::keyspec_t::spec_t &&spec,\n        const ql::protob_t<const Backtrace> &bt,\n        UNUSED const std::string &table_name) {",
+        "res_region": "    ql::env_t *env,\n    counted_t<ql::datum_stream_t> maybe_src,\n    const ql::datum_t &,\n    bool include_states,\n    ql::changefeed::keyspec_t::spec_t &&spec,\n    ql::backtrace_id_t bt,\n    UNUSED const std::string &table_name) {\n",
+        "lookback": "    counted_t<ql::datum_stream_t> maybe_src,",
+        "lookahead": "    counted_t<ql::datum_stream_t> stream;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 81,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.7207250595092773,
+        "hesitated": true
+    }
+]

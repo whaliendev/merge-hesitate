@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "\thash_algo->update_fn(&old_hash_ctx, &hdr, sizeof(hdr));",
+        "b_contents": "\tgit_hash_update(&old_hash_ctx, &hdr, sizeof(hdr));",
+        "base_contents": "\tthe_hash_algo->update_fn(&old_hash_ctx, &hdr, sizeof(hdr));",
+        "res_region": "\tgit_hash_update(&old_hash_ctx, &hdr, sizeof(hdr));",
+        "lookback": "\thdr.hdr_entries = htonl(object_count);",
+        "lookahead": "\thdr.hdr_entries = htonl(object_count);",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 415,
+        "end_line": 421,
+        "merge_gen_region": null,
+        "confidence": 0.7351031303405762,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\thash_algo->update_fn(&new_hash_ctx, &hdr, sizeof(hdr));",
+        "b_contents": "\tgit_hash_update(&new_hash_ctx, &hdr, sizeof(hdr));",
+        "base_contents": "\tthe_hash_algo->update_fn(&new_hash_ctx, &hdr, sizeof(hdr));",
+        "res_region": "\tgit_hash_update(&new_hash_ctx, &hdr, sizeof(hdr));",
+        "lookback": "\twrite_or_die(pack_fd, &hdr, sizeof(hdr));",
+        "lookahead": "\twrite_or_die(pack_fd, &hdr, sizeof(hdr));",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 423,
+        "end_line": 429,
+        "merge_gen_region": null,
+        "confidence": 0.7916548848152161,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\thash_algo->update_fn(&new_hash_ctx, buf, n);",
+        "b_contents": "\t\tgit_hash_update(&new_hash_ctx, buf, n);",
+        "base_contents": "\t\tthe_hash_algo->update_fn(&new_hash_ctx, buf, n);",
+        "res_region": "\t\tgit_hash_update(&new_hash_ctx, buf, n);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 444,
+        "end_line": 450,
+        "merge_gen_region": null,
+        "confidence": 0.5773322582244873,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\thash_algo->update_fn(&old_hash_ctx, buf, n);",
+        "b_contents": "\t\tgit_hash_update(&old_hash_ctx, buf, n);",
+        "base_contents": "\t\tthe_hash_algo->update_fn(&old_hash_ctx, buf, n);",
+        "res_region": "\t\tgit_hash_update(&old_hash_ctx, buf, n);",
+        "lookback": "\t\tpartial_pack_offset -= n;",
+        "lookahead": "\t\tpartial_pack_offset -= n;",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 459,
+        "end_line": 465,
+        "merge_gen_region": null,
+        "confidence": 0.6417117714881897,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\thash_algo->final_fn(hash, &old_hash_ctx);\n\t\t\tif (!hasheq(hash, partial_pack_hash, hash_algo))",
+        "b_contents": "\t\t\tgit_hash_final(hash, &old_hash_ctx);\n\t\t\tif (!hasheq(hash, partial_pack_hash,\n\t\t\t\t    the_repository->hash_algo))",
+        "base_contents": "\t\t\tthe_hash_algo->final_fn(hash, &old_hash_ctx);\n\t\t\tif (!hasheq(hash, partial_pack_hash,\n\t\t\t\t    the_repository->hash_algo))",
+        "res_region": "\t\t\tgit_hash_final(hash, &old_hash_ctx);\n\t\t\tif (!hasheq(hash, partial_pack_hash,\n\t\t\t\t    hash_algo))",
+        "lookback": "\t\t\tif (!hasheq(hash, partial_pack_hash,",
+        "lookahead": "\t\t\t\tdie(\"Unexpected checksum for %s \"",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 469,
+        "end_line": 480,
+        "merge_gen_region": null,
+        "confidence": 0.8398752212524414,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\thash_algo->final_fn(partial_pack_hash, &old_hash_ctx);\n\thash_algo->final_fn(new_pack_hash, &new_hash_ctx);\n\twrite_or_die(pack_fd, new_pack_hash, hash_algo->rawsz);",
+        "b_contents": "\t\tgit_hash_final(partial_pack_hash, &old_hash_ctx);\n\tgit_hash_final(new_pack_hash, &new_hash_ctx);\n\twrite_or_die(pack_fd, new_pack_hash, the_hash_algo->rawsz);",
+        "base_contents": "\t\tthe_hash_algo->final_fn(partial_pack_hash, &old_hash_ctx);\n\tthe_hash_algo->final_fn(new_pack_hash, &new_hash_ctx);\n\twrite_or_die(pack_fd, new_pack_hash, the_hash_algo->rawsz);",
+        "res_region": "\t\tgit_hash_final(partial_pack_hash, &old_hash_ctx);\n\tgit_hash_final(new_pack_hash, &new_hash_ctx);\n\twrite_or_die(pack_fd, new_pack_hash, hash_algo->rawsz);",
+        "lookback": "\tgit_hash_final(new_pack_hash, &new_hash_ctx);",
+        "lookahead": "\tfsync_component_or_die(FSYNC_COMPONENT_PACK, pack_fd, pack_name);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 496,
+        "end_line": 508,
+        "merge_gen_region": null,
+        "confidence": 0.7820728421211243,
+        "hesitated": true
+    }
+]

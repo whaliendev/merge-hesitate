@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "           \"mode of plugins, use disable_plugin_autoload to ingore autoload\\n\"\n        << \"    -c, --cpuprofile: enable gperftools cpu profile\\n\"\n        << \"    -o, --profile_filename=filename: the filename to dump the \"\n            \"profile to, default value is ${process_group}_cpu.prof. Only work \"\n            \"with -c option\\n\"\n        << \"    -H, --heapprofile: enable gperftools heap profile\\n\"\n        << \"    -O, --heapprofile_filename=filename: the filename to dump the \"\n            \"profile to, default value is ${process_group}_mem.prof. Only work \"\n            \"with -c option\\n\"",
+        "b_contents": "           \"mode of plugins, use disable_plugin_autoload to ignore autoload\\n\"",
+        "base_contents": "           \"mode of plugins, use disable_plugin_autoload to ingore autoload\\n\"",
+        "res_region": "           \"mode of plugins, use disable_plugin_autoload to ingore autoload\\n\"\n        << \"    -c, --cpuprofile: enable gperftools cpu profile\\n\"\n        << \"    -o, --profile_filename=filename: the filename to dump the \"\n           \"profile to, default value is ${process_group}_cpu.prof. Only work \"\n           \"with -c option\\n\"\n        << \"    -H, --heapprofile: enable gperftools heap profile\\n\"\n        << \"    -O, --heapprofile_filename=filename: the filename to dump the \"\n           \"profile to, default value is ${process_group}_mem.prof. Only work \"\n           \"with -c option\\n\"",
+        "lookback": "        << \"    -c, --cpuprofile: enable gperftools cpu profile\\n\"",
+        "lookahead": "        << \"Example:\\n\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 43,
+        "end_line": 57,
+        "merge_gen_region": null,
+        "confidence": 0.8317426443099976,
+        "hesitated": true
+    }
+]

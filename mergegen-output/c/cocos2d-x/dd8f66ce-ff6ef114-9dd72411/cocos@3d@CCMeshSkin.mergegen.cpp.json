@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "//    if (_dirtyFlag & Dirty_Translate)\n//    {\n//        Mat4::createTranslation(_localTranslate, &_local);\n//        if (_dirtyFlag & Dirty_Rotation)\n//            _local.rotate(_localRot);\n//        if (_dirtyFlag & Dirty_Scale)\n//            _local.scale(_localScale);\n//    }\n//    else if (_dirtyFlag & Dirty_Rotation)\n//    {\n//        Mat4::createRotation(_localRot, &_local);\n//        if (_dirtyFlag & Dirty_Scale)\n//            _local.scale(_localScale);\n//    }\n//    else if (_dirtyFlag & Dirty_Scale)\n//    {\n//        Mat4::createScale(_localScale, &_local);\n//    }\n//    _dirtyFlag = 0;\n    \n    Vec3 translate(0.f, 0.f, 0.f), scale(0.f, 0.f, 0.f);\n    Quaternion quat(0.f, 0.f, 0.f, 0.f);\n    if (_blendStates.size())",
+        "b_contents": "    Mat4::createTranslation(_localTranslate, &_local);\n    if (!_localRot.isZero())\n    _local.rotate(_localRot);\n    return;\n    \n    if (_dirtyFlag & Dirty_Translate)",
+        "base_contents": "    if (_dirtyFlag & Dirty_Translate)",
+        "res_region": "    if (!_localDirty)\n        return;\n    \n    Vec3 translate(0.f, 0.f, 0.f), scale(0.f, 0.f, 0.f);\n    Quaternion quat(0.f, 0.f, 0.f, 0.f);\n    if (_blendStates.size())",
+        "lookback": "        return;",
+        "lookahead": "    {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 217,
+        "end_line": 250,
+        "merge_gen_region": null,
+        "confidence": 0.783838152885437,
+        "hesitated": true
+    }
+]

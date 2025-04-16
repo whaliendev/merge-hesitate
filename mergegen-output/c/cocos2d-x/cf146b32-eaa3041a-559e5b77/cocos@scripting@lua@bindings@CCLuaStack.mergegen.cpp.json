@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#include \"lua_cocos2dx_physics_auto.hpp\"\n#include \"lua_cocos2dx_physics_manual.hpp\"",
+        "b_contents": "#include \"lua_cocos2dx_gui_auto.hpp\"\n#include \"lua_cocos2dx_gui_manual.hpp\"",
+        "base_contents": "",
+        "res_region": "#include \"lua_cocos2dx_physics_auto.hpp\"\n#include \"lua_cocos2dx_physics_manual.hpp\"\n#include \"lua_cocos2dx_gui_auto.hpp\"\n#include \"lua_cocos2dx_gui_manual.hpp\"",
+        "lookback": "#include \"lua_cocos2dx_physics_manual.hpp\"",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 60,
+        "end_line": 67,
+        "merge_gen_region": "include###########################################",
+        "confidence": 0.8869359493255615,
+        "hesitated": false,
+        "resolved": false
+    }
+]

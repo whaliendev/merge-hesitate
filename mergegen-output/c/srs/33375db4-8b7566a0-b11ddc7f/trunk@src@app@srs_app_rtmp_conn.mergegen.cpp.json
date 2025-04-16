@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    ",
+        "b_contents": "    \n    // Never allow the empty stream name, for HLS may write to a file with empty name.\n    // @see https://github.com/ossrs/srs/issues/834\n    if (req->stream.empty()) {\n        ret = ERROR_RTMP_STREAM_NAME_EMPTY;\n        srs_error(\"RTMP: Empty stream name not allowed, ret=%d\", ret);\n        return ret;\n    }\n",
+        "base_contents": "",
+        "res_region": "    \n    // Never allow the empty stream name, for HLS may write to a file with empty name.\n    // @see https://github.com/ossrs/srs/issues/834\n    if (req->stream.empty()) {\n        ret = ERROR_RTMP_STREAM_NAME_EMPTY;\n        srs_error(\"RTMP: Empty stream name not allowed, ret=%d\", ret);\n        return ret;\n    }\n",
+        "lookback": "    // Never allow the empty stream name, for HLS may write to a file with empty name.",
+        "lookahead": "    // client is identified, set the timeout to service timeout.",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 522,
+        "end_line": 536,
+        "merge_gen_region": null,
+        "confidence": 0.8230171203613281,
+        "hesitated": true
+    }
+]

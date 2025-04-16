@@ -75,7 +75,7 @@ class MergeConflictDataset(Dataset):
     def __getitem__(self, idx):
         # Get preprocessed input and output sequences
         input_ids = self.inputs[idx]
-        output_ids = self.outputs[idx]
+        output_ids = self.outputs[idx] # output_ids from pkl SHOULD include BOS and EOS as per user
 
         # Create attention mask (1 for non-pad tokens)
         attention_mask = (input_ids != self.tokenizer.pad_token_id).astype(np.int64)
@@ -83,22 +83,22 @@ class MergeConflictDataset(Dataset):
         # Convert to tensors
         input_tensor = torch.tensor(input_ids, dtype=torch.long)
         attention_tensor = torch.tensor(attention_mask, dtype=torch.long)
-        output_tensor = torch.tensor(output_ids, dtype=torch.long)
+        output_tensor = torch.tensor(output_ids, dtype=torch.long) # Keep original output_ids with BOS
 
         # Create sample with all required fields
         sample = {
             "input_ids": input_tensor,
             "attention_mask": attention_tensor,
-            "labels": output_tensor,
+            "labels": output_tensor, # Return the labels WITH the initial BOS token
         }
 
         # Add features if enabled
         if self.use_features:
+            # Assuming features are precomputed or loaded correctly elsewhere
             feature_tensor = self.features[idx]
             sample["features"] = feature_tensor
         else:
-            # Add dummy features tensor with zeros if needed by the model
-            # This ensures compatibility even when features are disabled
+            # Add dummy features tensor if needed, ensure size matches
             sample["features"] = torch.zeros(self.feature_size, dtype=torch.float)
 
         return sample

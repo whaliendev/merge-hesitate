@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    CameraSessionStats(const std::string& cameraId, int facing, int newCameraState,\n                       const std::string& clientName, int apiLevel, bool isNdk, int32_t latencyMs,\n                       int64_t logId);",
+        "b_contents": "    CameraSessionStats(const std::string& cameraId, int facing, int newCameraState,\n            const std::string& clientName, int apiLevel, bool isNdk, int32_t latencyMs);",
+        "base_contents": "    CameraSessionStats(const String16& cameraId, int facing, int newCameraState,\n            const String16& clientName, int apiLevel, bool isNdk, int32_t latencyMs);",
+        "res_region": "    CameraSessionStats(const std::string& cameraId, int facing, int newCameraState,\n                       const std::string& clientName, int apiLevel, bool isNdk, int32_t latencyMs,\n                       int64_t logId);",
+        "lookback": "                       const std::string& clientName, int apiLevel, bool isNdk, int32_t latencyMs,",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 169,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.6352471113204956,
+        "hesitated": true
+    }
+]

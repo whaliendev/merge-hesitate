@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "EnvOptions::EnvOptions(const DBOptions& options) {",
+        "b_contents": "EnvOptions EnvOptions::AdaptForLogWrite() const {\n  EnvOptions adapted = *this;\n  adapted.use_mmap_writes = false;\n  return adapted;\n}\n\nEnvOptions::EnvOptions(const Options& options) {",
+        "base_contents": "EnvOptions::EnvOptions(const Options& options) {",
+        "res_region": "EnvOptions EnvOptions::AdaptForLogWrite() const {\n  EnvOptions adapted = *this;\n  adapted.use_mmap_writes = false;\n  return adapted;\n}\n\nEnvOptions::EnvOptions(const DBOptions& options) {",
+        "lookback": "  EnvOptions adapted = *this;",
+        "lookahead": "  AssignEnvOptions(this, options);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 239,
+        "end_line": 251,
+        "merge_gen_region": null,
+        "confidence": 0.804163932800293,
+        "hesitated": true
+    }
+]

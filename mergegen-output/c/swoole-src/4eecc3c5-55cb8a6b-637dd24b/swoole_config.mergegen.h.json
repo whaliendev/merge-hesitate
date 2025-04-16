@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define SW_MAX_CORO_NUM_LIMIT            9223372036854775807LL\n#define SW_MAX_CORO_NESTING_LEVEL        128\n#define SW_CORO_TICK_SCHEDULE            1\n",
+        "b_contents": "",
+        "base_contents": "#define SW_MAX_CORO_NUM_LIMIT            9223372036854775807LL\n#define SW_MAX_CORO_NESTING_LEVEL        128\n",
+        "res_region": "#define SW_CORO_TICK_SCHEDULE            1",
+        "lookback": "#define SW_CORO_SWAP_BAILOUT",
+        "lookahead": "#define SW_CORO_SWAP_BAILOUT",
+        "label": [
+            "interleave",
+            "base_empty"
+        ],
+        "start_line": 259,
+        "end_line": 269,
+        "merge_gen_region": null,
+        "confidence": 0.7727320790290833,
+        "hesitated": true
+    }
+]

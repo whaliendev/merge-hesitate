@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "// @CddTest = 6.1/C-0-2\nTEST(record_cmd, etm_flush_interval_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--etm-flush-interval\", \"10\"}));\n}\n\n// @CddTest = 6.1/C-0-2",
+        "b_contents": "TEST(record_cmd, etm_flush_interval_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--etm-flush-interval\", \"10\"}));\n}\n",
+        "base_contents": "",
+        "res_region": "// @CddTest = 6.1/C-0-2\nTEST(record_cmd, etm_flush_interval_option) {\n  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {\n    GTEST_LOG_(INFO) << \"Omit this test since etm isn't supported on this device\";\n    return;\n  }\n  ASSERT_TRUE(RunRecordCmd({\"-e\", \"cs-etm\", \"--etm-flush-interval\", \"10\"}));\n}\n\n// @CddTest = 6.1/C-0-2",
+        "lookback": "TEST(record_cmd, etm_flush_interval_option) {",
+        "lookahead": "TEST(record_cmd, pmu_event_option) {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1210,
+        "end_line": 1231,
+        "merge_gen_region": " @CTest 61C1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output1output2outputalseoutput2outputalseoutput2output1output1",
+        "confidence": 0.9074367880821228,
+        "hesitated": false,
+        "resolved": false
+    }
+]

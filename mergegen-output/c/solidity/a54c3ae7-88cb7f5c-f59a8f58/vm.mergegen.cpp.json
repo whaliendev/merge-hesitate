@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <libdevcore/CommonIO.h>\n#include \"vm.h\"",
+        "b_contents": "#include \"vm.h\"",
+        "base_contents": "",
+        "res_region": "#include \"vm.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 23,
+        "end_line": 29,
+        "merge_gen_region": null,
+        "confidence": 0.6454213261604309,
+        "hesitated": true
+    }
+]

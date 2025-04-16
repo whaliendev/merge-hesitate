@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "void TextField::setAnchorPoint(const Vector2 &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _textFieldRenderer->setAnchorPoint(pt);\n}\n",
+        "b_contents": "",
+        "base_contents": "void TextField::setAnchorPoint(const Point &pt)\n{\n    Widget::setAnchorPoint(pt);\n    _textFieldRenderer->setAnchorPoint(pt);\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "void TextField::onSizeChanged()",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 731,
+        "end_line": 746,
+        "merge_gen_region": null,
+        "confidence": 0.7519672513008118,
+        "hesitated": true
+    }
+]

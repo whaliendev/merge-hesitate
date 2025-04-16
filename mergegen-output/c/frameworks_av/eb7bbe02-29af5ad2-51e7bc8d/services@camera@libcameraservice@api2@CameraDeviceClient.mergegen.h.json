@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "            std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n            const std::string& clientPackageName,",
+        "b_contents": "            const std::string& clientPackageName,",
+        "base_contents": "            const String16& clientPackageName,",
+        "res_region": "            std::shared_ptr<CameraServiceProxyWrapper> cameraServiceProxyWrapper,\n            const std::string& clientPackageName,",
+        "lookback": "            const std::string& clientPackageName,",
+        "lookahead": "            bool clientPackageOverride,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 182,
+        "end_line": 189,
+        "merge_gen_region": null,
+        "confidence": 0.39796745777130127,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    bool supportsUltraHighResolutionCapture(const std::string &cameraId);",
+        "b_contents": "    bool isUltraHighResolutionSensor(const std::string &cameraId);",
+        "base_contents": "    bool isUltraHighResolutionSensor(const String8 &cameraId);",
+        "res_region": "    bool supportsUltraHighResolutionCapture(const std::string &cameraId);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 253,
+        "end_line": 259,
+        "merge_gen_region": null,
+        "confidence": 0.8775642514228821,
+        "hesitated": true
+    }
+]

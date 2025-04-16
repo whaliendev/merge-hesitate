@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    \n    virtual bool hitTest(const Vector2 &pt);\n    ",
+        "b_contents": "        ",
+        "base_contents": "    \n    virtual bool hitTest(const Point &pt);\n    ",
+        "res_region": "",
+        "lookback": "CC_CONSTRUCTOR_ACCESS:",
+        "lookahead": "CC_CONSTRUCTOR_ACCESS:",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 267,
+        "end_line": 277,
+        "merge_gen_region": null,
+        "confidence": 0.6713077425956726,
+        "hesitated": true
+    }
+]

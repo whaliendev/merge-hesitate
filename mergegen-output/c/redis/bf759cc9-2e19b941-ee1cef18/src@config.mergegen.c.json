@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "        } else if (!strcasecmp(argv[0],\"jemalloc-bg-thread\") && argc == 2) {\n            if ((server.jemalloc_bg_thread = yesnotoi(argv[1])) == -1) {\n                err = \"argument must be 'yes' or 'no'\"; goto loaderr;\n            }\n        } else if (!strcasecmp(argv[0],\"daemonize\") && argc == 2) {\n            if ((server.daemonize = yesnotoi(argv[1])) == -1) {\n                err = \"argument must be 'yes' or 'no'\"; goto loaderr;\n            }\n        } else if (!strcasecmp(argv[0],\"dynamic-hz\") && argc == 2) {\n            if ((server.dynamic_hz = yesnotoi(argv[1])) == -1) {\n                err = \"argument must be 'yes' or 'no'\"; goto loaderr;\n            }",
+        "b_contents": "",
+        "base_contents": "        } else if (!strcasecmp(argv[0],\"daemonize\") && argc == 2) {\n            if ((server.daemonize = yesnotoi(argv[1])) == -1) {\n                err = \"argument must be 'yes' or 'no'\"; goto loaderr;\n            }\n        } else if (!strcasecmp(argv[0],\"dynamic-hz\") && argc == 2) {\n            if ((server.dynamic_hz = yesnotoi(argv[1])) == -1) {\n                err = \"argument must be 'yes' or 'no'\"; goto loaderr;\n            }",
+        "res_region": "",
+        "lookback": "            server.config_hz = atoi(argv[1]);",
+        "lookahead": "        } else if (!strcasecmp(argv[0],\"hz\") && argc == 2) {",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 476,
+        "end_line": 499,
+        "merge_gen_region": null,
+        "confidence": 0.617470920085907,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    } config_set_bool_field(\n      \"jemalloc-bg-thread\",server.jemalloc_bg_thread) {\n          set_jemalloc_bg_thread(server.jemalloc_bg_thread);\n    } config_set_bool_field(\n      \"protected-mode\",server.protected_mode) {\n    } config_set_bool_field(\n      \"gopher-enabled\",server.gopher_enabled) {\n    } config_set_bool_field(\n      \"stop-writes-on-bgsave-error\",server.stop_writes_on_bgsave_err) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-eviction\",server.lazyfree_lazy_eviction) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-expire\",server.lazyfree_lazy_expire) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-server-del\",server.lazyfree_lazy_server_del) {\n    } config_set_bool_field(\n      \"slave-lazy-flush\",server.repl_slave_lazy_flush) {\n    } config_set_bool_field(\n      \"replica-lazy-flush\",server.repl_slave_lazy_flush) {\n    } config_set_bool_field(\n      \"no-appendfsync-on-rewrite\",server.aof_no_fsync_on_rewrite) {\n    } config_set_bool_field(\n      \"dynamic-hz\",server.dynamic_hz) {\n",
+        "b_contents": "",
+        "base_contents": "    } config_set_bool_field(\n      \"protected-mode\",server.protected_mode) {\n    } config_set_bool_field(\n      \"gopher-enabled\",server.gopher_enabled) {\n    } config_set_bool_field(\n      \"stop-writes-on-bgsave-error\",server.stop_writes_on_bgsave_err) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-eviction\",server.lazyfree_lazy_eviction) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-expire\",server.lazyfree_lazy_expire) {\n    } config_set_bool_field(\n      \"lazyfree-lazy-server-del\",server.lazyfree_lazy_server_del) {\n    } config_set_bool_field(\n      \"slave-lazy-flush\",server.repl_slave_lazy_flush) {\n    } config_set_bool_field(\n      \"replica-lazy-flush\",server.repl_slave_lazy_flush) {\n    } config_set_bool_field(\n      \"no-appendfsync-on-rewrite\",server.aof_no_fsync_on_rewrite) {\n    } config_set_bool_field(\n      \"dynamic-hz\",server.dynamic_hz) {\n",
+        "res_region": "",
+        "lookback": "     * config_set_numerical_field(name,var,min,max) */",
+        "lookahead": "    /* Numerical fields.",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 1121,
+        "end_line": 1169,
+        "merge_gen_region": null,
+        "confidence": 0.4391949772834778,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    config_get_bool_field(\"jemalloc-bg-thread\", server.jemalloc_bg_thread);\n    config_get_bool_field(\"protected-mode\", server.protected_mode);\n    config_get_bool_field(\"gopher-enabled\", server.gopher_enabled);\n    config_get_bool_field(\"io-threads-do-reads\", server.io_threads_do_reads);\n    config_get_bool_field(\"repl-disable-tcp-nodelay\",\n            server.repl_disable_tcp_nodelay);\n    config_get_bool_field(\"repl-diskless-sync\",\n            server.repl_diskless_sync);\n    config_get_bool_field(\"aof-rewrite-incremental-fsync\",\n            server.aof_rewrite_incremental_fsync);\n    config_get_bool_field(\"rdb-save-incremental-fsync\",\n            server.rdb_save_incremental_fsync);\n    config_get_bool_field(\"aof-load-truncated\",\n            server.aof_load_truncated);\n    config_get_bool_field(\"aof-use-rdb-preamble\",\n            server.aof_use_rdb_preamble);\n    config_get_bool_field(\"lazyfree-lazy-eviction\",\n            server.lazyfree_lazy_eviction);\n    config_get_bool_field(\"lazyfree-lazy-expire\",\n            server.lazyfree_lazy_expire);\n    config_get_bool_field(\"lazyfree-lazy-server-del\",\n            server.lazyfree_lazy_server_del);\n    config_get_bool_field(\"slave-lazy-flush\",\n            server.repl_slave_lazy_flush);\n    config_get_bool_field(\"replica-lazy-flush\",\n            server.repl_slave_lazy_flush);\n    config_get_bool_field(\"dynamic-hz\",\n            server.dynamic_hz);",
+        "b_contents": "",
+        "base_contents": "    config_get_bool_field(\"protected-mode\", server.protected_mode);\n    config_get_bool_field(\"gopher-enabled\", server.gopher_enabled);\n    config_get_bool_field(\"io-threads-do-reads\", server.io_threads_do_reads);\n    config_get_bool_field(\"repl-disable-tcp-nodelay\",\n            server.repl_disable_tcp_nodelay);\n    config_get_bool_field(\"repl-diskless-sync\",\n            server.repl_diskless_sync);\n    config_get_bool_field(\"aof-rewrite-incremental-fsync\",\n            server.aof_rewrite_incremental_fsync);\n    config_get_bool_field(\"rdb-save-incremental-fsync\",\n            server.rdb_save_incremental_fsync);\n    config_get_bool_field(\"aof-load-truncated\",\n            server.aof_load_truncated);\n    config_get_bool_field(\"aof-use-rdb-preamble\",\n            server.aof_use_rdb_preamble);\n    config_get_bool_field(\"lazyfree-lazy-eviction\",\n            server.lazyfree_lazy_eviction);\n    config_get_bool_field(\"lazyfree-lazy-expire\",\n            server.lazyfree_lazy_expire);\n    config_get_bool_field(\"lazyfree-lazy-server-del\",\n            server.lazyfree_lazy_server_del);\n    config_get_bool_field(\"slave-lazy-flush\",\n            server.repl_slave_lazy_flush);\n    config_get_bool_field(\"replica-lazy-flush\",\n            server.repl_slave_lazy_flush);\n    config_get_bool_field(\"dynamic-hz\",\n            server.dynamic_hz);",
+        "res_region": "",
+        "lookback": "    /* Enum values */",
+        "lookahead": "",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 1473,
+        "end_line": 1531,
+        "merge_gen_region": null,
+        "confidence": 0.50221186876297,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    rewriteConfigYesNoOption(state,\"jemalloc-bg-thread\",server.jemalloc_bg_thread,1);\n    rewriteConfigYesNoOption(state,\"protected-mode\",server.protected_mode,CONFIG_DEFAULT_PROTECTED_MODE);\n    rewriteConfigYesNoOption(state,\"gopher-enabled\",server.gopher_enabled,CONFIG_DEFAULT_GOPHER_ENABLED);\n    rewriteConfigYesNoOption(state,\"io-threads-do-reads\",server.io_threads_do_reads,CONFIG_DEFAULT_IO_THREADS_DO_READS);",
+        "b_contents": "",
+        "base_contents": "    rewriteConfigYesNoOption(state,\"protected-mode\",server.protected_mode,CONFIG_DEFAULT_PROTECTED_MODE);\n    rewriteConfigYesNoOption(state,\"gopher-enabled\",server.gopher_enabled,CONFIG_DEFAULT_GOPHER_ENABLED);\n    rewriteConfigYesNoOption(state,\"io-threads-do-reads\",server.io_threads_do_reads,CONFIG_DEFAULT_IO_THREADS_DO_READS);",
+        "res_region": "",
+        "lookback": "    rewriteConfigNumericalOption(state,\"hz\",server.config_hz,CONFIG_DEFAULT_HZ);",
+        "lookahead": "    rewriteConfigClientoutputbufferlimitOption(state);",
+        "label": [
+            "base",
+            "base_empty"
+        ],
+        "start_line": 2330,
+        "end_line": 2340,
+        "merge_gen_region": null,
+        "confidence": 0.6344314813613892,
+        "hesitated": true
+    }
+]

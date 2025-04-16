@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "int\t server_create_socket(int, char **);",
+        "b_contents": "int\t server_create_socket(uint64_t, char **);",
+        "base_contents": "",
+        "res_region": "int\t server_create_socket(uint64_t, char **);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 2754,
+        "end_line": 2759,
+        "merge_gen_region": null,
+        "confidence": 0.29077836871147156,
+        "hesitated": true
+    }
+]

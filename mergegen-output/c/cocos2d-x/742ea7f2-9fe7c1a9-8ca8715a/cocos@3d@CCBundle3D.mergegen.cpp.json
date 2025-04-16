@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "Bundle3D::MeshData::MeshData()\n: vertex(nullptr)\n, vertexSizeInFloat(0)\n, indices(nullptr)\n, numIndex(0)\n, attribs(nullptr)\n, attribCount(0)\n{\n    \n}\nBundle3D::MeshData::~MeshData()\n{\n    resetData();\n}\n\nint Bundle3D::SkinData::getBoneNameIndex(const std::string& name)\n{\n    std::vector<std::string>::iterator iter = boneNames.begin();\n    for (int i = 0; iter != boneNames.end(); ++iter, ++i)\n    {\n        if ((*iter) == name)\n        {\n            return i;\n        }\n    }\n    return -1;\n}\n\nvoid Bundle3D::SkinData::getChildMap(std::map<int, std::vector<int> >& map, const rapidjson::Value& val, int index)\n{\n    if (val.HasMember(\"children\"))\n    {\n        const rapidjson::Value& children = val[\"children\"];\n        for (rapidjson::SizeType i = 0; i < children.Size(); i++)\n        {\n            const rapidjson::Value& child = children[i];\n            std::string child_name = child[\"id\"].GetString();\n            \n            int child_name_index = getBoneNameIndex(child_name);\n            if (child_name_index < 0)\n                break;\n\n            map[index].push_back(child_name_index);\n\n            getChildMap(map, child, child_name_index);\n        }\n    }\n}\n\nvoid Bundle3D::MeshData::resetData()\n{\n    CC_SAFE_DELETE_ARRAY(vertex);\n    CC_SAFE_DELETE_ARRAY(indices);\n    CC_SAFE_DELETE_ARRAY(attribs);\n    vertexSizeInFloat = 0;\n    numIndex = 0;\n    attribCount = 0;\n}\n",
+        "b_contents": "",
+        "base_contents": "Bundle3D::MeshData::MeshData()\n: vertex(nullptr)\n, vertexSizeInFloat(0)\n, indices(nullptr)\n, numIndex(0)\n, attribs(nullptr)\n, attribCount(0)\n{\n    \n}\nBundle3D::MeshData::~MeshData()\n{\n    resetData();\n}\nvoid Bundle3D::MeshData::resetData()\n{\n    CC_SAFE_DELETE_ARRAY(vertex);\n    CC_SAFE_DELETE_ARRAY(indices);\n    CC_SAFE_DELETE_ARRAY(attribs);\n    vertexSizeInFloat = 0;\n    numIndex = 0;\n    attribCount = 0;\n}\n",
+        "res_region": "void getChildMap(const SkinData* skinData, std::map<int, std::vector<int> >& map, const rapidjson::Value& val, int index)\n{\n    if (!skinData)\n        return;\n\n    if (val.HasMember(\"children\"))\n    {\n        const rapidjson::Value& children = val[\"children\"];\n        for (rapidjson::SizeType i = 0; i < children.Size(); i++)\n        {\n            const rapidjson::Value& child = children[i];\n            std::string child_name = child[\"id\"].GetString();\n\n            int child_name_index = skinData->getBoneNameIndex(child_name);\n            if (child_name_index < 0)\n                break;\n\n            map[index].push_back(child_name_index);\n\n            getChildMap(skinData, map, child, child_name_index);\n        }\n    }\n}\n\n\nBundle3D* Bundle3D::_instance = nullptr;\n",
+        "lookback": "{",
+        "lookahead": "Bundle3D* Bundle3D::getInstance()",
+        "label": [
+            "newcode",
+            "base_empty"
+        ],
+        "start_line": 37,
+        "end_line": 123,
+        "merge_gen_region": null,
+        "confidence": 0.30732759833335876,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    //meshdata->vertexSizeInFloat = 13 * 4;\n    //meshdata->vertex = new float[meshdata->vertexSizeInFloat];\n    //float vert[] = {0.f,50.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    0.f,0.f,50.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    -50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f};\n    //memcpy(meshdata->vertex, vert, meshdata->vertexSizeInFloat * sizeof(float));",
+        "b_contents": "    meshdata->vertexSizeInFloat = 13 * 4;\n    meshdata->vertex = new float[meshdata->vertexSizeInFloat];\n    //dabing's data\n//   float vert[] = {0.f,50.f,0.f,  0.f,0.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n//                   0.f,0.f,50.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n//                   50.f,0.f,0.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n//                  50.f,50.f,0.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f};\n    float vert[] = {0.f,50.f,0.f,  0.f,0.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n        0.f,0.f,50.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n        50.f,0.f,0.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f,\n        -50.f,0.f,0.f,  1.f,1.f,  0.f,0.f,0.f,0.f,   1.f,0.f,0.f,0.f};\n\n    \n    //float vert[] = {0.f,50.f,0.f,  0.f,0.f,50.f, 50.f,0.f,0.f, -50.f,0.f,0.f};\n    memcpy(meshdata->vertex, vert, meshdata->vertexSizeInFloat * sizeof(float));",
+        "base_contents": "    meshdata->vertexSizeInFloat = 13 * 4;\n    meshdata->vertex = new float[meshdata->vertexSizeInFloat];\n    float vert[] = {0.f,50.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n        0.f,0.f,50.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n        50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n        -50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f};\n    //float vert[] = {0.f,50.f,0.f,  0.f,0.f,50.f, 50.f,0.f,0.f, -50.f,0.f,0.f};\n    memcpy(meshdata->vertex, vert, meshdata->vertexSizeInFloat * sizeof(float));",
+        "res_region": "    //meshdata->vertexSizeInFloat = 13 * 4;\n    //meshdata->vertex = new float[meshdata->vertexSizeInFloat];\n    //float vert[] = {0.f,50.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    0.f,0.f,50.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f,\n    //    -50.f,0.f,0.f,1.f,1.f,0.f,0.f,0.f,0.f,1.f,0.f,0.f,0.f};\n    //memcpy(meshdata->vertex, vert, meshdata->vertexSizeInFloat * sizeof(float));\n    ",
+        "lookback": "    //meshdata->vertex = new float[meshdata->vertexSizeInFloat];",
+        "lookahead": "    //meshdata->numIndex = 4 * 3;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 159,
+        "end_line": 192,
+        "merge_gen_region": null,
+        "confidence": 0.7038961052894592,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    //meshdata->numIndex = 4 * 3;\n    //meshdata->indices = new unsigned short[meshdata->numIndex];\n    //unsigned short index[] = {0,1,2, 0,3,1, 0,2,3, 3,2,1};\n    //memcpy(meshdata->indices, index, meshdata->numIndex * sizeof(unsigned short));",
+        "b_contents": "    meshdata->numIndex = 4 * 3;\n    //meshdata->numIndex = 3;\n    meshdata->indices = new unsigned short[meshdata->numIndex];\n    unsigned short index[] = {0,1,2, 0,3,1, 0,2,3, 3,2,1};\n    //unsigned short index[] = {0,3,2};\n    //unsigned short index[] = {0,1,2};\n    memcpy(meshdata->indices, index, meshdata->numIndex * sizeof(unsigned short));",
+        "base_contents": "    meshdata->numIndex = 4 * 3;\n    //meshdata->numIndex = 3;\n    meshdata->indices = new unsigned short[meshdata->numIndex];\n    unsigned short index[] = {0,1,2, 0,3,1, 0,2,3, 3,2,1};\n    memcpy(meshdata->indices, index, meshdata->numIndex * sizeof(unsigned short));",
+        "res_region": "    //meshdata->numIndex = 4 * 3;\n    //meshdata->indices = new unsigned short[meshdata->numIndex];\n    //unsigned short index[] = {0,1,2, 0,3,1, 0,2,3, 3,2,1};\n    //memcpy(meshdata->indices, index, meshdata->numIndex * sizeof(unsigned short));",
+        "lookback": "    //meshdata->indices = new unsigned short[meshdata->numIndex];",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 194,
+        "end_line": 213,
+        "merge_gen_region": null,
+        "confidence": 0.787359893321991,
+        "hesitated": true
+    }
+]

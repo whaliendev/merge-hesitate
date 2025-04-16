@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t//! Maps nodes declaring a scope to scopes, i.e. ContractDefinition, FunctionDeclaration and\n\t//! StructDefinition (@todo not yet implemented), where nullptr denotes the global scope.\n\tstd::map<ASTNode const*, Scope> m_scopes;",
+        "b_contents": "\t/// Maps nodes declaring a scope to scopes, i.e. ContractDefinition, FunctionDeclaration and\n\t/// StructDefinition (@todo not yet implemented), where nullptr denotes the global scope.\n\tstd::map<ASTNode*, Scope> m_scopes;",
+        "base_contents": "\t//! Maps nodes declaring a scope to scopes, i.e. ContractDefinition, FunctionDeclaration and\n\t//! StructDefinition (@todo not yet implemented), where nullptr denotes the global scope.\n\tstd::map<ASTNode*, Scope> m_scopes;",
+        "res_region": "\t/// Maps nodes declaring a scope to scopes, i.e. ContractDefinition, FunctionDeclaration and\n\t/// StructDefinition (@todo not yet implemented), where nullptr denotes the global scope.\n\tstd::map<ASTNode const*, Scope> m_scopes;",
+        "lookback": "\t/// StructDefinition (@todo not yet implemented), where nullptr denotes the global scope.",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 59,
+        "end_line": 71,
+        "merge_gen_region": null,
+        "confidence": 0.7519395351409912,
+        "hesitated": true
+    }
+]

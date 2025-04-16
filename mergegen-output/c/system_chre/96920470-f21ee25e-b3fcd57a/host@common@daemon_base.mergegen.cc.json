@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "bool ChreDaemonBase::sendNanConfigurationUpdate(bool /*nanEnabled*/) {\n  LOGE(\"NAN is unsupported on this platform\");\n  return false;",
+        "b_contents": "#ifdef CHRE_DAEMON_METRIC_ENABLED\n        std::vector<VendorAtomValue> values(3);\n        values[0].set<VendorAtomValue::longValue>(\n            mPreloadedNanoappPendingTransactions.front().nanoappId);\n        values[1].set<VendorAtomValue::intValue>(\n            PixelAtoms::ChreHalNanoappLoadFailed::TYPE_PRELOADED);\n        values[2].set<VendorAtomValue::intValue>(\n            PixelAtoms::ChreHalNanoappLoadFailed::REASON_ERROR_GENERIC);\n        const VendorAtom atom{\n            .reverseDomainName = \"\",\n            .atomId = PixelAtoms::Atom::kChreHalNanoappLoadFailed,\n            .values{std::move(values)},\n        };\n        reportMetric(atom);\n#endif  // CHRE_DAEMON_METRIC_ENABLED\n      }\n      mPreloadedNanoappPendingTransactions.pop();\n    }\n  }",
+        "base_contents": "#ifdef CHRE_DAEMON_METRIC_ENABLED\n        std::vector<VendorAtomValue> values(3);\n        values[0].set<VendorAtomValue::longValue>(\n            mPreloadedNanoappPendingTransactions.front().nanoappId);\n        values[1].set<VendorAtomValue::intValue>(\n            PixelAtoms::ChreHalNanoappLoadFailed::TYPE_PRELOADED);\n        values[2].set<VendorAtomValue::intValue>(\n            PixelAtoms::ChreHalNanoappLoadFailed::REASON_ERROR_GENERIC);\n        const VendorAtom atom{\n            .reverseDomainName = PixelAtoms::ReverseDomainNames().pixel(),\n            .atomId = PixelAtoms::Atom::kChreHalNanoappLoadFailed,\n            .values{std::move(values)},\n        };\n        reportMetric(atom);\n#endif  // CHRE_DAEMON_METRIC_ENABLED\n      }\n      mPreloadedNanoappPendingTransactions.pop();\n    }\n  }",
+        "res_region": "bool ChreDaemonBase::sendNanConfigurationUpdate(bool /*nanEnabled*/) {\n  LOGE(\"NAN is unsupported on this platform\");\n  return false;",
+        "lookback": "  LOGE(\"NAN is unsupported on this platform\");",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 149,
+        "end_line": 193,
+        "merge_gen_region": null,
+        "confidence": 0.7177549004554749,
+        "hesitated": true
+    }
+]

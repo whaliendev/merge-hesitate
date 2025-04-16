@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/config_msgs/vehicle_config.pb.h\"",
+        "base_contents": "#include \"modules/common/configs/proto/vehicle_config.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/common/math/math_utils.h\"",
+        "lookahead": "#include \"modules/common/configs/vehicle_config_helper.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 36,
+        "end_line": 41,
+        "merge_gen_region": null,
+        "confidence": 0.590632438659668,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planner_open_space_config.pb.h\"",
+        "base_contents": "#include \"modules/planning/proto/planner_open_space_config.pb.h\"",
+        "res_region": "",
+        "lookback": "namespace apollo {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 49,
+        "end_line": 54,
+        "merge_gen_region": null,
+        "confidence": 0.5555658936500549,
+        "hesitated": true
+    }
+]

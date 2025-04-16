@@ -1,0 +1,87 @@
+[
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookahead": "                                         button_scale9->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 55,
+        "end_line": 64,
+        "merge_gen_region": null,
+        "confidence": 0.600895345211029,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookahead": "                                         button_scale9->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 128,
+        "end_line": 137,
+        "merge_gen_region": null,
+        "confidence": 0.600895345211029,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookahead": "                                         button_scale9->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 200,
+        "end_line": 209,
+        "merge_gen_region": null,
+        "confidence": 0.600895345211029,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookahead": "                                         button_scale9->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 269,
+        "end_line": 278,
+        "merge_gen_region": null,
+        "confidence": 0.600895345211029,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "b_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "base_contents": "        button_scale9->setSize(Size(100.0f, button_scale9->getContentSize().height));\n        button_scale9->setPosition(Point(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "res_region": "        button_scale9->setSize(Size(100.0f, button_scale9->getVirtualRendererSize().height));\n        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookback": "        button_scale9->setPosition(Vector2(layout->getSize().width - button_scale9->getSize().width / 2.0f,",
+        "lookahead": "                                         button_scale9->getSize().height / 2.0f));",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 339,
+        "end_line": 348,
+        "merge_gen_region": null,
+        "confidence": 0.600895345211029,
+        "hesitated": true
+    }
+]

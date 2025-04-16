@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\twlr_log(L_DEBUG, \"reaping %p %s\", container, container->name);\n\twhile (container->type != C_VIEW && container != &root_container && container->children->length == 0) {",
+        "b_contents": "\twlr_log(L_DEBUG, \"Reaping %p %s '%s'\", container,\n\t\t\tcontainer_type_to_str(container->type), container->name);\n\twhile (container->type != C_ROOT && container->type != C_OUTPUT\n\t\t\t&& container->children->length == 0) {",
+        "base_contents": "\twlr_log(L_DEBUG, \"reaping %p %s\", container, container->name);\n\twhile (container != &root_container && container->children->length == 0) {",
+        "res_region": "\twlr_log(L_DEBUG, \"Reaping %p %s '%s'\", container,\n\t\t\tcontainer_type_to_str(container->type), container->name);\n\twhile (container->type != C_ROOT && container->type != C_OUTPUT\n\t\t\t&& container->children->length == 0) {",
+        "lookback": "\t\t\tcontainer_type_to_str(container->type), container->name);",
+        "lookahead": "\t\tif (container->type == C_WORKSPACE) {",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 111,
+        "end_line": 122,
+        "merge_gen_region": null,
+        "confidence": 0.8433045148849487,
+        "hesitated": true
+    }
+]

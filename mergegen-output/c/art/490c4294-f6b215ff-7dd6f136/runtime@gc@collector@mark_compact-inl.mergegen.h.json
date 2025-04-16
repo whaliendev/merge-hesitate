@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  // Range to set bit: [begin, end]\n  uintptr_t end = begin + size - kAlignment;\n  const uintptr_t end_bit_idx = MemRangeBitmap::BitIndexFromAddr(end);\n  uintptr_t* begin_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(begin_bit_idx);\n  uintptr_t* end_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(end_bit_idx);\n  ptrdiff_t diff = end_bm_address - begin_bm_address;",
+        "b_contents": "  uintptr_t end = begin + size;\n  // We have to use the unchecked version of BitIndexFromAddr() as 'end' could\n  // be outside the range. Do explicit check here.\n  DCHECK_LE(end, MemRangeBitmap::CoverEnd());\n  const uintptr_t end_bit_idx = MemRangeBitmap::BitIndexFromAddrUnchecked(end);\n  uintptr_t* bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(begin_bit_idx);\n  uintptr_t* const end_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(end_bit_idx);",
+        "base_contents": "  const uintptr_t end_bit_idx = MemRangeBitmap::BitIndexFromAddr(begin + size);\n  uintptr_t* bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(begin_bit_idx);\n  uintptr_t* const end_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(end_bit_idx);",
+        "res_region": "  // Range to set bit: [begin, end]\n  uintptr_t end = begin + size - kAlignment;\n  const uintptr_t end_bit_idx = MemRangeBitmap::BitIndexFromAddr(end);\n  uintptr_t* begin_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(begin_bit_idx);\n  uintptr_t* end_bm_address = Bitmap::Begin() + Bitmap::BitIndexToWordIndex(end_bit_idx);\n  ptrdiff_t diff = end_bm_address - begin_bm_address;",
+        "lookback": "  uintptr_t end = begin + size - kAlignment;",
+        "lookahead": "  uintptr_t mask = Bitmap::BitIndexToMask(begin_bit_idx);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 32,
+        "end_line": 51,
+        "merge_gen_region": " Range set:begin end uintptrt = + -Alignment;outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8930287957191467,
+        "hesitated": false,
+        "resolved": false
+    }
+]

@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "    static FontFreeType* create(const std::string &fontName, int fontSize, GlyphCollection glyphs, \n        const char *customGlyphs,bool distanceFieldEnabled = false,int outline = 0);",
+        "b_contents": "    static FontFreeType * create(const std::string &fontName, int fontSize, GlyphCollection glyphs, \n        const char *customGlyphs,bool distanceFieldEnabled = false,int outline = 0);",
+        "base_contents": "    static FontFreeType * create(const std::string &fontName, int fontSize, GlyphCollection glyphs, const char *customGlyphs,bool distanceFieldEnabled = false,int outline = 0);",
+        "res_region": "    static FontFreeType* create(const std::string &fontName, int fontSize, GlyphCollection glyphs, \n        const char *customGlyphs,bool distanceFieldEnabled = false,int outline = 0);",
+        "lookback": "        const char *customGlyphs,bool distanceFieldEnabled = false,int outline = 0);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 56,
+        "end_line": 64,
+        "merge_gen_region": null,
+        "confidence": 0.6982631087303162,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    float getOutlineSize() const { return _outlineSize; }\n\n    void renderCharAt(unsigned char *dest,int posX, int posY, unsigned char* bitmap,long bitmapWidth,long bitmapHeight); \n\n    FT_Encoding getEncoding() const { return _encoding; }",
+        "b_contents": "    float getOutlineSize() const { return _outlineSize; }\n\n    void renderCharAt(unsigned char *dest,int posX, int posY, unsigned char* bitmap,long bitmapWidth,long bitmapHeight);\n\n    unsigned char* getGlyphBitmap(unsigned short charCode, long &outWidth, long &outHeight, Rect &outRect, int &xAdvance);\n\n    int getFontAscender() const;\n\n    FT_Encoding getEncoding() const { return _encoding; }\n\n    virtual FontAtlas* createFontAtlas() override;",
+        "base_contents": "    virtual FontAtlas   * createFontAtlas() override;\n    virtual int         * getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;\n    \n    unsigned char       * getGlyphBitmap(unsigned short theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);\n    \n    virtual int           getFontMaxHeight() const override { return _lineHeight; }\n    virtual int           getFontAscender() const;",
+        "res_region": "    float getOutlineSize() const { return _outlineSize; }\n\n    void renderCharAt(unsigned char *dest,int posX, int posY, unsigned char* bitmap,long bitmapWidth,long bitmapHeight); \n\n    FT_Encoding getEncoding() const { return _encoding; }\n\n    int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;\n    ",
+        "lookback": "",
+        "lookahead": "    unsigned char* getGlyphBitmap(unsigned short theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 70,
+        "end_line": 96,
+        "merge_gen_region": null,
+        "confidence": 0.6434887647628784,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;",
+        "b_contents": "    virtual int* getHorizontalKerningForTextUTF16(const std::u16string& text, int &outNumLetters) const override;",
+        "base_contents": "protected:",
+        "res_region": "",
+        "lookback": "    ",
+        "lookahead": "    unsigned char* getGlyphBitmap(unsigned short theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 98,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.8180007934570312,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    unsigned char* getGlyphBitmap(unsigned short theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);\n    \n    int getFontAscender() const;\n\n    virtual FontAtlas* createFontAtlas() override;\n    virtual int getFontMaxHeight() const override { return _lineHeight; }\nprivate:\n    static const char* _glyphASCII;\n    static const char* _glyphNEHE;\n    static FT_Library _FTlibrary;\n    static bool _FTInitialized;\n\n    FontFreeType(bool distanceFieldEnabled = false, int outline = 0);\n    virtual ~FontFreeType();\n\n    bool createFontObject(const std::string &fontName, int fontSize);",
+        "b_contents": "    virtual int getFontMaxHeight() const override { return _lineHeight; }\n\nprivate:\n    FontFreeType(bool distanceFieldEnabled = false, int outline = 0);\n    virtual ~FontFreeType();\n\n    bool   createFontObject(const std::string &fontName, int fontSize);",
+        "base_contents": "    FontFreeType(bool distanceFieldEnabled = false,int outline = 0);\n    virtual ~FontFreeType();\n    bool   createFontObject(const std::string &fontName, int fontSize);\n    \nprivate:",
+        "res_region": "    unsigned char* getGlyphBitmap(unsigned short theChar, long &outWidth, long &outHeight, Rect &outRect,int &xAdvance);\n    \n    int getFontAscender() const;\n\n    virtual FontAtlas* createFontAtlas() override;\n    virtual int getFontMaxHeight() const override { return _lineHeight; }\nprivate:\n    static const char* _glyphASCII;\n    static const char* _glyphNEHE;\n    static FT_Library _FTlibrary;\n    static bool _FTInitialized;\n\n    FontFreeType(bool distanceFieldEnabled = false, int outline = 0);\n    virtual ~FontFreeType();\n\n    bool createFontObject(const std::string &fontName, int fontSize);",
+        "lookback": "    ",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 106,
+        "end_line": 137,
+        "merge_gen_region": null,
+        "confidence": 0.8725610375404358,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    int getHorizontalKerningForChars(unsigned short firstChar, unsigned short secondChar) const;\n    unsigned char* getGlyphBitmapWithOutline(unsigned short code, FT_BBox &bbox);\n\n    void setGlyphCollection(GlyphCollection glyphs, const char* customGlyphs = nullptr);\n    const char* getGlyphCollection() const;",
+        "b_contents": "    int getHorizontalKerningForChars(unsigned short firstChar, unsigned short secondChar) const;\n    unsigned char* getGlyphBitmapWithOutline(unsigned short u16Code, FT_BBox &bbox);",
+        "base_contents": "    int  getHorizontalKerningForChars(unsigned short firstChar, unsigned short secondChar) const;\n    unsigned char       * getGlyphBitmapWithOutline(unsigned short theChar, FT_BBox &bbox);",
+        "res_region": "    int getHorizontalKerningForChars(unsigned short firstChar, unsigned short secondChar) const;\n    unsigned char* getGlyphBitmapWithOutline(unsigned short code, FT_BBox &bbox);\n\n    void setGlyphCollection(GlyphCollection glyphs, const char* customGlyphs = nullptr);\n    const char* getGlyphCollection() const;",
+        "lookback": "    unsigned char* getGlyphBitmapWithOutline(unsigned short code, FT_BBox &bbox);",
+        "lookahead": "    ",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 143,
+        "end_line": 155,
+        "merge_gen_region": null,
+        "confidence": 0.563964307308197,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    GlyphCollection _usedGlyphs;\n    std::string _customGlyphs;",
+        "b_contents": "    \n    FT_Encoding _encoding;",
+        "base_contents": "",
+        "res_region": "\n    GlyphCollection _usedGlyphs;\n    std::string _customGlyphs;",
+        "lookback": "    GlyphCollection _usedGlyphs;",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 166,
+        "end_line": 174,
+        "merge_gen_region": null,
+        "confidence": 0.575889527797699,
+        "hesitated": true
+    }
+]

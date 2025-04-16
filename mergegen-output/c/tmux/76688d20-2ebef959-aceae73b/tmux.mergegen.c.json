@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\tlogin_shell = (**argv == '-');\n\twhile ((opt = getopt(argc, argv, \"2c:Cdf:lL:qS:uUVv\")) != -1) {",
+        "b_contents": "\twhile ((opt = getopt(argc, argv, \"2c:Cdf:lL:qS:uUv\")) != -1) {",
+        "base_contents": "\tlogin_shell = (**argv == '-');\n\twhile ((opt = getopt(argc, argv, \"2c:Cdf:lL:qS:uUv\")) != -1) {",
+        "res_region": "\twhile ((opt = getopt(argc, argv, \"2c:Cdf:lL:qS:uUVv\")) != -1) {",
+        "lookback": "\t\tswitch (opt) {",
+        "lookahead": "\t\tswitch (opt) {",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 210,
+        "end_line": 218,
+        "merge_gen_region": null,
+        "confidence": 0.8122345209121704,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\tev_base = osdep_event_init();\n\texit(client_main(argc, argv, flags));",
+        "b_contents": "\texit(client_main(event_init(), argc, argv, flags));",
+        "base_contents": "\tev_base = event_init();\n\texit(client_main(argc, argv, flags));",
+        "res_region": "\texit(client_main(event_init(), argc, argv, flags));",
+        "lookback": "}",
+        "lookahead": "}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 364,
+        "end_line": 372,
+        "merge_gen_region": null,
+        "confidence": 0.45674073696136475,
+        "hesitated": true
+    }
+]

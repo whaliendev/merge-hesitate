@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "b_contents": "    virtual audio_utils::mutex& mutex() const = 0;",
+        "base_contents": "    virtual Mutex& mutex() const = 0;",
+        "res_region": "    virtual audio_utils::mutex& mutex() const\n            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "lookback": "            RETURN_CAPABILITY(audio_utils::AudioFlinger_Mutex) = 0;",
+        "lookahead": "    virtual const sp<PatchCommandThread>& getPatchCommandThread() = 0;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 33,
+        "end_line": 40,
+        "merge_gen_region": " audioutilsmutex mutex const_(_BBvirtual\",BB",
+        "confidence": 0.8913068175315857,
+        "hesitated": false,
+        "resolved": false
+    }
+]

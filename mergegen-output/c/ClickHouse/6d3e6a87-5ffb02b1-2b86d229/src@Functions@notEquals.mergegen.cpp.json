@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionNotEquals>(params));",
+        "b_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionNotEquals>(check_decimal_overflow, allow_not_comparable_types));",
+        "base_contents": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionNotEquals>(check_decimal_overflow));",
+        "res_region": "        = std::make_unique<FunctionToOverloadResolverAdaptor>(std::make_shared<FunctionNotEquals>(params));",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 19,
+        "end_line": 25,
+        "merge_gen_region": null,
+        "confidence": 0.8406766653060913,
+        "hesitated": true
+    }
+]

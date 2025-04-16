@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "namespace org {\nnamespace chromium {\nclass NetworkProxyServiceInterfaceProxyInterface;\n}  // namespace chromium\n}  // namespace org\n",
+        "b_contents": "class MetricsLibraryInterface;\n",
+        "base_contents": "class MetricsLibraryInterface;\n\nnamespace org {\nnamespace chromium {\nclass NetworkProxyServiceInterfaceProxyInterface;\n}  // namespace chromium\n}  // namespace org\n",
+        "res_region": "",
+        "lookback": "class PolicyProvider;",
+        "lookahead": "namespace policy {",
+        "label": [
+            "deletion",
+            "complex_conflict"
+        ],
+        "start_line": 48,
+        "end_line": 67,
+        "merge_gen_region": "",
+        "confidence": 0.8911426067352295,
+        "hesitated": false,
+        "resolved": true
+    }
+]

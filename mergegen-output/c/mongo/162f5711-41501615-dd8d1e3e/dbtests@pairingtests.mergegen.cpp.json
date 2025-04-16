@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"../db/replpair.h\"",
+        "b_contents": "#include \"../db/repl/replset.h\"",
+        "base_contents": "#include \"../db/replset.h\"",
+        "res_region": "#include \"../db/replpair.h\"",
+        "lookback": "#include \"dbtests.h\"",
+        "lookahead": "#include \"dbtests.h\"",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 20,
+        "end_line": 26,
+        "merge_gen_region": null,
+        "confidence": 0.6681472659111023,
+        "hesitated": true
+    }
+]

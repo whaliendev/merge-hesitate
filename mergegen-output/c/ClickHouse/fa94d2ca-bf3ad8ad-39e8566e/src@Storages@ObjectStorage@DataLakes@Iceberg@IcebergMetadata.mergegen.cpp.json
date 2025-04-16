@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    StorageObjectStorageSource::ObjectInfo object_info(manifest_list_file);",
+        "b_contents": "    ObjectInfo object_info(\n        std::filesystem::path(configuration_ptr->getPath()) / \"metadata\" / manifest_list_file);",
+        "base_contents": "    StorageObjectStorageSource::ObjectInfo object_info(\n        std::filesystem::path(configuration_ptr->getPath()) / \"metadata\" / manifest_list_file);",
+        "res_region": "    StorageObjectStorage::ObjectInfo object_info(manifest_list_file);",
+        "lookback": "    auto manifest_list_buf = StorageObjectStorageSource::createReadBuffer(object_info, object_storage, context, log);",
+        "lookahead": "    auto manifest_list_buf = StorageObjectStorageSource::createReadBuffer(object_info, object_storage, context, log);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 332,
+        "end_line": 340,
+        "merge_gen_region": null,
+        "confidence": 0.6573965549468994,
+        "hesitated": true
+    }
+]

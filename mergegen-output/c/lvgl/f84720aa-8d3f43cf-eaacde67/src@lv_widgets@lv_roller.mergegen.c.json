@@ -1,0 +1,104 @@
+[
+    {
+        "a_contents": "    lv_roller_t * roller = (lv_roller_t*)obj;\n    lv_obj_t * label = get_label(obj);\n\n    roller->sel_opt_id     = 0;\n    roller->sel_opt_id_ori = 0;",
+        "b_contents": "    lv_roller_ext_t * ext = lv_obj_get_ext_attr(roller);\n    lv_obj_t * label = get_label(roller);\n\n    ext->sel_opt_id     = 0;\n    ext->sel_opt_id_ori = 0;",
+        "base_contents": "\n    lv_roller_ext_t * ext = lv_obj_get_ext_attr(roller);\n    lv_obj_t * label = get_label(roller);\n\n    ext->sel_opt_id     = 0;\n    ext->sel_opt_id_ori = 0;",
+        "res_region": "    lv_roller_t * roller = (lv_roller_t*)obj;\n    lv_obj_t * label = get_label(obj);\n\n    roller->sel_opt_id     = 0;\n    roller->sel_opt_id_ori = 0;",
+        "lookback": "    lv_obj_t * label = get_label(obj);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 107,
+        "end_line": 126,
+        "merge_gen_region": null,
+        "confidence": 0.777344286441803,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n/**********************\n *   STATIC FUNCTIONS\n **********************/\n",
+        "base_contents": "\n\n/**********************\n *   STATIC FUNCTIONS\n **********************/\n",
+        "res_region": "",
+        "lookback": "/**",
+        "lookahead": "/**",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 368,
+        "end_line": 382,
+        "merge_gen_region": null,
+        "confidence": 0.8104199767112732,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    else if(mode == LV_DRAW_MODE_MAIN_DRAW) {\n        /* Split the drawing of the label into  an upper (above the selected area)",
+        "b_contents": "    else if(mode == LV_DESIGN_DRAW_MAIN) {\n        /* Split the drawing of the label into an upper (above the selected area)",
+        "base_contents": "    else if(mode == LV_DESIGN_DRAW_MAIN) {\n        /* Split the drawing of the label into  an upper (above the selected area)",
+        "res_region": "    else if(mode == LV_DRAW_MODE_MAIN_DRAW) {\n        /* Split the drawing of the label into  an upper (above the selected area)",
+        "lookback": "        /* Split the drawing of the label into  an upper (above the selected area)",
+        "lookahead": "         * and a lower (below the selected area)*/",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 503,
+        "end_line": 512,
+        "merge_gen_region": null,
+        "confidence": 0.5931499004364014,
+        "hesitated": true
+    },
+    {
+        "a_contents": " * Refresh the position of the roller. It uses the id stored in: roller->ddlist.selected_option_id",
+        "b_contents": " * Draw a rectangle which has gradient on its top and bottom\n * @param roller pointer to a roller object\n * @param clip_area pointer to the current mask (from the design function)\n */\nstatic void draw_bg(lv_obj_t * roller, const lv_area_t * clip_area)\n{\n    lv_draw_rect_dsc_t bg_dsc;\n    lv_draw_rect_dsc_init(&bg_dsc);\n    lv_obj_init_draw_rect_dsc(roller, LV_ROLLER_PART_BG, &bg_dsc);\n\n    /*With non-vertical gradient simply draw the background*/\n    if(bg_dsc.bg_grad_dir == LV_GRAD_DIR_NONE) {\n        lv_draw_rect(&roller->coords, clip_area, &bg_dsc);\n        return;\n    }\n\n    /*With vertical gradient mirror it*/\n\n    lv_area_t half_mask;\n    lv_coord_t h = lv_obj_get_height(roller);\n    bool union_ok;\n\n    lv_area_copy(&half_mask, &roller->coords);\n    half_mask.x1 -= roller->ext_draw_pad; /*Add ext size too (e.g. because of shadow draw) */\n    half_mask.x2 += roller->ext_draw_pad;\n    half_mask.y1 -= roller->ext_draw_pad;\n    half_mask.y2 = roller->coords.y1 + h / 2;\n\n    union_ok = _lv_area_intersect(&half_mask, &half_mask, clip_area);\n    bg_dsc.bg_main_color_stop = bg_dsc.bg_main_color_stop / 2;\n    bg_dsc.bg_grad_color_stop = 128 - (255 - bg_dsc.bg_grad_color_stop) / 2;\n    if(union_ok) {\n        lv_draw_rect(&roller->coords, &half_mask, &bg_dsc);\n    }\n\n    lv_area_copy(&half_mask, &roller->coords);\n    half_mask.x1 -= roller->ext_draw_pad; /*Revert ext. size adding*/\n    half_mask.x2 += roller->ext_draw_pad;\n    half_mask.y1 = roller->coords.y1 + h / 2;\n    half_mask.y2 += roller->ext_draw_pad;\n\n    union_ok = _lv_area_intersect(&half_mask, &half_mask, clip_area);\n    if(union_ok) {\n        lv_color_t c = bg_dsc.bg_color;\n        bg_dsc.bg_color = bg_dsc.bg_grad_color;\n        bg_dsc.bg_grad_color = c;\n\n        bg_dsc.bg_main_color_stop += 127;\n        bg_dsc.bg_grad_color_stop += 127;\n        lv_draw_rect(&roller->coords, &half_mask, &bg_dsc);\n    }\n}\n\n/**\n * Refresh the position of the roller. It uses the id stored in: ext->ddlist.selected_option_id",
+        "base_contents": " * Draw a rectangle which has gradient on its top and bottom\n * @param roller pointer to a roller object\n * @param clip_area pointer to the current mask (from the design function)\n */\nstatic void draw_bg(lv_obj_t * roller, const lv_area_t * clip_area)\n{\n    lv_draw_rect_dsc_t bg_dsc;\n    lv_draw_rect_dsc_init(&bg_dsc);\n    lv_obj_init_draw_rect_dsc(roller, LV_ROLLER_PART_BG, &bg_dsc);\n\n    /*With non-vertical gradient simply draw the background*/\n    if(bg_dsc.bg_grad_dir == LV_GRAD_DIR_NONE) {\n        lv_draw_rect(&roller->coords, clip_area, &bg_dsc);\n        return;\n    }\n\n    /*With vertical gradient mirror it*/\n\n    lv_area_t half_mask;\n    lv_coord_t h = lv_obj_get_height(roller);\n    bool union_ok;\n\n    lv_area_copy(&half_mask, &roller->coords);\n    half_mask.x1 -= roller->ext_draw_pad; /*Add ext size too (e.g. because of shadow draw) */\n    half_mask.x2 += roller->ext_draw_pad;\n    half_mask.y1 -= roller->ext_draw_pad;\n    half_mask.y2 = roller->coords.y1 + h / 2;\n\n    union_ok = _lv_area_intersect(&half_mask, &half_mask, clip_area);\n    bg_dsc.bg_main_color_stop = bg_dsc.bg_main_color_stop / 2;\n    bg_dsc.bg_grad_color_stop = 128 - (255 - bg_dsc.bg_grad_color_stop) / 2;\n    if(union_ok) {\n        lv_draw_rect(&roller->coords, &half_mask, &bg_dsc);\n    }\n\n    lv_area_copy(&half_mask, &roller->coords);\n    half_mask.x1 -= roller->ext_draw_pad; /*Revert ext. size adding*/\n    half_mask.x2 += roller->ext_draw_pad;\n    half_mask.y1 = roller->coords.y1 + h / 2;\n    half_mask.y2 += roller->ext_draw_pad;\n\n    union_ok = _lv_area_intersect(&half_mask, &half_mask, clip_area);\n    if(union_ok) {\n        lv_color_t c = bg_dsc.bg_color;\n        bg_dsc.bg_color = bg_dsc.bg_grad_color;\n        bg_dsc.bg_grad_color = c;\n\n        bg_dsc.bg_main_color_stop += 127;\n        bg_dsc.bg_grad_color_stop += 127;\n        lv_draw_rect(&roller->coords, &half_mask, &bg_dsc);\n    }\n}\n\n\n/**\n * Refresh the position of the roller. It uses the id stored in: ext->ddlist.selected_option_id",
+        "res_region": " * Refresh the position of the roller. It uses the id stored in: roller->ddlist.selected_option_id",
+        "lookback": " * @param roller pointer to a roller object",
+        "lookahead": " * @param roller pointer to a roller object",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 691,
+        "end_line": 806,
+        "merge_gen_region": null,
+        "confidence": 0.7715803980827332,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\nstatic lv_res_t release_handler(lv_obj_t * obj)",
+        "b_contents": "static lv_res_t release_handler(lv_obj_t * roller)",
+        "base_contents": "\nstatic lv_res_t release_handler(lv_obj_t * roller)",
+        "res_region": "static lv_res_t release_handler(lv_obj_t * obj)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 877,
+        "end_line": 885,
+        "merge_gen_region": null,
+        "confidence": 0.4802578389644623,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        int16_t new_opt  = -1;\n        if(roller->moved == 0) {\n            new_opt = 0;\n            lv_point_t p;\n            lv_indev_get_point(indev, &p);\n            p.y -= label->coords.y1;\n            p.x -= label->coords.x1;\n            uint32_t letter_i;\n            letter_i = lv_label_get_letter_on(label, &p);\n\n            const char * txt  = lv_label_get_text(label);\n            uint32_t i        = 0;\n            uint32_t i_prev   = 0;\n\n            uint32_t letter_cnt = 0;\n            for(letter_cnt = 0; letter_cnt < letter_i; letter_cnt++) {\n                uint32_t letter = _lv_txt_encoded_next(txt, &i);\n                /*Count he lines to reach the clicked letter. But ignore the last '\\n' because it\n                 * still belongs to the clicked line*/\n                if(letter == '\\n' && i_prev != letter_i) new_opt++;\n                i_prev = i;\n            }\n        } else {\n            /*If dragged then align the list to have an element in the middle*/\n            const lv_font_t * font = lv_obj_get_style_text_font(obj, LV_PART_MAIN);\n            lv_coord_t line_space = lv_obj_get_style_text_line_space(obj, LV_PART_MAIN);\n            lv_coord_t font_h              = lv_font_get_line_height(font);",
+        "b_contents": "        uint16_t new_opt  = 0;\n        lv_point_t p;\n        lv_indev_get_point(indev, &p);\n        p.y -= label->coords.y1;\n        p.x -= label->coords.x1;\n        uint32_t letter_i;\n        letter_i = lv_label_get_letter_on(label, &p);\n\n        const char * txt  = lv_label_get_text(label);\n        uint32_t i        = 0;\n        uint32_t i_prev   = 0;\n\n        uint32_t letter_cnt = 0;\n        for(letter_cnt = 0; letter_cnt < letter_i; letter_cnt++) {\n            uint32_t letter = _lv_txt_encoded_next(txt, &i);\n            /*Count he lines to reach the clicked letter. But ignore the last '\\n' because it\n             * still belongs to the clicked line*/\n            if(letter == '\\n' && i_prev != letter_i) new_opt++;\n            i_prev = i;\n        }\n        lv_roller_set_selected(roller, new_opt, LV_ANIM_ON);\n    }\n\n    uint32_t id  = ext->sel_opt_id; /*Just to use uint32_t in event data*/\n    lv_res_t res = lv_event_send(roller, LV_EVENT_VALUE_CHANGED, &id);\n    return res;\n}\n\nstatic void refr_width(lv_obj_t * roller)\n{\n    lv_obj_t * label = get_label(roller);\n    if(label == NULL) return;\n\n    switch(lv_label_get_align(label)) {\n        case LV_LABEL_ALIGN_LEFT:\n            lv_obj_align(label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0);\n            break;\n        case LV_LABEL_ALIGN_CENTER:\n            lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);\n            break;\n        case LV_LABEL_ALIGN_RIGHT:\n            lv_obj_align(label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);\n            break;\n    }\n\n    if(lv_roller_get_auto_fit(roller) == false) return;",
+        "base_contents": "        uint16_t new_opt  = 0;\n        lv_point_t p;\n        lv_indev_get_point(indev, &p);\n        p.y -= label->coords.y1;\n        p.x -= label->coords.x1;\n        uint32_t letter_i;\n        letter_i = lv_label_get_letter_on(label, &p);\n\n        const char * txt  = lv_label_get_text(label);\n        uint32_t i        = 0;\n        uint32_t i_prev   = 0;\n\n        uint32_t letter_cnt = 0;\n        for(letter_cnt = 0; letter_cnt < letter_i; letter_cnt++) {\n            uint32_t letter = _lv_txt_encoded_next(txt, &i);\n            /*Count he lines to reach the clicked letter. But ignore the last '\\n' because it\n             * still belongs to the clicked line*/\n            if(letter == '\\n' && i_prev != letter_i) new_opt++;\n            i_prev = i;\n        }\n        lv_roller_set_selected(roller, new_opt, LV_ANIM_ON);\n    }\n\n    uint32_t id  = ext->sel_opt_id; /*Just to use uint32_t in event data*/\n    lv_res_t res = lv_event_send(roller, LV_EVENT_VALUE_CHANGED, &id);\n    return res;\n}\n\nstatic void refr_width(lv_obj_t * roller)\n{\n    lv_obj_t * label = get_label(roller);\n    if(label == NULL) return;\n\n    switch(lv_label_get_align(label)) {\n        case LV_LABEL_ALIGN_LEFT:\n            lv_obj_align(label, NULL, LV_ALIGN_IN_LEFT_MID, 0, 0);\n            break;\n        case LV_LABEL_ALIGN_CENTER:\n            lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);\n            break;\n        case LV_LABEL_ALIGN_RIGHT:\n            lv_obj_align(label, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);\n            break;\n    }\n\n\n    if(lv_roller_get_auto_fit(roller) == false) return;",
+        "res_region": "        int16_t new_opt  = -1;\n        if(roller->moved == 0) {\n            new_opt = 0;\n            lv_point_t p;\n            lv_indev_get_point(indev, &p);\n            p.y -= label->coords.y1;\n            p.x -= label->coords.x1;\n            uint32_t letter_i;\n            letter_i = lv_label_get_letter_on(label, &p);\n\n            const char * txt  = lv_label_get_text(label);\n            uint32_t i        = 0;\n            uint32_t i_prev   = 0;\n\n            uint32_t letter_cnt = 0;\n            for(letter_cnt = 0; letter_cnt < letter_i; letter_cnt++) {\n                uint32_t letter = _lv_txt_encoded_next(txt, &i);\n                /*Count he lines to reach the clicked letter. But ignore the last '\\n' because it\n                 * still belongs to the clicked line*/\n                if(letter == '\\n' && i_prev != letter_i) new_opt++;\n                i_prev = i;\n            }\n        } else {\n            /*If dragged then align the list to have an element in the middle*/\n            const lv_font_t * font = lv_obj_get_style_text_font(obj, LV_PART_MAIN);\n            lv_coord_t line_space = lv_obj_get_style_text_line_space(obj, LV_PART_MAIN);\n            lv_coord_t font_h              = lv_font_get_line_height(font);",
+        "lookback": "        if(roller->moved == 0) {",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 911,
+        "end_line": 1034,
+        "merge_gen_region": null,
+        "confidence": 0.8643824458122253,
+        "hesitated": true
+    }
+]

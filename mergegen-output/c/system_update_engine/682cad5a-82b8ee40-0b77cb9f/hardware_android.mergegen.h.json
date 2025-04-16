@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  int64_t GetBuildTimestamp() const override;",
+        "b_contents": "  bool GetFirstActiveOmahaPingSent() const override;\n  void SetFirstActiveOmahaPingSent() override;",
+        "base_contents": "",
+        "res_region": "  int64_t GetBuildTimestamp() const override;\n  bool GetFirstActiveOmahaPingSent() const override;\n  void SetFirstActiveOmahaPingSent() override;",
+        "lookback": "  bool GetFirstActiveOmahaPingSent() const override;",
+        "lookahead": "",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 49,
+        "end_line": 55,
+        "merge_gen_region": null,
+        "confidence": 0.8129453063011169,
+        "hesitated": true
+    }
+]

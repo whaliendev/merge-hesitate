@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "// not needed with the includes above, added to prevent transitive include dependency.\n#include <utils/KeyedVector.h>\n#include <utils/String16.h>\n#include <atomic>\n#include <functional>\n#include <map>\n#include <optional>\n#include <set>",
+        "b_contents": "#include <datapath/AudioHwDevice.h>\n#include <datapath/AudioStreamIn.h>\n#include <datapath/AudioStreamOut.h>\n#include <datapath/SpdifStreamOut.h>\n#include <datapath/ThreadMetrics.h>\n#include <datapath/TrackMetrics.h>\n#include <fastpath/FastCapture.h>\n#include <fastpath/FastMixer.h>\n#include <media/nbaio/NBAIO.h>\n\n#include <android/os/IPowerManager.h>\n\n#include <media/nblog/NBLog.h>\n#include <private/media/AudioEffectShared.h>\n#include <private/media/AudioTrackShared.h>\n\n#include <vibrator/ExternalVibration.h>\n#include <vibrator/ExternalVibrationUtils.h>\n\n#include \"android/media/BnAudioRecord.h\"\n#include \"android/media/BnEffect.h\"\n\n#include \"Client.h\"\n#include \"ResamplerBufferProvider.h\"\n\n// include AudioFlinger component interfaces\n#include \"IAfEffect.h\"\n#include \"IAfTrack.h\"",
+        "base_contents": "#include <datapath/AudioHwDevice.h>\n#include <datapath/AudioStreamOut.h>\n#include <datapath/SpdifStreamOut.h>\n#include <datapath/ThreadMetrics.h>\n#include <datapath/TrackMetrics.h>\n#include <fastpath/FastCapture.h>\n#include <fastpath/FastMixer.h>\n#include <media/nbaio/NBAIO.h>\n\n#include <android/os/IPowerManager.h>\n\n#include <media/nblog/NBLog.h>\n#include <private/media/AudioEffectShared.h>\n#include <private/media/AudioTrackShared.h>\n\n#include <vibrator/ExternalVibration.h>\n#include <vibrator/ExternalVibrationUtils.h>\n\n#include \"android/media/BnAudioRecord.h\"\n#include \"android/media/BnEffect.h\"\n\n#include \"Client.h\"\n#include \"ResamplerBufferProvider.h\"\n\n// include AudioFlinger component interfaces\n#include \"IAfEffect.h\"\n#include \"IAfTrack.h\"",
+        "res_region": "// not needed with the includes above, added to prevent transitive include dependency.\n#include <utils/KeyedVector.h>\n#include <utils/String16.h>\n#include <atomic>\n#include <functional>\n#include <map>\n#include <optional>\n#include <set>",
+        "lookback": "#include <utils/KeyedVector.h>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 38,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.7724953889846802,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\npublic:\n    class RecordThread;\n    class PlaybackThread;\n    class MixerThread;\n    class DirectOutputThread;\n    class OffloadThread;\n    class DuplicatingThread;\n    class AsyncCallbackThread;\n    class BitPerfectThread;\nprivate:\n    class DeviceEffectManager;\n    // TODO(b/288339104) these should be separate files\npublic:\n    class PatchPanel;\n    class DeviceEffectManagerCallback;\nprivate:\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n    struct  stream_type_t {\n        stream_type_t()\n            :   volume(1.0f),\n                mute(false)\n        {\n        }\n        float       volume;\n        bool        mute;\n    };\n\n    // --- PlaybackThread ---\n\n#include \"Threads.h\"\n\n#include \"PatchPanel.h\"\n\n#include \"PatchCommandThread.h\"\n\n#include \"DeviceEffectManager.h\"\n\n#include \"MelReporter.h\"\n",
+        "base_contents": "    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge();\n\n    // TODO(b/288339104) replace these forward declaration classes with interfaces.\npublic:\n    class RecordThread;\n    class PlaybackThread;\n    class MixerThread;\n    class DirectOutputThread;\n    class OffloadThread;\n    class DuplicatingThread;\n    class AsyncCallbackThread;\n    class BitPerfectThread;\nprivate:\n    class DeviceEffectManager;\n    // TODO(b/288339104) these should be separate files\npublic:\n    class PatchPanel;\n    class DeviceEffectManagerCallback;\nprivate:\n    struct AudioStreamIn;\n    struct TeePatch;\npublic:\n    using TeePatches = std::vector<TeePatch>;\nprivate:\n\n    struct  stream_type_t {\n        stream_type_t()\n            :   volume(1.0f),\n                mute(false)\n        {\n        }\n        float       volume;\n        bool        mute;\n    };\n\n    // --- PlaybackThread ---\n\n#include \"Threads.h\"\n\n#include \"PatchPanel.h\"\n\n#include \"PatchCommandThread.h\"\n\n#include \"DeviceEffectManager.h\"\n\n#include \"MelReporter.h\"\n",
+        "res_region": "",
+        "lookback": "    // Preference is given to an io handle with a matching effect chain to session id.",
+        "lookahead": "    // Find io handle by session id.",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 522,
+        "end_line": 622,
+        "merge_gen_region": " Preference given an handle a matching chain session.",
+        "confidence": 0.9136207699775696,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "            const std::function<bool(const sp<IAfPlaybackThread>&)>& useThread = nullptr);",
+        "b_contents": "                        const std::function<bool(const sp<PlaybackThread>&)>& useThread = nullptr);\n\n    struct TeePatch {\n        sp<IAfPatchRecord> patchRecord;\n        sp<IAfPatchTrack> patchTrack;\n    };",
+        "base_contents": "                        const std::function<bool(const sp<PlaybackThread>&)>& useThread = nullptr);\n\n    // AudioStreamIn is immutable, so their fields are const.\n    // For emphasis, we could also make all pointers to them be \"const *\",\n    // but that would clutter the code unnecessarily.\n\n    struct AudioStreamIn : public Source {\n        AudioHwDevice* const audioHwDev;\n        sp<StreamInHalInterface> stream;\n        audio_input_flags_t flags;\n\n        sp<DeviceHalInterface> hwDev() const { return audioHwDev->hwDevice(); }\n\n        AudioStreamIn(AudioHwDevice *dev, const sp<StreamInHalInterface>& in,\n                audio_input_flags_t flags) :\n            audioHwDev(dev), stream(in), flags(flags) {}\n        status_t read(void *buffer, size_t bytes, size_t *read) override {\n            return stream->read(buffer, bytes, read);\n        }\n        status_t getCapturePosition(int64_t *frames, int64_t *time) override {\n            return stream->getCapturePosition(frames, time);\n        }\n        status_t standby() override { return stream->standby(); }\n    };\n\n    struct TeePatch {\n        sp<IAfPatchRecord> patchRecord;\n        sp<IAfPatchTrack> patchTrack;\n    };",
+        "res_region": "            const std::function<bool(const sp<IAfPlaybackThread>&)>& useThread = nullptr);",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 701,
+        "end_line": 740,
+        "merge_gen_region": null,
+        "confidence": 0.7441153526306152,
+        "hesitated": true
+    }
+]

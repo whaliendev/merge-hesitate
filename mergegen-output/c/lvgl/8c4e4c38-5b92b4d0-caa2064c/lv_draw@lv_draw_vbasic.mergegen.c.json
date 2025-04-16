@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    static lv_color_t color_array_tmp[LV_HOR_RES_MAX];       /*Used by 'lv_disp_mem_blend'*/",
+        "b_contents": "    static LV_ATTRIBUTE_MEM_ALIGN lv_color_t color_array_tmp[LV_HOR_RES];       /*Used by 'lv_disp_mem_blend'*/",
+        "base_contents": "    static lv_color_t color_array_tmp[LV_HOR_RES];       /*Used by 'lv_disp_mem_blend'*/",
+        "res_region": "    static LV_ATTRIBUTE_MEM_ALIGN lv_color_t color_array_tmp[LV_HOR_RES_MAX];       /*Used by 'lv_disp_mem_blend'*/",
+        "lookback": "    static lv_coord_t last_width = -1;",
+        "lookahead": "    static lv_coord_t last_width = -1;",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 153,
+        "end_line": 159,
+        "merge_gen_region": null,
+        "confidence": 0.8251398801803589,
+        "hesitated": true
+    }
+]

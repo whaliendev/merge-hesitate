@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\t\tstrvec_push(argv, \"-q\");",
+        "b_contents": "\t\targv_array_push(argv, \"-q\");\n\tif (family == TRANSPORT_FAMILY_IPV4)\n\t\targv_array_push(argv, \"--ipv4\");\n\telse if (family == TRANSPORT_FAMILY_IPV6)\n\t\targv_array_push(argv, \"--ipv6\");",
+        "base_contents": "\t\targv_array_push(argv, \"-q\");",
+        "res_region": "\t\tstrvec_push(argv, \"-q\");\n\tif (family == TRANSPORT_FAMILY_IPV4)\n\t\tstrvec_push(argv, \"--ipv4\");\n\telse if (family == TRANSPORT_FAMILY_IPV6)\n\t\tstrvec_push(argv, \"--ipv6\");",
+        "lookback": "\tif (family == TRANSPORT_FAMILY_IPV4)",
+        "lookahead": "}",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1553,
+        "end_line": 1563,
+        "merge_gen_region": null,
+        "confidence": 0.8574292659759521,
+        "hesitated": true
+    }
+]

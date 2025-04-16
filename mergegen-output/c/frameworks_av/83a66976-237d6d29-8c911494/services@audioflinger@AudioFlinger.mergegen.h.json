@@ -1,0 +1,191 @@
+[
+    {
+        "a_contents": "    , public IAfPatchPanelCallback\n    , public IAfThreadCallback",
+        "b_contents": "    , public IAfPatchPanelCallback",
+        "base_contents": "",
+        "res_region": "    , public IAfPatchPanelCallback\n    , public IAfThreadCallback",
+        "lookback": "    , public IAfThreadCallback",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 56,
+        "end_line": 62,
+        "merge_gen_region": null,
+        "confidence": 0.8586561679840088,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "    // TODO(b/291319167) Create interface and remove friends.\n    // TODO(b/291012167) replace the Thread friends with an interface.\n    friend class DirectOutputThread;\n    friend class MixerThread;\n    friend class MmapPlaybackThread;\n    friend class MmapThread;\n    friend class PlaybackThread;\n    friend class RecordThread;\n    friend class ThreadBase;\n",
+        "base_contents": "    // TODO(b/291319167) Create interface and remove friends.\n    friend class PatchPanel;\n    // TODO(b/291012167) replace the Thread friends with an interface.\n    friend class DirectOutputThread;\n    friend class MixerThread;\n    friend class MmapPlaybackThread;\n    friend class MmapThread;\n    friend class PlaybackThread;\n    friend class RecordThread;\n    friend class ThreadBase;\n",
+        "res_region": "",
+        "lookback": "    static void instantiate() ANDROID_API;",
+        "lookahead": "public:",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 65,
+        "end_line": 89,
+        "merge_gen_region": "",
+        "confidence": 0.9149900078773499,
+        "hesitated": false,
+        "resolved": true
+    },
+    {
+        "a_contents": "    // ---- begin IAfPatchPanelCallback interface\n\n    void closeThreadInternal_l(const sp<IAfPlaybackThread>& thread) final REQUIRES(mutex());\n    void closeThreadInternal_l(const sp<IAfRecordThread>& thread) final REQUIRES(mutex());\n    // return thread associated with primary hardware device, or NULL\n    IAfPlaybackThread* primaryPlaybackThread_l() const final  REQUIRES(mutex());\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final\n            REQUIRES(mutex());\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final  REQUIRES(mutex());\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final REQUIRES(mutex());\n    sp<IAfThreadBase> openInput_l(audio_module_handle_t module,\n            audio_io_handle_t* input,\n            audio_config_t* config,\n            audio_devices_t device,\n            const char* address,\n            audio_source_t source,\n            audio_input_flags_t flags,\n            audio_devices_t outputDevice,\n            const String8& outputDeviceAddress) final REQUIRES(mutex());\n    sp<IAfThreadBase> openOutput_l(audio_module_handle_t module,\n            audio_io_handle_t* output,\n            audio_config_t* halConfig,\n            audio_config_base_t* mixerConfig,\n            audio_devices_t deviceType,\n            const String8& address,\n            audio_output_flags_t flags) final REQUIRES(mutex());\n    const DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*>&\n            getAudioHwDevs_l() const final REQUIRES(mutex()) { return mAudioHwDevs; }\n    void updateDownStreamPatches_l(const struct audio_patch* patch,\n            const std::set<audio_io_handle_t>& streams) final REQUIRES(mutex());\n    void updateOutDevicesForRecordThreads_l(const DeviceDescriptorBaseVector& devices) final\n            REQUIRES(mutex());\n\n    // ---- end of IAfPatchPanelCallback interface\n\n    // ----- begin IAfThreadCallback interface\n\n    bool isNonOffloadableGlobalEffectEnabled_l() const final REQUIRES(mutex());\n    bool btNrecIsOff() const final { return mBtNrecIsOff.load(); }\n    float masterVolume_l() const final REQUIRES(mutex());\n    bool masterMute_l() const final REQUIRES(mutex());\n    float getMasterBalance_l() const REQUIRES(mutex());\n    // no range check, AudioFlinger::mutex() held\n    bool streamMute_l(audio_stream_type_t stream) const final REQUIRES(mutex()) {\n        return mStreamTypes[stream].mute;\n    }\n    audio_mode_t getMode() const final { return mMode; }\n    bool isLowRamDevice() const final { return mIsLowRamDevice; }\n    uint32_t getScreenState() const final { return mScreenState; }\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l() const final\n            REQUIRES(mutex());\n    const sp<IAfPatchPanel>& getPatchPanel() const final { return mPatchPanel; }\n    const sp<MelReporter>& getMelReporter() const final { return mMelReporter; }\n    const sp<EffectsFactoryHalInterface>& getEffectsFactoryHal() const final {\n        return mEffectsFactoryHal;\n    }\n    sp<IAudioManager> getOrCreateAudioManager() final;\n\n    // Called when the last effect handle on an effect instance is removed. If this\n    // effect belongs to an effect chain in mOrphanEffectChains, the chain is updated\n    // and removed from mOrphanEffectChains if it does not contain any effect.\n    // Return true if the effect was found in mOrphanEffectChains, false otherwise.\n    bool updateOrphanEffectChains(const sp<IAfEffectModule>& effect) final\n            EXCLUDES_AudioFlinger_Mutex;\n\n    status_t moveEffectChain_ll(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final\n            REQUIRES(mutex(), audio_utils::ThreadBase_Mutex);\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge() final;\n    sp<NBLog::Writer> newWriter_l(size_t size, const char *name) final REQUIRES(mutex());\n    void unregisterWriter(const sp<NBLog::Writer>& writer) final;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n            audio_session_t triggerSession,\n            audio_session_t listenerSession,\n            const audioflinger::SyncEventCallback& callBack,\n            const wp<IAfTrackBase>& cookie) final EXCLUDES_AudioFlinger_Mutex;\n\n    void ioConfigChanged(audio_io_config_event_t event,\n            const sp<AudioIoDescriptor>& ioDesc,\n            pid_t pid = 0) final EXCLUDES_AudioFlinger_ClientMutex;\n    void onNonOffloadableGlobalEffectEnable() final EXCLUDES_AudioFlinger_Mutex;\n    void onSupportedLatencyModesChanged(\n            audio_io_handle_t output, const std::vector<audio_latency_mode_t>& modes) final\n            EXCLUDES_AudioFlinger_ClientMutex;\n\n    // ---- end of IAfThreadCallback interface\n",
+        "b_contents": "    // ---- begin IAfPatchPanelCallback interface\n\n    void closeThreadInternal_l(const sp<IAfPlaybackThread>& thread) final;\n    void closeThreadInternal_l(const sp<IAfRecordThread>& thread) final;\n    // return thread associated with primary hardware device, or NULL\n    IAfPlaybackThread* primaryPlaybackThread_l() const final;\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final;\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final;\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final;\n    void lock() const final ACQUIRE(mLock) { mLock.lock(); }\n    void unlock() const final RELEASE(mLock) { mLock.unlock(); }\n    sp<IAfThreadBase> openInput_l(audio_module_handle_t module,\n            audio_io_handle_t* input,\n            audio_config_t* config,\n            audio_devices_t device,\n            const char* address,\n            audio_source_t source,\n            audio_input_flags_t flags,\n            audio_devices_t outputDevice,\n            const String8& outputDeviceAddress) final;\n    sp<IAfThreadBase> openOutput_l(audio_module_handle_t module,\n            audio_io_handle_t* output,\n            audio_config_t* halConfig,\n            audio_config_base_t* mixerConfig,\n            audio_devices_t deviceType,\n            const String8& address,\n            audio_output_flags_t flags) final;\n    const DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*>&\n            getAudioHwDevs_l() const final { return mAudioHwDevs; }\n    void updateDownStreamPatches_l(const struct audio_patch* patch,\n            const std::set<audio_io_handle_t>& streams) final;\n    void updateOutDevicesForRecordThreads_l(const DeviceDescriptorBaseVector& devices) final;\n\n    // ---- end of IAfPatchPanelCallback interface\n",
+        "base_contents": "",
+        "res_region": "    // ---- begin IAfPatchPanelCallback interface\n\n    void closeThreadInternal_l(const sp<IAfPlaybackThread>& thread) final REQUIRES(mutex());\n    void closeThreadInternal_l(const sp<IAfRecordThread>& thread) final REQUIRES(mutex());\n    // return thread associated with primary hardware device, or NULL\n    IAfPlaybackThread* primaryPlaybackThread_l() const final  REQUIRES(mutex());\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const final\n            REQUIRES(mutex());\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const final  REQUIRES(mutex());\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const final REQUIRES(mutex());\n    sp<IAfThreadBase> openInput_l(audio_module_handle_t module,\n            audio_io_handle_t* input,\n            audio_config_t* config,\n            audio_devices_t device,\n            const char* address,\n            audio_source_t source,\n            audio_input_flags_t flags,\n            audio_devices_t outputDevice,\n            const String8& outputDeviceAddress) final REQUIRES(mutex());\n    sp<IAfThreadBase> openOutput_l(audio_module_handle_t module,\n            audio_io_handle_t* output,\n            audio_config_t* halConfig,\n            audio_config_base_t* mixerConfig,\n            audio_devices_t deviceType,\n            const String8& address,\n            audio_output_flags_t flags) final REQUIRES(mutex());\n    const DefaultKeyedVector<audio_module_handle_t, AudioHwDevice*>&\n            getAudioHwDevs_l() const final REQUIRES(mutex()) { return mAudioHwDevs; }\n    void updateDownStreamPatches_l(const struct audio_patch* patch,\n            const std::set<audio_io_handle_t>& streams) final REQUIRES(mutex());\n    void updateOutDevicesForRecordThreads_l(const DeviceDescriptorBaseVector& devices) final\n            REQUIRES(mutex());\n\n    // ---- end of IAfPatchPanelCallback interface\n\n    // ----- begin IAfThreadCallback interface\n\n    bool isNonOffloadableGlobalEffectEnabled_l() const final REQUIRES(mutex());\n    bool btNrecIsOff() const final { return mBtNrecIsOff.load(); }\n    float masterVolume_l() const final REQUIRES(mutex());\n    bool masterMute_l() const final REQUIRES(mutex());\n    float getMasterBalance_l() const REQUIRES(mutex());\n    // no range check, AudioFlinger::mutex() held\n    bool streamMute_l(audio_stream_type_t stream) const final REQUIRES(mutex()) {\n        return mStreamTypes[stream].mute;\n    }\n    audio_mode_t getMode() const final { return mMode; }\n    bool isLowRamDevice() const final { return mIsLowRamDevice; }\n    uint32_t getScreenState() const final { return mScreenState; }\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l() const final\n            REQUIRES(mutex());\n    const sp<IAfPatchPanel>& getPatchPanel() const final { return mPatchPanel; }\n    const sp<MelReporter>& getMelReporter() const final { return mMelReporter; }\n    const sp<EffectsFactoryHalInterface>& getEffectsFactoryHal() const final {\n        return mEffectsFactoryHal;\n    }\n    sp<IAudioManager> getOrCreateAudioManager() final;\n\n    // Called when the last effect handle on an effect instance is removed. If this\n    // effect belongs to an effect chain in mOrphanEffectChains, the chain is updated\n    // and removed from mOrphanEffectChains if it does not contain any effect.\n    // Return true if the effect was found in mOrphanEffectChains, false otherwise.\n    bool updateOrphanEffectChains(const sp<IAfEffectModule>& effect) final\n            EXCLUDES_AudioFlinger_Mutex;\n\n    status_t moveEffectChain_ll(audio_session_t sessionId,\n            IAfPlaybackThread* srcThread, IAfPlaybackThread* dstThread) final\n            REQUIRES(mutex(), audio_utils::ThreadBase_Mutex);\n\n    // This is a helper that is called during incoming binder calls.\n    // Requests media.log to start merging log buffers\n    void requestLogMerge() final;\n    sp<NBLog::Writer> newWriter_l(size_t size, const char *name) final REQUIRES(mutex());\n    void unregisterWriter(const sp<NBLog::Writer>& writer) final;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n            audio_session_t triggerSession,\n            audio_session_t listenerSession,\n            const audioflinger::SyncEventCallback& callBack,\n            const wp<IAfTrackBase>& cookie) final EXCLUDES_AudioFlinger_Mutex;\n\n    void ioConfigChanged(audio_io_config_event_t event,\n            const sp<AudioIoDescriptor>& ioDesc,\n            pid_t pid = 0) final EXCLUDES_AudioFlinger_ClientMutex;\n    void onNonOffloadableGlobalEffectEnable() final EXCLUDES_AudioFlinger_Mutex;\n    void onSupportedLatencyModesChanged(\n            audio_io_handle_t output, const std::vector<audio_latency_mode_t>& modes) final\n            EXCLUDES_AudioFlinger_ClientMutex;\n\n    // ---- end of IAfThreadCallback interface\n",
+        "lookback": "",
+        "lookahead": "    /* List available audio ports and their attributes */",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 333,
+        "end_line": 463,
+        "merge_gen_region": null,
+        "confidence": 0.8060212135314941,
+        "hesitated": true
+    },
+    {
+        "a_contents": "            audio_port_handle_t *handle) EXCLUDES_AudioFlinger_Mutex;",
+        "b_contents": "                            audio_port_handle_t *handle);\n\n    static os::HapticScale onExternalVibrationStart(\n        const sp<os::ExternalVibration>& externalVibration);\n    static void onExternalVibrationStop(const sp<os::ExternalVibration>& externalVibration);\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l();\n",
+        "base_contents": "                            audio_port_handle_t *handle);\n\n    static os::HapticScale onExternalVibrationStart(\n        const sp<os::ExternalVibration>& externalVibration);\n    static void onExternalVibrationStop(const sp<os::ExternalVibration>& externalVibration);\n\n    void updateDownStreamPatches_l(const struct audio_patch *patch,\n                                   const std::set<audio_io_handle_t>& streams);\n\n    std::optional<media::AudioVibratorInfo> getDefaultVibratorInfo_l();\n",
+        "res_region": "            audio_port_handle_t *handle) EXCLUDES_AudioFlinger_Mutex;",
+        "lookback": "private:",
+        "lookahead": "private:",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 483,
+        "end_line": 506,
+        "merge_gen_region": null,
+        "confidence": 0.7532014846801758,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    audio_utils::mutex& unregisteredWritersMutex() const { return mUnregisteredWritersMutex; }\n    mutable audio_utils::mutex mUnregisteredWritersMutex;",
+        "b_contents": "    Mutex               mUnregisteredWritersLock;\n\npublic:\n    // Life cycle of gAudioFlinger and AudioFlinger:\n    //\n    // AudioFlinger is created once and survives until audioserver crashes\n    // irrespective of sp<> and wp<> as it is refcounted by ServiceManager and we\n    // don't issue a ServiceManager::tryUnregisterService().\n    //\n    // gAudioFlinger is an atomic pointer set on AudioFlinger::onFirstRef().\n    // After this is set, it is safe to obtain a wp<> or sp<> from it as the\n    // underlying object does not go away.\n    //\n    // Note: For most inner classes, it is acceptable to hold a reference to the outer\n    // AudioFlinger instance as creation requires AudioFlinger to exist in the first place.\n    //\n    // An atomic here ensures underlying writes have completed before setting\n    // the pointer. Access by memory_order_seq_cst.\n    //\n\n    static inline std::atomic<AudioFlinger *> gAudioFlinger = nullptr;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n                                        audio_session_t triggerSession,\n                                        audio_session_t listenerSession,\n                                        const audioflinger::SyncEventCallback& callBack,\n                                        const wp<IAfTrackBase>& cookie);\n\n    bool        btNrecIsOff() const { return mBtNrecIsOff.load(); }\n\nprivate:\n\n               audio_mode_t getMode() const { return mMode; }",
+        "base_contents": "    Mutex               mUnregisteredWritersLock;\n\npublic:\n    // Life cycle of gAudioFlinger and AudioFlinger:\n    //\n    // AudioFlinger is created once and survives until audioserver crashes\n    // irrespective of sp<> and wp<> as it is refcounted by ServiceManager and we\n    // don't issue a ServiceManager::tryUnregisterService().\n    //\n    // gAudioFlinger is an atomic pointer set on AudioFlinger::onFirstRef().\n    // After this is set, it is safe to obtain a wp<> or sp<> from it as the\n    // underlying object does not go away.\n    //\n    // Note: For most inner classes, it is acceptable to hold a reference to the outer\n    // AudioFlinger instance as creation requires AudioFlinger to exist in the first place.\n    //\n    // An atomic here ensures underlying writes have completed before setting\n    // the pointer. Access by memory_order_seq_cst.\n    //\n\n    static inline std::atomic<AudioFlinger *> gAudioFlinger = nullptr;\n\n    sp<audioflinger::SyncEvent> createSyncEvent(AudioSystem::sync_event_t type,\n                                        audio_session_t triggerSession,\n                                        audio_session_t listenerSession,\n                                        const audioflinger::SyncEventCallback& callBack,\n                                        const wp<IAfTrackBase>& cookie);\n\n    bool        btNrecIsOff() const { return mBtNrecIsOff.load(); }\n\n    void             lock() ACQUIRE(mLock) { mLock.lock(); }\n    void             unlock() RELEASE(mLock) { mLock.unlock(); }\n\nprivate:\n\n               audio_mode_t getMode() const { return mMode; }",
+        "res_region": "    audio_utils::mutex& unregisteredWritersMutex() const { return mUnregisteredWritersMutex; }\n    mutable audio_utils::mutex mUnregisteredWritersMutex;",
+        "lookback": "    mutable audio_utils::mutex mUnregisteredWritersMutex;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 514,
+        "end_line": 588,
+        "merge_gen_region": null,
+        "confidence": 0.8287477493286133,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    IAfThreadBase* checkThread_l(audio_io_handle_t ioHandle) const REQUIRES(mutex());\n    IAfPlaybackThread* checkMixerThread_l(audio_io_handle_t output) const REQUIRES(mutex());",
+        "b_contents": "    IAfThreadBase* checkThread_l(audio_io_handle_t ioHandle) const;\n    IAfPlaybackThread* checkMixerThread_l(audio_io_handle_t output) const;\n\n              sp<VolumeInterface> getVolumeInterface_l(audio_io_handle_t output) const;\n              std::vector<sp<VolumeInterface>> getAllVolumeInterfaces_l() const;",
+        "base_contents": "    IAfThreadBase* checkThread_l(audio_io_handle_t ioHandle) const;\n    IAfPlaybackThread* checkPlaybackThread_l(audio_io_handle_t output) const;\n    IAfPlaybackThread* checkMixerThread_l(audio_io_handle_t output) const;\n    IAfRecordThread* checkRecordThread_l(audio_io_handle_t input) const;\n    IAfMmapThread* checkMmapThread_l(audio_io_handle_t io) const;\n              sp<VolumeInterface> getVolumeInterface_l(audio_io_handle_t output) const;\n              std::vector<sp<VolumeInterface>> getAllVolumeInterfaces_l() const;",
+        "res_region": "    IAfThreadBase* checkThread_l(audio_io_handle_t ioHandle) const REQUIRES(mutex());\n    IAfPlaybackThread* checkMixerThread_l(audio_io_handle_t output) const REQUIRES(mutex());\n",
+        "lookback": "    IAfPlaybackThread* checkMixerThread_l(audio_io_handle_t output) const REQUIRES(mutex());",
+        "lookahead": "    sp<VolumeInterface> getVolumeInterface_l(audio_io_handle_t output) const REQUIRES(mutex());",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 690,
+        "end_line": 707,
+        "merge_gen_region": null,
+        "confidence": 0.8549226522445679,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    sp<VolumeInterface> getVolumeInterface_l(audio_io_handle_t output) const REQUIRES(mutex());\n    std::vector<sp<VolumeInterface>> getAllVolumeInterfaces_l() const REQUIRES(mutex());",
+        "b_contents": "\n    void closeOutputFinish(const sp<IAfPlaybackThread>& thread);\n    void closeInputFinish(const sp<IAfRecordThread>& thread);",
+        "base_contents": "    sp<IAfThreadBase> openInput_l(audio_module_handle_t module,\n                                           audio_io_handle_t *input,\n                                           audio_config_t *config,\n                                           audio_devices_t device,\n                                           const char* address,\n                                           audio_source_t source,\n                                           audio_input_flags_t flags,\n                                           audio_devices_t outputDevice,\n                                           const String8& outputDeviceAddress);\n    sp<IAfThreadBase> openOutput_l(audio_module_handle_t module,\n                                          audio_io_handle_t *output,\n                                          audio_config_t *halConfig,\n                                          audio_config_base_t *mixerConfig,\n                                          audio_devices_t deviceType,\n                                          const String8& address,\n                                          audio_output_flags_t flags);\n\n    void closeOutputFinish(const sp<IAfPlaybackThread>& thread);\n    void closeInputFinish(const sp<IAfRecordThread>& thread);",
+        "res_region": "    sp<VolumeInterface> getVolumeInterface_l(audio_io_handle_t output) const REQUIRES(mutex());\n    std::vector<sp<VolumeInterface>> getAllVolumeInterfaces_l() const REQUIRES(mutex());",
+        "lookback": "    std::vector<sp<VolumeInterface>> getAllVolumeInterfaces_l() const REQUIRES(mutex());",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 709,
+        "end_line": 736,
+        "merge_gen_region": "<Interface getInterface spVolume>Volume_(__) REQUIRESmutex spVolume>Volume_(__ output constRESmutex stdvectorRES7979RES7979finfin79797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979",
+        "confidence": 0.9282130002975464,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    // used by IAfDeviceEffectManagerCallback, IAfPatchPanelCallback, IAfThreadCallback",
+        "b_contents": "    // used by IAfDeviceEffectManagerCallback, IAfPatchPanelCallback",
+        "base_contents": "    // used by IAfDeviceEffectManagerCallback",
+        "res_region": "    // used by IAfDeviceEffectManagerCallback, IAfPatchPanelCallback, IAfThreadCallback",
+        "lookback": "    audio_unique_id_t nextUniqueId(audio_unique_id_use_t use) final;",
+        "lookahead": "    audio_unique_id_t nextUniqueId(audio_unique_id_use_t use) final;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 753,
+        "end_line": 759,
+        "merge_gen_region": null,
+        "confidence": 0.787656307220459,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    DeviceTypeSet primaryOutputDevice_l() const REQUIRES(mutex());",
+        "b_contents": "              DeviceTypeSet primaryOutputDevice_l() const;",
+        "base_contents": "              IAfPlaybackThread* primaryPlaybackThread_l() const;\n              DeviceTypeSet primaryOutputDevice_l() const;",
+        "res_region": "    DeviceTypeSet primaryOutputDevice_l() const REQUIRES(mutex());",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 763,
+        "end_line": 770,
+        "merge_gen_region": null,
+        "confidence": 0.6409708261489868,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    void broadcastParametersToRecordThreads_l(const String8& keyValuePairs) REQUIRES(mutex());\n    void forwardParametersToDownstreamPatches_l(",
+        "b_contents": "                void broadcastParametersToRecordThreads_l(const String8& keyValuePairs);\n                void forwardParametersToDownstreamPatches_l(",
+        "base_contents": "                void broadcastParametersToRecordThreads_l(const String8& keyValuePairs);\n                void updateOutDevicesForRecordThreads_l(const DeviceDescriptorBaseVector& devices);\n                void forwardParametersToDownstreamPatches_l(",
+        "res_region": "    void broadcastParametersToRecordThreads_l(const String8& keyValuePairs) REQUIRES(mutex());\n    void forwardParametersToDownstreamPatches_l(",
+        "lookback": "    void forwardParametersToDownstreamPatches_l(",
+        "lookahead": "                        audio_io_handle_t upStream, const String8& keyValuePairs,",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 801,
+        "end_line": 811,
+        "merge_gen_region": null,
+        "confidence": 0.5857149362564087,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    status_t closeOutput_nonvirtual(audio_io_handle_t output) EXCLUDES_AudioFlinger_Mutex;\n    status_t closeInput_nonvirtual(audio_io_handle_t input) EXCLUDES_AudioFlinger_Mutex;\n    void setAudioHwSyncForSession_l(IAfPlaybackThread* thread, audio_session_t sessionId)\n            REQUIRES(mutex());",
+        "b_contents": "    status_t    closeOutput_nonvirtual(audio_io_handle_t output);\n    status_t    closeInput_nonvirtual(audio_io_handle_t input);\n    void setAudioHwSyncForSession_l(IAfPlaybackThread* thread, audio_session_t sessionId);",
+        "base_contents": "    status_t    closeOutput_nonvirtual(audio_io_handle_t output);\n    void closeThreadInternal_l(const sp<IAfPlaybackThread>& thread);\n    status_t    closeInput_nonvirtual(audio_io_handle_t input);\n    void closeThreadInternal_l(const sp<IAfRecordThread>& thread);\n    void setAudioHwSyncForSession_l(IAfPlaybackThread* thread, audio_session_t sessionId);",
+        "res_region": "    status_t closeOutput_nonvirtual(audio_io_handle_t output) EXCLUDES_AudioFlinger_Mutex;\n    status_t closeInput_nonvirtual(audio_io_handle_t input) EXCLUDES_AudioFlinger_Mutex;\n    void setAudioHwSyncForSession_l(IAfPlaybackThread* thread, audio_session_t sessionId)\n            REQUIRES(mutex());",
+        "lookback": "    status_t closeInput_nonvirtual(audio_io_handle_t input) EXCLUDES_AudioFlinger_Mutex;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 919,
+        "end_line": 934,
+        "merge_gen_region": null,
+        "confidence": 0.8629465103149414,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "        const datum_t result =\n            construct_geo_point(point, env->env->limits());",
+        "b_contents": "        const counted_t<const datum_t> result =\n            construct_geo_point(point, env->env->limits());",
+        "base_contents": "        const counted_t<const datum_t> result =\n            construct_geo_point(point, env->env->limits);",
+        "res_region": "        const datum_t result = construct_geo_point(point, env->env->limits());",
+        "lookback": "        validate_geojson(result);",
+        "lookahead": "        validate_geojson(result);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 89,
+        "end_line": 98,
+        "merge_gen_region": null,
+        "confidence": 0.8498212099075317,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        const datum_t result =\n            construct_geo_line(line, env->env->limits());",
+        "b_contents": "        const counted_t<const datum_t> result =\n            construct_geo_line(line, env->env->limits());",
+        "base_contents": "        const counted_t<const datum_t> result =\n            construct_geo_line(line, env->env->limits);",
+        "res_region": "        const datum_t result = construct_geo_line(line, env->env->limits());",
+        "lookback": "        validate_geojson(result);",
+        "lookahead": "        validate_geojson(result);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 145,
+        "end_line": 154,
+        "merge_gen_region": null,
+        "confidence": 0.839946448802948,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        const datum_t result =\n            construct_geo_polygon(shell, env->env->limits());",
+        "b_contents": "        const counted_t<const datum_t> result =\n            construct_geo_polygon(shell, env->env->limits());",
+        "base_contents": "        const counted_t<const datum_t> result =\n            construct_geo_polygon(shell, env->env->limits);",
+        "res_region": "        const datum_t result = construct_geo_polygon(shell, env->env->limits());",
+        "lookback": "        validate_geojson(result);",
+        "lookahead": "        validate_geojson(result);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 170,
+        "end_line": 179,
+        "merge_gen_region": null,
+        "confidence": 0.8660431504249573,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        const datum_t result =\n            construct_geo_polygon(shell, env->env->limits());",
+        "b_contents": "        const counted_t<const datum_t> result =\n            construct_geo_polygon(shell, env->env->limits());",
+        "base_contents": "        const counted_t<const datum_t> result =\n            construct_geo_polygon(shell, env->env->limits);",
+        "res_region": "        const datum_t result = construct_geo_polygon(shell, env->env->limits());",
+        "lookback": "        validate_geojson(result);",
+        "lookahead": "        validate_geojson(result);",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 374,
+        "end_line": 383,
+        "merge_gen_region": null,
+        "confidence": 0.8660431504249573,
+        "hesitated": true
+    }
+]

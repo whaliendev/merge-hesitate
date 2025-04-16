@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  static const double kTrajectoryLenFactor = 10.0;\n  // skip to populate RSS cur_dist_lon if it is too large.\n  if (front_obstacle_distance <\n      kTrajectoryLenFactor *\n      reference_line_info->trajectory().GetSpatialLength()) {\n    reference_line_info->mutable_rss_info()->set_cur_dist_lon(\n        front_obstacle_distance);\n  }\n\n  reference_line_info->mutable_rss_info()->set_rss_safe_dist_lon(dMin_lon);",
+        "b_contents": "  reference_line_info->mutable_rss_info()->set_cur_dist_lon(\n      static_cast<double>(currentLonDistance));\n  reference_line_info->mutable_rss_info()->set_rss_safe_dist_lon(\n      static_cast<double>(safeLonDistance));",
+        "base_contents": "  static const double kTrajectoryLenFactor = 10.0;\n  // skip to populate RSS cur_dist_lon if it is too large.\n  if (front_obstacle_distance <\n      kTrajectoryLenFactor * reference_line_info->TrajectoryLength()) {\n    reference_line_info->mutable_rss_info()->set_cur_dist_lon(\n        front_obstacle_distance);\n  }\n\n  reference_line_info->mutable_rss_info()->set_rss_safe_dist_lon(dMin_lon);",
+        "res_region": "  reference_line_info->mutable_rss_info()->set_cur_dist_lon(\n      static_cast<double>(currentLonDistance));\n  reference_line_info->mutable_rss_info()->set_rss_safe_dist_lon(\n      static_cast<double>(safeLonDistance));",
+        "lookback": "      static_cast<double>(currentLonDistance));",
+        "lookahead": "  reference_line_info->mutable_rss_info()->set_acc_lon_range_minimum(",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 321,
+        "end_line": 347,
+        "merge_gen_region": null,
+        "confidence": 0.45118847489356995,
+        "hesitated": true
+    }
+]

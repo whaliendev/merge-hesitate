@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\n#include \"cyber/common/log.h\"\n#include \"modules/common_msgs/basic_msgs/error_code.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/control_msgs/control_cmd.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis_detail.pb.h\"\n#include \"modules/common_msgs/control_msgs/control_cmd.pb.h\"",
+        "base_contents": "#include \"modules/canbus/proto/chassis.pb.h\"\n#include \"modules/canbus/proto/chassis_detail.pb.h\"\n#include \"modules/control/proto/control_cmd.pb.h\"",
+        "res_region": "\n#include \"cyber/common/log.h\"\n#include \"modules/common_msgs/basic_msgs/error_code.pb.h\"\n#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n#include \"modules/common_msgs/control_msgs/control_cmd.pb.h\"",
+        "lookback": "#include \"cyber/common/log.h\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 26,
+        "end_line": 40,
+        "merge_gen_region": null,
+        "confidence": 0.819238007068634,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "#include \"modules/common_msgs/basic_msgs/error_code.pb.h\"",
+        "base_contents": "#include \"modules/common/proto/error_code.pb.h\"",
+        "res_region": "",
+        "lookback": "#include \"modules/drivers/canbus/can_comm/message_manager.h\"",
+        "lookahead": "#include \"modules/drivers/canbus/can_comm/can_sender.h\"",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 43,
+        "end_line": 48,
+        "merge_gen_region": null,
+        "confidence": 0.695205569267273,
+        "hesitated": true
+    }
+]

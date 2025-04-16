@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "bool VtsHalAutomotiveVehicleTargetTest::checkIsSupported(int32_t propertyId) {\n    auto result = mVhalClient->getPropConfigs({propertyId});\n    return result.ok();\n}\n",
+        "b_contents": "bool VtsHalAutomotiveVehicleTargetTest::checkIsSupported(int32_t propertyId) {\n  auto result = mVhalClient->getPropConfigs({propertyId});\n  return result.ok();\n}\n",
+        "base_contents": "",
+        "res_region": "bool VtsHalAutomotiveVehicleTargetTest::checkIsSupported(int32_t propertyId) {\n    auto result = mVhalClient->getPropConfigs({propertyId});\n    return result.ok();\n}\n",
+        "lookback": "    auto result = mVhalClient->getPropConfigs({propertyId});",
+        "lookahead": "std::vector<ServiceDescriptor> getDescriptors() {",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 889,
+        "end_line": 902,
+        "merge_gen_region": " result mhal->Prop({IdbooltsAutotVehicleTestcheckSupportedint(32tId { auto =VClientgetConfigs({Id return.();",
+        "confidence": 0.9008141160011292,
+        "hesitated": false,
+        "resolved": false
+    }
+]

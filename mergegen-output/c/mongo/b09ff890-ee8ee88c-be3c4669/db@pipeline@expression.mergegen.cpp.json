@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        /*           -1      0      1       reverse       name   */\n        /* EQ  */ { {false, true,  false}, Expression::EQ,  \"$eq\"  },\n        /* NE  */ { {true,  false, true},  Expression::NE,  \"$ne\"  },\n        /* GT  */ { {false, false, true},  Expression::LTE, \"$gt\"  },\n        /* GTE */ { {false, true,  true},  Expression::LT,  \"$gte\" },\n        /* LT  */ { {true,  false, false}, Expression::GTE, \"$lt\"  },\n        /* LTE */ { {true,  true,  false}, Expression::GT,  \"$lte\" },\n        /* CMP */ { {false, false, false}, Expression::CMP, \"$cmp\" },",
+        "b_contents": "        /*             -1      0      1      reverse          name   */\n        /* EQ  */ { { false, true,  false }, Expression::EQ,  \"$eq\"  },\n        /* NE  */ { { true,  false, true },  Expression::NE,  \"$ne\"  },\n        /* GT  */ { { false, false, true },  Expression::LTE, \"$gt\"  },\n        /* GTE */ { { false, true,  true },  Expression::LT,  \"$gte\" },\n        /* LT  */ { { true,  false, false }, Expression::GTE, \"$lt\"  },\n        /* LTE */ { { true,  true,  false }, Expression::GT,  \"$lte\" },\n        /* CMP */ { { false, false, false }, Expression::CMP, \"$cmp\" },",
+        "base_contents": "        /*           -1      0      1       reverse       name   */\n        /* EQ  */ { false, true,  false, Expression::EQ,  \"$eq\"  },\n        /* NE  */ { true,  false, true,  Expression::NE,  \"$ne\"  },\n        /* GT  */ { false, false, true,  Expression::LTE, \"$gt\"  },\n        /* GTE */ { false, true,  true,  Expression::LT,  \"$gte\" },\n        /* LT  */ { true,  false, false, Expression::GTE, \"$lt\"  },\n        /* LTE */ { true,  true,  false, Expression::GT,  \"$lte\" },\n        /* CMP */ { false, false, false, Expression::CMP, \"$cmp\" },",
+        "res_region": "        /*             -1      0      1      reverse          name   */\n        /* EQ  */ { { false, true,  false }, Expression::EQ,  \"$eq\"  },\n        /* NE  */ { { true,  false, true },  Expression::NE,  \"$ne\"  },\n        /* GT  */ { { false, false, true },  Expression::LTE, \"$gt\"  },\n        /* GTE */ { { false, true,  true },  Expression::LT,  \"$gte\" },\n        /* LT  */ { { true,  false, false }, Expression::GTE, \"$lt\"  },\n        /* LTE */ { { true,  true,  false }, Expression::GT,  \"$lte\" },\n        /* CMP */ { { false, false, false }, Expression::CMP, \"$cmp\" },",
+        "lookback": "        /* EQ  */ { { false, true,  false }, Expression::EQ,  \"$eq\"  },",
+        "lookahead": "    };",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 563,
+        "end_line": 590,
+        "merge_gen_region": null,
+        "confidence": 0.7242016196250916,
+        "hesitated": true
+    }
+]

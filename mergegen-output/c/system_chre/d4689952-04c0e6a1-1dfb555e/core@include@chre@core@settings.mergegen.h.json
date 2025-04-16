@@ -1,0 +1,54 @@
+[
+    {
+        "a_contents": "  /**\n   * Updates the state of a given setting.\n   *\n   * @param setting The setting to update.\n   * @param state The state of the setting.\n   */\n  void postSettingChange(Setting setting, bool enabled);",
+        "b_contents": "  /**\n   * Updates the state of a given setting.\n   *\n   * @param setting The setting to update.\n   * @param state The state of the setting.\n   */\n  void postSettingChange(Setting setting, SettingState state);",
+        "base_contents": "/**\n * Gets the current state of a given setting. Must be called from the context of\n * the main CHRE thread.\n *\n * @param setting The setting to check the current state of.\n *\n * @return The current state of the setting, SETTING_STATE_UNKNOWN if the\n * provided setting is invalid.\n */\nSettingState getSettingState(Setting setting);",
+        "res_region": "  /**\n   * Updates the state of a given setting.\n   *\n   * @param setting The setting to update.\n   * @param state The state of the setting.\n   */\n  void postSettingChange(Setting setting, bool enabled);",
+        "lookback": "   * Updates the state of a given setting.",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 42,
+        "end_line": 69,
+        "merge_gen_region": null,
+        "confidence": 0.83631831407547,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  /**\n   * Gets the current state of a given setting. Must be called from the context\n   * of the main CHRE thread.\n   *\n   * @param setting The setting to check the current state of.\n   *\n   * @return True if the setting is enabled.\n   */\n  bool getSettingEnabled(Setting setting);",
+        "b_contents": "  /**\n   * Gets the current state of a given setting. Must be called from the context\n   * of the main CHRE thread.\n   *\n   * @param setting The setting to check the current state of.\n   *\n   * @return The current state of the setting, SETTING_STATE_UNKNOWN if the\n   * provided setting is invalid.\n   */\n  SettingState getSettingState(Setting setting);",
+        "base_contents": "/**\n * Gets the current state of a given setting, but returns the state as an\n * int8_t. The state is guaranteed to be a member of enum chreUserSettingState.\n *\n * @param setting The setting to check the current state of (see\n * CHRE_USER_SETTINGS).\n *\n * @return The current state of the setting (see enum chreUserSettingState)\n */\nint8_t getSettingStateAsInt8(uint8_t setting);",
+        "res_region": "  /**\n   * Gets the current state of a given setting. Must be called from the context\n   * of the main CHRE thread.\n   *\n   * @param setting The setting to check the current state of.\n   *\n   * @return True if the setting is enabled.\n   */\n  bool getSettingEnabled(Setting setting);",
+        "lookback": "   * Gets the current state of a given setting. Must be called from the context",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 71,
+        "end_line": 103,
+        "merge_gen_region": null,
+        "confidence": 0.7793956995010376,
+        "hesitated": true
+    },
+    {
+        "a_contents": "  /**\n   * Gets the current state of a given setting, but returns the state as an\n   * int8_t. The state is guaranteed to be a member of enum\n   * chreUserSettingState.\n   *\n   * @param setting The setting to check the current state of (see\n   * CHRE_USER_SETTINGS).\n   *\n   * @return The current state of the setting (see enum chreUserSettingState)\n   */\n  int8_t getSettingStateAsInt8(uint8_t setting);\n\n  /**\n   * Logs the settings related stats in the debug dump. Must be called from the\n   * context of the main CHRE thread.\n   *\n   * @param debugDump The object that is printed into for debug dump logs.\n   */\n  void logStateToBuffer(DebugDumpWrapper &debugDump);\n\n private:\n  static constexpr size_t kNumSettings =\n      static_cast<size_t>(Setting::SETTING_MAX);\n\n  //! The current state for each setting.\n  bool mSettingStateList[kNumSettings];\n\n  void setSettingState(Setting setting, bool enabled);\n\n  const char *getSettingEnabledString(Setting setting);\n\n  static void settingChangedCallback(uint16_t type, void *data,\n                                     void *extraData);\n};",
+        "b_contents": "  /**\n   * Gets the current state of a given setting, but returns the state as an\n   * int8_t. The state is guaranteed to be a member of enum\n   * chreUserSettingState.\n   *\n   * @param setting The setting to check the current state of (see\n   * CHRE_USER_SETTINGS).\n   *\n   * @return The current state of the setting (see enum chreUserSettingState)\n   */\n  int8_t getSettingStateAsInt8(uint8_t setting);\n\n  /**\n   * Logs the settings related stats in the debug dump. Must be called from the\n   * context of the main CHRE thread.\n   *\n   * @param debugDump The object that is printed into for debug dump logs.\n   */\n  void logStateToBuffer(DebugDumpWrapper &debugDump);\n\n private:\n  static constexpr size_t kNumSettings =\n      static_cast<size_t>(Setting::SETTING_MAX);\n\n  //! The current state for each setting.\n  SettingState mSettingStateList[kNumSettings];\n\n  void setSettingState(Setting setting, SettingState state);\n\n  const char *getSettingStateString(Setting setting);\n\n  static void settingChangedCallback(uint16_t type, void *data,\n                                     void *extraData);\n};",
+        "base_contents": "/**\n * Logs the settings related stats in the debug dump. Must be called from the\n * context of the main CHRE thread.\n *\n * @param debugDump The object that is printed into for debug dump logs.\n */\nvoid logSettingStateToBuffer(DebugDumpWrapper &debugDump);",
+        "res_region": "  /**\n   * Gets the current state of a given setting, but returns the state as an\n   * int8_t. The state is guaranteed to be a member of enum\n   * chreUserSettingState.\n   *\n   * @param setting The setting to check the current state of (see\n   * CHRE_USER_SETTINGS).\n   *\n   * @return The current state of the setting (see enum chreUserSettingState)\n   */\n  int8_t getSettingStateAsInt8(uint8_t setting);\n\n  /**\n   * Logs the settings related stats in the debug dump. Must be called from the\n   * context of the main CHRE thread.\n   *\n   * @param debugDump The object that is printed into for debug dump logs.\n   */\n  void logStateToBuffer(DebugDumpWrapper &debugDump);\n\n private:\n  static constexpr size_t kNumSettings =\n      static_cast<size_t>(Setting::SETTING_MAX);\n\n  //! The current state for each setting.\n  bool mSettingStateList[kNumSettings];\n\n  void setSettingState(Setting setting, bool enabled);\n\n  const char *getSettingEnabledString(Setting setting);\n\n  static void settingChangedCallback(uint16_t type, void *data,\n                                     void *extraData);\n};",
+        "lookback": "   * Gets the current state of a given setting, but returns the state as an",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 105,
+        "end_line": 183,
+        "merge_gen_region": " Gets current of given, returns state an *8t. state guaranteed be member enum chrUserState * @ setting setting setting check current ofsee CH___). * @ The current of settingsee chrUserState */8tSettingState */8tSettingState */8t getStateInt(8t); *s settings stats the dump Must be from * context the CH thread. * @ debug The object is into debug logs */ logTo(Dump &debug);: constexpr sizetSettings staticcastsizetSettingSETTINGMAX //! current for setting boolSettingListkSettings voidSetting( setting bool); chargetEnabled( setting); void settingCallbackuint_ type voiddata voidextra);",
+        "confidence": 0.9261132478713989,
+        "hesitated": false,
+        "resolved": false
+    }
+]

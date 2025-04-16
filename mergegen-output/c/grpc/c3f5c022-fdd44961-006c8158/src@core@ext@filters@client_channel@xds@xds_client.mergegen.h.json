@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  std::shared_ptr<WorkSerializer> work_serializer_;\n",
+        "b_contents": "  const bool xds_routing_enabled_;\n\n  Combiner* combiner_;",
+        "base_contents": "  Combiner* combiner_;",
+        "res_region": "  const bool xds_routing_enabled_;\n\n  std::shared_ptr<WorkSerializer> work_serializer_;",
+        "lookback": "",
+        "lookahead": "  grpc_pollset_set* interested_parties_;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 243,
+        "end_line": 252,
+        "merge_gen_region": null,
+        "confidence": 0.7683935761451721,
+        "hesitated": true
+    }
+]

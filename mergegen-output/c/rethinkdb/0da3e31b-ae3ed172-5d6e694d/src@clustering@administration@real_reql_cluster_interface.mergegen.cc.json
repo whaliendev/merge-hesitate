@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        ql::backtrace_id_t bt,\n        const std::string &msg_if_not_found,",
+        "b_contents": "        const ql::protob_t<const Backtrace> &bt,",
+        "base_contents": "        const ql::protob_t<const Backtrace> &bt,\n        const std::string &msg_if_not_found,",
+        "res_region": "        ql::backtrace_id_t bt,",
+        "lookback": "        ql::env_t *env,",
+        "lookahead": "        ql::env_t *env,",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1064,
+        "end_line": 1072,
+        "merge_gen_region": null,
+        "confidence": 0.4528978168964386,
+        "hesitated": true
+    }
+]

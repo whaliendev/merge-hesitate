@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        char lockType() const { return _lockType; }",
+        "b_contents": "        bool displayInCurop() const { return _active && ! _suppressFromCurop; }\n\n        int getLockType() const { return _lockType; }",
+        "base_contents": "        int getLockType() const { return _lockType; }",
+        "res_region": "        char lockType() const { return _lockType; }\n        bool displayInCurop() const { return _active && ! _suppressFromCurop; }",
+        "lookback": "        bool displayInCurop() const { return _active && ! _suppressFromCurop; }",
+        "lookahead": "        bool isWaitingForLock() const { return _waitingForLock; }",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 187,
+        "end_line": 195,
+        "merge_gen_region": null,
+        "confidence": 0.7907629609107971,
+        "hesitated": true
+    }
+]

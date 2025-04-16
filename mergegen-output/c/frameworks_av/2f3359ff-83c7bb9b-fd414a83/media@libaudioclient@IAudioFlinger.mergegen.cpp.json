@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "status_t AudioFlingerClientAdapter::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMuted) {\n    return statusTFromBinderStatus(mDelegate->setTracksInternalMute(tracksInternalMuted));\n}\n\nstatus_t AudioFlingerClientAdapter::resetReferencesForTest() {\n    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(mDelegate->resetReferencesForTest()));\n    return OK;\n}\n",
+        "b_contents": "status_t AudioFlingerClientAdapter::resetReferencesForTest() {\n    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(mDelegate->resetReferencesForTest()));\n    return OK;\n}\n",
+        "base_contents": "",
+        "res_region": "status_t AudioFlingerClientAdapter::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMuted) {\n    return statusTFromBinderStatus(mDelegate->setTracksInternalMute(tracksInternalMuted));\n}\n\nstatus_t AudioFlingerClientAdapter::resetReferencesForTest() {\n    RETURN_STATUS_IF_ERROR(statusTFromBinderStatus(mDelegate->resetReferencesForTest()));\n    return OK;\n}\n",
+        "lookback": "        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMuted) {",
+        "lookahead": "////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 920,
+        "end_line": 938,
+        "merge_gen_region": null,
+        "confidence": 0.8220246434211731,
+        "hesitated": true
+    },
+    {
+        "a_contents": "Status AudioFlingerServerAdapter::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {\n    return Status::fromStatusT(mDelegate->setTracksInternalMute(tracksInternalMute));\n}\n\nStatus AudioFlingerServerAdapter::resetReferencesForTest() {\n    RETURN_BINDER_IF_ERROR(mDelegate->resetReferencesForTest());\n    return Status::ok();\n}\n",
+        "b_contents": "Status AudioFlingerServerAdapter::resetReferencesForTest() {\n    RETURN_BINDER_IF_ERROR(mDelegate->resetReferencesForTest());\n    return Status::ok();\n}\n",
+        "base_contents": "",
+        "res_region": "Status AudioFlingerServerAdapter::setTracksInternalMute(\n        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {\n    return Status::fromStatusT(mDelegate->setTracksInternalMute(tracksInternalMute));\n}\n\nStatus AudioFlingerServerAdapter::resetReferencesForTest() {\n    RETURN_BINDER_IF_ERROR(mDelegate->resetReferencesForTest());\n    return Status::ok();\n}\n",
+        "lookback": "        const std::vector<media::TrackInternalMuteInfo>& tracksInternalMute) {",
+        "lookahead": "} // namespace android",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 1498,
+        "end_line": 1516,
+        "merge_gen_region": null,
+        "confidence": 0.8437359929084778,
+        "hesitated": true
+    }
+]

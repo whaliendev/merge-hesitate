@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\n// VectorNet\nDEFINE_string(prediction_target_file, \"/apollo/data/train/test.pb.txt\",\n              \"VectorNet target pb file name\");\nDEFINE_double(obstacle_x, 0.0, \"obstacle position x\");\nDEFINE_double(obstacle_y, 0.0, \"obstacle position y\");\nDEFINE_double(obstacle_phi, 0.0, \"obstacle heading phi\");\nDEFINE_double(road_distance, 141.4,\n              \"road distance within which the points are got\");\nDEFINE_double(point_distance, 5.0,\n              \"sampling distance of two points\");",
+        "b_contents": "\n// VectorNet\nDEFINE_string(prediction_target_file, \"/apollo/data/train/test.pb.txt\",\n              \"VectorNet target pb file name\");\nDEFINE_string(world_coordinate_file, \"/apollo/data/world_coord.bin\",\n              \"VectorNet world coordinate file name\");\nDEFINE_string(prediction_target_dir, \"/apollo/data/train/\",\n              \"VectorNet target dir\");\nDEFINE_double(obstacle_x, 0.0, \"obstacle position x\");\nDEFINE_double(obstacle_y, 0.0, \"obstacle position y\");\nDEFINE_double(obstacle_phi, 0.0, \"obstacle heading phi\");\nDEFINE_double(road_distance, 141.4,\n              \"road distance within which the points are got\");\nDEFINE_double(point_distance, 5.0,\n              \"sampling distance of two points\");",
+        "base_contents": "",
+        "res_region": "\n// VectorNet\nDEFINE_string(prediction_target_file, \"/apollo/data/train/test.pb.txt\",\n              \"VectorNet target pb file name\");\nDEFINE_string(world_coordinate_file, \"/apollo/data/world_coord.bin\",\n              \"VectorNet world coordinate file name\");\nDEFINE_string(prediction_target_dir, \"/apollo/data/train/\",\n              \"VectorNet target dir\");\nDEFINE_double(obstacle_x, 0.0, \"obstacle position x\");\nDEFINE_double(obstacle_y, 0.0, \"obstacle position y\");\nDEFINE_double(obstacle_phi, 0.0, \"obstacle heading phi\");\nDEFINE_double(road_distance, 141.4,\n              \"road distance within which the points are got\");\nDEFINE_double(point_distance, 5.0,\n              \"sampling distance of two points\");",
+        "lookback": "// VectorNet",
+        "lookahead": "",
+        "label": [
+            "base",
+            "one_side_deletion"
+        ],
+        "start_line": 86,
+        "end_line": 115,
+        "merge_gen_region": " Vectoroutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9125169515609741,
+        "hesitated": false,
+        "resolved": false
+    }
+]

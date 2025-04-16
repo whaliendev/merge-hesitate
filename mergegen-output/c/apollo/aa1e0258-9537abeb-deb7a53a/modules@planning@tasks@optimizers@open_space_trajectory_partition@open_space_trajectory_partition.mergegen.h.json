@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n",
+        "b_contents": "#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"",
+        "base_contents": "#include \"modules/canbus/proto/chassis.pb.h\"",
+        "res_region": "#include \"modules/common_msgs/chassis_msgs/chassis.pb.h\"\n",
+        "lookback": "",
+        "lookahead": "#include \"modules/common/configs/vehicle_config_helper.h\"",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 27,
+        "end_line": 34,
+        "merge_gen_region": null,
+        "confidence": 0.8052570223808289,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "                \"%s thread %d: %ld ops in %.6f seconds and %.2f ops/sec\\n\",\n                FLAGS_env->TimeToString((uint64_t) now/1000000).c_str(),",
+        "b_contents": "                \"... thread %d: (%ld,%ld) ops (interval,total) in %.6f seconds and %.2f ops/sec\\n\",",
+        "base_contents": "                \"... thread %d: %ld ops in %.6f seconds and %.2f ops/sec\\n\",",
+        "res_region": "                \"%s thread %d: (%ld,%ld) ops (interval,total) in %.6f seconds and %.2f ops/sec\\n\",\n                FLAGS_env->TimeToString((uint64_t) now/1000000).c_str(),",
+        "lookback": "                FLAGS_env->TimeToString((uint64_t) now/1000000).c_str(),",
+        "lookahead": "                id_,",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 341,
+        "end_line": 348,
+        "merge_gen_region": null,
+        "confidence": 0.7281684279441833,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    options.level0_file_num_compaction_trigger = \n        FLAGS_level0_file_num_compaction_trigger;",
+        "b_contents": "    options.level0_file_num_compaction_trigger =\n        FLAGS_level0_file_num_compaction_trigger;",
+        "base_contents": "",
+        "res_region": "    options.level0_file_num_compaction_trigger =\n        FLAGS_level0_file_num_compaction_trigger;",
+        "lookback": "        FLAGS_level0_file_num_compaction_trigger;",
+        "lookahead": "    options.level0_slowdown_writes_trigger =",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 916,
+        "end_line": 923,
+        "merge_gen_region": null,
+        "confidence": 0.7437884211540222,
+        "hesitated": true
+    }
+]

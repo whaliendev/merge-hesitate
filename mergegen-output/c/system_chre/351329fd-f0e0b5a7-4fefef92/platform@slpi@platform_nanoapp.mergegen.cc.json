@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  if (mAppInfo != nullptr && mAppInfo->structMinorVersion >= 2 &&\n      mAppInfo->appVersionString != NULL) {",
+        "b_contents": "  if (mAppInfo != nullptr && mAppInfo->structMinorVersion >= 2\n      && mAppInfo->appVersionString != NULL) {",
+        "base_contents": "  if (mAppInfo != nullptr && mAppInfo->structMinorVersion >= 2 \n      && mAppInfo->appVersionString != NULL) {",
+        "res_region": "  if (mAppInfo != nullptr && mAppInfo->structMinorVersion >= 2 &&\n      mAppInfo->appVersionString != NULL) {",
+        "lookback": "      mAppInfo->appVersionString != NULL) {",
+        "lookahead": "    size_t appVersionStringLength = strlen(mAppInfo->appVersionString);",
+        "label": [
+            "ours",
+            "style_related"
+        ],
+        "start_line": 348,
+        "end_line": 357,
+        "merge_gen_region": " ((ifmifmifmifmifmifmifmifmifmifmifmifmififif",
+        "confidence": 0.8886329531669617,
+        "hesitated": false,
+        "resolved": false
+    }
+]

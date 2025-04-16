@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    /* Set the task's user data */\n    task->user_data = info;\n    lv_timer_set_repeat_count(task, 1);",
+        "b_contents": "    lv_task_set_repeat_count(task, 1);",
+        "base_contents": "    /* Set the task's user data */\n    task->user_data = info;\n    lv_task_set_repeat_count(task, 1);",
+        "res_region": "    /* Set the task's user data */\n    task->user_data = info;\n    lv_timer_set_repeat_count(task, 1);",
+        "lookback": "    task->user_data = info;",
+        "lookahead": "    return LV_RES_OK;",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 62,
+        "end_line": 72,
+        "merge_gen_region": null,
+        "confidence": 0.869610607624054,
+        "hesitated": true
+    }
+]

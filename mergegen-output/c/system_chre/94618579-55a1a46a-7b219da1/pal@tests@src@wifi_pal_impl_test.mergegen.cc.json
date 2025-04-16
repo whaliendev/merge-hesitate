@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "// Flag to require on-demand WiFi scanning to be enabled for the test to pass.\n// Set to false to allow tests to pass on disabled platforms.\n#ifndef PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED\n#define PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED true\n#endif\n\n// Same as above for scan monitoring.\n#ifndef PAL_IMPL_TEST_WIFI_SCAN_MONITORING_REQUIRED\n#define PAL_IMPL_TEST_WIFI_SCAN_MONITORING_REQUIRED true\n#endif\n",
+        "b_contents": "// Flag to require on-demand WiFi scanning to be enabled for the test to pass.\n// Set to false to allow tests to pass on disabled platforms.\n#ifndef PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED\n#define PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED true\n#endif\n",
+        "base_contents": "",
+        "res_region": "// Flag to require on-demand WiFi scanning to be enabled for the test to pass.\n// Set to false to allow tests to pass on disabled platforms.\n#ifndef PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED\n#define PAL_IMPL_TEST_WIFI_ON_DEMAND_SCAN_REQUIRED true\n#endif\n\n// Same as above for scan monitoring.\n#ifndef PAL_IMPL_TEST_WIFI_SCAN_MONITORING_REQUIRED\n#define PAL_IMPL_TEST_WIFI_SCAN_MONITORING_REQUIRED true\n#endif\n",
+        "lookback": "// Set to false to allow tests to pass on disabled platforms.",
+        "lookahead": "namespace {",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 26,
+        "end_line": 46,
+        "merge_gen_region": "// to//////////////////////////////////////////////////////////// Radio////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+        "confidence": 0.915721595287323,
+        "hesitated": false,
+        "resolved": false
+    }
+]

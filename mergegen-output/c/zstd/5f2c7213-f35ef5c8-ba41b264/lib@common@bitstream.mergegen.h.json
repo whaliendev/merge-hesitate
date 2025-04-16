@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if (bitD->bitsConsumed > (sizeof(bitD->bitContainer)*8))  /* should not happen => corruption detected */\n        return BIT_DStream_overflow;",
+        "b_contents": "    if (bitD->bitsConsumed > (sizeof(bitD->bitContainer)*8))  /* overflow detected, like end of stream */\n        return BIT_DStream_overflow;",
+        "base_contents": "\tif (bitD->bitsConsumed > (sizeof(bitD->bitContainer)*8))  /* should not happen => corruption detected */\n\t\treturn BIT_DStream_overflow;",
+        "res_region": "    if (bitD->bitsConsumed > (sizeof(bitD->bitContainer)*8))  /* overflow detected, like end of stream */\n        return BIT_DStream_overflow;",
+        "lookback": "        return BIT_DStream_overflow;",
+        "lookahead": "",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 406,
+        "end_line": 415,
+        "merge_gen_region": null,
+        "confidence": 0.8308051228523254,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  explicit ChangeFilter() {}",
+        "b_contents": "  explicit ChangeFilter(int argv) {\n    assert(argv == 100);\n  }",
+        "base_contents": "  explicit ChangeFilter(int argv) : argv_(argv) {}",
+        "res_region": "  explicit ChangeFilter() {}",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 2620,
+        "end_line": 2628,
+        "merge_gen_region": null,
+        "confidence": 0.716961681842804,
+        "hesitated": true
+    }
+]

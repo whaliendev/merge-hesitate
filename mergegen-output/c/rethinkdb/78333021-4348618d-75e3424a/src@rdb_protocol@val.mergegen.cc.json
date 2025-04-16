@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"geo/ellipsoid.hpp\"\n#include \"geo/distances.hpp\"",
+        "b_contents": "#include \"containers/name_string.hpp\"",
+        "base_contents": "",
+        "res_region": "#include \"containers/name_string.hpp\"\n#include \"geo/ellipsoid.hpp\"\n#include \"geo/distances.hpp\"",
+        "lookback": "#include \"geo/ellipsoid.hpp\"",
+        "lookahead": "#include \"rdb_protocol/math_utils.hpp\"",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 3,
+        "end_line": 9,
+        "merge_gen_region": null,
+        "confidence": 0.847239077091217,
+        "hesitated": true
+    }
+]

@@ -99,9 +99,39 @@ def evaluate_model(
                 # --- End Debug Printing ---
 
                 # --- Corrected Vectorized Exact Match Calculation (Val) ---
-                # Need pad_token_id and eos_token_id
+                # Get predictions and original labels (WITH BOS)
+                predictions = outputs["predictions"] # From argmax(logits), predicts token t+1
+                original_labels_with_bos = batch["labels"]   # Original labels WITH initial BOS
+
+                # Shift labels right to align with predictions for comparison
+                labels_for_match = original_labels_with_bos.clone()
+                pad_token_id = tokenizer.pad_token_id
+                labels_for_match = torch.cat([
+                    labels_for_match,
+                    torch.ones((labels_for_match.size(0), 1), dtype=torch.long, device=labels_for_match.device) * pad_token_id
+                ], dim=-1)
+                labels_for_match = labels_for_match[:, 1:] # labels_for_match[t] is original label[t+1]
+
+                # Need eos_token_id
                 eos_token_id = tokenizer.eos_token_id
-                batch_size, seq_len = predictions.shape # Assuming labels have compatible shape
+
+                # Pad shorter sequence to match the longer one for comparison
+                batch_size, seq_len_pred = predictions.shape
+                _, seq_len_label = labels_for_match.shape # Use shifted labels length
+                seq_len = max(seq_len_pred, seq_len_label)
+
+                if seq_len_pred < seq_len:
+                     padding_size = seq_len - seq_len_pred
+                     predictions = torch.cat([
+                         predictions,
+                         torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
+                     ], dim=1)
+                elif seq_len_label < seq_len:
+                     padding_size = seq_len - seq_len_label
+                     labels_for_match = torch.cat([
+                         labels_for_match,
+                         torch.full((batch_size, padding_size), pad_token_id, device=labels_for_match.device, dtype=labels_for_match.dtype)
+                     ], dim=1)
 
                 # 1. Create prediction mask (True up to and including first EOS)
                 pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
@@ -109,14 +139,14 @@ def evaluate_model(
                 first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
                 pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1) # Shape: [batch_size, seq_len]
 
-                # 2. Create label mask (True up to PAD)
-                label_mask = (labels != pad_token_id) # Shape: [batch_size, seq_len]
+                # 2. Create label mask (True up to PAD) - Use SHIFTED labels_for_match
+                label_mask = (labels_for_match != pad_token_id) # Shape: [batch_size, seq_len]
 
                 # 3. Combine masks
                 combined_mask = pred_mask & label_mask # Shape: [batch_size, seq_len]
 
-                # 4. Calculate correct tokens based on combined mask
-                correct_tokens = (predictions == labels) & combined_mask
+                # 4. Calculate correct tokens based on combined mask and SHIFTED labels_for_match
+                correct_tokens = (predictions == labels_for_match) & combined_mask
 
                 # 5. Calculate num_correct and num_valid based on combined mask
                 num_correct_tokens = correct_tokens.sum(dim=1)
@@ -146,49 +176,54 @@ def evaluate_model(
                      gen_kwargs.pop("features")
 
                 generated_ids, raw_confidence = unwrapped_model.generate(**gen_kwargs)
-                labels = batch["labels"]
-                # remove first bos token and add a pad token at the end
-                labels = labels[:, 1:]
-                labels = torch.cat(
-                    [
-                        labels,
-                        torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
-                    ],
-                    dim=-1
-                )
+                
+                # Get original labels (WITH BOS)
+                original_labels_with_bos = batch["labels"]
 
-                # --- Vectorized Exact Match Calculation (Test) ---
-                # Need pad_token_id and eos_token_id
+                # Shift labels right for comparison with generated_ids
+                labels_for_match = original_labels_with_bos.clone()
+                pad_token_id = tokenizer.pad_token_id
+                labels_for_match = torch.cat([
+                     labels_for_match,
+                     torch.ones((labels_for_match.size(0), 1), dtype=torch.long, device=labels_for_match.device) * pad_token_id
+                ], dim=-1)
+                labels_for_match = labels_for_match[:, 1:] # labels_for_match[t] is original label[t+1]
+
+                # Need eos_token_id
                 eos_token_id = tokenizer.eos_token_id
-                batch_size, seq_len_pred = generated_ids.shape
-                _, seq_len_label = labels.shape
 
                 # Pad shorter sequence to match the longer one for comparison
-                if seq_len_pred > seq_len_label:
-                    padding_size = seq_len_pred - seq_len_label
-                    labels = torch.cat([labels, torch.full((batch_size, padding_size), pad_token_id, device=labels.device, dtype=labels.dtype)], dim=1)
-                    seq_len = seq_len_pred
-                elif seq_len_label > seq_len_pred:
-                    padding_size = seq_len_label - seq_len_pred
-                    generated_ids = torch.cat([generated_ids, torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)], dim=1)
-                    seq_len = seq_len_label
-                else:
-                    seq_len = seq_len_pred # Both are same length
+                batch_size, seq_len_pred = generated_ids.shape
+                _, seq_len_label = labels_for_match.shape # Use shifted labels length
+                seq_len = max(seq_len_pred, seq_len_label)
 
-                # 1. Create prediction mask (True up to and including first EOS)
+                if seq_len_pred < seq_len:
+                     padding_size = seq_len - seq_len_pred
+                     generated_ids = torch.cat([
+                         generated_ids,
+                         torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)
+                     ], dim=1)
+                elif seq_len_label < seq_len:
+                     padding_size = seq_len - seq_len_label
+                     labels_for_match = torch.cat([
+                         labels_for_match,
+                         torch.full((batch_size, padding_size), pad_token_id, device=labels_for_match.device, dtype=labels_for_match.dtype)
+                     ], dim=1)
+
+                # 1. Create prediction mask (True up to and including first EOS in generated_ids)
                 pred_indices = torch.arange(seq_len, device=generated_ids.device).unsqueeze(0).expand(batch_size, -1)
                 eos_mask_pred = (generated_ids == eos_token_id)
                 first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
                 pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1)
 
-                # 2. Create label mask (True up to PAD)
-                label_mask = (labels != pad_token_id)
+                # 2. Create label mask (True up to PAD) - Use SHIFTED labels_for_match
+                label_mask = (labels_for_match != pad_token_id)
 
                 # 3. Combine masks
                 combined_mask = pred_mask & label_mask
 
-                # 4. Calculate correct tokens based on combined mask
-                correct_tokens = (generated_ids == labels) & combined_mask
+                # 4. Calculate correct tokens based on combined mask and SHIFTED labels_for_match
+                correct_tokens = (generated_ids == labels_for_match) & combined_mask
 
                 # 5. Calculate num_correct and num_valid based on combined mask
                 num_correct_tokens = correct_tokens.sum(dim=1)
@@ -202,6 +237,41 @@ def evaluate_model(
 
                 all_raw_confidences.append(raw_confidence)
                 all_exact_matches.append(exact_match) # Stores bool (Exact Match Only)
+
+                # --- Debug Printing (Test Stage) ---
+                if accelerator.is_main_process and printed_eval_samples < max_prints:
+                    num_to_print_this_batch = min(max_prints - printed_eval_samples, generated_ids.size(0))
+                    for i in range(num_to_print_this_batch):
+                         accelerator.print("\n" + "-" * 20 + f" Test Sample {printed_eval_samples} (Batch {batch_idx}, Idx {i}) " + "-" * 20)
+                         # Convert to list for cleaner printing
+                         gen_ids = generated_ids[i].tolist()
+                         # Use SHIFTED labels for debug comparison to align with what was checked
+                         label_ids_test = labels_for_match[i].tolist()
+                         # Optionally trim padding for readability
+                         try:
+                              gen_ids_trimmed = gen_ids[:gen_ids.index(pad_token_id)]
+                         except ValueError:
+                              gen_ids_trimmed = gen_ids # No pad found
+                         try:
+                              eos_index = gen_ids_trimmed.index(tokenizer.eos_token_id)
+                              gen_ids_trimmed = gen_ids_trimmed[:eos_index]
+                         except ValueError:
+                             pass # No EOS found
+
+                         try:
+                              label_ids_trimmed_test = label_ids_test[:label_ids_test.index(pad_token_id)]
+                         except ValueError:
+                              label_ids_trimmed_test = label_ids_test
+
+                         accelerator.print(f"Generated IDs : {gen_ids_trimmed}")
+                         accelerator.print(f"Target IDs (Shifted) : {label_ids_trimmed_test}") # Indicate labels are shifted
+                         # Decode for readability
+                         accelerator.print(f"Generated Text: {tokenizer.decode(gen_ids_trimmed, skip_special_tokens=False)}") # Keep special tokens for debugging?
+                         accelerator.print(f"Target Text (Shifted): {tokenizer.decode(label_ids_trimmed_test, skip_special_tokens=False)}")
+                         accelerator.print(f"Raw Confidence: {raw_confidence[i].item():.4f}") # Show raw confidence for this generated sample
+                         accelerator.print("-" * (42 + len(f" Test Sample {printed_eval_samples} (Batch {batch_idx}, Idx {i}) ")) + "\n")
+                         printed_eval_samples += 1
+                # --- End Debug Printing (Test Stage) ---
 
             else:
                 raise ValueError(f"Invalid stage for evaluation: {stage}. Must be 'val' or 'test'.")

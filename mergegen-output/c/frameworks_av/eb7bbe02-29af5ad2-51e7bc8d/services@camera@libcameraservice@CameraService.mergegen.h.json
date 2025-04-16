@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        void updateOverrideUid(uid_t uid, const std::string &callingPackage, bool active,\n                bool insert);\n        void registerWithActivityManager();",
+        "b_contents": "        void updateOverrideUid(uid_t uid, const std::string &callingPackage, bool active, bool insert);",
+        "base_contents": "        void updateOverrideUid(uid_t uid, String16 callingPackage, bool active, bool insert);",
+        "res_region": "        void updateOverrideUid(uid_t uid, const std::string &callingPackage, bool active,\n                bool insert);\n        void registerWithActivityManager();",
+        "lookback": "                bool insert);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 782,
+        "end_line": 790,
+        "merge_gen_region": null,
+        "confidence": 0.8223515748977661,
+        "hesitated": true
+    }
+]

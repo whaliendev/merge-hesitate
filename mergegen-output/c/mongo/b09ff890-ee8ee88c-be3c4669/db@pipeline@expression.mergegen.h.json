@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tshared_ptr<const Value> evaluatePath(\n\t    size_t index, const size_t pathLength,",
+        "b_contents": "\tshared_ptr<const Value> evaluatePath(\n\t    size_t index, const size_t pathLength, ",
+        "base_contents": "\tshared_ptr<const Value> ExpressionFieldPath::evaluatePath(\n\t    size_t index, const size_t pathLength,",
+        "res_region": "\tshared_ptr<const Value> evaluatePath(\n\t    size_t index, const size_t pathLength, ",
+        "lookback": "\t    size_t index, const size_t pathLength, ",
+        "lookahead": "\t    shared_ptr<Document> pDocument) const;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 491,
+        "end_line": 500,
+        "merge_gen_region": null,
+        "confidence": 0.505801260471344,
+        "hesitated": true
+    }
+]

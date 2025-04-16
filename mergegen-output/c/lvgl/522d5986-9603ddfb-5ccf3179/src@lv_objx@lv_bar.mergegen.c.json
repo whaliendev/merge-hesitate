@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        const lv_style_t * style_indic = lv_bar_get_style(bar, LV_BAR_STYLE_INDIC);\n        if(style_indic->body.shadow.width > bar->ext_size)\n            bar->ext_size = style_indic->body.shadow.width;",
+        "b_contents": "    if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_style_t * style_indic = lv_bar_get_style(bar, LV_BAR_STYLE_INDIC);\n        if(style_indic->body.shadow.width > bar->ext_draw_pad)\n            bar->ext_draw_pad = style_indic->body.shadow.width;",
+        "base_contents": "    if(sign == LV_SIGNAL_REFR_EXT_SIZE) {\n        lv_style_t * style_indic = lv_bar_get_style(bar, LV_BAR_STYLE_INDIC);\n        if(style_indic->body.shadow.width > bar->ext_size)\n            bar->ext_size = style_indic->body.shadow.width;",
+        "res_region": "\n    if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        const lv_style_t * style_indic = lv_bar_get_style(bar, LV_BAR_STYLE_INDIC);\n        if(style_indic->body.shadow.width > bar->ext_draw_pad)\n            bar->ext_draw_pad = style_indic->body.shadow.width;",
+        "lookback": "    if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {",
+        "lookahead": "    } else if(sign == LV_SIGNAL_GET_TYPE) {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 460,
+        "end_line": 475,
+        "merge_gen_region": null,
+        "confidence": 0.7852901816368103,
+        "hesitated": true
+    }
+]

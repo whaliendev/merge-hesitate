@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    std::vector<std::string> images;\n    images.push_back(\"Images/grossini_dance_01.png\");\n    images.push_back(\"Images/grossini_dance_02.png\");\n    images.push_back(\"Images/grossini_dance_03.png\");\n    images.push_back(\"Images/grossini_dance_04.png\");\n    images.push_back(\"Images/grossini_dance_05.png\");\n    images.push_back(\"Images/grossini_dance_06.png\");\n    images.push_back(\"Images/grossini_dance_07.png\");\n    images.push_back(\"Images/grossini_dance_08.png\");\n    images.push_back(\"Images/grossini_dance_09.png\");\n    images.push_back(\"Images/grossini_dance_10.png\");\n    images.push_back(\"Images/grossini_dance_11.png\");\n    images.push_back(\"Images/grossini_dance_12.png\");\n    images.push_back(\"Images/grossini_dance_13.png\");\n    images.push_back(\"Images/grossini_dance_14.png\");\n    images.push_back(\"Images/grossini.png\");\n    auto parent = Node::create();\n    parent->setPosition(s.width/2, s.height/2);\n    addChild(parent);\n    for(int index = 0; index < 500; ++index)\n    {\n        auto parent2 = Node::create();\n        parent2->setPosition(0,0);\n        parent->addChild(parent2);\n        parent2->setPosition(-50,0);\n        parent2->runAction(RepeatForever::create((JumpBy::create(10, Vector2(0,0), 400, 1))));\n        Sprite* sprite = Sprite::create(images[index % images.size()].c_str());\n        sprite->setPosition(Vector2(0,0));\n        //sprite->runAction(RepeatForever::create(RotateBy::create(3, 360)));\n        sprite->runAction(RepeatForever::create(Sequence::createWithTwoActions(ScaleBy::create(2, 2), ScaleBy::create(2,0.5))));\n        parent2->addChild(sprite);\n    }",
+        "b_contents": "    auto sprite2 = Sprite::create(\"Images/btn-about-normal-vertical.png\");\n    sprite2->setRotation(-85);\n    sprite2->setPosition(Point(size.width/2,size.height * 2/3));\n    sprite2->setScale(2);\n    addChild(sprite2);",
+        "base_contents": "    std::vector<std::string> images;\n    images.push_back(\"Images/grossini_dance_01.png\");\n    images.push_back(\"Images/grossini_dance_02.png\");\n    images.push_back(\"Images/grossini_dance_03.png\");\n    images.push_back(\"Images/grossini_dance_04.png\");\n    images.push_back(\"Images/grossini_dance_05.png\");\n    images.push_back(\"Images/grossini_dance_06.png\");\n    images.push_back(\"Images/grossini_dance_07.png\");\n    images.push_back(\"Images/grossini_dance_08.png\");\n    images.push_back(\"Images/grossini_dance_09.png\");\n    images.push_back(\"Images/grossini_dance_10.png\");\n    images.push_back(\"Images/grossini_dance_11.png\");\n    images.push_back(\"Images/grossini_dance_12.png\");\n    images.push_back(\"Images/grossini_dance_13.png\");\n    images.push_back(\"Images/grossini_dance_14.png\");\n    images.push_back(\"Images/grossini.png\");\n    auto parent = Node::create();\n    parent->setPosition(s.width/2, s.height/2);\n    addChild(parent);\n    for(int index = 0; index < 500; ++index)\n    {\n        auto parent2 = Node::create();\n        parent2->setPosition(0,0);\n        parent->addChild(parent2);\n        parent2->setPosition(-50,0);\n        parent2->runAction(RepeatForever::create((JumpBy::create(10, Point(0,0), 400, 1))));\n        Sprite* sprite = Sprite::create(images[index % images.size()].c_str());\n        sprite->setPosition(Point(0,0));\n        //sprite->runAction(RepeatForever::create(RotateBy::create(3, 360)));\n        sprite->runAction(RepeatForever::create(Sequence::createWithTwoActions(ScaleBy::create(2, 2), ScaleBy::create(2,0.5))));\n        parent2->addChild(sprite);\n    }",
+        "res_region": "\n    auto sprite2 = Sprite::create(\"Images/btn-about-normal-vertical.png\");\n    sprite2->setRotation(-85);\n    sprite2->setPosition(Point(size.width/2,size.height * 2/3));\n    sprite2->setScale(2);\n    addChild(sprite2);",
+        "lookback": "    auto sprite2 = Sprite::create(\"Images/btn-about-normal-vertical.png\");",
+        "lookahead": "    ",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 481,
+        "end_line": 553,
+        "merge_gen_region": null,
+        "confidence": 0.6603876948356628,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    for(int index = 0; index < 500; ++index)\n    {\n        auto parent2 = Node::create();\n        parent->addChild(parent2);\n        parent2->setPosition(50,0);\n        parent2->runAction(RepeatForever::create((JumpBy::create(7, Vector2(0,0), 400, 1))));\n        Sprite* sprite = Sprite::create(images[index % images.size()].c_str());\n        sprite->setPosition(Vector2(0,0));\n        //sprite->runAction(RepeatForever::create(RotateBy::create(3, 360)));\n        sprite->runAction(RepeatForever::create(Sequence::createWithTwoActions(ScaleBy::create(2, 2), ScaleBy::create(2,0.5))));\n        parent2->addChild(sprite);\n    }",
+        "b_contents": "    auto listener = EventListenerTouchOneByOne::create();\n    listener->setSwallowTouches(true);\n    \n    listener->onTouchBegan = CC_CALLBACK_2(NewCullingTest::onTouchBegan, this);\n    listener->onTouchMoved = CC_CALLBACK_2(NewCullingTest::onTouchMoved, this);\n    \n    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);\n    \n}",
+        "base_contents": "    for(int index = 0; index < 500; ++index)\n    {\n        auto parent2 = Node::create();\n        parent->addChild(parent2);\n        parent2->setPosition(50,0);\n        parent2->runAction(RepeatForever::create((JumpBy::create(7, Point(0,0), 400, 1))));\n        Sprite* sprite = Sprite::create(images[index % images.size()].c_str());\n        sprite->setPosition(Point(0,0));\n        //sprite->runAction(RepeatForever::create(RotateBy::create(3, 360)));\n        sprite->runAction(RepeatForever::create(Sequence::createWithTwoActions(ScaleBy::create(2, 2), ScaleBy::create(2,0.5))));\n        parent2->addChild(sprite);\n    }",
+        "res_region": "    auto listener = EventListenerTouchOneByOne::create();\n    listener->setSwallowTouches(true);\n    \n    listener->onTouchBegan = CC_CALLBACK_2(NewCullingTest::onTouchBegan, this);\n    listener->onTouchMoved = CC_CALLBACK_2(NewCullingTest::onTouchMoved, this);\n    \n    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);\n    \n}",
+        "lookback": "    listener->setSwallowTouches(true);",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 555,
+        "end_line": 591,
+        "merge_gen_region": null,
+        "confidence": 0.8519565463066101,
+        "hesitated": true
+    }
+]

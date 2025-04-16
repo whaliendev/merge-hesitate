@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (starts_with(path, \"refs/tags/\") && /* is a tag? */\n\t    !peel_iterated_oid(oid, &peeled)    && /* peelable? */\n\t    obj_is_packed(&peeled)) /* object packed? */",
+        "b_contents": "\tif (!peel_ref(tag, &peeled) && obj_is_packed(&peeled))",
+        "base_contents": "\tif (starts_with(path, \"refs/tags/\") && /* is a tag? */\n\t    !peel_ref(path, &peeled)    && /* peelable? */\n\t    obj_is_packed(&peeled)) /* object packed? */",
+        "res_region": "\tif (!peel_iterated_oid(oid, &peeled) && obj_is_packed(&peeled))",
+        "lookback": "\t\tadd_tag_chain(oid);",
+        "lookahead": "\t\tadd_tag_chain(oid);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 2820,
+        "end_line": 2830,
+        "merge_gen_region": null,
+        "confidence": 0.850549042224884,
+        "hesitated": true
+    }
+]

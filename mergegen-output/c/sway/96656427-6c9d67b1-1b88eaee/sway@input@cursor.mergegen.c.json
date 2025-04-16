@@ -1,0 +1,71 @@
+[
+    {
+        "a_contents": "static void cursor_send_pointer_motion(struct sway_cursor *cursor,\n\t\tuint32_t time) {\n\tstruct wlr_seat *seat = cursor->seat->wlr_seat;\n\tstruct wlr_surface *surface = NULL;\n\tdouble sx, sy;\n\n\tstruct sway_container *focus = NULL;\n",
+        "b_contents": "/**\n * Returns the container at the cursor's position. If the container is a view,\n * stores the surface at the cursor's position in `*surface`.\n */\nstatic struct sway_container *container_at_cursor(struct sway_cursor *cursor,\n\t\tstruct wlr_surface **surface, double *sx, double *sy) {",
+        "base_contents": "static void cursor_send_pointer_motion(struct sway_cursor *cursor,\n\t\tuint32_t time) {\n\tstruct wlr_seat *seat = cursor->seat->wlr_seat;\n\tstruct wlr_surface *surface = NULL;\n\tdouble sx, sy;\n",
+        "res_region": "/**\n * Returns the container at the cursor's position. If the container is a view,\n * stores the surface at the cursor's position in `*surface`.\n */\nstatic struct sway_container *container_at_cursor(struct sway_cursor *cursor,\n\t\tstruct wlr_surface **surface, double *sx, double *sy) {",
+        "lookback": " * Returns the container at the cursor's position. If the container is a view,",
+        "lookahead": "\t// check for unmanaged views first",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 22,
+        "end_line": 45,
+        "merge_gen_region": "outputstaticstaticstaticstaticstatic",
+        "confidence": 0.8947497606277466,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "\twl_list_for_each_reverse(view, &root_container.sway_root->unmanaged_views,\n\t\t\tunmanaged_view_link) {",
+        "b_contents": "\twl_list_for_each_reverse(view, unmanaged, unmanaged_view_link) {",
+        "base_contents": "\twl_list_for_each_reverse(view, &root_container.sway_root->unmanaged_views,\n\t\tunmanaged_view_link) {",
+        "res_region": "\twl_list_for_each_reverse(view, unmanaged, unmanaged_view_link) {",
+        "lookback": "\t\tif (view->type == SWAY_XWAYLAND_VIEW) {",
+        "lookahead": "\t\tif (view->type == SWAY_XWAYLAND_VIEW) {",
+        "label": [
+            "base",
+            "style_related"
+        ],
+        "start_line": 49,
+        "end_line": 57,
+        "merge_gen_region": null,
+        "confidence": 0.8248913288116455,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\t\tfocus = view->swayc;\n\t\t\t\tsurface = xsurface->surface;\n\t\t\t\tsx = cursor->x - box.x;\n\t\t\t\tsy = cursor->y - box.y;\n\t\t\t\tbreak;",
+        "b_contents": "\t\t\t\t*surface = xsurface->surface;\n\t\t\t\t*sx = cursor->x - box.x;\n\t\t\t\t*sy = cursor->y - box.y;\n\t\t\t\treturn view->swayc;",
+        "base_contents": "\t\t\t\tsurface = xsurface->surface;\n\t\t\t\tsx = cursor->x - box.x;\n\t\t\t\tsy = cursor->y - box.y;\n\t\t\t\twlr_seat_pointer_notify_enter(seat, surface, sx, sy);\n\t\t\t\twlr_seat_pointer_notify_motion(seat, time, sx, sy);\n\t\t\t\treturn;",
+        "res_region": "\t\t\t\t*surface = xsurface->surface;\n\t\t\t\t*sx = cursor->x - box.x;\n\t\t\t\t*sy = cursor->y - box.y;\n\t\t\t\treturn view->swayc;",
+        "lookback": "\t\t\t\t*sx = cursor->x - box.x;",
+        "lookahead": "\t\t\t}",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 68,
+        "end_line": 86,
+        "merge_gen_region": null,
+        "confidence": 0.7832658290863037,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t// then check for managed views\n\tif (focus == NULL) {\n\t\tfocus = container_at(&root_container, cursor->x, cursor->y, &surface,\n\t\t\t&sx, &sy);\n\t}\n\n\t// reset cursor if switching between clients\n\tstruct wl_client *client = NULL;\n\tif (focus) {\n\t\tclient = wl_resource_get_client(surface->resource);\n\t}\n\tif (client != cursor->image_client) {\n\t\twlr_xcursor_manager_set_cursor_image(cursor->xcursor_manager,\n\t\t\t\"left_ptr\", cursor->cursor);\n\t\tcursor->image_client = client;\n\t}\n\n\t// send pointer enter/leave\n\tif (focus) {",
+        "b_contents": "\t// find the output the cursor is on\n\tstruct wlr_output_layout *output_layout =\n\t\troot_container.sway_root->output_layout;\n\tstruct wlr_output *wlr_output =\n\t\twlr_output_layout_output_at(output_layout, cursor->x, cursor->y);\n\tif (wlr_output == NULL) {\n\t\treturn NULL;\n\t}\n\tstruct sway_output *output = wlr_output->data;\n\n\t// find the focused workspace on the output for this seat\n\tstruct sway_container *workspace_cont =\n\t\tsway_seat_get_focus_inactive(cursor->seat, output->swayc);\n\tif (workspace_cont != NULL && workspace_cont->type != C_WORKSPACE) {\n\t\tworkspace_cont = container_parent(workspace_cont, C_WORKSPACE);\n\t}\n\tif (workspace_cont == NULL) {\n\t\treturn output->swayc;\n\t}\n\n\tstruct sway_container *view_cont = container_at(workspace_cont,\n\t\tcursor->x, cursor->y, surface, sx, sy);\n\treturn view_cont != NULL ? view_cont : workspace_cont;\n}\n\nstatic void cursor_send_pointer_motion(struct sway_cursor *cursor,\n\t\tuint32_t time) {\n\tstruct wlr_seat *seat = cursor->seat->wlr_seat;\n\tstruct wlr_surface *surface = NULL;\n\tdouble sx, sy;\n\tstruct sway_container *cont =\n\t\tcontainer_at_cursor(cursor, &surface, &sx, &sy);\n\n\tif (cont != NULL && surface != NULL) {",
+        "base_contents": "\tstruct sway_container *swayc =\n\t\tcontainer_at(&root_container, cursor->x, cursor->y, &surface, &sx, &sy);\n\tif (swayc) {",
+        "res_region": "\t// find the output the cursor is on\n\tstruct wlr_output_layout *output_layout =\n\t\troot_container.sway_root->output_layout;\n\tstruct wlr_output *wlr_output =\n\t\twlr_output_layout_output_at(output_layout, cursor->x, cursor->y);\n\tif (wlr_output == NULL) {\n\t\treturn NULL;\n\t}\n\tstruct sway_output *output = wlr_output->data;\n\n\t// find the focused workspace on the output for this seat\n\tstruct sway_container *workspace_cont =\n\t\tsway_seat_get_focus_inactive(cursor->seat, output->swayc);\n\tif (workspace_cont != NULL && workspace_cont->type != C_WORKSPACE) {\n\t\tworkspace_cont = container_parent(workspace_cont, C_WORKSPACE);\n\t}\n\tif (workspace_cont == NULL) {\n\t\treturn output->swayc;\n\t}\n\n\tstruct sway_container *view_cont = container_at(workspace_cont,\n\t\tcursor->x, cursor->y, surface, sx, sy);\n\treturn view_cont != NULL ? view_cont : workspace_cont;\n}\n\nstatic void cursor_send_pointer_motion(struct sway_cursor *cursor,\n\t\tuint32_t time) {\n\tstruct wlr_seat *seat = cursor->seat->wlr_seat;\n\tstruct wlr_surface *surface = NULL;\n\tdouble sx, sy;\n\tstruct sway_container *cont =\n\t\tcontainer_at_cursor(cursor, &surface, &sx, &sy);\n\n\t// reset cursor if switching between clients\n\tstruct wl_client *client = NULL;\n\tif (surface != NULL) {\n\t\tclient = wl_resource_get_client(surface->resource);\n\t}\n\tif (client != cursor->image_client) {\n\t\twlr_xcursor_manager_set_cursor_image(cursor->xcursor_manager,\n\t\t\t\"left_ptr\", cursor->cursor);\n\t\tcursor->image_client = client;\n\t}\n\n\t// send pointer enter/leave\n\tif (cont != NULL && surface != NULL) {",
+        "lookback": "\tstruct wlr_output_layout *output_layout =",
+        "lookahead": "\t\twlr_seat_pointer_notify_enter(seat, surface, sx, sy);",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 91,
+        "end_line": 150,
+        "merge_gen_region": null,
+        "confidence": 0.842566728591919,
+        "hesitated": true
+    }
+]

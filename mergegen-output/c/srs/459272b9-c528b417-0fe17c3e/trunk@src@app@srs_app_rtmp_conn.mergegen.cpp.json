@@ -1,0 +1,53 @@
+[
+    {
+        "a_contents": "#include <srs_protocol_utility.hpp>\n#include <srs_protocol_json.hpp>\n#include <srs_app_kafka.hpp>",
+        "b_contents": "#include <srs_rtmp_utility.hpp>",
+        "base_contents": "",
+        "res_region": "#include <srs_protocol_utility.hpp>\n#include <srs_protocol_json.hpp>\n#include <srs_app_kafka.hpp>",
+        "lookback": "#include <srs_protocol_json.hpp>",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 55,
+        "end_line": 62,
+        "merge_gen_region": null,
+        "confidence": 0.8754374384880066,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    if ((err = rtmp->handshake()) != srs_success) {\n        return srs_error_wrap(err, \"rtmp handshake\");\n    }\n    \n    SrsRequest* req = info->req;\n    if ((err = rtmp->connect_app(req)) != srs_success) {\n        return srs_error_wrap(err, \"rtmp connect tcUrl\");\n    }\n    \n    // set client ip to request.\n    req->ip = ip;\n    \n    srs_trace(\"connect app, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%d, app=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(),\n        req->schema.c_str(), req->vhost.c_str(), req->port,",
+        "b_contents": "    srs_trace(\"connect app, \"\n        \"tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%s, app=%s, args=%s\", \n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(), \n        req->schema.c_str(), req->vhost.c_str(), req->port.c_str(),",
+        "base_contents": "    // discovery vhost, resolve the vhost from config\n    SrsConfDirective* parsed_vhost = _srs_config->get_vhost(req->vhost);\n    if (parsed_vhost) {\n        req->vhost = parsed_vhost->arg0();\n    }\n    \n    srs_info(\"discovery app success. schema=%s, vhost=%s, port=%s, app=%s\",\n        req->schema.c_str(), req->vhost.c_str(), req->port.c_str(), req->app.c_str());\n    \n    if (req->schema.empty() || req->vhost.empty() || req->port.empty() || req->app.empty()) {\n        ret = ERROR_RTMP_REQ_TCURL;\n        srs_error(\"discovery tcUrl failed. \"\n            \"tcUrl=%s, schema=%s, vhost=%s, port=%s, app=%s, ret=%d\",\n            req->tcUrl.c_str(), req->schema.c_str(), req->vhost.c_str(), req->port.c_str(), req->app.c_str(), ret);\n        return ret;\n    }\n    \n    // check vhost\n    if ((ret = check_vhost()) != ERROR_SUCCESS) {\n        srs_error(\"check vhost failed. ret=%d\", ret);\n        return ret;\n    }\n    srs_verbose(\"check vhost success.\");\n    \n    srs_trace(\"connect app, \"\n        \"tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%s, app=%s, args=%s\", \n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(), \n        req->schema.c_str(), req->vhost.c_str(), req->port.c_str(),",
+        "res_region": "\n    if ((err = rtmp->handshake()) != srs_success) {\n        return srs_error_wrap(err, \"rtmp handshake\");\n    }\n    \n    SrsRequest* req = info->req;\n    if ((err = rtmp->connect_app(req)) != srs_success) {\n        return srs_error_wrap(err, \"rtmp connect tcUrl\");\n    }\n    \n    // set client ip to request.\n    req->ip = ip;\n    \n    srs_trace(\"connect app, tcUrl=%s, pageUrl=%s, swfUrl=%s, schema=%s, vhost=%s, port=%d, app=%s, args=%s\",\n        req->tcUrl.c_str(), req->pageUrl.c_str(), req->swfUrl.c_str(),\n        req->schema.c_str(), req->vhost.c_str(), req->port,",
+        "lookback": "    if ((err = rtmp->handshake()) != srs_success) {",
+        "lookahead": "        req->app.c_str(), (req->args? \"(obj)\":\"null\"));",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 180,
+        "end_line": 230,
+        "merge_gen_region": null,
+        "confidence": 0.7800390720367432,
+        "hesitated": true
+    },
+    {
+        "a_contents": "        if ((err = bandwidth->bandwidth_check(rtmp, skt, req, local_ip)) != srs_success) {\n            return srs_error_wrap(err, \"rtmp: bandwidth check\");\n        }\n        return err;\n    }\n    ",
+        "b_contents": "        return bandwidth->bandwidth_check(rtmp, skt, req, local_ip);\n    }\n    ",
+        "base_contents": "        return bandwidth->bandwidth_check(rtmp, skt, req, local_ip);\n    }\n    \n    // do token traverse before serve it.\n    // @see https://github.com/ossrs/srs/pull/239\n    if (true) {\n        bool vhost_is_edge = _srs_config->get_vhost_is_edge(req->vhost);\n        bool edge_traverse = _srs_config->get_vhost_edge_token_traverse(req->vhost);\n        if (vhost_is_edge && edge_traverse) {\n            if ((ret = check_edge_token_traverse_auth()) != ERROR_SUCCESS) {\n                srs_warn(\"token auth failed, ret=%d\", ret);\n                return ret;\n            }\n        }\n    }\n    ",
+        "res_region": "        if ((err = bandwidth->bandwidth_check(rtmp, skt, req, local_ip)) != srs_success) {\n            return srs_error_wrap(err, \"rtmp: bandwidth check\");\n        }\n        return err;\n    }\n    ",
+        "lookback": "            return srs_error_wrap(err, \"rtmp: bandwidth check\");",
+        "lookahead": "    // set chunk size to larger.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 426,
+        "end_line": 454,
+        "merge_gen_region": null,
+        "confidence": 0.7265344858169556,
+        "hesitated": true
+    }
+]

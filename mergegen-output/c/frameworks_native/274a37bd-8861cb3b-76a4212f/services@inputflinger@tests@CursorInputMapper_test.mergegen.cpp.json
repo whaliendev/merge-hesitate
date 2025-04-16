@@ -1,0 +1,72 @@
+[
+    {
+        "a_contents": "    EXPECT_CALL((*mDevice), getAssociatedViewport)\n            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation90)));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "b_contents": "    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, ui::Rotation::Rotation90);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "base_contents": "    createDevice();\n    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, ui::Rotation::Rotation90);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "res_region": "    EXPECT_CALL((*mDevice), getAssociatedViewport)\n            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation90)));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookback": "            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation90)));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 512,
+        "end_line": 523,
+        "merge_gen_region": "EXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECT",
+        "confidence": 0.8990375399589539,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    EXPECT_CALL((*mDevice), getAssociatedViewport)\n            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation0)));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "b_contents": "    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, ui::Rotation::Rotation0);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "base_contents": "    createDevice();\n    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, ui::Rotation::Rotation0);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "res_region": "    EXPECT_CALL((*mDevice), getAssociatedViewport)\n            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation0)));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookback": "            .WillRepeatedly(Return(createPrimaryViewport(ui::Rotation::Rotation0)));",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 539,
+        "end_line": 550,
+        "merge_gen_region": "(EXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECTEXPECT",
+        "confidence": 0.8946512341499329,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "    EXPECT_CALL((*mDevice), getAssociatedViewport).WillRepeatedly(Return(secondaryViewport));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "b_contents": "    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, secondaryViewport);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "base_contents": "    createDevice();\n    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, secondaryViewport);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "res_region": "    EXPECT_CALL((*mDevice), getAssociatedViewport).WillRepeatedly(Return(secondaryViewport));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookback": "    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 643,
+        "end_line": 653,
+        "merge_gen_region": null,
+        "confidence": 0.7462422847747803,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    EXPECT_CALL((*mDevice), getAssociatedViewport).WillRepeatedly(Return(primaryViewport));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "b_contents": "    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, primaryViewport);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "base_contents": "    createDevice();\n    ViewportFakingInputDeviceContext deviceContext(*mDevice, EVENTHUB_ID, primaryViewport);\n    mMapper = createInputMapper<CursorInputMapper>(deviceContext, mReaderConfiguration);",
+        "res_region": "    EXPECT_CALL((*mDevice), getAssociatedViewport).WillRepeatedly(Return(primaryViewport));\n    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookback": "    mMapper = createInputMapper<CursorInputMapper>(*mDeviceContext, mReaderConfiguration);",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 1030,
+        "end_line": 1040,
+        "merge_gen_region": null,
+        "confidence": 0.7339022159576416,
+        "hesitated": true
+    }
+]

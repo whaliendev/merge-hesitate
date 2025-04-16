@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.34.0-dev\"\n#define GRPC_C_VERSION_STRING @\"13.0.0\"",
+        "b_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.33.2\"\n#define GRPC_C_VERSION_STRING @\"13.0.0\"",
+        "base_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.33.0-dev\"\n#define GRPC_C_VERSION_STRING @\"12.0.0\"",
+        "res_region": "#define GRPC_OBJC_VERSION_STRING @\"1.34.0-dev\"\n#define GRPC_C_VERSION_STRING @\"13.0.0\"",
+        "lookback": "#define GRPC_C_VERSION_STRING @\"13.0.0\"",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 24,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.847273051738739,
+        "hesitated": true
+    }
+]

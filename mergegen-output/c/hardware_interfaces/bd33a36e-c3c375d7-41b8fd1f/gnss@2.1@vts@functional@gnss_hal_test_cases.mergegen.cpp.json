@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    gnss_cb_->sv_info_list_cbq_.reset();\n    StartAndCheckFirstLocation(/* min_interval_msec= */ 1000, /* low_power_mode= */ false);",
+        "b_contents": "    gnss_cb_->sv_info_list_cbq_.reset();\n    StartAndCheckFirstLocation();",
+        "base_contents": "    StartAndCheckFirstLocation();",
+        "res_region": "    gnss_cb_->sv_info_list_cbq_.reset();\n    StartAndCheckFirstLocation(/* min_interval_msec= */ 1000, /* low_power_mode= */ false);",
+        "lookback": "    StartAndCheckFirstLocation(/* min_interval_msec= */ 1000, /* low_power_mode= */ false);",
+        "lookahead": "    int location_called_count = gnss_cb_->location_cbq_.calledCount();",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 255,
+        "end_line": 263,
+        "merge_gen_region": null,
+        "confidence": 0.7512943744659424,
+        "hesitated": true
+    }
+]

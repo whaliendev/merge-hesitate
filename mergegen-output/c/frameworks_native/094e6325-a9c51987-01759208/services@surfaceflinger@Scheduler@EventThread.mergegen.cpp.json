@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "        EventRegistrationFlags eventRegistration) const {\n    auto connection = sp<EventThreadConnection>::make(const_cast<EventThread*>(this),\n                                                      IPCThreadState::self()->getCallingUid(),\n                                                      eventRegistration);\n    if (FlagManager::getInstance().misc1()) {\n        const int policy = SCHED_FIFO;\n        connection->setMinSchedulerPolicy(policy, sched_get_priority_min(policy));\n    }\n    return connection;",
+        "b_contents": "        ResyncCallback resyncCallback, EventRegistrationFlags eventRegistration) const {\n    auto connection = sp<EventThreadConnection>::make(const_cast<EventThread*>(this),\n                                                      IPCThreadState::self()->getCallingUid(),\n                                                      std::move(resyncCallback),\n                                                      eventRegistration);\n    const int policy = SCHED_FIFO;\n    connection->setMinSchedulerPolicy(policy, sched_get_priority_min(policy));\n    return connection;",
+        "base_contents": "        ResyncCallback resyncCallback, EventRegistrationFlags eventRegistration) const {\n    return sp<EventThreadConnection>::make(const_cast<EventThread*>(this),\n                                           IPCThreadState::self()->getCallingUid(),\n                                           std::move(resyncCallback), eventRegistration);",
+        "res_region": "        EventRegistrationFlags eventRegistration) const {\n    auto connection = sp<EventThreadConnection>::make(const_cast<EventThread*>(this),\n                                                      IPCThreadState::self()->getCallingUid(),\n                                                      eventRegistration);\n    if (FlagManager::getInstance().misc1()) {\n        const int policy = SCHED_FIFO;\n        connection->setMinSchedulerPolicy(policy, sched_get_priority_min(policy));\n    }\n    return connection;",
+        "lookback": "    auto connection = sp<EventThreadConnection>::make(const_cast<EventThread*>(this),",
+        "lookahead": "}",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 326,
+        "end_line": 350,
+        "merge_gen_region": " connection spEventConnectionoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8905220031738281,
+        "hesitated": false,
+        "resolved": false
+    }
+]

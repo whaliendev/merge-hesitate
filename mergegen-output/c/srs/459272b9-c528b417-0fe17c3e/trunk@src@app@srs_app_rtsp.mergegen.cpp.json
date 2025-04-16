@@ -1,0 +1,37 @@
+[
+    {
+        "a_contents": "        std::string schema, host, vhost, app, param;\n        int port;\n        srs_discovery_tc_url(rtsp_tcUrl, schema, host, vhost, app, rtsp_stream, port, param);\n        ",
+        "b_contents": "        req = new SrsRequest();\n\n        std::string schema, host, vhost, app, port, param;\n        srs_discovery_tc_url(rtsp_tcUrl, schema, host, vhost, app, rtsp_stream, port, param);\n",
+        "base_contents": "        req = new SrsRequest();\n\n        std::string schema, host, vhost, app, port, param;\n        srs_discovery_tc_url(rtsp_tcUrl, schema, host, vhost, app, port, param);\n",
+        "res_region": "        std::string schema, host, vhost, app, param;\n        int port;\n        srs_discovery_tc_url(rtsp_tcUrl, schema, host, vhost, app, rtsp_stream, port, param);\n",
+        "lookback": "        int port;",
+        "lookahead": "        // generate output by template.",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 642,
+        "end_line": 659,
+        "merge_gen_region": null,
+        "confidence": 0.7737149596214294,
+        "hesitated": true
+    },
+    {
+        "a_contents": "",
+        "b_contents": "\n        size_t pos = string::npos;\n        string uri = req->tcUrl = output;\n\n        // tcUrl, stream\n        if ((pos = uri.rfind(\"/\")) != string::npos) {\n            req->stream = uri.substr(pos + 1);\n            req->tcUrl = uri = uri.substr(0, pos);\n        }\n    \n        srs_discovery_tc_url(req->tcUrl, \n            req->schema, req->host, req->vhost, req->app, req->stream, req->port,\n            req->param);",
+        "base_contents": "\n        size_t pos = string::npos;\n        string uri = req->tcUrl = output;\n\n        // tcUrl, stream\n        if ((pos = uri.rfind(\"/\")) != string::npos) {\n            req->stream = uri.substr(pos + 1);\n            req->tcUrl = uri = uri.substr(0, pos);\n        }\n    \n        srs_discovery_tc_url(req->tcUrl, \n            req->schema, req->host, req->vhost, req->app, req->port,\n            req->param);",
+        "res_region": "",
+        "lookback": "    ",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 664,
+        "end_line": 693,
+        "merge_gen_region": "",
+        "confidence": 0.9530386328697205,
+        "hesitated": false,
+        "resolved": true
+    }
+]

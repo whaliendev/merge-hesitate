@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include \"modules/planning/proto/planner_open_space_config.pb.h\"",
+        "b_contents": "#include \"modules/common_msgs/planning_msgs/planner_open_space_config.pb.h\"",
+        "base_contents": "",
+        "res_region": "#include \"modules/planning/proto/planner_open_space_config.pb.h\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 32,
+        "end_line": 37,
+        "merge_gen_region": null,
+        "confidence": 0.4005551338195801,
+        "hesitated": true
+    }
+]

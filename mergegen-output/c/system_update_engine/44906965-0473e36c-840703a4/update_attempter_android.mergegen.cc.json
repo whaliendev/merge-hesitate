@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         boot_control_,\n                         hardware_,\n                         nullptr,             // system_state, not used.\n                         download_fetcher));  // passes ownership",
+        "b_contents": "  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         boot_control_,\n                         hardware_,\n                         nullptr,  // system_state, not used.\n                         // passes ownership\n                         new MultiRangeHttpFetcher(download_fetcher),\n                         true /* is_interactive */));",
+        "base_contents": "  shared_ptr<DownloadAction> download_action(new DownloadAction(\n      prefs_,\n      boot_control_,\n      hardware_,\n      nullptr,                                        // system_state, not used.\n      new MultiRangeHttpFetcher(download_fetcher)));  // passes ownership",
+        "res_region": "  shared_ptr<DownloadAction> download_action(\n      new DownloadAction(prefs_,\n                         boot_control_,\n                         hardware_,\n                         nullptr,           // system_state, not used.\n                         download_fetcher,  // passes ownership\n                         true /* is_interactive */));",
+        "lookback": "      new DownloadAction(prefs_,",
+        "lookahead": "  shared_ptr<FilesystemVerifierAction> filesystem_verifier_action(",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 537,
+        "end_line": 560,
+        "merge_gen_region": null,
+        "confidence": 0.37418800592422485,
+        "hesitated": true
+    }
+]

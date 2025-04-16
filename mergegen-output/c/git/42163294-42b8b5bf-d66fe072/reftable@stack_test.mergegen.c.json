@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "static void test_parse_names(void)\n{\n\tchar buf[] = \"line\\n\";\n\tchar **names = NULL;\n\tparse_names(buf, strlen(buf), &names);\n\n\tEXPECT(NULL != names[0]);\n\tEXPECT(0 == strcmp(names[0], \"line\"));\n\tEXPECT(NULL == names[1]);\n\tfree_names(names);\n}\n\nstatic void test_names_equal(void)\n{\n\tconst char *a[] = { \"a\", \"b\", \"c\", NULL };\n\tconst char *b[] = { \"a\", \"b\", \"d\", NULL };\n\tconst char *c[] = { \"a\", \"b\", NULL };\n\n\tEXPECT(names_equal(a, a));\n\tEXPECT(!names_equal(a, b));\n\tEXPECT(!names_equal(a, c));\n}\n",
+        "base_contents": "static void test_parse_names(void)\n{\n\tchar buf[] = \"line\\n\";\n\tchar **names = NULL;\n\tparse_names(buf, strlen(buf), &names);\n\n\tEXPECT(NULL != names[0]);\n\tEXPECT(0 == strcmp(names[0], \"line\"));\n\tEXPECT(NULL == names[1]);\n\tfree_names(names);\n}\n\nstatic void test_names_equal(void)\n{\n\tchar *a[] = { \"a\", \"b\", \"c\", NULL };\n\tchar *b[] = { \"a\", \"b\", \"d\", NULL };\n\tchar *c[] = { \"a\", \"b\", NULL };\n\n\tEXPECT(names_equal(a, a));\n\tEXPECT(!names_equal(a, b));\n\tEXPECT(!names_equal(a, c));\n}\n",
+        "res_region": "",
+        "lookback": "{",
+        "lookahead": "static int write_test_ref(struct reftable_writer *wr, void *arg)",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 104,
+        "end_line": 153,
+        "merge_gen_region": null,
+        "confidence": 0.6810818910598755,
+        "hesitated": true
+    }
+]

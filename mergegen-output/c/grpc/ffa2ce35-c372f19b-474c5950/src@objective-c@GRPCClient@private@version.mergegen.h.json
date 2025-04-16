@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.11.0-dev\"",
+        "b_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.10.0\"",
+        "base_contents": "#define GRPC_OBJC_VERSION_STRING @\"1.10.0-pre2\"",
+        "res_region": "#define GRPC_OBJC_VERSION_STRING @\"1.11.0-dev\"",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 25,
+        "end_line": 31,
+        "merge_gen_region": " recvmStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemStatemState",
+        "confidence": 0.950171172618866,
+        "hesitated": false,
+        "resolved": false
+    }
+]

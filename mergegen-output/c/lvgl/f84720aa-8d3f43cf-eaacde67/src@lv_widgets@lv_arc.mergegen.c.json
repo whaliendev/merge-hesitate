@@ -1,0 +1,121 @@
+[
+    {
+        "a_contents": "    else  if(arc->indic_angle_start <arc->indic_angle_end && start <arc->indic_angle_end) {\n        inv_arc_area(obj, LV_MIN(arc->indic_angle_start, start), LV_MAX(arc->indic_angle_start, start),\n                     LV_PART_INDICATOR);",
+        "b_contents": "    else if(ext->arc_angle_start < ext->arc_angle_end && start < ext->arc_angle_end) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->arc_angle_start, start), LV_MATH_MAX(ext->arc_angle_start, start),\n                     LV_ARC_PART_INDIC);",
+        "base_contents": "    else  if(ext->arc_angle_start < ext->arc_angle_end && start < ext->arc_angle_end) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->arc_angle_start, start), LV_MATH_MAX(ext->arc_angle_start, start),\n                     LV_ARC_PART_INDIC);",
+        "res_region": "    else  if(arc->indic_angle_start <arc->indic_angle_end && start <arc->indic_angle_end) {\n        inv_arc_area(obj, LV_MIN(arc->indic_angle_start, start), LV_MAX(arc->indic_angle_start, start),\n                     LV_PART_INDICATOR);",
+        "lookback": "        inv_arc_area(obj, LV_MIN(arc->indic_angle_start, start), LV_MAX(arc->indic_angle_start, start),",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 105,
+        "end_line": 117,
+        "merge_gen_region": null,
+        "confidence": 0.7761633992195129,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    else  if(arc->indic_angle_end <arc->indic_angle_start && end <arc->indic_angle_start) {\n        inv_arc_area(obj, LV_MIN(arc->indic_angle_end, end), LV_MAX(arc->indic_angle_end, end), LV_PART_INDICATOR);",
+        "b_contents": "    else if(ext->arc_angle_end < ext->arc_angle_start && end < ext->arc_angle_start) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->arc_angle_end, end), LV_MATH_MAX(ext->arc_angle_end, end), LV_ARC_PART_INDIC);",
+        "base_contents": "    else  if(ext->arc_angle_end < ext->arc_angle_start && end < ext->arc_angle_start) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->arc_angle_end, end), LV_MATH_MAX(ext->arc_angle_end, end), LV_ARC_PART_INDIC);",
+        "res_region": "    else  if(arc->indic_angle_end <arc->indic_angle_start && end <arc->indic_angle_start) {\n        inv_arc_area(obj, LV_MIN(arc->indic_angle_end, end), LV_MAX(arc->indic_angle_end, end), LV_PART_INDICATOR);",
+        "lookback": "        inv_arc_area(obj, LV_MIN(arc->indic_angle_end, end), LV_MAX(arc->indic_angle_end, end), LV_PART_INDICATOR);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 148,
+        "end_line": 157,
+        "merge_gen_region": null,
+        "confidence": 0.710254967212677,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    else  if(arc->bg_angle_start <arc->bg_angle_end && start <arc->bg_angle_end) {\n        inv_arc_area(obj, LV_MIN(arc->bg_angle_start, start), LV_MAX(arc->bg_angle_start, start), LV_PART_MAIN);",
+        "b_contents": "    else if(ext->bg_angle_start < ext->bg_angle_end && start < ext->bg_angle_end) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->bg_angle_start, start), LV_MATH_MAX(ext->bg_angle_start, start), LV_ARC_PART_BG);",
+        "base_contents": "    else  if(ext->bg_angle_start < ext->bg_angle_end && start < ext->bg_angle_end) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->bg_angle_start, start), LV_MATH_MAX(ext->bg_angle_start, start), LV_ARC_PART_BG);",
+        "res_region": "    else  if(arc->bg_angle_start <arc->bg_angle_end && start <arc->bg_angle_end) {\n        inv_arc_area(obj, LV_MIN(arc->bg_angle_start, start), LV_MAX(arc->bg_angle_start, start), LV_PART_MAIN);",
+        "lookback": "        inv_arc_area(obj, LV_MIN(arc->bg_angle_start, start), LV_MAX(arc->bg_angle_start, start), LV_PART_MAIN);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 210,
+        "end_line": 219,
+        "merge_gen_region": null,
+        "confidence": 0.8205063939094543,
+        "hesitated": true
+    },
+    {
+        "a_contents": "    else  if(arc->bg_angle_end <arc->bg_angle_start && end <arc->bg_angle_start) {\n        inv_arc_area(obj, LV_MIN(arc->bg_angle_end, end), LV_MAX(arc->bg_angle_end, end), LV_PART_MAIN);",
+        "b_contents": "    else if(ext->bg_angle_end < ext->bg_angle_start && end < ext->bg_angle_start) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->bg_angle_end, end), LV_MATH_MAX(ext->bg_angle_end, end), LV_ARC_PART_BG);",
+        "base_contents": "    else  if(ext->bg_angle_end < ext->bg_angle_start && end < ext->bg_angle_start) {\n        inv_arc_area(arc, LV_MATH_MIN(ext->bg_angle_end, end), LV_MATH_MAX(ext->bg_angle_end, end), LV_ARC_PART_BG);",
+        "res_region": "    else  if(arc->bg_angle_end <arc->bg_angle_start && end <arc->bg_angle_start) {\n        inv_arc_area(obj, LV_MIN(arc->bg_angle_end, end), LV_MAX(arc->bg_angle_end, end), LV_PART_MAIN);",
+        "lookback": "        inv_arc_area(obj, LV_MIN(arc->bg_angle_end, end), LV_MAX(arc->bg_angle_end, end), LV_PART_MAIN);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 253,
+        "end_line": 262,
+        "merge_gen_region": null,
+        "confidence": 0.7922277450561523,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\nstatic void lv_arc_constructor(lv_obj_t * obj, lv_obj_t * parent, const lv_obj_t * copy)",
+        "b_contents": "/**\n * Get the value of a arc\n * @param arc pointer to a arc object\n * @return the value of the arc\n */\nint16_t lv_arc_get_value(const lv_obj_t * arc)",
+        "base_contents": "\n/**\n * Get the value of a arc\n * @param arc pointer to a arc object\n * @return the value of the arc\n */\nint16_t lv_arc_get_value(const lv_obj_t * arc)",
+        "res_region": "static void lv_arc_constructor(lv_obj_t * obj, lv_obj_t * parent, const lv_obj_t * copy)",
+        "lookback": "{",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 447,
+        "end_line": 465,
+        "merge_gen_region": null,
+        "confidence": 0.7730152606964111,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n        angle = lv_atan2(p.y, p.x);\n        angle -=arc->angle_ofs;\n        angle -=arc->bg_angle_start;   /*Make the angle relative to the start angle*/",
+        "b_contents": "        angle = _lv_atan2(p.y, p.x);\n        angle -= ext->rotation_angle;\n        angle -= ext->bg_angle_start;   /*Make the angle relative to the start angle*/",
+        "base_contents": "\n        angle = _lv_atan2(p.y, p.x);\n        angle -= ext->rotation_angle;\n        angle -= ext->bg_angle_start;   /*Make the angle relative to the start angle*/",
+        "res_region": "        angle = lv_atan2(p.y, p.x);\n        angle -=arc->angle_ofs;\n        angle -=arc->bg_angle_start;   /*Make the angle relative to the start angle*/\n",
+        "lookback": "        angle -=arc->angle_ofs;",
+        "lookahead": "        if(angle < 0) angle += 360;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 669,
+        "end_line": 683,
+        "merge_gen_region": null,
+        "confidence": 0.847250759601593,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\n    lv_coord_t indic_width = lv_obj_get_style_line_width(obj, LV_PART_INDICATOR);",
+        "b_contents": "    lv_coord_t indic_width = lv_obj_get_style_line_width(arc, LV_ARC_PART_INDIC);",
+        "base_contents": "\n    lv_coord_t indic_width = lv_obj_get_style_line_width(arc, LV_ARC_PART_INDIC);",
+        "res_region": "    lv_coord_t indic_width = lv_obj_get_style_line_width(obj, LV_PART_INDICATOR);",
+        "lookback": "    r -= indic_width;",
+        "lookahead": "    r -= indic_width;",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 922,
+        "end_line": 930,
+        "merge_gen_region": null,
+        "confidence": 0.7266673445701599,
+        "hesitated": true
+    }
+]

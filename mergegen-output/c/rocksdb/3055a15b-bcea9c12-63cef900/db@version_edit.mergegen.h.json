@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "  std::vector<std::pair<int, FileMetaData>> new_files_;\n\n  // Each version edit record should have column_family_id set\n  // If it's not set, it is default (0)\n  uint32_t column_family_;\n  // a version edit can be either column_family add or\n  // column_family drop. If it's column family add,\n  // it also includes column family name.\n  bool is_column_family_drop_;\n  bool is_column_family_add_;\n  std::string column_family_name_;",
+        "b_contents": "  std::vector<std::pair<int, FileMetaData> > new_files_;\n\n  enum {\n    kManifestVersion = 1\n  };",
+        "base_contents": "  std::vector<std::pair<int, FileMetaData> > new_files_;",
+        "res_region": "  std::vector<std::pair<int, FileMetaData>> new_files_;\n\n  // Each version edit record should have column_family_id set\n  // If it's not set, it is default (0)\n  uint32_t column_family_;\n  // a version edit can be either column_family add or\n  // column_family drop. If it's column family add,\n  // it also includes column family name.\n  bool is_column_family_drop_;\n  bool is_column_family_add_;\n  std::string column_family_name_;\n\n  enum {\n    kManifestVersion = 1\n  };",
+        "lookback": "",
+        "lookahead": "};",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 165,
+        "end_line": 185,
+        "merge_gen_region": " Each edit should columnfamilyid // it not, is default0)32t__; a edit be columnfamily or columnfamily. it's family, ittext column family, it>( column name bool____)) bool____) stdstring____; stdstring____; stdstring____;_________________________________________________________________________________________________________________________",
+        "confidence": 0.8860526084899902,
+        "hesitated": false,
+        "resolved": false
+    }
+]

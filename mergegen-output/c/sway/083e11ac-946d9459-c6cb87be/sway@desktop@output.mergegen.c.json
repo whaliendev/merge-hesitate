@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "\tfloat clear_color[] = {0.25f, 0.25f, 0.25f, 1.0f};\n\tstruct wlr_renderer *renderer = wlr_backend_get_renderer(wlr_output->backend);\n\twlr_renderer_clear(renderer, &clear_color);\n\n\tint buffer_age = -1;\n\twlr_output_make_current(wlr_output, &buffer_age);",
+        "b_contents": "\tint buffer_age = -1;\n\twlr_output_make_current(wlr_output, &buffer_age);\n \twlr_renderer_begin(server->renderer, wlr_output);",
+        "base_contents": "\twlr_output_make_current(wlr_output);",
+        "res_region": "\twlr_renderer_clear(renderer, &clear_color);\n\n\tint buffer_age = -1;\n\twlr_output_make_current(wlr_output, &buffer_age);",
+        "lookback": "",
+        "lookahead": "\twlr_renderer_begin(server->renderer, wlr_output);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 222,
+        "end_line": 235,
+        "merge_gen_region": "_____(__2randrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrandrand",
+        "confidence": 0.8900559544563293,
+        "hesitated": false,
+        "resolved": false
+    }
+]

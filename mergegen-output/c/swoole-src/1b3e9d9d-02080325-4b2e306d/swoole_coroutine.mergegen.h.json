@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    int cid;",
+        "b_contents": "    uint32_t *cid;\n    /**\n     * user coroutine\n     */\n    zval *function;",
+        "base_contents": "    uint32_t *cid;",
+        "res_region": "    int cid;\n    /**\n     * user coroutine\n     */\n    zval *function;",
+        "lookback": "    /**",
+        "lookahead": "    time_t start_time;",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 94,
+        "end_line": 104,
+        "merge_gen_region": null,
+        "confidence": 0.755680501461029,
+        "hesitated": true
+    }
+]

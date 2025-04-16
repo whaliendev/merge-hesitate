@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tif (needs_lost_and_found) {\n\t\t/* insert a lost+found directory at the beginning of the dentries */\n\t\tstruct dentry *tmp = calloc(entries + 1, sizeof(struct dentry));\n\t\tmemset(tmp, 0, sizeof(struct dentry));\n\t\tmemcpy(tmp + 1, dentries, entries * sizeof(struct dentry));\n\t\tdentries = tmp;\n\n\t\tdentries[0].filename = strdup(\"lost+found\");\n\t\tasprintf(&dentries[0].path, \"%s/lost+found\", dir_path);\n\t\tdentries[0].full_path = NULL;\n\t\tdentries[0].size = 0;\n\t\tdentries[0].mode = S_IRWXU;\n\t\tdentries[0].file_type = EXT4_FT_DIR;\n\t\tdentries[0].uid = 0;\n\t\tdentries[0].gid = 0;\n\t\tif (sehnd) {\n\t\t\tchar *sepath = NULL;\n\t\t\tasprintf(&sepath, \"/%s\", dentries[0].path);\n\t\t\tif (selabel_lookup(sehnd, &dentries[0].secon, sepath, dentries[0].mode) < 0)\n\t\t\t\terror(\"cannot lookup security context for %s\", dentries[0].path);\n\t\t\tfree(sepath);\n\t\t}\n\t\tentries++;\n\t\tdirs++;\n\t}\n",
+        "b_contents": "\tif (needs_lost_and_found) {\n\t\t/* insert a lost+found directory at the beginning of the dentries */\n\t\tstruct dentry *tmp = calloc(entries + 1, sizeof(struct dentry));\n\t\tmemset(tmp, 0, sizeof(struct dentry));\n\t\tmemcpy(tmp + 1, dentries, entries * sizeof(struct dentry));\n\t\tdentries = tmp;\n\n\t\tdentries[0].filename = strdup(\"lost+found\");\n\t\tdentries[0].path = strdup(\"/lost+found\");\n\t\tdentries[0].full_path = NULL;\n\t\tdentries[0].size = 0;\n\t\tdentries[0].mode = S_IRWXU;\n\t\tdentries[0].file_type = EXT4_FT_DIR;\n\t\tdentries[0].uid = 0;\n\t\tdentries[0].gid = 0;\n#ifdef HAVE_SELINUX\n\t\tif (sehnd)\n\t\t\tif (selabel_lookup(sehnd, &dentries[0].secon, \"lost+found\", dentries[0].mode) < 0)\n\t\t\t\terror(\"cannot lookup security context for /lost+found\");\n#endif\n\t\tentries++;\n\t\tdirs++;\n\t}\n",
+        "base_contents": "",
+        "res_region": "\tif (needs_lost_and_found) {\n\t\t/* insert a lost+found directory at the beginning of the dentries */\n\t\tstruct dentry *tmp = calloc(entries + 1, sizeof(struct dentry));\n\t\tmemset(tmp, 0, sizeof(struct dentry));\n\t\tmemcpy(tmp + 1, dentries, entries * sizeof(struct dentry));\n\t\tdentries = tmp;\n\n\t\tdentries[0].filename = strdup(\"lost+found\");\n\t\tasprintf(&dentries[0].path, \"%s/lost+found\", dir_path);\n\t\tdentries[0].full_path = NULL;\n\t\tdentries[0].size = 0;\n\t\tdentries[0].mode = S_IRWXU;\n\t\tdentries[0].file_type = EXT4_FT_DIR;\n\t\tdentries[0].uid = 0;\n\t\tdentries[0].gid = 0;\n\t\tif (sehnd) {\n\t\t\tchar *sepath = NULL;\n\t\t\tasprintf(&sepath, \"/%s\", dentries[0].path);\n\t\t\tif (selabel_lookup(sehnd, &dentries[0].secon, sepath, dentries[0].mode) < 0)\n\t\t\t\terror(\"cannot lookup security context for %s\", dentries[0].path);\n\t\t\tfree(sepath);\n\t\t}\n\t\tentries++;\n\t\tdirs++;\n\t}\n",
+        "lookback": "\t\t/* insert a lost+found directory at the beginning of the dentries */",
+        "lookahead": "\tinode = make_directory(dir_inode, entries, dentries, dirs);",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 212,
+        "end_line": 265,
+        "merge_gen_region": null,
+        "confidence": 0.518616259098053,
+        "hesitated": true
+    }
+]

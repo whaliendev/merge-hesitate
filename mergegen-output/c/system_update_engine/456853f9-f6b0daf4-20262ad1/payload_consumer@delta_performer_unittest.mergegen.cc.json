@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "        kLegacyPartitionNameRoot, install_plan_.target_slot, new_part.path());",
+        "b_contents": "        kPartitionNameRoot, install_plan_.target_slot, new_part);",
+        "base_contents": "        kLegacyPartitionNameRoot, install_plan_.target_slot, new_part);",
+        "res_region": "        kPartitionNameRoot, install_plan_.target_slot, new_part.path());",
+        "lookback": "    fake_boot_control_.SetPartitionDevice(",
+        "lookahead": "    fake_boot_control_.SetPartitionDevice(",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 272,
+        "end_line": 278,
+        "merge_gen_region": null,
+        "confidence": 0.5994536280632019,
+        "hesitated": true
+    }
+]

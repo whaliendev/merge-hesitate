@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "\t/* Repository's reference storage format, as serialized on disk. */\n\tunsigned int ref_storage_format;\n",
+        "b_contents": "\t/* Repository's compatibility hash algorithm. */\n\tconst struct git_hash_algo *compat_hash_algo;\n",
+        "base_contents": "",
+        "res_region": "\t/* Repository's compatibility hash algorithm. */\n\tconst struct git_hash_algo *compat_hash_algo;\n\n\t/* Repository's reference storage format, as serialized on disk. */\n\tunsigned int ref_storage_format;\n",
+        "lookback": "\tconst struct git_hash_algo *compat_hash_algo;",
+        "lookahead": "\t/* A unique-id for tracing purposes. */",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 165,
+        "end_line": 174,
+        "merge_gen_region": null,
+        "confidence": 0.6235731840133667,
+        "hesitated": true
+    },
+    {
+        "a_contents": "void repo_set_ref_storage_format(struct repository *repo, unsigned int format);",
+        "b_contents": "void repo_set_compat_hash_algo(struct repository *repo, int compat_algo);",
+        "base_contents": "",
+        "res_region": "void repo_set_compat_hash_algo(struct repository *repo, int compat_algo);\nvoid repo_set_ref_storage_format(struct repository *repo, unsigned int format);",
+        "lookback": "void repo_set_ref_storage_format(struct repository *repo, unsigned int format);",
+        "lookahead": "void initialize_the_repository(void);",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 214,
+        "end_line": 219,
+        "merge_gen_region": null,
+        "confidence": 0.8321518301963806,
+        "hesitated": true
+    }
+]

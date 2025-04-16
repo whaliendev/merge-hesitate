@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "",
+        "b_contents": "#include \"update_engine/payload_consumer/file_writer.h\"",
+        "base_contents": "#include \"update_engine/payload_consumer/payload_constants.h\"",
+        "res_region": "",
+        "lookback": "using base::Time;",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 59,
+        "end_line": 64,
+        "merge_gen_region": null,
+        "confidence": 0.49862655997276306,
+        "hesitated": true
+    }
+]

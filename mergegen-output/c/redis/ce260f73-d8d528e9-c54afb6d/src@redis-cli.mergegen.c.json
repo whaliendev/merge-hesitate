@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    while((line = linenoise(context ? \"redis> \" : \"not connected> \")) != NULL) {",
+        "b_contents": "    linenoiseSetCompletionCallback(completionCallback);\n    while((line = linenoise(\"redis> \")) != NULL) {",
+        "base_contents": "    while((line = linenoise(\"redis> \")) != NULL) {",
+        "res_region": "    linenoiseSetCompletionCallback(completionCallback);\n\n    while((line = linenoise(context ? \"redis> \" : \"not connected> \")) != NULL) {",
+        "lookback": "",
+        "lookahead": "        if (line[0] != '\\0') {",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 543,
+        "end_line": 550,
+        "merge_gen_region": null,
+        "confidence": 0.8073839545249939,
+        "hesitated": true
+    }
+]

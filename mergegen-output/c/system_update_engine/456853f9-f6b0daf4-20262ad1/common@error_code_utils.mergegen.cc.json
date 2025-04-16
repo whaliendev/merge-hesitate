@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    case ErrorCode::kPayloadTimestampError:\n      return \"ErrorCode::kPayloadTimestampError\";",
+        "b_contents": "    case ErrorCode::kOmahaUpdateIgnoredOverCellular:\n      return \"ErrorCode::kOmahaUpdateIgnoredOverCellular\";",
+        "base_contents": "",
+        "res_region": "    case ErrorCode::kOmahaUpdateIgnoredOverCellular:\n      return \"ErrorCode::kOmahaUpdateIgnoredOverCellular\";\n    case ErrorCode::kPayloadTimestampError:\n      return \"ErrorCode::kPayloadTimestampError\";",
+        "lookback": "      return \"ErrorCode::kOmahaUpdateIgnoredOverCellular\";",
+        "lookahead": "    case ErrorCode::kUpdatedButNotActive:",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 146,
+        "end_line": 153,
+        "merge_gen_region": null,
+        "confidence": 0.8580273985862732,
+        "hesitated": true
+    }
+]

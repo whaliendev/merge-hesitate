@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "enum {\n    LV_DIR_NONE     = 0x00,\n    LV_DIR_LEFT     = (1 << 0),\n    LV_DIR_RIGHT    = (1 << 1),\n    LV_DIR_TOP      = (1 << 2),\n    LV_DIR_BOTTOM   = (1 << 3),\n    LV_DIR_HOR      = LV_DIR_LEFT | LV_DIR_RIGHT,\n    LV_DIR_VER      = LV_DIR_TOP | LV_DIR_BOTTOM,\n    LV_DIR_ALL      = LV_DIR_HOR | LV_DIR_VER,\n};\n\ntypedef uint8_t lv_dir_t;\n\n",
+        "b_contents": "",
+        "base_contents": "",
+        "res_region": "enum {\n    LV_DIR_NONE     = 0x00,\n    LV_DIR_LEFT     = (1 << 0),\n    LV_DIR_RIGHT    = (1 << 1),\n    LV_DIR_TOP      = (1 << 2),\n    LV_DIR_BOTTOM   = (1 << 3),\n    LV_DIR_HOR      = LV_DIR_LEFT | LV_DIR_RIGHT,\n    LV_DIR_VER      = LV_DIR_TOP | LV_DIR_BOTTOM,\n    LV_DIR_ALL      = LV_DIR_HOR | LV_DIR_VER,\n};\n\ntypedef uint8_t lv_dir_t;\n",
+        "lookback": "    LV_DIR_NONE     = 0x00,",
+        "lookahead": "/**********************",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 77,
+        "end_line": 95,
+        "merge_gen_region": null,
+        "confidence": 0.6044867634773254,
+        "hesitated": true
+    }
+]

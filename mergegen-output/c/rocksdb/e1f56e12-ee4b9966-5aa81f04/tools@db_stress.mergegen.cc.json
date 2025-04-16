@@ -1,0 +1,36 @@
+[
+    {
+        "a_contents": "    for (size_t cf = 0; cf < column_families_.size(); ++cf) {\n      if (!thread->rand.OneIn(2)) {\n        // Use iterator to verify this range\n        unique_ptr<Iterator> iter(\n            db_->NewIterator(options, column_families_[cf]));\n        iter->Seek(Key(start));\n        for (long i = start; i < end; i++) {\n          std::string from_db;\n          std::string keystr = Key(i);\n          Slice k = keystr;\n          Status s = iter->status();\n          if (iter->Valid()) {\n            if (iter->key().compare(k) > 0) {\n              s = Status::NotFound(Slice());\n            } else if (iter->key().compare(k) == 0) {\n              from_db = iter->value().ToString();\n              iter->Next();\n            } else if (iter->key().compare(k) < 0) {\n              VerificationAbort(\"An out of range key was found\", cf, i);\n            }\n          } else {\n            // The iterator found no value for the key in question, so do not\n            // move to the next item in the iterator",
+        "b_contents": "\n    if (!thread->rand.OneIn(2)) {\n      options.prefix_seek = FLAGS_prefix_size > 0;\n      // Use iterator to verify this range\n      unique_ptr<Iterator> iter(db_->NewIterator(options));\n      iter->Seek(Key(start));\n      for (long i = start; i < end; i++) {\n        // TODO(ljin): update \"long\" to uint64_t\n        // Reseek when the prefix changes\n        if (i % (static_cast<int64_t>(1) << 8 * (8 - FLAGS_prefix_size)) == 0) {\n          iter->Seek(Key(i));\n        }\n        std::string from_db;\n        std::string keystr = Key(i);\n        Slice k = keystr;\n        Status s = iter->status();\n        if (iter->Valid()) {\n          if (iter->key().compare(k) > 0) {",
+        "base_contents": "    if (!thread->rand.OneIn(2)) {\n      // Use iterator to verify this range\n      unique_ptr<Iterator> iter(db_->NewIterator(options));\n      iter->Seek(Key(start));\n      for (long i = start; i < end; i++) {\n        std::string from_db;\n        std::string keystr = Key(i);\n        Slice k = keystr;\n        Status s = iter->status();\n        if (iter->Valid()) {\n          if (iter->key().compare(k) > 0) {",
+        "res_region": "    for (size_t cf = 0; cf < column_families_.size(); ++cf) {\n      if (!thread->rand.OneIn(2)) {\n        // Use iterator to verify this range\n        options.prefix_seek = FLAGS_prefix_size > 0;\n        unique_ptr<Iterator> iter(\n            db_->NewIterator(options, column_families_[cf]));\n        iter->Seek(Key(start));\n        for (long i = start; i < end; i++) {\n          // TODO(ljin): update \"long\" to uint64_t\n          // Reseek when the prefix changes\n          if (i % (static_cast<int64_t>(1) << 8 * (8 - FLAGS_prefix_size)) ==\n              0) {\n            iter->Seek(Key(i));\n          }\n          std::string from_db;\n          std::string keystr = Key(i);\n          Slice k = keystr;\n          Status s = iter->status();\n          if (iter->Valid()) {\n            if (iter->key().compare(k) > 0) {\n              s = Status::NotFound(Slice());\n            } else if (iter->key().compare(k) == 0) {\n              from_db = iter->value().ToString();\n              iter->Next();\n            } else if (iter->key().compare(k) < 0) {\n              VerificationAbort(\"An out of range key was found\", cf, i);\n            }\n          } else {\n            // The iterator found no value for the key in question, so do not\n            // move to the next item in the iterator",
+        "lookback": "      if (!thread->rand.OneIn(2)) {",
+        "lookahead": "            s = Status::NotFound(Slice());",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 1231,
+        "end_line": 1286,
+        "merge_gen_region": null,
+        "confidence": 0.8633869290351868,
+        "hesitated": true
+    },
+    {
+        "a_contents": "      } else {\n        // Use Get to verify this range\n        for (long i = start; i < end; i++) {\n          std::string from_db;\n          std::string keystr = Key(i);\n          Slice k = keystr;\n          Status s = db_->Get(options, column_families_[cf], k, &from_db);\n          if (from_db.length()) {\n            PrintKeyValue(cf, i, from_db.data(), from_db.length());\n          }\n          VerifyValue(cf, i, options, shared, from_db, s, true);",
+        "b_contents": "      }\n    } else {\n      // Use Get to verify this range\n      for (long i = start; i < end; i++) {\n        std::string from_db;\n        std::string keystr = Key(i);\n        Slice k = keystr;\n        Status s = db_->Get(options, k, &from_db);\n        VerifyValue(i, options, shared, from_db, s, true);\n        if (from_db.length()) {\n          PrintKeyValue(i, from_db.data(), from_db.length());",
+        "base_contents": "      }\n    }\n    else {\n      // Use Get to verify this range\n      for (long i = start; i < end; i++) {\n        std::string from_db;\n        std::string keystr = Key(i);\n        Slice k = keystr;\n        Status s = db_->Get(options, k, &from_db);\n        VerifyValue(i, options, shared, from_db, s, true);\n        if (from_db.length()) {\n          PrintKeyValue(i, from_db.data(), from_db.length());",
+        "res_region": "      } else {\n        // Use Get to verify this range\n        for (long i = start; i < end; i++) {\n          std::string from_db;\n          std::string keystr = Key(i);\n          Slice k = keystr;\n          Status s = db_->Get(options, column_families_[cf], k, &from_db);\n          VerifyValue(cf, i, options, shared, from_db, s, true);\n          if (from_db.length()) {\n            PrintKeyValue(cf, i, from_db.data(), from_db.length());\n          }",
+        "lookback": "        // Use Get to verify this range",
+        "lookahead": "        }",
+        "label": [
+            "interleave",
+            "base_underutilized"
+        ],
+        "start_line": 1294,
+        "end_line": 1331,
+        "merge_gen_region": null,
+        "confidence": 0.8771778345108032,
+        "hesitated": true
+    }
+]

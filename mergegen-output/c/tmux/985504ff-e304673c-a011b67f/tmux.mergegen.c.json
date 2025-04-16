@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "\tsetlocale(LC_CTYPE, \"en_US.UTF-8\");",
+        "b_contents": "\n\tsetlocale(LC_CTYPE, \"en_US.UTF-8\");",
+        "base_contents": "",
+        "res_region": "\tsetlocale(LC_CTYPE, \"en_US.UTF-8\");",
+        "lookback": "\tsetlocale(LC_TIME, \"\");",
+        "lookahead": "\tsetlocale(LC_TIME, \"\");",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 192,
+        "end_line": 198,
+        "merge_gen_region": null,
+        "confidence": 0.667911946773529,
+        "hesitated": true
+    }
+]

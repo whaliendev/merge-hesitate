@@ -1,0 +1,38 @@
+[
+    {
+        "a_contents": "/**********************\n *   STATIC FUNCTIONS\n **********************/\n\nstatic void lv_checkbox_constructor(lv_obj_t * obj, lv_obj_t * parent, const lv_obj_t * copy)",
+        "b_contents": "/**\n * Make the check box inactive (disabled)\n * @param cb pointer to a check box object\n */\nvoid lv_checkbox_set_disabled(lv_obj_t * cb)",
+        "base_contents": "\n/**\n * Make the check box inactive (disabled)\n * @param cb pointer to a check box object\n */\nvoid lv_checkbox_set_disabled(lv_obj_t * cb)",
+        "res_region": "/**********************\n *   STATIC FUNCTIONS\n **********************/\n\nstatic void lv_checkbox_constructor(lv_obj_t * obj, lv_obj_t * parent, const lv_obj_t * copy)",
+        "lookback": " *   STATIC FUNCTIONS",
+        "lookahead": "{",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 129,
+        "end_line": 148,
+        "merge_gen_region": "*************************************************************************************************************************",
+        "confidence": 0.9047036170959473,
+        "hesitated": false,
+        "resolved": false
+    },
+    {
+        "a_contents": "        lv_coord_t bg_colp = lv_obj_get_style_pad_column(obj, LV_PART_MAIN);\n        lv_coord_t marker_leftp = lv_obj_get_style_pad_left(obj, LV_PART_MARKER);\n        lv_coord_t marker_rightp = lv_obj_get_style_pad_right(obj, LV_PART_MARKER);\n        lv_coord_t marker_topp = lv_obj_get_style_pad_top(obj, LV_PART_MARKER);\n        lv_coord_t marker_bottomp = lv_obj_get_style_pad_bottom(obj, LV_PART_MARKER);\n        lv_point_t marker_size;\n        marker_size.x = font_h + marker_leftp + marker_rightp;\n        marker_size.y = font_h + marker_topp + marker_bottomp;\n\n        p->x = marker_size.x + txt_size.x + bg_colp;\n        p->y = LV_MAX(marker_size.y, txt_size.y);\n    }\n    else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_coord_t *s = param;\n        lv_coord_t m = _lv_obj_get_draw_rect_ext_pad_size(obj, LV_PART_MARKER);\n        *s = LV_MAX(*s, m);",
+        "b_contents": "static lv_style_list_t * lv_checkbox_get_style(lv_obj_t * cb, uint8_t type)\n{\n    lv_style_list_t * style_dsc_p;\n\n    lv_checkbox_ext_t * ext = lv_obj_get_ext_attr(cb);\n    switch(type) {\n        case LV_CHECKBOX_PART_BG:\n            style_dsc_p = &cb->style_list;\n            break;\n        case LV_CHECKBOX_PART_BULLET:\n            style_dsc_p = lv_obj_get_style_list(ext->bullet, LV_BTN_PART_MAIN);\n            break;\n        default:\n            style_dsc_p = NULL;",
+        "base_contents": "\nstatic lv_style_list_t * lv_checkbox_get_style(lv_obj_t * cb, uint8_t type)\n{\n    lv_style_list_t * style_dsc_p;\n\n    lv_checkbox_ext_t * ext = lv_obj_get_ext_attr(cb);\n    switch(type) {\n        case LV_CHECKBOX_PART_BG:\n            style_dsc_p = &cb->style_list;\n            break;\n        case LV_CHECKBOX_PART_BULLET:\n            style_dsc_p = lv_obj_get_style_list(ext->bullet, LV_BTN_PART_MAIN);\n            break;\n        default:\n            style_dsc_p = NULL;",
+        "res_region": "        lv_coord_t bg_colp = lv_obj_get_style_pad_column(obj, LV_PART_MAIN);\n        lv_coord_t marker_leftp = lv_obj_get_style_pad_left(obj, LV_PART_MARKER);\n        lv_coord_t marker_rightp = lv_obj_get_style_pad_right(obj, LV_PART_MARKER);\n        lv_coord_t marker_topp = lv_obj_get_style_pad_top(obj, LV_PART_MARKER);\n        lv_coord_t marker_bottomp = lv_obj_get_style_pad_bottom(obj, LV_PART_MARKER);\n        lv_point_t marker_size;\n        marker_size.x = font_h + marker_leftp + marker_rightp;\n        marker_size.y = font_h + marker_topp + marker_bottomp;\n\n        p->x = marker_size.x + txt_size.x + bg_colp;\n        p->y = LV_MAX(marker_size.y, txt_size.y);\n    }\n    else if(sign == LV_SIGNAL_REFR_EXT_DRAW_PAD) {\n        lv_coord_t *s = param;\n        lv_coord_t m = _lv_obj_get_draw_rect_ext_pad_size(obj, LV_PART_MARKER);\n        *s = LV_MAX(*s, m);",
+        "lookback": "        lv_coord_t marker_leftp = lv_obj_get_style_pad_left(obj, LV_PART_MARKER);",
+        "lookahead": "    }",
+        "label": [
+            "ours",
+            "base_underutilized"
+        ],
+        "start_line": 290,
+        "end_line": 338,
+        "merge_gen_region": "___ lvpointtoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.8861203193664551,
+        "hesitated": false,
+        "resolved": false
+    }
+]

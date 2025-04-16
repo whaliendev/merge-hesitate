@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "  Shutdown,\n  TimerSyncRequest,\n  DelayedFatalError,",
+        "b_contents": "  DelayedFatalError,",
+        "base_contents": "",
+        "res_region": "  Shutdown,\n  TimerSyncRequest,\n  DelayedFatalError,",
+        "lookback": "  TimerSyncRequest,",
+        "lookahead": "};",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 54,
+        "end_line": 61,
+        "merge_gen_region": null,
+        "confidence": 0.8375685811042786,
+        "hesitated": true
+    }
+]

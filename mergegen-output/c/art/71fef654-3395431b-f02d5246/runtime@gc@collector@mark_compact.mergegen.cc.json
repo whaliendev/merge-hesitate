@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "// We require MREMAP_DONTUNMAP functionality of the mremap syscall, which was\n// introduced in 5.13 kernel version.\nstatic bool HaveMremapDontunmap() {\n  void* old = mmap(nullptr, kPageSize, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);\n  CHECK_NE(old, MAP_FAILED);\n  void* addr = mremap(old, kPageSize, kPageSize, MREMAP_MAYMOVE | MREMAP_DONTUNMAP, nullptr);\n  CHECK_EQ(munmap(old, kPageSize), 0);\n  if (addr != MAP_FAILED) {\n    CHECK_EQ(munmap(addr, kPageSize), 0);\n    return true;\n  } else {\n    return false;\n  }\n}\nstatic bool gHaveMremapDontunmap = IsKernelVersionAtLeast(5, 13) || HaveMremapDontunmap();\n\n// Concurrent compaction termination logic depends on the kernel having\n// the fault-retry feature (allowing repeated faults on the same page), which was\n// introduced in 5.7. On Android this feature is backported on all the kernels where\n// userfaultfd is enabled.\nstatic const bool gKernelHasFaultRetry = kIsTargetAndroid || IsKernelVersionAtLeast(5, 7);\n",
+        "b_contents": "// We require MREMAP_DONTUNMAP functionality in mremap syscall, which was\n// introduced in 5.13 kernel version. Check for that on host. Checking\n// on target is not required as MREMAP_DONTUNMAP and userfaultfd were enabled\n// together.\n#ifdef ART_TARGET\nstatic const bool gHaveMremapDontunmap = true;\n#else\nstatic const bool gHaveMremapDontunmap = IsKernelVersionAtLeast(5, 13);\n#endif\n",
+        "base_contents": "",
+        "res_region": "// We require MREMAP_DONTUNMAP functionality of the mremap syscall, which was\n// introduced in 5.13 kernel version.\nstatic bool HaveMremapDontunmap() {\n  void* old = mmap(nullptr, kPageSize, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);\n  CHECK_NE(old, MAP_FAILED);\n  void* addr = mremap(old, kPageSize, kPageSize, MREMAP_MAYMOVE | MREMAP_DONTUNMAP, nullptr);\n  CHECK_EQ(munmap(old, kPageSize), 0);\n  if (addr != MAP_FAILED) {\n    CHECK_EQ(munmap(addr, kPageSize), 0);\n    return true;\n  } else {\n    return false;\n  }\n}\nstatic bool gHaveMremapDontunmap = IsKernelVersionAtLeast(5, 13) || HaveMremapDontunmap();\n\n// Concurrent compaction termination logic depends on the kernel having\n// the fault-retry feature (allowing repeated faults on the same page), which was\n// introduced in 5.7. On Android this feature is backported on all the kernels where\n// userfaultfd is enabled.\nstatic const bool gKernelHasFaultRetry = kIsTargetAndroid || IsKernelVersionAtLeast(5, 7);\n",
+        "lookback": "// introduced in 5.13 kernel version.",
+        "lookahead": "#ifndef ART_FORCE_USE_READ_BARRIER",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 62,
+        "end_line": 97,
+        "merge_gen_region": null,
+        "confidence": 0.8605486750602722,
+        "hesitated": true
+    }
+]

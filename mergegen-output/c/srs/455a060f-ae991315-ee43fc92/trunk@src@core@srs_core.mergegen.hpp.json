@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#define VERSION_REVISION    37",
+        "b_contents": "#define VERSION_REVISION    251",
+        "base_contents": "#define VERSION_REVISION    250",
+        "res_region": "#define VERSION_REVISION    37",
+        "lookback": "",
+        "lookahead": "",
+        "label": [
+            "ours",
+            "complex_conflict"
+        ],
+        "start_line": 29,
+        "end_line": 35,
+        "merge_gen_region": null,
+        "confidence": 0.8544321656227112,
+        "hesitated": true
+    }
+]

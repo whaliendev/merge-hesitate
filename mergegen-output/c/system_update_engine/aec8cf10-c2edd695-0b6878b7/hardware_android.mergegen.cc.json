@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "// Android properties that identify the hardware and potentially non-updatable\n// parts of the bootloader (such as the bootloader version and the baseband\n// version).\nconst char kPropBootBootloader[] = \"ro.boot.bootloader\";\nconst char kPropBootBaseband[] = \"ro.boot.baseband\";\nconst char kPropProductManufacturer[] = \"ro.product.manufacturer\";\nconst char kPropBootHardwareSKU[] = \"ro.boot.hardware.sku\";\nconst char kPropBootRevision[] = \"ro.boot.revision\";\nconst char kPropBuildDateUTC[] = \"ro.build.date.utc\";\n",
+        "b_contents": "const char kPropBuildDateUTC[] = \"ro.build.date.utc\";\n",
+        "base_contents": "",
+        "res_region": "// Android properties that identify the hardware and potentially non-updatable\n// parts of the bootloader (such as the bootloader version and the baseband\n// version).\nconst char kPropBootBootloader[] = \"ro.boot.bootloader\";\nconst char kPropBootBaseband[] = \"ro.boot.baseband\";\nconst char kPropProductManufacturer[] = \"ro.product.manufacturer\";\nconst char kPropBootHardwareSKU[] = \"ro.boot.hardware.sku\";\nconst char kPropBootRevision[] = \"ro.boot.revision\";\nconst char kPropBuildDateUTC[] = \"ro.build.date.utc\";\n",
+        "lookback": "// parts of the bootloader (such as the bootloader version and the baseband",
+        "lookahead": "// Write a recovery command line |message| to the BCB. The arguments to recovery",
+        "label": [
+            "ours",
+            "one_side_deletion"
+        ],
+        "start_line": 48,
+        "end_line": 63,
+        "merge_gen_region": "outputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutputoutput",
+        "confidence": 0.9333540201187134,
+        "hesitated": false,
+        "resolved": false
+    }
+]

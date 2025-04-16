@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    M(739, DELTA_KERNEL_ERROR) \\",
+        "b_contents": "    M(739, BUZZHOUSE) \\",
+        "base_contents": "",
+        "res_region": "    M(739, BUZZHOUSE) \\\n    M(740, DELTA_KERNEL_ERROR) \\",
+        "lookback": "    M(740, DELTA_KERNEL_ERROR) \\",
+        "lookahead": "\\",
+        "label": [
+            "newcode",
+            "one_side_deletion"
+        ],
+        "start_line": 618,
+        "end_line": 623,
+        "merge_gen_region": null,
+        "confidence": 0.7238946557044983,
+        "hesitated": true
+    }
+]

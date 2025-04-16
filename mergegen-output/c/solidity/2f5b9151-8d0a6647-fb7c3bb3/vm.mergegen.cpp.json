@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "mObject FakeExtVM::exportLog()\n{\n\tmObject ret;\n\tfor (LogEntry const& l: sub.logs)\n\t{\n\t\tmObject o;\n\t\to[\"address\"] = toString(l.address);\n\t\tmArray topics;\n\t\tfor (auto const& t: l.topics)\n\t\t\ttopics.push_back(toString(t));\n\t\to[\"topics\"] = topics;\n\t\to[\"data\"] = \"0x\" + toHex(l.data);\n\t\tret[toString(l.bloom())] = o;\n\t}\n\treturn ret;\n}\n\nvoid FakeExtVM::importLog(mObject& _o)\n{\n\tfor (auto const& l: _o)\n\t{\n\t\tmObject o = l.second.get_obj();\n\t\t// cant use BOOST_REQUIRE, because this function is used outside boost test (createRandomTest)\n\t\tassert(o.count(\"address\") > 0);\n\t\tassert(o.count(\"topics\") > 0);\n\t\tassert(o.count(\"data\") > 0);\n\t\tLogEntry log;\n\t\tlog.address = Address(o[\"address\"].get_str());\n\t\tfor (auto const& t: o[\"topics\"].get_array())\n\t\t\tlog.topics.push_back(h256(t.get_str()));\n\t\tlog.data = importData(o);\n\t\tsub.logs.push_back(log);\n\t}\n}\n",
+        "b_contents": "",
+        "base_contents": "mObject FakeExtVM::exportLog()\n{\n\tmObject ret;\n\tfor (LogEntry const& l: sub.logs)\n\t{\n\t\tmObject o;\n\t\to[\"address\"] = toString(l.address);\n\t\tmArray topics;\n\t\tfor (auto const& t: l.topics)\n\t\t\ttopics.push_back(toString(t));\n\t\to[\"topics\"] = topics;\n\t\to[\"data\"] = \"0x\" + toHex(l.data);\n\t\tret[toString(l.bloom())] = o;\n\t}\n\treturn ret;\n}\n\nvoid FakeExtVM::importLog(mObject& _o)\n{\n\tfor (auto const& l: _o)\n\t{\n\t\tmObject o = l.second.get_obj();\n\t\t// cant use BOOST_REQUIRE, because this function is used outside boost test (createRandomTest)\n\t\tassert(o.count(\"address\") > 0);\n\t\tassert(o.count(\"topics\") > 0);\n\t\tassert(o.count(\"data\") > 0);\n\t\tLogEntry log;\n\t\tlog.address = Address(o[\"address\"].get_str());\n\t\tfor (auto const& t: o[\"topics\"].get_array())\n\t\t\tlog.topics.insert(h256(t.get_str()));\n\t\tlog.data = importData(o);\n\t\tsub.logs.push_back(log);\n\t}\n}\n",
+        "res_region": "mObject FakeExtVM::exportLog()\n{\n\tmObject ret;\n\tfor (LogEntry const& l: sub.logs)\n\t{\n\t\tmObject o;\n\t\to[\"address\"] = toString(l.address);\n\t\tmArray topics;\n\t\tfor (auto const& t: l.topics)\n\t\t\ttopics.push_back(toString(t));\n\t\to[\"topics\"] = topics;\n\t\to[\"data\"] = \"0x\" + toHex(l.data);\n\t\tret[toString(l.bloom())] = o;\n\t}\n\treturn ret;\n}\n\nvoid FakeExtVM::importLog(mObject& _o)\n{\n\tfor (auto const& l: _o)\n\t{\n\t\tmObject o = l.second.get_obj();\n\t\t// cant use BOOST_REQUIRE, because this function is used outside boost test (createRandomTest)\n\t\tassert(o.count(\"address\") > 0);\n\t\tassert(o.count(\"topics\") > 0);\n\t\tassert(o.count(\"data\") > 0);\n\t\tLogEntry log;\n\t\tlog.address = Address(o[\"address\"].get_str());\n\t\tfor (auto const& t: o[\"topics\"].get_array())\n\t\t\tlog.topics.push_back(h256(t.get_str()));\n\t\tlog.data = importData(o);\n\t\tsub.logs.push_back(log);\n\t}\n}\n",
+        "lookback": "{",
+        "lookahead": "mObject FakeExtVM::exportState()",
+        "label": [
+            "ours",
+            "base_empty"
+        ],
+        "start_line": 122,
+        "end_line": 195,
+        "merge_gen_region": null,
+        "confidence": 0.48169440031051636,
+        "hesitated": true
+    }
+]

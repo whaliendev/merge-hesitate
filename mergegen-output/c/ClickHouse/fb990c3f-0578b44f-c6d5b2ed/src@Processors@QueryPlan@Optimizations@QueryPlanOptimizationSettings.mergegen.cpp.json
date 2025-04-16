@@ -1,0 +1,20 @@
+[
+    {
+        "a_contents": "    extern const SettingsBool query_plan_convert_join_to_in;",
+        "b_contents": "    extern const SettingsBool use_query_condition_cache;\n    extern const SettingsBoolAuto query_plan_join_swap_table;\n    extern const SettingsMaxThreads max_threads;\n    extern const SettingsSeconds lock_acquire_timeout;",
+        "base_contents": "",
+        "res_region": "    extern const SettingsBool query_plan_convert_join_to_in;\n    extern const SettingsBool use_query_condition_cache;\n    extern const SettingsBoolAuto query_plan_join_swap_table;\n    extern const SettingsMaxThreads max_threads;\n    extern const SettingsSeconds lock_acquire_timeout;",
+        "lookback": "    extern const SettingsBool use_query_condition_cache;",
+        "lookahead": "    extern const SettingsString force_optimize_projection_name;",
+        "label": [
+            "interleave",
+            "one_side_deletion"
+        ],
+        "start_line": 35,
+        "end_line": 43,
+        "merge_gen_region": "cexternexternexternexternexternextern",
+        "confidence": 0.9506892561912537,
+        "hesitated": false,
+        "resolved": false
+    }
+]

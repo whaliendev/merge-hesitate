@@ -1,0 +1,70 @@
+[
+    {
+        "a_contents": "\tif (dwim_ref(cb.buf.buf, cb.buf.len, &oid, &ref, 1) == 1 &&\n\t    /* sha1 is a commit? match without further lookup */",
+        "b_contents": "\tif (dwim_ref(cb.buf.buf, cb.buf.len, &oid, &ref) == 1 &&\n\t    /* oid is a commit? match without further lookup */",
+        "base_contents": "\tif (dwim_ref(cb.buf.buf, cb.buf.len, &oid, &ref) == 1 &&\n\t    /* sha1 is a commit? match without further lookup */",
+        "res_region": "\tif (dwim_ref(cb.buf.buf, cb.buf.len, &oid, &ref, 1) == 1 &&\n\t    /* oid is a commit? match without further lookup */",
+        "lookback": "\t    /* oid is a commit? match without further lookup */",
+        "lookahead": "\t    (oideq(&cb.noid, &oid) ||",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1574,
+        "end_line": 1583,
+        "merge_gen_region": null,
+        "confidence": 0.6156850457191467,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf, QUOTE_PATH_QUOTE_SP);\n\t\tprintf(\" %s\\n\", one);",
+        "b_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf);\n\t\tfprintf(s->fp, \" %s\\n\", one);",
+        "base_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf);\n\t\tprintf(\" %s\\n\", one);",
+        "res_region": "\t\tone = quote_path(it->string, s->prefix, &onebuf, QUOTE_PATH_QUOTE_SP);\n\t\tfprintf(s->fp, \" %s\\n\", one);",
+        "lookback": "\t\tfprintf(s->fp, \" %s\\n\", one);",
+        "lookahead": "\t\tstrbuf_release(&onebuf);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1870,
+        "end_line": 1879,
+        "merge_gen_region": null,
+        "confidence": 0.828531801700592,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\t\tone = quote_path(d->rename_source, s->prefix, &onebuf,\n\t\t\t\t\t QUOTE_PATH_QUOTE_SP);\n\t\t\tprintf(\"%s -> \", one);",
+        "b_contents": "\t\t\tone = quote_path(d->rename_source, s->prefix, &onebuf);\n\t\t\tif (*one != '\"' && strchr(one, ' ') != NULL) {\n\t\t\t\tfputc('\"', s->fp);\n\t\t\t\tstrbuf_addch(&onebuf, '\"');\n\t\t\t\tone = onebuf.buf;\n\t\t\t}\n\t\t\tfprintf(s->fp, \"%s -> \", one);",
+        "base_contents": "\t\t\tone = quote_path(d->rename_source, s->prefix, &onebuf);\n\t\t\tif (*one != '\"' && strchr(one, ' ') != NULL) {\n\t\t\t\tputchar('\"');\n\t\t\t\tstrbuf_addch(&onebuf, '\"');\n\t\t\t\tone = onebuf.buf;\n\t\t\t}\n\t\t\tprintf(\"%s -> \", one);",
+        "res_region": "\t\t\tone = quote_path(d->rename_source, s->prefix, &onebuf,\n\t\t\t\t\t QUOTE_PATH_QUOTE_SP);\n\t\t\tfprintf(s->fp, \"%s -> \", one);",
+        "lookback": "\t\t\t\t\t QUOTE_PATH_QUOTE_SP);",
+        "lookahead": "\t\t\tstrbuf_release(&onebuf);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1907,
+        "end_line": 1927,
+        "merge_gen_region": null,
+        "confidence": 0.7703765034675598,
+        "hesitated": true
+    },
+    {
+        "a_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf, QUOTE_PATH_QUOTE_SP);\n\t\tprintf(\"%s\\n\", one);",
+        "b_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf);\n\t\tif (*one != '\"' && strchr(one, ' ') != NULL) {\n\t\t\tfputc('\"', s->fp);\n\t\t\tstrbuf_addch(&onebuf, '\"');\n\t\t\tone = onebuf.buf;\n\t\t}\n\t\tfprintf(s->fp, \"%s\\n\", one);",
+        "base_contents": "\t\tone = quote_path(it->string, s->prefix, &onebuf);\n\t\tif (*one != '\"' && strchr(one, ' ') != NULL) {\n\t\t\tputchar('\"');\n\t\t\tstrbuf_addch(&onebuf, '\"');\n\t\t\tone = onebuf.buf;\n\t\t}\n\t\tprintf(\"%s\\n\", one);",
+        "res_region": "\t\tone = quote_path(it->string, s->prefix, &onebuf, QUOTE_PATH_QUOTE_SP);\n\t\tfprintf(s->fp, \"%s\\n\", one);",
+        "lookback": "\t\tfprintf(s->fp, \"%s\\n\", one);",
+        "lookahead": "\t\tstrbuf_release(&onebuf);",
+        "label": [
+            "interleave",
+            "complex_conflict"
+        ],
+        "start_line": 1930,
+        "end_line": 1949,
+        "merge_gen_region": null,
+        "confidence": 0.8549648523330688,
+        "hesitated": true
+    }
+]

@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "    sorting_t _sorting)\n    : readgen_t(\n        std::move(_global_optargs),\n        std::move(user_context),\n        std::move(_table_name),\n        _profile,\n        _read_mode,\n        _sorting),\n      datumspec(_datumspec) { }",
+        "b_contents": "    sorting_t _sorting,\n    require_sindexes_t _require_sindex_val)\n    : readgen_t(\n        std::move(_global_optargs),\n        std::move(user_context),\n        std::move(_table_name),\n        _profile,\n        _read_mode,\n        _sorting),\n      datumspec(_datumspec),\n      require_sindex_val(_require_sindex_val) { }",
+        "base_contents": "    sorting_t _sorting)\n    : readgen_t(std::move(_global_optargs),\n                std::move(_table_name),\n                _profile, _read_mode, _sorting),\n      datumspec(_datumspec) { }",
+        "res_region": "    sorting_t _sorting,\n    require_sindexes_t _require_sindex_val)\n    : readgen_t(\n        std::move(_global_optargs),\n        std::move(user_context),\n        std::move(_table_name),\n        _profile,\n        _read_mode,\n        _sorting),\n      datumspec(_datumspec),\n      require_sindex_val(_require_sindex_val) { }",
+        "lookback": "    require_sindexes_t _require_sindex_val)",
+        "lookahead": "",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 798,
+        "end_line": 826,
+        "merge_gen_region": null,
+        "confidence": 0.6940403580665588,
+        "hesitated": true
+    }
+]

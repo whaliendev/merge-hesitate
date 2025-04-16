@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "#include <pwd.h>\n#include <signal.h>",
+        "b_contents": "#include <stdint.h>",
+        "base_contents": "#include <paths.h>\n#include <pwd.h>\n#include <signal.h>\n#include <stdint.h>",
+        "res_region": "#include <stdint.h>",
+        "lookback": "#include <stdlib.h>",
+        "lookahead": "#include <stdlib.h>",
+        "label": [
+            "base",
+            "complex_conflict"
+        ],
+        "start_line": 23,
+        "end_line": 33,
+        "merge_gen_region": null,
+        "confidence": 0.6313340067863464,
+        "hesitated": true
+    }
+]

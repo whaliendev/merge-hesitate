@@ -1,0 +1,19 @@
+[
+    {
+        "a_contents": "            server_name_client_t *_name_client,\n            watchable_map_t<peer_id_t, cluster_directory_metadata_t> *_directory_view);\n    ~server_status_artificial_table_backend_t();",
+        "b_contents": "            server_config_client_t *_config_client,\n            clone_ptr_t< watchable_t< change_tracking_map_t<\n                peer_id_t, cluster_directory_metadata_t> > > _directory_view,\n            boost::shared_ptr< semilattice_readwrite_view_t<\n                cow_ptr_t<namespaces_semilattice_metadata_t> > > _table_sl_view,\n            boost::shared_ptr< semilattice_readwrite_view_t<\n                databases_semilattice_metadata_t> > _database_sl_view);",
+        "base_contents": "            server_name_client_t *_name_client,\n            clone_ptr_t< watchable_t< change_tracking_map_t<\n                peer_id_t, cluster_directory_metadata_t> > > _directory_view,\n            boost::shared_ptr< semilattice_readwrite_view_t<\n                cow_ptr_t<namespaces_semilattice_metadata_t> > > _table_sl_view,\n            boost::shared_ptr< semilattice_readwrite_view_t<\n                databases_semilattice_metadata_t> > _database_sl_view);",
+        "res_region": "            server_config_client_t *_server_config_client,\n            watchable_map_t<peer_id_t, cluster_directory_metadata_t> *_directory_view);\n    ~server_status_artificial_table_backend_t();",
+        "lookback": "            watchable_map_t<peer_id_t, cluster_directory_metadata_t> *_directory_view);",
+        "lookahead": "",
+        "label": [
+            "newcode",
+            "complex_conflict"
+        ],
+        "start_line": 26,
+        "end_line": 46,
+        "merge_gen_region": null,
+        "confidence": 0.726565957069397,
+        "hesitated": true
+    }
+]
