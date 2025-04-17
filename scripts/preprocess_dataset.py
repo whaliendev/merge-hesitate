@@ -15,7 +15,7 @@ except Exception as e:
     exit()
 
 # Add special tokens
-brackets_tokens = ["<lbra>", "<rbra>"]
+brackets_tokens = ["<lbra>", "<mbra>", "<rbra>"]
 succeed_num = tokenizer.add_tokens(brackets_tokens)
 assert succeed_num == len(brackets_tokens)
 
@@ -24,6 +24,7 @@ assert succeed_num == len(brackets_tokens)
 MAX_CONFLICT_LENGTH = 500
 MAX_RESOLVE_LENGTH = 256
 LBRA_TOKEN = "<lbra>"
+MBRA_TOKEN = "<mbra>"
 RBRA_TOKEN = "<rbra>"
 
 
@@ -74,7 +75,7 @@ def process_chunk(start_idx, end_idx, data, data_name, result_queue):
             ids_res = tokenizer.convert_tokens_to_ids(tokens_res)
 
             cur_input = ids_input
-            cur_output = [tokenizer.bos_token_id] + ids_res + [tokenizer.eos_token_id]
+            cur_output = ids_res + [tokenizer.eos_token_id]
 
             max_conflict_length = max(max_conflict_length, len(cur_input))
             max_resolve_length = max(max_resolve_length, len(cur_output))
@@ -176,7 +177,7 @@ def git_merge(tokens_base, tokens_a, tokens_b, index):
         final_tokens += merge_res[start:]
 
     # Add special tokens
-    final_tokens = [tokenizer.bos_token] + final_tokens + [tokenizer.eos_token]
+    # final_tokens = [tokenizer.bos_token] + final_tokens + [tokenizer.eos_token]
 
     return final_tokens
 

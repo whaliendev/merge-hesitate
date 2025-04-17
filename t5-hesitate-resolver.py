@@ -143,7 +143,7 @@ def git_merge(tokens_base, tokens_a, tokens_b):
                 idx += 1
 
         # Add BOS/EOS (Using actual tokens, not IDs yet)
-        final_tokens = [tokenizer.bos_token] + final_tokens + [tokenizer.eos_token]
+        # final_tokens = [tokenizer.bos_token] + final_tokens + [tokenizer.eos_token]
         # Return tokens, not IDs
         return final_tokens
 
@@ -162,6 +162,20 @@ def pad_input(input_ids, conflict_length=MAX_SEQ_LENGTH - FEATURE_SIZE):
     assert len(padded_ids) == conflict_length, f"Padding failed: expected {conflict_length}, got {len(padded_ids)}"
     return padded_ids
 
+def pad_labels(labels_ids, max_len=MAX_RESOLVE_LEN):
+    """Pads or truncates labels_ids to the specified length."""
+    global tokenizer
+    pad_id_actual = tokenizer.pad_token_id if tokenizer else 0 # Get actual pad ID
+
+    if len(labels_ids) <= max_len:
+        padded_ids = labels_ids + [pad_id_actual] * (max_len - len(labels_ids))
+    else:
+        # Truncate from the end
+        logger.warning(f"Labels length {len(labels_ids)} exceeds max_length {max_len}. Truncating.")
+        padded_ids = labels_ids[:max_len]
+    assert len(padded_ids) == max_len, f"Labels padding failed: expected {max_len}, got {len(padded_ids)}"
+    return padded_ids
+
 # --- Model Loading ---
 def load_model_and_tokenizer():
     """Loads the HesitateT5 model, tokenizer, and calibrator."""
@@ -175,7 +189,7 @@ def load_model_and_tokenizer():
         logger.info(f"Loading tokenizer from {TOKENIZER_PATH}")
         tokenizer = AutoTokenizer.from_pretrained(TOKENIZER_PATH)
         # Ensure special tokens are known (needed for git_merge)
-        special_tokens = ["<lbra>", "<rbra>"]
+        special_tokens = ["<lbra>", "<mbra>", "<rbra>"]
         tokenizer.add_tokens(special_tokens)
         logger.info(f"Tokenizer loaded. Vocab size: {len(tokenizer)}")
 
@@ -184,7 +198,7 @@ def load_model_and_tokenizer():
         model_structure = HesitateT5(
             model_name_or_path=MODEL_NAME_OR_PATH,
             tokenizer=tokenizer, # Pass tokenizer for potential resizing
-            confidence_threshold=0.88, # Initial threshold, will be loaded from state
+            confidence_threshold=0.4, # Initial threshold, will be loaded from state
             feature_size=FEATURE_SIZE,
             use_features=USE_FEATURES,
         )
@@ -240,7 +254,7 @@ def load_model_and_tokenizer():
 
 
 # --- Core Resolution Logic ---
-def resolve_with_hesitation(input_ids_array):
+def resolve_with_hesitation(input_ids_array, res_region=None):
     """Resolves conflict using HesitateT5, applying calibration and threshold."""
     global model, tokenizer, calibrator, device
 
@@ -265,29 +279,82 @@ def resolve_with_hesitation(input_ids_array):
 
     with torch.no_grad():
         try:
-            # Use the model's generate method
-            gen_kwargs = {
-                "input_ids": input_ids,
-                "attention_mask": attention_mask,
-                "features": features, # Will be None if USE_FEATURES is False
-                "num_beams": NUM_BEAMS,
-                "max_resolve_len": MAX_RESOLVE_LEN,
-            }
-            # Remove features kwarg if not used by the loaded model
-            if not hasattr(model, 'use_features') or not model.use_features:
-                 if "features" in gen_kwargs:
-                      gen_kwargs.pop("features")
-            elif "features" not in gen_kwargs and USE_FEATURES: # Check global config too
-                 # This case should not happen if USE_FEATURES is True globally and implemented
-                 logger.error("Model expects features, but none were provided/implemented.")
-                 raise ValueError("Feature mismatch: Model expects features.")
+            if res_region is None:
+                # Fallback to generate if no res_region provided
+                gen_kwargs = {
+                    "input_ids": input_ids,
+                    "attention_mask": attention_mask,
+                    "features": features, # Will be None if USE_FEATURES is False
+                    "num_beams": NUM_BEAMS,
+                    "max_resolve_len": MAX_RESOLVE_LEN,
+                }
+                # Remove features kwarg if not used by the loaded model
+                if not hasattr(model, 'use_features') or not model.use_features:
+                     if "features" in gen_kwargs:
+                          gen_kwargs.pop("features")
+                elif "features" not in gen_kwargs and USE_FEATURES: # Check global config too
+                     # This case should not happen if USE_FEATURES is True globally and implemented
+                     logger.error("Model expects features, but none were provided/implemented.")
+                     raise ValueError("Feature mismatch: Model expects features.")
 
+                generated_ids, raw_confidence_tensor = model.generate(**gen_kwargs)
+                raw_confidence = raw_confidence_tensor.item() # Get float value
+                
+                # Decode the generated sequence
+                output_ids_list = generated_ids[0].tolist() # Shape [max_resolve_len] -> list
+                
+                # Remove padding and EOS token robustly
+                try:
+                    eos_index = output_ids_list.index(tokenizer.eos_token_id)
+                    output_ids_list = output_ids_list[:eos_index]
+                except ValueError:
+                    pass # EOS not found, use full list
+                # Remove padding tokens
+                output_ids_list = [id_ for id_ in output_ids_list if id_ != tokenizer.pad_token_id]
+                
+                # Use tokenizer.decode for robust conversion
+                resolved_content_str = tokenizer.decode(output_ids_list, skip_special_tokens=True)
+            else:
+                # Use forward method when res_region is provided
+                # Tokenize and prepare res_region with EOS token
+                res_region_with_eos = res_region + tokenizer.eos_token
+                labels_ids = tokenizer.encode(res_region_with_eos, add_special_tokens=False)
+                
+                # Pad or truncate labels to MAX_RESOLVE_LEN
+                padded_labels = pad_labels(labels_ids)
+                labels_tensor = torch.tensor(padded_labels, dtype=torch.long).unsqueeze(0).to(device)
+                
+                # Prepare forward kwargs
+                fwd_kwargs = {
+                    "input_ids": input_ids,
+                    "attention_mask": attention_mask,
+                    "labels": labels_tensor,
+                    "features": features,
+                    "stage": "val"  # Using validation mode for inference
+                }
+                
+                # Remove features kwarg if not used
+                if not hasattr(model, 'use_features') or not model.use_features:
+                    if "features" in fwd_kwargs:
+                        fwd_kwargs.pop("features")
+                
+                # Call forward
+                output = model.forward(**fwd_kwargs)
+                
+                # Extract confidence
+                raw_confidence = output["confidence"].item()
+                
+                # Get predictions
+                predictions = output.get("predictions", None)
+                if predictions is not None:
+                    # just decode the predictions
+                    resolved_content_str = tokenizer.decode(predictions[0], skip_special_tokens=True)
+                else:
+                    logger.warning("No predictions found in forward output")
+                    resolved_content_str = None
 
-            generated_ids, raw_confidence_tensor = model.generate(**gen_kwargs)
-            # raw_confidence_tensor shape: [1]
-
-            raw_confidence = raw_confidence_tensor.item() # Get float value
-            model_threshold = model.confidence_threshold # Get threshold loaded from state
+            # Get model threshold
+            model_threshold = model.confidence_threshold 
 
             # --- Apply Calibration ---
             calibrated_confidence = raw_confidence # Default if no calibrator
@@ -305,22 +372,7 @@ def resolve_with_hesitation(input_ids_array):
 
             final_confidence = calibrated_confidence # Store the score used for decision
 
-            # Decode the generated sequence (beam 0)
-            output_ids_list = generated_ids[0].tolist() # Shape [max_resolve_len] -> list
-
-            # Remove padding and EOS token robustly
-            try:
-                eos_index = output_ids_list.index(tokenizer.eos_token_id)
-                output_ids_list = output_ids_list[:eos_index]
-            except ValueError:
-                pass # EOS not found, use full list
-            # Remove padding tokens
-            output_ids_list = [id_ for id_ in output_ids_list if id_ != tokenizer.pad_token_id]
-
-            # Use tokenizer.decode for robust conversion
-            resolved_content_str = tokenizer.decode(output_ids_list, skip_special_tokens=True)
-
-            # --- Hesitation Check (AFTER decoding) ---
+            # --- Hesitation Check ---
             logger.info(f"Comparing confidence {final_confidence:.4f} against threshold {model_threshold:.4f}")
             if final_confidence >= model_threshold:
                 hesitated = False
@@ -359,6 +411,7 @@ def resolve_conflict():
         raw_a = json_data.get('raw_a')
         raw_b = json_data.get('raw_b')
         raw_base = json_data.get('raw_base')
+        res_region = json_data.get('res_region')  # Get res_region from request
 
         if raw_a is None or raw_b is None or raw_base is None:
             logger.warning("Missing required parameters in JSON payload.")
@@ -384,14 +437,16 @@ def resolve_conflict():
         # Convert to numpy array
         padded_ids_array = np.array(padded_ids_list)
 
-        # Resolve with hesitation
-        resolved_content, confidence, hesitated = resolve_with_hesitation(padded_ids_array)
+        # Resolve with hesitation, passing res_region
+        resolved_content, confidence, hesitated = resolve_with_hesitation(padded_ids_array, res_region)
 
         # --- Log Inputs and Resolution ---
         logger.info("="*15 + " Conflict Resolution Attempt " + "="*15)
         logger.info(f"INPUT Base:\n---\n{raw_base}\n---")
         logger.info(f"INPUT A:\n---\n{raw_a}\n---")
         logger.info(f"INPUT B:\n---\n{raw_b}\n---")
+        if res_region:
+            logger.info(f"GROUND TRUTH:\n---\n{res_region}\n---")
         logger.info("-"*40)
         logger.info(f"GENERATED Content:\n---\n{resolved_content if resolved_content is not None else '[Error during generation]'}\n---")
         confidence_str = f'{confidence:.4f}' if confidence is not None else 'N/A'

@@ -24,7 +24,7 @@ def main(args):
         "All datasets must have the same length"
     )
 
-    tr, vr, _ = 0.8, 0.1, 0.1
+    tr, vr, _ = 0.8, 0.2, 0.0
     tr_size = int(len(base) * tr)
     vr_size = int(len(base) * vr)
     _ = len(base) - tr_size - vr_size

@@ -51,7 +51,7 @@ def train(args):
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name_or_path)
 
     # Ensure special tokens are added to tokenizer if they aren't already
-    special_tokens = ["<lbra>", "<rbra>"]
+    special_tokens = ["<lbra>", "<mbra>", "<rbra>"]
 
     # Add special tokens if they don't exist
     successed_num = tokenizer.add_tokens(special_tokens)
@@ -168,17 +168,6 @@ def train(args):
             confidence = outputs["confidence"]
             # Logits size: [batch_size, seq_len, vocab_size]
             logits = outputs["logits"]
-            # Labels size: [batch_size, seq_len]
-            labels = batch["labels"]
-            # remove first bos token and add a pad token at the end
-            labels = labels[:, 1:]
-            labels = torch.cat(
-                [
-                    labels,
-                    torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
-                ],
-                dim=-1,
-            )
 
             # --- Corrected Vectorized Correctness Calculation ---
             with torch.no_grad():
@@ -190,43 +179,30 @@ def train(args):
                 pad_token_id = tokenizer.pad_token_id
                 eos_token_id = tokenizer.eos_token_id
 
-                # Get original labels (WITH initial BOS) from the batch
-                original_labels_with_bos = batch["labels"]
+                target_labels = batch["labels"]
 
-                # Prepare target labels for comparison: shift original labels right
-                # Target labels should align with predictions: target[b,t] should be original label[b, t+1]
-                target_labels = original_labels_with_bos.clone()
-                target_labels = torch.cat([ # Append PAD
-                    target_labels,
-                    torch.ones((target_labels.size(0), 1), dtype=torch.long, device=target_labels.device) * pad_token_id
-                ], dim=-1)
-                target_labels = target_labels[:, 1:] # SHIFT RIGHT
-
-                # Pad predictions or target_labels to the same length
+                # Pad predictions to match label length
                 batch_size, seq_len_pred = predictions.shape
                 _, seq_len_labels = target_labels.shape
-                seq_len = max(seq_len_pred, seq_len_labels)
-
-                if seq_len_pred < seq_len:
-                    padding_size = seq_len - seq_len_pred
+                
+                # Always pad predictions to match label length
+                if seq_len_pred < seq_len_labels:
+                    padding_size = seq_len_labels - seq_len_pred
                     predictions = torch.cat([
                         predictions,
                         torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
                     ], dim=1)
-                elif seq_len_labels < seq_len:
-                    padding_size = seq_len - seq_len_labels
-                    target_labels = torch.cat([
-                        target_labels,
-                        torch.full((batch_size, padding_size), pad_token_id, device=target_labels.device, dtype=target_labels.dtype)
-                    ], dim=1)
+                elif seq_len_pred > seq_len_labels:
+                    # Truncate predictions if longer than labels
+                    predictions = predictions[:, :seq_len_labels]
 
                 # Now predictions and target_labels have shape [batch_size, seq_len]
                 # and target_labels[b, t] is the original label token t+1
 
                 # 1. Create prediction mask (True up to and including first EOS)
-                pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
+                pred_indices = torch.arange(seq_len_labels, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
                 eos_mask_pred = (predictions == eos_token_id)
-                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
+                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len_labels)
                 pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1)
 
                 # 2. Create label mask (True up to PAD) - Use the SHIFTED target_labels
@@ -250,9 +226,38 @@ def train(args):
                 )
                 # --- End Corrected Calculation ---
 
+            content_match = torch.all((predictions == target_labels) | (target_labels == pad_token_id), dim=1)
 
-            # Use per-sample correctness as target for confidence loss
-            conf_loss = conf_criterion(confidence, sample_correctness)
+            pred_has_eos = (predictions == eos_token_id).any(dim=1)
+            label_has_eos = (target_labels == eos_token_id).any(dim=1)
+
+            pred_eos_pos = torch.argmax((predictions == eos_token_id).float(), dim=1)
+            label_eos_pos = torch.argmax((target_labels == eos_token_id).float(), dim=1)
+
+            pred_last_non_pad = torch.sum((predictions != pad_token_id).float(), dim=1) - 1
+            label_last_non_pad = torch.sum((target_labels != pad_token_id).float(), dim=1) - 1
+            pred_last_non_pad = torch.maximum(pred_last_non_pad, torch.zeros_like(pred_last_non_pad))
+            label_last_non_pad = torch.maximum(label_last_non_pad, torch.zeros_like(label_last_non_pad))
+
+            pred_end_pos = torch.where(pred_has_eos, pred_eos_pos, pred_last_non_pad)
+            label_end_pos = torch.where(label_has_eos, label_eos_pos, label_last_non_pad)
+
+            end_pos_match = pred_end_pos == label_end_pos
+
+            eos_consistency = (pred_has_eos == label_has_eos)
+
+            sequence_exact_match = content_match & end_pos_match & eos_consistency
+            # --- End Sequence-level Exact Match Calculation ---
+
+            # 4. Use sequence-level exact match as confidence target
+            # 混合损失
+            token_level_target = num_correct_tokens.float() / (num_valid_tokens.float() + 1e-9)
+            sequence_level_target = sequence_exact_match.float()
+            
+            alpha = min(0.96, (epoch + 1) / args.num_epochs)
+            combined_target = (1-alpha) * token_level_target + alpha * sequence_level_target
+            
+            conf_loss = conf_criterion(confidence, combined_target)
 
             # Combined loss (weighted sum)
             loss = gen_loss + args.confidence_weight * conf_loss
@@ -479,34 +484,44 @@ def train_calibrator(model: HesitateT5, val_loader: DataLoader, tokenizer: AutoT
             labels = batch["labels"]
 
             # --- Vectorized Exact Match Calculation (for calibrator target) ---
-            shifted_labels = labels.clone()
-            shifted_labels = torch.cat(
-                [
-                    shifted_labels,
-                    torch.ones(
-                        (shifted_labels.size(0), 1),
-                        dtype=torch.long,
-                        device=shifted_labels.device,
-                    ) * pad_token_id,
-                ],
-                dim=-1,
-            )[:, 1:] # Align with predictions
+            # Ensure predictions and labels are of the same length
+            batch_size, seq_len_pred = predictions.shape
+            _, seq_len_label = labels.shape
+            
+            # Always adjust predictions to match label length
+            if seq_len_pred < seq_len_label:
+                padding_size = seq_len_label - seq_len_pred
+                predictions = torch.cat([
+                    predictions,
+                    torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
+                ], dim=1)
+            elif seq_len_pred > seq_len_label:
+                # Truncate predictions if longer than labels
+                predictions = predictions[:, :seq_len_label]
+            
+            content_match = torch.all((predictions == labels) | (labels == pad_token_id), dim=1)
 
-            # Ensure predictions are same length (should be handled by model.forward)
-            if predictions.size(1) != shifted_labels.size(1):
-                 min_len = min(predictions.size(1), shifted_labels.size(1))
-                 predictions = predictions[:, :min_len]
-                 shifted_labels = shifted_labels[:, :min_len]
+            eos_token_id = tokenizer.eos_token_id
+            pred_has_eos = (predictions == eos_token_id).any(dim=1)
+            label_has_eos = (labels == eos_token_id).any(dim=1)
 
-            mask = shifted_labels != pad_token_id
-            correct_tokens = (predictions == shifted_labels) & mask
-            num_correct_tokens = correct_tokens.sum(dim=1)
-            num_valid_tokens = mask.sum(dim=1)
+            pred_eos_pos = torch.argmax((predictions == eos_token_id).float(), dim=1)
+            label_eos_pos = torch.argmax((labels == eos_token_id).float(), dim=1)
 
-            exact_match = torch.zeros_like(confidence, dtype=torch.bool)
-            valid_mask_sum = num_valid_tokens > 0
-            exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
-            # --- End Exact Match Calculation ---
+            pred_last_non_pad = torch.sum((predictions != pad_token_id).float(), dim=1) - 1
+            label_last_non_pad = torch.sum((labels != pad_token_id).float(), dim=1) - 1
+            # 确保不是负数 (如果全是pad)
+            pred_last_non_pad = torch.maximum(pred_last_non_pad, torch.zeros_like(pred_last_non_pad))
+            label_last_non_pad = torch.maximum(label_last_non_pad, torch.zeros_like(label_last_non_pad))
+
+            pred_end_pos = torch.where(pred_has_eos, pred_eos_pos, pred_last_non_pad)
+            label_end_pos = torch.where(label_has_eos, label_eos_pos, label_last_non_pad)
+
+            end_pos_match = pred_end_pos == label_end_pos
+
+            eos_consistency = (pred_has_eos == label_has_eos)
+
+            exact_match = content_match & end_pos_match & eos_consistency
 
             raw_confidences.extend(confidence.cpu().tolist())
             exact_matches_for_calib.extend(exact_match.cpu().tolist()) # Use exact match as target

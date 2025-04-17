@@ -22,3 +22,5 @@ archive
 OUTPUT
 **/.ipynb_checkpoints
 *.ipynb_checkpoints
+mergegen-output
+*.csv

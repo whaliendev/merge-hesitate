@@ -88,7 +88,7 @@ def validate(args):
     # --- Load Tokenizer ---
     try:
         tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name_or_path)
-        special_tokens = ["<lbra>", "<rbra>"]
+        special_tokens = ["<lbra>", "<mbra>", "<rbra>"]
         num_added = tokenizer.add_tokens(special_tokens)
         if num_added != len(special_tokens):
              logger.warning(f"Added {num_added}/{len(special_tokens)} special tokens. Some might have existed.")

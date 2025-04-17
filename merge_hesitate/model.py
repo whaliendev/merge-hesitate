@@ -4,6 +4,9 @@ import torch.nn.functional as F
 from transformers import T5ForConditionalGeneration
 from transformers.modeling_outputs import BaseModelOutputWithPastAndCrossAttentions
 import math
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class HesitateT5(nn.Module):
@@ -124,6 +127,7 @@ class HesitateT5(nn.Module):
         # -------------------------------------
 
         # Calculate confidence based on the attention-pooled hidden state
+        # [batch_size, 1]
         confidence = self.confidence_head(pooled_hidden).squeeze(-1)
 
         # Return potentially FiLM-fused states for decoder/generation and confidence
@@ -148,11 +152,27 @@ class HesitateT5(nn.Module):
             input_ids, attention_mask, features
         )
 
-        decoder_input_ids = labels
+        batch_size, seq_len = labels.shape
+    
+        expanded_labels = torch.full(
+            (batch_size, seq_len + 1), 
+            self.tokenizer.pad_token_id,
+            dtype=labels.dtype,
+            device=labels.device
+        )
+        
+        # 步骤2: 插入BOS到第一列
+        expanded_labels[:, 0] = self.tokenizer.bos_token_id
+        
+        # 步骤3: 填充原始数据，考虑截断
+        expanded_labels[:, 1:] = labels
+        
+        # 步骤4: 处理序列长度限制（移除最后一个token）
+        decoder_input_ids = expanded_labels[:, :seq_len] 
 
         # Get decoder outputs using potentially fused encoder states
         decoder_outputs = self.generator.decoder(
-            input_ids=decoder_input_ids, # Feed original labels (WITH BOS) here
+            input_ids=decoder_input_ids, # Feed input starting with BOS
             encoder_hidden_states=encoder_states_for_decoder, # Use potentially fused states
             encoder_attention_mask=attention_mask,
             return_dict=True,
@@ -164,33 +184,22 @@ class HesitateT5(nn.Module):
         logits = self.generator.lm_head(logits) # [batch_size, seq_len, vocab_size]
 
         # Compute generation loss
-        log_probs = F.log_softmax(logits, dim=-1)
+        outputs = F.softmax(logits, dim=-1)
+        outputs = torch.log(outputs.clamp(min=1e-10, max=1))
 
         shifted_labels = labels.clone()
         pad_token_id = self.tokenizer.pad_token_id if self.tokenizer else self.generator.config.pad_token_id
-        shifted_labels = torch.cat(
-            [
-                shifted_labels,
-                torch.ones(
-                    (shifted_labels.size(0), 1),
-                    dtype=torch.long,
-                    device=input_ids.device,
-                ) * pad_token_id,
-            ],
-            dim=-1,
-        )
-        shifted_labels = shifted_labels[:, 1:] # shifted_labels[b, t] is original label[b, t+1]
 
         # Create mask for valid label positions (non-padding) based on SHIFTED labels
         mask = shifted_labels != pad_token_id
 
         # Compute NLL loss, masked for padding
         nll_loss = F.nll_loss(
-            log_probs.view(-1, log_probs.size(-1)),
+            outputs.view(-1, outputs.size(-1)),
             shifted_labels.contiguous().view(-1),
             reduction="none",
         )
-        nll_loss = nll_loss.masked_fill(~mask.view(-1), 0)
+        nll_loss = nll_loss.masked_fill(mask.view(-1) == False, 0)
 
         # Prepare output dictionary
         output = {
@@ -256,7 +265,7 @@ class HesitateT5(nn.Module):
             outputs = self.generator.generate(
                 encoder_outputs=encoder_outputs_for_generate,
                 decoder_input_ids=(
-                    torch.ones(len(batch[0]), 1) * self.tokenizer.bos_token_id
+                    torch.ones(input_ids.size(0), 1) * self.tokenizer.bos_token_id
                 )
                 .long()
                 .cuda(),
@@ -270,8 +279,8 @@ class HesitateT5(nn.Module):
         outputs = outputs.view(input_ids.size(0), num_beams, -1)
 
         # Select the top beam (index 0)
-        top_beam_output = outputs[:, 0, 1:] # Remove potential leading BOS/PAD from generate output
-
+        top_beam_output = outputs[:, 0, 2:]
+        print("top_beam_output: \n", top_beam_output)
         # Pad or truncate the top beam output to max_resolve_len
         final_outputs_size = max_resolve_len
         pad_token_id = self.tokenizer.pad_token_id if self.tokenizer else self.generator.config.pad_token_id

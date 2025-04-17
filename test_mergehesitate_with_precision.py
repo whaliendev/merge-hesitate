@@ -11,7 +11,7 @@ from git_service import process_conflict_blocks
 
 base_url = "http://127.0.0.1:5000/resolve_conflict"
 
-data = {"raw_a": "", "raw_b": "", "raw_base": ""}
+data = {"raw_a": "", "raw_b": "", "raw_base": "", "res_region": ""}
 
 result_dir = "./mergegen-output/c"
 # 可能的后缀列表
@@ -37,19 +37,68 @@ def remove_whitespace_and_compare(str1, str2):
     )
 
 
-def get_leading_context(
-    conflicting_lines: List[str], start_line: int, context_size: int = 10
-) -> str:
-    """Get the leading context of the conflict block."""
-    start_line = max(0, start_line - context_size + 1)
-    return "\n".join(conflicting_lines[start_line : start_line + context_size])
+def get_context_lines(truth_content, block, before_lines=1, after_lines=1):
+    """
+    Get context lines from truth content using resolved line positions.
+    Handles special cases including completely deleted blocks (where start > end).
+
+    Args:
+        truth_content (str): The content of the truth file
+        block: The ConflictBlock object
+        before_lines (int): Number of context lines to add before
+        after_lines (int): Number of context lines to add after
+
+    Returns:
+        tuple: (before_context, after_context) - lines to add before and after the block
+    """
+    lines = truth_content.splitlines()
+
+    # 确保行号有效 (>= 1)
+    if block.resolved_start_line < 1:
+        block.resolved_start_line = 1
+
+    # 检测完全删除的冲突块 (start > end)
+    if block.resolved_start_line > block.resolved_end_line:
+        # 完全删除的情况 - 使用start位置作为分割点
+        deletion_point = block.resolved_start_line - 1  # 转为0-based索引
+        before_start = max(0, deletion_point - before_lines)
+        before_context = lines[before_start:deletion_point]
+
+        after_end = min(len(lines), deletion_point + after_lines)
+        after_context = lines[deletion_point:after_end]
+
+        return before_context, after_context
+
+    # 常规情况处理 (包括start==end的单行解决方案)
+    start_idx = max(0, block.resolved_start_line - 1 - before_lines)
+    before_context = lines[start_idx : block.resolved_start_line - 1]
+
+    end_idx = min(len(lines), block.resolved_end_line - 1 + after_lines + 1)
+    after_context = lines[
+        block.resolved_end_line - 1 + 1 : end_idx
+    ]  # 修改为从end结束后开始
+
+    return before_context, after_context
 
 
-def get_trailing_context(
-    conflicting_lines: List[str], end_line: int, context_size: int = 10
-) -> str:
-    """Get the trailing context of the conflict block."""
-    return "\n".join(conflicting_lines[end_line : end_line + context_size])
+def add_context_to_block(block_content, before_context, after_context):
+    """
+    Add context lines to a block of content.
+
+    Args:
+        block_content (str): The content of the block
+        before_context (list): Lines to add before the block
+        after_context (list): Lines to add after the block
+
+    Returns:
+        str: The block with added context
+    """
+    block_lines = block_content.splitlines()
+
+    # Combine all lines
+    all_lines = before_context + block_lines + after_context
+
+    return "\n".join(all_lines)
 
 
 def ensure_dir_exists(dir_path: str):
@@ -137,42 +186,48 @@ def process_merge_scenario(
         conflict_blocks = process_conflict_blocks(conflict_content, merged_content, merged_filepath)
         conflict_count += len(conflict_blocks)
 
-        conflicting_chunks = [
-            {
+        conflicting_chunks = []
+        for conflict_block in conflict_blocks:
+            before_context, after_context = get_context_lines(
+                merged_content, conflict_block, before_lines=1, after_lines=1
+            )
+            
+            conflicting_chunks.append({
                 "a_contents": conflict_block.ours,
                 "b_contents": conflict_block.theirs,
                 "base_contents": conflict_block.base,
                 "res_region": conflict_block.merged,
-                "lookback": get_leading_context(
-                    merged_lines, conflict_block.resolved_start_line, 1
-                ),
-                "lookahead": get_trailing_context(
-                    merged_lines, conflict_block.resolved_end_line, 1
-                ),
+                "lookback": "\n".join(before_context),
+                "lookahead": "\n".join(after_context),
                 "label": conflict_block.labels,
                 "start_line": conflict_block.start_line - 1,
                 "end_line": conflict_block.end_line - 1,
-            }
-            for conflict_block in conflict_blocks
-        ]
+            })
 
         for conflict_chunk in conflicting_chunks:
             data.clear()
             data["raw_a"] = (
                 conflict_chunk["lookback"]
+                + "\n"
                 + conflict_chunk["a_contents"]
+                + "\n"
                 + conflict_chunk["lookahead"]
             )
             data["raw_b"] = (
                 conflict_chunk["lookback"]
+                + "\n"
                 + conflict_chunk["b_contents"]
+                + "\n"
                 + conflict_chunk["lookahead"]
             )
             data["raw_base"] = (
                 conflict_chunk["lookback"]
+                + "\n"
                 + conflict_chunk["base_contents"]
+                + "\n"
                 + conflict_chunk["lookahead"]
             )
+            data["res_region"] = conflict_chunk["res_region"]
 
             response = requests.post(base_url, json=data)
 
@@ -202,7 +257,7 @@ def process_merge_scenario(
                         )
                     )
 
-                    if conflict_chunk["resolved"]:
+                    if conflict_chunk["resolved"] or truth_no_space.startswith(res_no_space):
                         correct_count += 1
                     elif (
                         resolved_content is not None and

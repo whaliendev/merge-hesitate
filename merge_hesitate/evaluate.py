@@ -57,20 +57,15 @@ def evaluate_model(
                 # Validation uses model.forward
                 batch["stage"] = "val"
                 outputs = model(**batch)
-
+                # batch_size, seq_len
                 predictions = outputs["predictions"]
+                # batch_size, seq_len
                 raw_confidence = outputs["confidence"] # Get raw confidence
+                # batch_size, 1
                 labels = batch["labels"]
-                # remove first bos token and add a pad token at the end
-                labels = labels[:, 1:]
-                labels = torch.cat(
-                    [
-                        labels,
-                        torch.ones(labels.size(0), 1, dtype=torch.long, device=labels.device) * tokenizer.pad_token_id,
-                    ],
-                    dim=-1
-                )
+                # 1
                 batch_loss = outputs["loss"]
+                # 1
                 batch_valid_tokens = outputs["valid_tokens"]
 
                 # --- Debug Printing (uses raw confidence) ---
@@ -98,65 +93,59 @@ def evaluate_model(
                          printed_eval_samples += 1
                 # --- End Debug Printing ---
 
-                # --- Corrected Vectorized Exact Match Calculation (Val) ---
-                # Get predictions and original labels (WITH BOS)
-                predictions = outputs["predictions"] # From argmax(logits), predicts token t+1
-                original_labels_with_bos = batch["labels"]   # Original labels WITH initial BOS
+                # --- Vectorized Exact Match Calculation (Val) ---
+                # Get predictions and original labels
+                predictions = outputs["predictions"]
+                original_labels = batch["labels"]
 
-                # Shift labels right to align with predictions for comparison
-                labels_for_match = original_labels_with_bos.clone()
-                pad_token_id = tokenizer.pad_token_id
-                labels_for_match = torch.cat([
-                    labels_for_match,
-                    torch.ones((labels_for_match.size(0), 1), dtype=torch.long, device=labels_for_match.device) * pad_token_id
-                ], dim=-1)
-                labels_for_match = labels_for_match[:, 1:] # labels_for_match[t] is original label[t+1]
-
-                # Need eos_token_id
-                eos_token_id = tokenizer.eos_token_id
-
-                # Pad shorter sequence to match the longer one for comparison
+                # Ensure predictions and labels are of the same length
                 batch_size, seq_len_pred = predictions.shape
-                _, seq_len_label = labels_for_match.shape # Use shifted labels length
-                seq_len = max(seq_len_pred, seq_len_label)
+                _, seq_len_label = original_labels.shape
+                
+                # Always adjust predictions to match label length
+                if seq_len_pred < seq_len_label:
+                    padding_size = seq_len_label - seq_len_pred
+                    predictions = torch.cat([
+                        predictions,
+                        torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
+                    ], dim=1)
+                elif seq_len_pred > seq_len_label:
+                    # Truncate predictions if longer than labels
+                    predictions = predictions[:, :seq_len_label]
+                
+                # --- Calculate sequence-level exact match (与train.py保持一致) ---
+                # 1. 内容匹配检查
+                content_match = torch.all((predictions == original_labels) | (original_labels == pad_token_id), dim=1)
 
-                if seq_len_pred < seq_len:
-                     padding_size = seq_len - seq_len_pred
-                     predictions = torch.cat([
-                         predictions,
-                         torch.full((batch_size, padding_size), pad_token_id, device=predictions.device, dtype=predictions.dtype)
-                     ], dim=1)
-                elif seq_len_label < seq_len:
-                     padding_size = seq_len - seq_len_label
-                     labels_for_match = torch.cat([
-                         labels_for_match,
-                         torch.full((batch_size, padding_size), pad_token_id, device=labels_for_match.device, dtype=labels_for_match.dtype)
-                     ], dim=1)
+                # 2. 检查EOS位置的一致性
+                eos_token_id = tokenizer.eos_token_id
+                pred_has_eos = (predictions == eos_token_id).any(dim=1)
+                label_has_eos = (original_labels == eos_token_id).any(dim=1)
 
-                # 1. Create prediction mask (True up to and including first EOS)
-                pred_indices = torch.arange(seq_len, device=predictions.device).unsqueeze(0).expand(batch_size, -1)
-                eos_mask_pred = (predictions == eos_token_id)
-                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
-                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1) # Shape: [batch_size, seq_len]
+                # 对于有EOS的序列，找EOS位置
+                pred_eos_pos = torch.argmax((predictions == eos_token_id).float(), dim=1)
+                label_eos_pos = torch.argmax((original_labels == eos_token_id).float(), dim=1)
 
-                # 2. Create label mask (True up to PAD) - Use SHIFTED labels_for_match
-                label_mask = (labels_for_match != pad_token_id) # Shape: [batch_size, seq_len]
+                # 对于没有EOS的序列，找最后一个非pad token的位置
+                pred_last_non_pad = torch.sum((predictions != pad_token_id).float(), dim=1) - 1
+                label_last_non_pad = torch.sum((original_labels != pad_token_id).float(), dim=1) - 1
+                # 确保不是负数 (如果全是pad)
+                pred_last_non_pad = torch.maximum(pred_last_non_pad, torch.zeros_like(pred_last_non_pad))
+                label_last_non_pad = torch.maximum(label_last_non_pad, torch.zeros_like(label_last_non_pad))
 
-                # 3. Combine masks
-                combined_mask = pred_mask & label_mask # Shape: [batch_size, seq_len]
+                # 根据是否有EOS选择使用哪个结束位置
+                pred_end_pos = torch.where(pred_has_eos, pred_eos_pos, pred_last_non_pad)
+                label_end_pos = torch.where(label_has_eos, label_eos_pos, label_last_non_pad)
 
-                # 4. Calculate correct tokens based on combined mask and SHIFTED labels_for_match
-                correct_tokens = (predictions == labels_for_match) & combined_mask
+                # 比较结束位置
+                end_pos_match = pred_end_pos == label_end_pos
 
-                # 5. Calculate num_correct and num_valid based on combined mask
-                num_correct_tokens = correct_tokens.sum(dim=1)
-                num_valid_tokens = combined_mask.sum(dim=1)
+                # 检查EOS一致性(都有或都没有)
+                eos_consistency = (pred_has_eos == label_has_eos)
 
-                # 6. Check for exact match (all valid tokens in the combined range must be correct)
-                exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
-                valid_mask_sum = num_valid_tokens > 0
-                exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
-                # --- End Corrected Vectorized Exact Match (Val) ---
+                # 序列完全匹配需要三个条件: 内容匹配、边界匹配、EOS一致性
+                exact_match = content_match & end_pos_match & eos_consistency
+                # --- End Sequence-level Exact Match Calculation ---
 
                 all_raw_confidences.append(raw_confidence)
                 all_exact_matches.append(exact_match) # Stores bool (Exact Match Only)
@@ -177,17 +166,12 @@ def evaluate_model(
 
                 generated_ids, raw_confidence = unwrapped_model.generate(**gen_kwargs)
                 
-                # Get original labels (WITH BOS)
                 original_labels_with_bos = batch["labels"]
 
                 # Shift labels right for comparison with generated_ids
                 labels_for_match = original_labels_with_bos.clone()
                 pad_token_id = tokenizer.pad_token_id
-                labels_for_match = torch.cat([
-                     labels_for_match,
-                     torch.ones((labels_for_match.size(0), 1), dtype=torch.long, device=labels_for_match.device) * pad_token_id
-                ], dim=-1)
-                labels_for_match = labels_for_match[:, 1:] # labels_for_match[t] is original label[t+1]
+                print("labels_for_match: \n", labels_for_match)
 
                 # Need eos_token_id
                 eos_token_id = tokenizer.eos_token_id
@@ -197,43 +181,65 @@ def evaluate_model(
                 _, seq_len_label = labels_for_match.shape # Use shifted labels length
                 seq_len = max(seq_len_pred, seq_len_label)
 
-                if seq_len_pred < seq_len:
-                     padding_size = seq_len - seq_len_pred
-                     generated_ids = torch.cat([
-                         generated_ids,
-                         torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)
-                     ], dim=1)
-                elif seq_len_label < seq_len:
-                     padding_size = seq_len - seq_len_label
-                     labels_for_match = torch.cat([
-                         labels_for_match,
-                         torch.full((batch_size, padding_size), pad_token_id, device=labels_for_match.device, dtype=labels_for_match.dtype)
-                     ], dim=1)
+                # Always adjust predictions to match label length
+                if seq_len_pred < seq_len_label:
+                    padding_size = seq_len_label - seq_len_pred
+                    generated_ids = torch.cat([
+                        generated_ids,
+                        torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)
+                    ], dim=1)
+                elif seq_len_pred > seq_len_label:
+                    # Truncate predictions if longer than labels
+                    generated_ids = generated_ids[:, :seq_len_label]
 
-                # 1. Create prediction mask (True up to and including first EOS in generated_ids)
-                pred_indices = torch.arange(seq_len, device=generated_ids.device).unsqueeze(0).expand(batch_size, -1)
-                eos_mask_pred = (generated_ids == eos_token_id)
-                first_eos_idx_pred = torch.where(eos_mask_pred.any(dim=1), eos_mask_pred.float().argmax(dim=1), seq_len)
-                pred_mask = pred_indices <= first_eos_idx_pred.unsqueeze(1)
+                # --- Vectorized Exact Match Calculation (Test) ---
+                # Ensure predictions and labels are of the same length
+                batch_size, seq_len_pred = generated_ids.shape
+                _, seq_len_label = original_labels_with_bos.shape
+                
+                # Always adjust predictions to match label length
+                if seq_len_pred < seq_len_label:
+                    padding_size = seq_len_label - seq_len_pred
+                    generated_ids = torch.cat([
+                        generated_ids,
+                        torch.full((batch_size, padding_size), pad_token_id, device=generated_ids.device, dtype=generated_ids.dtype)
+                    ], dim=1)
+                elif seq_len_pred > seq_len_label:
+                    # Truncate predictions if longer than labels
+                    generated_ids = generated_ids[:, :seq_len_label]
+                
+                # --- Calculate sequence-level exact match (与train.py保持一致) ---
+                # 1. 内容匹配检查
+                content_match = torch.all((generated_ids == original_labels_with_bos) | (original_labels_with_bos == pad_token_id), dim=1)
 
-                # 2. Create label mask (True up to PAD) - Use SHIFTED labels_for_match
-                label_mask = (labels_for_match != pad_token_id)
+                # 2. 检查EOS位置的一致性
+                pred_has_eos = (generated_ids == eos_token_id).any(dim=1)
+                label_has_eos = (original_labels_with_bos == eos_token_id).any(dim=1)
 
-                # 3. Combine masks
-                combined_mask = pred_mask & label_mask
+                # 对于有EOS的序列，找EOS位置
+                pred_eos_pos = torch.argmax((generated_ids == eos_token_id).float(), dim=1)
+                label_eos_pos = torch.argmax((original_labels_with_bos == eos_token_id).float(), dim=1)
 
-                # 4. Calculate correct tokens based on combined mask and SHIFTED labels_for_match
-                correct_tokens = (generated_ids == labels_for_match) & combined_mask
+                # 对于没有EOS的序列，找最后一个非pad token的位置
+                pred_last_non_pad = torch.sum((generated_ids != pad_token_id).float(), dim=1) - 1
+                label_last_non_pad = torch.sum((original_labels_with_bos != pad_token_id).float(), dim=1) - 1
+                # 确保不是负数 (如果全是pad)
+                pred_last_non_pad = torch.maximum(pred_last_non_pad, torch.zeros_like(pred_last_non_pad))
+                label_last_non_pad = torch.maximum(label_last_non_pad, torch.zeros_like(label_last_non_pad))
 
-                # 5. Calculate num_correct and num_valid based on combined mask
-                num_correct_tokens = correct_tokens.sum(dim=1)
-                num_valid_tokens = combined_mask.sum(dim=1)
+                # 根据是否有EOS选择使用哪个结束位置
+                pred_end_pos = torch.where(pred_has_eos, pred_eos_pos, pred_last_non_pad)
+                label_end_pos = torch.where(label_has_eos, label_eos_pos, label_last_non_pad)
 
-                # 6. Check for exact match
-                exact_match = torch.zeros_like(raw_confidence, dtype=torch.bool)
-                valid_mask_sum = num_valid_tokens > 0
-                exact_match[valid_mask_sum] = (num_correct_tokens[valid_mask_sum] == num_valid_tokens[valid_mask_sum])
-                # --- End Vectorized Exact Match (Test) ---
+                # 比较结束位置
+                end_pos_match = pred_end_pos == label_end_pos
+
+                # 检查EOS一致性(都有或都没有)
+                eos_consistency = (pred_has_eos == label_has_eos)
+
+                # 序列完全匹配需要三个条件: 内容匹配、边界匹配、EOS一致性
+                exact_match = content_match & end_pos_match & eos_consistency
+                # --- End Sequence-level Exact Match Calculation ---
 
                 all_raw_confidences.append(raw_confidence)
                 all_exact_matches.append(exact_match) # Stores bool (Exact Match Only)
@@ -278,7 +284,7 @@ def evaluate_model(
 
     # Concatenate results from all batches
     all_raw_confidences = torch.cat(all_raw_confidences)
-    all_exact_matches = torch.cat(all_exact_matches) # Now stores Exact Match bool
+    all_exact_matches = torch.cat(all_exact_matches)
 
     # Gather results from all processes
     gathered_confidences = accelerator.gather_for_metrics(all_raw_confidences)
